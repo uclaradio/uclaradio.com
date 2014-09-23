@@ -1,0 +1,15 @@
+/* mobile styles 
+ * iphone: 320px wide
+ * nexus / android 5" phones: 360px wide
+ * use %, not px in css :P
+ */
+
+@media only screen and (min-width : 320px) and (max-width : 568px) {
+  h1 {
+    background-color: red;
+  }
+
+  div {
+    background-color: red;
+  }
+}

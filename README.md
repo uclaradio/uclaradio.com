@@ -1,4 +1,4 @@
-site
+UCLARadio
 ====
 
-UCLARadio frontpage
+This is our frontpage. This is our readme. 
