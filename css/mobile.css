@@ -5,11 +5,18 @@
  */
 
 @media only screen and (min-width : 320px) and (max-width : 568px) {
-  h1 {
+  #logo {
+    background-color: red;
+  }
+  #media {
     background-color: red;
   }
 
-  div {
-    background-color: red;
+  #billboard {
+    display: none;
   }
+  #gutter {
+    display: none;
+  }
+
 }

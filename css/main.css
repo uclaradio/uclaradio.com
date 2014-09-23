@@ -1,11 +1,13 @@
 /* desktop styles */
 @media only screen and (min-width : 569px){ 
-  h1 { 
+  #logo {
+    background-color: purple;
+  }
+  #media {
     background-color: purple;
   }
 
-  div {
+  #billboard #gutter {
     background-color: purple;
   }
-
 }
