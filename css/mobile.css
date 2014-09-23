@@ -1,17 +1,38 @@
 /* mobile styles 
- * iphone: 320px wide
- * nexus / android 5" phones: 360px wide
- * use %, not px in css :P
+ * Targeting a 320x480px screen
  */
 
 @media only screen and (min-width : 320px) and (max-width : 568px) {
-  #logo {
+  body {
+    padding: 10px;
+    text-align: center;
     background-color: red;
+  }
+  #logo {
+    margin: 0 auto;
+    height: 280px;
+    width: 280px;
+    background-color: blue;
   }
   #media {
-    background-color: red;
+    margin: 0 auto;
+    margin-top: 10px;
+    background-color: green;
   }
 
+  #play-button {
+    margin: 0 auto;
+    height: 160px;
+    width: 160px;
+    background-color: white;
+  }
+
+  #info-text {
+    height: 40px;
+    background-color: purple;
+  }
+
+  /* Hide these on mobile, because not enough room */
   #billboard {
     display: none;
   }
