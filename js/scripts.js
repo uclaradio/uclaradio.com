@@ -16,12 +16,11 @@ $(function() {
 
 $(function() {
   $("#play-button").click(function() {
+	$(this).children().toggleClass("glyphicon glyphicon-play-circle center-block glyphicon glyphicon-pause center-block");
     if (stream.paused == false) {
       stream.pause();
-	  //TODO change image to pause
     } else {
       stream.play();
-	  //TODO change image to play
     }
   });
 });
