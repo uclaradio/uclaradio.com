@@ -10,16 +10,16 @@ function squarify(element) {
 }
 
 $(function() {
-  // Keep that button square!
-  squarify($('#play-button')); 
 
   // activate the play button
   $("#play-button").click(function() {
-    $(this).children().toggleClass("fa fa-playfa fa-pause");
+    $(this).children().toggleClass("fa fa-play fa fa-pause");
     if (stream.paused === false) {
       stream.pause();
     } else {
       stream.play();
     }
   });
+  // Keep that button square!
+  squarify($('#play-button')); 
 });
