@@ -1,6 +1,14 @@
-#logo {
-  height: 280px;
-  background-color: purple;
+
+body {
+  background: url('../img/triangles.svg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.jumbotron {
+  border-radius: 0px !important;
+  height: 350px;
 }
 
 #billboard {
