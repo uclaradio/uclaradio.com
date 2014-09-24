@@ -1,13 +1,21 @@
-/* desktop styles */
-@media only screen and (min-width : 569px){ 
-  #logo {
-    background-color: purple;
-  }
-  #media {
-    background-color: purple;
-  }
+#logo {
+  height: 280px;
+  background-color: purple;
+}
+#media {
+  background-color: purple;
+}
 
-  #billboard #gutter {
-    background-color: purple;
+#billboard {
+  background-color: purple;
+}
+
+.footer {
+  display: inline;
+}
+
+@media only screen and (max-width: 767px) {
+  .mobile-only {
+    display: none;
   }
 }

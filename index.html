@@ -6,24 +6,34 @@
     <meta name="description" content="UCLA Radio">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UCLA Radio</title>
-    <!-- Normalize.css, for easy cross-browser compatibility. -->
-    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <!-- Our stylesheets -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/mobile.css">
   </head>
   <body>
-    <div id="content">
-      <div id="logo">Logo</div>
-      <div id="media">
-        <div id="play-button">Play</div>
-        <div id="info-text">Info</div>
+    <div class="container" role="main">
+      <div class="jumbotron"></div>
+      <div class="row">
+        <div class="col-sm-3 col-xs-12" id="play-button">Play</div>
+        <div class="col-sm-9 col-xs-12" id="billboard">Billboard</div>
       </div>
-      <div id="billboard">Billboard</div>
-      <div id="gutter">
-        <div id="blog-link">Blog</div>
-        <div id="playlist-link">Playlist</div>
-        <div id="social">Social</div>
+      <div class="row">
+        <div class="col-sm-12 desktop-only" id="messages">
+          Messages
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="row text-center">
+          <span class="col-xs-4" id="blog-link">Blog</span>
+          <span class="col-xs-4" id="playlist-link">Playlist</span>
+          <span class="col-xs-4" id="social">Social</span>
+        </div>
       </div>
     </div>
   </body>
