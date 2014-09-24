@@ -1,6 +1,6 @@
 
 body {
-  font-size: 20px;
+  font-size: 24px;
   background-color: blue;
   padding-top: 20px;
   /*
@@ -43,6 +43,7 @@ body {
 #play-button .glyphicon {
   display: table-cell;
   vertical-align: middle;
+  text-decoration: none;
 }
 
 #billboard {
@@ -55,15 +56,39 @@ body {
   margin: auto;
 }
 
-#social { 
+#blog-link{
+  text-align: left;
   text-decoration: none;
+  font-size: 34px;
+}
+
+#playlist-link {
+  text-align: left;
+  text-decoration: none;
+  font-size: 34px;
+}
+
+/* fix for the small screen size, it overlaps the blog button. */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  #playlist-link {
+    padding-left: 40px;
+  }
+}
+#social { 
   text-align: right;
 }
-#social .twitter {
-  margin-left: 20px;
+
+/* css is stupid and won't let you consolidate text-decorations */
+#social .facebook {
+  text-decoration: none;
 }
+
 #social .youtube {
-  margin-left: 20px;
+  text-decoration: none;
+}
+
+#social .twitter {
+  text-decoration: none;
 }
 
 .pop-button {
@@ -72,7 +97,6 @@ body {
   background: #5786c1;
   color: white;
   padding: 8px 14px;
-  text-decoration: none;
   display: inline-block; /* needed for anchors */
   position: relative;
 }
@@ -100,6 +124,7 @@ body {
 }
 
 
+
 /* Mobile only stuff */
 @media only screen and (max-width: 767px) {
   body {
@@ -114,9 +139,11 @@ body {
     text-align: center;
   }
   #blog-link {
+    text-align: center;
     padding-bottom: 10px;
   }
   #playlist-link {
+    text-align: center;
     padding-bottom: 10px;
   }
   #social{
