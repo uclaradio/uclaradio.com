@@ -3,18 +3,17 @@ body {
   font-size: 20px;
   background-color: blue;
   padding-top: 20px;
-  text-decoration: none;
   /*
   background: url('../img/triangles.svg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
- */
+   */
 }
 
 .container {
-   background: #ededed;
+  background: #ededed;
   padding: 20px;
   border-radius: 3px; 
 }
@@ -26,19 +25,17 @@ body {
   margin-bottom: 20px;
 }
 
-#billboard {
-  border-style: solid;
-  border-width: 1px;
-}
 
-#media { 
-  margin-bottom: 20px;
-}
+
+
 
 #messages {
   margin-bottom: 20px;
 }
 
+#media { 
+  margin-bottom: 20px;
+}
 /* set to table alignment to get the bastard vertically aligned */
 #play-button {
   font-size: 120px;
@@ -52,9 +49,27 @@ body {
   vertical-align: middle;
 }
 
+#billboard {
+  text-align: right;
+  font-size: 90px;
+}
+
+
+#social { 
+  text-decoration: none;
+}
+
 .footer {
   display: inline;
+  margin: auto;
 }
+#social .twitter {
+  margin-left: 20px;
+}
+#social .youtube {
+  margin-left: 20px;
+}
+
 
 /* Mobile only stuff */
 @media only screen and (max-width: 767px) {
@@ -66,6 +81,22 @@ body {
     margin-right: auto;
     margin-bottom: 20px;
   }
+  #blog-link {
+    padding-bottom: 10px;
+  }
+  #playlist-link {
+    padding-bottom: 10px;
+  }
+  #social{
+    padding-bottom: 10px;
+  }
+  #social .facebook {
+    margin-right: 20px;
+  }
+  #social .twitter {
+    margin-left: 20px;
+  }
+
   /* helper class, use to tag things that should be desktop-only */
   .desktop-only {
     display: none;
