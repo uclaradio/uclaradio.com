@@ -15,25 +15,25 @@ function getRandColorScheme(timeOfDay) {
   switch(timeOfDay) {
     case 'night': // blacks, greys
       {
-        possColors = ['Greys'];
+        possColors = ['Greys', 'PuRd'];
         break;
       }
     case 'morning': // oranges, yellows, reds, greens
       {
         possColors = ['Reds', 'Oranges', 'YlOrBr', 'YlOrRd', 'OrRd', 
-            'PuRd'];
+            'PuRd', 'RdPu'];
         break;
       }
     case 'noon': // greens, purples, blues, yellows
       {
-        possColors = ['Greens', 'RdPu', 'PuRd', 'BrBG', 'PuOr', 'PiYG', 
+        possColors = ['Greens', 'BrBG', 'PuOr', 'PiYG', 
             'Spectral', 'YlGn'];
         break;
       }
     case 'evening': // blues, cool colors
       {
         possColors = ['YlGnBu', 'GnBu', 'PuBuGn', 'PuBu', 'Purples', 'Blues',
-                   'RdPu', 'Greens'];
+                   'RdPu', 'PuRd', 'Greens'];
         break;
       }
   }

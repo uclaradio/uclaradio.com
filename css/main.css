@@ -7,12 +7,13 @@ body {
 }
 
 .container {
-  background: #ededed;
+  background: rgba(245,245,245,0.7);
   padding: 20px;
   border-radius: 3px; 
 }
 
 .jumbotron {
+  background: transparent;
   font-size: 90px;
   height: 350px;
   margin-bottom: 20px;
