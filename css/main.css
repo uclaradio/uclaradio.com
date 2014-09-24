@@ -25,10 +25,6 @@ body {
   margin-bottom: 20px;
 }
 
-
-
-
-
 #messages {
   margin-bottom: 20px;
 }
@@ -54,14 +50,14 @@ body {
   font-size: 90px;
 }
 
-
-#social { 
-  text-decoration: none;
-}
-
 .footer {
   display: inline;
   margin: auto;
+}
+
+#social { 
+  text-decoration: none;
+  text-align: right;
 }
 #social .twitter {
   margin-left: 20px;
@@ -81,6 +77,9 @@ body {
     margin-right: auto;
     margin-bottom: 20px;
   }
+  #billboard {
+    text-align: center;
+  }
   #blog-link {
     padding-bottom: 10px;
   }
@@ -89,9 +88,14 @@ body {
   }
   #social{
     padding-bottom: 10px;
+    text-align: center;
   }
   #social .facebook {
     margin-right: 20px;
+  }
+  #social .youtube {
+    margin-left: 0px;
+    margin-right : 0px;
   }
   #social .twitter {
     margin-left: 20px;

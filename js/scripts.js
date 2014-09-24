@@ -12,12 +12,11 @@ function squarify(element) {
 $(function() {
   // Keep that button square!
   squarify($('#play-button')); 
-});
 
-$(function() {
+  // activate the play button
   $("#play-button").click(function() {
-	$(this).children().toggleClass("glyphicon glyphicon-play-circle center-block glyphicon glyphicon-pause center-block");
-    if (stream.paused == false) {
+    $(this).children().toggleClass("fa fa-playfa fa-pause");
+    if (stream.paused === false) {
       stream.pause();
     } else {
       stream.play();
