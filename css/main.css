@@ -1,15 +1,9 @@
 
 body {
+  height: 100%;
+  width: 100%;
   font-size: 24px;
-  background-color: blue;
   padding-top: 20px;
-  /*
-  background: url('../img/triangles.svg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-   */
 }
 
 .container {
@@ -19,14 +13,13 @@ body {
 }
 
 .jumbotron {
-  font-size: 50px;
+  font-size: 90px;
   height: 350px;
-  background-color: purple;
   margin-bottom: 20px;
 }
 
 #messages {
-  margin-bottom: 20px;
+  margin-bottom: 70px;
 }
 
 #media { 
@@ -91,6 +84,7 @@ body {
   }
 }
 
+
 #social { 
   text-align: right;
 }
@@ -154,6 +148,7 @@ body {
   }
   #billboard {
     text-align: center;
+    font-size: 70px;
   }
   #blog-link {
     text-align: center;

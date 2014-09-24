@@ -22,4 +22,10 @@ $(function() {
   });
   // Keep that button square!
   squarify($('#play-button')); 
+
+  // Generate that background image!
+  var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175});
+  var pattern = t.generate(4000, 3000);
+  document.body.setAttribute('style', 'background: ' + 
+     pattern.dataUrl + ' no-repeat center center fixed');
 });
