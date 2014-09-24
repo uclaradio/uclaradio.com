@@ -5,34 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="UCLA Radio">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UCLA Radio</title>
+    <title>UCLA Radio</title> 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 
     <!-- Our stylesheets -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
   </head>
   <body>
     <div class="container" role="main">
-      <div class="jumbotron"></div>
+      <div class="jumbotron" id="logo"></div>
       <div class="row">
         <div class="col-sm-3 col-xs-12" id="play-button">Play</div>
-        <div class="col-sm-9 col-xs-12" id="billboard">Billboard</div>
+        <div class="col-sm-9 col-xs-12" id="billboard">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</div>
       </div>
       <div class="row">
         <div class="col-sm-12 desktop-only" id="messages">
-          Messages
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
         </div>
       </div>
 
       <div class="footer">
         <div class="row text-center">
-          <span class="col-xs-4" id="blog-link">Blog</span>
-          <span class="col-xs-4" id="playlist-link">Playlist</span>
-          <span class="col-xs-4" id="social">Social</span>
+          <span class="col-xs-4" id="blog-link">
+            <a class="btn btn-default btn-lg pop-button" role="button" href="#">BLOG</a>
+          </span>
+          <span class="col-xs-4" id="playlist-link">
+            <a class="btn btn-default btn-lg pop-button" role="button" href="#">PLAYLISTS</a>
+          </span>
+          <span class="col-xs-4" id="social">
+            <a class="btn btn-default btn-lg pop-button" role="button" href="#">SOCIAL</a>
+          </span>
         </div>
       </div>
     </div>

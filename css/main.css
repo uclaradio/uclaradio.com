@@ -2,20 +2,31 @@
   height: 280px;
   background-color: purple;
 }
-#media {
-  background-color: purple;
-}
 
 #billboard {
   background-color: purple;
+}
+
+#messages {
+  margin-top: 10px;
 }
 
 .footer {
   display: inline;
 }
 
+/* helper class, use to tag things that should be desktop-only */
 @media only screen and (max-width: 767px) {
-  .mobile-only {
+  .desktop-only {
     display: none;
   }
+}
+
+/* rule for cool lookin button */
+.pop-button:hover {
+    -webkit-box-shadow: 5px 5px 0px #888;
+            box-shadow: 5px 5px 0px #888;
+     margin-left: -5px;
+     margin-top: -5px;
+
 }
