@@ -1,6 +1,8 @@
 
 body {
   font-size: 20px;
+  background-color: blue;
+  padding-top: 20px;
   /*
   background: url('../img/triangles.svg') no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -10,10 +12,16 @@ body {
  */
 }
 
+.container {
+   background: #ededed;
+  padding: 20px;
+  border-radius: 3px; 
+}
+
 .jumbotron {
-  border-radius: 0px !important;
   font-size: 50px;
   height: 350px;
+  background-color: purple;
 }
 
 #billboard {
@@ -29,21 +37,21 @@ body {
   margin-top: 10px;
 }
 
+/* set to table alignment to get the bastard vertically aligned */
 #play-button {
-  font-size: 50px;
+  font-size: 60px;
   max-height: 260px;
   max-width: 260px;
+  display: table;
+}
+
+#play-button .glyphicon-play {
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .footer {
   display: inline;
-}
-
-/* helper class, use to tag things that should be desktop-only */
-@media only screen and (max-width: 767px) {
-  .desktop-only {
-    display: none;
-  }
 }
 
 /* rule for cool lookin button */
@@ -62,4 +70,24 @@ body {
      margin-left: 0px;
      margin-right: 0px;
      margin-bottom: 0px;
+}
+
+/* Mobile only stuff */
+@media only screen and (max-width: 767px) {
+  body {
+    padding-top: 0px;
+  }
+  #play-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+  /* to fix the button from "shuffling" */
+  #play-button:hover {
+    margin-bottom: 15px;
+  }
+  /* helper class, use to tag things that should be desktop-only */
+  .desktop-only {
+    display: none;
+  }
 }
