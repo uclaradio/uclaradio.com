@@ -80,6 +80,9 @@ body {
   #billboard {
     text-align: center;
   }
+  #left-arrow {
+    display: none;
+  }
   #blog-link {
     padding-bottom: 10px;
   }
