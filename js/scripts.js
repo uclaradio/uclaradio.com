@@ -11,13 +11,13 @@ function getRandColorScheme(timeOfDay) {
     case 'morning': // oranges, yellows, reds, greens
       {
         possColors = ['Reds', 'Oranges', 'YlOrBr', 'YlOrRd', 'OrRd', 
-            'PuRd', 'RdPu'];
+                   'PuRd', 'RdPu'];
         break;
       }
     case 'noon': // greens, purples, blues, yellows
       {
         possColors = ['Greens', 'BrBG', 'PuOr', 
-            'Spectral', 'YlGn'];
+                   'Spectral', 'YlGn'];
         break;
       }
     case 'evening': // blues, cool colors
@@ -55,6 +55,55 @@ function getColorSchemeFromTime() {
     return getRandColorScheme('evening');
   }
 }
+function setDropShadows(darkColor, mediumColor) {
+  var boxShadowHoverCss = "1px 0px " + mediumColor + 
+    ", 0px 1px " + darkColor +
+    ", 2px 1px " + mediumColor +
+    ", 1px 2px " + darkColor +
+    ", 3px 2px " + mediumColor +
+    ", 2px 3px " + darkColor +
+    ", 4px 3px " + mediumColor +
+    ", 3px 4px " + darkColor;
+  console.log(boxShadowHoverCss);
+
+  var boxShadowActiveCss = "1px 0px " + mediumColor + 
+    ", 0px 1px " + darkColor +
+    ", 2px 1px " + mediumColor +
+    ", 1px 2px " + darkColor;
+  console.log(boxShadowActiveCss);
+
+
+  $(".pop-button").hover(
+      function() {
+        $(this).css('box-shadow', boxShadowHoverCss);
+      },
+      function() {
+        $(this).css('box-shadow', '');
+      }
+      );
+  $(".pop-button").focus(
+      function() {
+        $(this).css('box-shadow', boxShadowHoverCss);
+      },
+      function() {
+        $(this).css('box-shadow', '');
+      }
+      );
+
+  // activated by mousedown
+  $(".pop-button").mousedown(
+      function() {
+        $(this).css('box-shadow', boxShadowActiveCss);
+      }
+      );
+
+  // on mouse up, want to transition to the "hover" state
+  $(".pop-button").mouseup(
+      function() {
+        $(this).css('box-shadow', boxShadowHoverCss);
+      }
+      );
+}
 
 $(function() {
 
@@ -83,5 +132,10 @@ $(function() {
   var medium = colors[7];
   var light = colors[6];
 
+
   $(".pop-button").css('background-color', light);
+  // need to change the drop shadow as well as button
+  setDropShadows(dark, medium);
 });
+
+

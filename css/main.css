@@ -126,24 +126,14 @@ a:hover {
 }
 .pop-button:hover {
   transform: translate(-4px, -4px);
-  box-shadow: 1px 0px #b41c98, 0px 1px #680656,
-  2px 1px #b41c98, 1px 2px #680656,
-  3px 2px #b41c98, 2px 3px #680656,
-  4px 3px #b41c98, 3px 4px #680656;
 }
 /* same as above */
 .pop-button:focus {
   transform: translate(-4px, -4px);
-  box-shadow: 1px 0px #b41c98, 0px 1px #680656,
-  2px 1px #b41c98, 1px 2px #680656,
-  3px 2px #b41c98, 2px 3px #680656,
-  4px 3px #b41c98, 3px 4px #680656;
 }
 
 .pop-button:active {
   transform: translate(-2px, -2px);
-  box-shadow: 1px 0px #b41c98, 0px 1px #680656,
-  2px 1px #b41c98, 1px 2px #680656;
 }
 
 a.twitter:hover {
