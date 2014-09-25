@@ -1,13 +1,3 @@
-// Script to guarantee a div is square. Useful for the play button.
-function squarify(element) {
-  squareItUp();
-  window.onresize = function(element) {
-    squareItUp();
-  };
-  function squareItUp() {
-    $(element).height($(element).width());
-  }
-}
 // given the time of day, returns a random color scheme 
 // matching it.
 function getRandColorScheme(timeOfDay) {
@@ -15,7 +5,7 @@ function getRandColorScheme(timeOfDay) {
   switch(timeOfDay) {
     case 'night': // blacks, greys
       {
-        possColors = ['Greys', 'PuRd'];
+        possColors = ['Greys'];
         break;
       }
     case 'morning': // oranges, yellows, reds, greens
@@ -26,7 +16,7 @@ function getRandColorScheme(timeOfDay) {
       }
     case 'noon': // greens, purples, blues, yellows
       {
-        possColors = ['Greens', 'BrBG', 'PuOr', 'PiYG', 
+        possColors = ['Greens', 'BrBG', 'PuOr', 
             'Spectral', 'YlGn'];
         break;
       }
@@ -77,14 +67,21 @@ $(function() {
       stream.play();
     }
   });
-  // Keep that button square!
-  squarify($('#play-button')); 
 
   // Generate that background image!
   var colorScheme = getColorSchemeFromTime();
+  //debug
+  console.log(colorScheme);
   var colors = Trianglify.colorbrewer[colorScheme][9];
   var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175, x_gradient: colors});
   var pattern = t.generate(4000, 3000);
   document.body.setAttribute('style', 'background: ' + 
     pattern.dataUrl + ' no-repeat center center fixed');
+
+  // Now set the buttons based on color scheme
+  var dark = colors[8];
+  var medium = colors[7];
+  var light = colors[6];
+
+  $(".pop-button").css('background-color', light);
 });

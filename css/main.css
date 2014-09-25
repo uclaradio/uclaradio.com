@@ -28,16 +28,22 @@ body {
 }
 /* set to table alignment to get the bastard vertically aligned */
 #play-button {
+  height: 180px;
+  width: 180px;
   font-size: 120px;
-  max-height: 260px;
-  max-width: 260px;
   display: table;
+  border-radius: 50%;
 }
 
-#play-button .glyphicon {
+#play-icon {
   display: table-cell;
   vertical-align: middle;
   text-decoration: none;
+  text-align: center;
+}
+
+.fa-play {
+  padding-left: 15px;
 }
 
 #billboard {
@@ -57,12 +63,19 @@ body {
     margin-left: -15px;
 }
 
+#blog-link:hover {
+}
+
 #playlist-link {
   text-align: left;
   text-decoration: none;
   font-size: 34px;
 }
 
+a:hover {
+  text-decoration: none;
+  color: white;
+}
 /* fix padding for the screen sizes, to get the buttons aligned */
 
 /* small */
@@ -106,7 +119,6 @@ body {
 .pop-button {
   border: 0;
   border-radius: 3px;
-  background: #5786c1;
   color: white;
   padding: 8px 14px;
   display: inline-block; /* needed for anchors */
@@ -114,27 +126,37 @@ body {
 }
 .pop-button:hover {
   transform: translate(-4px, -4px);
-  box-shadow: 1px 0px #3a587f, 0px 1px #4171ae,
-  2px 1px #3a587f, 1px 2px #4171ae,
-  3px 2px #3a587f, 2px 3px #4171ae,
-  4px 3px #3a587f, 3px 4px #4171ae;
+  box-shadow: 1px 0px #b41c98, 0px 1px #680656,
+  2px 1px #b41c98, 1px 2px #680656,
+  3px 2px #b41c98, 2px 3px #680656,
+  4px 3px #b41c98, 3px 4px #680656;
 }
 /* same as above */
 .pop-button:focus {
   transform: translate(-4px, -4px);
-  box-shadow: 1px 0px #3a587f, 0px 1px #4171ae,
-  2px 1px #3a587f, 1px 2px #4171ae,
-  3px 2px #3a587f, 2px 3px #4171ae,
-  4px 3px #3a587f, 3px 4px #4171ae;
+  box-shadow: 1px 0px #b41c98, 0px 1px #680656,
+  2px 1px #b41c98, 1px 2px #680656,
+  3px 2px #b41c98, 2px 3px #680656,
+  4px 3px #b41c98, 3px 4px #680656;
 }
-
 
 .pop-button:active {
   transform: translate(-2px, -2px);
-  box-shadow: 1px 0px #3a587f, 0px 1px #4171ae,
-  2px 1px #3a587f, 1px 2px #4171ae;
+  box-shadow: 1px 0px #b41c98, 0px 1px #680656,
+  2px 1px #b41c98, 1px 2px #680656;
 }
 
+a.twitter:hover {
+  color: #55acee; /* official branded color */
+}
+
+a.facebook:hover {
+  color: #3b5999; /* official branded color */
+}
+
+a.youtube:hover {
+  color: #cd201f; /* official branded color */
+}
 
 
 /* Mobile only stuff */
