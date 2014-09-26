@@ -1,5 +1,7 @@
 
 body {
+  font-family: Lato, sans-serif;
+  font-style: italic;
   height: 100%;
   width: 100%;
   font-size: 24px;
@@ -19,12 +21,8 @@ body {
   margin-bottom: 20px;
 }
 
-#messages {
-  margin-bottom: 70px;
-}
-
 #media { 
-  margin-bottom: 20px;
+  margin-bottom: 70px;
 }
 /* set to table alignment to get the bastard vertically aligned */
 #play-button {
@@ -50,6 +48,15 @@ body {
   text-align: right;
   font-size: 90px;
 }
+
+#messages {
+  font-family: Merriweather, serif;
+  font-style: normal;
+  margin-bottom: 30px;
+}
+
+
+
 
 .footer {
   display: inline;
@@ -82,19 +89,19 @@ a:hover {
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
   #playlist-link {
-    margin-left: 40px;
+    margin-left: 30px;
   }
 }
 /* med */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   #playlist-link {
-    margin-left: 10px;
+    margin-left: 0px;
   }
 }
 /* lg */
 @media only screen and (min-width: 1200px) {
   #playlist-link {
-    margin-left: -20px;
+    margin-left: -30px;
   }
 }
 
