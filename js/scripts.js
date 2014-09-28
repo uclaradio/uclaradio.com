@@ -112,7 +112,10 @@ $(function() {
     $(this).children().toggleClass("fa fa-play fa fa-pause");
     if (stream.paused === false) {
       stream.pause();
+      // need to hard reset to stop the download
+      stream.src = '';
     } else {
+      stream.src = "http://stream.uclaradio.com:8000/listen";
       stream.play();
     }
   });

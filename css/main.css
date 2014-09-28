@@ -28,6 +28,7 @@ body {
 #play-button {
   height: 180px;
   width: 180px;
+  padding: 0px;
   font-size: 120px;
   display: table;
   border-radius: 50%;
@@ -56,9 +57,6 @@ body {
   margin-bottom: 30px;
 }
 
-
-
-
 .footer {
   display: inline;
   margin: auto;
@@ -69,9 +67,6 @@ body {
   text-decoration: none;
   font-size: 34px;
     margin-left: -15px;
-}
-
-#blog-link:hover {
 }
 
 #playlist-link {
@@ -133,15 +128,21 @@ a:hover {
   position: relative;
 }
 .pop-button:hover {
-  transform: translate(-4px, -4px);
+  -webkit-transform: translate(-4px, -4px);
+      -ms-transform: translate(-4px, -4px);
+          transform: translate(-4px, -4px);
 }
 /* same as above */
 .pop-button:focus {
-  transform: translate(-4px, -4px);
+  -webkit-transform: translate(-4px, -4px);
+      -ms-transform: translate(-4px, -4px);
+          transform: translate(-4px, -4px);
 }
 
 .pop-button:active {
-  transform: translate(-2px, -2px);
+  -webkit-transform: translate(-2px, -2px);
+      -ms-transform: translate(-2px, -2px);
+          transform: translate(-2px, -2px);
 }
 
 /* Mobile only stuff */
