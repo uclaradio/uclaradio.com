@@ -86,7 +86,7 @@ function setDropShadows(darkColor, mediumColor) {
         $(this).css('box-shadow', boxShadowHoverCss);
       },
       function() {
-        $(this).css('box-shadow', '');
+        $(this).css('b)x-shadow', '');
       }
       );
 
@@ -103,6 +103,40 @@ function setDropShadows(darkColor, mediumColor) {
         $(this).css('box-shadow', boxShadowHoverCss);
       }
       );
+}
+
+function setLogo(colorScheme) {
+  // night logo, works with grey gradients
+  var filename;
+  if (colorScheme === "Greys") {
+    // get random number between 0-2
+    var choice = possColors[Math.floor(Math.random()*3)];
+    filename = "img/space" + choice + ".png";
+  }
+  else { // use normal logo
+    filename = "img/logo.png";
+  }
+
+  $("#logo").attr("src", filename);
+}
+
+function setPageTheme(colorScheme) {
+  var colors = Trianglify.colorbrewer[colorScheme][9];
+  var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175, x_gradient: colors});
+  var pattern = t.generate(4000, 3000);
+  document.body.setAttribute('style', 'background: ' + 
+    pattern.dataUrl + ' no-repeat center center fixed');
+
+  // Now set the buttons based on color scheme
+  var dark = colors[8];
+  var medium = colors[7];
+  var light = colors[6];
+
+
+  $(".pop-button").css('background-color', light);
+  // need to change the drop shadow as well as button
+  setDropShadows(dark, medium);
+  setLogo(colorScheme);
 }
 
 $(function() {
@@ -124,21 +158,8 @@ $(function() {
   var colorScheme = getColorSchemeFromTime();
   //debug
   console.log(colorScheme);
-  var colors = Trianglify.colorbrewer[colorScheme][9];
-  var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175, x_gradient: colors});
-  var pattern = t.generate(4000, 3000);
-  document.body.setAttribute('style', 'background: ' + 
-    pattern.dataUrl + ' no-repeat center center fixed');
+  setPageTheme(colorScheme); 
 
-  // Now set the buttons based on color scheme
-  var dark = colors[8];
-  var medium = colors[7];
-  var light = colors[6];
-
-
-  $(".pop-button").css('background-color', light);
-  // need to change the drop shadow as well as button
-  setDropShadows(dark, medium);
 });
 
 
