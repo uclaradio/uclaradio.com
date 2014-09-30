@@ -110,7 +110,7 @@ function setLogo(colorScheme) {
   var filename;
   if (colorScheme === "Greys") {
     // get random number between 0-2
-    var choice = possColors[Math.floor(Math.random()*3)];
+    var choice = Math.floor(Math.random()*3);
     filename = "img/space" + choice + ".png";
   }
   else { // use normal logo
