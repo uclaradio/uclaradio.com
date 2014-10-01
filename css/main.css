@@ -11,7 +11,11 @@ body {
 
 .container {
   background: rgba(245,245,245,0.7);
-  padding: 20px;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
   border-radius: 3px; 
 }
 
@@ -30,16 +34,18 @@ body {
 }
 
 #media {
-  margin-bottom: 70px;
 }
 /* set to table alignment to get the bastard vertically aligned */
 #play-button {
-  height: 140px;
-  width: 140px;
+  height: 200px;
+  width: 200px;
   padding: 0px;
-  font-size: 90px;
+  font-size: 120px;
   display: table;
   border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
 }
 
 #play-icon {
@@ -54,9 +60,10 @@ body {
 }
 
 #billboard {
-  text-align: right;
+  text-align: center;
   font-size: 90px;
   padding-top: 0px;
+  padding-bottom: 20px;
 }
 
 #messages {
@@ -158,13 +165,7 @@ a:hover {
   body {
     padding-top: 0px;
   }
-  #play-button {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-  }
   #billboard {
-    text-align: center;
     font-size: 90px;
   }
   #blog-link {
