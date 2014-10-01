@@ -11,11 +11,7 @@ body {
 
 .container {
   background: rgba(245,245,245,0.7);
-
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding: 50px;
   border-radius: 3px; 
 }
 
@@ -23,9 +19,7 @@ body {
   background: transparent;
   font-size: 90px;
   height: 350px;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-top: 20px;
+  padding: 0px;
 }
 
 #logo {
