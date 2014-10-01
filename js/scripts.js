@@ -146,7 +146,7 @@ $(function() {
 
   // activate the play button
   $("#play-button").click(function() {
-    $(this).children().toggleClass("fa fa-play fa fa-pause");
+    $("#play-icon").toggleClass("fa fa-play fa fa-pause");
     if (stream.paused === false) {
       stream.pause();
       // need to hard reset to stop the download

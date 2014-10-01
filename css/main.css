@@ -26,26 +26,27 @@ body {
   padding-bottom: 110px;
 }
 
-#media {
-}
 /* set to table alignment to get the bastard vertically aligned */
 #play-button {
+  float: none;
   height: 200px;
   width: 200px;
-  padding: 0px;
-  font-size: 120px;
-  display: table;
-  border-radius: 50%;
   margin-left: auto;
   margin-right: auto;
+  font-size: 120px;
   margin-bottom: 20px;
 }
 
-#play-icon {
-  display: table-cell;
-  vertical-align: middle;
-  text-decoration: none;
+#play-button .pop-button {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+#play-button #play-icon {
   text-align: center;
+  margin: 0 auto;
+  text-decoration: none;
 }
 
 .fa-play {
@@ -175,14 +176,14 @@ a:hover {
     text-align: center;
   }
   #social .facebook {
-    margin-right: 20px;
+    margin-right: 0px;
   }
   #social .youtube {
     margin-left: 0px;
     margin-right : 0px;
   }
   #social .twitter {
-    margin-left: 20px;
+    margin-left: 0px;
   }
 
   /* helper class, use to tag things that should be desktop-only */
