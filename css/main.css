@@ -7,12 +7,17 @@ body {
   width: 100%;
   font-size: 24px;
   padding-top: 20px;
+  background-size: cover;
 }
 
 .container {
   background: rgba(245,245,245,0.7);
   padding: 50px;
   border-radius: 3px; 
+}
+
+.container #logo {
+  background: rgba(0,0,0,0.0); /* transparent */
 }
 
 #logo {

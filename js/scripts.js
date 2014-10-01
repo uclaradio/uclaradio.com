@@ -55,7 +55,7 @@ function getColorSchemeFromTime() {
     return getRandColorScheme('evening');
   }
 }
-function setButtons(darkColor, mediumColor, lightColor) {
+function setButtons(darkColor, mediumColor, lightColor, midnight) {
   $(".pop-button").css('background-color', lightColor);
 
   var boxShadowHoverCss = "1px 0px " + mediumColor + 
@@ -88,7 +88,7 @@ function setButtons(darkColor, mediumColor, lightColor) {
         $(this).css('box-shadow', boxShadowHoverCss);
       },
       function() {
-        $(this).css('b)x-shadow', '');
+        $(this).css('box-shadow', '');
       }
       );
 
@@ -107,37 +107,39 @@ function setButtons(darkColor, mediumColor, lightColor) {
       );
 }
 
-function setLogo(colorScheme) {
-  // night logo, works with grey gradients
-  var filename;
-  if (colorScheme === "Greys") {
-    // get random number between 0-2
-    var choice = Math.floor(Math.random()*3);
-    filename = "img/space" + choice + ".png";
-  }
-  else { // use normal logo
-    filename = "img/logo.png";
-  }
-
-  $("#logo").attr("src", filename);
-}
-
 function setPageTheme(colorScheme) {
-  var colors = Trianglify.colorbrewer[colorScheme][9];
-  var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175, x_gradient: colors});
-  var pattern = t.generate(4000, 3000);
-  document.body.setAttribute('style', 'background: ' + 
-    pattern.dataUrl + ' no-repeat center center fixed');
+  var midnight = false;
+  var dark = null;
+  var medium = null;
+  var light = null;
+
+  if (colorScheme === "Greys") { // midnight space theme
+    midnight = true;
+    var filename = 'img/nebula' + Math.floor(Math.random()*3) + '.jpg';
+    var backgroundAttribute = "background: url(" + filename +
+      ") no-repeat center center fixed";
+    document.body.setAttribute('style', backgroundAttribute);
+    dark = '#292e49';
+    medium = '#2d4b56';
+    light = '#30716d';
+  }
+  else {
+    var colors = Trianglify.colorbrewer[colorScheme][9];
+    var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175, x_gradient: colors});
+    var pattern = t.generate(4000, 3000);
+    document.body.setAttribute('style', 'background: ' + 
+        pattern.dataUrl + ' no-repeat center center fixed');
+
+    dark = colors[8];
+    medium = colors[7];
+    light = colors[6];
+  }
 
   // Now set the buttons based on color scheme
-  var dark = colors[8];
-  var medium = colors[7];
-  var light = colors[6];
 
-
+  // check if it is "dark" theme or not
   // need to change the drop shadow as well as button
-  setButtons(dark, medium, light);
-  setLogo(colorScheme);
+  setButtons(dark, medium, light, midnight);
 }
 
 $(function() {
