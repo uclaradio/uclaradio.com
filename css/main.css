@@ -1,8 +1,8 @@
 
 body {
   font-family: Lato, sans-serif;
-  font-color: #333;
   font-style: italic;
+  font-color: #333;
   height: 100%;
   width: 100%;
   font-size: 24px;
@@ -15,16 +15,10 @@ body {
   border-radius: 3px; 
 }
 
-.container .jumbotron {
-  background: transparent;
-  font-size: 90px;
-  height: 350px;
-  padding: 0px;
-}
-
 #logo {
   max-width: 100%;
   max-height: 100%;
+  padding-bottom: 110px;
 }
 
 #media {
@@ -55,9 +49,9 @@ body {
 
 #billboard {
   text-align: center;
-  font-size: 90px;
+  font-size: 80px;
   padding-top: 0px;
-  padding-bottom: 20px;
+  padding-bottom: 100px;
 }
 
 #messages {
@@ -160,7 +154,7 @@ a:hover {
     padding-top: 0px;
   }
   #billboard {
-    font-size: 90px;
+    font-size: 50px;
   }
   #blog-link {
     text-align: center;
