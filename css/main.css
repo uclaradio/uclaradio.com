@@ -1,6 +1,7 @@
 
 body {
   font-family: Lato, sans-serif;
+  font-color: #333;
   font-style: italic;
   height: 100%;
   width: 100%;
@@ -14,26 +15,29 @@ body {
   border-radius: 3px; 
 }
 
-.jumbotron {
+.container .jumbotron {
   background: transparent;
   font-size: 90px;
   height: 350px;
-  margin-bottom: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 20px;
 }
 
 #logo {
-  width: contain;
+  max-width: 100%;
+  max-height: 100%;
 }
 
-#media { 
+#media {
   margin-bottom: 70px;
 }
 /* set to table alignment to get the bastard vertically aligned */
 #play-button {
-  height: 180px;
-  width: 180px;
+  height: 140px;
+  width: 140px;
   padding: 0px;
-  font-size: 120px;
+  font-size: 90px;
   display: table;
   border-radius: 50%;
 }
@@ -52,7 +56,7 @@ body {
 #billboard {
   text-align: right;
   font-size: 90px;
-  padding-top: 20px;
+  padding-top: 0px;
 }
 
 #messages {

@@ -55,7 +55,9 @@ function getColorSchemeFromTime() {
     return getRandColorScheme('evening');
   }
 }
-function setDropShadows(darkColor, mediumColor) {
+function setButtons(darkColor, mediumColor, lightColor) {
+  $(".pop-button").css('background-color', lightColor);
+
   var boxShadowHoverCss = "1px 0px " + mediumColor + 
     ", 0px 1px " + darkColor +
     ", 2px 1px " + mediumColor +
@@ -133,9 +135,8 @@ function setPageTheme(colorScheme) {
   var light = colors[6];
 
 
-  $(".pop-button").css('background-color', light);
   // need to change the drop shadow as well as button
-  setDropShadows(dark, medium);
+  setButtons(dark, medium, light);
   setLogo(colorScheme);
 }
 
@@ -159,7 +160,6 @@ $(function() {
   //debug
   console.log(colorScheme);
   setPageTheme(colorScheme); 
-
 });
 
 
