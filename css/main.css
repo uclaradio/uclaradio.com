@@ -92,7 +92,9 @@ a:hover {
 
 /* small */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-
+  #side {
+    border: none;
+  }
   #playlist-link {
     margin-left: 30px;
   }
