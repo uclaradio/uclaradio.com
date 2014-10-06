@@ -1,9 +1,82 @@
-#lfmRecentTracks {width:220px; border-collapse:collapse}
- td.lfmTrackImageCell {text-align:center;padding-right:3px;width:34px;background:transparent url(http://cdn.last.fm/flatness/icons/res/3/track.png) no-repeat scroll 50% 50%}
- img.IMAGE { width:34px; height:34px}
- td.lfmTrackInfoCell { padding-left:3px}
- a.TITLE {font-size:80%}
- span.ARTIST {display:block;font-size:70%}
- span.DATE {display:block;font-size:60%}
- #lfmMostRecentTrackImage {display:block;float:left;padding:0px 10px; width:120px; height:100px}
- #lfmMostRecentTrackPlayIcon {vertical-align:bottom;display:none}
+#lfmRecentTracks 
+{
+	width:220px; 
+	border-collapse:collapse
+}
+
+ td.lfmTrackImageCell 
+ {
+ 	text-align:center;
+ 	padding-right:3px;
+ 	width:34px;
+ 	background:transparent url(http://cdn.last.fm/flatness/icons/res/3/track.png) no-repeat scroll 50% 50%
+ }
+ 
+ img.IMAGE 
+ { 
+ 	width:34px; 
+ 	height:34px
+ }
+
+ td.lfmTrackInfoCell 
+ { 
+ 	padding-left:3px
+ }
+
+ a.TITLE 
+ {
+ 	font-size:80%
+ }
+
+ span.ARTIST 
+ {
+ 	display:block;font-size:70%
+ }
+
+ span.DATE 
+ {
+ 	display:block;
+ 	font-size:60%
+ }
+
+ #lfmMostRecentTrackImage 
+ {
+ 	display:block;
+ 	float:left;
+ 	padding:0px 10px; 
+ 	width:120px; 
+ 	height:100px
+ }
+
+ #lfmMostRecentTrackPlayIcon 
+ {
+ 	vertical-align:bottom;
+	display:none
+}
+
+#Current_info
+{
+	font-style: normal
+}
+
+#Current_info .col-sm-7
+{
+	text-align: right;
+}
+
+#Current_info .col-sm-7 strong
+{
+	font-size: 40px
+}
+
+#side
+{
+	margin-left: 10px; 
+	border-left: solid 1px;
+}
+
+#side #lfmMostRecentTrack
+{
+	text-align: left;
+	font-size: 15px
+}
