@@ -15,7 +15,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- other fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:100italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'>
 
     <!-- trianglify, for background stuff -->
@@ -24,28 +24,83 @@
 
     <!-- Our stylesheets/scripts -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/recent_tracks.css">
     <script src="js/scripts.js"></script>
+    <script src="js/recent_tracks.js"></script>
+    <script src="js/currently_playing.js"></script>
+
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
   </head>
   <body>
     <div class="container" role="main">
-      <div class="jumbotron text-center"> UCLA RADIO 
+      <img id="logo" src="img/logo.png" alt="UCLA RADIO" />
+      <div id="play-button">
+        <a role="button" class="pop-button text-center" href="#">
+          <span id="play-icon" class="fa fa-play"></span>
+          <audio id="stream" preload="none">
+            <p>Your browser does not support the stream. :(</p>
+          </audio>
+        </a>
       </div>
-      <div class="row" id="media">
-        <div class="col-sm-3 "> 
-          <a role="button" id="play-button" class="pop-button" href="#">
-            <span id="play-icon" class="fa fa-play"></span>
-            <audio id="stream">
-              <source src="http://stream.uclaradio.com:8000/listen" type="audio/mpeg">
-            </audio>
-          </a>
-        </div>
-        <div class="col-sm-9" id="billboard">
-          LISTEN LIVE
+      <div class="row" id="billboard">
+        <div class="col-sm-12"> 
+          LISTEN LIVE 
         </div>
       </div>
+
+
+
+
+      <div id="Current_info" class="row">
+        <div class="col-sm-7">
+              <strong>Currently On Air</strong>
+              <h2>%SHOW TITLE%</h2>
+              <h3>%DJ_NAME(S)%</h3>
+              % Show Description pulled from calender / Bio %
+            <br />
+        </div>
+
+        <div id="side" class="col-sm-4">
+          <br />
+            <div id="lfmMostRecentTrack">
+                  <img id="lfmMostRecentTrackImage" src="http://cdn.last.fm/flatness/catalogue/noimage/2/default_album_medium.png"/>
+                  <b><span id="lfmMostRecentTrackDate"></span></b>
+                  <div id="lfmMostRecentTrackTitle"></div>
+                  <span id="lfmMostRecentTrackArtist"></span> 
+                  <span id="lfmMostRecentTrackAlbum"></span>
+            </div>
+
+          <br />
+          <br />
+
+          <h2><strong>Recently Played</strong></h2>
+            <div id="lfmRecentTracks">
+              <div class="contain">
+                <img class="IMAGE" src="%IMAGE%" />
+                <span class="TITLE">%TITLE%</span>
+                <span class="ARTIST">by %ARTIST%</span>
+                <span class="DATE">%DATE%</span>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+
       <div class="row">
-        <div class="col-sm-12 desktop-only" id="messages">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        <div class="col-sm-12 desktop-only text-justify" id="messages">
+          <p>
+            UCLA Radio is an entirely student run radio station.
+            We broadcast all day, every day from a secret cave
+            in Ackerman Student Union.
+          </p>
+          <p>
+            We're accepting applications for Fall internships.
+            Apply <a href="http://recruiting.dailybruin.com/applications/uclaradiocom/radio-intern/" target="_blank">here</a> 
+            and let's be friends.
+          </p>
         </div>
       </div>
 
@@ -53,26 +108,32 @@
         <div class="row">
           <span class="col-xs-12 col-sm-7" id="links-container">
             <span class="col-xs-12 col-sm-3" id="blog-link">
-              <a class="pop-button" role="button" href="http://uclaradio.tumblr.com/">BLOG</a>
+              <a class="pop-button" target="_blank" role="button" href="http://uclaradio.tumblr.com/">BLOG</a>
             </span>
             <span class="col-xs-12 col-sm-3" id="playlist-link">
-              <a class="pop-button" role="button" href="https://play.spotify.com/user/uclaradio/undefined/playlists">PLAYLISTS</a>
+              <a class="pop-button" target="_blank" role="button" href="http://www.last.fm/user/uclaradio">PLAYLISTS</a>
             </span>
           </span>
           <span class="col-xs-12 col-sm-5" id="social">
-            <a href="https://www.facebook.com/UCLARadio" class="pop-button facebook">
+            <a href="https://www.facebook.com/UCLARadio" target="_blank" class="pop-button facebook">
               <i class="fa fa-facebook-square fa-2x"></i>
             </a>
-            <a href="https://www.youtube.com/user/UCLAradiocom" class="pop-button youtube">
-              <i class="fa fa-youtube-square fa-2x "></i>
+            <a href="http://instagram.com/UCLARadio" target="_blank" class="pop-button instagram">
+              <i class="fa fa-instagram fa-2x "></i>
             </a>
-            <a href="https://twitter.com/UCLAradio" class="pop-button twitter">
+            <a href="https://twitter.com/UCLAradio" target="_blank" class="pop-button twitter">
               <i class="fa fa-twitter-square fa-2x "></i>
             </a>
           </span>
         </div>
       </div>
     </div>
+
+    <script type="text/javascript" src="http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=5&format=json&callback=lfmRecentTracks"></script>
+    <script type="text/javascript" src="http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=lfmMostRecentTrack"></script>
+
+
+
   </body>
 </html>
 

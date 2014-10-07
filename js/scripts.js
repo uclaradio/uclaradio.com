@@ -55,7 +55,9 @@ function getColorSchemeFromTime() {
     return getRandColorScheme('evening');
   }
 }
-function setDropShadows(darkColor, mediumColor) {
+function setButtons(darkColor, mediumColor, lightColor, midnight) {
+  $(".pop-button").css('background-color', lightColor);
+
   var boxShadowHoverCss = "1px 0px " + mediumColor + 
     ", 0px 1px " + darkColor +
     ", 2px 1px " + mediumColor +
@@ -105,14 +107,52 @@ function setDropShadows(darkColor, mediumColor) {
       );
 }
 
+function setPageTheme(colorScheme) {
+  var midnight = false;
+  var dark = null;
+  var medium = null;
+  var light = null;
+
+  if (colorScheme === "Greys") { // midnight space theme
+    midnight = true;
+    var filename = 'img/nebula' + Math.floor(Math.random()*3) + '.jpg';
+    var backgroundAttribute = "background: url(" + filename +
+      ") no-repeat center center fixed";
+    document.body.setAttribute('style', backgroundAttribute);
+    dark = '#292e49';
+    medium = '#2d4b56';
+    light = '#30716d';
+  }
+  else {
+    var colors = Trianglify.colorbrewer[colorScheme][9];
+    var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175, x_gradient: colors});
+    var pattern = t.generate(4000, 3000);
+    document.body.setAttribute('style', 'background: ' + 
+        pattern.dataUrl + ' no-repeat center center fixed');
+
+    dark = colors[8];
+    medium = colors[7];
+    light = colors[6];
+  }
+
+  // Now set the buttons based on color scheme
+
+  // check if it is "dark" theme or not
+  // need to change the drop shadow as well as button
+  setButtons(dark, medium, light, midnight);
+}
+
 $(function() {
 
   // activate the play button
   $("#play-button").click(function() {
-    $(this).children().toggleClass("fa fa-play fa fa-pause");
+    $("#play-icon").toggleClass("fa fa-play fa fa-pause");
     if (stream.paused === false) {
       stream.pause();
+      // need to hard reset to stop the download
+      stream.src = '';
     } else {
+      stream.src = "http://stream.uclaradio.com:8000/listen";
       stream.play();
     }
   });
@@ -121,21 +161,7 @@ $(function() {
   var colorScheme = getColorSchemeFromTime();
   //debug
   console.log(colorScheme);
-  var colors = Trianglify.colorbrewer[colorScheme][9];
-  var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175, x_gradient: colors});
-  var pattern = t.generate(4000, 3000);
-  document.body.setAttribute('style', 'background: ' + 
-    pattern.dataUrl + ' no-repeat center center fixed');
-
-  // Now set the buttons based on color scheme
-  var dark = colors[8];
-  var medium = colors[7];
-  var light = colors[6];
-
-
-  $(".pop-button").css('background-color', light);
-  // need to change the drop shadow as well as button
-  setDropShadows(dark, medium);
+  setPageTheme(colorScheme); 
 });
 
 
