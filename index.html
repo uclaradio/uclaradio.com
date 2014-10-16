@@ -24,7 +24,12 @@
 
     <!-- Our stylesheets/scripts -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/recent_tracks.css">
     <script src="js/scripts.js"></script>
+    <script src="js/recent_tracks.js"></script>
+    <script src="js/currently_playing.js"></script>
+
+
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Google analytics -->
@@ -51,9 +56,50 @@
       </div>
       <div class="row" id="billboard">
         <div class="col-sm-12"> 
-          LISTEN LIVE
+          LISTEN LIVE 
         </div>
       </div>
+
+
+
+
+      <div id="Current_info" class="row">
+        <div class="col-sm-7">
+              <strong>Currently On Air</strong>
+              <h2>%SHOW TITLE%</h2>
+              <h3>%DJ_NAME(S)%</h3>
+              % Show Description pulled from calender / Bio %
+            <br />
+        </div>
+
+        <div id="side" class="col-sm-4">
+          <br />
+            <div id="lfmMostRecentTrack">
+                  <img id="lfmMostRecentTrackImage" src="http://cdn.last.fm/flatness/catalogue/noimage/2/default_album_medium.png"/>
+                  <b><span id="lfmMostRecentTrackDate"></span></b>
+                  <div id="lfmMostRecentTrackTitle"></div>
+                  <span id="lfmMostRecentTrackArtist"></span> 
+                  <span id="lfmMostRecentTrackAlbum"></span>
+            </div>
+
+          <br />
+          <br />
+
+          <h2><strong>Recently Played</strong></h2>
+            <div id="lfmRecentTracks">
+              <div class="contain">
+                <img class="IMAGE" src="%IMAGE%" />
+                <span class="TITLE">%TITLE%</span>
+                <span class="ARTIST">by %ARTIST%</span>
+                <span class="DATE">%DATE%</span>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+
       <div class="row">
         <div class="col-sm-12 desktop-only text-justify" id="messages">
           <p>
@@ -93,6 +139,12 @@
         </div>
       </div>
     </div>
+
+    <script type="text/javascript" src="http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=5&format=json&callback=lfmRecentTracks"></script>
+    <script type="text/javascript" src="http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=lfmMostRecentTrack"></script>
+
+
+
   </body>
 </html>
 
