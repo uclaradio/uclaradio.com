@@ -142,19 +142,23 @@ function setPageTheme(colorScheme) {
   setButtons(dark, medium, light, midnight);
 }
 
-$(function() {
+$(document).ready(function() {
+  var stream = document.getElementById('stream');
+
+  var playing = false;
 
   // activate the play button
   $("#play-button").click(function() {
-    $("#play-icon").toggleClass("fa fa-play fa fa-pause");
-    if (stream.paused === false) {
-      stream.pause();
-      // need to hard reset to stop the download
-      stream.src = '';
-    } else {
-      stream.src = "http://stream.uclaradio.com:8000/listen";
+
+    if (!playing) {
       stream.play();
+      playing = true;
+    } else {
+      stream.pause();
+      playing = false;
     }
+
+    $("#play-icon").toggleClass("fa fa-play fa fa-pause");
   });
 
   // Generate that background image!
