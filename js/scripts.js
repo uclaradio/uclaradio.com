@@ -143,19 +143,32 @@ function setPageTheme(colorScheme) {
 }
 
 $(document).ready(function() {
-  var stream = document.getElementById('stream');
 
+  var stream = document.getElementById('stream');
   var playing = false;
+  var mobile = mobileBrowserCheck();
+
+  //add preloading to non-mobile browsers
+  if (!mobile)
+    stream.setAttribute('preload', 'auto');
 
   // activate the play button
   $("#play-button").click(function() {
 
     if (!playing) {
+	  //add the source again if we're on a mobile device
+	  if (mobile)
+		stream.src="http://stream.uclaradio.com:8000/listen";
+
       stream.play();
       playing = true;
     } else {
       stream.pause();
       playing = false;
+
+	  //remove the source if the user is on a mobile device to stop data transfer
+	  if (mobile)
+	    stream.src = '';
     }
 
     $("#play-icon").toggleClass("fa fa-play fa fa-pause");
