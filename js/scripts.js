@@ -183,7 +183,7 @@ $(document).ready(function() {
   // Generate that background image!
   var colorScheme = getColorSchemeFromTime();
   //debug
-  console.log(colorScheme);
+  //console.log(colorScheme);
   setPageTheme(colorScheme); 
 });
 
