@@ -146,7 +146,11 @@ $(document).ready(function() {
 
   var stream = document.getElementById('stream');
   var playing = false;
+
+  //Calls mobileBrowserCheck function from mobileBrowserCheck.js.
+  //function in that file is taken from detectmobilebrowsers.com
   var mobile = mobileBrowserCheck();
+
 
   //add preloading to non-mobile browsers
   if (!mobile)
@@ -156,7 +160,8 @@ $(document).ready(function() {
   $("#play-button").click(function() {
 
     if (!playing) {
-	  //add the source again if we're on a mobile device
+
+	  //add the source again if we're on a mobile device since it was removed to stop download.
 	  if (mobile)
 		stream.src="http://stream.uclaradio.com:8000/listen";
 
@@ -166,7 +171,8 @@ $(document).ready(function() {
       stream.pause();
       playing = false;
 
-	  //remove the source if the user is on a mobile device to stop data transfer
+	  //remove the source if the user is on a mobile device to stop data transfer. If we don't do this on mobile,
+	  //data stream will continue until the tab is closed, even if browser is minimized.
 	  if (mobile)
 	    stream.src = '';
     }
