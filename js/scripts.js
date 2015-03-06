@@ -66,13 +66,13 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
     ", 2px 3px " + darkColor +
     ", 4px 3px " + mediumColor +
     ", 3px 4px " + darkColor;
-  console.log(boxShadowHoverCss);
+  //console.log(boxShadowHoverCss);
 
   var boxShadowActiveCss = "1px 0px " + mediumColor + 
     ", 0px 1px " + darkColor +
     ", 2px 1px " + mediumColor +
     ", 1px 2px " + darkColor;
-  console.log(boxShadowActiveCss);
+  //console.log(boxShadowActiveCss);
 
 
   $(".pop-button").hover(

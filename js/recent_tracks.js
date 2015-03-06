@@ -20,7 +20,7 @@ return name.length > l ? name.substr(0,l-2) + "\u2026" : name
 
 function loadcarousel(arr) {
   var oTracks = new Array().concat(JSONdata.recenttracks.track);
-  console.log("BOOOOO");
+  //console.log("BOOOOO");
 
 }
 
@@ -31,7 +31,7 @@ function loadcarousel(arr) {
 
 function lfmRecentTracks(JSONdata) {
     var oTracks = new Array().concat(JSONdata.recenttracks.track);
-    console.log(oTracks);
+    //console.log(oTracks);
     for (var i =  typeof oTracks[0]['@attr'] == "undefined"  ? 0 : 0; i < oTracks.length; i++) {
         
         var div = document.getElementById('c_data');
