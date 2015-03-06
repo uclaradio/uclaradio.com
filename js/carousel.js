@@ -1,6 +1,4 @@
  $(document).ready(function(){
-
-
     $('#c_data').slick({
 		  dots: true,
 		  infinite: false,
@@ -34,8 +32,5 @@
 		      }
 		    }
 		  ]
-});
-
-
-
+	});
 });
