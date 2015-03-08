@@ -18,56 +18,52 @@ function truncateName(name, l) {
 return name.length > l ? name.substr(0,l-2) + "\u2026" : name
 }
 
-function loadcarousel(arr) {
-  var oTracks = new Array().concat(JSONdata.recenttracks.track);
-  //console.log("BOOOOO");
+var latestTrackInfo = {
+	name: null,
+	artist: null
+};
 
+function updateRecentTracks(JSONdata) {
+    var oTracks = new Array().concat(JSONdata.recenttracks.track);
+
+	var div = document.getElementById('c_data');
+	var pic = oTracks[0].image[1]["#text"] != "" ? oTracks[0].image[2]["#text"] : null;
+	var latestTrackTitle = truncateName(oTracks[0].name, 22);
+	var latestTrackArtist = truncateName(oTracks[0].artist["#text"], 22);
+
+	if (latestTrackTitle !== latestTrackInfo.name && latestTrackArtist !== latestTrackInfo.artist) {
+		latestTrackInfo.name = latestTrackTitle;
+		latestTrackInfo.artist = latestTrackArtist;
+		
+		
+		  //include case such that no image is found
+		pic = (pic == null) ? "img/no_album_artwork.jpg" : pic;
+	 	$('#c_data').slick('slickAdd', '<div> <br />' + '<img class= "album_artwork" src="' + pic + '"</>'+ '<strong>"' + latestTrackTitle + '"</strong><br />' + latestTrackArtist + '</div>', 0, true);
+	}
 }
 
-// var myVar;
-// function myFunction(){
-
-//   myVar = 
-
 function lfmRecentTracks(JSONdata) {
-    var oTracks = new Array().concat(JSONdata.recenttracks.track);
-    //console.log(oTracks);
-    for (var i =  typeof oTracks[0]['@attr'] == "undefined"  ? 0 : 0; i < oTracks.length; i++) {
-        
-        var div = document.getElementById('c_data');
-        var pic = oTracks[i].image[1]["#text"] != "" ? oTracks[i].image[2]["#text"] : null;
-        var track_title = truncateName(oTracks[i].name, 22);
+	var oTracks = new Array().concat(JSONdata.recenttracks.track);
+
+	latestTrackInfo.name = truncateName(oTracks[0].name, 22);
+	latestTrackInfo.artist = truncateName(oTracks[0].artist["#text"], 22);
+
+	for (var i = 0; i < oTracks.length; i++) {
+		
+		//var div = document.getElementById('c_data');
+		var pic = oTracks[i].image[1]["#text"] != "" ? oTracks[i].image[2]["#text"] : null;
+		var track_title = truncateName(oTracks[i].name, 22);
         var artist = truncateName(oTracks[i].artist["#text"], 22);
-        var date;
 
-        if (!oTracks[i].date)
-        {
-          date = "Now Playing";
-          var imbed = (pic == null) ? '<img class= "album_artwork" id="currently_playing" src="img/no_album_artwork.jpg" />' : '<img class= "album_artwork" id="currently_playing" src="' + pic + '"/>';
-          var now_playing= '<img id="current_track" src="img/musicbaryt3.gif" />';
-          div.innerHTML = div.innerHTML + '<div> <br />' + imbed + '<strong>"' + track_title + '"</strong><br />' + artist + now_playing + '</div>';
-
-        }
-        else
-        {
-          //include case such that no image is found
-         date = calculateDateAgo(new Date().getTime()/1000 - oTracks[i].date.uts);
-         pic = (pic == null) ? "img/no_album_artwork.jpg" : pic;
-         div.innerHTML = div.innerHTML + '<div> <br />' + '<img class= "album_artwork" src="' + pic + '"</>'+ '<strong>"' + track_title + '"</strong><br />' + artist + "<br />" + date + '</div>';
-        }
+		pic = (pic == null) ? "img/no_album_artwork.jpg" : pic;
+        $('#c_data').slick('slickAdd', '<div> <br />' + '<img class= "album_artwork" src="' + pic + '"</>'+ '<strong>"' + track_title + '"</strong><br />' + artist + '</div>');
 
     }
 
-
-
-        $('#messages').slideDown("slow", function(){
-          
-            $( '#c_data' ).fadeIn(1000);
-
-        });
-
-
-    }
+	$('#messages').slideDown("slow", function(){
+		$( '#c_data' ).fadeIn(1000);
+	});
+}
 
 // }
 
