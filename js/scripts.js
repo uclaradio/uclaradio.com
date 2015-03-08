@@ -190,7 +190,7 @@ $(document).ready(function() {
 
 function checkCarouselData() {
   setTimeout(function() {
-    jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json&callback=updateRecentTracks');
+    jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=reganhsu&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json&callback=updateRecentTracks');
     checkCarouselData();
   }, 30000);
 }
