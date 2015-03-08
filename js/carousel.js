@@ -33,5 +33,5 @@ $(document).ready(function() {
 		    }
 		  ]
 	});
-	jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=reganhsu&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json&callback=lfmRecentTracks');
+	jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json&callback=lfmRecentTracks');
 });
