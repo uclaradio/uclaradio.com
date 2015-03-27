@@ -1,119 +1,112 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="UCLA Radio">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UCLA Radio</title> 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <!-- font awesome -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-    <!-- other fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Lato:300italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:300' rel='stylesheet' type='text/css'>
-
-    <!-- trianglify, for background stuff -->
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js"></script>
-
-    <!-- Our stylesheets/scripts -->
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script src="js/mobileBrowserCheck.js"></script>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-
-    <!-- slick carousel -->
-	<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-	<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
-
-
-
-    <!-- Google analytics -->
-    <!--script>
+doctype html(lang='en')
+head
+    meta(charset='utf-8')
+    |     
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    |     
+    meta(name='description', content='UCLA Radio')
+    |     
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    |     
+    title UCLA Radio
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    // bootstrap
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+    |     
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
+    // font awesome
+    link(href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+    // other fonts
+    link(href='http://fonts.googleapis.com/css?family=Lato:300italic', rel='stylesheet', type='text/css')
+    |     
+    link(href='http://fonts.googleapis.com/css?family=Merriweather:300', rel='stylesheet', type='text/css')
+    // trianglify, for background stuff
+    script(src='http://d3js.org/d3.v3.min.js')
+    |     
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js')
+    // Our stylesheets/scripts
+    link(rel='stylesheet', type='text/css', href='css/main.css')
+    |     
+    script(src='js/mobileBrowserCheck.js')
+    |     
+    link(rel='icon', href='favicon.ico', type='image/x-icon')
+    // slick carousel
+    link(rel='stylesheet', type='text/css', href='slick/slick.css')
+    | &#x9;
+    link(rel='stylesheet', type='text/css', href='slick/slick-theme.css')
+    // Google analytics
+    //
+      script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-55657708-1', 'auto');
-       ga('send', 'pageview');
-    </script-->
-  </head>
-  <body>
-    <audio id="stream" src="http://stream.uclaradio.com:8000/listen" preload="none"></audio>
-    <div class="container" role="main">
-      <img id="logo" src="img/logo.png" alt="UCLA RADIO" />
-      <div id="play-button">
-        <a role="button" class="pop-button text-center" href="#">
-          <span id="play-icon" class="fa fa-play"></span>
-        </a>
-      </div>
-      <div class="row" id="billboard">
-        <div class="col-sm-12"> 
-          LISTEN LIVE
-        </div>
-      </div>
-
-      <div class="row">
-            <br />
-            <center>
-              <div id="c_data">
-              <!--recent_tracks.js allocates recent tracks-->
-              </div>
-            </center>
-            <br />
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12 desktop-only text-justify" id="messages">
-          <p>
-            UCLA Radio is an entirely student run radio station.
-            We broadcast all day, every day from a secret cave
-            in Ackerman Student Union.
-          </p>
-          <p>
-            Our schedule is available <a href='http://i.imgur.com/xntixyW.png' target='_blank'>here.</a>
-          </p>
-		  <p>
-		    If you're having trouble with the stream, you can try listening here:
-			  <a href="http://tunein.com/radio/UCLA-Radio-s2652/" target="_blank">TuneIn</a>
-        </div>
-      </div>
-
-      <div class="footer">
-        <div class="row">
-          <span class="col-xs-12 col-sm-7" id="links-container">
-            <span class="col-xs-12 col-sm-3" id="blog-link">
-              <a class="pop-button" target="_blank" role="button" href="http://uclaradio.tumblr.com/">BLOG</a>
-            </span>
-            <span class="col-xs-12 col-sm-3" id="playlist-link">
-              <a class="pop-button" target="_blank" role="button" href="http://www.last.fm/user/uclaradio">PLAYLISTS</a>
-            </span>
-          </span>
-          <span class="col-xs-12 col-sm-5" id="social">
-            <a href="https://www.facebook.com/UCLARadio" target="_blank" class="pop-button facebook">
-              <i class="fa fa-facebook-square fa-2x"></i>
-            </a>
-            <a href="http://instagram.com/UCLARadio" target="_blank" class="pop-button instagram">
-              <i class="fa fa-instagram fa-2x "></i>
-            </a>
-            <a href="https://twitter.com/UCLAradio" target="_blank" class="pop-button twitter">
-              <i class="fa fa-twitter-square fa-2x "></i>
-            </a>
-          </span>
-        </div>
-      </div>
-    </div>
-  </body>
-
-    <script type="text/javascript" src="slick/slick.min.js"></script>
-    <script src="js/recent_tracks.js"></script>
-    <script src="js/carousel.js"></script>
-    <script src="js/scripts.js"></script>
-
-</html>
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-55657708-1', 'auto');
+      ga('send', 'pageview');
+      </script
+  |   
+  body
+    audio#stream(src='http://stream.uclaradio.com:8000/listen', preload='none')
+    |     
+    .container(role='main')
+      img#logo(src='img/logo.png', alt='UCLA RADIO')
+      |       
+      #play-button
+        a.pop-button.text-center(role='button', href='#')
+          span#play-icon.fa.fa-play
+      |       
+      #billboard.row
+        .col-sm-12
+          | LISTEN LIVE
+      |       
+      .row
+        br
+        |             
+        center
+          #c_data
+            // recent_tracks.js allocates recent tracks
+        |             
+        br
+      |       
+      .row
+        #messages.col-sm-12.desktop-only.text-justify
+          p
+            | UCLA Radio is an entirely student run radio station.
+            | We broadcast all day, every day from a secret cave
+            | in Ackerman Student Union.
+          |           
+          p
+            | Our schedule is available 
+            a(href='http://i.imgur.com/xntixyW.png', target='_blank') here.
+          | &#x9;&#x9;  
+          p
+            | If you&apos;re having trouble with the stream, you can try listening here:
+            a(href='http://tunein.com/radio/UCLA-Radio-s2652/', target='_blank') TuneIn
+      |       
+      .footer
+        .row
+          span#links-container.col-xs-12.col-sm-7
+            span#blog-link.col-xs-12.col-sm-3
+              a.pop-button(target='_blank', role='button', href='http://uclaradio.tumblr.com/') BLOG
+            |             
+            span#playlist-link.col-xs-12.col-sm-3
+              a.pop-button(target='_blank', role='button', href='http://www.last.fm/user/uclaradio') PLAYLISTS
+          |           
+          span#social.col-xs-12.col-sm-5
+            a.pop-button.facebook(href='https://www.facebook.com/UCLARadio', target='_blank')
+              i.fa.fa-facebook-square.fa-2x
+            |             
+            a.pop-button.instagram(href='http://instagram.com/UCLARadio', target='_blank')
+              i.fa.fa-instagram.fa-2x
+            |             
+            a.pop-button.twitter(href='https://twitter.com/UCLAradio', target='_blank')
+              i.fa.fa-twitter-square.fa-2x
+  |     
+  script(type='text/javascript', src='slick/slick.min.js')
+  |     
+  script(src='js/recent_tracks.js')
+  |     
+  script(src='js/carousel.js')
+  |     
+  script(src='js/scripts.js')
