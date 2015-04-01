@@ -35,6 +35,16 @@ padding-top: 1%;
 padding-bottom: 1%;
 }
 
+#carousel-container
+{
+  height:221px;
+}
+
+.twitter, .instagram, .facebook
+{
+  margin:5px;
+}
+
 #c_data
 {
   width: 80%;
@@ -131,8 +141,16 @@ mark
 
 #play-button #play-icon {
   text-align: center;
-  margin: 0 auto;
   text-decoration: none;
+}
+
+/*this style rule is to vertically center the play triangle within the button
+ * the margin-top: -61px pushes it back towards the top by half of the height of the triangle.
+ */
+#play-icon {
+  position: relative;
+  top: 50%;
+  margin-top: -61px;
 }
 
 .fa-play {
