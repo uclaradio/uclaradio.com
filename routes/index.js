@@ -1,9 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
+router.get('/', function(req, res) {
+    var db = req.db;
+    var collection = db.get('djcollection');
+    collection.find({},{},function(e,docs){
+        res.render('index', {
+            "djlist" : docs
+        });
+    });
 });
 
 module.exports = router;

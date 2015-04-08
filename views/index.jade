@@ -36,20 +36,36 @@ head
     link(rel='stylesheet', type='text/css', href='slick/slick.css')
     link(rel='stylesheet', type='text/css', href='slick/slick-theme.css')
 
-     
   body
+         
     audio#stream(src='http://stream.uclaradio.com:8000/listen', preload='none')
          
     .container(role='main')
       img#logo(src='img/logo.png', alt='UCLA RADIO')
+        
+      .row     
+        .col-md-4
+          #play-button
+            a.pop-button.text-center(role='button', href='#')
+              span#play-icon.fa.fa-play
              
-      #play-button
-        a.pop-button.text-center(role='button', href='#')
-          span#play-icon.fa.fa-play
-             
-      #billboard.row
-        .col-sm-12
-          | LISTEN LIVE
+          #billboard
+              | LISTEN
+        
+        .col-md-8
+           center#dj_blurb
+              center#on_air
+              | helloworld
+              
+              block content
+                  h1.
+                      User List
+                  ul
+                      each user, i in djlist
+                          li
+                            |#{user.dj}
+
+
              
       .row
         br
