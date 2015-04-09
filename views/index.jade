@@ -52,7 +52,7 @@ head
       img#logo(src='img/logo.png', alt='UCLA RADIO')
         
       .row     
-        .col-md-4
+        .col-md-12
           #play-button
             a.pop-button.text-center(role='button', href='#')
               span#play-icon.fa.fa-play
@@ -60,21 +60,6 @@ head
           #billboard
               | LISTEN
         
-        .col-md-8
-           center#dj_blurb
-              center#on_air
-              | helloworld
-              
-              block content
-                  h1.
-                      User List
-                  ul
-                      each user, i in djlist
-                          li
-                            |#{user.dj}
-
-
-             
       .row
         br
                      
