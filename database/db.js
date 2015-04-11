@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
  
 mongoose.connect('mongodb://localhost/local');
 
+var db = {};
+
 var Schema = mongoose.Schema;
    
 var DjBlurbSchema = new Schema({
@@ -16,8 +18,12 @@ var DjBlurbSchema = new Schema({
 
 var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
 
-/*DjBlurbModel.findOne({timeslot: 'm10am'}, function(err, blurb) {
-	if (err) return console.error(err);
-	console.dir(blurb);
-});*/
+db.getABlurb = function(time) {
+	DjBlurbModel.find({timeslot: '10pm', day: 'Wed'}, 'link', function(err, blurb) {
+		if (err)
+			console.log('err');
+		console.dir(blurb);
+	});
+});
 
+module.exports = db;
