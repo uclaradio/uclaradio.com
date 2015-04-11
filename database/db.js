@@ -6,9 +6,12 @@ var Schema = mongoose.Schema;
    
 var DjBlurbSchema = new Schema({
 	djName: String,
-	picture: Buffer,
+	showName: String,
+	genre: String,
 	description: String,
-	timeslot: String
+	link: String,
+	timeslot: String,
+	day: String
 });
 
 var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
