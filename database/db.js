@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
  
-mongoose.connect('mongodb://localhost/uclaradio');
+mongoose.connect('mongodb://localhost/local');
 
 var db = {};
 
