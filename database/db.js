@@ -29,4 +29,15 @@ db.getBlurbByTimeslotAndDay = function(time, day) {
 	});
 };
 
+db.getAllBlurbs = function() {
+	DjBlurbModel.find({}, function(err, blurbs) {
+		if (err) console.log(err);
+		var arrayBlurbs = [];
+		for(var i = 0; i < blurbs.length; i++)
+			arrayBlurbs.push(blurbs[i]._doc);
+
+		console.dir(arrayBlurbs);
+	});
+};
+
 module.exports = db;
