@@ -22,21 +22,19 @@ var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
 //i.e. hour and then am or pm. not 24-hour format
 //expects day string like 'Wed', 'Thu'
 //i.e. first three letters of the day, first letter capitalized
-db.getBlurbByTimeslotAndDay = function(time) {
-	DjBlurbModel.findOne({timeslot: time}, function(err, blurb) {
-		if (err) console.log('err');
-		console.log(blurb);
+db.getBlurbByTimeslotAndDay = function(time, day, callback) {
+	DjBlurbModel.findOne({timeslot: time, day: day}, function(err, blurb) {
+		callback(err, blurb);
 	});
 };
 
-db.getAllBlurbs = function() {
+db.getAllBlurbs = function(callback) {
 	DjBlurbModel.find({}, function(err, blurbs) {
-		if (err) console.log(err);
 		var arrayBlurbs = [];
 		for(var i = 0; i < blurbs.length; i++)
 			arrayBlurbs.push(blurbs[i]._doc);
 
-		console.dir(arrayBlurbs);
+		callback(err, arrayBlurbs);
 	});
 };
 
