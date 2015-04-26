@@ -1,0 +1,411 @@
+/*<we modify*/
+
+#blurb-wrapper
+{
+	height: 300px;
+	display: none;
+}
+
+.blurbcontainer
+{
+	padding-left: 50px;
+}
+
+@media only screen and (max-width: 990px){
+	.blurbcontainer
+	{
+		padding-left: 0px;
+		padding-top: 5%;
+	}
+}
+/*we modify>*/
+
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('../fonts/icomoon.eot');
+	src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/icomoon.svg#icomoon') format('svg'),
+		url('../fonts/icomoon.woff') format('woff'),
+		url('../fonts/icomoon.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+/* Needed for a fluid height: */
+html, body, .blurbcontainer, .main { height: 100%;}
+
+/* main wrapper */
+.cbp-contentslider {
+	width: 100%;
+	height: 100%;
+/*	margin: 1em auto;
+*/	position: relative;
+	/*border: 4px solid #47a3da*/
+	border: 4px solid #333;
+}
+
+.cbp-contentslider > ul {
+	list-style: none;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
+.cbp-contentslider > ul li {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	padding: 1em;
+
+}
+
+/* Whithout JS, we use :target */
+.cbp-contentslider > ul li:target {
+	z-index: 100;
+}
+
+.cbp-contentslider nav {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 3.313em;
+	z-index: 1000;
+	/*border-top: 4px solid #47a3da;*/
+	border-top: 4px solid #333;
+	overflow: hidden;
+}
+
+.cbp-contentslider nav a {
+	float: left;
+	display: block;
+	width: 20%;
+	height: 100%;
+	font-weight: 400;
+	letter-spacing: 0.1em;
+	overflow: hidden;
+	color: black;
+/*	background: #fff;
+*/	outline: none;
+	text-align: center;
+	line-height: 3;
+	/*position: relative;*/
+	/*padding-left: 3.125em;*/
+	text-transform: uppercase;
+	border-right: 4px solid #333;
+	-webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+	-moz-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+	transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.cbp-contentslider nav a span {
+	display: block;
+}
+
+.cbp-contentslider nav a:last-child {
+	border: none;
+	box-shadow: 1px 0 #47a3da; /* fills gap caused by rounding */
+}
+
+.cbp-contentslider nav a:hover {
+	/*background-color: #47a3da;*/
+	background-color: #333;
+	color: #fff;
+}
+
+.cbp-contentslider nav a.rc-active {
+	background-color: #333;
+	color: #fff;
+}
+
+/* Iconfont for navigation and headings */
+.cbp-contentslider [class^="icon-"]:before, 
+.cbp-contentslider [class*=" icon-"]:before {
+	font-family: 'icomoon';
+	font-style: normal;
+	text-align: center;
+	speak: none;
+	font-weight: normal;
+	line-height: 2.5;
+	font-size: 2em;
+	position: absolute;
+	left: 10%;
+	top: 50%;
+	margin: -1.250em 0 0 0;
+	height: 2.500em;
+	width: 2.500em;
+	color: rgba(0,0,0,0.1);
+	-webkit-font-smoothing: antialiased;
+}
+
+
+.cbp-contentslider [class^="icon-"].rc-active:before, 
+.cbp-contentslider [class*=" icon-"].rc-active:before,
+.cbp-contentslider nav a:hover:before {
+	color: rgba(255,255,255,0.9);
+}
+
+.cbp-contentslider h3 {
+	font-size: 2.5em;
+	line-height: 1.7;
+	font-weight: 300;
+	margin: 0 0 0.3em;
+	/*position: relative;*/
+	color: #333;
+/*	text-transform: uppercase;
+*/	text-align: right;
+/*	letter-spacing: 0.3em;
+*/	padding: 0 0.2em 0 0;
+	border-bottom: 4px solid #333;
+}
+
+.cbp-contentslider h3[class^="icon-"]:before, 
+.cbp-contentslider h3[class*=" icon-"]:before {
+	top: 0;
+	left: 0;
+	width: 2em;
+	line-height: 1;
+	height: 1.2em;
+	margin: 0;
+	color: #333;
+	/*color: #47a3da;*/
+}
+
+.cbp-contentslider li > div {
+	position: absolute;
+	top: 6em;
+	bottom: 3.313em;
+	width: 100%;
+	left: 0;
+	padding: 0 1em;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.cbp-contentslider .cbp-content {
+	-webkit-column-rule: 1px dashed #333;
+	-moz-column-rule: 1px dashed #333;
+	column-rule: 1px dashed #333;
+	-webkit-column-count: 2;
+	-moz-column-count: 2;
+	-o-column-count: 2;
+	column-count: 2;
+	-webkit-column-gap: 1em;
+	-moz-column-gap: 1em;
+	-o-column-gap: 1em;
+	column-gap: 1em;
+	vertical-align: top;	
+/*	padding: 1em 0;
+*/}
+
+.cbp-contentslider p {
+	color: #333;
+	padding: 0 0.5em 0.4em;
+	margin: 0;
+	font-size: 1.2em;
+	font-weight: 300;
+	text-align: justify;
+	line-height: 1.6;
+}
+
+/* Media queries */
+
+@media screen and (max-width: 70em) { 
+	.cbp-contentslider p {
+		font-size: 100%;
+	}
+}
+
+@media screen and (max-width: 67.75em) {
+
+	.cbp-contentslider { font-size: 85%; }
+
+	.cbp-contentslider nav a[class^="icon-"]:before, 
+	.cbp-contentslider nav a[class*=" icon-"]:before {
+		left: 50%;
+		margin-left: -1.250em;
+	}
+
+	.cbp-contentslider nav a span {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 43em) {
+
+	.cbp-contentslider h3 {
+		font-size: 2em;
+	}
+
+	.cbp-contentslider .cbp-content {
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+		-o-column-count: 1;
+		column-count: 1;
+	}
+
+	.cbp-contentslider li > div {
+		top: 5em;
+	}
+
+}
+
+@media screen and (max-width: 25em) { 
+	.cbp-contentslider nav a { padding: 0;}
+	.cbp-contentslider h3[class^="icon-"]:before, 
+	.cbp-contentslider h3[class*=" icon-"]:before { display: none;}
+}
+
+/* General Demo Style */
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@font-face {
+	font-family: 'fontawesome';
+	src:url('../fonts/fontawesome.eot');
+	src:url('../fonts/fontawesome.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/fontawesome.svg#fontawesome') format('svg'),
+		url('../fonts/fontawesome.woff') format('woff'),
+		url('../fonts/fontawesome.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body, html { font-size: 100%; 	padding: 0; margin: 0;}
+
+/* Reset */
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+body {
+/*    font-family: 'Lato', Calibri, Arial, sans-serif;
+    color: #47a3da;*/
+
+}
+
+a {
+	color: #f0f0f0;
+	text-decoration: none;
+}
+
+
+
+.main,
+.blurbcontainer > header {
+/*	width: 90%;
+*/	max-width: 70em;
+	margin: 0 auto;
+/*	padding: 0 1.875em 3.125em 1.875em;
+*/}
+
+.blurbcontainer > header {
+/*	padding: 2.875em 1.875em 1.875em;
+*/}
+
+.blurbcontainer > header h1 {
+	font-size: 2.125em;
+	line-height: 1;
+	margin: 0;
+	float: left;
+	font-weight: 400;
+}
+
+.blurbcontainer > header span {
+	display: block;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5em;
+/*	padding: 0 0 0.6em 0.1em;
+*/}
+
+.blurbcontainer > header nav {
+	float: right;
+}
+
+.blurbcontainer > header nav a {
+	display: block;
+	float: left;
+	position: relative;
+	width: 2.5em;
+	height: 2.5em;
+	background: #fff;
+	border-radius: 50%;
+	color: transparent;
+	margin: 0 0.1em;
+	border: 4px solid #333;
+	text-indent: -8000px;
+}
+
+.blurbcontainer > header nav a:after {
+	content: attr(data-info);
+	color: #333;
+	position: absolute;
+	width: 600%;
+	top: 120%;
+	text-align: right;
+	right: 0;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.blurbcontainer > header nav a:hover:after {
+	opacity: 1;
+}
+
+.blurbcontainer > header nav a:hover {
+	background: #333;
+}
+
+.icon-drop:before, 
+.icon-arrow-left:before {
+	font-family: 'fontawesome';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 2;
+	text-align: center;
+	color: #333;
+	-webkit-font-smoothing: antialiased;
+	text-indent: 8000px;
+	padding-left: 8px;
+}
+
+.blurbcontainer > header nav a:hover:before {
+	color: #fff;
+}
+
+.icon-drop:before {
+	content: "\e000";
+}
+
+.icon-arrow-left:before {
+	content: "\f060";
+}
+
+

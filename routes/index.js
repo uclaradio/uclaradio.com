@@ -3,8 +3,14 @@ var router = express.Router();
 var db = require('../database/db');
 
 router.get('/', function(req, res) {
-	console.log(db.getAllBlurbs());
+	//res.render('index');
 	res.render('index');
+});
+
+
+router.get('/blurb', function(req, res) {
+	//res.render('index');
+	res.render('blurb');
 });
 
 module.exports = router;

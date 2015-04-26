@@ -36,6 +36,10 @@ head
     link(rel='stylesheet', type='text/css', href='slick/slick.css')
     link(rel='stylesheet', type='text/css', href='slick/slick-theme.css')
 
+    // blurb stylesheet
+    link(rel='stylesheet', type='text/css', href='blurb/component.css')
+    script(src='blurb/modernizr.custom.js')
+
     script(type='text/javascript').
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -47,18 +51,68 @@ head
   body
          
     audio#stream(src='http://stream.uclaradio.com:8000/listen', preload='none')
-         
+    
+    br
+
     .container(role='main')
       img#logo(src='img/logo.png', alt='UCLA RADIO')
-        
-      .row     
-        .col-md-12
+      |   <br /><br /><br />
+
+      .row#current-show   
+        .col-md-3#play-button-wrapper
           #play-button
             a.pop-button.text-center(role='button', href='#')
               span#play-icon.fa.fa-play
-             
-          #billboard
-              | LISTEN
+
+        .col-md-9#blurb-wrapper
+          .blurbcontainer(style='width: 100%')
+            .main
+              #cbp-contentslider.cbp-contentslider
+                ul
+                  li#slide1 
+                    h3
+                    div
+                      .cbp-content
+                        .profile-pic                        
+                        .hosted-by
+                          |Hosted by 
+                        .show-about
+                          br
+                  li#slide2 
+                    h3
+                    div
+                      .cbp-content
+                        .profile-pic                        
+                        .hosted-by
+                          |Hosted by 
+                        .show-about
+                          br
+                  li#slide3
+                    h3
+                    div
+                      .cbp-content
+                        .profile-pic                        
+                        .hosted-by
+                          |Hosted by 
+                        .show-about
+                          br
+                  li#slide4 
+                    h3
+                    div
+                      .cbp-content
+                        .profile-pic                        
+                        .hosted-by
+                          |Hosted by 
+                        .show-about
+                          br
+                       
+                nav
+                  a(id='#0' href='#slide1')
+                  a(id='#1' href='#slide2')
+                  a(id='#2' href='#slide3')
+                  a(id='#3' href='#slide4')
+
+ 
         
       .row
         br
@@ -67,6 +121,9 @@ head
           #c_data
             // recent_tracks.js allocates recent tracks
                      
+        br
+        br
+        br
         br
              
       .row
@@ -99,8 +156,17 @@ head
             a.pop-button.twitter(href='https://twitter.com/UCLAradio', target='_blank')
               i.fa.fa-twitter-square.fa-2x
        
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+script(src='blurb/jquery.cbpContentSlider.min.js')
+script(src='blurb/jquery.cbpContentSlider.js')
+script.
+  $(function() {
+  $( '#cbp-contentslider' ).cbpContentSlider();
+  });
 script(src='slick/slick.min.js')
-
+script(src='js/current_show.js')
 script(src='js/recent_tracks.js')
 script(src='js/carousel.js')
 script(src='js/scripts.js')
+
+

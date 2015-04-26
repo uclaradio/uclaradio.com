@@ -1,8 +1,53 @@
+
+
+#play-button-wrapper
+{
+  margin-top: 5%;
+  text-align: center;
+  margin-left: 3%;
+  margin-right: -3%;
+}
+
 #dj_blurb
 {
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important; 
    font-style: normal;
+   color: white;
+   padding: 2%;
+   margin-left: 1%;
+   background-color: blue;
+   width: 100%;
 }
+
+@media only screen and (max-width: 990px){
+  #dj_blurb{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  #button-play-wrapper{
+    width: 100%;
+  }
+
+  #play-button-wrapper {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+
+    }
+}
+
+@media only screen and (max-width: 850px){
+  #dj_blurb
+  {
+    width: 100% !important;
+    margin-left: 0px !important;
+    background-color: yellow !important;
+
+  }
+}
+
+
 
 .slick-prev{
 }
@@ -81,7 +126,9 @@ padding-bottom: 1%;
 
 body {
   font-family: Lato, sans-serif;
-  font-style: italic;
+/*  font-style: italic;
+*/  
+  font-style: normal;
   font-color: #333;
   height: 100%;
   width: 100%;
@@ -113,17 +160,20 @@ mark
 
 .container #logo {
   background: rgba(0,0,0,0.0); /* transparent */
+
 }
 
 #logo {
   max-width: 100%;
   max-height: 100%;
-  padding-bottom: 50px;
-}
+/*  border-bottom: 3px solid black;
+*/}
 
 /* set to table alignment to get the bastard vertically aligned */
 #play-button {
   float: none;
+  border-radius: 100%;
+  box-shadow: 0px 0px 50px #fff;
   height: 200px;
   width: 200px;
   margin-left: auto;
@@ -159,14 +209,14 @@ mark
 
 #billboard {
   text-align: center;
-  font-size: 80px;
+  font-size: 6vw;
   padding-top: 0px;
   padding-bottom: 20px;
   z-index: 10;
 }
 
 #messages {
-  font-family: Merriweather, serif;
+  text-align: center;
   font-style: normal;
   margin-bottom: 30px;
 }
