@@ -97,34 +97,12 @@ function populate(show)
 		{
 			var num = i + 1;
 			slide = "#slide" +  num;
-			nav_num = "#nav" + num;
-			alert(slide);
-
-			// if(show[i].image == "")
-			// {
-			// 	$(slide).find('.cbp-content').css('-webkit-column-count', '1');
-			// 	$(slide).find('.cbp-content').css('-moz-column-count', '1');
-
-			// }
-			// else
-			// {
-				$(slide).find('.profile-pic').append("<img src=" + show[i].image+"/>");
-			// }
-
-				$(slide).find('h3').append('<em>' + show[i].showName + '</em>');
-				$(slide).find('.hosted-by').append('<strong>' + show[i].djName + '</strong> <br />');
-				$(slide).find('.show-about').append(show[i].about);
-				//var active = (i == 0) ? 'class="rc-active"' : '';
-				//var nav = '<a href="' + slide + '"'+ active +'style="width: '+ nav_width +'%;">'+show[i].timeslot+'</a>'; 
-				//NAV = NAV + '<a href="' + slide + '">' + show[i].timeslot + '</a>';
-				var but = '#' + i;
-				alert(but);
-				// var element = document.getElementById(but);
-				document.getElementById(but).innerHTML = show[i].timeslot;
-				//$(slide).append(show[i].timeslot);
-				//$('#nav').append(nav);
-				//$("#billboard").css("width", "30%");
-				// $("#current-show").append("<div class='col-sm-9'><div id='dj_blurb'>" + show.showName + "<br />" + show.djName +"</div></div>");
+			$(slide).find('.profile-pic').append("<img src=" + show[i].image+"/>");
+			$(slide).find('h3').append('<em>' + show[i].showName + '</em>');
+			$(slide).find('.hosted-by').append('<strong>' + show[i].djName + '</strong> <br />');
+			$(slide).find('.show-about').append(show[i].about);
+			document.getElementById('#' + i).innerHTML = show[i].timeslot;
+				
 		}
 		 //NAV = NAV + "</nav>";
 		 $('#blurb-wrapper').show();
