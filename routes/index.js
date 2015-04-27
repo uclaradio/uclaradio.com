@@ -22,9 +22,18 @@ router.get('/', function(req, res) {
 		time += 'pm';
 	}
 	
-	db.getBlurbByTimeslotAndDay(time, day, function(err, blurb) {
-		res.render('index', blurb);
+	console.log(time);
+
+	db.getAllBlurbs(function(err,blurb) {
+		console.log(blurb);
+		res.render('index', {
+			blurbs: blurb
+		})
 	});
+	// db.getBlurbByTimeslotAndDay(time, day, function(err, blurb) {
+	// 	res.render('index', blurb);
+	// });
+
 });
 
 

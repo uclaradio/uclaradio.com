@@ -1,4 +1,7 @@
-
+.hosted-by
+{
+  font-size: 1.5vw;
+}
 
 #play-button-wrapper
 {
@@ -217,7 +220,7 @@ mark
 
 #messages {
   text-align: center;
-  font-style: normal;
+  font-size: 1.2vw;
   margin-bottom: 30px;
 }
 

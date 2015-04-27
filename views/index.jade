@@ -56,13 +56,18 @@ head
 
     .container(role='main')
       img#logo(src='img/logo1.png', alt='UCLA RADIO')
-      |   <br /><br /><br />
+      br
+      br
+      br
+      br
 
       .row#current-show   
         .col-md-3#play-button-wrapper
           #play-button
             a.pop-button.text-center(role='button', href='#')
               span#play-icon.fa.fa-play
+          br
+          br
 
         .col-md-9#blurb-wrapper
           .blurbcontainer(style='width: 100%')
@@ -73,38 +78,50 @@ head
                     h3
                     div
                       .cbp-content
-                        .profile-pic                        
-                        .hosted-by
-                          |Hosted by 
-                        .show-about
-                          br
+                        .row
+                          .col-sm-6#slide1p
+                            .profile-pic                        
+                          .col-sm-6  
+                            .hosted-by
+                              |Hosted by 
+                            .show-about
+                               br
                   li#slide2 
                     h3
                     div
                       .cbp-content
-                        .profile-pic                        
-                        .hosted-by
-                          |Hosted by 
-                        .show-about
-                          br
+                        .row
+                          .col-sm-6#slide2p
+                            .profile-pic                        
+                          .col-sm-6  
+                            .hosted-by
+                              |Hosted by 
+                            .show-about
+                               br
                   li#slide3
                     h3
                     div
                       .cbp-content
-                        .profile-pic                        
-                        .hosted-by
-                          |Hosted by 
-                        .show-about
-                          br
+                        .row
+                          .col-sm-6#slide3p
+                            .profile-pic                        
+                          .col-sm-6  
+                            .hosted-by
+                              |Hosted by 
+                            .show-about
+                               br
                   li#slide4 
                     h3
                     div
                       .cbp-content
-                        .profile-pic                        
-                        .hosted-by
-                          |Hosted by 
-                        .show-about
-                          br
+                        .row
+                          .col-sm-6#slide4p
+                            .profile-pic                        
+                          .col-sm-6  
+                            .hosted-by
+                              |Hosted by 
+                            .show-about
+                               br
                        
                 nav
                   a(id='#0' href='#slide1')
@@ -115,6 +132,10 @@ head
  
         
       .row
+        br
+        br
+        br
+        br
         br
                      
         center#carousel-container
@@ -129,6 +150,7 @@ head
       .row
         #messages.col-sm-12.desktop-only.text-justify
           p
+            
             | UCLA Radio is an entirely student run radio station.
             | We broadcast all day, every day from a secret cave
             | in Ackerman Student Union.
@@ -159,12 +181,20 @@ head
 script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
 script(src='blurb/jquery.cbpContentSlider.min.js')
 script(src='blurb/jquery.cbpContentSlider.js')
+script(src='js/current_show.js')
+
 script.
+  $(document).ready(function(){
+  var bob = !{JSON.stringify(blurbs)};
+  console.log(bob);
+  populate(bob);
+  });
+
+
   $(function() {
   $( '#cbp-contentslider' ).cbpContentSlider();
   });
 script(src='slick/slick.min.js')
-script(src='js/current_show.js')
 script(src='js/recent_tracks.js')
 script(src='js/carousel.js')
 script(src='js/scripts.js')
