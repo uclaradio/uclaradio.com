@@ -47,7 +47,7 @@ function getColorSchemeFromTime() {
 
   // Nighttime: 9pm - 6am == 21 - 6 PDT == 4 - 13 UTC
   if (hour >= 4 && hour < 13) {
-    return getRandColorScheme('evening');
+    return getRandColorScheme('night');
   } 
   // Morning: 6am - 9am == 6-9 PDT == 13-16 UTC
   else if (hour >= 13 && hour < 16) {
