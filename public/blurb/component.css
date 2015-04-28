@@ -1,5 +1,13 @@
 /*<we modify*/
 
+.rc-active
+{
+	color: white !important;
+	font-style: bold !important;
+	text-decoration: none !important;
+}
+
+
 #blurb-wrapper
 {
 	height: 300px;
@@ -43,8 +51,8 @@ html, body, .blurbcontainer, .main { height: 100%;}
 /*	margin: 1em auto;
 */	position: relative;
 	/*border: 4px solid #47a3da*/
-	border: 4px solid #333;
-}
+/*	border: 4px solid #333;
+*/}
 
 .cbp-contentslider > ul {
 	list-style: none;
@@ -115,14 +123,16 @@ html, body, .blurbcontainer, .main { height: 100%;}
 
 .cbp-contentslider nav a:hover {
 	/*background-color: #47a3da;*/
-	background-color: #333;
-	color: #fff;
+/*	background-color: #333;
+*/	
+
+/*color: #fff*/;
 }
 
 .cbp-contentslider nav a.rc-active {
-	background-color: #333;
-	color: #fff;
-}
+/*	background-color: #333;*/
+/*	color: #fff;
+*/}
 
 /* Iconfont for navigation and headings */
 .cbp-contentslider [class^="icon-"]:before, 
@@ -148,8 +158,8 @@ html, body, .blurbcontainer, .main { height: 100%;}
 .cbp-contentslider [class^="icon-"].rc-active:before, 
 .cbp-contentslider [class*=" icon-"].rc-active:before,
 .cbp-contentslider nav a:hover:before {
-	color: rgba(255,255,255,0.9);
-}
+/*	color: rgba(255,255,255,0.9);
+*/}
 
 .cbp-contentslider h3 {
 	font-size: 2.5em;

@@ -1,3 +1,10 @@
+function injectStyles(rule) {
+  var div = $("<div />", {
+    html: '&shy;<style>' + rule + '</style>'
+  }).appendTo("body");    
+}
+
+
 // given the time of day, returns a random color scheme 
 // matching it.
 function getRandColorScheme(timeOfDay) {
@@ -40,7 +47,7 @@ function getColorSchemeFromTime() {
 
   // Nighttime: 9pm - 6am == 21 - 6 PDT == 4 - 13 UTC
   if (hour >= 4 && hour < 13) {
-    return getRandColorScheme('night');
+    return getRandColorScheme('evening');
   } 
   // Morning: 6am - 9am == 6-9 PDT == 13-16 UTC
   else if (hour >= 13 && hour < 16) {
@@ -55,9 +62,23 @@ function getColorSchemeFromTime() {
     return getRandColorScheme('evening');
   }
 }
+
 function setButtons(darkColor, mediumColor, lightColor, midnight) {
   $(".pop-button").css('background-color', lightColor);
+  $(".cbp-contentslider").css("border", "4px solid" + lightColor);
+  $(".cbp-contentslider nav a").css("border-right", "4px solid" + lightColor);
+  document.getElementById('#3').style.border = "none";
+  $(".cbp-contentslider h3").css("border-bottom", "4px solid" + lightColor);
+    $(".cbp-contentslider nav a").hover(function(){
+    $(this).css("background-color", lightColor);
+  }, function(){
+    $(this).css("background-color", "");
+  });
 
+  injectStyles('.rc-active {background-color:'+ lightColor +';}');
+
+  $("nav").css("border-top", "4px solid" + lightColor);
+  console.log("THE LIGHT COLOR IS" + lightColor);
   var boxShadowHoverCss = "1px 0px " + mediumColor + 
     ", 0px 1px " + darkColor +
     ", 2px 1px " + mediumColor +
@@ -194,5 +215,7 @@ function checkCarouselData() {
     checkCarouselData();
   }, 30000);
 }
+
+
 
 

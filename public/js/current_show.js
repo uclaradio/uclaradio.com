@@ -21,7 +21,7 @@ function populate(show)
 			$(slide).find('.profile-pic').append("<img src=" + show[i].image+"/>");
 			$(slide).find('h3').append('<em>' + show[i].showName + '</em>');
 			$(slide).find('.hosted-by').append('<strong>' + show[i].djName + '</strong> <br />');
-			$(slide).find('.hosted-by').append('<strong>' + show[i].djName + '</strong> <br />');
+			$(slide).find('.hosted-by').append('<em>' + show[i].genre + '</em> <br />');
 			$(slide).find('.show-about').append(show[i].about);
 			
 			//if dj doesn't want an image
