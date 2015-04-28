@@ -47,7 +47,7 @@ function getColorSchemeFromTime() {
 
   // Nighttime: 9pm - 6am == 21 - 6 PDT == 4 - 13 UTC
   if (hour >= 4 && hour < 13) {
-    return getRandColorScheme('night');
+    return getRandColorScheme('morning');
   } 
   // Morning: 6am - 9am == 6-9 PDT == 13-16 UTC
   else if (hour >= 13 && hour < 16) {
@@ -64,18 +64,21 @@ function getColorSchemeFromTime() {
 }
 
 function setButtons(darkColor, mediumColor, lightColor, midnight) {
+  injectStyles('.rc-active {background-color:'+ lightColor +';}');
+  $(".cbp-contentslider nav a").hover(function(){
+    $(this).css("background-color", lightColor);
+    $(this).css("color", "white");
+  }, function(){
+    $(this).css("background-color", "");
+    $(this).css("color", "black")
+  });
   $(".pop-button").css('background-color', lightColor);
   $(".cbp-contentslider").css("border", "4px solid" + lightColor);
   $(".cbp-contentslider nav a").css("border-right", "4px solid" + lightColor);
-  document.getElementById('#3').style.border = "none";
+  document.getElementById('#2').style.border = "none";
   $(".cbp-contentslider h3").css("border-bottom", "4px solid" + lightColor);
-    $(".cbp-contentslider nav a").hover(function(){
-    $(this).css("background-color", lightColor);
-  }, function(){
-    $(this).css("background-color", "");
-  });
+  
 
-  injectStyles('.rc-active {background-color:'+ lightColor +';}');
 
   $("nav").css("border-top", "4px solid" + lightColor);
   console.log("THE LIGHT COLOR IS" + lightColor);

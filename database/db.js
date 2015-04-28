@@ -46,7 +46,7 @@ db.getAllBlurbs = function(callback) {
 		},
 		{
 			djName: "dj Nutmeg", 
-			showName: "Life of Space", 
+			showName: "Where in the world is Long Show names?", 
 			genre: "eclectic", 
 			about: "I like my beers.  I like to think a lot.",
 			link: "www.reganhsu.com",
@@ -57,7 +57,7 @@ db.getAllBlurbs = function(callback) {
 		},
 		{
 			djName: "dj Nutmeg", 
-			showName: "The Ultimate Spice", 
+			showName: "UGH: Y do PPL have long show names? NO beuno", 
 			genre: "eclectic", 
 			about: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ILorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularit was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
 			link: "www.reganhsu.com",

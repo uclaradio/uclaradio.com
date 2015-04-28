@@ -1,6 +1,107 @@
+/**
+{
+  font-family: 'apercuregular' !important;
+}*/
+
+.djName
+{
+  font-family: "apercu_lightregular";
+  font-size: 12px;
+  letter-spacing: 0em;
+  padding-left: 4px;
+  margin-top: 2px;
+  text-align: center
+
+
+}
+
+sup
+{
+  font-size: 1vw;
+  margin-top: -200% !important;
+}
+
+.timeslot
+{
+  margin-top: -5%;
+  font-size: 3vw;
+
+}
+
+@media only screen and (min-width: 775px) and (max-width: 950px){
+  .timeslot{
+    margin-top: -5px;
+  }
+}
+
+@media only screen and (max-width: 775px){
+  h3
+  {
+    font-size: 4vw !important;
+    text-align: center !important;
+  }
+  .timeslot
+  {
+    font-size: 5vw;
+  }
+  .AMorPM {
+    display: none;
+  }
+  sup
+  {
+    font-size: 3vw;
+  }
+  .djName
+  {
+    display: none;
+  }
+
+}
+
+
+@media only screen and (max-width: 550px){
+  .timeslot
+  {
+    margin-top: -5%;
+    font-size: 7vw;
+  }
+  .djName
+  {
+    display:none;
+  }
+
+}
+
+@media only screen and (max-width: 400px){
+  .timeslot
+  {
+    margin-top: -5%;
+    font-size: 9vw;
+  }
+  .djName
+  {
+    display: none;
+  }
+
+}
+
+@media only screen and (min-width: 1375px){
+  .timeslot
+  {
+    margin-top: -5%;
+    font-size: 2.7vw;
+  }
+}
+
+h3
+{
+  font-family: 'apercuregular';
+}
+
 nav
 {
   font-style: none !important;
+  font-family: 'apercubold';
 }
 
 .hosted-by
@@ -14,17 +115,6 @@ nav
   text-align: center;
   margin-left: 3%;
   margin-right: -3%;
-}
-
-#dj_blurb
-{
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important; 
-   font-style: normal;
-   color: white;
-   padding: 2%;
-   margin-left: 1%;
-   background-color: blue;
-   width: 100%;
 }
 
 @media only screen and (max-width: 990px){
@@ -60,19 +150,12 @@ nav
 .slick-prev{
 }
 
-#on_air
-{
-  padding-top: 10px;
-  font-size: 50px;
-}
 
 .album_artwork
 {
   width: 126px;
 }
 
-#SHOW_TITLE, #DJ_NAME {font-size: 35px !important;}
-#BLURB {font-size: 25px !important;}
 
 
 .slick-slide
@@ -80,17 +163,12 @@ nav
   height: 231px;
 }
 
-#dj_image
-{
-  float: left;
-  padding-left: 1%;
-padding-top: 1%;
-padding-bottom: 1%;
-}
-
 #carousel-container
 {
   height:221px;
+  font-family: 'apercu_lightregular';
+  font-size: 100px !important;
+
 }
 
 .twitter, .instagram, .facebook
@@ -101,8 +179,8 @@ padding-bottom: 1%;
 #c_data
 {
   width: 80%;
-  font-size: 18px;
   margin-left: auto;
+  font-size: 15px;
   margin-right: auto;
 }
 
@@ -115,7 +193,7 @@ padding-bottom: 1%;
 {
   display:none;
   font: black !important;
-/*  background-color:rgba(0,0,0,0.5);
+/*  backgrouxnd-color:rgba(0,0,0,0.5);
 *//*  -webkit-box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.75);*/
@@ -124,23 +202,15 @@ padding-bottom: 1%;
   margin-right: auto;
 }
 
-#blurb
-{
-  color: black;
-  float: right;
-  height: 100%;
-  /*font-family: Lato, sans-serif;*/
-}
 
 body {
-  font-family: Lato, sans-serif;
-/*  font-style: italic;
+/*  font-family: Lato, sans-serif;
+*//*  font-style: italic;
 */  
   font-style: normal;
   font-color: #333;
   height: 100%;
   width: 100%;
-  font-size: 24px;
   padding-top: 20px;
   background-size: cover;
 }
@@ -217,7 +287,6 @@ mark
 
 #billboard {
   text-align: center;
-  font-size: 6vw;
   padding-top: 0px;
   padding-bottom: 20px;
   z-index: 10;
@@ -225,8 +294,12 @@ mark
 
 #messages {
   text-align: center;
-  font-size: 1.2vw;
+  font-size: 18px;
   margin-bottom: 30px;
+  font-family: 'apercubold';
+  letter-spacing: 0.05em;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .footer {
@@ -255,21 +328,6 @@ a:hover {
 
 /* small */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  #on_air
-  {
-    font-size: 30px;
-  }
-
-  #SHOW_TITLE, #DJ_NAME, #BLURB {font-size: 20px !important;}
-
-
-  #dj_image img
-  {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-    margin-bottom: 5%;  
-}
 
   #playlist-link {
     margin-left: 30px;
@@ -345,10 +403,7 @@ a:hover {
 #SHOW_TITLE, #DJ_NAME, #BLURB {font-size: 15px !important;}
 
 
-#c_data
-{
-  width: 50%;
-}
+
 
 .album_artwork
 {

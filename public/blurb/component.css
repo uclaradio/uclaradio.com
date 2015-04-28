@@ -1,5 +1,13 @@
 /*<we modify*/
 
+
+
+#cbp-contentslider
+{
+	-webkit-box-shadow: inset 0px 0px 20px 3px rgba(255,255,255,1);
+	-moz-box-shadow: inset 0px 0px 20px 3px rgba(255,255,255,1);
+	box-shadow: inset 0px 0px 20px 3px rgba(255,255,255,1);
+}
 .rc-active
 {
 	color: white !important;
@@ -50,9 +58,9 @@ html, body, .blurbcontainer, .main { height: 100%;}
 	height: 120%;
 /*	margin: 1em auto;
 */	position: relative;
-	/*border: 4px solid #47a3da*/
-/*	border: 4px solid #333;
-*/}
+	font-family: "apercu_lightregular"; 
+	letter-spacing: .05em;
+}
 
 .cbp-contentslider > ul {
 	list-style: none;
@@ -102,7 +110,7 @@ html, body, .blurbcontainer, .main { height: 100%;}
 	color: black;
 /*	background: #fff;
 */	outline: none;
-	padding: 5px;
+	padding: 3px;
 	/*position: relative;*/
 	/*padding-left: 3.125em;*/
 	text-transform: uppercase;
@@ -162,7 +170,7 @@ html, body, .blurbcontainer, .main { height: 100%;}
 */}
 
 .cbp-contentslider h3 {
-	font-size: 2.5em;
+	font-size: 2em;
 	line-height: 1.7;
 	font-weight: 300;
 	margin: 0 0 0.3em;
