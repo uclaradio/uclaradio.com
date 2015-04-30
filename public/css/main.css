@@ -3,6 +3,11 @@
   font-family: 'apercuregular' !important;
 }*/
 
+.show-about
+{
+  font-size: 12px !important;
+}
+
 .djName
 {
   font-family: "apercu_lightregular";
@@ -34,11 +39,18 @@ sup
   }
 }
 
+@media only screen and (min-width: 992px){
+  h3
+  {
+    font-size: 2vw !important;
+  }
+}
+
 @media only screen and (max-width: 775px){
   h3
   {
-    font-size: 4vw !important;
-    text-align: center !important;
+    font-size: 3vw !important;
+    text-align: center;
   }
   .timeslot
   {
@@ -88,7 +100,7 @@ sup
 @media only screen and (min-width: 1375px){
   .timeslot
   {
-    margin-top: -5%;
+    margin-top: -4%;
     font-size: 2.7vw;
   }
 }

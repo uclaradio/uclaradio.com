@@ -65,6 +65,9 @@ function getColorSchemeFromTime() {
 
 function setButtons(darkColor, mediumColor, lightColor, midnight) {
   injectStyles('.rc-active {background-color:'+ lightColor +';}');
+
+
+
   $(".cbp-contentslider nav a").hover(function(){
     $(this).css("background-color", lightColor);
     $(this).css("color", "white");
@@ -77,11 +80,12 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
   $(".cbp-contentslider nav a").css("border-right", "4px solid" + lightColor);
   document.getElementById('#2').style.border = "none";
   $(".cbp-contentslider h3").css("border-bottom", "4px solid" + lightColor);
-  
-
-
   $("nav").css("border-top", "4px solid" + lightColor);
-  console.log("THE LIGHT COLOR IS" + lightColor);
+  injectStyles('.slick-prev:before {color: ' + lightColor + ' !important;');
+  injectStyles('.slick-next:before {color: ' + lightColor + ' !important;');
+
+
+
   var boxShadowHoverCss = "1px 0px " + mediumColor + 
     ", 0px 1px " + darkColor +
     ", 2px 1px " + mediumColor +

@@ -18,8 +18,15 @@ function populate(show)
 			//but for now we'll fill content using JS
 			var num = i + 1;
 			slide = "#slide" +  num;
-			$(slide).find('.profile-pic').append("<img src=" + show[i].image+"/>");
+
 			$(slide).find('h3').append(show[i].showName);
+			// if(show[i].showName.length > 30)
+			// {
+			// 	$(slide).find('h3').css("font-size", "2vw");
+			// }
+
+
+			$(slide).find('.profile-pic').append("<img src=" + show[i].image+"/>");
 			$(slide).find('.hosted-by').append('<strong>' + show[i].djName + '</strong> <br />');
 			$(slide).find('.hosted-by').append('<em>' + show[i].genre + '</em> <br />');
 			$(slide).find('.show-about').append(show[i].about);
@@ -35,8 +42,13 @@ function populate(show)
 				document.getElementById('#' + i).style.lineHeight = "2.5";
 			}
 			else {
-				var time = (show[i].timeslot[1] == '2' || show[i].timeslot[1] == '1' || show[i].timeslot[1] == '0' ) ? show[i].timeslot.slice(2) : show[i].timeslot[0];
-				document.getElementById('#' + i).innerHTML = '<div class="row"><div class="col-sm-2 timeslot">'  + time +'<sup>' + show[i].timeslot.slice(-2) + '<br /><div class="AMorPM">PST</div></sup>' + '</div><div class="col-sm-10"> <div class="djName"><em>' + show[i].showName + "</em></div></div></div>";
+				var time = (show[i].timeslot[1] == '2' || show[i].timeslot[1] == '1' || show[i].timeslot[1] == '0' ) ? show[i].timeslot.slice(0,2) : show[i].timeslot[0];
+				if(time.length == 2){
+					document.getElementById('#' + i).innerHTML = '<div class="row"><div class="col-sm-2 timeslot">'  + time +'<br /><sup>' + show[i].timeslot.slice(-2) + '<div class=".AMorPM">PST</div></sup>' + '</div><div class="col-sm-10"> <div class="djName">' + show[i].showName + "</div></div></div>";
+				}
+				else
+					document.getElementById('#' + i).innerHTML = '<div class="row"><div class="col-sm-2 timeslot">'  + time +'<sup>' + show[i].timeslot.slice(-2) + '<br /><div class=".AMorPM">PST</div></sup>' + '</div><div class="col-sm-10"> <div class="djName">' + show[i].showName + "</div></div></div>";
+			
 			}
 				
 		}

@@ -59,7 +59,6 @@ html, body, .blurbcontainer, .main { height: 100%;}
 /*	margin: 1em auto;
 */	position: relative;
 	font-family: "apercu_lightregular"; 
-	letter-spacing: .05em;
 }
 
 .cbp-contentslider > ul {
@@ -102,6 +101,7 @@ html, body, .blurbcontainer, .main { height: 100%;}
 .cbp-contentslider nav a {
 	float: left;
 	display: block;
+	padding-left: 2px;
 	width: 20%;
 	height: 100%;
 	font-weight: 400;
@@ -113,8 +113,8 @@ html, body, .blurbcontainer, .main { height: 100%;}
 	padding: 3px;
 	/*position: relative;*/
 	/*padding-left: 3.125em;*/
-	text-transform: uppercase;
-	border-right: 4px solid #333;
+/*	text-transform: uppercase;
+*/	border-right: 4px solid #333;
 	-webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 	-moz-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 	transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
@@ -197,13 +197,27 @@ html, body, .blurbcontainer, .main { height: 100%;}
 
 .cbp-contentslider li > div {
 	position: absolute;
-	top: 6em;
+	top: 4em;
 	bottom: 3.313em;
 	width: 100%;
 	left: 0;
 	padding: 0 1em;
 	overflow-x: hidden;
 	overflow-y: auto;
+}
+
+@media only screen and (max-width: 991px){
+	.cbp-contentslider li > div {
+		top: 6em;
+	}
+
+}
+
+@media only screen and (max-width: 600px){
+	.cbp-contentslider li > div {
+		top: 4em !important;
+	}
+
 }
 
 .cbp-contentslider .cbp-content {
