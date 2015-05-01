@@ -1,5 +1,8 @@
 /*<we modify*/
-
+h3
+{
+	text-align: center;
+}
 
 
 #cbp-contentslider
@@ -34,7 +37,18 @@
 		padding-top: 5%;
 	}
 }
-/*we modify>*/
+
+@media only screen and (min-width: 990px){
+	.blurbcontainer
+	{
+		margin-top: 10px
+	}
+
+	.cbp-content
+	{
+		margin-top: 10px;
+	}
+}/*we modify>*/
 
 
 @font-face {
@@ -126,8 +140,8 @@ html, body, .blurbcontainer, .main { height: 100%;}
 
 .cbp-contentslider nav a:last-child {
 	border: none;
-	box-shadow: 1px 0 #47a3da; /* fills gap caused by rounding */
-}
+/*	box-shadow: 1px 0 #47a3da;  fills gap caused by rounding 
+*/}
 
 .cbp-contentslider nav a:hover {
 	/*background-color: #47a3da;*/
@@ -176,10 +190,7 @@ html, body, .blurbcontainer, .main { height: 100%;}
 	margin: 0 0 0.3em;
 	/*position: relative;*/
 	color: #333;
-/*	text-transform: uppercase;
-*/	text-align: right;
-/*	letter-spacing: 0.3em;
-*/	padding: 0 0.2em 0 0;
+	padding: 0 0.2em 0 0;
 	border-bottom: 4px solid #333;
 }
 

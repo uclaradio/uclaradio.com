@@ -2,20 +2,38 @@
 {
   font-family: 'apercuregular' !important;
 }*/
+@media only screen and (max-width: 1200px){
+  .nav-dj-name
+  {
+    display: none;
+  }
+}
+
+.dj-image
+{
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
 
 .show-about
 {
   font-size: 12px !important;
 }
 
+
+
 .djName
 {
+  border-left: 2px dotted solid black;
   font-family: "apercu_lightregular";
   font-size: 12px;
   letter-spacing: 0em;
   padding-left: 4px;
   margin-top: 2px;
-  text-align: center
+  height: 100%;
+  
 
 
 }
@@ -43,6 +61,10 @@ sup
   h3
   {
     font-size: 2vw !important;
+  }
+  .dj-image
+  {
+    padding-top: 2%;    
   }
 }
 
@@ -100,7 +122,7 @@ sup
 @media only screen and (min-width: 1375px){
   .timeslot
   {
-    margin-top: -4%;
+    margin-top: -5%;
     font-size: 2.7vw;
   }
 }
@@ -118,7 +140,7 @@ nav
 
 .hosted-by
 {
-  font-size: 1.5vw;
+  font-size: 15px;
 }
 
 #play-button-wrapper
@@ -130,11 +152,6 @@ nav
 }
 
 @media only screen and (max-width: 990px){
-  #dj_blurb{
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-  }
 
   #button-play-wrapper{
     width: 100%;
@@ -323,13 +340,21 @@ mark
   text-align: left;
   text-decoration: none;
   font-size: 34px;
-    margin-left: -15px;
+  margin-left: -15px;
+  font-family: 'apercuregular';
+  letter-spacing: 0.05em;
+
 }
 
 #playlist-link {
+  padding-left: 20px;
   text-align: left;
   text-decoration: none;
   font-size: 34px;
+  font-family: 'apercuregular';
+  letter-spacing: 0.1em;
+
+
 }
 
 a:hover {

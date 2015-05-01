@@ -65,6 +65,7 @@ function getColorSchemeFromTime() {
 
 function setButtons(darkColor, mediumColor, lightColor, midnight) {
   injectStyles('.rc-active {background-color:'+ lightColor +';}');
+  injectStyles('.cbp-contentslider nav a:last-child {box-shadow: 1px 0 ' + lightColor + ';}')
 
 
 
