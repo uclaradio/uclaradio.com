@@ -106,10 +106,22 @@ head
                   option(value='10pm') 10PM
                   option(value='11pm') 11PM
                   option(value='12am') 12AM
+        .row
+          .col-md-6
+            .form-group
+              label(for='password') Super Secret Password
+                input.form-control#password(type='text', name='password')
 
+          .col-md-6
+            .form-group
+              label(for='picture') Show Picture
+                input.form-control#picture(type='file', name='picture')
+
+        .row
+          .col-md-12
             .form-group
               label(for='description') Description
-                input.form-control#description(type='textarea', name='description')
+                textarea.form-control#description(name='description')
 
       .row
         .col-md-12
