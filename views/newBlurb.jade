@@ -27,6 +27,7 @@ head
     script(src='http://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js')
     // Our stylesheets/scripts
     link(rel='stylesheet', type='text/css', href='css/main.css')
+    link(rel='stylesheet', type='text/css', href='css/newBlurb.css')
          
     link(rel='icon', href='favicon.ico', type='image/x-icon')
 
@@ -41,27 +42,31 @@ head
   body
          
     .container(role='main')
-      img#logo(src='img/logo.png', alt='UCLA RADIO')
+      img#logo(src='img/logo1.png', alt='UCLA RADIO')
 
-      .row
-        .col-md-12
-          form
+      form(action='/newBlurb' method='POST' enctype='multipart/form-data')
+        .row
+          .col-md-6
             .form-group
               label(for='dj-name') DJ Name
                 input.form-control#dj-name(type='text', name='djName')
 
+          .col-md-6
             .form-group
               label(for='show-name') Show Name
                 input.form-control#show-name(type='text', name='showName')
-
+        .row
+          .col-md-6
             .form-group
               label(for='genre') Genre
                 input.form-control#genre(type='text', name='genre')
 
+          .col-md-6
             .form-group
               label(for='link') Link
                 input.form-control#link(type='text', name='link')
-
+        .row
+          .col-md-6
             .form-group
               label(for='day') Day
                 select.form-control#day(name='day')
@@ -73,6 +78,7 @@ head
                   option(value='Sat') Saturday
                   option(value='Sun') Sunday
 
+          .col-md-6
             .form-group
               label(for='timeslot') Timeslot
                 select.form-control#timeslot(name='timeslot')
@@ -100,12 +106,24 @@ head
                   option(value='10pm') 10PM
                   option(value='11pm') 11PM
                   option(value='12am') 12AM
+        .row
+          .col-md-6
+            .form-group
+              label(for='password') Super Secret Password
+                input.form-control#password(type='text', name='password')
 
+          .col-md-6
+            .form-group
+              label(for='picture') Show Picture
+                input.form-control#picture(type='file', name='picture')
+
+        .row
+          .col-md-12
             .form-group
               label(for='description') Description
-                input.form-control#description(type='textarea', name='description')
+                textarea.form-control#description(name='description')
 
       .row
         .col-md-12
        
-script(src='js/scripts.js')
+script(src='js/newBlurb.js')
