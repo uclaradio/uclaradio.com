@@ -113,12 +113,13 @@ function setPageTheme(colorScheme) {
   var medium = null;
   var light = null;
 
+  document.body.setAttribute('style', 'background-image: url(http://i.imgur.com/7vdDtPN.jpg)');
   if (colorScheme === "Greys") { // midnight space theme
     midnight = true;
     var filename = 'img/nebula' + Math.floor(Math.random()*3) + '.jpg';
     var backgroundAttribute = "background: url(" + filename +
       ") no-repeat center center fixed";
-    document.body.setAttribute('style', backgroundAttribute);
+    //document.body.setAttribute('style', backgroundAttribute);
     dark = '#292e49';
     medium = '#2d4b56';
     light = '#30716d';
@@ -127,8 +128,8 @@ function setPageTheme(colorScheme) {
     var colors = Trianglify.colorbrewer[colorScheme][9];
     var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175, x_gradient: colors});
     var pattern = t.generate(4000, 3000);
-    document.body.setAttribute('style', 'background: ' + 
-        pattern.dataUrl + ' no-repeat center center fixed');
+    //document.body.setAttribute('style', 'background: ' + 
+        //pattern.dataUrl + ' no-repeat center center fixed');
 
     dark = colors[8];
     medium = colors[7];
