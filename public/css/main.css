@@ -1,6 +1,6 @@
 #dj_blurb
 {
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important; 
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
    font-style: normal;
 }
 
@@ -86,7 +86,6 @@ body {
   height: 100%;
   width: 100%;
   font-size: 24px;
-  padding-top: 20px;
   background-size: cover;
 }
 
@@ -108,7 +107,8 @@ mark
 .container {
   background: rgba(245,245,245,0.7);
   padding: 50px;
-  border-radius: 3px; 
+  border-radius: 3px;
+  margin: 20px auto;
 }
 
 .container #logo {
@@ -210,7 +210,7 @@ a:hover {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
-    margin-bottom: 5%;  
+    margin-bottom: 5%;
 }
 
   #playlist-link {
@@ -235,7 +235,7 @@ a:hover {
 }
 
 
-#social { 
+#social {
   text-align: right;
 }
 
@@ -317,7 +317,7 @@ a:hover {
 
   .slick-dots
   {
-    display: none !important;  
+    display: none !important;
   }
 
 
