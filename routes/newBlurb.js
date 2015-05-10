@@ -1,10 +1,11 @@
 var express = require('express');
-var bodyparse = require('body-parser') 
-app.use(express.json());       // to support JSON-encoded bodies
-app.use(express.urlencoded()); // to support URL-encoded bodies
+var bodyParser = require('body-parser'); 
+var app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
 var router = express.Router();
-var db = require('../databease/db');
-var passwords = require('../passwords.json')
+var db = require('../database/db');
+var passwords = require('../passwords.json');
 
 router.get('/', function(req, res) {
 	res.render('newBlurb');
