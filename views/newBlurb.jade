@@ -49,27 +49,27 @@ head
           .col-md-6
             .form-group
               label(for='dj-name') DJ Name
-                input.form-control#dj-name(type='text', name='djName')
+                input.form-control#dj-name(type='text', name='djName', required)
 
           .col-md-6
             .form-group
               label(for='show-name') Show Name
-                input.form-control#show-name(type='text', name='showName')
+                input.form-control#show-name(type='text', name='showName', required)
         .row
           .col-md-6
             .form-group
               label(for='genre') Genre
-                input.form-control#genre(type='text', name='genre')
+                input.form-control#genre(type='text', name='genre', required)
 
           .col-md-6
             .form-group
               label(for='link') Link
-                input.form-control#link(type='text', name='link')
+                input.form-control#link(type='text', name='link', required)
         .row
           .col-md-6
             .form-group
               label(for='day') Day
-                select.form-control#day(name='day')
+                select.form-control#day(name='day', required)
                   option(value='Mon') Monday
                   option(value='Tue') Tuesday
                   option(value='Wed') Wednesday
@@ -81,7 +81,7 @@ head
           .col-md-6
             .form-group
               label(for='timeslot') Timeslot
-                select.form-control#timeslot(name='timeslot')
+                select.form-control#timeslot(name='timeslot', required)
                   option(value='1am') 1AM
                   option(value='2am') 2AM
                   option(value='3am') 3AM
@@ -110,18 +110,18 @@ head
           .col-md-6
             .form-group
               label(for='password') Super Secret Password
-                input.form-control#password(type='text', name='password')
+                input.form-control#password(type='text', name='password', required)
 
           .col-md-6
             .form-group
               label(for='picture') Show Picture
-                input.form-control#picture(type='file', name='picture')
+                input.form-control#picture(type='file', name='picture', required)
 
         .row
           .col-md-12
             .form-group
               label(for='description') Description
-                textarea.form-control#description(name='description')
+                textarea.form-control#description(name='description', required)
 
         .row
           .col-md-12
