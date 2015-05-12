@@ -5,3 +5,8 @@ label {
 #logo {
 	margin-bottom: 25px;
 }
+
+#new-blurb-submit {
+	background-color: rgba(0, 0, 0, .13);
+	width: 100%;
+}
