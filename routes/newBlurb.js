@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
 	res.render('newBlurb');
 });
 
-router.post('/', function(req,res) {
+router.post('/', function(req, res, next) {
     
     console.log(req.body);
     console.log(req.body.djName);    
