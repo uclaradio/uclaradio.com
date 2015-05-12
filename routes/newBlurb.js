@@ -12,27 +12,33 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req,res) {
-	
+    
+    console.log(req.body);
+    console.log(req.body.djName);    
+
 	// Get the form data after it is submitted
-	var djName 	= req.body.dj-name,
-	    showName 	= req.body.show-name,
-	    genre 	= req.body.genre,
-	    link	= req.body.link,
-	    day		= req.body.day,
+	var djName 	    = req.body.djName,
+	    showName 	= req.body.showName,
+	    genre 	    = req.body.genre,
+	    link	    = req.body.link,
+	    day	    	= req.body.day,
 	    timeslot	= req.body.timeslot,
 	    description	= req.body.description,
-	    picture	= req.body.picture, 
 	    password	= req.body.password;
-	
+
+    console.log(req.files);
+
 	if (password != passwords.secretpassword)
 	{
 		console.log("Incorrect password. No blurb updated.");
-		return;
+	    res.end("Incorrect Password.");	
+        return;
+
 	}
 
 	// Adds the blurb to the database.
-	db.addBlurb(djName, showName, genre, description, link, timeslot, day);
-
+	console.log(db.addBlurb(djName, showName, genre, description, link, timeslot, day));
+    res.redirect('/');
 });
 
 module.exports = router;

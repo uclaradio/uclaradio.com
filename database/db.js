@@ -93,8 +93,10 @@ db.addBlurb = function(djName, showName, genre, description, link, timeslot, day
 	var blurb = new DjBlurbModel(blurb_data);
 	blurb.save( function(err, blurb) {
 		if (err) console.log('err');
-		console.log(blurb);
+		return blurb; 
 	});
+
+    return "Blurb has been successfully posted"; 
 };
 
 module.exports = db;
