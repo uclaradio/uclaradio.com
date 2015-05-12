@@ -22,6 +22,7 @@ router.post('/', function(req, res, next) {
 	    timeslot	= req.body.timeslot,
 	    description	= req.body.description,
 	    password	= req.body.password;
+		picture     = req.files.picture.path;
 
     console.log(req.files);
 
