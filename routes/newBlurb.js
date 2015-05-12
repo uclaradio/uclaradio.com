@@ -13,9 +13,6 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res, next) {
     
-    console.log(req.body);
-    console.log(req.body.djName);    
-
 	// Get the form data after it is submitted
 	var djName 	    = req.body.djName,
 	    showName 	= req.body.showName,
