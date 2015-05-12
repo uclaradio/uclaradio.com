@@ -28,8 +28,13 @@ router.post('/', function(req, res, next) {
 		res.end("Incorrect Password.");	
 
 	// Adds the blurb to the database.
-	console.log(db.addBlurb(djName, showName, genre, description, link, timeslot, day));
-    res.redirect('/');
+	db.addBlurb(djName, showName, genre, description, link, timeslot, day, picture, function(err, blurbSaved) {
+		if (err) next(err);
+		if (blurbSaved)
+			res.redirect('/');
+		else
+			res.end('Blurb not saved.');
+	});
 });
 
 module.exports = router;
