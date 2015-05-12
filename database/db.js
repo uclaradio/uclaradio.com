@@ -7,13 +7,14 @@ var db = {};
 var Schema = mongoose.Schema;
    
 var DjBlurbSchema = new Schema({
-	djName: String,
+	djName: Array,
 	showName: String,
 	genre: String,
 	description: String,
 	link: String,
 	timeslot: String,
-	day: String
+	day: String,
+	picture: String
 }, {collection: 'DjBlurbs'});
 
 var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
