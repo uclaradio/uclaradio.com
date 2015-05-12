@@ -24,15 +24,8 @@ router.post('/', function(req, res, next) {
 	    password	= req.body.password;
 		picture     = req.files.picture.path;
 
-    console.log(req.files);
-
-	if (password != passwords.secretpassword)
-	{
-		console.log("Incorrect password. No blurb updated.");
-	    res.end("Incorrect Password.");	
-        return;
-
-	}
+	if (passwords.secretpassword != passwords.secretpassword)
+		res.end("Incorrect Password.");	
 
 	// Adds the blurb to the database.
 	console.log(db.addBlurb(djName, showName, genre, description, link, timeslot, day));
