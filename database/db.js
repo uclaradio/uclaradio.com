@@ -81,7 +81,7 @@ db.getAllBlurbs = function(callback) {
 	});
 };
 
-db.addBlurb = function(djName, showName, genre, description, link, timeslot, day) {
+db.addBlurb = function(djName, showName, genre, description, link, timeslot, day, picture, callback) {
 	blurb_data = {
 		"djName": djName,
 		"showName": showName,
@@ -89,15 +89,16 @@ db.addBlurb = function(djName, showName, genre, description, link, timeslot, day
 		"description": description,
 		"link": link,
 		"timeslot": timeslot,
-		"day": day	
+		"day": day,
+		"picture": picture
 	};
+
 	var blurb = new DjBlurbModel(blurb_data);
-	blurb.save( function(err, blurb) {
-		if (err) console.log('err');
-		return blurb; 
+
+	blurb.save(function(err, blurbSaved) {
+		callback(err, blurbSaved);
 	});
 
-    return "Blurb has been successfully posted"; 
 };
 
 module.exports = db;
