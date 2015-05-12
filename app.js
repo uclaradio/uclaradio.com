@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(multer({ dest: './public/blurbImages/', inMemory: true}));
+app.use(multer({ dest: './public/blurbImages/'}));
 
 app.use('/', routes);
 app.use('/newBlurb', newBlurb);
