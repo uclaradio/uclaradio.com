@@ -69,8 +69,8 @@
     line-height: 1;
 
     opacity: .75;
-/*    color: #333;
-*/
+    color: #333;
+
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
