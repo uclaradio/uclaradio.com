@@ -1,190 +1,39 @@
-/**
+#dj_blurb
 {
-  font-family: 'apercuregular' !important;
-}*/
-@media only screen and (max-width: 1200px){
-  .nav-dj-name
-  {
-    display: none;
-  }
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+   font-style: normal;
 }
-
-.dj-image
-{
-  width: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto
-}
-
-.show-about
-{
-  font-size: 12px !important;
-}
-
-
-
-.djName
-{
-  border-left: 2px dotted solid black;
-  font-family: "apercu_lightregular";
-  font-size: 12px;
-  letter-spacing: 0em;
-  padding-left: 4px;
-  margin-top: 2px;
-  height: 100%;
-  
-
-
-}
-
-sup
-{
-  font-size: 1vw;
-  margin-top: -200% !important;
-}
-
-.timeslot
-{
-  margin-top: -5%;
-  font-size: 3vw;
-
-}
-
-@media only screen and (min-width: 775px) and (max-width: 950px){
-  .timeslot{
-    margin-top: -5px;
-  }
-}
-
-@media only screen and (min-width: 992px){
-  h3
-  {
-    font-size: 2vw !important;
-  }
-  .dj-image
-  {
-    padding-top: 2%;    
-  }
-}
-
-@media only screen and (max-width: 775px){
-  h3
-  {
-    font-size: 3vw !important;
-    text-align: center;
-  }
-  .timeslot
-  {
-    font-size: 5vw;
-  }
-  .AMorPM {
-    display: none;
-  }
-  sup
-  {
-    font-size: 3vw;
-  }
-  .djName
-  {
-    display: none;
-  }
-
-}
-
-
-@media only screen and (max-width: 550px){
-  .timeslot
-  {
-    margin-top: -5%;
-    font-size: 7vw;
-  }
-  .djName
-  {
-    display:none;
-  }
-
-}
-
-@media only screen and (max-width: 400px){
-  .timeslot
-  {
-    margin-top: -5%;
-    font-size: 9vw;
-  }
-  .djName
-  {
-    display: none;
-  }
-
-}
-
-@media only screen and (min-width: 1375px){
-  .timeslot
-  {
-    margin-top: -5%;
-    font-size: 2.7vw;
-  }
-}
-
-h3
-{
-  font-family: 'apercuregular';
-}
-
-nav
-{
-  font-style: none !important;
-  font-family: 'apercubold';
-}
-
-.hosted-by
-{
-  font-size: 15px;
-}
-
-#play-button-wrapper
-{
-  margin-top: 5%;
-  text-align: center;
-  margin-left: 3%;
-  margin-right: -3%;
-}
-
-@media only screen and (max-width: 990px){
-
-  #button-play-wrapper{
-    width: 100%;
-  }
-
-  #play-button-wrapper {
-    margin-left: 0px !important;
-    margin-right: 0px !important;
-
-    }
-}
-
-@media only screen and (max-width: 850px){
-  #dj_blurb
-  {
-    width: 100% !important;
-    margin-left: 0px !important;
-    background-color: yellow !important;
-
-  }
-}
-
-
 
 .slick-prev{
 }
 
+#on_air
+{
+  padding-top: 10px;
+  font-size: 50px;
+}
 
 .album_artwork
 {
   width: 126px;
 }
 
+#SHOW_TITLE, #DJ_NAME {font-size: 35px !important;}
+#BLURB {font-size: 25px !important;}
+
+#pledge-drive
+{
+	background: linear-gradient(to top right, rgb(68, 144, 183), rgb(176, 70, 89));
+	color: white;
+	font-size: 100px;
+}
+
+@media (max-width: 1080px) {
+	#pledge-drive
+	{
+		font-size: 60px;
+	}
+}
 
 
 .slick-slide
@@ -192,12 +41,17 @@ nav
   height: 231px;
 }
 
+#dj_image
+{
+  float: left;
+  padding-left: 1%;
+padding-top: 1%;
+padding-bottom: 1%;
+}
+
 #carousel-container
 {
   height:221px;
-  font-family: 'apercu_lightregular';
-  font-size: 100px !important;
-
 }
 
 .twitter, .instagram, .facebook
@@ -208,8 +62,8 @@ nav
 #c_data
 {
   width: 80%;
+  font-size: 18px;
   margin-left: auto;
-  font-size: 15px;
   margin-right: auto;
 }
 
@@ -222,7 +76,7 @@ nav
 {
   display:none;
   font: black !important;
-/*  backgrouxnd-color:rgba(0,0,0,0.5);
+/*  background-color:rgba(0,0,0,0.5);
 *//*  -webkit-box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.75);*/
@@ -231,15 +85,21 @@ nav
   margin-right: auto;
 }
 
+#blurb
+{
+  color: black;
+  float: right;
+  height: 100%;
+  /*font-family: Lato, sans-serif;*/
+}
 
 body {
-/*  font-family: Lato, sans-serif;
-*//*  font-style: italic;
-*/  
-  font-style: normal;
+  font-family: Lato, sans-serif;
+  font-style: italic;
   font-color: #333;
   height: 100%;
   width: 100%;
+  font-size: 24px;
   padding-top: 20px;
   background-size: cover;
 }
@@ -260,27 +120,30 @@ mark
 
 
 .container {
-  background: rgba(245,245,245,0.7);
+  background: rgba(245,245,245,0.5);
   padding: 50px;
-  border-radius: 3px; 
+  border-radius: 3px;
 }
 
 .container #logo {
   background: rgba(0,0,0,0.0); /* transparent */
-
 }
 
 #logo {
   max-width: 100%;
   max-height: 100%;
-/*  border-bottom: 3px solid black;
-*/}
+  padding-bottom: 50px;
+}
+
+.pledge-button {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 100px;
+}
 
 /* set to table alignment to get the bastard vertically aligned */
 #play-button {
   float: none;
-  border-radius: 100%;
-  box-shadow: 0px 0px 50px #fff;
   height: 200px;
   width: 200px;
   margin-left: auto;
@@ -316,19 +179,16 @@ mark
 
 #billboard {
   text-align: center;
+  font-size: 80px;
   padding-top: 0px;
   padding-bottom: 20px;
   z-index: 10;
 }
 
 #messages {
-  text-align: center;
-  font-size: 18px;
+  font-family: Merriweather, serif;
+  font-style: normal;
   margin-bottom: 30px;
-  font-family: 'apercubold';
-  letter-spacing: 0.05em;
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 .footer {
@@ -340,21 +200,13 @@ mark
   text-align: left;
   text-decoration: none;
   font-size: 34px;
-  margin-left: -15px;
-  font-family: 'apercuregular';
-  letter-spacing: 0.05em;
-
+    margin-left: -15px;
 }
 
 #playlist-link {
-  padding-left: 20px;
   text-align: left;
   text-decoration: none;
   font-size: 34px;
-  font-family: 'apercuregular';
-  letter-spacing: 0.1em;
-
-
 }
 
 a:hover {
@@ -365,6 +217,21 @@ a:hover {
 
 /* small */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+  #on_air
+  {
+    font-size: 30px;
+  }
+
+  #SHOW_TITLE, #DJ_NAME, #BLURB {font-size: 20px !important;}
+
+
+  #dj_image img
+  {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
 
   #playlist-link {
     margin-left: 30px;
@@ -388,7 +255,7 @@ a:hover {
 }
 
 
-#social { 
+#social {
   text-align: right;
 }
 
@@ -440,7 +307,10 @@ a:hover {
 #SHOW_TITLE, #DJ_NAME, #BLURB {font-size: 15px !important;}
 
 
-
+#c_data
+{
+  width: 50%;
+}
 
 .album_artwork
 {
@@ -467,7 +337,7 @@ a:hover {
 
   .slick-dots
   {
-    display: none !important;  
+    display: none !important;
   }
 
 
