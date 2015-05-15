@@ -22,7 +22,7 @@ router.post('/', function(req, res, next) {
 	    timeslot	= req.body.timeslot,
 	    description	= req.body.description,
 	    password	= req.body.password;
-		picture     = req.files.picture.path;
+		picture     = req.files.picture.path.replace('public/', '');
 
 	if (passwords.secretpassword != passwords.secretpassword)
 		res.end("Incorrect Password.");	
