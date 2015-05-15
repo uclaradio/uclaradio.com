@@ -22,22 +22,14 @@ router.get('/', function(req, res) {
 		time += 'pm';
 	}
 	
-	console.log(time);
-
-	db.getAllBlurbs(function(err,blurb) {
-		res.render('index', {
-			blurbs: blurb
-		});
+	db.getBlurbByTimeslotAndDay(time, day, function(err, blurb) {
+		res.render('index', {blurb: blurb});
 	});
-	// db.getBlurbByTimeslotAndDay(time, day, function(err, blurb) {
-	// 	res.render('index', blurb);
-	// });
 
 });
 
 
 router.get('/blurb', function(req, res) {
-	//res.render('index');
 	res.render('blurb');
 });
 
