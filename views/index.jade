@@ -73,9 +73,8 @@ head
             #blurb-title
               h1= blurb.showName
 
-            each name in blurb.djName
-              .djName
-                h2= name
+            .djName
+              h2= blurb.djName
 
             if blurb.genre
               #genre

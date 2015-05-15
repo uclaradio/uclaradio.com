@@ -23,6 +23,7 @@ router.get('/', function(req, res) {
 	}
 	
 	db.getBlurbByTimeslotAndDay(time, day, function(err, blurb) {
+		blurb.djName = blurb.djName.join(',');
 		res.render('index', {blurb: blurb});
 	});
 
