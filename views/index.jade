@@ -61,7 +61,7 @@ head
               | LISTEN
 
       else
-        .row
+        .row.dj_blurb
           .col-md-4
             #play-button
               a.pop-button.text-center(role='button', href='#')
@@ -74,11 +74,11 @@ head
               h1= blurb.showName
 
             .djName
-              h2= blurb.djName
+              h3= blurb.djName
 
             if blurb.genre
               #genre
-                h2= blurb.genre
+                h3= blurb.genre
 
             #description
               p= blurb.description
@@ -87,7 +87,7 @@ head
               a(href='#{blurb.link}') Check us out!
 
           .col-md-4
-            img(src='#{blurb.picture}')
+            img#blurb-image(src='#{blurb.picture}')
 
       .row
         br
