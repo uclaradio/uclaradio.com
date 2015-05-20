@@ -68,6 +68,18 @@ padding-bottom: 1%;
   /*font-family: Lato, sans-serif;*/
 }
 
+.form-control
+{
+	font-style: normal;
+	font-weight: normal;
+}
+
+#new-blurb-submit
+{
+	font-style: normal;
+	font-weight: normal;
+}
+
 body {
   font-family: Lato, sans-serif;
   font-style: italic;
