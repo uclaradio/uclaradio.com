@@ -122,6 +122,16 @@ mark
   padding-bottom: 50px;
 }
 
+#description
+{
+  font-size: 16px;
+}
+
+#genre h3
+{
+  font-size: 20px;
+}
+
 /* set to table alignment to get the bastard vertically aligned */
 #play-button {
   float: none;
