@@ -32,29 +32,9 @@ function getRandColorScheme(timeOfDay) {
 }
 
 function getColorSchemeFromTime() {
-  var hour = new Date().getUTCHours();
-
-  // UCLA is located 7 hours behind UTC. Use UTC time so our
-  // background colors will be synchronized wherever you are in the world.
-  var timeOfDay = null;
-
-  // Nighttime: 9pm - 6am == 21 - 6 PDT == 4 - 13 UTC
-  if (hour >= 4 && hour < 13) {
-    return getRandColorScheme('night');
-  }
-  // Morning: 6am - 9am == 6-9 PDT == 13-16 UTC
-  else if (hour >= 13 && hour < 16) {
-    return getRandColorScheme('morning');
-  }
-  // Noon: 9am - 5pm == 9-17 PDT == 16-00 UTC
-  else if (hour >= 16) {
-    return getRandColorScheme('noon');
-  }
-  // Evening: 5pm-9pm == 17-21 PDT == 00-04 UTC
-  else {
-    return getRandColorScheme('evening');
-  }
+  return getRandColorScheme('night');
 }
+
 function setButtons(darkColor, mediumColor, lightColor, midnight) {
   $(".pop-button").css('background-color', lightColor);
 

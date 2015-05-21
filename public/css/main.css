@@ -1,26 +1,15 @@
-#dj_blurb
+.dj_blurb
 {
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
    font-style: normal;
 }
 
+#blurb-image {
+	width: 100%;
+}
+
 .slick-prev{
 }
-
-#on_air
-{
-  padding-top: 10px;
-  font-size: 50px;
-}
-
-.album_artwork
-{
-  width: 126px;
-}
-
-#SHOW_TITLE, #DJ_NAME {font-size: 35px !important;}
-#BLURB {font-size: 25px !important;}
-
 
 .slick-slide
 {
@@ -79,6 +68,18 @@ padding-bottom: 1%;
   /*font-family: Lato, sans-serif;*/
 }
 
+.form-control
+{
+	font-style: normal;
+	font-weight: normal;
+}
+
+#new-blurb-submit
+{
+	font-style: normal;
+	font-weight: normal;
+}
+
 body {
   font-family: Lato, sans-serif;
   font-style: italic;
@@ -105,7 +106,7 @@ mark
 
 
 .container {
-  background: rgba(245,245,245,0.7);
+  background: rgba(245,245,245,0.5);
   padding: 50px;
   border-radius: 3px;
   margin: 20px auto;
@@ -119,6 +120,16 @@ mark
   max-width: 100%;
   max-height: 100%;
   padding-bottom: 50px;
+}
+
+#description
+{
+  font-size: 16px;
+}
+
+#genre h3
+{
+  font-size: 20px;
 }
 
 /* set to table alignment to get the bastard vertically aligned */
@@ -183,10 +194,21 @@ mark
     margin-left: -15px;
 }
 
+.bott-button {
+  font-size: 34px;
+  margin: 5px;
+}
+
 #playlist-link {
   text-align: left;
   text-decoration: none;
   font-size: 34px;
+}
+
+@media (max-width: 767px) {
+  #links-container {
+    text-align: center;
+  }
 }
 
 a:hover {
@@ -352,16 +374,6 @@ a:hover {
   #social{
     padding-bottom: 10px;
     text-align: center;
-  }
-  #social .facebook {
-    margin-right: 0px;
-  }
-  #social .instagram {
-    margin-left: 0px;
-    margin-right : 0px;
-  }
-  #social .twitter {
-    margin-left: 0px;
   }
 
   /* helper class, use to tag things that should be desktop-only */

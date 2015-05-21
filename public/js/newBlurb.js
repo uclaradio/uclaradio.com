@@ -1,4 +1,11 @@
-// given the time of day, returns a random color scheme
+function injectStyles(rule) {
+  var div = $("<div />", {
+    html: '&shy;<style>' + rule + '</style>'
+  }).appendTo("body");    
+}
+
+
+// given the time of day, returns a random color scheme 
 // matching it.
 function getRandColorScheme(timeOfDay) {
   var possColors, choice;
@@ -10,13 +17,13 @@ function getRandColorScheme(timeOfDay) {
       }
     case 'morning': // oranges, yellows, reds, greens
       {
-        possColors = ['Reds', 'Oranges', 'YlOrBr', 'YlOrRd', 'OrRd',
+        possColors = ['Reds', 'Oranges', 'YlOrBr', 'YlOrRd', 'OrRd', 
                    'PuRd', 'RdPu'];
         break;
       }
     case 'noon': // greens, purples, blues, yellows
       {
-        possColors = ['Greens', 'BrBG', 'PuOr',
+        possColors = ['Greens', 'BrBG', 'PuOr', 
                    'Spectral', 'YlGn'];
         break;
       }
@@ -34,14 +41,14 @@ function getRandColorScheme(timeOfDay) {
 function getColorSchemeFromTime() {
   var hour = new Date().getUTCHours();
 
-  // UCLA is located 7 hours behind UTC. Use UTC time so our
+  // UCLA is located 7 hours behind UTC. Use UTC time so our 
   // background colors will be synchronized wherever you are in the world.
   var timeOfDay = null;
 
   // Nighttime: 9pm - 6am == 21 - 6 PDT == 4 - 13 UTC
   if (hour >= 4 && hour < 13) {
-    return getRandColorScheme('night');
-  }
+    return getRandColorScheme('morning');
+  } 
   // Morning: 6am - 9am == 6-9 PDT == 13-16 UTC
   else if (hour >= 13 && hour < 16) {
     return getRandColorScheme('morning');
@@ -55,10 +62,29 @@ function getColorSchemeFromTime() {
     return getRandColorScheme('evening');
   }
 }
-function setButtons(darkColor, mediumColor, lightColor, midnight) {
-  $(".pop-button").css('background-color', lightColor);
 
-  var boxShadowHoverCss = "1px 0px " + mediumColor +
+function setButtons(darkColor, mediumColor, lightColor, midnight) {
+  injectStyles('.rc-active {background-color:'+ lightColor +';}');
+  injectStyles('.cbp-contentslider nav a:last-child {box-shadow: 1px 0 ' + lightColor + ';}')
+
+  $(".cbp-contentslider nav a").hover(function(){
+    $(this).css("background-color", lightColor);
+    $(this).css("color", "white");
+  }, function(){
+    $(this).css("background-color", "");
+    $(this).css("color", "black")
+  });
+  $(".pop-button").css('background-color', lightColor);
+  $(".cbp-contentslider").css("border", "4px solid" + lightColor);
+  $(".cbp-contentslider nav a").css("border-right", "4px solid" + lightColor);
+  $(".cbp-contentslider h3").css("border-bottom", "4px solid" + lightColor);
+  $("nav").css("border-top", "4px solid" + lightColor);
+  injectStyles('.slick-prev:before {color: ' + lightColor + ' !important;');
+  injectStyles('.slick-next:before {color: ' + lightColor + ' !important;');
+
+
+
+  var boxShadowHoverCss = "1px 0px " + mediumColor + 
     ", 0px 1px " + darkColor +
     ", 2px 1px " + mediumColor +
     ", 1px 2px " + darkColor +
@@ -68,7 +94,7 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
     ", 3px 4px " + darkColor;
   //console.log(boxShadowHoverCss);
 
-  var boxShadowActiveCss = "1px 0px " + mediumColor +
+  var boxShadowActiveCss = "1px 0px " + mediumColor + 
     ", 0px 1px " + darkColor +
     ", 2px 1px " + mediumColor +
     ", 1px 2px " + darkColor;
@@ -127,7 +153,7 @@ function setPageTheme(colorScheme) {
     var colors = Trianglify.colorbrewer[colorScheme][9];
     var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175, x_gradient: colors});
     var pattern = t.generate(4000, 3000);
-    document.body.setAttribute('style', 'background: ' +
+    document.body.setAttribute('style', 'background: ' + 
         pattern.dataUrl + ' no-repeat center center fixed');
 
     dark = colors[8];
@@ -143,56 +169,9 @@ function setPageTheme(colorScheme) {
 }
 
 $(document).ready(function() {
-
-  var stream = document.getElementById('stream');
-  var playing = false;
-
-  //Calls mobileBrowserCheck function from mobileBrowserCheck.js.
-  //function in that file is taken from detectmobilebrowsers.com
-  var mobile = mobileBrowserCheck();
-
-
-  //add preloading to non-mobile browsers
-  if (!mobile)
-    stream.setAttribute('preload', 'auto');
-
-  // activate the play button
-  $("#play-button").click(function() {
-
-    if (!playing) {
-
-	  //add the source again if we're on a mobile device since it was removed to stop download.
-	  if (mobile)
-		stream.src="http://stream.uclaradio.com:8000/listen";
-
-      stream.play();
-      playing = true;
-    } else {
-      stream.pause();
-      playing = false;
-
-	  //remove the source if the user is on a mobile device to stop data transfer. If we don't do this on mobile,
-	  //data stream will continue until the tab is closed, even if browser is minimized.
-	  if (mobile)
-	    stream.src = '';
-    }
-
-    $("#play-icon").toggleClass("fa fa-play fa fa-pause");
-  });
-
   // Generate that background image!
   var colorScheme = getColorSchemeFromTime();
+
   //debug
-  setPageTheme(colorScheme);
-
-  checkCarouselData();
+  setPageTheme(colorScheme); 
 });
-
-function checkCarouselData() {
-  setTimeout(function() {
-    jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks');
-    checkCarouselData();
-  }, 30000);
-}
-
-

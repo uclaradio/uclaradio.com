@@ -50,14 +50,14 @@ head
 
     .container(role='main')
       img#logo(src='img/logo.png', alt='UCLA RADIO')
-        
-      .row
-        .col-md-12
-          #play-button
-            a.pop-button.text-center(role='button', href='#')
-              span#play-icon.fa.fa-play
-             
-          #billboard
+      if (!blurb)
+        .row
+          .col-md-12
+            #play-button
+              a.pop-button.text-center(role='button', href='#')
+                span#play-icon.fa.fa-play
+
+            #billboard
               | LISTEN
 
       else
@@ -90,44 +90,12 @@ head
             img#blurb-image(src='#{blurb.picture}')
 
       .row
-        br
-
         center#carousel-container
           #c_data
             // recent_tracks.js allocates recent tracks
-
-        br
-
-      .row
-        #messages.col-sm-12.desktop-only.text-justify
-          p
-            | UCLA Radio is an entirely student run radio station.
-            | We broadcast all day, every day from a secret cave
-            | in Ackerman Student Union.
-
-      .footer
-        .row
-          span#links-container.col-xs-12.col-sm-9
-            a.bott-button.pop-button(target='_blank', role='button', href='http://uclaradio.tumblr.com/') BLOG
-
-            a.bott-button.pop-button(target='_blank', role='button', href='http://www.last.fm/user/uclaradio') PLAYS
-
-            a.bott-button.pop-button(target='_blank', role='button', href='http://i.imgur.com/SXZOT6W.png') SCHEDULE
-
-            a.bott-button.pop-button(target='_blank', role='button', href='http://tunein.com/radio/UCLA-Radio-s2652/') TUNEIN
-
-          span#social.col-xs-12.col-sm-3
-            a.pop-button.facebook(href='https://www.facebook.com/UCLARadio', target='_blank')
-              i.fa.fa-facebook-square.fa-2x
-
-            a.pop-button.instagram(href='http://instagram.com/UCLARadio', target='_blank')
-              i.fa.fa-instagram.fa-2x
-
-            a.pop-button.twitter(href='https://twitter.com/UCLAradio', target='_blank')
-              i.fa.fa-twitter-square.fa-2x
 
 script(src='slick/slick.min.js')
 
 script(src='js/recent_tracks.js')
 script(src='js/carousel.js')
-script(src='js/scripts.js')
+script(src='js/ios.js')

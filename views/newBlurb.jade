@@ -1,0 +1,133 @@
+doctype html(lang='en')
+head
+    meta(charset='utf-8')
+         
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+         
+    meta(name='description', content='UCLA Radio')
+         
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+         
+    title UCLA Radio
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    // bootstrap
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+         
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
+    // font awesome
+    link(href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+    // other fonts
+    link(href='http://fonts.googleapis.com/css?family=Lato:300italic', rel='stylesheet', type='text/css')
+         
+    link(href='http://fonts.googleapis.com/css?family=Merriweather:300', rel='stylesheet', type='text/css')
+    // trianglify, for background stuff
+    script(src='http://d3js.org/d3.v3.min.js')
+         
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js')
+    // Our stylesheets/scripts
+    link(rel='stylesheet', type='text/css', href='css/main.css')
+    link(rel='stylesheet', type='text/css', href='css/newBlurb.css')
+         
+    link(rel='icon', href='favicon.ico', type='image/x-icon')
+
+    script(type='text/javascript').
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-21406547-20', 'auto');
+      ga('send', 'pageview');
+
+  body
+         
+    .container(role='main')
+      img#logo(src='img/logo.png', alt='UCLA RADIO')
+
+      form(action='/newBlurb' method='POST' enctype='multipart/form-data')
+        .row
+          .col-md-6
+            .form-group
+              label(for='dj-name') DJ Name (Separate names by commas)
+                input.form-control#dj-name(type='text', name='djName', required)
+
+          .col-md-6
+            .form-group
+              label(for='show-name') Show Name
+                input.form-control#show-name(type='text', name='showName', required)
+        .row
+          .col-md-6
+            .form-group
+              label(for='genre') Genre
+                input.form-control#genre(type='text', name='genre', required)
+
+          .col-md-6
+            .form-group
+              label(for='link') Link
+                input.form-control#link(type='text', name='link', required)
+        .row
+          .col-md-6
+            .form-group
+              label(for='day') Day
+                select.form-control#day(name='day', required)
+                  option(disabled='disabled')
+                  option(value='Mon') Monday
+                  option(value='Tue') Tuesday
+                  option(value='Wed') Wednesday
+                  option(value='Thu') Thursday
+                  option(value='Fri') Friday
+                  option(value='Sat') Saturday
+                  option(value='Sun') Sunday
+
+          .col-md-6
+            .form-group
+              label(for='timeslot') Timeslot
+                select.form-control#timeslot(name='timeslot', required)
+                  option(disabled='disabled')
+                  option(value='1am') 1AM
+                  option(value='2am') 2AM
+                  option(value='3am') 3AM
+                  option(value='4am') 4AM
+                  option(value='5am') 5AM
+                  option(value='6am') 6AM
+                  option(value='7am') 7AM
+                  option(value='8am') 8AM
+                  option(value='9am') 9AM
+                  option(value='10am') 10AM
+                  option(value='11am') 11AM
+                  option(value='12pm') 12PM
+                  option(value='1pm') 1PM
+                  option(value='2pm') 2PM
+                  option(value='3pm') 3PM
+                  option(value='4pm') 4PM
+                  option(value='5pm') 5PM
+                  option(value='6pm') 6PM
+                  option(value='7pm') 7PM
+                  option(value='8pm') 8PM
+                  option(value='9pm') 9PM
+                  option(value='10pm') 10PM
+                  option(value='11pm') 11PM
+                  option(value='12am') 12AM
+        .row
+          .col-md-6
+            .form-group
+              label(for='password') Super Secret Password
+                input.form-control#password(type='password', name='password', required)
+
+          .col-md-6
+            .form-group
+              label(for='picture') Show Picture
+                input.form-control#picture(type='file', name='picture', required)
+
+        .row
+          .col-md-12
+            .form-group
+              label(for='description') Description
+                textarea.form-control#description(name='description', required)
+
+        .row
+          .col-md-12
+            .form-group
+              button.btn#new-blurb-submit(type='submit') Submit
+
+script(src='js/newBlurb.js')
