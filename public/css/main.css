@@ -194,10 +194,21 @@ mark
     margin-left: -15px;
 }
 
+.bott-button {
+  font-size: 34px;
+  margin: 5px;
+}
+
 #playlist-link {
   text-align: left;
   text-decoration: none;
   font-size: 34px;
+}
+
+@media (max-width: 767px) {
+  #links-container {
+    text-align: center;
+  }
 }
 
 a:hover {
@@ -363,16 +374,6 @@ a:hover {
   #social{
     padding-bottom: 10px;
     text-align: center;
-  }
-  #social .facebook {
-    margin-right: 0px;
-  }
-  #social .instagram {
-    margin-left: 0px;
-    margin-right : 0px;
-  }
-  #social .twitter {
-    margin-left: 0px;
   }
 
   /* helper class, use to tag things that should be desktop-only */
