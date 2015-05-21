@@ -8,6 +8,7 @@ var multer = require('multer');
 
 var routes = require('./routes/index');
 var newBlurb = require('./routes/newBlurb');
+var ios = require('./routes/ios');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(multer({ dest: './public/blurbImages/'}));
 
 app.use('/', routes);
 app.use('/newBlurb', newBlurb);
+app.use('/ios', ios);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
