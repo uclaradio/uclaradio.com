@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
  
-mongoose.connect('mongodb://localhost/local');
+mongoose.connect('mongodb://192.241.193.240/local');
 
 var db = {};
 
