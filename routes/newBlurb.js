@@ -8,7 +8,7 @@ var db = require('../database/db');
 var passwords = require('../passwords.json');
 
 router.get('/', function(req, res) {
-	res.render('newBlurb');
+	res.render('newBlurb', {status: ''});
 });
 
 router.post('/', function(req, res, next) {
@@ -24,16 +24,16 @@ router.post('/', function(req, res, next) {
 	    password	= req.body.password;
 		picture     = req.files.picture.path.replace('public/', '');
 
-	if (passwords.secretpassword != passwords.secretpassword)
+	if (password != passwords.secretpassword)
 		res.end("Incorrect Password.");	
 
 	// Adds the blurb to the database.
 	db.addBlurb(djName, showName, genre, description, link, timeslot, day, picture, function(err, blurbSaved) {
 		if (err) next(err);
 		if (blurbSaved)
-			res.redirect('/');
+			res.render('newBlurb', {status: 'Blurb successfully submitted!'});
 		else
-			res.end('Blurb not saved.');
+			res.render('newBlurb', {status: 'Try again! Something went wrong :^('});
 	});
 });
 
