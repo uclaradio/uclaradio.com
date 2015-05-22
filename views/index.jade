@@ -50,15 +50,44 @@ head
 
     .container(role='main')
       img#logo(src='img/logo.png', alt='UCLA RADIO')
-        
-      .row
-        .col-md-12
-          #play-button
-            a.pop-button.text-center(role='button', href='#')
-              span#play-icon.fa.fa-play
-             
-          #billboard
+      if (!blurb)
+        .row
+          .col-md-12
+            #play-button
+              a.pop-button.text-center(role='button', href='#')
+                span#play-icon.fa.fa-play
+
+            #billboard
               | LISTEN
+
+      else
+        .row.dj_blurb
+          .col-md-4
+            #play-button
+              a.pop-button.text-center(role='button', href='#')
+                span#play-icon.fa.fa-play
+            #billboard
+              | LISTEN
+
+          .col-md-4
+            #blurb-title
+              h1= blurb.showName
+
+            .djName
+              h3= blurb.djName
+
+            if blurb.genre
+              #genre
+                h3= blurb.genre
+
+            #description
+              p= blurb.description
+
+            #link
+              a(href='#{blurb.link}') Check us out!
+
+          .col-md-4
+            img#blurb-image(src='#{blurb.picture}')
 
       .row
         br
