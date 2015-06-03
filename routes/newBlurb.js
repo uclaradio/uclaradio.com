@@ -24,6 +24,9 @@ router.post('/', function(req, res, next) {
 	    password	= req.body.password;
 		picture     = req.files.picture.path.replace('public/', '');
 
+	if (link.indexOf('http') !== 0)
+		link = 'http://' + link;
+
 	if (password != passwords.secretpassword)
 		res.end("Incorrect Password.");	
 
