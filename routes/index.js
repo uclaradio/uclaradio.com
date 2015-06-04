@@ -21,7 +21,7 @@ router.get('/', function(req, res) {
 		time -= 12;
 		time += 'pm';
 	}
-	
+
 	db.getBlurbByTimeslotAndDay(time, day, function(err, blurb) {
 		if (blurb)
 			blurb.djName = blurb.djName.join(',');
@@ -31,9 +31,12 @@ router.get('/', function(req, res) {
 
 });
 
-
 router.get('/blurb', function(req, res) {
 	res.render('blurb');
+});
+
+router.get('/pledgedrive', function(req, res, next) {
+	res.render('pledgedrive');
 });
 
 module.exports = router;
