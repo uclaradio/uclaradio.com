@@ -127,6 +127,26 @@ mark
   padding-bottom: 50px;
 }
 
+.pledge-button {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 100px;
+}
+
+#pledge-drive
+{
+	background: linear-gradient(to top right, rgb(68, 144, 183), rgb(176, 70, 89));
+	color: white;
+	font-size: 100px;
+}
+
+@media (max-width: 1080px) {
+	#pledge-drive
+	{
+		font-size: 60px;
+	}
+}
+
 #description
 {
   font-size: 16px;
