@@ -230,7 +230,7 @@ mark
   font-size: 34px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1200px) {
   #links-container {
     text-align: center;
   }
@@ -258,7 +258,7 @@ a:hover {
     margin-right: auto;
     margin-top: 5%;
     margin-bottom: 5%;
-}
+  }
 
   #playlist-link {
     margin-left: 30px;
@@ -327,35 +327,48 @@ a:hover {
 
 @media only screen and (max-width: 500px) {
 
-#on_air
-{
-  font-size: 20px;
+    #on_air
+    {
+      font-size: 20px;
+    }
+    #SHOW_TITLE, #DJ_NAME, #BLURB {font-size: 15px !important;}
+
+
+    #c_data
+    {
+      width: 50%;
+    }
+
+    .album_artwork
+    {
+      width: 100px;
+    }
+
+    .slick-prev:before, .slick-next:before { font-size: 80px !important;}
+
+
+
+
 }
-#SHOW_TITLE, #DJ_NAME, #BLURB {font-size: 15px !important;}
 
+/* center social and other links for ipad view */
+@media only screen and (max-width: 767px){ 
 
-#c_data
-{
-  width: 50%;
-}
-
-.album_artwork
-{
-  width: 100px;
-}
-
-.slick-prev:before, .slick-next:before { font-size: 80px !important;}
-
-
+  /* helper class, use to tag things that should be desktop-only */
+  .desktop-only{
+    display: none !important;
+  }
 
 
 }
 
 /* Mobile only stuff */
+@media only screen and (max-width: 1200px){
 
-
-@media only screen and (max-width: 767px){
-
+  #social{
+    padding-bottom: 10px;
+    text-align: center;
+  }
 
   body {
     padding-top: 0px;
@@ -366,8 +379,6 @@ a:hover {
   {
     display: none !important;
   }
-
-
 
   #dj_image img
   {
@@ -387,6 +398,7 @@ a:hover {
   #billboard {
     font-size: 50px;
   }
+
   #blog-link {
     text-align: center;
     padding-bottom: 10px;
@@ -395,14 +407,5 @@ a:hover {
   #playlist-link {
     text-align: center;
     padding-bottom: 10px;
-  }
-  #social{
-    padding-bottom: 10px;
-    text-align: center;
-  }
-
-  /* helper class, use to tag things that should be desktop-only */
-  .desktop-only {
-    display: none;
   }
 }
