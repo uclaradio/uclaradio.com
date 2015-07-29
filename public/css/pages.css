@@ -1,0 +1,75 @@
+label {
+	width: 100%;
+}
+
+#logo {
+	margin-bottom: 25px;
+}
+
+#new-blurb-submit {
+	background-color: rgba(0, 0, 0, .13);
+	width: 100%;
+}
+
+body {
+	font-style: normal;
+}
+
+.mdl-card {
+	width: auto;
+	margin-bottom: 40px;
+}
+
+.demo-card-wide > .mdl-card__title {
+	height: 176px;
+}
+
+.mdl-card__title > h2 {
+	background-color: hsla(0, 0%, 0%,0.5);
+	padding: 10px;
+	color: white;
+}
+
+.demo-card-wide > .mdl-card__title.staffing-points {
+	background: url('/img/staffing-points.png') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.total-points {
+	background: url('/img/points-total.png') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.in-station {
+	background: url('/img/in-station.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.concert-press {
+	background: url('/img/concert-press.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.substitution {
+	background: url('/img/substitution.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.spreadsheet {
+	background: url('/img/spreadsheet.png') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.consent-and-release {
+	background: url('/img/consent-and-release.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.roster {
+	background: url('/img/roster.png') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.calendar {
+	background: url('/img/calendar.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.email {
+	background: url('/img/email.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.faq {
+	background: url('/img/faq.jpg') center / cover;
+}
