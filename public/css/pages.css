@@ -1,3 +1,18 @@
+.flex {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.mdl-card__supporting-text {
+	height: 90px;
+}
+
+.mdl-card__actions {
+	height: 53px;
+}
+
 label {
 	width: 100%;
 }
@@ -6,18 +21,17 @@ label {
 	margin-bottom: 25px;
 }
 
-#new-blurb-submit {
-	background-color: rgba(0, 0, 0, .13);
-	width: 100%;
-}
-
 body {
 	font-style: normal;
 }
 
 .mdl-card {
 	width: auto;
+	max-width: 500px;
 	margin-bottom: 40px;
+	margin-right: 20px;
+	margin-left: 20px;
+	flex-grow: 1;
 }
 
 .demo-card-wide > .mdl-card__title {
