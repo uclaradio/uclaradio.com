@@ -1,3 +1,11 @@
+//to inline style rules to the html document on load
+//purpose: to change the color of the left and right buttons
+function injectStyles(rule) {
+  var div = $("<div />", {
+    html: '&shy;<style>' + rule + '</style>'
+  }).appendTo("body");
+}    
+
 // given the time of day, returns a random color scheme
 // matching it.
 function getRandColorScheme(timeOfDay) {
@@ -55,7 +63,13 @@ function getColorSchemeFromTime() {
     return getRandColorScheme('evening');
   }
 }
+
 function setButtons(darkColor, mediumColor, lightColor, midnight) {
+  
+  //change colors of left and right buttons 
+  injectStyles('.slick-prev:before {color: ' + lightColor + ' !important;');
+  injectStyles('.slick-next:before {color: ' + lightColor + ' !important;');
+  
   $(".pop-button").css('background-color', lightColor);
 
   var boxShadowHoverCss = "1px 0px " + mediumColor +
