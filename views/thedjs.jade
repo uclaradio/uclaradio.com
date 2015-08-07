@@ -26,6 +26,8 @@ head
 
     script(src='http://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js')
     // Our stylesheets/scripts
+    link(rel='stylesheet', type='text/css', href='css/font.css')
+    link(rel='stylesheet', type='text/css', href='css/main.css')
     link(rel='stylesheet', type='text/css', href='css/allShowsPage.css')
 
     script(src='js/mobileBrowserCheck.js')
@@ -46,13 +48,12 @@ head
 
   body
 
+    audio#stream(src='http://stream.uclaradio.com:8000/listen', preload='none')
 
     .container(role='main')
       img#logo(src='img/logo.png', alt='UCLA RADIO')
-      .row
-        ul
-          each showName in blurbs
-            li= showName["showName"]
+
+
 
 
 
@@ -61,6 +62,13 @@ head
 
       .footer
         .row
+          #allShows
+            ul
+              each showName in blurbs
+                li= showName["showName"]
+                &nbsp;&nbsp;&nbsp;
+          br
+
           span#links-container.col-xs-12.col-sm-12.col-lg-9
             a.bott-button.pop-button(target='_blank', role='button', href='http://uclaradio.tumblr.com/') BLOG
 

@@ -55,9 +55,6 @@ router.get('/blurbs', function(req, res) {
 
 });
 
-router.get('/blurb', function(req, res) {
-	res.render('blurb');
-});
 
 router.get('/pledgedrive', function(req, res, next) {
 	res.render('pledgedrive');
