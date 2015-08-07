@@ -71,6 +71,8 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
   injectStyles('.slick-next:before {color: ' + lightColor + ' !important;');
   
   $(".pop-button").css('background-color', lightColor);
+  $("#allShows").css('border', '4px solid' + lightColor)
+  $("#allShows li").css('background-color', lightColor);
 
   var boxShadowHoverCss = "1px 0px " + mediumColor +
     ", 0px 1px " + darkColor +
