@@ -31,6 +31,16 @@ router.get('/', function(req, res) {
 
 });
 
+//return all blurbs
+router.get('/blurbs', function(req, res) {
+
+	db.getAllBlurbs(function(err, blurbs) {
+		console.log(blurbs);
+		res.render('index', {blurbs: blurbs})
+	});
+
+});
+
 router.get('/blurb', function(req, res) {
 	res.render('blurb');
 });
