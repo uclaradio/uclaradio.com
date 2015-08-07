@@ -31,12 +31,26 @@ router.get('/', function(req, res) {
 
 });
 
+
+var sort_by = function(field, reverse, primer){
+
+   var key = primer ? 
+       function(x) {return primer(x[field])} : 
+       function(x) {return x[field]};
+
+   reverse = !reverse ? 1 : -1;
+
+   return function (a, b) {
+       return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+     } 
+}
+
 //return all blurbs
 router.get('/blurbs', function(req, res) {
 
 	db.getAllBlurbs(function(err, blurbs) {
-		console.log(blurbs);
-		res.render('index', {blurbs: blurbs})
+		blurbs.sort(sort_by('showName', false, function(a){return a.toUpperCase()}));
+		res.render('thedjs', {blurbs: blurbs})
 	});
 
 });
