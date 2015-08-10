@@ -55,6 +55,20 @@ router.get('/blurbs', function(req, res) {
 
 });
 
+router.get('/blurbs/:show', function (req, res) {
+	var params = req.params;
+	var show = req.params.show;
+	show = show.replace("_", " ");
+	db.getBlurbByShowTitle(show, function(err, blurb) {
+		//console.log(blurb.djName);
+		if(blurb == null) {
+			res.redirect('http://uclaradio.com');
+		}
+		else{
+			res.send('<html><body><h1>Hello World ' + blurb.djName[0] + '</h1></body></html>');
+		}
+	});
+});
 
 router.get('/pledgedrive', function(req, res, next) {
 	res.render('pledgedrive');

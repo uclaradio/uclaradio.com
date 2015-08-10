@@ -29,6 +29,13 @@ db.getBlurbByTimeslotAndDay = function(time, day, callback) {
 	});
 };
 
+//get a blurb by the title of the show
+db.getBlurbByShowTitle = function(title, callback) {
+	DjBlurbModel.findOne({showName: title}, function(err, blurb){
+		callback(err, blurb);
+	});
+};
+
 db.getAllBlurbs = function(callback) {
 	DjBlurbModel.find({}, function(err, blurbs) {
 		callback(err, blurbs);

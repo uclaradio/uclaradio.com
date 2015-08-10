@@ -31,6 +31,7 @@ padding-bottom: 1%;
 
 #carousel-container
 {
+  font: 'apercu_lightregular' !important;
   height:221px;
 }
 
@@ -86,8 +87,7 @@ padding-bottom: 1%;
 }
 
 body {
-  font-family: Lato, sans-serif;
-  font-style: italic;
+  font-family: 'apercuregular';
   font-color: #333;
   height: 100%;
   width: 100%;
