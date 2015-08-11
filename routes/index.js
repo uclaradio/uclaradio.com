@@ -50,14 +50,37 @@ router.get('/blurbs', function(req, res) {
 
 	db.getAllBlurbs(function(err, blurbs) {
 		blurbs.sort(sort_by('showName', false, function(a){return a.toUpperCase()}));
-		res.render('thedjs', {blurbs: blurbs})
+		var urls = [];
+		for(var i = 0; i < blurbs.length; i++) {
+			//since urls will need underscores instead of spaces
+			blurbs[i].url = blurbs[i].showName.split(' ').join('_');
+		}
+		res.render('thedjs', {blurbs: blurbs, urls: urls})
 	});
 
 });
 
-
 router.get('/pledgedrive', function(req, res, next) {
 	res.render('pledgedrive');
 });
+
+router.get('/blurbs/:show', function (req, res) {
+	var params = req.params;
+	var show = req.params.show;
+	//since database contains spaces rather than underscores present in url
+	show = show.split('_').join(' ');
+	db.getBlurbByShowTitle(show, function(err, blurb) {
+		//console.log(blurb.djName);
+		if(blurb == null) {
+			res.redirect('/');
+		}
+		else{
+			res.render('showPage', {blurb: blurb});
+			//res.send('<html><body><h1>Hello World ' + blurb.djName[0] + '</h1></body></html>');
+		}
+	});
+});
+
+
 
 module.exports = router;
