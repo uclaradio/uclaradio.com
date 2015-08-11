@@ -31,7 +31,6 @@ padding-bottom: 1%;
 
 #carousel-container
 {
-  font: 'apercu_lightregular' !important;
   height:221px;
 }
 
@@ -46,6 +45,8 @@ padding-bottom: 1%;
   font-size: 18px;
   margin-left: auto;
   margin-right: auto;
+  font-family: 'apercu_lightregular';
+
 }
 
 #current_track
