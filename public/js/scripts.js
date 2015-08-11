@@ -70,9 +70,11 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
   injectStyles('.slick-prev:before {color: ' + lightColor + ' !important;');
   injectStyles('.slick-next:before {color: ' + lightColor + ' !important;');
   
+  //the show titles at the footer of /blurbs
   $(".pop-button").css('background-color', lightColor);
-  $("#allShows").css('border', '4px solid' + lightColor)
-  $("#allShows li").css('background-color', lightColor);
+  $("#allShows").css('border', '4px solid' + lightColor);
+  $("#allShows a").css('color', lightColor);
+
 
   var boxShadowHoverCss = "1px 0px " + mediumColor +
     ", 0px 1px " + darkColor +

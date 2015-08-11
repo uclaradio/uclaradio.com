@@ -50,7 +50,13 @@ router.get('/blurbs', function(req, res) {
 
 	db.getAllBlurbs(function(err, blurbs) {
 		blurbs.sort(sort_by('showName', false, function(a){return a.toUpperCase()}));
-		res.render('thedjs', {blurbs: blurbs})
+		var urls = [];
+		for(var i = 0; i < blurbs.length; i++) {
+			//since urls will need underscores instead of spaces
+			blurbs[i].url = blurbs[i].showName.split(' ').join('_');
+			console.log(blurbs[i].url + "\n");
+		}
+		res.render('thedjs', {blurbs: blurbs, urls: urls})
 	});
 
 });
@@ -58,7 +64,8 @@ router.get('/blurbs', function(req, res) {
 router.get('/blurbs/:show', function (req, res) {
 	var params = req.params;
 	var show = req.params.show;
-	show = show.replace("_", " ");
+	//since database contains spaces rather than underscores present in url
+	show = show.split('_').join(' ');
 	db.getBlurbByShowTitle(show, function(err, blurb) {
 		//console.log(blurb.djName);
 		if(blurb == null) {

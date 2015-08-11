@@ -64,9 +64,10 @@ head
         .row
           #allShows
             ul
-              each showName in blurbs
-                li= showName["showName"]
+              each show in blurbs
+                a(href="/blurbs/"+show.url) #{show.showName}
                 &nbsp;&nbsp;&nbsp;
+          
           br
 
           span#links-container.col-xs-12.col-sm-12.col-lg-9
