@@ -133,7 +133,7 @@ function setPageTheme(colorScheme) {
 
   if (colorScheme === "Greys") { // midnight space theme
     midnight = true;
-    var filename = 'img/nebula' + Math.floor(Math.random()*3) + '.jpg';
+    var filename = '/img/nebula' + Math.floor(Math.random()*3) + '.jpg';
     var backgroundAttribute = "background: url(" + filename +
       ") no-repeat center center fixed";
     document.body.setAttribute('style', backgroundAttribute);

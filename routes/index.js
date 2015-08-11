@@ -54,11 +54,14 @@ router.get('/blurbs', function(req, res) {
 		for(var i = 0; i < blurbs.length; i++) {
 			//since urls will need underscores instead of spaces
 			blurbs[i].url = blurbs[i].showName.split(' ').join('_');
-			console.log(blurbs[i].url + "\n");
 		}
 		res.render('thedjs', {blurbs: blurbs, urls: urls})
 	});
 
+});
+
+router.get('/pledgedrive', function(req, res, next) {
+	res.render('pledgedrive');
 });
 
 router.get('/blurbs/:show', function (req, res) {
@@ -72,13 +75,12 @@ router.get('/blurbs/:show', function (req, res) {
 			res.redirect('http://uclaradio.com');
 		}
 		else{
-			res.send('<html><body><h1>Hello World ' + blurb.djName[0] + '</h1></body></html>');
+			res.render('showPage', {show: blurb});
+			//res.send('<html><body><h1>Hello World ' + blurb.djName[0] + '</h1></body></html>');
 		}
 	});
 });
 
-router.get('/pledgedrive', function(req, res, next) {
-	res.render('pledgedrive');
-});
+
 
 module.exports = router;
