@@ -53,16 +53,27 @@ head
     .container(role='main')
       img#logo(src='/img/logo.png', alt='UCLA RADIO')
 
+      br
+
+      .row
+        if(blurb.picture != "")
+          .col-lg-6
+            img(src="/"+blurb.picture)
 
 
+        .col-lg-6
+          h1=blurb.showName 
+          each dj in blurb.djName
+            h2=dj
+          h3=blurb.day+" "+blurb.timeslot 
+          h3=blurb.genre 
+          h3=blurb.link 
+          p=blurb.description
 
-
-
-
+      br
 
       .footer
         .row
-
 
           span#links-container.col-xs-12.col-sm-12.col-lg-9
             a.bott-button.pop-button(target='_blank', role='button', href='http://uclaradio.tumblr.com/') BLOG

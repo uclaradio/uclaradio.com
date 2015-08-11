@@ -72,10 +72,10 @@ router.get('/blurbs/:show', function (req, res) {
 	db.getBlurbByShowTitle(show, function(err, blurb) {
 		//console.log(blurb.djName);
 		if(blurb == null) {
-			res.redirect('http://uclaradio.com');
+			res.redirect('/');
 		}
 		else{
-			res.render('showPage', {show: blurb});
+			res.render('showPage', {blurb: blurb});
 			//res.send('<html><body><h1>Hello World ' + blurb.djName[0] + '</h1></body></html>');
 		}
 	});
