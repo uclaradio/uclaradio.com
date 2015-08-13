@@ -207,6 +207,7 @@ mark
   /*font-family: 'apercuregular',"Roboto","Helvetica","Arial",sans-serif;*/
   font-style: normal;
   margin-bottom: 30px;
+  letter-spacing: .05em;
 }
 
 .footer {
