@@ -88,7 +88,6 @@ padding-bottom: 1%;
 }
 
 body {
-  font-family: 'apercuregular';
   font-color: #333;
   height: 100%;
   width: 100%;
@@ -203,7 +202,7 @@ mark
 }
 
 #messages {
-  font-family: Merriweather, serif;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
   font-style: normal;
   margin-bottom: 30px;
 }
