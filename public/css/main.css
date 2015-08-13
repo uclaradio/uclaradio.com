@@ -5,7 +5,7 @@
 
 .dj_blurb
 {
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+   font-family: 'apercuregular', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
    font-style: normal;
 }
 
@@ -25,8 +25,8 @@
 {
   float: left;
   padding-left: 1%;
-padding-top: 1%;
-padding-bottom: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
 
 #carousel-container
@@ -88,6 +88,7 @@ padding-bottom: 1%;
 }
 
 body {
+  font-family: 'apercuregular';
   font-color: #333;
   height: 100%;
   width: 100%;
@@ -194,6 +195,7 @@ mark
 }
 
 #billboard {
+  font-family: arial;
   text-align: center;
   font-size: 80px;
   padding-top: 0px;
@@ -202,7 +204,7 @@ mark
 }
 
 #messages {
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  /*font-family: 'apercuregular',"Roboto","Helvetica","Arial",sans-serif;*/
   font-style: normal;
   margin-bottom: 30px;
 }
