@@ -73,3 +73,11 @@ body {
 .demo-card-wide > .mdl-card__title.faq {
 	background: url('/img/faq.jpg') center / cover;
 }
+
+.demo-card-wide > .mdl-card__title.suggestion-box {
+	background: url('/img/suggestion-box.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.bylaws {
+	background: url('/img/bylaws.jpg') center / cover;
+}
