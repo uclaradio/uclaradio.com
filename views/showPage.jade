@@ -46,6 +46,11 @@ head
       ga('create', 'UA-21406547-20', 'auto');
       ga('send', 'pageview');
 
+    ////////////////////////////////////////////////
+    /////scripts for showPage.jade exclusively
+    ////////////////////////////////////////////////
+    link(rel='stylesheet', type='text/css', href='/css/showPage.css')
+
   body
 
     audio#stream(src='http://stream.uclaradio.com:8000/listen', preload='none')
@@ -58,7 +63,7 @@ head
       .row
         if(blurb.picture != "")
           .col-lg-6
-            img(src="/"+blurb.picture)
+            img#showPageProfPic(src="/"+blurb.picture)
 
 
         .col-lg-6
