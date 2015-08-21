@@ -13,6 +13,7 @@ var schedule = require('./routes/schedule');
 var pages = require('./routes/pages');
 var blurbs = require('./routes/blurbs');
 
+
 var app = express();
 
 // view engine setup

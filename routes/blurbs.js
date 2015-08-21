@@ -30,6 +30,10 @@ router.get('/', function(req, res) {
 
 });
 
+router.get('/draft', function(req, res, next) {
+	res.render('blurbPageDraft');
+});
+
 router.get('/:show', function (req, res) {
 	var params = req.params;
 	var show = req.params.show;
