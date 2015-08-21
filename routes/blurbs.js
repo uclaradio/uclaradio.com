@@ -30,9 +30,11 @@ router.get('/', function(req, res) {
 			//since urls will need underscores instead of spaces
 			blurbs[i].url = blurbs[i].showName.split(' ').join('_');
 			dayOfweek = blurbs[i].day;
+
+			//each ul list which reps day of week in thedjs.jade will use showsByDAy
 			showsByDay[dayOfweek].push(blurbs[i]);
 		}
-		console.log(showsByDay);
+
 		res.render('thedjs', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
 	});
 
