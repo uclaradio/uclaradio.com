@@ -11,10 +11,12 @@
 	position: absolute;
 	width: 100%;
 	left: 0;
-	bottom: 140px;
-	overflow: hidden;
 	text-align: center;
 	pointer-events: none;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	height: 90%;
+
 }
 
 .no-js .mi-slider ul {
@@ -31,7 +33,7 @@
 
 .mi-slider ul li {
 	display: inline-block;
-	padding: 20px;
+	background-color: yellow;
 	width: 20%;
 	max-width: 300px;
 	-webkit-transform: translateX(600%);
@@ -61,13 +63,12 @@
 	border: none;
 }
 
-.mi-slider ul li h4 {
+.mi-slider ul li {
 	display: inline-block;
 	font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
 	font-style: italic;
 	font-weight: 400;
 	font-size: 18px;
-	padding: 20px 10px 0;
 }
 
 .mi-slider ul li:hover {

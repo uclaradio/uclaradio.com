@@ -28,24 +28,12 @@ html { height: 100%; }
     *zoom: 1;
 }
 
-body {
-    font-family: 'Lato', Calibri, Arial, sans-serif;
-    background: #fff;
-    font-weight: 400;
-    font-size: 15px;
-    color: #333;
-    overflow: scroll;
-    overflow-x: hidden;
-}
 
 a {
 	color: #555;
 	text-decoration: none;
 }
 
-.container {
-	width: 100%;
-}
 
 .container > header {
 	width: 90%;
@@ -130,4 +118,12 @@ a {
 .codrops-demos a.current-demo:hover {
 	color: #aaa;
 	border-color: #aaa;
+}
+
+.main {
+	background-color: red;
+}
+
+.contentSlider{
+	background-color: blue;
 }
