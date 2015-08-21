@@ -75,13 +75,13 @@ head
               //document.getElementById('yourLinkID').click();
 
               nav
-                a(href='#') Sun
-                a(href='#') M
-                a(href='#') T
-                a(href='#') W
-                a(href='#') Th
-                a(href='#') F
-                a(href='#') Sat
+                a(href='#')#Sun Sun
+                a(href='#')#Mon M
+                a(href='#')#Tue T
+                a(href='#')#Wed W
+                a(href='#')#Thu Th
+                a(href='#')#Fri F
+                a(href='#')#Sat Sat
 
           br
           br
@@ -123,10 +123,25 @@ script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
 ////////////////////////////////////////////////
 /////files for this page exclusively
 ////////////////////////////////////////////////
-
 script(src='/js/jquery.catslider.js')
+
 script.
   $(function() {
   $( '#mi-slider' ).catslider();
+  console.log( "ready!" );
+
   });
+
+script.
+  $( document ).ready(function() {
+    var now = new Date();
+    var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var day = days[ now.getDay() ];
+    $('#'+day).click();
+    //document.getElementById(day).click();    
+    console.log( "ready!" );
+  });
+
+
+
 
