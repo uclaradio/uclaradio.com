@@ -72,7 +72,6 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
   
   //the show titles at the footer of /blurbs
   $(".pop-button").css('background-color', lightColor);
-  $("#allShows").css('border', '4px solid' + lightColor);
   $("#allShows a").css('color', lightColor);
 
 

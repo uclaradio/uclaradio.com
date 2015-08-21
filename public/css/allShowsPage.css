@@ -3,9 +3,8 @@
   font-family: 'apercu_lightregular';
   font-style: normal !important;
   color: white;
-  margin: 2%;
-  padding: 1%;
-
+  text-align: center;
+  /*border is set in line 75 of scripts.js*/
 }
 
 
@@ -17,6 +16,7 @@
     padding-left: 5px;
     padding-right: 5px;
     transition: color 0.5s, background-color 0.5s;
+    font-style: italic;
 
 }
 

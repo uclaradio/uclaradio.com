@@ -297,7 +297,7 @@
 		max-width: 90%;
 	}
 	.mi-slider nav a {
-		font-size: 12px;
+		font-size: 20px;
 		padding: 10px 10px 30px 14px;
 	}
 }
@@ -312,9 +312,14 @@
 }
 
 @media screen and (max-width: 490px){ 
+	.contentSlider {
+		display: none;
+	}
+/*
 	.mi-slider {
 		text-align: center;
 		height: auto;
+		display: none;
 	}
 
 	.mi-slider ul {
@@ -336,5 +341,6 @@
 	.mi-slider nav {
 		display: none;
 	}
+	*/
 }
 
