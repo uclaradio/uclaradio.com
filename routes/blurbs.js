@@ -19,13 +19,21 @@ var sort_by = function(field, reverse, primer){
 router.get('/', function(req, res) {
 
 	db.getAllBlurbs(function(err, blurbs) {
+		//sort blurbs alpha by showName
 		blurbs.sort(sort_by('showName', false, function(a){return a.toUpperCase()}));
 		var urls = [];
+
+		//so we can populate each slide in the page that shows all the blurbs
+		var showsByDay = {"Sun":[], "Mon":[], "Tue":[], "Wed":[], "Thu":[], "Fri":[], "Sat":[] };
+		
 		for(var i = 0; i < blurbs.length; i++) {
 			//since urls will need underscores instead of spaces
 			blurbs[i].url = blurbs[i].showName.split(' ').join('_');
+			dayOfweek = blurbs[i].day;
+			showsByDay[dayOfweek].push(blurbs[i]);
 		}
-		res.render('thedjs', {blurbs: blurbs, urls: urls})
+		console.log(showsByDay);
+		res.render('thedjs', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
 	});
 
 });
