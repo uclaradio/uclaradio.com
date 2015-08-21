@@ -15,7 +15,7 @@
 	pointer-events: none;
 	overflow-x: hidden;
 	overflow-y: scroll;
-	height: 90%;
+	height: 85%;
 
 }
 
@@ -33,7 +33,6 @@
 
 .mi-slider ul li {
 	display: inline-block;
-	background-color: yellow;
 	width: 20%;
 	max-width: 300px;
 	-webkit-transform: translateX(600%);
@@ -92,17 +91,23 @@
 	display: inline-block;
 	text-transform: uppercase;
 	letter-spacing: 5px;
-	padding: 40px 30px 30px 34px;
+	padding: 10px 30px 30px 30px;
 	position: relative;
 	color: #888;
 	outline: none;
 	-webkit-transition: color 0.2s linear;
 	transition: color 0.2s linear;
+
 }
 
 .mi-slider nav a:hover,
 .mi-slider nav a.mi-selected {
 	color: #000;
+	text-shadow: -8px 8px 8px #fff, 8px -8px 8px #fff;
+	text-decoration: none;
+
+
+
 }
 
 .mi-slider nav a.mi-selected:after,
@@ -117,6 +122,7 @@
 	pointer-events: none;
 }
 
+/*
 .mi-slider nav a.mi-selected:after {
 	border-color: transparent;
 	border-top-color: #fff;
@@ -132,6 +138,7 @@
 	left: 50%;
 	margin-left: -27px;
 }
+*/
 
 /* Move classes and animations */
 
@@ -291,7 +298,7 @@
 	}
 	.mi-slider nav a {
 		font-size: 12px;
-		padding: 40px 10px 30px 14px;
+		padding: 10px 10px 30px 14px;
 	}
 }
 
