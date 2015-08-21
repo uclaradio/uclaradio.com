@@ -1,22 +1,24 @@
 #allShows
 {
-  font-family: 'apercu_lightregular';
+  font-family: 'apercuregular';
   font-style: normal !important;
   color: white;
   text-align: center;
+      line-height: 20px;
+
   /*border is set in line 75 of scripts.js*/
 }
 
 
-
-#allShows li a {
+#allShows a {
     text-decoration:  none;
     list-style-type: none;
-    display: inline;
     padding-left: 5px;
     padding-right: 5px;
     transition: color 0.5s, background-color 0.5s;
-    font-style: italic;
+    font-size: 17px;
+    letter-spacing: 2px;
+
 
 }
 
@@ -26,7 +28,7 @@
     transition: color 0.5s, background-color 0.5s;
 }
 
-#allShows ul {
+#allShows {
     list-style-type: none;
     margin: 0;
     padding: 5px; 

@@ -71,7 +71,7 @@ head
                         img(src="/"+show.picture)
                         h4=show.showName    
 
-              br
+              br 
               //document.getElementById('yourLinkID').click();
 
               nav
@@ -84,8 +84,8 @@ head
                 a(href='#')#Sat SA
 
           br
-          br
 
+      //should be executed right after
       //this removes buttons and associated lists of days without shows
       script.
         $(document ).ready(function() {
@@ -109,10 +109,9 @@ head
         .row
 
           #allShows
-            ul
               each show in blurbs
-                a(href="/blurbs/"+show.url) #{show.showName}
-                &nbsp;&nbsp;&nbsp;
+                  a(href="/blurbs/"+show.url) #{show.showName}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           
           br
 
