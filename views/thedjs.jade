@@ -86,6 +86,28 @@ head
           br
           br
 
+      //this removes buttons and associated lists of days without shows
+      script.
+        $(document ).ready(function() {
+          var daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+          var days = 7;
+          //$("#mi-slider > ul").length
+          for (var i = 1; i <= days; i++) {
+              //$('#mi-slider ul:nth-child(1)').remove();
+              //$('#Sun').remove();
+              if($('#mi-slider ul:nth-child('+i+') li').length == 0)
+              {
+                  $("#mi-slider ul:nth-child("+i+")").remove();
+                  $('#'+daysOfWeek[i-1]).remove();
+                  daysOfWeek.splice(i, 1);
+                  days = days-1;
+                  i = i-1;
+
+              };
+
+          }
+        });
+
       .footer
         .row
 
@@ -137,9 +159,12 @@ script.
     var now = new Date();
     var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
     var day = days[ now.getDay() ];
-    $('#'+day).click();
-    //document.getElementById(day).click();    
-    console.log( "ready!" );
+    //$('#'+day).click();
+    //document.getElementById(day).click();  
+    //$('#mi-slider ul:nth-child(1)').remove();
+
+    //$('#Sun').remove(); 
+
   });
 
 
