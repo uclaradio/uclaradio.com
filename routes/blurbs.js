@@ -35,6 +35,11 @@ router.get('/', function(req, res) {
 			showsByDay[dayOfweek].push(blurbs[i]);
 		}
 
+		for(var day in showsByDay) {
+			console.log(showsByDay[day].showName);
+		};
+
+
 		res.render('thedjs', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
 	});
 
