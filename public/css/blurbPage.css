@@ -6,16 +6,22 @@
 	height: 490px;
 }
 
+
+ul li h4 {
+	text-align: center;
+	margin-bottom: 15%;
+}
+
 .mi-slider ul {
 	list-style-type: none;
 	position: absolute;
 	width: 100%;
-	left: 0;
 	text-align: center;
 	pointer-events: none;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	height: 85%;
+	margin-right: auto;
 
 }
 
@@ -34,6 +40,8 @@
 .mi-slider ul li {
 	display: inline-block;
 	width: 20%;
+	text-align: center;
+	position: relative;
 	max-width: 300px;
 	-webkit-transform: translateX(600%);
 	transform: translateX(600%);
@@ -315,6 +323,7 @@
 	.contentSlider {
 		display: none;
 	}
+
 /*
 	.mi-slider {
 		text-align: center;

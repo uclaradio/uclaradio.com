@@ -4,7 +4,7 @@
   font-style: normal !important;
   color: white;
   text-align: center;
-      line-height: 20px;
+  line-height: 20px;
 
   /*border is set in line 75 of scripts.js*/
 }
@@ -33,3 +33,55 @@
     margin: 0;
     padding: 5px; 
 }
+
+#sample{
+    width:200px;
+    height:200px;
+    overflow:hidden;
+    position: relative;
+    margin: 0 auto;
+}
+
+#sample img {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+@media only screen and (max-width: 1200px){
+  #sample{
+      width:150px;
+      height:150px;
+      overflow:hidden;
+      position: relative;
+  }
+}
+
+@media only screen and (max-width: 1000px){
+  #sample{
+      width:120px;
+      height:120px;
+      overflow:hidden;
+      position: relative;
+      display: center
+  }
+}
+
+@media only screen and (max-width: 900px){
+  #sample{
+      width:100px;
+      height:100px;
+      overflow:hidden;
+      position: relative;
+  }
+}
+
+@media only screen and (max-width: 620px){
+  #sample{
+      width:75px;
+      height:75px;
+      overflow:hidden;
+      position: relative;
+  }
+}
+
