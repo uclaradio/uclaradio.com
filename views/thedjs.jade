@@ -113,7 +113,10 @@ head
           #allShows
               each show in blurbs
                   a(href="/blurbs/"+show.url) #{show.showName}
-                  |&nbsp;&nbsp;&nbsp;
+                  #footerEnter
+                    br
+                  |&nbsp;&nbsp;&nbsp;&nbsp;
+
                
           
           br

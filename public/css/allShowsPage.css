@@ -5,8 +5,15 @@
   color: white;
   text-align: center;
   line-height: 20px;
+  word-wrap: break-word;
+
 
   /*border is set in line 75 of scripts.js*/
+}
+
+#footerEnter
+{
+  display: none;
 }
 
 
@@ -84,5 +91,15 @@
       overflow:hidden;
       position: relative;
   }
+
+  #footerEnter{
+    display: inline;
+  }
+
+  #footerSpace{
+    display: none;
+  }
+
+
 }
 
