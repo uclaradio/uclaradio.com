@@ -28,7 +28,6 @@ head
     // Our stylesheets/scripts
     link(rel='stylesheet', type='text/css', href='css/font.css')
     link(rel='stylesheet', type='text/css', href='css/main.css')
-    link(rel='stylesheet', type='text/css', href='css/allShowsPage.css')
 
     script(src='js/mobileBrowserCheck.js')
 
@@ -46,27 +45,79 @@ head
       ga('create', 'UA-21406547-20', 'auto');
       ga('send', 'pageview');
 
+    ////////////////////////////////////////////////
+    /////files for this page exclusively
+    ////////////////////////////////////////////////
+    link(rel='stylesheet', type='text/css', href='css/allShowsPage.css')
+
+    //content slider dependencies
+    link(rel='stylesheet', type='text/css', href='/css/blurbPage.css')
+    script(src='/js/modernizr.custom.63321.js')
+
   body
 
     audio#stream(src='http://stream.uclaradio.com:8000/listen', preload='none')
 
     .container(role='main')
       img#logo(src='img/logo.png', alt='UCLA RADIO')
+      .contentSlider
+          .main
+            #mi-slider.mi-slider
+              each day in showsByDay
+                ul
+                  each show in day
+                    li
+                      #sample
+                          a(href="/blurbs/"+show.url)
+                            img(src="/"+show.picture)
+                      h4=show.showName
+                      //h4=show.timeslot+" "+show.showName    
 
+              br 
+              //document.getElementById('yourLinkID').click();
 
+              nav
+                a(href='#')#Sun SU
+                a(href='#')#Mon M
+                a(href='#')#Tue T
+                a(href='#')#Wed W
+                a(href='#')#Thu Th
+                a(href='#')#Fri F
+                a(href='#')#Sat SA
 
+          br
 
+      //should be executed right after
+      //this removes buttons and associated lists of days without shows
+      script.
+        $(document ).ready(function() {
+          var daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+          var days = 7;
+          //$("#mi-slider > ul").length
+          for (var i = 1; i <= days; i++) {
+              if($('#mi-slider ul:nth-child('+i+') li').length == 0)
+              {
+                  $("#mi-slider ul:nth-child("+i+")").remove();
+                  $('#'+daysOfWeek[i-1]).remove();
+                  daysOfWeek.splice(i, 1);
+                  days = days-1;
+                  i = i-1;
+              };
 
-
-
+          }
+        });
 
       .footer
         .row
+
           #allShows
-            ul
               each show in blurbs
-                a(href="/blurbs/"+show.url) #{show.showName}
-                &nbsp;&nbsp;&nbsp;
+                  a(href="/blurbs/"+show.url) #{show.showName}
+                  #footerEnter
+                    br
+                  |&nbsp;&nbsp;&nbsp;&nbsp;
+
+               
           
           br
 
@@ -91,4 +142,31 @@ head
 
 script(src='slick/slick.min.js')
 script(src='js/scripts.js')
+script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
+    
+////////////////////////////////////////////////
+/////files for this page exclusively
+////////////////////////////////////////////////
+script(src='/js/jquery.catslider.js')
+
+script.
+  $(function() {
+  $( '#mi-slider' ).catslider();
+  console.log( "ready!" );
+
+  });
+
+script.
+  $( document ).ready(function() {
+    var now = new Date();
+    var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var day = days[ now.getDay() ];
+    $('#'+day).click();
+    document.getElementById(day).click();  
+
+
+  });
+
+
+
 

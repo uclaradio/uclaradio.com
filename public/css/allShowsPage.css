@@ -1,22 +1,31 @@
 #allShows
 {
-  font-family: 'apercu_lightregular';
+  font-family: 'apercuregular';
   font-style: normal !important;
   color: white;
-  margin: 2%;
-  padding: 1%;
+  text-align: center;
+  line-height: 20px;
+  word-wrap: break-word;
 
+
+  /*border is set in line 75 of scripts.js*/
+}
+
+#footerEnter
+{
+  display: none;
 }
 
 
-
-#allShows li a {
+#allShows a {
     text-decoration:  none;
     list-style-type: none;
-    display: inline;
     padding-left: 5px;
     padding-right: 5px;
     transition: color 0.5s, background-color 0.5s;
+    font-size: 17px;
+    letter-spacing: 2px;
+
 
 }
 
@@ -26,8 +35,71 @@
     transition: color 0.5s, background-color 0.5s;
 }
 
-#allShows ul {
+#allShows {
     list-style-type: none;
     margin: 0;
     padding: 5px; 
 }
+
+#sample{
+    width:200px;
+    height:200px;
+    overflow:hidden;
+    position: relative;
+    margin: 0 auto;
+}
+
+#sample img {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 1200px){
+  #sample{
+      width:150px;
+      height:150px;
+      overflow:hidden;
+      position: relative;
+  }
+}
+
+@media only screen and (max-width: 1000px){
+  #sample{
+      width:120px;
+      height:120px;
+      overflow:hidden;
+      position: relative;
+      display: center
+  }
+}
+
+@media only screen and (max-width: 900px){
+  #sample{
+      width:100px;
+      height:100px;
+      overflow:hidden;
+      position: relative;
+  }
+}
+
+@media only screen and (max-width: 620px){
+  #sample{
+      width:75px;
+      height:75px;
+      overflow:hidden;
+      position: relative;
+  }
+
+  #footerEnter{
+    display: inline;
+  }
+
+  #footerSpace{
+    display: none;
+  }
+
+
+}
+
