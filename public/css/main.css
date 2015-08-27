@@ -117,6 +117,14 @@ mark
   margin: 20px auto;
 }
 
+.form-container {
+  background: rgba(245,245,245,0.5);
+  padding: 25px;
+  border-radius: 3px;
+  margin: 20px auto;
+  width: 100%;
+}
+
 .container #logo {
   background: rgba(0,0,0,0.0); /* transparent */
 }
