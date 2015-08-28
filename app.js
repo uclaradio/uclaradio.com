@@ -8,6 +8,7 @@ var multer = require('multer');
 
 var routes = require('./routes/index');
 var newBlurb = require('./routes/newBlurb');
+var newShow = require('./routes/newShow');
 var ios = require('./routes/ios');
 var schedule = require('./routes/schedule');
 var pages = require('./routes/pages');
@@ -32,6 +33,7 @@ app.use(multer({ dest: './public/blurbImages/'}));
 
 app.use('/', routes);
 app.use('/newBlurb', newBlurb);
+app.use('/newShow', newShow);
 app.use('/ios', ios);
 app.use('/schedule', schedule);
 app.use('/pages', pages);

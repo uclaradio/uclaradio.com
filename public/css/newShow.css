@@ -1,0 +1,13 @@
+.center {
+	text-align: center;
+}
+
+.circle-num {
+	margin-top: 50px;
+}
+
+label {
+	margin-top: 20px;
+	font-weight: 400;
+	font-size: 18px;
+}
