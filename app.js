@@ -11,7 +11,8 @@ var newBlurb = require('./routes/newBlurb');
 var ios = require('./routes/ios');
 var schedule = require('./routes/schedule');
 var pages = require('./routes/pages');
-var blurbs = require('./routes/blurbs');
+//var blurbs = require('./routes/blurbs');
+var shows = require('./routes/shows');
 
 
 var app = express();
@@ -34,7 +35,8 @@ app.use('/newBlurb', newBlurb);
 app.use('/ios', ios);
 app.use('/schedule', schedule);
 app.use('/pages', pages);
-app.use('/blurbs', blurbs);
+//app.use('/blurbs', blurbs);
+app.use('/shows', shows);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
