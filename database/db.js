@@ -65,6 +65,7 @@ var ProposedShowSchema = new Schema({
 	whatHasImproved: String,
 	moreListeners: String,
 	otherComments: String,
+	interestedInReceiving: String,
 }, {collection: 'ProposedShows'});
 
 var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
@@ -162,7 +163,8 @@ db.addProposedShow = function(data, callback) {
 		threeThingsImproved: data.threeThingsImproved,
 		whatHasImproved: data.whatHasImproved,
 		moreListeners: data.moreListeners,
-		otherComments: data.otherComments
+		otherComments: data.otherComments,
+		interestedInReceiving: data.interestedInReceiving
 	};
 
 	var proposedShow = new ProposedShowModel(proposedShowData);
