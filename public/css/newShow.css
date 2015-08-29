@@ -11,3 +11,9 @@ label {
 	font-weight: 400;
 	font-size: 18px;
 }
+
+h1#header {
+	font-size: 80px;
+	text-align: center;
+	margin-bottom: 50px;
+}

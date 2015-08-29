@@ -46,8 +46,10 @@ head
       a(href='/')
         img#logo(src='img/logo.png', alt='UCLA RADIO')
 
+      h1#header Show App
+
       #submissionStatus
-        h1= status
+        h3= status
 
       form(action='/newShow' method='POST' enctype='multipart/form-data')
         .form-container
