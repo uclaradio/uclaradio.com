@@ -43,34 +43,33 @@ function encode_safe_url(showName){
 	return safe_url;
 }
 
-function decode_safe_url(showName){
-	var safe_url;
-	safe_url = showName.split('(question_mark)').join('?');
-	safe_url = safe_url.split('_').join(' ');
-	safe_url = safe_url.split('(dollar)').join('$');
-	safe_url = safe_url.split('(amperstamp)').join('&');
-	safe_url = safe_url.split('(plus)').join('+');
-	safe_url = safe_url.split('(comma)').join(',');
-	safe_url = safe_url.split('(forward_slash)').join('/');
-	safe_url = safe_url.split('(colon)').join(':');
-	safe_url = safe_url.split('(equals)').join('=');
-	safe_url = safe_url.split('(at)').join('@');
-	safe_url = safe_url.split('(quote)').join('"');
-	safe_url = safe_url.split('(less_than)').join('<');
-	safe_url = safe_url.split('(greater_than)').join('>');
-	safe_url = safe_url.split('(hashtag)').join('<');
-	safe_url = safe_url.split('(percent)').join('%');
-	safe_url = safe_url.split('(open_brace)').join('{');	
-	safe_url = safe_url.split('(close_brace)').join('}');
-	safe_url = safe_url.split('(vertical_bar)').join('|');
-	safe_url = safe_url.split('(carrot)').join('^');
-	safe_url = safe_url.split('(tilde)').join('~');
-	safe_url = safe_url.split('(open_bracket)').join('[');
-	safe_url = safe_url.split('(close_bracket)').join(']');
-	safe_url = safe_url.split('(grave_accent)').join('`');
-	return safe_url;
+function decode_safe_url(url){
+	var showName;
+	showName = url.split('(question_mark)').join('?');
+	showName = showName.split('_').join(' ');
+	showName = showName.split('(dollar)').join('$');
+	showName = showName.split('(amperstamp)').join('&');
+	showName = showName.split('(plus)').join('+');
+	showName = showName.split('(comma)').join(',');
+	showName = showName.split('(forward_slash)').join('/');
+	showName = showName.split('(colon)').join(':');
+	showName = showName.split('(equals)').join('=');
+	showName = showName.split('(at)').join('@');
+	showName = showName.split('(quote)').join('"');
+	showName = showName.split('(less_than)').join('<');
+	showName = showName.split('(greater_than)').join('>');
+	showName = showName.split('(hashtag)').join('<');
+	showName = showName.split('(percent)').join('%');
+	showName = showName.split('(open_brace)').join('{');	
+	showName = showName.split('(close_brace)').join('}');
+	showName = showName.split('(vertical_bar)').join('|');
+	showName = showName.split('(carrot)').join('^');
+	showName = showName.split('(tilde)').join('~');
+	showName = showName.split('(open_bracket)').join('[');
+	showName = showName.split('(close_bracket)').join(']');
+	showName = showName.split('(grave_accent)').join('`');
+	return showName;
 }
-
 //return all blurbs
 router.get('/', function(req, res) {
 
