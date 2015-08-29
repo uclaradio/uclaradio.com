@@ -74,7 +74,13 @@ ul li h4 {
 	font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
 	font-style: italic;
 	font-weight: 400;
-	font-size: 18px;
+	font-size: 0.7em;
+}
+
+
+.mi-slider ul li h4 {
+	font-size: 0.7em;
+
 }
 
 .mi-slider ul li:hover {

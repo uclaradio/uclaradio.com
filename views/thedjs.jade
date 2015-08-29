@@ -68,9 +68,10 @@ head
                   each show in day
                     li
                       #sample
-                          a(href="/blurbs/"+show.url)
+                          a(href="/shows/"+show.url)
                             img(src="/"+show.picture)
-                      h4=show.showName
+                      p=show.showName
+                      br
                       //h4=show.timeslot+" "+show.showName    
 
               br 
@@ -112,10 +113,10 @@ head
 
           #allShows
               each show in blurbs
-                  a(href="/blurbs/"+show.url) #{show.showName}
+                  a(href="/shows/"+show.url) #{show.showName}
+                  |&nbsp;&nbsp;&nbsp;&nbsp;
                   #footerEnter
                     br
-                  |&nbsp;&nbsp;&nbsp;&nbsp;
 
                
           
