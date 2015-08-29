@@ -18,7 +18,6 @@ var sort_by = function(field, reverse, primer){
 function encode_safe_url(showName){
 	var safe_url;
 	safe_url = showName.split('?').join('(question_mark)');
-	safe_url = safe_url.split(' ').join('_');
 	safe_url = safe_url.split('$').join('(dollar)');
 	safe_url = safe_url.split('&').join('(amperstamp)');
 	safe_url = safe_url.split('+').join('(plus)');
@@ -40,13 +39,14 @@ function encode_safe_url(showName){
 	safe_url = safe_url.split('[').join('(open_bracket)');
 	safe_url = safe_url.split(']').join('(close_bracket)');
 	safe_url = safe_url.split('`').join('(grave_accent)');
+	safe_url = safe_url.split(' ').join('_');
+
 	return safe_url;
 }
 
 function decode_safe_url(url){
 	var showName;
 	showName = url.split('(question_mark)').join('?');
-	showName = showName.split('_').join(' ');
 	showName = showName.split('(dollar)').join('$');
 	showName = showName.split('(amperstamp)').join('&');
 	showName = showName.split('(plus)').join('+');
@@ -68,6 +68,8 @@ function decode_safe_url(url){
 	showName = showName.split('(open_bracket)').join('[');
 	showName = showName.split('(close_bracket)').join(']');
 	showName = showName.split('(grave_accent)').join('`');
+	showName = showName.split('_').join(' ');
+
 	return showName;
 }
 //return all blurbs
