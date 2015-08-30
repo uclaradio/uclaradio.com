@@ -104,5 +104,35 @@ router.get('/', function(req, res) {
 
 });
 
+
+router.delete('/:show', function (req, res) {
+	var params = req.params;
+	var show = req.params.show;
+	//since database contains spaces rather than underscores present in url
+	
+	//UNSAFE characters
+	show = decode_safe_url(show);
+	console.log("UGH THE SHOW IS :" + show);
+
+	db.deleteBlurbByShowTitle(show, function(err) {
+		if(err == null){
+			res.redirect('/');
+		} else {
+			res.send(400, error);
+		}
+		//res.redirect('/');
+		//console.log(blurb.djName);
+		// if(err == null) {
+		// 	res.redirect('/');
+		// }
+		// else{
+		// 	res
+		// 	//res.render('showPage', {blurb: blurb});
+		// 	//res.send('<html><body><h1>Hello World ' + blurb.djName[0] + '</h1></body></html>');
+		// }
+	});
+});
+
+
 module.exports = router;
 
