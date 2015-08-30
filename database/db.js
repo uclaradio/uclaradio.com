@@ -89,6 +89,19 @@ db.getBlurbByShowTitle = function(title, callback) {
 	});
 };
 
+//delete a blurb by the title of show
+db.deleteBlurbByShowTitle = function(title, callback){
+	DjBlurbModel.remove({showName: title}, function(err){
+	    if (!err) {
+	            message.type = 'notification!';
+	    }
+	    else {
+	            message.type = 'error';
+	    }
+    });
+};
+
+
 db.getAllBlurbs = function(callback) {
 	DjBlurbModel.find({}, function(err, blurbs) {
 		callback(err, blurbs);
