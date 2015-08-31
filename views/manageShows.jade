@@ -56,6 +56,9 @@ head
       img#logo(src='img/logo.png', alt='UCLA RADIO')
       each show in blurbs
           a(href="/shows/"+show.url) #{show.showName}
+          a(href="manageShows/"+ show.url) Delete
+
+
           |&nbsp;&nbsp;&nbsp;&nbsp;
           #footerEnter
             br
