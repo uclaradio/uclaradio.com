@@ -42,7 +42,7 @@ router.delete('/:show', function (req, res) {
 	var show = req.params.show;
 	
 	//UNSAFE characters
-	show = decode_safe_url(show);
+	show = helper_funcs.decode_safe_url(show);
 	console.log("UGH THE SHOW IS :" + show);
 
 	db.deleteBlurbByShowTitle(show, function(err) {
