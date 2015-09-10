@@ -3,7 +3,6 @@ var router = express.Router();
 var db = require('../database/db');
 var helper_funcs = require('./helper_funcs.js')
 
-
 //return all blurbs
 router.get('/', function(req, res) {
 
@@ -30,32 +29,31 @@ router.get('/', function(req, res) {
 			console.log(showsByDay[day].showName);
 		};
 
-		res.render('thedjs', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
+		res.render('manageShows', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
 	});
 
 });
 
-
-router.get('/:show', function (req, res) {
+////////
+//curl -H "Content-Type: application/json" -X DELETE  http://localhost:3000/manageShows/{name}
+////////
+router.delete('/:show', function (req, res) {
 	var params = req.params;
-	console.log(params);
 	var show = req.params.show;
-	//since database contains spaces rather than underscores present in url
 	
-	console.log("SHOW: " + show);
 	//UNSAFE characters
 	show = helper_funcs.decode_safe_url(show);
+	console.log("UGH THE SHOW IS :" + show);
 
-	db.getBlurbByShowTitle(show, function(err, blurb) {
-		//console.log(blurb.djName);
-		if(blurb == null) {
+	db.deleteBlurbByShowTitle(show, function(err) {
+		if(err == null){
 			res.redirect('/');
-		}
-		else{
-			res.render('showPage', {blurb: blurb});
-			//res.send('<html><body><h1>Hello World ' + blurb.djName[0] + '</h1></body></html>');
+		} else {
+			res.send(400, error);
 		}
 	});
 });
 
+
 module.exports = router;
+
