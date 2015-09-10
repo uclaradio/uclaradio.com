@@ -174,4 +174,10 @@ db.addProposedShow = function(data, callback) {
 	});
 };
 
+db.getProposedShows = function(callback) {
+	ProposedShowModel.find({}, function(err, shows) {
+		callback(err, shows);
+	});
+}
+
 module.exports = db;
