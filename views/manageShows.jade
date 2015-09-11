@@ -55,7 +55,7 @@ head
     .container(role='main')
       img#logo(src='img/logo.png', alt='UCLA RADIO')
       each show in blurbs
-          a(href="/shows/"+show.url) #{show.showName}
+          a(href="/shows/delete/"+show.url) #{show.showName}
           a(href="manageShows/"+ show.url) Delete
 
 

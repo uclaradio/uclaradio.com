@@ -25,25 +25,21 @@ router.get('/', function(req, res) {
 			showsByDay[dayOfweek].push(blurbs[i]);
 		}
 
-		for(var day in showsByDay) {
-			console.log(showsByDay[day].showName);
-		};
-
 		res.render('manageShows', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
 	});
 
 });
 
 ////////
+//DELETE via command line:
 //curl -H "Content-Type: application/json" -X DELETE  http://localhost:3000/manageShows/{name}
 ////////
-router.get('/:show', function (req, res) {
+router.get('/delete/:show', function (req, res) {
 	var params = req.params;
 	var show = req.params.show;
 	
 	//UNSAFE characters
 	show = helper_funcs.decode_safe_url(show);
-	console.log("UGH THE SHOW IS :" + show);
 
 	db.deleteBlurbByShowTitle(show, function(err) {
 		if(err == null){
@@ -53,6 +49,16 @@ router.get('/:show', function (req, res) {
 		}
 	});
 });
+
+//modify a show
+// router.get('/modify/:show', function(req, res){
+// 	var params = req.params;
+// 	var show = req.params.show;
+	
+// 	//UNSAFE characters
+// 	show = helper_funcs.decode_safe_url(show);
+
+// });
 
 
 module.exports = router;
