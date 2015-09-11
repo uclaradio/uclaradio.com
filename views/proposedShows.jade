@@ -1,0 +1,209 @@
+doctype html(lang='en')
+head
+    meta(charset='utf-8')
+         
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+         
+    meta(name='description', content='UCLA Radio')
+         
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+         
+    title UCLA Radio
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+    // bootstrap
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+         
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
+    // font awesome
+    link(href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+    // other fonts
+    link(href='http://fonts.googleapis.com/css?family=Lato:300italic', rel='stylesheet', type='text/css')
+         
+    link(href='http://fonts.googleapis.com/css?family=Merriweather:300', rel='stylesheet', type='text/css')
+    // trianglify, for background stuff
+    script(src='http://d3js.org/d3.v3.min.js')
+         
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js')
+    // Our stylesheets/scripts
+    link(rel='stylesheet', type='text/css', href='css/main.css')
+    link(rel='stylesheet', type='text/css', href='css/newBlurb.css')
+    link(rel='stylesheet', type='text/css', href='css/proposedShows.css')
+         
+    link(rel='icon', href='favicon.ico', type='image/x-icon')
+
+    body
+      .container(role='main')
+        a(href='/')
+          img#logo(src='img/logo.png', alt='UCLA RADIO')
+
+        h1#header Submitted Shows
+
+        each show in shows
+          p.header full name:
+          each name in show.fullNames
+            p= name
+
+          p.header dj name:
+          each djName in show.djNames
+            p= djName
+
+          p.header department:
+          each department in show.departments
+            p= department
+
+          p.header email:
+          each email in show.emails
+            p= email
+
+          p.header phone number:
+          each phoneNumber in show.phoneNumbers
+            p= phoneNumber
+
+          p.header number of quarters as a dj
+          p= show.numQuarters
+
+          p.header do they want an intern?
+          if show.acceptableToHaveIntern
+            p yes, #{show.numInterns}
+          else
+            p no
+
+          .row
+            .col-md-6
+              h2 Proposed Show 1
+
+              p.header show title
+              p= show.showTitle1
+
+              p.header genre
+              p= show.genre1
+
+              p.header show length
+              p= show.length1
+
+              p.header show description
+              p= show.showDescription1
+
+              p.header sample set
+              p= show.sampleSet1
+
+              p.header talking points
+              p= show.talkingPoints1
+
+            .col-md-6
+              h2 Proposed Show 2
+
+              p.header show title
+              p= show.showTitle2
+
+              p.header genre
+              p= show.genre2
+
+              p.header show length
+              p= show.length2
+
+              p.header show description
+              p= show.showDescription2
+
+              p.header sample set
+              p= show.sampleSet2
+
+              p.header talking points
+              p= show.talkingPoints2
+
+          h2 Preferred Timeslots
+
+          .row
+            .col-md-1.col-md-offset-1
+              p.header 1
+            .col-md-1
+              p.header 2
+            .col-md-1
+              p.header 3
+            .col-md-1
+              p.header 4
+            .col-md-1
+              p.header 5
+            .col-md-1
+              p.header 6
+            .col-md-1
+              p.header 7
+            .col-md-1
+              p.header 8
+            .col-md-1
+              p.header 9
+            .col-md-1
+              p.header 10
+
+          .row
+            .col-md-1.col-md-offset-1
+              p= show.timeslot1
+            .col-md-1
+              p= show.timeslot2
+            .col-md-1
+              p= show.timeslot3
+            .col-md-1
+              p= show.timeslot4
+            .col-md-1
+              p= show.timeslot5
+            .col-md-1
+              p= show.timeslot6
+            .col-md-1
+              p= show.timeslot7
+            .col-md-1
+              p= show.timeslot8
+            .col-md-1
+              p= show.timeslot9
+            .col-md-1
+              p= show.timeslot10
+
+          .row
+            .col-md-1.col-md-offset-1
+              p= show.day1
+            .col-md-1
+              p= show.day2
+            .col-md-1
+              p= show.day3
+            .col-md-1
+              p= show.day4
+            .col-md-1
+              p= show.day5
+            .col-md-1
+              p= show.day6
+            .col-md-1
+              p= show.day7
+            .col-md-1
+              p= show.day8
+            .col-md-1
+              p= show.day9
+            .col-md-1
+              p= show.day10
+
+          p.header which show they prefer
+          p= show.preferredShow
+
+          p.header why the show is valuable
+          p= show.whyValuable
+
+          p.header how to improve the show
+          p= show.howToImprove
+
+          p.header three things that should be improved in radio
+          p= show.threeThingsImproved
+
+          p.header what has improved in radio
+          p= show.whatHasImproved
+
+          p.header how can radio get more listeners
+          p= show.moreListeners
+
+          p.header other comments
+          p= show.otherComments
+
+          p.header are they interested in getting more info about in-station opportunities
+          p= show.interestedInReceiving
+
+          hr
+
+script(src='js/newBlurb.js')
