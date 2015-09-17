@@ -30,7 +30,7 @@ router.get('/', function(req, res) {
 			console.log(showsByDay[day].showName);
 		};
 
-		res.render('thedjs', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
+		res.render('allShowsPage', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
 	});
 
 });

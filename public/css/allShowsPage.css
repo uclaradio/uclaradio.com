@@ -7,7 +7,6 @@
   line-height: 20px;
   word-wrap: break-word;
 
-
   /*border is set in line 75 of scripts.js*/
 }
 
@@ -20,8 +19,8 @@
 #allShows a {
     text-decoration:  none;
     list-style-type: none;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     transition: color 0.5s, background-color 0.5s;
     font-size: 17px;
     letter-spacing: 2px;

@@ -113,7 +113,6 @@ head
           #allShows
               each show in blurbs
                   a(href="/shows/"+show.url) #{show.showName}
-                  |&nbsp;&nbsp;&nbsp;&nbsp;
                   #footerEnter
                     br
 
@@ -152,11 +151,11 @@ script(src='/js/jquery.catslider.js')
 script.
   $(function() {
   $( '#mi-slider' ).catslider();
-  console.log( "ready!" );
 
   });
 
 script.
+  //moves the slider to the right day
   $( document ).ready(function() {
     var now = new Date();
     var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
