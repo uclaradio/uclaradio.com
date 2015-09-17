@@ -1,0 +1,35 @@
+body {
+	background: #a71c44;
+}
+
+img {
+	display: block;
+	margin: 0 auto;
+}
+
+#rush {
+	margin: 100px 0;
+}
+#text-1 {
+	width: 80%;
+	margin-bottom: 50px;
+}
+
+#text-2 {
+	width: 80%;
+	margin-bottom: 50px;
+}
+
+#text-3 {
+	width: 30%;
+}
+
+#text-4 {
+	width: 60%;
+	margin-bottom: 50px;
+}
+
+#text-5 {
+	width: 60%;
+	margin-bottom: 50px;
+}
