@@ -19,6 +19,9 @@ router.get('/', function(req, res) {
 			
 			//get rid of unsafe url characters
 			blurbs[i].url = helper_funcs.encode_safe_url(blurbs[i].showName);
+
+			//shorten show name to fit within the width of the profpic in the catslider
+			blurbs[i].showName = helper_funcs.truncateName(blurbs[i].showName, 22);
 			
 			dayOfweek = blurbs[i].day;
 
@@ -27,10 +30,11 @@ router.get('/', function(req, res) {
 		}
 
 		for(var day in showsByDay) {
+			console.log("ugh");
 			console.log(showsByDay[day].showName);
 		};
 
-		res.render('thedjs', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
+		res.render('allShowsPage', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
 	});
 
 });

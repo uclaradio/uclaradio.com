@@ -1,5 +1,9 @@
 module.exports = {
 
+		truncateName: function(name, l) {
+			return name.length > l ? name.substr(0,l-2) + "\u2026" : name;
+		},
+
 		sort_by: function(field, reverse, primer){
 
 		   var key = primer ? 

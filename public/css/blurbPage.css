@@ -75,7 +75,9 @@ ul li h4 {
 	font-style: italic;
 	font-weight: 400;
 	font-size: 0.7em;
+	overflow-wrap: break-word;
 }
+
 
 
 .mi-slider ul li h4 {

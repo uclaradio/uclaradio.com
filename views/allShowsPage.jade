@@ -11,6 +11,7 @@ head
     title UCLA Radio
     // jQuery (necessary for Bootstrap's JavaScript plugins)
     script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+
     // bootstrap
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
 
@@ -58,7 +59,7 @@ head
     audio#stream(src='', preload='none')
     .container(role='main')
       img#logo(src='img/logo.png', alt='UCLA RADIO')
-      .contentSlider
+      #contentSlider.contentSlider
           .main
             #mi-slider.mi-slider
               each day in showsByDay
@@ -73,7 +74,6 @@ head
                       //h4=show.timeslot+" "+show.showName    
 
               br 
-              //document.getElementById('yourLinkID').click();
 
               nav
                 a(href='#')#Sun SU
@@ -86,10 +86,10 @@ head
 
           br
 
-      //should be executed right after
-      //this removes buttons and associated lists of days without shows
+      //This script should be executed right after
+      //This removes buttons and associated lists of days without shows in the content slider
       script.
-        $(document ).ready(function() {
+        $(document).ready(function() {
           var daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
           var days = 7;
           //$("#mi-slider > ul").length
@@ -105,6 +105,10 @@ head
               };
 
           }
+          if(days == 0) {
+            $('#mi-slider').remove();
+            $('#contentSlider').append("<p><center><em>There are currently no shows blurbs to view.</em></center></p>");
+          }
         });
 
       .footer
@@ -113,7 +117,6 @@ head
           #allShows
               each show in blurbs
                   a(href="/shows/"+show.url) #{show.showName}
-                  |&nbsp;&nbsp;&nbsp;&nbsp;
                   #footerEnter
                     br
 
@@ -152,11 +155,11 @@ script(src='/js/jquery.catslider.js')
 script.
   $(function() {
   $( '#mi-slider' ).catslider();
-  console.log( "ready!" );
 
   });
 
 script.
+  //moves the slider to the right day
   $( document ).ready(function() {
     var now = new Date();
     var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
