@@ -23,6 +23,7 @@ img {
 
 #text-3 {
 	width: 30%;
+	margin-bottom: 50px;
 }
 
 #text-4 {
@@ -38,4 +39,13 @@ img {
 #text-6 {
 	width: 60%;
 	margin-bottom: 50px;
+}
+
+#text-7 {
+	width: 60%;
+	margin-bottom: 50px;
+}
+
+#text-8 {
+	width: 60%;
 }
