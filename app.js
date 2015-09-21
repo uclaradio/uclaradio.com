@@ -14,7 +14,6 @@ var ios = require('./routes/ios');
 var schedule = require('./routes/schedule');
 var pages = require('./routes/pages');
 var shows = require('./routes/shows');
-var rush = require('./routes/rush');
 var manageShows = require('./routes/manageShows');
 
 
@@ -41,7 +40,6 @@ app.use('/ios', ios);
 app.use('/schedule', schedule);
 app.use('/pages', pages);
 app.use('/shows', shows);
-app.use('/rush', rush);
 app.use('/manageShows', manageShows);
 
 // catch 404 and forward to error handler
