@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var fs = require('fs');
  
 mongoose.connect('mongodb://192.241.193.240/local');
 
@@ -187,6 +188,195 @@ db.getProposedShows = function(callback) {
 	ProposedShowModel.find({}, function(err, shows) {
 		callback(err, shows);
 	});
+};
+
+function getIndexOffOfDayAndTime(day, time) {
+	var xCord,
+		yCord;
+
+	console.log('"' + day + '"','"' + time + '"');
+
+	switch (day) {
+		case 'Sun':
+			xCord = 1;
+			break;
+		case 'Mon':
+			xCord = 2;
+			break;
+		case 'Tue':
+			xCord = 3;
+			break;
+		case 'Wed':
+			xCord = 4;
+			break;
+		case 'Thu':
+			xCord = 5;
+			break;
+		case 'Fri':
+			xCord = 6;
+			break;
+		case 'Sat':
+			xCord = 7;
+			break;
+	}
+
+	switch (time) {
+		case '10am':
+			yCord = 1;
+			break;
+		case '11am':
+			yCord = 2;
+			break;
+		case '12pm':
+			yCord = 3;
+			break;
+		case '1pm':
+			yCord = 4;
+			break;
+		case '2pm':
+			yCord = 5;
+			break;
+		case '3pm':
+			yCord = 6;
+			break;
+		case '4pm':
+			yCord = 7;
+			break;
+		case '5pm':
+			yCord = 8;
+			break;
+		case '6pm':
+			yCord = 9;
+			break;
+		case '7pm':
+			yCord = 10;
+			break;
+		case '8pm':
+			yCord = 11;
+			break;
+		case '9pm':
+			yCord = 12;
+			break;
+		case '10pm':
+			yCord = 13;
+			break;
+		case '11pm':
+			yCord = 14;
+			break;
+		case '12am':
+			yCord = 15;
+			break;
+	}
+
+	return {
+		x: xCord,
+		y: yCord
+	};
 }
+
+db.insertTimeslotsToSchedule = function(callback) {
+	var namesHandledSoFar = [];
+	ProposedShowModel.find({}, function(err, shows) {
+
+		//initialize an array variable to hold interim schedule
+		var schedule = new Array(8);
+		for (var i = 0; i < 8; i++) {
+			//create y axis with 15 time slots
+			schedule[i] = new Array(16);
+			for (var j = 0; j < 16; j++) {
+				//create a list that we can put each priority slot in
+				schedule[i][j] = new Array();
+			}
+		}
+		
+		//put in table headers
+		schedule[0][0].push("");
+		schedule[1][0].push("Sunday");
+		schedule[2][0].push("Monday");
+		schedule[3][0].push("Tuesday");
+		schedule[4][0].push("Wednesday");
+		schedule[5][0].push("Thursday");
+		schedule[6][0].push("Friday");
+		schedule[7][0].push("Saturday");
+
+		schedule[0][1].push("10am");
+		schedule[0][2].push("11am");
+		schedule[0][3].push("12pm");
+		schedule[0][4].push("1pm");
+		schedule[0][5].push("2pm");
+		schedule[0][6].push("3pm");
+		schedule[0][7].push("4pm");
+		schedule[0][8].push("5pm");
+		schedule[0][9].push("6pm");
+		schedule[0][10].push("7pm");
+		schedule[0][11].push("8pm");
+		schedule[0][12].push("9pm");
+		schedule[0][13].push("10pm");
+		schedule[0][14].push("11pm");
+		schedule[0][15].push("12am");
+
+		var addTimeToSchedule = function(coord, lastName, priority) {
+			console.log(coord);
+			if (coord.x === undefined || coord.y === undefined)
+				return;
+			schedule[coord.x][coord.y].push(lastName + priority);
+		}
+
+		//iterate through all shows
+		//getIndexOffOfDayAndTime(day, time)
+		var coord;
+		var lastName;
+		for (i = 0; i < shows.length; i++) {
+			lastName = shows[i].fullNames[0].split(' ')[1];
+			if (namesHandledSoFar.indexOf(lastName) > -1)
+				continue;
+			namesHandledSoFar.push(lastName);
+			coord = getIndexOffOfDayAndTime(shows[i].day1, shows[i].timeslot1);
+			addTimeToSchedule(coord, lastName, '1');
+			coord = getIndexOffOfDayAndTime(shows[i].day2, shows[i].timeslot2);
+			addTimeToSchedule(coord, lastName, '2');
+			coord = getIndexOffOfDayAndTime(shows[i].day3, shows[i].timeslot3);
+			addTimeToSchedule(coord, lastName, '3');
+			coord = getIndexOffOfDayAndTime(shows[i].day4, shows[i].timeslot4);
+			addTimeToSchedule(coord, lastName, '4');
+			coord = getIndexOffOfDayAndTime(shows[i].day5, shows[i].timeslot5);
+			addTimeToSchedule(coord, lastName, '5');
+			coord = getIndexOffOfDayAndTime(shows[i].day6, shows[i].timeslot6);
+			addTimeToSchedule(coord, lastName, '6');
+			coord = getIndexOffOfDayAndTime(shows[i].day7, shows[i].timeslot7);
+			addTimeToSchedule(coord, lastName, '7');
+			coord = getIndexOffOfDayAndTime(shows[i].day8, shows[i].timeslot8);
+			addTimeToSchedule(coord, lastName, '8');
+			coord = getIndexOffOfDayAndTime(shows[i].day9, shows[i].timeslot9);
+			addTimeToSchedule(coord, lastName, '9');
+			coord = getIndexOffOfDayAndTime(shows[i].day10, shows[i].timeslot10);
+			addTimeToSchedule(coord, lastName, '10');
+		}
+
+		console.log(schedule);
+
+		var stringSchedule = '';
+		for (var y = 0; y < schedule[0].length; y++) {
+			for (var x = 0; x < schedule.length; x++) {
+				if (x !== 0)
+					stringSchedule += ', ';
+				stringSchedule += '"';
+				for (var i = 0; i < schedule[x][y].length; i++) {
+					if (i !== 0)
+						stringSchedule += ', ';
+					stringSchedule += schedule[x][y][i];
+				}
+				stringSchedule += '"';
+			}
+			stringSchedule += '\n';
+		}
+
+		fs.writeFile('test.csv', stringSchedule, function (err) {
+			if (err) console.log(err);
+			console.log('saved file');
+		});
+	});
+
+};
 
 module.exports = db;
