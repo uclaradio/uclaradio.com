@@ -13,6 +13,7 @@ var proposedShows = require('./routes/proposedShows');
 var ios = require('./routes/ios');
 var schedule = require('./routes/schedule');
 var pages = require('./routes/pages');
+var calendar = require('./routes/calendar');
 var shows = require('./routes/shows');
 var manageShows = require('./routes/manageShows');
 
@@ -39,6 +40,7 @@ app.use('/proposedShows', proposedShows);
 app.use('/ios', ios);
 app.use('/schedule', schedule);
 app.use('/pages', pages);
+app.use('/calendar', calendar);
 app.use('/shows', shows);
 app.use('/manageShows', manageShows);
 
