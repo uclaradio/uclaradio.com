@@ -81,3 +81,15 @@ body {
 .demo-card-wide > .mdl-card__title.bylaws {
 	background: url('/img/bylaws.jpg') center / cover;
 }
+
+.demo-card-wide > .mdl-card__title.interview-signups {
+	background: url('/img/interview-signups.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.show-graphics {
+	background: url('/img/show-graphics.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.nmfs {
+	background: url('/img/nmfs.png') center / cover;
+}
