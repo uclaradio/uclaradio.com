@@ -135,6 +135,10 @@ mark
   padding-bottom: 50px;
 }
 
+#sotm {
+  width: 100%;
+}
+
 .pledge-button {
   text-align: center;
   margin-bottom: 50px;
