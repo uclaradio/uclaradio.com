@@ -15,6 +15,7 @@ router.post('/', function(req, res, next) {
     
 	// Get the form data after it is submitted
 	var djName 	    = req.body.djName.split(','),
+	    showOfTheMonth = false,
 	    showName 	= req.body.showName,
 	    genre 	    = req.body.genre,
 	    link	    = req.body.link,

@@ -15,7 +15,8 @@ var DjBlurbSchema = new Schema({
 	link: String,
 	timeslot: String,
 	day: String,
-	picture: String
+	picture: String, 
+	showOfTheMonth: Boolean
 }, {collection: 'DjBlurbs'});
 
 var ProposedShowSchema = new Schema({
@@ -83,6 +84,15 @@ db.getBlurbByTimeslotAndDay = function(time, day, callback) {
 	});
 };
 
+//make a show a show of the month
+db.makeShowOfMonth = function(title, callback) {
+	DjBlurbModel.update({}, {showOfTheMonth: false}, {multi: true}, function(err){
+		DjBlurbModel.update({showName: title}, {showOfTheMonth: true}, function(err, blurb){
+			callback(err);
+		})
+	});
+};
+
 //get a blurb by the title of the show
 db.getBlurbByShowTitle = function(title, callback) {
 	DjBlurbModel.findOne({showName: title}, function(err, blurb){
@@ -97,6 +107,9 @@ db.deleteBlurbByShowTitle = function(title, callback){
 		callback(err);
 	});
 };
+
+
+
 
 
 db.getAllBlurbs = function(callback) {
@@ -124,6 +137,7 @@ db.addBlurb = function(djName, showName, genre, description, link, timeslot, day
 	});
 
 };
+
 
 db.addProposedShow = function(data, callback) {
 	proposedShowData = {

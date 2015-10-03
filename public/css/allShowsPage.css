@@ -1,3 +1,5 @@
+
+
 #allShows
 {
   font-family: 'apercuregular';
@@ -29,7 +31,7 @@
 }
 
 #allShows a:hover {
-    background-color: white !important;
+    background-color: white;
     color: black;
     transition: color 0.5s, background-color 0.5s;
 }

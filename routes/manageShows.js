@@ -30,6 +30,8 @@ router.get('/', function(req, res) {
 
 });
 
+//new show of the month
+
 ////////
 //DELETE via command line:
 //curl -H "Content-Type: application/json" -X DELETE  http://localhost:3000/manageShows/{name}
@@ -48,6 +50,40 @@ router.get('/delete/:show', function (req, res) {
 			res.send(400, error);
 		}
 	});
+});
+
+router.get('/makeShowOfMonth/:show', function (req, res) {
+	var params = req.params;
+	var show = req.params.show;
+	
+	//UNSAFE characters
+	show = helper_funcs.decode_safe_url(show);
+
+	db.makeShowOfMonth(show, function(err){
+		if(err == null){
+			res.redirect('/manageShows');
+		} else {
+			res.send(400, error);
+		}
+	});
+
+});
+
+router.get('/makeShowOfMonth/:show', function (req, res) {
+	var params = req.params;
+	var show = req.params.show;
+	
+	//UNSAFE characters
+	show = helper_funcs.decode_safe_url(show);
+
+	db.makeShowOfMonth(show, function(err){
+		if(err == null){
+			res.redirect('/manageShows');
+		} else {
+			res.send(400, error);
+		}
+	});
+
 });
 
 //modify a show

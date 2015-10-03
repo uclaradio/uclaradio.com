@@ -55,8 +55,10 @@ head
     .container(role='main')
       img#logo(src='img/logo.png', alt='UCLA RADIO')
       each show in blurbs
-          a(href="/shows/"+show.url) #{show.showName}
-          a(href="/manageshows/delete/"+ show.url) Delete
+          a(href="/shows/"+show.url) #{show.showName} : 
+          a(href="/manageshows/delete/"+ show.url) Delete  
+          a(href="/manageshows/makeShowOfMonth/"+ show.url) Make_show_of_month  
+
 
 
           |&nbsp;&nbsp;&nbsp;&nbsp;

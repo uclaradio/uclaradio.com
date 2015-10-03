@@ -107,7 +107,7 @@ head
           }
           if(days == 0) {
             $('#mi-slider').remove();
-            $('#contentSlider').append("<p><center><em>There are currently no shows blurbs to view.</em></center></p>");
+            $('#contentSlider').append("<p><center><em>There are currently no shows blurbs for viewing.</em></center></p>");
           }
         });
 
@@ -116,8 +116,11 @@ head
 
           #allShows
               each show in blurbs
-                  a(href="/shows/"+show.url) #{show.showName}
-                  #footerEnter
+                  if(show.showOfTheMonth == true)
+                    a(href="/shows/"+show.url)#showOftheMonth #{"✨"+show.showName+" ✨"}
+                  else  
+                    a(href="/shows/"+show.url) #{show.showName}
+          #footerEnter
                     br
 
                
@@ -151,6 +154,8 @@ script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
 /////files for this page exclusively
 ////////////////////////////////////////////////
 script(src='/js/jquery.catslider.js')
+link(rel='stylesheet', type='text/css', href='css/showOfTheMonth.css')
+
 
 script.
   $(function() {

@@ -22,7 +22,8 @@ router.get('/', function(req, res) {
 
 			//shorten show name to fit within the width of the profpic in the catslider
 			blurbs[i].showName = helper_funcs.truncateName(blurbs[i].showName, 22);
-			
+
+			//get day of week
 			dayOfweek = blurbs[i].day;
 
 			//each ul in content slider list which represent day of week in thedjs.jade will use showsByDAy
@@ -46,7 +47,6 @@ router.get('/:show', function (req, res) {
 	var show = req.params.show;
 	//since database contains spaces rather than underscores present in url
 	
-	console.log("SHOW: " + show);
 	//UNSAFE characters
 	show = helper_funcs.decode_safe_url(show);
 
