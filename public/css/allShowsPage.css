@@ -48,6 +48,13 @@
     overflow:hidden;
     position: relative;
     margin: 0 auto;
+
+}
+
+#sample img:hover{
+  padding:0px;
+  transition: padding 0.1s;
+
 }
 
 #sample img {
@@ -55,6 +62,9 @@
     bottom: 0px;
     left: 0px;
     width: 100%;
+    padding: 7px;
+    transition: padding 0.1s;
+
 }
 
 @media only screen and (max-width: 1200px){

@@ -57,7 +57,9 @@ head
 
     .container(role='main')
       img#logo(src='/img/logo.png', alt='UCLA RADIO')
-
+      
+      if(blurb.showOfTheMonth == true)
+        img#logo(src='/img/showofmonth.png')
 
 
       .row
