@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
 	    password	= req.body.password;
 		picture     = req.files.picture.path.replace('public/', '');
 
-	console.log("picutre being uploaded here: " + picture);
+	console.log("picutre being uploaded here: " + req.files.picture.path);
 
 	if (link.indexOf('http') !== 0)
 		link = 'http://' + link;
@@ -34,6 +34,9 @@ router.post('/', function(req, res, next) {
 	if (password != passwords.secretpassword)
 		res.end("Incorrect Password.");	
 
+	lwip.open(req.files.picture.path, function(err, image) {
+	  if (err) throw err;
+	});
 
 // lwip.open('lena.jpg', function(err, image) {
 //     if (err) return console.log(err);
@@ -52,7 +55,7 @@ router.post('/', function(req, res, next) {
 		else
 			res.render('newBlurb', {status: 'Try again! Something went wrong :^('});
 	});
-	
+
 });
 
 module.exports = router;
