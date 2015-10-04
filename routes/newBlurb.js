@@ -25,8 +25,11 @@ router.post('/', function(req, res, next) {
 	    description	= req.body.description,
 	    password	= req.body.password;
 		picture     = req.files.picture.path.replace('public/', '');
+		thumbnail   = req.files.picture.path.replace('public/', '').replace('.jpg','thumbnail.jpg');
 
-	console.log("picutre being uploaded here: " + req.files.picture.path);
+	console.log("thumbnail being uploaded here: " + thumbnail);
+	console.log("picutre being uploaded here: " + picture);
+
 
 	if (link.indexOf('http') !== 0)
 		link = 'http://' + link;
@@ -34,27 +37,28 @@ router.post('/', function(req, res, next) {
 	if (password != passwords.secretpassword)
 		res.end("Incorrect Password.");	
 
+	//compress image
 	lwip.open(req.files.picture.path, function(err, image) {
 	  if (err) throw err;
-	});
+	  image.writeFile('public/' + thumbnail, {
+	  	quality: 30
+	  }, function(err) {
+	  	if(err) res.render('newBlurb', {status: 'Try Again! Image processing error - contact web :^('});
+	  	else { 
+			db.addBlurb(djName, showName, genre, description, link, timeslot, day, picture, thumbnail, function(err, blurbSaved) {
+				if (err) next(err);
+				if (blurbSaved)
+					res.render('newBlurb', {status: 'Blurb successfully submitted!'});
+				else
+					res.render('newBlurb', {status: 'Try again! Something went wrong :^('});
+			});
+		};
 
-// lwip.open('lena.jpg', function(err, image) {
-//     if (err) return console.log(err);
-//     image.writeFile('lena_low_quality.jpg', {
-//         quality: 10
-//     }, function(err) {
-//         if (err) return console.log(err);
-//         console.log('done');
-//     });
-// });
-	
-	db.addBlurb(djName, showName, genre, description, link, timeslot, day, picture, function(err, blurbSaved) {
-		if (err) next(err);
-		if (blurbSaved)
-			res.render('newBlurb', {status: 'Blurb successfully submitted!'});
-		else
-			res.render('newBlurb', {status: 'Try again! Something went wrong :^('});
+	  }
+	);
 	});
+	
+
 
 });
 

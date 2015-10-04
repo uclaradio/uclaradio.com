@@ -17,6 +17,7 @@ var DjBlurbSchema = new Schema({
 	timeslot: String,
 	day: String,
 	picture: String, 
+	thumbnail: String,
 	showOfTheMonth: Boolean
 }, {collection: 'DjBlurbs'});
 
@@ -121,7 +122,7 @@ db.getAllBlurbs = function(callback) {
 	});
 };
 
-db.addBlurb = function(djName, showName, genre, description, link, timeslot, day, picture, callback) {
+db.addBlurb = function(djName, showName, genre, description, link, timeslot, day, picture, thumbnail, callback) {
 	blurb_data = {
 		"djName": djName,
 		"showName": showName,
@@ -130,7 +131,8 @@ db.addBlurb = function(djName, showName, genre, description, link, timeslot, day
 		"link": link,
 		"timeslot": timeslot,
 		"day": day,
-		"picture": picture
+		"picture": picture,
+		"thumbnail": thumbnail
 	};
 
 	var blurb = new DjBlurbModel(blurb_data);
