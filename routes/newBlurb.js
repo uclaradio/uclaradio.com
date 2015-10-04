@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser'); 
 var app = express();
+var lwip = require('lwip')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 var router = express.Router();
@@ -25,13 +26,25 @@ router.post('/', function(req, res, next) {
 	    password	= req.body.password;
 		picture     = req.files.picture.path.replace('public/', '');
 
+	console.log("picutre being uploaded here: " + picture);
+
 	if (link.indexOf('http') !== 0)
 		link = 'http://' + link;
 
 	if (password != passwords.secretpassword)
 		res.end("Incorrect Password.");	
 
-	// Adds the blurb to the database.
+
+// lwip.open('lena.jpg', function(err, image) {
+//     if (err) return console.log(err);
+//     image.writeFile('lena_low_quality.jpg', {
+//         quality: 10
+//     }, function(err) {
+//         if (err) return console.log(err);
+//         console.log('done');
+//     });
+// });
+	
 	db.addBlurb(djName, showName, genre, description, link, timeslot, day, picture, function(err, blurbSaved) {
 		if (err) next(err);
 		if (blurbSaved)
@@ -39,6 +52,7 @@ router.post('/', function(req, res, next) {
 		else
 			res.render('newBlurb', {status: 'Try again! Something went wrong :^('});
 	});
+	
 });
 
 module.exports = router;

@@ -8,6 +8,10 @@ var helper_funcs = require('./helper_funcs.js')
 router.get('/', function(req, res) {
 
 	db.getAllBlurbs(function(err, blurbs) {
+		
+		//make sure blurbs are unique for 2 hour shows (djs have to input twice)
+		blurbs = helper_funcs.getUniqueBlurbs(blurbs);
+
 		//sort blurbs alpha by showName
 		blurbs.sort(helper_funcs.sort_by('showName', false, function(a){return a.toUpperCase()}));
 		var urls = [];

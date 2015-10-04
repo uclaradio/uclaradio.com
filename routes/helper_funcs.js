@@ -1,5 +1,45 @@
 module.exports = {
 
+		getUniqueBlurbs: function(blurbs) {
+			var unique = [];
+
+			for(var i = 0; i < blurbs.length; i++){
+				var showName = blurbs[i].showName
+
+				if(unique.indexOf(showName) > -1){
+					//check if saved slot is after
+					var saved_blurb = blurbs[unique.indexOf(showName)]
+					if(saved_blurb.timeslot.length > blurbs[i].timeslot.length) {
+						//12 
+						console.log("saved_blurb: " + saved_blurb.timeslot);
+						if(blurbs[i].timeslot == "1PM") {
+							saved_blurb.timeslot = blurbs[i].timeslot;
+							console.log("YAAAAAJDFGKADMFG");
+						}
+					} else if(saved_blurb.timeslot.length < blurbs[i].timeslot.length){
+						if(blurbs[i].timeslot == "12PM") {
+							saved_blurb.timeslot = blurbs[i].timeslot;
+														console.log("22YAAAAAJDFGKADMFG");
+
+						}
+					}
+					else if(saved_blurb.timeslot[2] < blurbs[i].timeslot[2]) {
+						saved_blurb.timeslot = blurbs[i].timeslot;
+					};
+					console.log("changed to: " + saved_blurb.showName + " @ " + saved_blurb.timeslot)
+					blurbs[unique.indexOf(showName)] = saved_blurb;
+					blurbs.splice(i, 1);
+					i = i -1;
+
+
+				} else {
+					//push the names into the array
+					unique.push(showName);
+				}
+			}
+			return blurbs;
+		},
+
 		truncateName: function(name, l) {
 			return name.length > l ? name.substr(0,l-2) + "\u2026" : name;
 		},

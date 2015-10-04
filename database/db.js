@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var fs = require('fs');
+var helper_funcs = require('../routes/helper_funcs');
  
 mongoose.connect('mongodb://192.241.193.240/local');
 
@@ -86,7 +87,7 @@ db.getBlurbByTimeslotAndDay = function(time, day, callback) {
 
 //make a show a show of the month
 db.makeShowOfMonth = function(title, callback) {
-	DjBlurbModel.update({}, {showOfTheMonth: false}, {multi: true}, function(err){
+	DjBlurbModel.update({}, {showOfTheMonth: false}, function(err){
 		DjBlurbModel.update({showName: title}, {showOfTheMonth: true}, function(err, blurb){
 			callback(err);
 		})
@@ -95,8 +96,10 @@ db.makeShowOfMonth = function(title, callback) {
 
 //get a blurb by the title of the show
 db.getBlurbByShowTitle = function(title, callback) {
-	DjBlurbModel.findOne({showName: title}, function(err, blurb){
-		callback(err, blurb);
+	DjBlurbModel.find({'showName': title}, function(err, blurb){
+		var earlier = helper_funcs.getUniqueBlurbs(blurb);
+		earlier = earlier[0];
+		callback(err, earlier);
 	});
 };
 
