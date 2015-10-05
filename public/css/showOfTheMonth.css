@@ -9,3 +9,11 @@
   text-shadow: -10px 10px 10px #fff, 10px -10px 10px #fff;
 
 }
+
+#showOftheMonthlogo {
+	-webkit-filter: drop-shadow( -5px -5px 5px #fff );
+            filter: drop-shadow( -5px -5px 5px #fff );
+           	margin-bottom: 20px;
+           	margin-top: -20px;
+           	width: 100%;
+}

@@ -50,6 +50,8 @@ head
     /////scripts for showPage.jade exclusively
     ////////////////////////////////////////////////
     link(rel='stylesheet', type='text/css', href='/css/showPage.css')
+    link(rel='stylesheet', type='text/css', href='/css/showOfTheMonth.css')
+
 
   body
 
@@ -59,7 +61,7 @@ head
       img#logo(src='/img/logo.png', alt='UCLA RADIO')
       
       if(blurb.showOfTheMonth == true)
-        img#logo(src='/img/showofmonth.png')
+        img#showOftheMonthlogo(src='/img/showofmonth.svg')
 
 
       .row
