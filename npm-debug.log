@@ -8,7 +8,7 @@
 7 verbose unsafe-perm in lifecycle true
 8 info uclaradio.github.io@0.0.0 Failed to exec start script
 9 verbose stack Error: uclaradio.github.io@0.0.0 start: `node ./bin/www`
-9 verbose stack Exit status 1
+9 verbose stack Exit status 8
 9 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:213:16)
 9 verbose stack     at EventEmitter.emit (events.js:98:17)
 9 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
@@ -23,7 +23,7 @@
 15 error npm  v2.12.1
 16 error code ELIFECYCLE
 17 error uclaradio.github.io@0.0.0 start: `node ./bin/www`
-17 error Exit status 1
+17 error Exit status 8
 18 error Failed at the uclaradio.github.io@0.0.0 start script 'node ./bin/www'.
 18 error This is most likely a problem with the uclaradio.github.io package,
 18 error not with npm itself.
