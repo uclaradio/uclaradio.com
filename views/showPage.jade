@@ -58,10 +58,10 @@ head
     audio#stream(src='', preload='none')
 
     .container(role='main')
-      img#logo(src='/img/logo.png', alt='UCLA RADIO')
-      
       if(blurb.showOfTheMonth == true)
-        img#showOftheMonthlogo(src='/img/showofmonth.svg')
+        img#showOftheMonthlogo(src='/img/showofmonth.svg', alt='UCLA RADIO')
+      else
+        img#logo(src='/img/logo.png', alt='UCLA RADIO')
 
 
       .row
