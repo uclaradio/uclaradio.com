@@ -1,6 +1,7 @@
 module.exports = {
 
 		getUniqueBlurbs: function(blurbs) {
+			console.log("GETUNIQEBLURBSCALLED");
 			var unique = [];
 
 			for(var i = 0; i < blurbs.length; i++){
@@ -19,8 +20,6 @@ module.exports = {
 					} else if(saved_blurb.timeslot.length < blurbs[i].timeslot.length){
 						if(blurbs[i].timeslot == "12PM") {
 							saved_blurb.timeslot = blurbs[i].timeslot;
-														console.log("22YAAAAAJDFGKADMFG");
-
 						}
 					}
 					else if(saved_blurb.timeslot[2] < blurbs[i].timeslot[2]) {
