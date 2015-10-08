@@ -1,4 +1,6 @@
-
+.footerShow {
+  width: 20%;
+}
 
 #allShows
 {
@@ -11,6 +13,12 @@
 
   /*border is set in line 75 of scripts.js*/
 }
+
+#allShows li {
+  list-style-type: none;
+  display: inline-block;
+}
+
 
 #footerEnter
 {
@@ -111,6 +119,23 @@
     display: none;
   }
 
+}
+
+@media only screen and (max-width: 620px){
+  #allShows li {
+    width: 100%;
+  }
+  #allShows li a {
+    width: 100%;
+    font-size: 23px !important;
+    line-height: 30px;
+    word-spacing: 1px;
+    line-height: 
+  }
+
+  #allShows li ul a {
+    width: 100%;
+  }
 
 }
 
