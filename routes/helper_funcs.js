@@ -1,5 +1,18 @@
 module.exports = {
 
+		AppendValueSoSort: function(blurbs) {
+			for(var i = 0; i < blurbs.length; i++ ){
+				if(blurbs[i].timeslot.substr(blurbs[i].timeslot.length-2, blurbs[i].timeslot.length -1) == "am") {
+					blurbs[i].order = blurbs[i].timeslot.substr(0, blurbs[i].timeslot.length-2) - "12";
+				} else if(blurbs[i].timeslot == "12pm") {
+					blurbs[i].order = blurbs[i].timeslot.substr(0, blurbs[i].timeslot.length-2) - "12";
+				} else {
+					blurbs[i].order = blurbs[i].timeslot.substr(0, blurbs[i].timeslot.length-2) - "0";
+				}
+			}
+			return blurbs;
+		},
+
 		getUniqueBlurbs: function(blurbs) {
 			var unique = [];
 
@@ -14,19 +27,15 @@ module.exports = {
 						console.log("saved_blurb: " + saved_blurb.timeslot);
 						if(blurbs[i].timeslot == "1PM") {
 							saved_blurb.timeslot = blurbs[i].timeslot;
-							console.log("YAAAAAJDFGKADMFG");
 						}
 					} else if(saved_blurb.timeslot.length < blurbs[i].timeslot.length){
 						if(blurbs[i].timeslot == "12PM") {
 							saved_blurb.timeslot = blurbs[i].timeslot;
-														console.log("22YAAAAAJDFGKADMFG");
-
 						}
 					}
 					else if(saved_blurb.timeslot[2] < blurbs[i].timeslot[2]) {
 						saved_blurb.timeslot = blurbs[i].timeslot;
 					};
-					console.log("changed to: " + saved_blurb.showName + " @ " + saved_blurb.timeslot)
 					blurbs[unique.indexOf(showName)] = saved_blurb;
 					blurbs.splice(i, 1);
 					i = i -1;

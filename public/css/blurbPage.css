@@ -326,7 +326,7 @@ ul li h4 {
 	}
 }
 
-@media screen and (max-width: 490px){ 
+@media screen and (max-width: 600px){ 
 	.contentSlider {
 		display: none;
 	}

@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser'); 
 var app = express();
-var lwip = require('lwip')
+var lwip = require('lwip');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 var router = express.Router();
@@ -27,8 +27,8 @@ router.post('/', function(req, res, next) {
 		picture     = req.files.picture.path.replace('public/', '');
 		thumbnail   = req.files.picture.path.replace('public/', '').replace('.jpg','thumbnail.jpg');
 
-	console.log("thumbnail being uploaded here: " + thumbnail);
-	console.log("picutre being uploaded here: " + picture);
+	//console.log("thumbnail being uploaded here: " + thumbnail);
+	//console.log("picutre being uploaded here: " + picture);
 
 
 	if (link.indexOf('http') !== 0)
@@ -39,12 +39,12 @@ router.post('/', function(req, res, next) {
 
 	//compress image
 	lwip.open(req.files.picture.path, function(err, image) {
-	  if (err) throw err;
-	  image.writeFile('public/' + thumbnail, {
-	  	quality: 30
-	  }, function(err) {
-	  	if(err) res.render('newBlurb', {status: 'Try Again! Image processing error - contact web :^('});
-	  	else { 
+	   if (err) throw err;
+	   image.writeFile('public/' + thumbnail, {
+	   	quality: 30
+	   }, function(err) {
+	   	if(err) res.render('newBlurb', {status: 'Try Again! Image processing error - contact web :^('});
+	   	else { 
 			db.addBlurb(djName, showName, genre, description, link, timeslot, day, picture, thumbnail, function(err, blurbSaved) {
 				if (err) next(err);
 				if (blurbSaved)
@@ -52,10 +52,10 @@ router.post('/', function(req, res, next) {
 				else
 					res.render('newBlurb', {status: 'Try again! Something went wrong :^('});
 			});
-		};
+	 	};
 
-	  }
-	);
+	   }
+	 );
 	});
 	
 

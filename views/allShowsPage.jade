@@ -69,9 +69,8 @@ head
                       #sample
                           a(href="/shows/"+show.url)
                             img(src="/"+show.thumbnail)
-                      p=show.showName
+                      p=show.showName+ " (" +show.timeslot + ")"
                       br
-                      //h4=show.timeslot+" "+show.showName    
 
               br 
 
@@ -115,11 +114,14 @@ head
         .row
 
           #allShows
+            ul
               each show in blurbs
                   if(show.showOfTheMonth == true)
-                    a(href="/shows/"+show.url)#showOftheMonth #{"✨"+show.showName+" ✨"}
+                    li
+                      a(href="/shows/"+show.url)#showOftheMonth #{"✨"+show.showName+" ✨"}
                   else  
-                    a(href="/shows/"+show.url) #{show.showName}
+                    li
+                      a(href="/shows/"+show.url) #{show.showName}
           #footerEnter
                     br
 
