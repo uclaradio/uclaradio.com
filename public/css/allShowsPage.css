@@ -1,3 +1,10 @@
+#ProgrammingTitle h1 {
+  text-align: center;
+  margin-top: -3%;
+  font-family: 'apercuregular';
+  word-spacing: 10px;
+}
+
 .footerShow {
   width: 20%;
 }
