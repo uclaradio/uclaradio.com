@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
 	    description	= req.body.description,
 	    password	= req.body.password;
 		picture     = req.files.picture.path.replace('public/', '');
-		thumbnail   = req.files.picture.path.replace('public/', '').replace('.jpg','thumbnail.jpg');
+		thumbnail   = req.files.picture.path.replace('public/', '').replace('.jpg','thumbnail.jpg').replace('.png', 'thumbnail.png').replace('.jpeg', 'thumbnail.jpeg');
 
 	//console.log("thumbnail being uploaded here: " + thumbnail);
 	//console.log("picutre being uploaded here: " + picture);
