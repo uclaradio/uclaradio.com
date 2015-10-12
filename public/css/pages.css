@@ -93,3 +93,7 @@ body {
 .demo-card-wide > .mdl-card__title.nmfs {
 	background: url('/img/nmfs.png') center / cover;
 }
+
+.demo-card-wide > .mdl-card__title.photovidrequest {
+	background: url('/img/photovidrequest.jpg') center / cover;
+}
