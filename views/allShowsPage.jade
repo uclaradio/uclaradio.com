@@ -115,7 +115,7 @@ head
 
           #allShows
             ul
-              each show in blurbsSortedAlpha
+              each show in blurbs
                   if(show.showOfTheMonth == true)
                     li
                       a(href="/shows/"+show.url)#showOftheMonth #{"✨"+show.showName+" ✨"}
