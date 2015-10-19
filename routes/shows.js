@@ -7,6 +7,7 @@ var helper_funcs = require('./helper_funcs.js')
 //return all blurbs
 router.get('/', function(req, res) {
 
+
 	db.getAllBlurbs(function(err, blurbs) {
 		//assign order
 		blurbs = helper_funcs.AppendValueSoSort(blurbs);
@@ -17,6 +18,11 @@ router.get('/', function(req, res) {
 		console.log("getAllBlurbs called!");
 		//sort blurbs alpha by showName
 		blurbs.sort(helper_funcs.sort_by('order', false, false));
+		
+		var blurbsSortedAlpha = blurbs;
+		blurbsSortedAlpha.sort(helper_funcs.sort_by('showName', false, function(a){ return a.toUpperCase()}));
+		console.log(blurbsSortedAlpha);
+
 		var urls = [];
 
 		//so we can populate each slide in the page that shows all the blurbs
@@ -24,6 +30,9 @@ router.get('/', function(req, res) {
 		
 		for(var i = 0; i < blurbs.length; i++) {
 			
+			blurbsSortedAlpha[i].url = helper_funcs.encode_safe_url(blurbsSortedAlpha[i].showName);
+
+
 			//get rid of unsafe url characters
 			blurbs[i].url = helper_funcs.encode_safe_url(blurbs[i].showName);
 
@@ -37,7 +46,7 @@ router.get('/', function(req, res) {
 			showsByDay[dayOfweek].push(blurbs[i]);
 		}
 
-		res.render('allShowsPage', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
+		res.render('allShowsPage', {blurbs: blurbs, urls: urls, showsByDay: showsByDay, blurbsSortedAlpha: blurbsSortedAlpha})
 	});
 
 });
