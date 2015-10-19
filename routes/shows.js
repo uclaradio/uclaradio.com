@@ -15,13 +15,8 @@ router.get('/', function(req, res) {
 		//make sure blurbs are unique for 2 hour shows (djs have to input twice)
 		blurbs = helper_funcs.getUniqueBlurbs(blurbs);
 
-		console.log("getAllBlurbs called!");
-		//sort blurbs alpha by showName
+		//sort by order assigned
 		blurbs.sort(helper_funcs.sort_by('order', false, false));
-		
-		var blurbsSortedAlpha = blurbs;
-		blurbsSortedAlpha.sort(helper_funcs.sort_by('showName', false, function(a){ return a.toUpperCase()}));
-		console.log(blurbsSortedAlpha);
 
 		var urls = [];
 
@@ -30,8 +25,6 @@ router.get('/', function(req, res) {
 		
 		for(var i = 0; i < blurbs.length; i++) {
 			
-			blurbsSortedAlpha[i].url = helper_funcs.encode_safe_url(blurbsSortedAlpha[i].showName);
-
 
 			//get rid of unsafe url characters
 			blurbs[i].url = helper_funcs.encode_safe_url(blurbs[i].showName);
@@ -46,7 +39,9 @@ router.get('/', function(req, res) {
 			showsByDay[dayOfweek].push(blurbs[i]);
 		}
 
-		res.render('allShowsPage', {blurbs: blurbs, urls: urls, showsByDay: showsByDay, blurbsSortedAlpha: blurbsSortedAlpha})
+		blurbs.sort(helper_funcs.sort_by('showName', false, function(a){ return a.toUpperCase()}));
+
+		res.render('allShowsPage', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
 	});
 
 });
