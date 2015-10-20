@@ -18,7 +18,7 @@ ul li h4 {
 	text-align: center;
 	pointer-events: none;
 	overflow-x: hidden;
-	overflow-y: scroll;
+	overflow-y: hidden;
 	height: 85%;
 	margin-right: auto;
 
