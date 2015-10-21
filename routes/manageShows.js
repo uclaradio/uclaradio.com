@@ -9,23 +9,16 @@ router.get('/', function(req, res) {
 	db.getAllBlurbs(function(err, blurbs) {
 		//sort blurbs alpha by showName
 		blurbs.sort(helper_funcs.sort_by('showName', false, function(a){return a.toUpperCase()}));
-		var urls = [];
 
-		//so we can populate each slide in the page that shows all the blurbs
-		var showsByDay = {"Sun":[], "Mon":[], "Tue":[], "Wed":[], "Thu":[], "Fri":[], "Sat":[] };
 		
 		for(var i = 0; i < blurbs.length; i++) {
 			
 			//get rid of unsafe url characters
 			blurbs[i].url = helper_funcs.encode_safe_url(blurbs[i].showName);
 			
-			dayOfweek = blurbs[i].day;
-
-			//each ul in content slider list which represent day of week in thedjs.jade will use showsByDAy
-			showsByDay[dayOfweek].push(blurbs[i]);
 		}
 
-		res.render('manageShows', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
+		res.render('manageShows', {blurbs: blurbs})
 	});
 
 });

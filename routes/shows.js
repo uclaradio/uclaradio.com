@@ -7,6 +7,7 @@ var helper_funcs = require('./helper_funcs.js')
 //return all blurbs
 router.get('/', function(req, res) {
 
+
 	db.getAllBlurbs(function(err, blurbs) {
 		//assign order
 		blurbs = helper_funcs.AppendValueSoSort(blurbs);
@@ -14,9 +15,9 @@ router.get('/', function(req, res) {
 		//make sure blurbs are unique for 2 hour shows (djs have to input twice)
 		blurbs = helper_funcs.getUniqueBlurbs(blurbs);
 
-		console.log("getAllBlurbs called!");
-		//sort blurbs alpha by showName
+		//sort by order assigned
 		blurbs.sort(helper_funcs.sort_by('order', false, false));
+
 		var urls = [];
 
 		//so we can populate each slide in the page that shows all the blurbs
@@ -24,6 +25,7 @@ router.get('/', function(req, res) {
 		
 		for(var i = 0; i < blurbs.length; i++) {
 			
+
 			//get rid of unsafe url characters
 			blurbs[i].url = helper_funcs.encode_safe_url(blurbs[i].showName);
 
@@ -36,6 +38,8 @@ router.get('/', function(req, res) {
 			//each ul in content slider list which represent day of week in thedjs.jade will use showsByDAy
 			showsByDay[dayOfweek].push(blurbs[i]);
 		}
+
+		blurbs.sort(helper_funcs.sort_by('showName', false, function(a){ return a.toUpperCase()}));
 
 		res.render('allShowsPage', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
 	});
