@@ -88,7 +88,7 @@ db.getBlurbByTimeslotAndDay = function(time, day, callback) {
 
 //make a show a show of the month
 db.makeShowOfMonth = function(title, callback) {
-	DjBlurbModel.update({}, {showOfTheMonth: false}, function(err){
+	DjBlurbModel.update({showOfTheMonth: title}, {showOfTheMonth: false}, function(err){
 		DjBlurbModel.update({showName: title}, {showOfTheMonth: true}, function(err, blurb){
 			callback(err);
 		})
