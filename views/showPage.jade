@@ -75,8 +75,9 @@ head
           each dj in blurb.djName
             h2=dj 
           h3=blurb.day+" "+blurb.timeslot 
-          h3=blurb.genre 
-          a(href='#{blurb.link}', target='_blank') Check us out!
+          h3=blurb.genre
+          if(blurb.link != "")
+            a(href='#{blurb.link}', target='_blank') Check us out!
           p=blurb.description
 
       br

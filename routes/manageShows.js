@@ -62,22 +62,6 @@ router.get('/makeShowOfMonth/:show', function (req, res) {
 
 });
 
-router.get('/makeShowOfMonth/:show', function (req, res) {
-	var params = req.params;
-	var show = req.params.show;
-	
-	//UNSAFE characters
-	show = helper_funcs.decode_safe_url(show);
-
-	db.makeShowOfMonth(show, function(err){
-		if(err == null){
-			res.redirect('/manageShows');
-		} else {
-			res.send(400, error);
-		}
-	});
-
-});
 
 //modify a show
 // router.get('/modify/:show', function(req, res){
