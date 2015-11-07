@@ -3,6 +3,36 @@ var router = express.Router();
 var db = require('../database/db');
 
 router.get('/', function(req, res) {
+	var info = getTimeAndDay();
+
+	db.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
+		if (blurb)
+			blurb.djName = blurb.djName.join(',');
+
+		res.render('index', {blurb: blurb});
+	});
+
+});
+
+router.get('/blurbinfo', function(req, res, next) {
+	var info = getTimeAndDay();
+
+	db.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
+		if (blurb)
+			blurb.djName = blurb.djName.join(',');
+
+		res.setHeader('Content-Type', 'application/json');
+		res.send(JSON.stringify(blurb));
+	});
+
+});
+
+
+router.get('/pledgedrive', function(req, res, next) {
+	res.render('pledgedrive');
+});
+
+function getTimeAndDay() {
 	var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	var date = new Date();
 
@@ -22,21 +52,11 @@ router.get('/', function(req, res) {
 		time += 'pm';
 	}
 
-	db.getBlurbByTimeslotAndDay(time, day, function(err, blurb) {
-		if (blurb)
-			blurb.djName = blurb.djName.join(',');
-
-		res.render('index', {blurb: blurb});
-	});
-
-});
-
-
-router.get('/pledgedrive', function(req, res, next) {
-	res.render('pledgedrive');
-});
-
-
+	return {
+		day: day,
+		time: time
+	};
+}
 
 
 
