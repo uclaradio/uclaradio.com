@@ -327,22 +327,11 @@ a:hover {
   display: inline-block; /* needed for anchors */
   position: relative;
 }
-.pop-button:hover {
-  -webkit-transform: translate(-4px, -4px);
-      -ms-transform: translate(-4px, -4px);
-          transform: translate(-4px, -4px);
-}
-/* same as above */
-.pop-button:focus {
-  -webkit-transform: translate(-4px, -4px);
-      -ms-transform: translate(-4px, -4px);
-          transform: translate(-4px, -4px);
-}
 
 .pop-button:active {
-  -webkit-transform: translate(-2px, -2px);
-      -ms-transform: translate(-2px, -2px);
-          transform: translate(-2px, -2px);
+  -webkit-transform: translate(+4px, +4px);
+      -ms-transform: translate(+4px, +4px);
+          transform: translate(+4px, +4px);
 }
 
 @media only screen and (max-width: 500px) {
@@ -372,7 +361,7 @@ a:hover {
 }
 
 /* center social and other links for ipad view */
-@media only screen and (max-width: 767px){ 
+@media only screen and (max-width: 767px){
 
   /* helper class, use to tag things that should be desktop-only */
   .desktop-only{

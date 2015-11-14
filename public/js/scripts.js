@@ -4,7 +4,7 @@ function injectStyles(rule) {
   var div = $("<div />", {
     html: '&shy;<style>' + rule + '</style>'
   }).appendTo("body");
-}    
+}
 
 // given the time of day, returns a random color scheme
 // matching it.
@@ -65,18 +65,17 @@ function getColorSchemeFromTime() {
 }
 
 function setButtons(darkColor, mediumColor, lightColor, midnight) {
-  
-  //change colors of left and right buttons 
+
+  //change colors of left and right buttons
   injectStyles('.slick-prev:before {color: ' + lightColor + ' !important;');
   injectStyles('.slick-next:before {color: ' + lightColor + ' !important;');
-  
+
   //the show titles at the footer of /blurbs
   $(".pop-button").css('background-color', lightColor);
   $("#allShows a").css('color', lightColor);
   $("#showOftheMonth").css('color', 'black');
 
-
-  var boxShadowHoverCss = "1px 0px " + mediumColor +
+  var boxShadowCss = "1px 0px " + mediumColor +
     ", 0px 1px " + darkColor +
     ", 2px 1px " + mediumColor +
     ", 1px 2px " + darkColor +
@@ -84,45 +83,21 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
     ", 2px 3px " + darkColor +
     ", 4px 3px " + mediumColor +
     ", 3px 4px " + darkColor;
-  //console.log(boxShadowHoverCss);
+  //console.log(boxShadowCss);
 
-  var boxShadowActiveCss = "1px 0px " + mediumColor +
-    ", 0px 1px " + darkColor +
-    ", 2px 1px " + mediumColor +
-    ", 1px 2px " + darkColor;
-  //console.log(boxShadowActiveCss);
-
-
-  $(".pop-button").hover(
-      function() {
-        $(this).css('box-shadow', boxShadowHoverCss);
-      },
-      function() {
-        $(this).css('box-shadow', '');
-      }
-      );
-  $(".pop-button").focus(
-      function() {
-        $(this).css('box-shadow', boxShadowHoverCss);
-      },
-      function() {
-        $(this).css('box-shadow', '');
-      }
-      );
-
-  // activated by mousedown
+  $(".pop-button").css('box-shadow', boxShadowCss);
   $(".pop-button").mousedown(
-      function() {
-        $(this).css('box-shadow', boxShadowActiveCss);
-      }
-      );
+    function() {
+      $(this).css('box-shadow', '');
+      return false;
+    }
+  );
 
-  // on mouse up, want to transition to the "hover" state
-  $(".pop-button").mouseup(
-      function() {
-        $(this).css('box-shadow', boxShadowHoverCss);
-      }
-      );
+  $(document).mouseup(
+    function() {
+      $(".pop-button").css('box-shadow', boxShadowCss);
+    }
+  );
 }
 
 function setPageTheme(colorScheme) {
@@ -196,6 +171,7 @@ $(document).ready(function() {
     }
 
     $("#play-icon").toggleClass("fa fa-play fa fa-pause");
+    return false;
   });
 
   // Generate that background image!
