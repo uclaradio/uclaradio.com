@@ -29,6 +29,7 @@ head
     // Our stylesheets/scripts
     link(rel='stylesheet', type='text/css', href='css/font.css')
     link(rel='stylesheet', type='text/css', href='css/main.css')
+    link(rel='stylesheet', type='text/css', href='css/allShows.css')
 
     script(src='js/mobileBrowserCheck.js')
 
@@ -111,6 +112,9 @@ head
           }
         });
 
+      #full-schedule
+        a.bott-button.pop-button(target='_blank', role='button', href='/schedule') FULL SCHEDULE
+
       .footer
         .row
 
@@ -135,7 +139,7 @@ head
 
             a.bott-button.pop-button(target='_blank', role='button', href='http://www.last.fm/user/uclaradio') PLAYS
 
-            a.bott-button.pop-button(target='_blank', role='button', href='/schedule') SCHEDULE
+            a.bott-button.pop-button(target='_blank', role='button', href='/shows') SHOWS
 
             a.bott-button.pop-button(target='_blank', role='button', href='http://tunein.com/radio/UCLA-Radio-s2652/') TUNEIN
 
