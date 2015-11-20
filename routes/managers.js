@@ -4,6 +4,8 @@ var db = require('../database/db');
 var helper_funcs = require('./helper_funcs.js');
 
 router.get('/', function(req, res) {
+
+	// temporary manager data for testing
 	db.dropManagers();
 	var callback = function(err, managerSaved){console.log("error occurred inserting manager");}
 	db.addManager("Matteo", "Web", "Thursday", "7:00pm", "Studio", "picture", "thumbnail", callback);
@@ -13,7 +15,7 @@ router.get('/', function(req, res) {
 
 	db.getAllManagers(function(err, managers) {
 
-		var rowsPerColumn = 3;
+		var columnsPerRow = 3;
 
 		// sort by department name
 		managers.sort(helper_funcs.sort_by('department', false, false));
@@ -22,7 +24,7 @@ router.get('/', function(req, res) {
 		
 		// sort so that department managers are shown in columns, 3 to a row
 		for(var i = 0; i < managers.length; i++) {
-			if (i % rowsPerColumn === 0) {
+			if (i % columnsPerRow === 0) {
 				var row = [];
 				row.push(managers[i]);
 				managerRows.push(row);
