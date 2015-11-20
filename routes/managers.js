@@ -4,6 +4,10 @@ var db = require('../database/db');
 var helper_funcs = require('./helper_funcs.js');
 
 router.get('/', function(req, res) {
+	db.dropManagers();
+	db.addManager("Matteo", "Web", "Thursday", "7:00", "Studio, yo", "picture", "thumbnail", function(err, managerSaved){console.log("error occurred inserting manager");});
+	db.addManager("Eddie", "Art and Design", "Thursday", "6:30", "Studio, yo", "picture", "thumbnail", function(err, managerSaved){console.log("error occurred inserting manager");});
+
 	db.getAllManagers(function(err, managers) {
 
 		var rowsPerColumn = 3;
@@ -15,7 +19,7 @@ router.get('/', function(req, res) {
 		
 		// sort so that department managers are shown in columns, 3 to a row
 		for(var i = 0; i < managers.length; i++) {
-			if (i % rowsPerColumn == 0) {
+			if (i % rowsPerColumn === 0) {
 				var row = [];
 				row.push(managers[i]);
 				managerRows.push(row);

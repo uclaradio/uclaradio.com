@@ -50,5 +50,14 @@ head
       a(href='/')
         img#logo(src='img/logo.png', alt='UCLA RADIO')
 
+      table
+        thead
+          tr: td Header
+        tbody
+          each row in managerRows
+            tr
+              each manager in row
+                td: a(href="#{manager.department}")
+
 
 script(src='js/newBlurb.js')
