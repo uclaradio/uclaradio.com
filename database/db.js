@@ -71,10 +71,21 @@ var ProposedShowSchema = new Schema({
 	otherComments: String,
 	interestedInReceiving: String,
 }, {collection: 'ProposedShows'});
+   
+var ManagerSchema = new Schema({
+	managerName: String,
+	department: String,
+	meetingTime: String,
+	meetingLocation: String,
+	picture: String, 
+	thumbnail: String
+}, {collection: 'DepartmentMeetings'});
 
 var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
 
 var ProposedShowModel = mongoose.model('ProposedShow', ProposedShowSchema);
+
+var ManagerModel = mongoose.model('Manager', ManagerSchema);
 
 //expects a string like '10pm', '8am', '6pm'
 //i.e. hour and then am or pm. not 24-hour format
@@ -206,6 +217,31 @@ db.addProposedShow = function(data, callback) {
 db.getProposedShows = function(callback) {
 	ProposedShowModel.find({}, function(err, shows) {
 		callback(err, shows);
+	});
+};
+
+// insert a new department meeting
+db.addManager = function(managerName, department, meetingTime, meetingLocation, picture, thumbnail, callback) {
+	manager_data = {
+		"managerName": managerName,
+		"department": department,
+		"meetingTime": meetingTime,
+		"meetingLocation": meetingLocation,
+		"picture": picture,
+		"thumbnail": thumbnail
+	};
+
+	var manager = new ManagerModel(manager_data);
+
+	manager.save(function(err, managerSaved) {
+		callback(err, managerSaved);
+	});
+
+};
+
+db.getAllManagers = function(callback) {
+	ManagerModel.find({}, function(err, managers) {
+		callback(err, managers);
 	});
 };
 
