@@ -5,8 +5,11 @@ var helper_funcs = require('./helper_funcs.js');
 
 router.get('/', function(req, res) {
 	db.dropManagers();
-	db.addManager("Matteo", "Web", "Thursday", "7:00", "Studio, yo", "picture", "thumbnail", function(err, managerSaved){console.log("error occurred inserting manager");});
-	db.addManager("Eddie", "Art and Design", "Thursday", "6:30", "Studio, yo", "picture", "thumbnail", function(err, managerSaved){console.log("error occurred inserting manager");});
+	var callback = function(err, managerSaved){console.log("error occurred inserting manager");}
+	db.addManager("Matteo", "Web", "Thursday", "7:00pm", "Studio", "picture", "thumbnail", callback);
+	db.addManager("Eddie", "Art and Design", "Thursday", "6:30pm", "Eddie's Apartment", "picture", "thumbnail", callback);
+	db.addManager("Scott Gee", "Events", "Tuesday", "5:00pm", "Studio", "picture", "thumbnail", callback);
+	db.addManager("Taylor", "Marketing", "Wednesday", "12:15pm", "Studio", "picture", "thumbnail", callback);
 
 	db.getAllManagers(function(err, managers) {
 

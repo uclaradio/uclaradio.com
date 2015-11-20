@@ -50,14 +50,17 @@ head
       a(href='/')
         img#logo(src='img/logo.png', alt='UCLA RADIO')
 
-      table
-        thead
-          tr: td Header
-        tbody
-          each row in managerRows
-            tr
-              each manager in row
-                td: a(href="#{manager.department}")
+      - each row in managerRows
+        .row
+          - each manager in row
+            .col-md-4
+              .mdl-card.mdl-shadow--2dp.demo-card-wide 
+                .mdl-card__title
+                  h2.mdl-card__title-text.black #{manager.managerName}
+                .mdl-card__supporting-text
+                  | #{manager.department}
+                .mdl-card__actions.mdl-card--border
+                    | #{manager.meetingDay}: #{manager.meetingTime} (#{manager.meetingLocation})
 
 
 script(src='js/newBlurb.js')
