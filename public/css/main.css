@@ -145,10 +145,14 @@ mark
   width: 100%;
 }
 
-.pledge-button {
+.apply-div {
   text-align: center;
-  margin-bottom: 50px;
-  font-size: 100px;
+}
+
+.apply-button {
+  text-align: center;
+  margin-bottom: 50px !important;
+  font-size: 75px !important;
 }
 
 #pledge-drive
