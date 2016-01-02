@@ -106,12 +106,13 @@ function setPageTheme(colorScheme) {
   var medium = null;
   var light = null;
 
+  document.body.setAttribute('style', 'background-image: url(http://i.imgur.com/7vdDtPN.jpg)');
   if (colorScheme === "Greys") { // midnight space theme
     midnight = true;
     var filename = '/img/nebula' + Math.floor(Math.random()*3) + '.jpg';
     var backgroundAttribute = "background: url(" + filename +
       ") no-repeat center center fixed";
-    document.body.setAttribute('style', backgroundAttribute);
+    //document.body.setAttribute('style', backgroundAttribute);
     dark = '#292e49';
     medium = '#2d4b56';
     light = '#30716d';
