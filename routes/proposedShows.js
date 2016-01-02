@@ -9,10 +9,10 @@ var passwords = require('../passwords.json');
 
 router.get('/', function(req, res) {
 	db.insertTimeslotsToSchedule();
-	/*db.getProposedShows(function(err, proposedShows) {
+	db.getProposedShows(function(err, proposedShows) {
 		if (err) next(err);
 		res.render('proposedShows', {shows: proposedShows});
-	});*/
+	});
 });
 
 router.post('/', function(req, res) {
