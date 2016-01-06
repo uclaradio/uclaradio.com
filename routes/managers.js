@@ -4,15 +4,7 @@ var db = require('../database/db');
 var helper_funcs = require('./helper_funcs.js');
 
 router.get('/', function(req, res) {
-
-	// temporary manager data for testing
-	db.dropManagers();
-	var callback = function(err, managerSaved){console.log("error occurred inserting manager");}
-	db.addManager("Matteo", "Web", "Thursday", "7:00pm", "Studio", "picture", "thumbnail", callback);
-	db.addManager("Eddie", "Art and Design", "Thursday", "6:30pm", "Eddie's Apartment", "picture", "thumbnail", callback);
-	db.addManager("Scott Gee", "Events", "Tuesday", "5:00pm", "Studio", "picture", "thumbnail", callback);
-	db.addManager("Taylor", "Marketing", "Wednesday", "12:15pm", "Studio", "picture", "thumbnail", callback);
-
+	
 	db.getAllManagers(function(err, managers) {
 
 		var columnsPerRow = 3;

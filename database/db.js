@@ -75,7 +75,6 @@ var ProposedShowSchema = new Schema({
 var ManagerSchema = new Schema({
 	managerName: String,
 	department: String,
-	meetingDay: String,
 	meetingTime: String,
 	meetingLocation: String,
 	picture: String, 
@@ -221,12 +220,11 @@ db.getProposedShows = function(callback) {
 	});
 };
 
-// insert a new department meeting
-db.addManager = function(managerName, department, meetingDay, meetingTime, meetingLocation, picture, thumbnail, callback) {
+// insert a new department manager
+db.addManager = function(managerName, department, meetingTime, meetingLocation, picture, thumbnail, callback) {
 	manager_data = {
 		"managerName": managerName,
 		"department": department,
-		"meetingDay": meetingDay,
 		"meetingTime": meetingTime,
 		"meetingLocation": meetingLocation,
 		"picture": picture,
