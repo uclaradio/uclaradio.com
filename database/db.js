@@ -74,11 +74,11 @@ var ProposedShowSchema = new Schema({
    
 var ManagerSchema = new Schema({
 	managerName: String,
-	department: String,
+	managerTitle: String,
 	meetingTime: String,
 	meetingLocation: String,
-	picture: String, 
-	thumbnail: String
+	email: String,
+	picture: String
 }, {collection: 'DepartmentMeetings'});
 
 var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
@@ -221,14 +221,14 @@ db.getProposedShows = function(callback) {
 };
 
 // insert a new department manager
-db.addManager = function(managerName, department, meetingTime, meetingLocation, picture, thumbnail, callback) {
+db.addManager = function(managerName, managerTitle, meetingTime, meetingLocation, email, picture, callback) {
 	manager_data = {
 		"managerName": managerName,
-		"department": department,
+		"managerTitle": managerTitle,
 		"meetingTime": meetingTime,
 		"meetingLocation": meetingLocation,
-		"picture": picture,
-		"thumbnail": thumbnail
+		"email": email,
+		"picture": picture
 	};
 
 	var manager = new ManagerModel(manager_data);
@@ -241,7 +241,7 @@ db.addManager = function(managerName, department, meetingTime, meetingLocation, 
 
 db.dropManagers = function() {
 	ManagerModel.remove({}, function(err) { 
-	   console.log('collection removed');
+	   // console.log('Removed all managers');
 	});
 }
 

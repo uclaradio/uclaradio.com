@@ -32,7 +32,7 @@ head
     script(src='http://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js')
     // Our stylesheets/scripts
     link(rel='stylesheet', type='text/css', href='css/main.css')
-    link(rel='stylesheet', type='text/css', href='css/pages.css')
+    link(rel='stylesheet', type='text/css', href='css/managers.css')
          
     link(rel='icon', href='favicon.ico', type='image/x-icon')
 
@@ -55,15 +55,17 @@ head
           - each manager in row
             .col-md-4
               .mdl-card.mdl-shadow--2dp.demo-card-wide 
-                .mdl-card__title
-                  h2.mdl-card__title-text.black #{manager.managerName}
-                .mdl-card__supporting-text
-                  | #{manager.department}
-                .mdl-card__actions.mdl-card--border
-                    if manager.meetingLocation.length > 0
-                      | #{manager.meetingTime} @ #{manager.meetingLocation.length}
-                    else
-                      | #{manager.meetingTime}
+                .mdl-title
+                  h2.managerName #{manager.managerName}
+                img(src="/img/#{manager.picture}")
+                .mdl-subtitle
+                  h3.department #{manager.managerTitle}
+                  if manager.meetingLocation
+                    p(style="margin-bottom: 0") DEPT MEETINGS: #{manager.meetingTime} @ #{manager.meetingLocation}
+                  else
+                    p(style="margin-bottom: 0") DEPT MEETINGS: #{manager.meetingTime}
+                  if manager.email
+                    p EMAIL: #{manager.email}
 
 
 script(src='js/newBlurb.js')

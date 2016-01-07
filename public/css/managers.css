@@ -1,0 +1,47 @@
+label {
+	width: 100%;
+}
+
+#logo {
+	margin-bottom: 25px;
+}
+
+#new-blurb-submit {
+	background-color: rgba(0, 0, 0, .13);
+	width: 100%;
+}
+
+body {
+	font-style: normal;
+}
+
+.mdl-card {
+	width: auto;
+	/*height: 450px;*/
+	max-width: 300px;
+	margin: 0 auto 40px auto;
+	padding: 10px;
+	border: 10px white solid;
+	color: #fff;
+	background-color: #BA95FC;
+	text-align: center;
+}
+
+.mdl-card img {
+	object-fit: contain;
+	max-height: 260px;
+	padding: 0 10px 0 10px;
+}
+
+.mdl-card h2, h3 {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+.mdl-card p {
+	font-weight: bold;
+}
+
+.managerName {
+	text-transform: uppercase;
+}
