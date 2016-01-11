@@ -29,8 +29,18 @@ head
     link(rel='stylesheet', type='text/css', href='css/main.css')
     link(rel='stylesheet', type='text/css', href='css/newBlurb.css')
     link(rel='stylesheet', type='text/css', href='css/schedule.css')
-         
     link(rel='icon', href='favicon.ico', type='image/x-icon')
+
+
+    ///////
+    //font
+    //////
+    link(rel='stylesheet', type='text/css', href='css/font.css')
+
+    ////////////////////////////////////////////////
+    ///files for this page exclusively
+    ////////////////////////////////////////////////
+    link(rel='stylesheet', type='text/css', href='css/TicketGiveawayCalendar.css')
 
     script(type='text/javascript').
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -41,17 +51,37 @@ head
       ga('send', 'pageview');
 
   body
-         
+  
     .container(role='main')
       a(href='/')
         img#logo(src='img/logo.png', alt='UCLA RADIO')
 
       ul
        each Month in eventsByMonth
-          li=Month.month
-          ul
+          li#Month=Month.month
+          ul#events
             each event in Month.arr
-              li=event.start.getDate() + " " + event.summary
+              if(event.start.getDate()%10==1)
+                li
+                  | #{event.start.getDate()}
+                  sup st
+                  | #{" " + event.summary}                
+              else if(event.start.getDate()%10==2)
+                li
+                  | #{event.start.getDate()}
+                  sup nd
+                  | #{" " + event.summary}
+              else if(event.start.getDate()%10==3)
+                li
+                  | #{event.start.getDate()}
+                  sup rd
+                  | #{" " + event.summary}
+              else
+                li
+                  | #{event.start.getDate()}
+                  sup th
+                  | #{" " + event.summary}         
+          hr
             
 
 

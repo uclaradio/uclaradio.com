@@ -1,0 +1,56 @@
+body {
+	font-family: 'apercuregular';
+}
+
+#Month {
+	font-size: 75px;
+	text-align: center;
+	left: 0;
+	letter-spacing: 10px;
+	width: 100%;
+}
+
+@media (max-width: 750px) {
+	#Month
+	{
+		font-size: 50px;
+	}
+}
+
+ul {
+	padding-left:0;
+}
+
+hr {
+	background-color: black;
+	border-color: black;
+}
+
+ul #Month {
+	list-style-type: none;
+	padding-left:0;
+	padding-right:0; 
+	margin-right:0
+	margin-left:0;
+}
+
+#events {
+	text-align: center;
+	padding-left:0;
+	margin-left:0;
+	padding-bottom: 50px;
+}
+
+#events li {
+	font-family:apercu_lightregular;
+	list-style-type: none;
+	display: inline-block;
+	border: 1px solid black;
+	margin-right: 1%;
+	margin-left: 1%;
+	margin-top: .5%;
+	margin-bottom: .5%;
+	padding: .5%;
+	font-size: 25px;
+	border-radius: 2em;
+}
