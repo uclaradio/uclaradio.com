@@ -50,7 +50,55 @@ ul #Month {
 	margin-left: 1%;
 	margin-top: .5%;
 	margin-bottom: .5%;
-	padding: .5%;
 	font-size: 25px;
 	border-radius: 2em;
+}
+
+.Venue {
+	visibility: hidden;
+	position: absolute;
+	padding-top: 15px;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	font-size: 20px;
+	letter-spacing: -1px;
+	color: white;
+
+
+
+
+}
+
+.Artist {
+	/*display: none;*/
+	padding:0;
+	margin-top:0;
+	margin-bottom:0;
+	left:0;
+	right:0;
+	letter-spacing: 2px;
+
+}
+
+ul #events li {
+	/*background-color: blue;*/
+	padding: 10px;
+	position: relative;
+	transition: background-color .3s;
+
+}
+
+ul #events li:hover {
+	background-color: black;
+	transition: background-color .3s;
+}
+
+ul #events li:hover .Venue{
+	visibility: visible;
+}
+
+ul #events li:hover .Artist{
+	visibility: hidden;
 }

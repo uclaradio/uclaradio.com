@@ -61,26 +61,27 @@ head
           li#Month=Month.month
           ul#events
             each event in Month.arr
-              if(event.start.getDate()%10==1)
                 li
-                  | #{event.start.getDate()}
-                  sup st
-                  | #{" " + event.summary}                
-              else if(event.start.getDate()%10==2)
-                li
-                  | #{event.start.getDate()}
-                  sup nd
-                  | #{" " + event.summary}
-              else if(event.start.getDate()%10==3)
-                li
-                  | #{event.start.getDate()}
-                  sup rd
-                  | #{" " + event.summary}
-              else
-                li
-                  | #{event.start.getDate()}
-                  sup th
-                  | #{" " + event.summary}         
+                  .Artist
+                    | #{" " + event.summary.split("@")[0]}  
+                  
+                  .Venue
+                    if(event.start.getDate()%10==1)
+                       | #{event.start.getDate()}
+                       sup st
+                    else if(event.start.getDate()%10==2)
+                       | #{event.start.getDate()}
+                       sup nd
+                    else if(event.start.getDate()%10==3)
+                       | #{event.start.getDate()}
+                       sup rd
+                    else
+                       | #{event.start.getDate()}
+                       sup th
+                    if(event.summary.split("@").length > 1)
+                      | #{event.summary.split("@")[1].substring(0,event.summary.split("@")[0].length)}
+
+
           hr
             
 

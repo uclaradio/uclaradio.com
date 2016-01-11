@@ -13,8 +13,11 @@ router.get('/', function(req, res, next) {
       var currDate = new Date();
       var Year = currDate.getYear();
       var Month = currDate.getMonth();
+      var currDate = currDate.getDate();
       events = events.filter(function(el) {
-          return (el["start"].getMonth() >= Month) && (el["start"].getYear() == Year)
+          return (el["start"].getMonth() >= Month) 
+          && (el["start"].getYear() == Year) 
+          && !((el["start"].getMonth() == Month) && (el["start"].getDate() < currDate))
       })
       events = events.reverse();
 
