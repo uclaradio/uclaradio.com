@@ -42,7 +42,7 @@ ul #Month {
 }
 
 #events li {
-	font-family:apercu_lightregular;
+	font-family:'apercuregular';
 	list-style-type: none;
 	display: inline-block;
 	border: 1px solid black;
