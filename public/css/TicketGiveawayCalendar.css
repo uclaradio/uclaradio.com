@@ -1,6 +1,24 @@
 body {
 	font-family: 'apercuregular';
 }
+#logo {
+	-ms-transform: rotate(2deg); /* IE 9 */
+    -webkit-transform: rotate(2deg); /* Safari */
+    transform: rotate(2deg);
+}
+
+#about {
+	font-family: courier;
+	font-size: 20px;
+    -ms-transform: rotate(-2deg); /* IE 9 */
+    -webkit-transform: rotate(-2deg); /* Safari */
+    transform: rotate(-2deg);
+    margin-top: -20px;
+    /*border-style: dotted;*/
+    border-left: dotted black 2px;
+    padding-left: 2px;
+    margin-bottom: 5px;
+}
 
 #Month {
 	font-size: 75px;

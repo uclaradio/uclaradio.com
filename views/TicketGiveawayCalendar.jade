@@ -56,6 +56,9 @@ head
       a(href='/')
         img#logo(src='img/logo.png', alt='UCLA RADIO')
 
+      #about
+        p="Welcome to UCLA Radio’s official Giveaway Calendar! This calendar illustrates which shows we will be running giveaways for every week. Like us on Facebook and follow us on Instagram to stay up to date on how to win tickets to the following shows:"
+
       ul
        each Month in eventsByMonth
           li#Month=Month.month
@@ -84,7 +87,7 @@ head
                        | #{event.start.getDate()}
                        sup th
                     if(event.summary.split("@").length > 1)
-                      | #{event.summary.split("@")[1]}
+                      | #{" |" + event.summary.split("@")[1]}
 
 
           hr
