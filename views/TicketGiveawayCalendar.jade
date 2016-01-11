@@ -63,8 +63,13 @@ head
             each event in Month.arr
                 li
                   .Artist
-                    | #{" " + event.summary.split("@")[0]}  
-                  
+                    if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
+                    | &nbsp; &nbsp; &nbsp;
+
+                    | #{event.summary.split("@")[0]}  
+
+                    if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
+                    | &nbsp; &nbsp; &nbsp;
                   .Venue
                     if(event.start.getDate()%10==1)
                        | #{event.start.getDate()}
@@ -79,7 +84,7 @@ head
                        | #{event.start.getDate()}
                        sup th
                     if(event.summary.split("@").length > 1)
-                      | #{event.summary.split("@")[1].substring(0,event.summary.split("@")[0].length)}
+                      | #{event.summary.split("@")[1]}
 
 
           hr
