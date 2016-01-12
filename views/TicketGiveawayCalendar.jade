@@ -74,20 +74,23 @@ head
                     if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
                     | &nbsp; &nbsp; &nbsp;
                   .Venue
-                    if(event.start.getDate()%10==1)
-                       | #{event.start.getDate()}
-                       sup st
+                    | #{event.start.getDate()}
+                    if(event.start.getDate()==11)
+                       sup th
+                    else if(event.start.getDate()==12)
+                       sup th
+                    else if(event.start.getDate()==13)
+                       sup th
+                    else if(event.start.getDate()%10==1)
+                       sup st             
                     else if(event.start.getDate()%10==2)
-                       | #{event.start.getDate()}
                        sup nd
                     else if(event.start.getDate()%10==3)
-                       | #{event.start.getDate()}
                        sup rd
                     else
-                       | #{event.start.getDate()}
                        sup th
                     if(event.summary.split("@").length > 1)
-                      | #{" |" + event.summary.split("@")[1]}
+                      | #{" at " + event.summary.split("@")[1]}
 
 
           hr
