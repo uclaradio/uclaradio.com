@@ -110,7 +110,8 @@ ul #Month {
 	font-style: bold;
 }
 
-.Artist {
+
+a .Artist {
 	/*display: none;*/
 	padding:0;
 	margin-top:0;
@@ -118,6 +119,7 @@ ul #Month {
 	left:0;
 	right:0;
 	letter-spacing: 2px;
+	color: black;
 
 }
 

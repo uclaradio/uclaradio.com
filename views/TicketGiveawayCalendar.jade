@@ -65,32 +65,33 @@ head
           ul#events
             each event in Month.arr
                 li
-                  .Artist
-                    if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
-                    | &nbsp; &nbsp; &nbsp;
+                  a(href='http://www.last.fm/music/' + event.summary.split("@")[0].replace(/\(.*\)/g,'').trim().split(" ").join('+'))
+                    .Artist
+                      if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
+                      | &nbsp; &nbsp; &nbsp;
 
-                    | #{event.summary.split("@")[0]}  
+                      | #{event.summary.split("@")[0]}  
 
-                    if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
-                    | &nbsp; &nbsp; &nbsp;
-                  .Venue
-                    | #{event.start.getDate()}
-                    if(event.start.getDate()==11)
-                       sup th
-                    else if(event.start.getDate()==12)
-                       sup th
-                    else if(event.start.getDate()==13)
-                       sup th
-                    else if(event.start.getDate()%10==1)
-                       sup st             
-                    else if(event.start.getDate()%10==2)
-                       sup nd
-                    else if(event.start.getDate()%10==3)
-                       sup rd
-                    else
-                       sup th
-                    if(event.summary.split("@").length > 1)
-                      | #{" | " + event.summary.split("@")[1]}
+                      if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
+                      | &nbsp; &nbsp; &nbsp;
+                    .Venue
+                      | #{event.start.getDate()}
+                      if(event.start.getDate()==11)
+                         sup th
+                      else if(event.start.getDate()==12)
+                         sup th
+                      else if(event.start.getDate()==13)
+                         sup th
+                      else if(event.start.getDate()%10==1)
+                         sup st             
+                      else if(event.start.getDate()%10==2)
+                         sup nd
+                      else if(event.start.getDate()%10==3)
+                         sup rd
+                      else
+                         sup th
+                      if(event.summary.split("@").length > 1)
+                        | #{" | " + event.summary.split("@")[1]}
 
 
           hr
@@ -101,17 +102,20 @@ head
          ul
            each event in x.arr
              li
-              if(event.start.getDate()%10==1)
-                 | #{event.start.getDate()}
-                 sup st
+              | #{event.start.getDate()}
+              if(event.start.getDate()==11)
+                 sup th
+              else if(event.start.getDate()==12)
+                 sup th
+              else if(event.start.getDate()==13)
+                 sup th
+              else if(event.start.getDate()%10==1)
+                 sup st             
               else if(event.start.getDate()%10==2)
-                 | #{event.start.getDate()}
                  sup nd
               else if(event.start.getDate()%10==3)
-                 | #{event.start.getDate()}
                  sup rd
               else
-                 | #{event.start.getDate()}
                  sup th
               | #{"| " + event.summary}
             
