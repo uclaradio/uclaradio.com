@@ -28,6 +28,16 @@ body {
 	{
 		font-size: 50px;
 	}
+
+	#Desktop {
+		display: none;
+	}
+}
+
+@media (min-width: 750px) {
+	#MobileEvents {
+		display: none;
+	}
 }
 
 ul {
@@ -67,6 +77,15 @@ ul #Month {
 	border-radius: 2em;
 }
 
+#MobileEvents {
+	font-family: courier;
+	font-size: 15px;
+}
+#MobileEvents li {
+	list-style-type: none;
+}
+
+
 .Venue {
 	visibility: hidden;
 	position: absolute;
@@ -82,6 +101,13 @@ ul #Month {
 
 
 
+}
+
+#titleMobile {
+	margin-top: 10px;
+	font-size: 30px;
+	text-decoration: underline;
+	font-style: bold;
 }
 
 .Artist {

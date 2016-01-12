@@ -40,8 +40,9 @@ router.get('/', function(req, res, next) {
         return el.arr.length != 0;
       })
       console.log(eventsByMonth);
+      var mobileEvents = eventsByMonth;
       //console.log(events[0]);
-      res.render('TicketGiveawayCalendar', {eventsByMonth: eventsByMonth});
+      res.render('TicketGiveawayCalendar', {eventsByMonth: eventsByMonth, mobileEvents: mobileEvents});
 
     });
 });

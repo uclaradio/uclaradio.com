@@ -59,7 +59,7 @@ head
       #about
         p="Welcome to UCLA Radio’s official Giveaway Calendar! This calendar illustrates which shows we will be running giveaways for every week. Like us on Facebook and follow us on Instagram to stay up to date on how to win tickets to the following shows:"
 
-      ul
+      ul#Desktop
        each Month in eventsByMonth
           li#Month=Month.month
           ul#events
@@ -91,6 +91,26 @@ head
 
 
           hr
+
+      ul#MobileEvents
+       each x in mobileEvents
+         li#titleMobile=x.month
+         ul
+           each event in x.arr
+             li
+              if(event.start.getDate()%10==1)
+                 | #{event.start.getDate()}
+                 sup st
+              else if(event.start.getDate()%10==2)
+                 | #{event.start.getDate()}
+                 sup nd
+              else if(event.start.getDate()%10==3)
+                 | #{event.start.getDate()}
+                 sup rd
+              else
+                 | #{event.start.getDate()}
+                 sup th
+              | #{"| " + event.summary}
             
 
 
