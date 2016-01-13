@@ -1,0 +1,145 @@
+body {
+	font-family: 'apercuregular';
+}
+#logo {
+
+}
+
+#about {
+	font-family: courier;
+	font-size: 20px;
+    margin-top: -35px;
+    /*border-style: dotted;*/
+    padding-left: 2px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#Month {
+	font-size: 75px;
+	text-align: center;
+	left: 0;
+	letter-spacing: 10px;
+	width: 100%;
+}
+
+@media (max-width: 750px) {
+	#Month
+	{
+		font-size: 50px;
+	}
+
+	#Desktop {
+		display: none;
+	}
+}
+
+@media (min-width: 750px) {
+	#MobileEvents {
+		display: none;
+	}
+}
+
+ul {
+	padding-left:0;
+}
+
+hr {
+	background-color: black;
+	border-color: black;
+}
+
+ul #Month {
+	list-style-type: none;
+	padding-left:0;
+	padding-right:0; 
+	margin-right:0
+	margin-left:0;
+}
+
+#events {
+	text-align: center;
+	padding-left:0;
+	margin-left:0;
+	padding-bottom: 50px;
+}
+
+#events li {
+	font-family:'apercuregular';
+	list-style-type: none;
+	display: inline-block;
+	border: 1px solid black;
+	margin-right: 1%;
+	margin-left: 1%;
+	margin-top: .5%;
+	margin-bottom: .5%;
+	font-size: 25px;
+	border-radius: 2em;
+}
+
+#MobileEvents {
+	font-family: courier;
+	font-size: 15px;
+}
+#MobileEvents li {
+	list-style-type: none;
+}
+
+
+.Venue {
+	visibility: hidden;
+	position: absolute;
+	padding-top: 15px;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	font-size: 20px;
+	letter-spacing: -1px;
+	color: white;
+
+
+
+
+}
+
+#titleMobile {
+	margin-top: 10px;
+	font-size: 30px;
+	text-decoration: underline;
+	font-style: bold;
+}
+
+
+a .Artist {
+	/*display: none;*/
+	padding:0;
+	margin-top:0;
+	margin-bottom:0;
+	left:0;
+	right:0;
+	letter-spacing: 2px;
+	color: black;
+
+}
+
+ul #events li {
+	/*background-color: blue;*/
+	padding: 10px;
+	position: relative;
+	transition: background-color .3s;
+
+}
+
+ul #events li:hover {
+	background-color: black;
+	transition: background-color .3s;
+}
+
+ul #events li:hover .Venue{
+	visibility: visible;
+}
+
+ul #events li:hover .Artist{
+	visibility: hidden;
+}
