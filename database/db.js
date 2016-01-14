@@ -72,9 +72,20 @@ var ProposedShowSchema = new Schema({
 	interestedInReceiving: String,
 }, {collection: 'ProposedShows'});
 
+var StaffingPointsSchema = new Schema({
+	fullName: String,
+	dateCompleted: Date,
+	description: String,
+	department: String,
+	number: Number,
+	notes: String,
+}, {collection: 'StaffingPoints'});
+
 var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
 
 var ProposedShowModel = mongoose.model('ProposedShow', ProposedShowSchema);
+
+var StaffingPointsModel = mongoose.model('StaffingPoints', StaffingPointsSchema);
 
 //expects a string like '10pm', '8am', '6pm'
 //i.e. hour and then am or pm. not 24-hour format
@@ -200,6 +211,24 @@ db.addProposedShow = function(data, callback) {
 
 	proposedShow.save(function(err, proposedShowSaved) {
 		callback(err, proposedShowSaved);
+	});
+};
+
+db.addStaffingPoints = function(data, callback) {
+	staffingPointsData = {
+		fullName: data.fullName,
+		dateCompleted: data.dateCompleted,
+		description: data.pointsDescription,
+		department: data.department,
+		number: data.numberOfPoints,
+		notes: data.other,
+	};
+
+	var staffingPoints = new StaffingPointsModel(staffingPointsData);
+
+	staffingPoints.save(function(err, staffingPointsSaved) {
+		if (err) console.log(err);
+		callback(err, staffingPointsSaved);
 	});
 };
 
