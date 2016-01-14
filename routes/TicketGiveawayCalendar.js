@@ -24,6 +24,7 @@ router.get('/', function(req, res, next) {
       var eventsByMonth = [{month:"January", arr:[]},
                           {month:"February", arr:[]},
                           {month:"March", arr:[]},
+                          {month:"April", arr:[]},
                           {month:"May", arr:[]},
                           {month:"June", arr:[]},
                           {month:"July", arr:[]},
