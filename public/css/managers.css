@@ -1,0 +1,116 @@
+label {
+	width: 100%;
+}
+
+#logo {
+	margin-bottom: 25px;
+}
+
+body {
+	font-style: normal;
+}
+
+.container {
+  background:rgba(255,255,255,0.5);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 450px;
+}
+
+.manager {
+  background-color: white;
+  height: 200px;
+  opacity: 0.8;
+  margin: 0 auto 30px auto;
+  max-width: 400px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.manager:hover {
+  opacity: 1;
+}
+
+.top {
+  /*height: 15%;*/ /* Removed to allow overflow when names are long */
+  position: fix;
+  background-color: salmon;
+}
+
+.top h1 {
+  font-size: 12px;
+  padding: 10px;
+  color: black;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.main {
+	height: 85%;
+}
+
+#name {
+  color: white;
+  font-family: arial;
+  text-transform: none;
+}
+
+.pic {
+  height: 100%;
+  width: 170px; 
+  display: inline-block;
+  float: left;
+
+}
+
+.pic img {
+	flex-shrink:0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.info {
+  width: auto;
+  height: 100%;
+  overflow: hidden;
+}
+
+.info h1 {
+  margin: 0 0 5px 0;
+  font-size: 11px;
+  left: 5%;
+}
+
+.info ul {
+  font-size: 9px;
+  line-height: 15px;
+  padding-left: 15px;
+}
+
+.meetings { 
+  width: 100%;
+  height: 33%;
+  padding: 5px;
+  background-color: #BDBDBD;
+}
+
+.contact { 
+  width: 100%;
+  height: 33%;
+  padding: 5px;
+  background-color: #E6E6E6;
+}
+
+.contact a {
+  font-size: 11px;
+}
+
+.show { 
+  width: 100%;
+  height: 33%;
+  padding: 5px;
+  background-color: white;
+}
