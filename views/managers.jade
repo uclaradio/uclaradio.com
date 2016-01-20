@@ -50,22 +50,29 @@ head
       a(href='/')
         img#logo(src='img/logo.png', alt='UCLA RADIO')
 
-      - each row in managerRows
-        .row
-          - each manager in row
-            .col-md-4
-              .mdl-card.mdl-shadow--2dp.demo-card-wide 
-                .mdl-title
-                  h2.managerName #{manager.managerName}
-                img(src="/img/#{manager.picture}")
-                .mdl-subtitle
-                  h3.department #{manager.managerTitle}
-                  if manager.meetingLocation
-                    p(style="margin-bottom: 0") DEPT MEETINGS: #{manager.meetingTime} @ #{manager.meetingLocation}
-                  else
-                    p(style="margin-bottom: 0") DEPT MEETINGS: #{manager.meetingTime}
-                  if manager.email
-                    p EMAIL: #{manager.email}
+      - each manager in managers
+        .div(class="col-sm-12 col-md-6 col-lg-4")
+          .manager
+            .top
+              h1 #{manager.position} // 
+                span(id="name") #{manager.name}
+            .main
+              .pic
+                img(src="/img/#{manager.photo}")
+              .info
+                .meetings
+                  h1 MEETINGS: 
+                  ul
+                    li #{manager.meetingTime} (#{manager.meetingPlace})
+                .contact
+                  h1 CONTACT: 
+                  ul
+                    li
+                      a(href="#{manager.email}") email me!
+                .show
+                  h1 SHOW: 
+                  ul
+                    li #{manager.showName} (#{manager.showTime})
 
 
 script(src='js/newBlurb.js')
