@@ -73,12 +73,14 @@ var ProposedShowSchema = new Schema({
 }, {collection: 'ProposedShows'});
    
 var ManagerSchema = new Schema({
-	managerName: String,
-	managerTitle: String,
+	name: String,
+	position: String,
 	meetingTime: String,
-	meetingLocation: String,
+	meetingPlace: String,
 	email: String,
-	picture: String
+	showName: String,
+	showTime: String,
+	photo: String
 }, {collection: 'DepartmentMeetings'});
 
 var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
@@ -219,16 +221,26 @@ db.getProposedShows = function(callback) {
 		callback(err, shows);
 	});
 };
+	// name: String,
+	// position: String,
+	// meetingTime: String,
+	// meetingPlace: String,
+	// email: String,
+	// showName: String,
+	// showTime: String,
+	// photo: String
 
 // insert a new department manager
-db.addManager = function(managerName, managerTitle, meetingTime, meetingLocation, email, picture, callback) {
+db.addManager = function(name, position, meetingTime, meetingPlace, email, showName, showTime, photo, callback) {
 	manager_data = {
-		"managerName": managerName,
-		"managerTitle": managerTitle,
+		"name": name,
+		"position": position,
 		"meetingTime": meetingTime,
-		"meetingLocation": meetingLocation,
+		"meetingPlace": meetingPlace,
 		"email": email,
-		"picture": picture
+		"showName": showName,
+		"showTime": showTime,
+		"photo": photo
 	};
 
 	var manager = new ManagerModel(manager_data);
