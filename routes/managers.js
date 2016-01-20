@@ -7,8 +7,8 @@ router.get('/', function(req, res) {
 	
 	db.getAllManagers(function(err, managers) {
 
-		// sort by department name
-		managers.sort(helper_funcs.sort_by('department', false, false));
+		// sort by position name
+		managers.sort(helper_funcs.sort_by('position', false, false));
 
 		res.render('managers', {managers: managers});
 	});

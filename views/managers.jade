@@ -58,7 +58,7 @@ head
                 span(id="name") #{manager.name}
             .main
               .pic
-                img(src="/img/#{manager.photo}")
+                img(src="#{manager.photo}")
               .info
                 .meetings
                   h1 MEETINGS: 
@@ -68,7 +68,7 @@ head
                   h1 CONTACT: 
                   ul
                     li
-                      a(href="#{manager.email}") email me!
+                      a(href="mailto:#{manager.email}") email me!
                 .show
                   h1 SHOW: 
                   ul

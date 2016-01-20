@@ -16,18 +16,15 @@ body {
   padding-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
-  min-width: 350px;
+  min-width: 450px;
 }
 
 .manager {
   background-color: white;
   height: 200px;
   opacity: 0.8;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin: 0 auto 30px auto;
+  max-width: 400px;
   border-radius: 5px;
   overflow: hidden;
 }
@@ -37,7 +34,7 @@ body {
 }
 
 .top {
-  /*height: 15%;*/
+  /*height: 15%;*/ /* Removed to allow overflow when names are long */
   position: fix;
   background-color: salmon;
 }
@@ -55,7 +52,6 @@ body {
 }
 
 #name {
-  font-size: 11px;
   color: white;
   font-family: arial;
   text-transform: none;
@@ -118,35 +114,3 @@ body {
   padding: 5px;
   background-color: white;
 }
-
-/*
-.mdl-card {
-	width: auto;
-	max-width: 300px;
-	margin: 0 auto 40px auto;
-	padding: 10px;
-	border: 10px white solid;
-	color: #fff;
-	background-color: #BA95FC;
-	text-align: center;
-}
-
-.mdl-card img {
-	object-fit: contain;
-	max-height: 260px;
-	padding: 0 10px 0 10px;
-}
-
-.mdl-card h2, h3 {
-	margin-top: 0px;
-	margin-bottom: 5px;
-}
-
-.mdl-card p {
-	font-weight: bold;
-}
-
-.managerName {
-	text-transform: uppercase;
-}
-*/
