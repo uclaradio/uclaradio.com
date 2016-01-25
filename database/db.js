@@ -71,6 +71,17 @@ var ProposedShowSchema = new Schema({
 	otherComments: String,
 	interestedInReceiving: String,
 }, {collection: 'ProposedShows'});
+   
+var ManagerSchema = new Schema({
+	name: String,
+	position: String,
+	meetingTime: String,
+	meetingPlace: String,
+	email: String,
+	showName: String,
+	showTime: String,
+	photo: String
+}, {collection: 'DepartmentMeetings'});
 
 var StaffingPointsSchema = new Schema({
 	fullName: String,
@@ -86,6 +97,8 @@ var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
 var ProposedShowModel = mongoose.model('ProposedShow', ProposedShowSchema);
 
 var StaffingPointsModel = mongoose.model('StaffingPoints', StaffingPointsSchema);
+
+var ManagerModel = mongoose.model('Manager', ManagerSchema);
 
 //expects a string like '10pm', '8am', '6pm'
 //i.e. hour and then am or pm. not 24-hour format
@@ -241,6 +254,47 @@ db.getStaffingPoints = function(callback) {
 db.getProposedShows = function(callback) {
 	ProposedShowModel.find({}, function(err, shows) {
 		callback(err, shows);
+	});
+};
+	// name: String,
+	// position: String,
+	// meetingTime: String,
+	// meetingPlace: String,
+	// email: String,
+	// showName: String,
+	// showTime: String,
+	// photo: String
+
+// insert a new department manager
+db.addManager = function(name, position, meetingTime, meetingPlace, email, showName, showTime, photo, callback) {
+	manager_data = {
+		"name": name,
+		"position": position,
+		"meetingTime": meetingTime,
+		"meetingPlace": meetingPlace,
+		"email": email,
+		"showName": showName,
+		"showTime": showTime,
+		"photo": photo
+	};
+
+	var manager = new ManagerModel(manager_data);
+
+	manager.save(function(err, managerSaved) {
+		callback(err, managerSaved);
+	});
+
+};
+
+db.dropManagers = function() {
+	ManagerModel.remove({}, function(err) { 
+	   // console.log('Removed all managers');
+	});
+}
+
+db.getAllManagers = function(callback) {
+	ManagerModel.find({}, function(err, managers) {
+		callback(err, managers);
 	});
 };
 
