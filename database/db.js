@@ -232,6 +232,12 @@ db.addStaffingPoints = function(data, callback) {
 	});
 };
 
+db.getStaffingPoints = function(callback) {
+	StaffingPointsModel.find({}, function(err, points) {
+		callback(err, points);
+	});
+};
+
 db.getProposedShows = function(callback) {
 	ProposedShowModel.find({}, function(err, shows) {
 		callback(err, shows);
