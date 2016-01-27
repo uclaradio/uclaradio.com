@@ -1,33 +1,33 @@
 var db = require('../db');
 
 console.log("Updating managers...");
-
 db.dropManagers();
 
-var callback = function(err, managerSaved){ if (err) { console.log("error occurred inserting manager");}}
+var callback = function(err, managerSaved){ if (err) { console.log("error occurred inserting manager");}};
 
 //db.addManager(name, position, meetingTime, meetingPlace, email, showName, showTime, photo, callback)
-db.addManager("Gracie Phillips", "Programming Manager", "TBA", "TBA", "radio.programming@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xfa1/t31.0-8/q81/p960x960/11212674_822438087837255_7878424938127600285_o.jpg", callback);
-db.addManager("Zach Seidl", "General Manager", "TBA", "The Station", "gm@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xat1/v/t1.0-9/12088257_10200801882246758_7822281650510597887_n.jpg?oh=0a1b7bde02760f06ee2d2499bcd714d3&oe=57078F69", callback);
-db.addManager("Tyler Wennstrom", "Asst. General Manager", "TBA", "TBA", "agm@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/10906045_945441715465927_2905963898448583881_n.jpg?oh=0bcdff2b5f76a9666158a5cffe978498&oe=57003B55", callback);
-db.addManager("Carla Lupita Rowley", "Intern Manager", "TBA", "TBA", "uclaradio.interns@gmail.com", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/1979589_10206536392142428_5278191476036604085_n.jpg?oh=24805cb68d6a90c66fa99cd7ab9d51a8&oe=5720F96C", callback);
-db.addManager("Alex Torpey", "Intern Manager", "TBA", "TBA", "uclaradio.interns@gmail.com", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/995615_10206836947546301_5899592961899905930_n.jpg?oh=6813ef4ad34443aadadcb899ec7410e2&oe=57135034", callback);
-
-db.addManager("Pamela Crick", "Promos / Fundraising Manager", "TBA", "TBA", "radio.promotions@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xlf1/v/t1.0-9/10941912_10152660207998807_4000503844979689146_n.jpg?oh=4fc7c3a5aef91c8d87cc1c2b318c29e3&oe=571CEA23", callback);
-db.addManager("Taylor Whelchel", "Marketing Manager", "TBA", "TBA", "radio.marketing@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10559684_10208575397451681_6289109775822404845_n.jpg?oh=aac14e80dc2269dbd4e14dda635ce1f8&oe=571F4EF4", callback);
-db.addManager("Eva Maria Pino", "Music Manager", "TBA", "TBA", "radio.music@media.ucla.edu", "show", "show time", "/img/eva.jpg", callback);
-db.addManager("Eddie Hernandez", "Digital Press Manager", "TBA", "TBA", "radio.digitalpress@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xtf1/v/t1.0-9/11885248_915416035198237_8358619889574921472_n.jpg?oh=b049d4a8ca6efeb27ca04d9849c957cc&oe=57104C40", callback);
-
-db.addManager("Matteo Vesprini-Heindrich", "Web Manager", "Wed 1-2PM", "The Station", "uclaradio.web@gmail.com", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xft1/v/t1.0-9/12003139_937416649658238_5496339720395314020_n.jpg?oh=39c287e0a44921b179ee7d5128361c7c&oe=571280AC", callback);
-db.addManager("Gabe Brenner", "Art + Design Manager", "TBA", "TBA", "radio.artanddesign@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xft1/v/t1.0-9/11951825_10207541418163929_8298615012169738158_n.jpg?oh=7a26b318d1c5290835fde48280b1c2eb&oe=5702394E", callback);
-db.addManager("Regan Hsu", "Web Manager", "Wed 1-2PM", "The Station", "uclaradio.web@gmail.com", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xpt1/v/t1.0-9/12342662_10206930044742301_5206199238876877476_n.jpg?oh=f82dfc49a773e749f4cf2f335bf5c9d9&oe=571175FE", callback);
-db.addManager("Gee Leonardo", "Photo / Video Manager", "TBA", "TBA", "photoandvideo@uclaradio.com", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xtp1/v/t1.0-9/12227640_575714052584513_4778557768518796032_n.jpg?oh=5159b28ac75e96eb097b84a1a52a750d&oe=570FC0C1", callback);
-db.addManager("Kim Seltzer", "Comedy Manager", "By Appointment", "", "uclaradio.comedy@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xpt1/v/t1.0-9/11110575_1010112505668257_3301186109900778812_n.jpg?oh=92187372d4b4141475f03fd40b188da0&oe=57166B09", callback);
-
-db.addManager("Aliya Kamalova", "Comedy Asst. Manager", "By Appointment", "", "uclaradio.comedy@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xat1/v/t1.0-9/12088257_10200801882246758_7822281650510597887_n.jpg?oh=0a1b7bde02760f06ee2d2499bcd714d3&oe=57078F69", callback);
-db.addManager("Eric Aberbook", "Digital Press Manager", "TBA", "TBA", "radio.digitalpress@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/10981610_10204820998737513_6085244458543564994_n.jpg?oh=1b21b0184305d7ad377ed0072cabfdb3&oe=571739B2", callback);
-db.addManager("Britt Hewitt", "News Manager", "TBA", "TBA", "uclaradio.news@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/11896186_10205833160886515_2262455960785604428_n.jpg?oh=e1eb03ae56dfb43a7921903fe208d69d&oe=570C8FAB", callback);
-db.addManager("Scott Gee", "Events Manager", "TBA", "TBA", "radio.events@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xpt1/v/t1.0-9/12193772_10207720391912625_1538564929513905088_n.jpg?oh=d397f566970474400de26270d036de4c&oe=571763FB", callback);
-db.addManager("Nicolo Scolieri", "Productions Manager", "TBA", "TBA", "radio.productions@media.ucla.edu", "show", "show time", "https://scontent.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/10320469_10203202444076898_7181799369937496709_n.jpg?oh=ace176e27d16868ef3f095e48068101d&oe=5721B9C0", callback);
+db.addManager("Zach Seidl", "General Manager", "Mon 6-8PM, Wed 5-7PM", "The Station", "gm@uclaradio.com", "102.HEAVEN", "Mon 2-3PM", "/img/Managers/zachseidl.jpg", callback);
+db.addManager("Tyler Wennstrom", "Asst. General Manager", "Tues 3:30PM-5:00PM", "The Station", "agm@media.ucla.edu", "N/A", "N/A", "/img/Managers/tylerwennstrom.JPG", callback);
+db.addManager("Carla Rowley", "Intern Manager", "Wed 2-3PM", "The Station", "rowleycarla@ucla.edu", "show", "show time", "/img/Managers/carlarowley.JPG", callback);
+db.addManager("Alex Torpey", "Intern Manager", "Wed 2-3PM", "The Station", "uclaradio.interns@gmail.com", "The Discourse", "Wed 1-2PM", "/img/Managers/alextorpey.jpg", callback);
+db.addManager("Pamela Crick", "Promotions Manager", "Thurs 6-7PM", "The Station", "radio.promotions@media.ucla.edu", "Avocado Club", "Wed 8-9PM", "/img/Managers/pamelacrick.jpg", callback);
+db.addManager("Taylor Whelchel", "Marketing Manager", "TBA", "TBA", "radio.marketing@media.ucla.edu", "N/A", "N/A", "/img/Managers/taylorwhelchel.jpg", callback);
+db.addManager("Eva Maria Pino", "Music Manager", "Thurs 7-8 PM", "The Station", "radio.music@media.ucla.edu", "Who's That?", "Tues 2-3PM", "/img/Managers/evapino.jpg", callback);
+db.addManager("Angela Nguyen", "Music Manager", "Thurs 7-8 PM", "The Station", "radio.music@media.ucla.edu", "The Conventional Unknown", "Thurs 10-11PM", "/img/Managers/angelanguyen.jpg", callback);
+db.addManager("Matteo Vesprini-Heidrich", "Web Manager", "Wed 1-2PM", "The Station", "uclaradio.web@gmail.com", "Sleep Sounds", "Wed 10-11PM", "/img/Managers/matteo.jpg", callback);
+db.addManager("Regan Hsu", "Web Manager", "Wed 1-2PM", "The Station", "uclaradio.web@gmail.com", "N/A", "N/A", "/img/Managers/reganhsu.jpg", callback);
+db.addManager("Eddie Hernandez", "Digital Press Manager", "Tues 6-7PM", "The Station", "radio.digitalpress@media.ucla.edu", "Sleep Sounds", "Wed 10-11PM", "/img/Managers/eddiehernandez.JPG", callback);
+db.addManager("Eric Aberbook", "Digital Press Manager", "Tues 6-7PM", "The Station", "radio.digitalpress@media.ucla.edu", "N/A", "N/A", "/img/Managers/ericaberbook.jpg", callback);
+db.addManager("Gabe Brenner", "Art + Design Manager", "Thurs 5:30-6:30PM", "The Station", "radio.artanddesign@media.ucla.edu", "N/A", "N/A", "/img/Managers/gabebrenner.png", callback);
+db.addManager("Gee Leonardo", "Photo / Video Manager", "Thurs 6:15-8PM", "The Station", "photoandvideo@uclaradio.com", "N/A", "N/A", "/img/Managers/gleonardo.png", callback);
+db.addManager("Scott Gee", "Events Manager", "Tues 5-6PM", "The Station", "radio.events@media.ucla.edu", "Few Things Considered", "Fri 8-9PM",  "/img/Managers/scottgee.jpg", callback);
+db.addManager("Casey John Leonard", "News Manager", "Wed 5-6PM", "The Station", "cj.leonard@hotmail.com", "News Hour; In Conversation; Weekend Edition", "Mon & Thurs 5-6PM; Tues 1-2 PM; Sun 4-5 PM",  "/img/Managers/caseyleonard.jpg", callback);
+db.addManager("Willow Stowe", "Programming Manager", "Tues 5:30-6:30PM (week 3, 4 & 6)", "The Station", "radio.programming@media.ucla.edu", "Coffee Talk", "Sun 6-7 PM", "/img/Managers/willowstowe.jpg", callback);
+db.addManager("Gracie Phillips", "Programming Manager", "Tues 5:30-6:30PM (week 3, 4 & 6)", "The Station", "radio.programming@media.ucla.edu", "The Mighty Schwa", "Sun 11AM-12PM", "/img/Managers/graciephillips.jpg", callback);
+db.addManager("Kim Seltzer", "Comedy Manager", "Wed 2-2:30PM (even weeks)", "The Station", "uclaradio.comedy@media.ucla.edu", "Free Time", "Tues 6PM", "/img/Managers/kimseltzer.jpg", callback);
+db.addManager("Aliya Kamalova", "Comedy Manager", "Wed 2-2:30PM (even weeks)", "The Station", "uclaradio.comedy@media.ucla.edu", "Free Time", "Tues 6PM", "/img/Managers/aliyakamalova.jpg", callback);
+db.addManager("Nicolo Scolieri", "Productions Manager", "Thurs 6:15-6:45PM", "The Station", "radio.productions@media.ucla.edu", "Where In The World Is Carmen San Diego?", "Sat 11AM-12PM", "/img/Managers/nicoloscolieri.png", callback);
+db.addManager("Darryn Albert", "Sports Manager", "Fri 3-4PM", "The Station", "dnalbert@ucla.edu", "N/A", "N/A", "/img/Managers/darrynalbert.JPG", callback);
+db.addManager("Desiree Samler", "Fundraising Manager", "Wed 5-6PM", "The Station", "radio.fundraising@media.ucla.edu", "The Brunch Special", "Wed 2-3PM", "/img/Managers/desireesamler.png", callback);
 
 console.log("Finished updating managers");
