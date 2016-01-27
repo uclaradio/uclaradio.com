@@ -26,7 +26,7 @@ db.addManager("Willow Stowe", "Programming Manager", "Tues 5:30-6:30PM (week 3, 
 db.addManager("Gracie Phillips", "Programming Manager", "Tues 5:30-6:30PM (week 3, 4 & 6)", "The Station", "radio.programming@media.ucla.edu", "The Mighty Schwa", "Sun 11AM-12PM", "/img/Managers/graciephillips.jpg", callback);
 db.addManager("Kim Seltzer", "Comedy Manager", "Wed 2-2:30PM (even weeks)", "The Station", "uclaradio.comedy@media.ucla.edu", "Free Time", "Tues 6PM", "/img/Managers/kimseltzer.jpg", callback);
 db.addManager("Aliya Kamalova", "Comedy Manager", "Wed 2-2:30PM (even weeks)", "The Station", "uclaradio.comedy@media.ucla.edu", "Free Time", "Tues 6PM", "/img/Managers/aliyakamalova.jpg", callback);
-db.addManager("Nicolo Scolieri", "Productions Manager", "Thurs 6:15-6:45PM", "The Station", "radio.productions@media.ucla.edu", "Where In The World Is Carmen San Diego?", "Sat 11AM-12PM", "/img/Managers/nicoloscolieri.png", callback);
+db.addManager("Nicolo Scolieri", "Productions Manager", "Thurs 6:15-6:45PM", "The Station", "radio.productions@media.ucla.edu", "Where In The World Is Carmen Sandiego?", "Sat 11AM-12PM", "/img/Managers/nicoloscolieri.png", callback);
 db.addManager("Darryn Albert", "Sports Manager", "Fri 3-4PM", "The Station", "dnalbert@ucla.edu", "N/A", "N/A", "/img/Managers/darrynalbert.JPG", callback);
 db.addManager("Desiree Samler", "Fundraising Manager", "Wed 5-6PM", "The Station", "radio.fundraising@media.ucla.edu", "The Brunch Special", "Wed 2-3PM", "/img/Managers/desireesamler.png", callback);
 
