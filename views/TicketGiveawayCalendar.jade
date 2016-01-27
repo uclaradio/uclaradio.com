@@ -67,13 +67,15 @@ head
                 li
                   a(href='http://www.last.fm/music/' + event.summary.split("@")[0].replace(/\(.*\)/g,'').trim().split(" ").join('+'))
                     .Artist
-                      if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
-                      | &nbsp; &nbsp; &nbsp;
+                      if(event.summary.split("@").length > 1) 
+                        if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
+                        | &nbsp; &nbsp; &nbsp; &nbsp;
 
                       | #{event.summary.split("@")[0]}  
 
-                      if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
-                      | &nbsp; &nbsp; &nbsp;
+                      if(event.summary.split("@").length > 1)
+                        if(event.summary.split("@")[0].length < event.summary.split("@")[1].length)
+                        | &nbsp; &nbsp; &nbsp; &nbsp;
                     .Venue
                       | #{event.start.getDate()}
                       if(event.start.getDate()==11)
