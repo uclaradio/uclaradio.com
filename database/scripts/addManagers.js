@@ -13,7 +13,7 @@ db.addManager("Alex Torpey", "Intern Manager", "Wed 2-3PM", "The Station", "ucla
 db.addManager("Pamela Crick", "Promotions Manager", "Thurs 6-7PM", "The Station", "radio.promotions@media.ucla.edu", "Avocado Club", "Wed 8-9PM", "/img/Managers/pamelacrick.jpg", callback);
 db.addManager("Taylor Whelchel", "Marketing Manager", "TBA", "TBA", "radio.marketing@media.ucla.edu", "N/A", "N/A", "/img/Managers/taylorwhelchel.jpg", callback);
 db.addManager("Eva Maria Pino", "Music Manager", "Thurs 7-8 PM", "The Station", "radio.music@media.ucla.edu", "Who's That?", "Tues 2-3PM", "/img/Managers/evapino.jpg", callback);
-db.addManager("Angela Nguyen", "Music Manager", "Thurs 7-8 PM", "The Station", "radio.music@media.ucla.edu", "The Conventional Unknown", "Thurs 10-11PM", "/img/Managers/angelanguyen.jpg", callback);
+db.addManager("Angela Nguyen", "Music Manager", "Thurs 7-8 PM", "The Station", "radio.music@media.ucla.edu", "The Conventional Unknown", "Thurs 10-11PM", "/img/Managers/angelanguyen.png", callback);
 db.addManager("Matteo Vesprini-Heidrich", "Web Manager", "Wed 1-2PM", "The Station", "uclaradio.web@gmail.com", "Sleep Sounds", "Wed 10-11PM", "/img/Managers/matteo.jpg", callback);
 db.addManager("Regan Hsu", "Web Manager", "Wed 1-2PM", "The Station", "uclaradio.web@gmail.com", "N/A", "N/A", "/img/Managers/reganhsu.jpg", callback);
 db.addManager("Eddie Hernandez", "Digital Press Manager", "Tues 6-7PM", "The Station", "radio.digitalpress@media.ucla.edu", "Sleep Sounds", "Wed 10-11PM", "/img/Managers/eddiehernandez.JPG", callback);
