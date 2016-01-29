@@ -35,16 +35,18 @@ router.post('/', function(req, res, next) {
 		link = 'http://' + link;
 
 	if (password != passwords.secretpassword)
-		res.end("Incorrect Password.");	
+		return res.end("Incorrect Password.");	
 
 	//compress image
 	lwip.open(req.files.picture.path, function(err, image) {
-	   if (err) throw err;
-	   image.writeFile('public/' + thumbnail, {
-	   	quality: 30
-	   }, function(err) {
-	   	if(err) res.render('newBlurb', {status: 'Try Again! Image processing error - contact web :^('});
-	   	else { 
+		if (err)
+			throw err;
+
+		var options = { quality: 30 };
+
+		image.writeFile('public/' + thumbnail, options , function(err) {
+			if(err) return res.render('newBlurb', {status: 'Try Again! Image processing error - contact web :^('});
+
 			db.addBlurb(djName, showName, genre, description, link, timeslot, day, picture, thumbnail, function(err, blurbSaved) {
 				if (err) next(err);
 				if (blurbSaved)
@@ -52,14 +54,9 @@ router.post('/', function(req, res, next) {
 				else
 					res.render('newBlurb', {status: 'Try again! Something went wrong :^('});
 			});
-	 	};
 
-	   }
-	 );
+		});
 	});
-	
-
-
 });
 
 module.exports = router;
