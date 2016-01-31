@@ -3,15 +3,13 @@ var fs = require('fs');
 var helper_funcs = require('../routes/helper_funcs');
 var crypto 		= require('crypto'); // encryption
 // var moment 		= require('moment'); // dates
- 
-mongoose.connect('mongodb://192.241.193.240/local');
 
 var db = {};
 
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-	name: String,
+	username: String,
 	pass: String,
 	email: String,
 	djName: String
@@ -22,10 +20,10 @@ var UserModel = mongoose.model('User', UserSchema);
 
 /***** User Account Management *****/
 
-// log in a user with given name and password hash, with unspecific error msg
-db.autoLogin = function(name, pass, callback) {
-	UserModel.findOne({name: name}, function(err, o) {
-		if (o && o.pass = pass) {
+// log in a user with given username and password hash, with unspecific error msg
+db.autoLogin = function(username, pass, callback) {
+	UserModel.findOne({username: username}, function(err, o) {
+		if (o && o.pass == pass) {
 			// user logged in
 			callback(o);
 		}
@@ -36,9 +34,9 @@ db.autoLogin = function(name, pass, callback) {
 	});
 }
 
-// log in a user with given name and password, with 'invalid-pass' or 'user-not-found' error msg
-db.manualLogin = function(name, pass, callback) {
-	UserModel.findOne({name: name}, function(err, o) {
+// log in a user with given username and password, with 'invalid-pass' or 'user-not-found' error msg
+db.manualLogin = function(username, pass, callback) {
+	UserModel.findOne({username: username}, function(err, o) {
 		if (o == null) {
 			callback('user-not-found');
 		}
@@ -57,14 +55,14 @@ db.manualLogin = function(name, pass, callback) {
 }
 
 // create a new user with the given user data
-db.addNewAccount = function(name, pass, email, djName, callback) {
+db.addNewAccount = function(username, pass, email, djName, callback) {
 	newData = {
-		"name": name,
+		"username": username,
 		"email": email,
 		"djName": djName
 	};
 
-	UserModel.findOne({name: newData.name}, function(err, o) {
+	UserModel.findOne({username: newData.username}, function(err, o) {
 		if (o) {
 			callback('username-taken');
 		}
@@ -88,9 +86,9 @@ db.addNewAccount = function(name, pass, email, djName, callback) {
 	});
 }
 
-// update email, djName on a user with the given name
-db.updateAccount = function(name, email, djName, callback) {
-	UserModel.findOne({name: name}, function(err, o) {
+// update email, djName on a user with the given username
+db.updateAccount = function(username, email, djName, callback) {
+	UserModel.findOne({username: username}, function(err, o) {
 		o.email = email;
 		o.djName = djName;
 

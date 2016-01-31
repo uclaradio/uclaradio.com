@@ -1,0 +1,40 @@
+
+extends layout
+
+block content
+
+	.github-fork-ribbon-wrapper.right
+		.github-fork-ribbon(style='background-color: #333;')
+			a(href="https://github.com/braitsch/node-login") View On Github
+
+	#login-container
+		form( method="post")#login-form.well.span4
+			h1 Hello!
+			p.subheading Please Login To Your Account
+			label Username 
+			input(type="text", name="user", id='user-tf').span4.required
+			label Password
+			input(type="password", name="pass", id='pass-tf').span4.required
+			button(type="submit")#btn-login.btn.btn-primary
+				i.icon-lock.icon-white
+				| Sign in
+			label#remember-me.checkbox Remember Me
+				input(type="checkbox", checked='checked')
+			div.clear-fix
+			hr
+			div.btm-links
+				a(href='#')#forgot-password Forgot Your Password?
+				a(href='/signup')#create-account Create An Account
+
+	include modals/alert
+	include modals/lost-password
+
+block scripts
+	script(src='/panel/vendor/jquery.min.js')
+	script(src='/panel/vendor/jquery.form.js')
+	script(src='/panel/vendor/bootstrap-modal.js')
+	script(src='/panel/vendor/bootstrap-transition.js')
+	script(src='/panel/js/views/login.js')
+	script(src='/panel/js/controllers/loginController.js')
+	script(src='/panel/js/form-validators/loginValidator.js')
+	script(src='/panel/js/form-validators/emailValidator.js')
