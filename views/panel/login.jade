@@ -3,10 +3,6 @@ extends layout
 
 block content
 
-	.github-fork-ribbon-wrapper.right
-		.github-fork-ribbon(style='background-color: #333;')
-			a(href="https://github.com/braitsch/node-login") View On Github
-
 	#login-container
 		form( method="post")#login-form.well.span4
 			h1 Hello!
@@ -24,7 +20,7 @@ block content
 			hr
 			div.btm-links
 				a(href='#')#forgot-password Forgot Your Password?
-				a(href='/signup')#create-account Create An Account
+				a(href='/panel/signup')#create-account Create An Account
 
 	include modals/alert
 	include modals/lost-password

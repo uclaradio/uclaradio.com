@@ -3,7 +3,8 @@ var router = express.Router();
 var db = require('../database/db');
 var accounts = require('../database/dbAccounts.js');
 
-// main log in page
+
+/***** Main Log In Page *****/
 router.get('/', function(req, res) {
 	// check credentials
 	if (req.cookies.username == undefined || req.cookies.pass == undefined) {
@@ -13,7 +14,7 @@ router.get('/', function(req, res) {
 		accounts.autoLogin(req.cookies.username, req.cookies.pass, function(o) {
 			if (o != null) {
 				req.session.user = o;
-				res.redirect('/home');
+				res.redirect('/panel/home');
 			}
 			else {
 				res.render('panel/login', {title: 'Log In'});
@@ -38,11 +39,13 @@ router.post('/', function(req, res) {
 	});
 });
 
-// user homepage
+
+/***** User Home Page *****/
+
 router.get('/home', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
-		res.redirect('/');
+		res.redirect('/panel');
 	}
 	else {
 		res.render('panel/home', {
@@ -51,5 +54,14 @@ router.get('/home', function(req, res) {
 		});
 	}
 });
+
+
+/***** New Accounts *****/
+
+router.get('/signup', function(req, res) {
+	res.render('signup', {title: 'Signup'});
+});
+
+//router.post('/signup', function(req, res))
 
 module.exports = router;
