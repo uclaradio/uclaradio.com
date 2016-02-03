@@ -8,8 +8,8 @@ var callback = function(err, managerSaved){ if (err) { console.log("error occurr
 //db.addManager(name, position, meetingTime, meetingPlace, email, showName, showTime, photo, callback)
 db.addManager("Zach Seidl", "General Manager", "Mon 6-8PM, Wed 5-7PM", "The Station", "gm@uclaradio.com", "102.HEAVEN", "Mon 2-3PM", "/img/Managers/zachseidl.jpg", callback);
 db.addManager("Tyler Wennstrom", "Asst. General Manager", "Tues 3:30PM-5:00PM", "The Station", "agm@media.ucla.edu", "N/A", "N/A", "/img/Managers/tylerwennstrom.JPG", callback);
-db.addManager("Carla Rowley", "Intern Manager", "Wed 2-3PM", "The Station", "rowleycarla@ucla.edu", "N/A", "N/A", "/img/Managers/carlarowley.JPG", callback);
-db.addManager("Alex Torpey", "Intern Manager", "Wed 2-3PM", "The Station", "uclaradio.interns@gmail.com", "The Discourse", "Wed 1-2PM", "/img/Managers/alextorpey.jpg", callback);
+db.addManager("Carla Rowley", "Intern Manager", "Tues 8-9PM", "Bunche 2178", "rowleycarla@ucla.edu", "N/A", "N/A", "/img/Managers/carlarowley.JPG", callback);
+db.addManager("Alex Torpey", "Intern Manager", "Tues 8-9PM", "Bunche 2178", "uclaradio.interns@gmail.com", "The Discourse", "Wed 1-2PM", "/img/Managers/alextorpey.jpg", callback);
 db.addManager("Pamela Crick", "Promotions Manager", "Thurs 6-7PM", "The Station", "radio.promotions@media.ucla.edu", "Avocado Club", "Wed 8-9PM", "/img/Managers/pamelacrick.jpg", callback);
 db.addManager("Taylor Whelchel", "Marketing Manager", "TBA", "TBA", "radio.marketing@media.ucla.edu", "N/A", "N/A", "/img/Managers/taylorwhelchel.jpg", callback);
 db.addManager("Eva Maria Pino", "Music Manager", "Thurs 7-8 PM", "The Station", "radio.music@media.ucla.edu", "Who's That?", "Tues 2-3PM", "/img/Managers/evapino.jpg", callback);
