@@ -1,8 +1,11 @@
 var mongoose = require('mongoose');
 var fs = require('fs');
 var helper_funcs = require('../routes/helper_funcs');
+
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
  
-mongoose.connect('mongodb://192.241.193.240/local');
+mongoose.connect('mongodb://localhost/local', options);
 
 var db = {};
 
