@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 
@@ -35,6 +36,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(session({
+  key: "mysite.sid.uid.whatever",
+  secret: "faeb4453e5d14fe6f6d04637f78077c76c73d1b4",
+  cookie: {
+    maxAge: 2678400000 // 31 days
+  },
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(multer({ dest: './public/blurbImages/'}));
 

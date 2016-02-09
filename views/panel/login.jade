@@ -8,7 +8,7 @@ block content
 			h1 Hello!
 			p.subheading Please Login To Your Account
 			label Username 
-			input(type="text", name="user", id='user-tf').span4.required
+			input(type="text", name="username", id='user-tf').span4.required
 			label Password
 			input(type="password", name="pass", id='pass-tf').span4.required
 			button(type="submit")#btn-login.btn.btn-primary
@@ -20,7 +20,7 @@ block content
 			hr
 			div.btm-links
 				a(href='#')#forgot-password Forgot Your Password?
-				a(href='/panel/signup')#create-account Create An Account
+				a(href=':signup')#create-account Create An Account
 
 	include modals/alert
 	include modals/lost-password

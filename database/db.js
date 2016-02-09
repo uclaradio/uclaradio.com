@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var fs = require('fs');
 var helper_funcs = require('../routes/helper_funcs');
  
-mongoose.connect('mongodb://192.241.193.240/local');
+mongoose.connect('mongodb://localhost/local');
 
 var db = {};
 

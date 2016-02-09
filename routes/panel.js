@@ -14,7 +14,9 @@ router.get('/', function(req, res) {
 		accounts.autoLogin(req.cookies.username, req.cookies.pass, function(o) {
 			if (o != null) {
 				req.session.user = o;
+
 				res.redirect('/panel/home');
+				
 			}
 			else {
 				res.render('panel/login', {title: 'Log In'});
@@ -43,6 +45,7 @@ router.post('/', function(req, res) {
 /***** User Home Page *****/
 
 router.get('/home', function(req, res) {
+	
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
 		res.redirect('/panel');
@@ -53,13 +56,31 @@ router.get('/home', function(req, res) {
 			udata: req.session.user
 		});
 	}
+	
+	/*
+	res.render('panel/home', {
+		title: 'Panel',
+		udata: req.session.user
+	});
+	*/
 });
 
 
 /***** New Accounts *****/
 
 router.get('/signup', function(req, res) {
-	res.render('signup', {title: 'Signup'});
+	res.render('panel/signup', {title: 'Signup'});
+});
+
+router.post('/signup', function(req, res) {
+	accounts.addNewAccount(req.body['name'], req.body['pass'], req.body['email'], req.body['djName'], function(e) {
+		if (e) {
+			res.status(400).send(e);
+		}
+		else {
+			res.status(200).send('ok');
+		}
+	});
 });
 
 //router.post('/signup', function(req, res))

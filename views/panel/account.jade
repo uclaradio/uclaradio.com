@@ -18,12 +18,10 @@ input(type='hidden', value= user._id)#userId
 				label.control-label(for='email-tf') Email
 				.controls
 					input#email-tf(type='text', name='email', value= user.email)
-			#clist-cg.control-group
-				label.control-label(for='country-list') Location
+			#djName-cg.control-group
+				label.control-label(for='djName-tf') Email
 				.controls
-					select#country-list(name='country')
-						each item in countries
-							option(selected=item.name == user.country)= item.name
+					input#djName-tf(type='text', name='djName', value= user.djName)
 			hr
 			p#sub2.subheading
 			#user-cg.control-group
@@ -37,7 +35,7 @@ input(type='hidden', value= user._id)#userId
 			hr
 			.form-buttons
 				button(type='button')#account-form-btn1.btn
-				button(type='submit')#account-form-btn2.btn
+				button(type='submit')#account-form-btn2.btn submit
 
 // display form errors in a custom modal window //
 

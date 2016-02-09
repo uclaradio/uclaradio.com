@@ -39,6 +39,7 @@ db.manualLogin = function(username, pass, callback) {
 	UserModel.findOne({username: username}, function(err, o) {
 		if (o == null) {
 			callback('user-not-found');
+			console.log("user not found: ", username);
 		}
 		else {
 			validatePassword(pass, o.pass, function(err, res) {
@@ -48,6 +49,7 @@ db.manualLogin = function(username, pass, callback) {
 				}
 				else {
 					callback('invalid-pass');
+					console.log("invalid pass");
 				}
 			});
 		}
