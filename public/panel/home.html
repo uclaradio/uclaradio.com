@@ -5,6 +5,8 @@
     <title>DJ Panel</title>
     <!-- Not present in the tutorial. Just for basic styling. -->
     <link rel="stylesheet" href="/panel/css/base.css" />
+    <link rel='stylesheet' href='/panel/vendor/bootstrap.min.css' />
+    <link rel='stylesheet' href='/panel/css/style.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
@@ -12,7 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
   </head>
   <body>
-    <div id="centered">
+    <div id="container" class="well">
+      <p id="logout"><a href="/panel/logout">Log Out</a></p>
       <h2>DJ Panel</h2>
       <br />
       <div id="content"></div>

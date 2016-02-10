@@ -16,6 +16,10 @@ a:hover {
   text-decoration: underline;
 }
 
+#logout {
+  float: right;
+}
+
 code {
   background-color: #f8f8f8;
   border: 1px solid #ddd;

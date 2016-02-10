@@ -3,7 +3,7 @@ extends layout
 
 block content
 
-	#login-container
+	#container
 		form( method="post")#login-form.well.span4
 			h1 Hello!
 			p.subheading Please Login To Your Account
@@ -20,7 +20,7 @@ block content
 			hr
 			div.btm-links
 				a(href='#')#forgot-password Forgot Your Password?
-				a(href=':signup')#create-account Create An Account
+				a(href='/panel/signup')#create-account Request An Account
 
 	include modals/alert
 	include modals/lost-password

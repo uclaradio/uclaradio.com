@@ -60,8 +60,8 @@ router.get('/logout', function(req, res) {
 		res.clearCookie('user');
 		res.clearCookie('pass');
 		req.session.destroy();
-		res.redirect('/panel');
 	}
+	res.redirect('/panel');
 });
 
 
@@ -72,12 +72,12 @@ router.get('/signup', function(req, res) {
 });
 
 router.post('/signup', function(req, res) {
-	accounts.addNewAccount(req.body['name'], req.body['pass'], req.body['email'], req.body['djName'], function(e) {
+	accounts.addNewAccount(req.body['username'], req.body['pass'], req.body['email'], req.body['djName'], function(e) {
 		if (e) {
 			res.status(400).send(e);
 		}
 		else {
-			res.status(200).send('ok');
+			res.redirect('/panel');
 		}
 	});
 });

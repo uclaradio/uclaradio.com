@@ -10,31 +10,27 @@ input(type='hidden', value= user._id)#userId
 		p#sub1.subheading Please tell us a little about yourself.
 		hr
 		fieldset
-			#name-cg.control-group
-				label.control-label(for='name-tf') Name
-				.controls
-					input#name-tf(type='text', name='name', value= user.name)
-			#email-cg.control-group
-				label.control-label(for='email-tf') Email
-				.controls
-					input#email-tf(type='text', name='email', value= user.email)
-			#djName-cg.control-group
-				label.control-label(for='djName-tf') Email
-				.controls
-					input#djName-tf(type='text', name='djName', value= user.djName)
-			hr
-			p#sub2.subheading
 			#user-cg.control-group
 				label.control-label(for='user-tf') Username
 				.controls
-					input#user-tf.disabled(type='text', name='user', value= user.user)
+					input#user-tf.disabled(type='text', name='username', value= user.user)
 			#pass-cg.control-group
 				label.control-label(for='pass-tf') Password
 				.controls
 					input#pass-tf(type='password', name='pass', value='')
 			hr
+			p#sub2.subheading
+			#email-cg.control-group
+				label.control-label(for='email-tf') Email
+				.controls
+					input#email-tf(type='text', name='email', value= user.email)
+			#djName-cg.control-group
+				label.control-label(for='djName-tf') DJ Name
+				.controls
+					input#djName-tf(type='text', name='djName', value= user.djName)
+			hr
 			.form-buttons
-				button(type='button')#account-form-btn1.btn
+				button(type='button',onclick="window.location.href='/panel'")#account-form-btn1.btn back
 				button(type='submit')#account-form-btn2.btn submit
 
 // display form errors in a custom modal window //
