@@ -12,7 +12,8 @@ var UserSchema = new Schema({
 	username: String,
 	pass: String,
 	email: String,
-	djName: String
+	djName: String,
+	phone: String
 }, {collection: 'User'});
 
 var UserModel = mongoose.model('User', UserSchema);
@@ -89,15 +90,11 @@ db.addNewAccount = function(username, pass, email, djName, callback) {
 }
 
 // update email, djName on a user with the given username
-db.updateAccount = function(username, email, djName, callback) {
-	UserModel.findOne({username: username}, function(err, o) {
-		o.email = email;
-		o.djName = djName;
-
-		UserModel.save(o, {safe: true}, function(err) {
-			if (err) callback(err);
-			else callback(null, o);
-		});
+db.updateAccount = function(username, email, djName, phone, callback) {
+	var newData = {"email": email, "djName": djName, "phone": phone};
+	UserModel.findOneAndUpdate({'username': username}, newData, {upsert:true, new:true}, function(err, o) {
+    	if (err) return res.send(500, { error: err });
+    	callback(null, o);
 	});
 }
 

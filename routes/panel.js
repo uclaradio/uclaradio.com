@@ -45,24 +45,23 @@ router.post('/', function(req, res) {
 /***** User Home Page *****/
 
 router.get('/home', function(req, res) {
-	
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
 		res.redirect('/panel');
 	}
 	else {
-		res.render('panel/home', {
-			title: 'Panel',
-			udata: req.session.user
-		});
+		var path = require('path');
+		res.sendFile(path.resolve('public/panel/home.html'));
 	}
-	
-	/*
-	res.render('panel/home', {
-		title: 'Panel',
-		udata: req.session.user
-	});
-	*/
+});
+
+router.get('/logout', function(req, res) {
+	if (req.session.user) {
+		res.clearCookie('user');
+		res.clearCookie('pass');
+		req.session.destroy();
+		res.redirect('/panel');
+	}
 });
 
 
@@ -83,6 +82,44 @@ router.post('/signup', function(req, res) {
 	});
 });
 
-//router.post('/signup', function(req, res))
+
+/***** New Accounts *****/
+
+router.get('/api/updateUser', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		var user = req.session.user;
+		var userData = {"username": user.username, "djName": user.djName, "email": user.email, "phone": user.phone};
+		res.json(userData);
+		//res.json({"username": "senor danger", "djName": "Tommy", "email": "danger@example.com"});
+	}
+});
+
+router.post('/api/updateUser', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		if (req.session.user.username != req.body.username) {
+			res.status(400).send(e);
+		}
+		else {
+			// update user info
+			var callback = function(err, user) {
+				if (err) { console.log("failed to update user: ", err); }
+				else {
+					var userData = {"username": user.username, "djName": user.djName, "email": user.email, "phone": user.phone};
+					res.json(userData);
+				}
+			};
+			accounts.updateAccount(req.body.username, req.body.email, req.body.djName, req.body.phone, callback);
+		}
+	}
+});
+
 
 module.exports = router;
