@@ -153,7 +153,7 @@ db.getUserByEmail = function(email, callback) {
 
 // return array of all users
 db.getAllUsers = function(callback) {
-	UserModel.find().toArray(function(err, res) {
+	UserModel.find(function(err, res) {
 		if (err) {
 			callback(err);
 		}
@@ -214,12 +214,12 @@ var getObjectId = function(id) {
 /***** Shows *****/
 
 // create a new show with the given data
-db.addNewShow = function(title, day, time, djName, callback) {
+db.addNewShow = function(title, day, time, djs, callback) {
 	newData = {
 		"title": title,
 		"day": day,
 		"time": time,
-		"djName": djName
+		"djs": djs
 	};
 
 	ShowModel.findOne({title: newData.title}, function(err, o) {
@@ -262,7 +262,7 @@ db.updateShow = function(title, day, time, djs, genre, blurb, picture, thumbnail
 };
 
 db.getShowsForUser = function(djUsername, callback) {
-	UserModel.find({djs: djUsername}).toArray(function(err, res) {
+	ShowModel.find({djs: djUsername}, function(err, res) {
 		if (err) {
 			callback(err);
 		}

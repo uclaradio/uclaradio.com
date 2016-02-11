@@ -122,4 +122,45 @@ router.post('/api/updateUser', function(req, res) {
 });
 
 
+/***** Show Info *****/
+
+router.get('/api/shows', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		// return list of shows belonging to current user
+		var callback = function(err, shows) {
+			if (err) { console.log("failed to retrieve shows for user: ", err); }
+			else {
+				res.json(shows);
+			}
+		}
+		accounts.getShowsForUser(req.session.user.username, callback);
+	}
+});
+
+router.post('/api/addShow', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		var callback = function(err, saved) {
+			if (err) { console.log("failed to add show for user: ", err); }
+			else {
+				if (saved) {
+					// return list of shows
+					res.redirect('/panel/api/shows');
+				}
+				else { res.status(400).send(e); }
+			}
+		}
+		// addNewShow = function(title, day, time, djs, callback) {
+		accounts.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], callback);
+	}
+});
+
+
 module.exports = router;
