@@ -83,9 +83,9 @@ router.post('/signup', function(req, res) {
 });
 
 
-/***** New Accounts *****/
+/***** Account Info *****/
 
-router.get('/api/updateUser', function(req, res) {
+router.get('/api/user', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
 		res.redirect('/panel');

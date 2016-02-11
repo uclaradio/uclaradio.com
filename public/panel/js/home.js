@@ -38,7 +38,7 @@ var UserData = React.createClass({
     updatedUser.username = oldUser.username;
     this.setState({user: updatedUser});
     $.ajax({
-      url: this.props.url,
+      url: this.props.updateUrl,
       dataType: 'json',
       type: 'POST',
       data: updatedUser,
@@ -47,7 +47,7 @@ var UserData = React.createClass({
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({user: oldUser});
-        console.error(this.props.url, status, err.toString());
+        console.error(this.props.updateUrl, status, err.toString());
       }.bind(this)
     });
   },
@@ -62,95 +62,36 @@ var UserData = React.createClass({
       <div className="userData">
         <h2>{this.state.user.username}</h2>
 
-        <UserEditableTextField name="DJ Name" currentValue={this.state.user.djName} onTextSubmit={this.handleDJNameSubmit}/>
-        <UserEditableTextField name="Email" currentValue={this.state.user.email} onTextSubmit={this.handleEmailSubmit}/>
-        <UserEditableTextField name="Phone Number" currentValue={this.state.user.phone} onTextSubmit={this.handlePhoneSubmit}/>
+        <UserEditableTextField name="DJ Name" currentValue={this.state.user.djName} onTextSubmit={this.handleDJNameSubmit} />
+        <UserEditableTextField name="Email" currentValue={this.state.user.email} onTextSubmit={this.handleEmailSubmit} />
+        <UserEditableTextField name="Phone Number" currentValue={this.state.user.phone} onTextSubmit={this.handlePhoneSubmit} />
 
         <br />
-        <p>No page links available</p>
+        <ShowsList />
       </div>
     );
   }
 });
 
-/*
-var UserTextForm = React.createClass({
+var ShowsList = React.createClass({
   getInitialState: function() {
-    return {text: ''};
-  },
-  handleTextChange: function(e) {
-    this.setState({text: e.target.value});
-  },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var text = this.state.text.trim();
-    if (!text) {
-      return;
-    }
-    this.props.onTextSubmit(text)
-    this.setState({text: ''});
+    return {shows: []};
   },
   render: function() {
+    // list shows
     return (
-      <form className="userTextForm" onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          placeholder={this.props.name}
-          value={this.state.text}
-          onChange={this.handleTextChange}
-        />
-        <input type="submit" value="Update" />
-      </form>
-    );
-  }
-});
-*/
-
-var UserEditableTextField = React.createClass({
-  getInitialState: function() {
-    return {text: '', editableField: false};
-  },
-  handleTextChange: function(e) {
-    this.setState({text: e.target.value});
-  },
-  toggleEditableField: function(e) {
-    this.setState({text: '', editableField: !this.state.editableField})
-  },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var text = this.state.text.trim();
-    if (!text) {
-      return;
-    }
-    this.props.onTextSubmit(text)
-    this.setState({text: '', editableField: false});
-  },
-  render: function() {
-    return (
-      <div className="userEditableTextField">
-      { this.state.editableField ?
-        // field edit/submittable
-        <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          id="no_bottom_margins"
-          placeholder={this.props.name}
-          value={this.state.text}
-          onChange={this.handleTextChange}
-        />
-        &ensp;<input type="submit" id="no_bottom_margins" value="Update" />
-        &ensp;<a onClick={this.toggleEditableField}>Cancel</a>
-        </form>
-      :
-      // locked to user input
-      <p>{this.props.name}: {this.props.currentValue} <a onClick={this.toggleEditableField}>Edit</a></p>
-    }
+      <div className="showsList">
+      <h2> Shows </h2>
+      <ul>
+        <li>No shows found.</li>
+      </ul>
     </div>
     );
   }
 });
 
+
 ReactDOM.render(
-  <UserData url="/panel/api/updateUser"/>,
+  <UserData url="/panel/api/user" updateUrl="/panel/api/updateUser" />,
   document.getElementById('content')
 );

@@ -13,10 +13,36 @@ var UserSchema = new Schema({
 	pass: String,
 	email: String,
 	djName: String,
-	phone: String
+	phone: String,
+	privileges: [String]
 }, {collection: 'User'});
 
+var ShowSchema = new Schema({
+	title: String,
+	day: String,
+	time: String,
+	djs: [String], // collection of username strings
+	genre: String,
+	blurb: String,
+	picture: String,
+	thumbnail: String,
+	pages: {
+		title: String,
+		link: String
+	},
+	episodes: {
+		date: Date,
+		title: String,
+		picture: String,
+		link: String,
+		description: String
+	}
+});
+
+
 var UserModel = mongoose.model('User', UserSchema);
+
+var ShowModel = mongoose.model('Show', ShowSchema);
 
 
 /***** User Account Management *****/
@@ -92,7 +118,7 @@ db.addNewAccount = function(username, pass, email, djName, callback) {
 // update email, djName on a user with the given username
 db.updateAccount = function(username, email, djName, phone, callback) {
 	var newData = {"email": email, "djName": djName, "phone": phone};
-	UserModel.findOneAndUpdate({'username': username}, newData, {upsert:true, new:true}, function(err, o) {
+	UserModel.findOneAndUpdate({'username': username}, newData, {upsert:false, new:true}, function(err, o) {
     	if (err) return res.send(500, { error: err });
     	callback(null, o);
 	});
@@ -183,6 +209,76 @@ var getObjectId = function(id) {
 		}
 	});
 }
+
+
+/***** Shows *****/
+
+// create a new show with the given data
+db.addNewShow = function(title, day, time, djName, callback) {
+	newData = {
+		"title": title,
+		"day": day,
+		"time": time,
+		"djName": djName
+	};
+
+	ShowModel.findOne({title: newData.title}, function(err, o) {
+		if (o) {
+			callback('title-taken');
+		}
+		else {
+			ShowModel.findOne({day: newData.day, time: newData.time}, function(err, o) {
+				if (o) {
+					callback('time-taken');
+				}
+				else {
+					var newShow = new ShowModel(newData);
+					newShow.save(function(err, saved) {
+						callback(err, saved);
+					});
+				}
+			});
+		}
+	});
+}
+
+db.updateShow = function(title, day, time, djs, genre, blurb, picture, thumbnail, pages, episodes, callback) {
+	var newData = {
+		"day": day,
+		"time": time,
+		"djs": djs,
+		"genre": genre,
+		"blurb": blurb,
+		"picture": picture,
+		"thumbnail": thumbnail,
+		"pages": pages,
+		"episodes": episodes
+	};
+
+	ShowModel.findOneAndUpdate({'title': title}, newData, {upsert:true, new:true}, function(err, o) {
+    	if (err) return res.send(500, { error: err });
+    	callback(null, o);
+	});
+};
+
+db.getShowsForUser = function(djUsername, callback) {
+	UserModel.find({djs: djUsername}).toArray(function(err, res) {
+		if (err) {
+			callback(err);
+		}
+		else {
+			callback(null, res);
+		}
+	});
+};
+
+db.getShow = function(title, callback) {
+	ShowModel.findOne({title: title}, function(err, o) {
+		if (o) {
+			callback(o);
+		}
+	});
+};
 
 
 module.exports = db;
