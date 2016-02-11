@@ -17,25 +17,25 @@ var UserData = React.createClass({
     });
   },
   handleDJNameSubmit: function(newDJName) {
-    var user = this.state.user;
+    var user = $.extend(true, {}, this.state.user);
     user.djName = newDJName;
     this.handleUserDataSubmit(user);
   },
   handleEmailSubmit: function(newEmail) {
-    var user = this.state.user;
+    var user = $.extend(true, {}, this.state.user);
     user.email = newEmail;
     this.handleUserDataSubmit(user);
   },
   handlePhoneSubmit: function(newPhone) {
-    var user = this.state.user;
+    var user = $.extend(true, {}, this.state.user);
     user.phone = newPhone;
     this.handleUserDataSubmit(user);
   },
   handleUserDataSubmit: function(updatedUser) {
-    var user = this.state.user;
+    var oldUser = this.state.user;
     console.log("submiting username: ", updatedUser.username, ", djName: ", updatedUser.djName, ", email: ", updatedUser.email, ", phone:", updatedUser.phone);
     // Optimistically update local data
-    updatedUser.username = user.username;
+    updatedUser.username = oldUser.username;
     this.setState({user: updatedUser});
     $.ajax({
       url: this.props.url,
@@ -46,7 +46,7 @@ var UserData = React.createClass({
         this.setState({user: user});
       }.bind(this),
       error: function(xhr, status, err) {
-        this.setState({user: user});
+        this.setState({user: oldUser});
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
@@ -61,21 +61,22 @@ var UserData = React.createClass({
     return (
       <div className="userData">
         <h2>{this.state.user.username}</h2>
-        <p>DJ Name: {this.state.user.djName}</p>
-        <p>Email: {this.state.user.email}</p>
-        <p>Phone Number: {this.state.user.phone}</p>
 
-        <UserTextForm name="DJ Name" onTextSubmit={this.handleDJNameSubmit}/>
-        <UserTextForm name="Email" onTextSubmit={this.handleEmailSubmit}/>
-        <UserTextForm name="Phone Number" onTextSubmit={this.handlePhoneSubmit}/>
+        <UserEditableTextField name="DJ Name" currentValue={this.state.user.djName} onTextSubmit={this.handleDJNameSubmit}/>
+        <UserEditableTextField name="Email" currentValue={this.state.user.email} onTextSubmit={this.handleEmailSubmit}/>
+        <UserEditableTextField name="Phone Number" currentValue={this.state.user.phone} onTextSubmit={this.handlePhoneSubmit}/>
+
+        <br />
+        <p>No page links available</p>
       </div>
     );
   }
 });
 
+/*
 var UserTextForm = React.createClass({
   getInitialState: function() {
-    return {property: ''};
+    return {text: ''};
   },
   handleTextChange: function(e) {
     this.setState({text: e.target.value});
@@ -103,147 +104,53 @@ var UserTextForm = React.createClass({
     );
   }
 });
+*/
 
+var UserEditableTextField = React.createClass({
+  getInitialState: function() {
+    return {text: '', editableField: false};
+  },
+  handleTextChange: function(e) {
+    this.setState({text: e.target.value});
+  },
+  toggleEditableField: function(e) {
+    this.setState({text: '', editableField: !this.state.editableField})
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var text = this.state.text.trim();
+    if (!text) {
+      return;
+    }
+    this.props.onTextSubmit(text)
+    this.setState({text: '', editableField: false});
+  },
+  render: function() {
+    return (
+      <div className="userEditableTextField">
+      { this.state.editableField ?
+        // field edit/submittable
+        <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          id="no_bottom_margins"
+          placeholder={this.props.name}
+          value={this.state.text}
+          onChange={this.handleTextChange}
+        />
+        &ensp;<input type="submit" id="no_bottom_margins" value="Update" />
+        &ensp;<a onClick={this.toggleEditableField}>Cancel</a>
+        </form>
+      :
+      // locked to user input
+      <p>{this.props.name}: {this.props.currentValue} <a onClick={this.toggleEditableField}>Edit</a></p>
+    }
+    </div>
+    );
+  }
+});
 
 ReactDOM.render(
   <UserData url="/panel/api/updateUser"/>,
   document.getElementById('content')
 );
-
-/*
-var Comment = React.createClass({
-  rawMarkup: function() {
-    var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
-    return { __html: rawMarkup };
-  },
-
-  render: function() {
-    return (
-      <div className="comment">
-        <h2 className="commentAuthor">
-          {this.props.author}
-        </h2>
-        <span dangerouslySetInnerHTML={this.rawMarkup()} />
-      </div>
-    );
-  }
-});
-
-var CommentBox = React.createClass({
-  loadCommentsFromServer: function() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  },
-  handleCommentSubmit: function(comment) {
-    var comments = this.state.data;
-    // Optimistically set an id on the new comment. It will be replaced by an
-    // id generated by the server. In a production application you would likely
-    // not use Date.now() for this and would have a more robust system in place.
-    comment.id = Date.now();
-    var newComments = comments.concat([comment]);
-    this.setState({data: newComments});
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      type: 'POST',
-      data: comment,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        this.setState({data: comments});
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  },
-  getInitialState: function() {
-    return {data: []};
-  },
-  componentDidMount: function() {
-    this.loadCommentsFromServer();
-    setInterval(this.loadCommentsFromServer, this.props.pollInterval);
-  },
-  render: function() {
-    return (
-      <div className="commentBox">
-        <h1>Comments</h1>
-        <CommentList data={this.state.data} />
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
-      </div>
-    );
-  }
-});
-
-var CommentList = React.createClass({
-  render: function() {
-    var commentNodes = this.props.data.map(function(comment) {
-      return (
-        <Comment author={comment.author} key={comment.id}>
-          {comment.text}
-        </Comment>
-      );
-    });
-    return (
-      <div className="commentList">
-        {commentNodes}
-      </div>
-    );
-  }
-});
-
-var CommentForm = React.createClass({
-  getInitialState: function() {
-    return {author: '', text: ''};
-  },
-  handleAuthorChange: function(e) {
-    this.setState({author: e.target.value});
-  },
-  handleTextChange: function(e) {
-    this.setState({text: e.target.value});
-  },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var author = this.state.author.trim();
-    var text = this.state.text.trim();
-    if (!text || !author) {
-      return;
-    }
-    this.props.onCommentSubmit({author: author, text: text});
-    this.setState({author: '', text: ''});
-  },
-  render: function() {
-    return (
-      <form className="commentForm" onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          placeholder="Your name"
-          value={this.state.author}
-          onChange={this.handleAuthorChange}
-        />
-        <input
-          type="text"
-          placeholder="Say something..."
-          value={this.state.text}
-          onChange={this.handleTextChange}
-        />
-        <input type="submit" value="Post" />
-      </form>
-    );
-  }
-});
-
-ReactDOM.render(
-  <CommentBox url="/api/comments" pollInterval={2000} />,
-  document.getElementById('content')
-);
-
-*/

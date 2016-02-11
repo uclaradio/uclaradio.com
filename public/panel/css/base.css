@@ -16,9 +16,16 @@ a:hover {
   text-decoration: underline;
 }
 
+/*  Edits */
 #logout {
   float: right;
 }
+
+#no_bottom_margins {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+/* /Edits */
 
 code {
   background-color: #f8f8f8;
