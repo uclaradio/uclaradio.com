@@ -43,9 +43,9 @@ router.post('/', function(req, res) {
 
 
 /***** User Home Page *****/
-
-router.get('/home', function(req, res) {
-	if (req.session.user == null) {
+/*
+router.get('/:home', function(req, res) {
+	//if (req.session.user == null) {
 		// not logged in, redirect to log in page
 		res.redirect('/panel');
 	}
@@ -63,7 +63,7 @@ router.get('/logout', function(req, res) {
 	}
 	res.redirect('/panel');
 });
-
+*/
 
 /***** New Accounts *****/
 
