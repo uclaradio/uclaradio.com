@@ -88,7 +88,6 @@ router.get('/availableShows', function(req, res, next) {
 router.post('/stubform', function(req, res){
     publicGoogleCalendar.getEvents(function(err, events) {
       // console.log(req.body);
-      console.log("SHIT");
       if (err) { return console.log(err.message); }
 
       var theKey = req.body['ArtistAndVenue'].replace(/\s/g, '').replace('@', '').toLowerCase()
@@ -100,47 +99,39 @@ router.post('/stubform', function(req, res){
           (el["description"].replace(/\s/g, '').replace('@', '').toLowerCase().indexOf(requester) > -1);
         
       })
+
       var message = "";
 
-      if(events.length != 1) {
-        message = "Oops, either you are not on the list for this ticket OR you filled out something incorrectly.  Please contact radio.promotions@media.ucla.edu if you keep encountering this error."
-      } else {
-        message = "Hi, " + req.body['Name'] + ".  A confirmation email has been sent to " + req.body['Email'] + "."
-      }
-
-      var winner = req.body['Name'];
-      var firstName = winner.split(' ')[0];
-      var summary = events[0]['summary'];
-      var month = events[0]["start"].getMonth() + 1;
-      var day = events[0]["start"].getDate();
-      var currday = new Date();
-      var emailBody = "Hey "+ firstName + ",<p>Congratulations on winning the tickets to " + summary + " from UCLA Radio!</p> <p>This email is to confirm your spot on will call under the name <strong>" + winner + "</strong>. Please respond to this email to confirm that you have received this email and that you have thoroughly read it through. Here are the details of the show again. 1 PAIR of tickets to <strong>" + summary + "</strong> on <strong>" + month + "/" + day + "</strong>. Bring a valid photo ID to the show to claim your tickets.</p><p>NOTE: Contest winners are limited to win a maximum of 1 pair of tickets per event. Complimentary tickets that are won have no cash value, are non-transferable and may not be sold. We have a strict zero-tolerance policy on reselling; if a winner is found to have sold their complimentary tickets, the winner be banned from receiving any contest tickets in the future and will be denied entry into the event.</p><p>Please let me know if you have any questions. Be sure to tune into <a href='http://uclaradio.com/'>UCLARadio.com</a> to win future tickets, <a href='https://www.facebook.com/UCLARadio/'>Like</a> us on Facebook, and <a href='https://www.instagram.com/uclaradio/'>follow us on Instagram</a> to stay up to date on future giveaways!</p><p>Don't forget to check out our new <a href='http://uclaradio.com/GiveawayCalendar'>Giveaway Calendar</a> on our website to stay up to date on future giveaways!</p> Cheers,<br /> UCLA Radio <br /> <br />["+ currday + "] End of message."
-      console.log(emailBody);
-
-      var mailOptions = {
-          from: 'UCLA RADIO <radio.promotions@media.ucla.edu>', // sender address 
-          to: req.body['Email'], // list of receivers 
-          subject: 'Congratulations', // Subject line 
-          // text: emailBody, // plaintext body 
-          html: emailBody // html body 
-      };
-  
-       
-      // send mail with defined transport object 
-      console.log(events.length);
       if(events.length == 1) {
-          transporter.sendMail(mailOptions, function(error, info){
+        var winner = req.body['Name'];
+        var firstName = winner.split(' ')[0];
+        var summary = events[0]['summary'];
+        var month = events[0]["start"].getMonth() + 1;
+        var day = events[0]["start"].getDate();
+        var currday = new Date();
+        var emailBody = "Hey "+ firstName + ",<p>Congratulations on winning the tickets to " + summary + " from UCLA Radio!</p> <p>This email is to confirm your spot on will call under the name <strong>" + winner + "</strong>. Please respond to this email to confirm that you have received this email and that you have thoroughly read it through. Here are the details of the show again. 1 PAIR of tickets to <strong>" + summary + "</strong> on <strong>" + month + "/" + day + "</strong>. Bring a valid photo ID to the show to claim your tickets.</p><p>NOTE: Contest winners are limited to win a maximum of 1 pair of tickets per event. Complimentary tickets that are won have no cash value, are non-transferable and may not be sold. We have a strict zero-tolerance policy on reselling; if a winner is found to have sold their complimentary tickets, the winner be banned from receiving any contest tickets in the future and will be denied entry into the event.</p><p>Please let me know if you have any questions. Be sure to tune into <a href='http://uclaradio.com/'>UCLARadio.com</a> to win future tickets, <a href='https://www.facebook.com/UCLARadio/'>Like</a> us on Facebook, and <a href='https://www.instagram.com/uclaradio/'>follow us on Instagram</a> to stay up to date on future giveaways!</p><p>Don't forget to check out our new <a href='http://uclaradio.com/GiveawayCalendar'>Giveaway Calendar</a> on our website to stay up to date on future giveaways!</p> Cheers,<br /> UCLA Radio <br /> <br />["+ currday + "] End of message."
+        var mailOptions = {
+            from: 'UCLA RADIO <radio.promotions@media.ucla.edu>', // sender address 
+            to: req.body['Email'], // list of receivers 
+            subject: 'Congratulations', // Subject line 
+            // text: emailBody, // plaintext body 
+            html: emailBody // html body 
+        };
+        if(events.length == 1) {
+            message = "Congratulations " + firstName + "!  A confirmation email has been sent to " + req.body['Email'] + "."
+            transporter.sendMail(mailOptions, function(error, info){
+                if(error){
+                    return console.log(error);
+                }
 
-              if(error){
-                  return console.log(error);
-              }
-              console.log('Message sent: ' + info.response);
+            });
 
-          });
-
+        }
+      } else {
+        message = "Oops, either you are not on the list for this ticket OR you filled out something incorrectly."
       }
 
-          res.render('stubform', {status: ''});
+          res.render('stubform', {message: message});
 
     });
 

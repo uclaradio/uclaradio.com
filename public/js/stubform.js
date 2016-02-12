@@ -18,7 +18,7 @@
             source: TicketsGivenAway
           });
           
-          console.log(CorrespondingWinners);
+          // console.log(CorrespondingWinners);
 
 		$( "form" ).submit(function( event ) {
 			// var name = $( this ).serializeArray()[0].value;

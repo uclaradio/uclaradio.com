@@ -1,5 +1,12 @@
 /*OVERRIDES OVERRIDE THE JQUERY LIBRARY*/
 
+#confirmMessage {
+	font-size: 1em;
+	padding-left: 2%;
+	font-family: courier;
+}
+
+
 @media (max-width: 600px) {
 	.ui-autocomplete li {
 		font-size: 50%;
@@ -8,6 +15,12 @@
 	}
 	label {
 		font-size: 1em !important;
+	}
+	#confirmMessage {
+		font-size: 0.7em;
+	}
+	.stubInput {
+		font-size: 0.7em;
 	}
 
 }

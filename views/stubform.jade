@@ -62,6 +62,17 @@ head
       a(href='/')
         img#logo(src='/img/GIVEAWAYS_BANNER.svg', alt='UCLA RADIO')
 
+      if(message)
+       #confirmMessage
+        p=message
+        if(message == "Oops, either you are not on the list for this ticket OR you filled out something incorrectly.") 
+            ul 
+              li="Enter the Instagram handler OR Facebook full name (ONE or THE OTHER) that which UCLA Radio awarded."
+              li="Begin typing the Band/Show's name in 'I won tickets to' and select from drop down."
+              li="If you encounter another error, please contact radio.promotions@media.ucla.edu directly."
+      br
+
+
       form#staffing-points(action='' method='POST')
         input.stubInput(type='text', name='Name', placeholder="✎ First and Last Name", required)
         br
@@ -88,4 +99,4 @@ head
         input#submitButton.stubInput(type='submit', name='submitButton', value='SUBMIT')
 
 script(src='/js/newBlurb.js')
-script(src='/js/example.js')    
+script(src='/js/stubform.js')    
