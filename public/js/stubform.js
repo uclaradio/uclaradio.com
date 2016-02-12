@@ -1,5 +1,5 @@
  $(document).ready(function(){ 
-      $.getJSON("http://localhost:3000/GiveawayCalendar/availableShows", function(response){
+      $.getJSON("http://uclaradio.com/GiveawayCalendar/availableShows", function(response){
       	console.log(response);
       	var TicketsGivenAway = [];
 
