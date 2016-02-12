@@ -103,6 +103,12 @@ router.post('/stubform', function(req, res){
       var message = "";
 
       if(events.length == 1) {
+        var reciever = req.body['Email'];
+        if(reciever.indexOf('@ucla.edu') > -1) {
+          reciever = reciever.split('@');
+          reciever = reciever[0] + '@g.ucla.edu';
+        }
+        console.log("CORRECT EMAIL" + reciever);
         var winner = req.body['Name'];
         var firstName = winner.split(' ')[0];
         var summary = events[0]['summary'];
@@ -112,7 +118,7 @@ router.post('/stubform', function(req, res){
         var emailBody = "Hey "+ firstName + ",<p>Congratulations on winning the tickets to " + summary + " from UCLA Radio!</p> <p>This email is to confirm your spot on will call under the name <strong>" + winner + "</strong>. Please respond to this email to confirm that you have received this email and that you have thoroughly read it through. Here are the details of the show again. 1 PAIR of tickets to <strong>" + summary + "</strong> on <strong>" + month + "/" + day + "</strong>. Bring a valid photo ID to the show to claim your tickets.</p><p>NOTE: Contest winners are limited to win a maximum of 1 pair of tickets per event. Complimentary tickets that are won have no cash value, are non-transferable and may not be sold. We have a strict zero-tolerance policy on reselling; if a winner is found to have sold their complimentary tickets, the winner be banned from receiving any contest tickets in the future and will be denied entry into the event.</p><p>Please let me know if you have any questions. Be sure to tune into <a href='http://uclaradio.com/'>UCLARadio.com</a> to win future tickets, <a href='https://www.facebook.com/UCLARadio/'>Like</a> us on Facebook, and <a href='https://www.instagram.com/uclaradio/'>follow us on Instagram</a> to stay up to date on future giveaways!</p><p>Don't forget to check out our new <a href='http://uclaradio.com/GiveawayCalendar'>Giveaway Calendar</a> on our website to stay up to date on future giveaways!</p> Cheers,<br /> UCLA Radio <br /> <br />["+ currday + "] End of message."
         var mailOptions = {
             from: 'UCLA RADIO <radio.promotions@media.ucla.edu>', // sender address 
-            to: req.body['Email'], // list of receivers 
+            to: reciever, // list of receivers 
             subject: 'Congratulations', // Subject line 
             // text: emailBody, // plaintext body 
             html: emailBody // html body 
