@@ -134,6 +134,21 @@ var ShowsList = React.createClass({
       }.bind(this)
     });
   },
+  handleDeleteShow: function(show) {
+    show.delete = true;
+    $.ajax({
+      url: this.props.showURL,
+      dataType: 'json',
+      type: 'POST',
+      data: show,
+      success: function() {
+        this.loadDataFromServer();
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.showURL, status, err.toString());
+      }.bind(this)
+    });
+  },
   getInitialState: function() {
     // shows: {title, day, time}
     return {shows: []};
@@ -145,17 +160,22 @@ var ShowsList = React.createClass({
     // list shows
     var showURL = this.props.showURL;
     var handleUpdateShow = this.handleUpdateShow;
+    var handleDeleteShow = this.handleDeleteShow;
     var allShows = this.state.shows.map(function(show) {
       return (
-       <Show key={show.id} show={show} url={showURL} onUpdateShow={handleUpdateShow} />
+      <div key={show.id}>
+       <Show show={show} url={showURL} onUpdateShow={handleUpdateShow} onDeleteShow={handleDeleteShow} />
+       <br />
+      </div>
       );
     });
     return (
       <div className="showsList">
-      <h2> Shows </h2>
+        <h2> Shows </h2>
         {allShows}
+        <br />
         <NewShowForm onNewShowSubmit={this.handleUserSubmitNewShow}/>
-    </div>
+      </div>
     );
   }
 });
@@ -185,6 +205,9 @@ var Show = React.createClass({
     updatedShow.blurb = blurb;
     this.props.onUpdateShow(updatedShow);
   },
+  handleDeleteShow: function() {
+    this.props.onDeleteShow(this.props.show);
+  },
   render: function() {
     return (
       <div className="show">
@@ -194,6 +217,9 @@ var Show = React.createClass({
         <UserEditableDateTimeField day={this.props.show.day} time={this.props.show.time} onDateSubmit={this.handleDateSubmit} />
         <UserEditableTextField name="Genre" currentValue={this.props.show.genre} onTextSubmit={this.handleGenreSubmit} />
         <UserEditableTextField name="Blurb" multiline={true} currentValue={this.props.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
+
+        <ConfirmationButton confirm="Delete Show" submit="Really delete show?" onSubmit={this.handleDeleteShow} />
+        <br />
       </div>
     );
   }

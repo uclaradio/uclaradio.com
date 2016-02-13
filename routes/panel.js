@@ -82,6 +82,8 @@ router.post('/signup', function(req, res) {
 });
 
 
+/***** API *****/
+
 /***** Account Info *****/
 
 router.get('/api/user', function(req, res) {
@@ -152,6 +154,15 @@ router.post('/api/show', function(req, res) {
 			if (!hasAccess) {
 				console.log("user requested invalid show");
 				res.status(400).send();
+				return;
+			}
+
+			// delete show
+			if (req.body.delete) {
+				accounts.removeShow(req.body.id, function (e) {
+					if (e) { console.log("error removing show: ", e); res.status(400).send(); }
+					else { res.json("success"); }
+				});
 				return;
 			}
 

@@ -179,6 +179,35 @@ var UserEditableDateTimeField = React.createClass({
   }
 });
 
+/**
+*  Allows user to confirm a button submission
+*
+*  @prop confirm: text to display on button when confirming
+*  @prop submit: text to display on button when submitting
+*  @prop onSubmit -> function(): parent's function to call when submitting
+*/
+var ConfirmationButton = React.createClass({
+  getInitialState: function() {
+    return {unlock: false};
+  },
+  toggleUnlock: function() {
+    this.setState({unlock: !this.state.unlock});
+  },
+  render: function() {
+    return (
+      <div className="confirmationButton">
+      { this.state.unlock ? 
+        <div><button className="confirm-btn2" onClick={this.props.onSubmit}>{this.props.submit}</button>
+        &ensp;<a className="cancel-txt" onClick={this.toggleUnlock}>Cancel</a></div>
+        :
+        <button className="confirm-btn1" onClick={this.toggleUnlock}>{this.props.confirm}</button>
+      }
+      </div>
+    );
+  }
+});
+
 window.UserEditableTextField = UserEditableTextField;
 window.DateTimeField = DateTimeField;
 window.UserEditableDateTimeField = UserEditableDateTimeField;
+window.ConfirmationButton = ConfirmationButton;

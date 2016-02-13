@@ -31,6 +31,16 @@ a:hover {
   white-space: pre-wrap;
 }
 
+#container .confirm-btn1, #container .confirm-btn2 {
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+
+#container h3 {
+  padding-top: 20px;
+}
+
 /* END Edits */
 
 code {

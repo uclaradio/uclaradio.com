@@ -293,6 +293,12 @@ db.getShow = function(id, callback) {
 	});
 };
 
+db.removeShow = function(id, callback) {
+	ShowModel.remove({id: id}, function (e) {
+		callback(e);
+	});
+}
+
 
 /***** Last Ids *****/
 
