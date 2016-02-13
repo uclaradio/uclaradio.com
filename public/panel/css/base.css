@@ -21,11 +21,17 @@ a:hover {
   float: right;
 }
 
-#no_bottom_margins {
+/*form input, form button {
   margin-bottom: 0px;
   padding-bottom: 0px;
+}*/
+
+.savedData {
+  font-weight: bold;
+  white-space: pre-wrap;
 }
-/* /Edits */
+
+/* END Edits */
 
 code {
   background-color: #f8f8f8;

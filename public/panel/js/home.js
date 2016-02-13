@@ -66,7 +66,7 @@ var UserData = React.createClass({
         <UserEditableTextField name="Phone Number" currentValue={this.state.user.phone} onTextSubmit={this.handlePhoneSubmit} />
 
         <br />
-        <ShowsList url={this.props.showURL} addShowURL={this.props.addShowURL}/>
+        <ShowsList url={this.props.showsURL} showURL={this.props.showURL} addShowURL={this.props.addShowURL}/>
       </div>
     );
   }
@@ -89,7 +89,9 @@ var ShowsList = React.createClass({
   handleUserSubmitNewShow: function(showData) {
     var oldShows = this.state.shows;
     // optimistically add show data
-    this.setState({shows: this.state.shows.concat([showData])});
+    var localShowData = showData;
+    localShowData.id = oldShows[oldShows.length-1] + 1; // give new show a temporary id so React has a key for the show element
+    this.setState({shows: this.state.shows.concat([localShowData])});
     $.ajax({
       url: this.props.addShowURL,
       dataType: 'json',
@@ -104,6 +106,34 @@ var ShowsList = React.createClass({
       }.bind(this)
     });
   },
+  handleUpdateShow: function(showData) {
+    var oldShows = this.state.shows;
+    var newShows = $.extend(true, [], this.state.shows);
+    for (var i = 0; i < newShows.length; i++) {
+      if (newShows[i].id == showData.id) {
+        // found show to update
+        newShows[i] = showData;
+        break;
+      }
+    }
+    // optimistically add show data to present
+    this.setState({shows: newShows});
+    // encode array as JSON to send to server
+    showData.djs = JSON.stringify(showData.djs);
+    $.ajax({
+      url: this.props.showURL,
+      dataType: 'json',
+      type: 'POST',
+      data: showData,
+      success: function() {
+        this.loadDataFromServer();
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({shows: oldShows});
+        console.error(this.props.showURL, status, err.toString());
+      }.bind(this)
+    });
+  },
   getInitialState: function() {
     // shows: {title, day, time}
     return {shows: []};
@@ -113,19 +143,58 @@ var ShowsList = React.createClass({
   },
   render: function() {
     // list shows
+    var showURL = this.props.showURL;
+    var handleUpdateShow = this.handleUpdateShow;
     var allShows = this.state.shows.map(function(show) {
       return (
-        <li key={show.title}><b>{show.title}</b> ({show.day} {show.time})</li>
+       <Show key={show.id} show={show} url={showURL} onUpdateShow={handleUpdateShow} />
       );
     });
     return (
       <div className="showsList">
       <h2> Shows </h2>
-      <ul>
         {allShows}
-        <li key="newShow"><NewShowForm onNewShowSubmit={this.handleUserSubmitNewShow}/></li>
-      </ul>
+        <NewShowForm onNewShowSubmit={this.handleUserSubmitNewShow}/>
     </div>
+    );
+  }
+});
+
+var Show = React.createClass({
+  getInitialState: function() {
+    return {};
+  },
+  handleTitleSubmit: function(title) {
+    var updatedShow = this.props.show;
+    updatedShow.title = title;
+    this.props.onUpdateShow(updatedShow);
+  },
+  handleDateSubmit: function(day, time) {
+    var updatedShow = this.props.show;
+    updatedShow.day = day;
+    updatedShow.time = time;
+    this.props.onUpdateShow(updatedShow);
+  },
+  handleGenreSubmit: function(genre) {
+    var updatedShow = this.props.show;
+    updatedShow.genre = genre;
+    this.props.onUpdateShow(updatedShow);
+  },
+  handleBlurbSubmit: function(blurb) {
+    var updatedShow = this.props.show;
+    updatedShow.blurb = blurb;
+    this.props.onUpdateShow(updatedShow);
+  },
+  render: function() {
+    return (
+      <div className="show">
+        <h3>{this.props.show.title}</h3>
+
+        <UserEditableTextField name="Title" currentValue={this.props.show.title} onTextSubmit={this.handleTitleSubmit} />
+        <UserEditableDateTimeField day={this.props.show.day} time={this.props.show.time} onDateSubmit={this.handleDateSubmit} />
+        <UserEditableTextField name="Genre" currentValue={this.props.show.genre} onTextSubmit={this.handleGenreSubmit} />
+        <UserEditableTextField name="Blurb" multiline={true} currentValue={this.props.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
+      </div>
     );
   }
 });
@@ -170,20 +239,7 @@ var NewShowForm = React.createClass({
               value={this.state.title}
               onChange={this.handleTitleChange}
             />
-            &ensp;<select value={this.state.day} onChange={this.handleDayChange}>
-              <option value="Mon">Monday</option>
-              <option value="Tue">Tuesday</option>
-              <option value="Wed">Wednesday</option>
-              <option value="Thu">Thursday</option>
-              <option value="Fri">Friday</option>
-              <option value="Sat">Saturday</option>
-              <option value="Sun">Sunday</option>
-            </select>
-            &ensp;<select value={this.state.time} onChange={this.handleTimeChange}>
-              <option value="11am">11AM</option>
-              <option value="12pm">12PM</option>
-              <option value="1pm">1PM</option>
-            </select>
+            &ensp;<DateTimeField day={this.state.day} time={this.state.time} onDayChange={this.handleDayChange} onTimeChange={this.handleTimeChange} />
             &ensp;<input type="submit" id="no_bottom_margins" value="Submit" />
             &ensp;<a onClick={this.toggleEditableField}>Cancel</a>
           </form>
@@ -198,6 +254,6 @@ var NewShowForm = React.createClass({
 
 
 ReactDOM.render(
-  <UserData url="/panel/api/user" updateURL="/panel/api/updateUser" showURL="/panel/api/shows" addShowURL="/panel/api/addShow" />,
+  <UserData url="/panel/api/user" updateURL="/panel/api/updateUser" showsURL="/panel/api/shows" showURL="/panel/api/show" addShowURL="/panel/api/addShow" />,
   document.getElementById('content')
 );

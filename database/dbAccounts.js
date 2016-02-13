@@ -19,6 +19,7 @@ var UserSchema = new Schema({
 
 var ShowSchema = new Schema({
 	title: String,
+	id: Number,
 	day: String,
 	time: String,
 	djs: [String], // collection of username strings
@@ -39,10 +40,18 @@ var ShowSchema = new Schema({
 	}
 });
 
+var LastIdSchema = new Schema({
+	key: String, // name of table
+	lastId: Number // greatest id of objects created (should increment when creating new ones)
+});
+// keys for LastId
+var showIdKey = "show"; // ids for Show table
 
-var UserModel = mongoose.model('User', UserSchema);
+var UserModel = mongoose.model('users', UserSchema);
 
-var ShowModel = mongoose.model('Show', ShowSchema);
+var ShowModel = mongoose.model('shows', ShowSchema);
+
+var LastIdModel = mongoose.model('lastIds', LastIdSchema);
 
 
 /***** User Account Management *****/
@@ -215,49 +224,46 @@ var getObjectId = function(id) {
 
 // create a new show with the given data
 db.addNewShow = function(title, day, time, djs, callback) {
-	newData = {
-		"title": title,
-		"day": day,
-		"time": time,
-		"djs": djs
-	};
+	db.getNextAvailableId(showIdKey, function(nextId) {
+		console.log("nextId: ", nextId);
+		newData = {
+			"title": title,
+			"id": nextId,
+			"day": day,
+			"time": time,
+			"djs": djs
+		};
 
-	ShowModel.findOne({title: newData.title}, function(err, o) {
-		if (o) {
-			callback('title-taken');
-		}
-		else {
-			ShowModel.findOne({day: newData.day, time: newData.time}, function(err, o) {
-				if (o) {
-					callback('time-taken');
-				}
-				else {
-					var newShow = new ShowModel(newData);
-					newShow.save(function(err, saved) {
-						callback(err, saved);
-					});
-				}
-			});
-		}
+		ShowModel.findOne({title: newData.title}, function(err, o) {
+			if (o) {
+				callback('title-taken');
+			}
+			else {
+				ShowModel.findOne({day: newData.day, time: newData.time}, function(err, o) {
+					if (o) {
+						callback('time-taken');
+					}
+					else {
+						var newShow = new ShowModel(newData);
+						newShow.save(function(err, saved) {
+							callback(err, saved);
+							if (saved) {
+								db.setLastTakenId(showIdKey, nextId, function(err) {
+									if (err) { console.log("error setting next id for shows: ", err); }
+								});
+							}
+						});
+					}
+				});
+			}
+		});
 	});
 }
 
-db.updateShow = function(title, day, time, djs, genre, blurb, picture, thumbnail, pages, episodes, callback) {
-	var newData = {
-		"day": day,
-		"time": time,
-		"djs": djs,
-		"genre": genre,
-		"blurb": blurb,
-		"picture": picture,
-		"thumbnail": thumbnail,
-		"pages": pages,
-		"episodes": episodes
-	};
-
-	ShowModel.findOneAndUpdate({'title': title}, newData, {upsert:true, new:true}, function(err, o) {
-    	if (err) return res.send(500, { error: err });
-    	callback(null, o);
+db.updateShow = function(id, newData, callback) {
+	ShowModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
+    	if (err) { callback(err); }
+    	else { callback(null, o); }
 	});
 };
 
@@ -272,13 +278,41 @@ db.getShowsForUser = function(djUsername, callback) {
 	});
 };
 
-db.getShow = function(title, callback) {
-	ShowModel.findOne({title: title}, function(err, o) {
+db.userHasAccessToShow = function(username, id, callback) {
+	ShowModel.findOne({id: id, djs: username}, function(err, o) {
+		if (o) { callback(true); }
+		else { callback(false); }
+	});
+};
+
+db.getShow = function(id, callback) {
+	ShowModel.findOne({id: id}, function(err, o) {
 		if (o) {
 			callback(o);
 		}
 	});
 };
 
+
+/***** Last Ids *****/
+
+db.getNextAvailableId = function(key, callback) {
+	LastIdModel.findOne({key: key}, function(err, o) {
+		if (o) {
+			callback(o.lastId + 1);
+		}
+		else {
+			callback(1);
+		}
+	});
+};
+
+db.setLastTakenId = function(key, lastId, callback) {
+	newData = {key: key, lastId: lastId};
+	LastIdModel.findOneAndUpdate({key: key}, newData, {upsert: true, new:true}, function(err, o) {
+		if (err) { callback(err); }
+		else { callback(null); }
+	});
+};
 
 module.exports = db;

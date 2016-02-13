@@ -43,9 +43,9 @@ router.post('/', function(req, res) {
 
 
 /***** User Home Page *****/
-/*
-router.get('/:home', function(req, res) {
-	//if (req.session.user == null) {
+
+router.get('/home', function(req, res) {
+	if (req.session.user == null) {
 		// not logged in, redirect to log in page
 		res.redirect('/panel');
 	}
@@ -63,7 +63,6 @@ router.get('/logout', function(req, res) {
 	}
 	res.redirect('/panel');
 });
-*/
 
 /***** New Accounts *****/
 
@@ -141,6 +140,46 @@ router.get('/api/shows', function(req, res) {
 	}
 });
 
+// update details for one show 
+router.post('/api/show', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		accounts.userHasAccessToShow(req.session.user.username, req.body.id, function(hasAccess) {
+			// user doesn't have access to this show
+			if (!hasAccess) {
+				console.log("user requested invalid show");
+				res.status(400).send();
+				return;
+			}
+
+			var djs = JSON.parse(req.body.djs);
+
+			var newData = {
+				"title": req.body.title,
+				"day": req.body.day,
+				"time": req.body.time,
+				"djs": djs,
+				"genre": req.body.genre,
+				"blurb": req.body.blurb,
+				"picture": req.body.picture,
+				"thumbnail": req.body.thumbnail,
+				"pages": req.body.pages,
+				"episodes": req.body.episodes
+			};
+			// return show with id belonging to logged in user
+			var callback = function(err, show) {
+				if (err) { console.log("error updating show: ", err); }
+				if (show) { res.json("success"); }
+				else { res.status(400).send(); }
+			}
+			accounts.updateShow(req.body.id, newData, callback);
+		});
+	}
+});
+
 router.post('/api/addShow', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
@@ -149,13 +188,12 @@ router.post('/api/addShow', function(req, res) {
 	else {
 		var callback = function(err, saved) {
 			if (err) { console.log("failed to add show for user: ", err); }
-			else {
-				if (saved) {
-					// return list of shows
-					res.redirect('/panel/api/shows');
-				}
-				else { res.status(400).send(e); }
+
+			if (saved) {
+				// return full list of shows
+				res.redirect('/panel/api/shows');
 			}
+			else { res.status(400).send(); }
 		}
 		// addNewShow = function(title, day, time, djs, callback) {
 		accounts.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], callback);
