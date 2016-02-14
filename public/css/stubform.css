@@ -1,4 +1,10 @@
 /*OVERRIDES OVERRIDE THE JQUERY LIBRARY*/
+#Questions {
+	text-align: center;
+	width: 100%;
+	font-family: 'apercuregular';
+	line-height:200%
+}
 
 #confirmMessage {
 	font-size: 1em;
