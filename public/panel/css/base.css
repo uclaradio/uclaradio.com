@@ -41,6 +41,10 @@ a:hover {
   padding-top: 20px;
 }
 
+#container a {
+  cursor: pointer;
+}
+
 /* END Edits */
 
 code {

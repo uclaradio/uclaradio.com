@@ -271,7 +271,7 @@ var NewShowForm = React.createClass({
           </form>
           :
           // locked to user input
-          <p><a onClick={this.toggleEditableField}>Add New Show</a></p>
+          <p><a onClick={this.toggleEditableField}>+ Add New Show</a></p>
         }
       </div>
     );
