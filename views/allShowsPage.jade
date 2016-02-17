@@ -71,7 +71,7 @@ head
                       #sample
                           a(href="/shows/"+show.url)
                             img(src="/"+show.thumbnail)
-                      p=show.showName+ " (" +show.timeslot + ")"
+                      p=show.title+ " (" +show.time + ")"
                       br
 
               br 
@@ -120,7 +120,7 @@ head
 
           #allShows
             ul
-              each show in blurbs
+              each show in shows
                   if(show.showOfTheMonth == true)
                     li
                       a(href="/shows/"+show.url)#showOftheMonth #{"✨"+show.showName+" ✨"}

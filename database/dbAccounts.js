@@ -293,6 +293,18 @@ db.getShow = function(id, callback) {
 	});
 };
 
+// return array of all users
+db.getAllShows = function(callback) {
+	ShowModel.find(function(err, res) {
+		if (err) {
+			callback(err);
+		}
+		else {
+			callback(null, res);
+		}
+	});
+}
+
 db.removeShow = function(id, callback) {
 	ShowModel.remove({id: id}, function (e) {
 		callback(e);
