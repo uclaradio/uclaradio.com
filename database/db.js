@@ -93,6 +93,8 @@ var StaffingPointsSchema = new Schema({
 	department: String,
 	number: Number,
 	notes: String,
+	managerNotes: String,
+	status: String
 }, {collection: 'StaffingPoints'});
 
 var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
@@ -238,6 +240,8 @@ db.addStaffingPoints = function(data, callback) {
 		department: data.department,
 		number: data.numberOfPoints,
 		notes: data.other,
+		managerNotes: "",
+		status: "pending"
 	};
 
 	var staffingPoints = new StaffingPointsModel(staffingPointsData);
