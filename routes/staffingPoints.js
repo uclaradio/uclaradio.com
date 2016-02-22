@@ -32,4 +32,14 @@ router.post('/', function(req, res, next) {
 	});
 });
 
+router.get('/view', function(req, res) {
+	res.render('staffingPointsView');
+});
+
+router.get('/points', function(req, res, next) {
+	db.getStaffingPoints(function(err, points) {
+		res.send(points);
+	});
+});
+
 module.exports = router;
