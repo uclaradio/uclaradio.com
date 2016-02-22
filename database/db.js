@@ -141,10 +141,6 @@ db.deleteBlurbByShowTitle = function(title, callback){
 	});
 };
 
-
-
-
-
 db.getAllBlurbs = function(callback) {
 	DjBlurbModel.find({}, function(err, blurbs) {
 		callback(err, blurbs);
@@ -249,6 +245,14 @@ db.addStaffingPoints = function(data, callback) {
 	staffingPoints.save(function(err, staffingPointsSaved) {
 		if (err) console.log(err);
 		callback(err, staffingPointsSaved);
+	});
+};
+
+db.updateStaffingPointStatus = function(id, status, callback) {
+	console.log('updating');
+	StaffingPointsModel.update({_id: id}, {$set: {status: status}}, { multi: false }, function(err, update) {
+		console.log(update);
+		callback(err, update);
 	});
 };
 
