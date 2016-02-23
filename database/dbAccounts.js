@@ -154,9 +154,21 @@ db.deleteUser = function(id, callback) {
 }
 
 // perform callback on user with provided email
-db.getUserByEmail = function(email, callback) {
-	UserModel.findOne({email: email}, function(err, o) {
-		callback(o);
+// db.getUserByEmail = function(email, callback) {
+// 	UserModel.findOne({email: email}, function(err, o) {
+// 		callback(o);
+// 	});
+// }
+
+// perform callback on user with provided id
+db.getDJNamesFromUsernames = function(usernames, callback) {
+	console.log("finding usernames:", usernames);
+	UserModel.find({username: {$in: usernames}}, function(err, users) {
+		var djNames = [];
+		for (var i = 0; i < users.length; i++) {
+			djNames.push(users[i].djName);
+		}
+		callback(err, djNames);
 	});
 }
 
@@ -285,11 +297,15 @@ db.userHasAccessToShow = function(username, id, callback) {
 	});
 };
 
-db.getShow = function(id, callback) {
-	ShowModel.findOne({id: id}, function(err, o) {
-		if (o) {
-			callback(o);
-		}
+// db.getShow = function(id, callback) {
+// 	ShowModel.findOne({id: id}, function(err, o) {
+// 		callback(err, o);
+// 	});
+// };
+
+db.getShowByTitle = function(title, callback) {
+	ShowModel.findOne({title: title}, function(err, o) {
+		callback(err, o);
 	});
 };
 

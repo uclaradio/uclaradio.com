@@ -58,27 +58,25 @@ head
     audio#stream(src='', preload='none')
 
     .container(role='main')
-      if(blurb.showOfTheMonth == true)
-        img#showOftheMonthlogo(src='/img/showofmonth.svg', alt='UCLA RADIO')
-      else
-        img#logo(src='/img/logo.png', alt='UCLA RADIO')
+      // if(blurb.showOfTheMonth == true)
+        // img#showOftheMonthlogo(src='/img/showofmonth.svg', alt='UCLA RADIO')
+      //else
+      img#logo(src='/img/logo.png', alt='UCLA RADIO')
 
 
       .row
-        if(blurb.picture != "")
+        if(show.picture != "")
           .col-lg-6
-            img#showPageProfPic(src="/"+blurb.picture)
+            img#showPageProfPic(src=show.picture)
 
 
         .col-lg-6
-          h1=blurb.showName 
-          each dj in blurb.djName
+          h1=show.title 
+          each dj in show.djNames
             h2=dj 
-          h3=blurb.day+" "+blurb.timeslot 
-          h3=blurb.genre
-          if(blurb.link != "")
-            a(href='#{blurb.link}', target='_blank') Check us out!
-          p=blurb.description
+          h3=show.day+" "+show.time 
+          h3=show.genre
+          p=show.blurb
 
       br
 
