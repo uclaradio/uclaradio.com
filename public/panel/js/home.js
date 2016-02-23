@@ -141,10 +141,15 @@ var ShowsList = React.createClass({
     });
   },
   handleUpdatePicture: function(id, img) {
-    var formData = newFormData();
-    formData.append("id", img);
+    var formData = new FormData();
+    formData.append("img", img);
+    formData.append("id", id);
     var request = new XMLHttpRequest();
     request.open("POST", this.props.showPicURL);
+    var loadData = this.loadDataFromServer;
+    request.onload = function(e) {
+      if (request.status == 200) { loadData(); }
+    };
     request.send(formData);
   },
   handleDeleteShow: function(show) {
@@ -170,7 +175,7 @@ var ShowsList = React.createClass({
     this.loadDataFromServer();
   },
   render: function() {
-    // list shows
+    // create list of all shows
     var showURL = this.props.showURL;
     var handleUpdateShow = this.handleUpdateShow;
     var handleDeleteShow = this.handleDeleteShow;
@@ -219,8 +224,8 @@ var Show = React.createClass({
     updatedShow.blurb = blurb;
     this.props.onUpdateShow(updatedShow);
   },
-  handlePictureSubmit: function(e) {
-    this.props.onUpdateShowPicture(this.props.show.id, e.target.files[0]);
+  handlePictureSubmit: function(img) {
+    this.props.onUpdateShowPicture(this.props.show.id, img);
   },
   handleDeleteShow: function() {
     this.props.onDeleteShow(this.props.show);
@@ -229,14 +234,14 @@ var Show = React.createClass({
     return (
       <div className="show">
         <h3>{this.props.show.title}</h3>
-        <img src={this.props.show.thumbnail || "/img/nothumbnail.png" } />
+        <img className="showPic" src={this.props.show.thumbnail || "/img/radio.png" } />
         <UserEditableTextField name="Title" currentValue={this.props.show.title} onTextSubmit={this.handleTitleSubmit} />
         <UserEditableDateTimeField day={this.props.show.day} time={this.props.show.time} onDateSubmit={this.handleDateSubmit} />
         <UserEditableTextField name="Genre" currentValue={this.props.show.genre} onTextSubmit={this.handleGenreSubmit} />
         <UserEditableTextField name="Blurb" multiline={true} currentValue={this.props.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
-        <FileInput name="Picture" accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} className="fileUpload" />
+        <FileInput accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} submitText="Submit Picture" />
 
-        <ConfirmationButton confirm="Delete Show" submit="Really delete show?" onSubmit={this.handleDeleteShow} />
+        <ConfirmationButton confirm={"Delete " + this.props.show.title} submit={"Really delete " + this.props.show.title + "?"} onSubmit={this.handleDeleteShow} />
         <br />
       </div>
     );

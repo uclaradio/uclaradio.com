@@ -198,7 +198,7 @@ var ConfirmationButton = React.createClass({
       <div className="confirmationButton">
       { this.state.unlock ? 
         <div><button className="confirm-btn2" onClick={this.props.onSubmit}>{this.props.submit}</button>
-        &ensp;<a className="cancel-txt" onClick={this.toggleUnlock}>Cancel</a></div>
+        &ensp;<button className="confirm-cancel" onClick={this.toggleUnlock}>Cancel</button></div>
         :
         <button className="confirm-btn1" onClick={this.toggleUnlock}>{this.props.confirm}</button>
       }

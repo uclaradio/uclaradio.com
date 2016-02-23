@@ -1,7 +1,7 @@
 body {
   background: #fff;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1.7;
   margin: 0;
   padding: 30px;
@@ -31,10 +31,29 @@ a:hover {
   white-space: pre-wrap;
 }
 
-#container .confirm-btn1, #container .confirm-btn2 {
+.showPic {
+  max-width: 75%;
+  max-height: 75%;
+  display: block;
+  margin: 0 auto;
+}
+
+.ConfirmationButton {
+  padding-top: 10px;
+}
+
+#container .confirm-btn1, #container .confirm-btn2, #container .confirm-cancel {
   margin: 0;
-  padding: 0;
+  padding: 5px 10px;
   width: auto;
+  background-color: #f44336;
+  border: none;
+  color: white;
+}
+
+#container .confirm-cancel {
+  background-color: #cfcfcf;
+  color: black;
 }
 
 #container h3 {
@@ -43,6 +62,20 @@ a:hover {
 
 #container a {
   cursor: pointer;
+}
+
+#container a.disabled {
+  cursor: auto;
+  text-decoration: none;
+  color: grey;
+}
+
+.fileInput input {
+  padding-bottom: 2px;
+}
+
+.fileInput {
+  padding: 5px 0 10px 0;
 }
 
 /* END Edits */

@@ -1,64 +1,35 @@
-// var React = require('react');
+// upload.js
+// Contains elements used for uploading files in a form
 
+
+/**
+*  Upload a file with file input field
+*
+*  @prop onChange: function(event) -> call when file chosen to upload
+*  @prop accept: file types to accept
+*  @prop submitText: text to display as submit button
+*/
 var FileInput = React.createClass({
   getInitialState: function() {
-    return {
-      value: '',
-      styles: {
-        parent: {
-          position: 'relative'
-        },
-        file: {
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          opacity: 0,
-          width: '100%',
-          zIndex: 1
-        },
-        text: {
-          position: 'relative',
-          zIndex: -1
-        }
-      }
-    };
+    return {"fileSelected": false};
   },
-
-  handleChange: function(e) {
-    this.setState({
-      value: e.target.value.split(/(\\|\/)/g).pop()
-    });
-    if (this.props.onChange) this.props.onChange(e);
+  handleChange: function() {
+    var file = ReactDOM.findDOMNode(this.refs.file).files[0];
+    this.setState({"fileSelected": (file != null)});
   },
-
+  handleSubmit: function() {
+    var file = ReactDOM.findDOMNode(this.refs.file).files[0];
+    if (this.props.onChange && file) {
+      this.props.onChange(file);
+    }
+  },
   render: function() {
-    return React.DOM.div({
-        style: this.state.styles.parent
-      },
-
-      // Actual file input
-      React.DOM.input({
-        type: 'file',
-        name: this.props.name,
-        className: this.props.className,
-        onChange: this.handleChange,
-        disabled: this.props.disabled,
-        accept: this.props.accept,
-        style: this.state.styles.file
-      }),
-
-      // Emulated file input
-      React.DOM.input({
-        type: 'text',
-        tabIndex: -1,
-        name: this.props.name + '_filename',
-        value: this.state.value,
-        className: this.props.className,
-        onChange: function() {},
-        placeholder: this.props.placeholder,
-        disabled: this.props.disabled,
-        style: this.state.styles.text
-      }));
+    return (
+      <div className="fileInput">
+        <input ref="file" type="file" accept={this.props.accept} onChange={this.handleChange} />
+        <br /><a className={this.state.fileSelected ? "enabled" : "disabled"} onClick={this.handleSubmit}>{this.props.submitText}</a>
+      </div>
+    );
   }
 });
 

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../database/db');
 var accounts = require('../database/dbAccounts.js');
+var lwip = require('lwip');
 
 
 /***** Main Log In Page *****/
@@ -218,24 +219,40 @@ router.post('/api/showPic', function(req, res) {
 	}
 	else {
 		accounts.userHasAccessToShow(req.session.user.username, req.body.id, function(hasAccess) {
-			if (hasAccess) {
-				res.status(200).send();
+			if (!hasAccess) { res.status(400).send(); }
+
+			else {
+				// user has access to update this show
+				var errorCallback = function(err) {
+					console.log("failed to add show picture: ", err);
+					res.status(400).send();
+				}
+
+				var picture = req.files.img.path.replace('public/', '/');
+				var thumbnail = req.files.img.path.replace('public/', '/').replace('.jpg','thumbnail.jpg').replace('.png', 'thumbnail.png').replace('.jpeg', 'thumbnail.jpeg').replace('.gif', 'thumbnail.gif');
+
+				// compress image
+				lwip.open(req.files.img.path, function(err, image) {
+					if (err) { errorCallback(err); }
+
+					var options = { quality: 30 };
+
+					image.writeFile('public/' + thumbnail, options , function(err) {
+						if (err) { errorCallback(err); }
+
+						// update show data with new pictures
+						var newData = {"picture": picture, "thumbnail": thumbnail};
+						accounts.updateShow(req.body.id, newData, function(err, o) {
+							if (err) { errorCallback(err); }
+							else {
+								// updated successfully!
+								res.json("success");
+							}
+						});
+					});
+				});
 			}
-			else { res.status(400).send(); }
 		});
-
-
-		var callback = function(err, saved) {
-			if (err) { console.log("failed to add show for user: ", err); }
-
-			if (saved) {
-				// return full list of shows
-				res.redirect('/panel/api/shows');
-			}
-			else { res.status(400).send(); }
-		}
-		// addNewShow = function(title, day, time, djs, callback) {
-		accounts.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], callback);
 	}
 });
 
