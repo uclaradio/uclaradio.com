@@ -211,5 +211,33 @@ router.post('/api/addShow', function(req, res) {
 	}
 });
 
+router.post('/api/showPic', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		accounts.userHasAccessToShow(req.session.user.username, req.body.id, function(hasAccess) {
+			if (hasAccess) {
+				res.status(200).send();
+			}
+			else { res.status(400).send(); }
+		});
+
+
+		var callback = function(err, saved) {
+			if (err) { console.log("failed to add show for user: ", err); }
+
+			if (saved) {
+				// return full list of shows
+				res.redirect('/panel/api/shows');
+			}
+			else { res.status(400).send(); }
+		}
+		// addNewShow = function(title, day, time, djs, callback) {
+		accounts.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], callback);
+	}
+});
+
 
 module.exports = router;

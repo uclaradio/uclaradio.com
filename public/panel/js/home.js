@@ -1,18 +1,24 @@
 // home.html
 // let DJ edit personal info
 
+var urls = {url: "/panel/api/user",
+            updateURL: "/panel/api/updateUser",
+            showsURL: "/panel/api/shows",
+            showURL: "/panel/api/show",
+            addShowURL: "/panel/api/addShow",
+            showPicURL: "/panel/api/showPic"};
 
 var UserData = React.createClass({
   loadDataFromServer: function() {
     $.ajax({
-      url: this.props.url,
+      url: this.props.urls.url,
       dataType: 'json',
       cache: false,
       success: function(user) {
         this.setState({user: user});
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error(this.props.urls.url, status, err.toString());
       }.bind(this)
     });
   },
@@ -37,7 +43,7 @@ var UserData = React.createClass({
     updatedUser.username = oldUser.username;
     this.setState({user: updatedUser});
     $.ajax({
-      url: this.props.updateURL,
+      url: this.props.urls.updateURL,
       dataType: 'json',
       type: 'POST',
       data: updatedUser,
@@ -46,7 +52,7 @@ var UserData = React.createClass({
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({user: oldUser});
-        console.error(this.props.updateURL, status, err.toString());
+        console.error(this.props.urls.updateURL, status, err.toString());
       }.bind(this)
     });
   },
@@ -66,7 +72,7 @@ var UserData = React.createClass({
         <UserEditableTextField name="Phone Number" currentValue={this.state.user.phone} onTextSubmit={this.handlePhoneSubmit} />
 
         <br />
-        <ShowsList url={this.props.showsURL} showURL={this.props.showURL} addShowURL={this.props.addShowURL}/>
+        <ShowsList url={this.props.urls.showsURL} showURL={this.props.urls.showURL} addShowURL={this.props.urls.addShowURL} showPicURL={this.props.urls.showPicURL} />
       </div>
     );
   }
@@ -134,6 +140,13 @@ var ShowsList = React.createClass({
       }.bind(this)
     });
   },
+  handleUpdatePicture: function(id, img) {
+    var formData = newFormData();
+    formData.append("id", img);
+    var request = new XMLHttpRequest();
+    request.open("POST", this.props.showPicURL);
+    request.send(formData);
+  },
   handleDeleteShow: function(show) {
     show.delete = true;
     $.ajax({
@@ -161,10 +174,11 @@ var ShowsList = React.createClass({
     var showURL = this.props.showURL;
     var handleUpdateShow = this.handleUpdateShow;
     var handleDeleteShow = this.handleDeleteShow;
+    var handleUpdatePicture = this.handleUpdatePicture;
     var allShows = this.state.shows.map(function(show) {
       return (
       <div key={show.id}>
-       <Show show={show} url={showURL} onUpdateShow={handleUpdateShow} onDeleteShow={handleDeleteShow} />
+       <Show show={show} url={showURL} onUpdateShow={handleUpdateShow} onUpdateShowPicture={handleUpdatePicture} onDeleteShow={handleDeleteShow} />
        <br />
       </div>
       );
@@ -205,6 +219,9 @@ var Show = React.createClass({
     updatedShow.blurb = blurb;
     this.props.onUpdateShow(updatedShow);
   },
+  handlePictureSubmit: function(e) {
+    this.props.onUpdateShowPicture(this.props.show.id, e.target.files[0]);
+  },
   handleDeleteShow: function() {
     this.props.onDeleteShow(this.props.show);
   },
@@ -212,11 +229,12 @@ var Show = React.createClass({
     return (
       <div className="show">
         <h3>{this.props.show.title}</h3>
-
+        <img src={this.props.show.thumbnail || "/img/nothumbnail.png" } />
         <UserEditableTextField name="Title" currentValue={this.props.show.title} onTextSubmit={this.handleTitleSubmit} />
         <UserEditableDateTimeField day={this.props.show.day} time={this.props.show.time} onDateSubmit={this.handleDateSubmit} />
         <UserEditableTextField name="Genre" currentValue={this.props.show.genre} onTextSubmit={this.handleGenreSubmit} />
         <UserEditableTextField name="Blurb" multiline={true} currentValue={this.props.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
+        <FileInput name="Picture" accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} className="fileUpload" />
 
         <ConfirmationButton confirm="Delete Show" submit="Really delete show?" onSubmit={this.handleDeleteShow} />
         <br />
@@ -280,6 +298,6 @@ var NewShowForm = React.createClass({
 
 
 ReactDOM.render(
-  <UserData url="/panel/api/user" updateURL="/panel/api/updateUser" showsURL="/panel/api/shows" showURL="/panel/api/show" addShowURL="/panel/api/addShow" />,
+  <UserData urls={urls} />,
   document.getElementById('content')
 );
