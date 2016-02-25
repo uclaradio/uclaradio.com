@@ -142,6 +142,25 @@ var DepartmentFilter = React.createClass({
 });
 
 var StaffingPointsRow = React.createClass({
+	updateStatus: function(status) {
+		var userId = this.props.record._id;
+		var password = this.props.password;
+		var managerNotes = this.refs.managerNotes.value;
+		var ajaxUpdateStatus = this.props.ajaxUpdateStatus;
+		$.post('view/update',
+			{
+				userId: userId,
+				status: status,
+				managerNotes: managerNotes,
+				password: password
+			},
+			function(data) {
+				ajaxUpdateStatus(data, status, userId);
+			}
+		);
+		
+	},
+	
 	render: function() {
 		return (
 			<tr>
@@ -164,14 +183,16 @@ var StaffingPointsRow = React.createClass({
 					{this.props.record.notes}
 				</td>
 				<td>
-					{this.props.status}
+					{this.props.record.status}
+				</td>
+				<td onClick={this.updateStatus.bind(null, 'approved')}>
+					<button>Approve</button>
+				</td>
+				<td onClick={this.updateStatus.bind(null, 'denied')}>
+					<button>Deny</button>
 				</td>
 				<td>
-					<button></button>
-				</td>
-				<td>
-					<textarea>
-						{this.props.record.managerNotes}
+					<textarea ref="managerNotes" defaultValue={this.props.record.managerNotes}>
 					</textarea>
 				</td>
 			</tr>
@@ -183,10 +204,9 @@ var StaffingPointsTable = React.createClass({
 
 	
 	render: function() {
-
 		var records = this.props.records
 			.filter(function(record) {
-				var nameMatch = record.fullName.indexOf(this.props.nameFilter) !== -1;
+				var nameMatch = record.fullName.toUpperCase().indexOf(this.props.nameFilter.toUpperCase()) !== -1;
 				var departmentMatch; 
 				if (this.props.departmentFilter === 'all')
 					departmentMatch = true;
@@ -203,13 +223,13 @@ var StaffingPointsTable = React.createClass({
 				var beforeEndDateMatch = record.dateCompleted < this.props.endDateFilter;
 
 				return statusMatch && departmentMatch && nameMatch && afterBeginDateMatch && beforeEndDateMatch;
-			}, this)
+			}, this);
 
-		var rows = records.map( function(record, index) {
+		var rows = records.map( function(record) {
 			return (
-				<StaffingPointsRow key={index} record={record}/>
+				<StaffingPointsRow key={record._id} record={record} password={this.props.password} ajaxUpdateStatus={this.props.updateStatus}/>
 			);
-		});
+		}, this);
 
 		return (
 			<table>
@@ -240,6 +260,9 @@ var StaffingPointsTable = React.createClass({
 							Approve
 						</th>
 						<th>
+							Deny
+						</th>
+						<th>
 							Manager Notes
 						</th>
 					</tr>
@@ -260,8 +283,53 @@ var StaffingPointsView = React.createClass({
 			departmentFilter: "all",
 			statusFilter: "all",
 			beginDateFilter: new Date('January 1, 2016'),
-			endDateFilter: new Date()
+			endDateFilter: new Date(),
+			password: '',
+			statusMessage: '',
+			records: []
 		};
+	},
+
+	componentDidMount: function() {
+		var component = this;
+		$.get('points', function( data ) {
+			data.forEach( function(val) {
+				val.dateCompleted = new Date(val.dateCompleted);
+			});
+			component.setState({
+				records: data
+			});
+		});
+	},
+
+	updatePassword: function() {
+		this.setState({
+			password: this.refs.passwordInput.value
+		});
+	},
+
+	updateStatus: function(statusMessage, newStatus, id) {
+		let recordToUpdateIndex = -1;
+
+		for (let x = 0; x < this.state.records.length; x++) {
+			if (this.state.records[x]._id === id)
+				recordToUpdateIndex = x;
+		}
+
+		const recordToUpdate = this.state.records[recordToUpdateIndex];
+
+		const newRecord = JSON.parse(JSON.stringify(recordToUpdate));
+
+		newRecord.dateCompleted = new Date(newRecord.dateCompleted);
+
+		newRecord.status = newStatus;
+
+		var records = [...this.state.records.slice(0, recordToUpdateIndex), newRecord, ...this.state.records.slice(recordToUpdateIndex + 1, this.state.records.length)];
+
+		this.setState({
+			records: records,
+			statusMessage: statusMessage
+		});
 	},
 
 	handleFilterChange: function( newFilterObj ) {
@@ -272,17 +340,18 @@ var StaffingPointsView = React.createClass({
 		return (
 			<div>
 				<h1 id="header">Staffing Points</h1>
+				<h4>{this.state.statusMessage}</h4>
 				<div className="row">
 					<div className="col-md-4 col-md-offset-8 ">
 						<div className="form-group">
 							<h3>Super Secret Password</h3>
-							<input type="password" name="password" className="form-control" />
+							<input type="password" name="password" className="form-control" onChange={this.updatePassword} ref="passwordInput"/>
 						</div>
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-md-3">
-						<NameFilter filterName={'hi'} handleFilterChange={this.handleFilterChange} />
+						<NameFilter filterName={this.state.nameFilter} handleFilterChange={this.handleFilterChange} />
 					</div>
 					<div className="col-md-3">
 						<DateFilter beginDate={this.state.beginDateFilter} endDate={this.state.endDateFilter} handleFilterChange={this.handleFilterChange} />
@@ -295,27 +364,21 @@ var StaffingPointsView = React.createClass({
 					</div>
 				</div>
 				<StaffingPointsTable 
-					records={this.props.data}
+					records={this.state.records}
 					nameFilter={this.state.nameFilter}
 					departmentFilter={this.state.departmentFilter}
 					statusFilter={this.state.statusFilter}
 					beginDateFilter={this.state.beginDateFilter}
 					endDateFilter={this.state.endDateFilter}
+					password={this.state.password}
+					updateStatus={this.updateStatus}
 				/>
 			</div>
 		);
 	}
 });
 
-$.get('points', function( data ) {
-	//data = [{fullName: 'Matteo', number: 5, description: 'description', department: 'web', dateCompleted: new Date(), notes: 'notes'}];
-	data.forEach( function(val) {
-		val.dateCompleted = new Date(val.dateCompleted);
-	});
-	//console.log(data);
-	ReactDOM.render(
-		<StaffingPointsView data={data}/>,
-		document.getElementById('container')
-	);
-});
-
+ReactDOM.render(
+	<StaffingPointsView/>,
+	document.getElementById('container')
+);
