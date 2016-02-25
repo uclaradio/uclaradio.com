@@ -102,7 +102,7 @@ var StatusFilter = React.createClass({
 });
 
 var DepartmentFilter = React.createClass({
-	updateDepartmentStatus: function() {
+	updateFilterDepartment: function() {
 		this.props.handleFilterChange({
 			departmentFilter: this.refs.departmentInput.value
 		});
@@ -116,7 +116,7 @@ var DepartmentFilter = React.createClass({
 					name="department"
 					className="form-control"
 					defaultValue="all"
-					onChange={this.updateDepartmentStatus}
+					onChange={this.updateFilterDepartment}
 					ref="departmentInput"
 				>
 					<option value="all">All</option>
