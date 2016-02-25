@@ -92,7 +92,8 @@ var StatusFilter = React.createClass({
 				>
 					<option value="all">Any</option>
 					<option value="pending">Pending</option>
-					<option value="completed">Completed</option>
+					<option value="approved">Approved</option>
+					<option value="denied">Denied</option>
 					<option value="canceled">Canceled</option>
 				</select>
 			</div>
