@@ -8,15 +8,16 @@ var db = {};
 
 var Schema = mongoose.Schema;
 
+// Users (DJs)
 var UserSchema = new Schema({
 	username: String,
 	pass: String,
 	email: String,
 	djName: String,
-	phone: String,
-	privileges: [String]
+	phone: String
 }, {collection: 'User'});
 
+// Radio shows to show on the site
 var ShowSchema = new Schema({
 	title: String,
 	id: Number,
@@ -41,16 +42,27 @@ var ShowSchema = new Schema({
 	}
 });
 
+// User privileges (checked for access to manager pages, etc.)
+var PrivilegeSchema = new Schema({
+	name: String, // name of privilege
+	users: [String],
+	links: [String]
+});
+db.developerPrivilegeName = "Developer";
+db.managerPrivilegeName = "Manager";
+
+// Contains last distributed id for a table, in order to provide a unique id for each show, etc.
 var LastIdSchema = new Schema({
 	key: String, // name of table
 	lastId: Number // greatest id of objects created (should increment when creating new ones)
 });
-// keys for LastId
 var showIdKey = "show"; // ids for Show table
 
 var UserModel = mongoose.model('users', UserSchema);
 
 var ShowModel = mongoose.model('shows', ShowSchema);
+
+var PrivilegeModel = mongoose.model('privileges', PrivilegeSchema);
 
 var LastIdModel = mongoose.model('lastIds', LastIdSchema);
 
@@ -238,7 +250,7 @@ var getObjectId = function(id) {
 // create a new show with the given data
 db.addNewShow = function(title, day, time, djs, callback) {
 	db.getNextAvailableId(showIdKey, function(nextId) {
-		console.log("nextId: ", nextId);
+		// console.log("nextId: ", nextId);
 		newData = {
 			"title": title,
 			"id": nextId,
@@ -328,6 +340,50 @@ db.removeShow = function(id, callback) {
 	});
 }
 
+
+/***** Privileges *****/
+
+/**
+*  Update the privileges table to give or take away a privilege for a user
+*  ...
+*  @param shoudlHave -> bool: user should get privilege
+*  @param callback -> function(err, updated: bool)
+*/
+db.updatePrivilege = function(username, privilege, shouldHave, callback) {
+	
+	var update = shouldHave ? {$push: {users: username}} :  {$pull: {users: username}};
+
+	PrivilegeModel.findOneAndUpdate({name: privilege}, update, {upsert: false}, function(err, o) {
+		if (err) {
+			console.log("error updating privilege: ", err);
+			callback(err, false);
+		}
+		else {
+			callback(null, true);
+		}
+	});
+}
+
+/**
+*  Check if a user has a given privilege
+*  ...
+*  @param callback -> function(err, hasAccess: bool)
+*/
+db.checkPrivilege = function(username, privilege, callback) {
+	PrivilegeModel.findOne({name: privilege}, function(err, o) {
+		if (err) {
+			console.log("error checking privilege:", err);
+			callback(err, false);
+		}
+		else {
+			if (o && o.users.indexOf(username) > -1) {
+				// user has access
+				callback(null, true);
+			}
+			else { callback(null, false); }
+		}
+	});
+}
 
 /***** Last Ids *****/
 

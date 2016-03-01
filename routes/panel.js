@@ -15,9 +15,7 @@ router.get('/', function(req, res) {
 		accounts.autoLogin(req.cookies.username, req.cookies.pass, function(o) {
 			if (o != null) {
 				req.session.user = o;
-
 				res.redirect('/panel/home');
-				
 			}
 			else {
 				res.render('panel/login', {title: 'Log In'});
@@ -82,6 +80,26 @@ router.post('/signup', function(req, res) {
 	});
 });
 
+/***** Managers *****/
+
+router.get('/manager', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		accounts.checkPrivilege(req.session.user.username, accounts.developerPrivilegeName, function(err, hasAccess) {
+			if (hasAccess) {
+				var path = require('path');
+				res.sendFile(path.resolve('public/panel/manager.html'));
+			}
+			else {
+				// redirect to home page
+				res.redirect('/panel');
+			}
+		});
+	}
+});
 
 /***** API *****/
 
@@ -255,6 +273,8 @@ router.post('/api/showPic', function(req, res) {
 		});
 	}
 });
+
+/***** Managers *****/
 
 
 module.exports = router;
