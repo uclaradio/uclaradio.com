@@ -27,6 +27,7 @@ var ShowSchema = new Schema({
 	blurb: String,
 	picture: String,
 	thumbnail: String,
+	public: Boolean,
 	pages: {
 		title: String,
 		link: String

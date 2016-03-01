@@ -235,13 +235,13 @@ var Show = React.createClass({
       <div className="show">
         <h3>{this.props.show.title}</h3>
         <img className="showPic" src={this.props.show.thumbnail || "/img/radio.png" } />
+        <FileInput accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} submitText="Submit Picture" />
         <UserEditableTextField name="Title" currentValue={this.props.show.title} onTextSubmit={this.handleTitleSubmit} />
         <UserEditableDateTimeField day={this.props.show.day} time={this.props.show.time} onDateSubmit={this.handleDateSubmit} />
         <UserEditableTextField name="Genre" currentValue={this.props.show.genre} onTextSubmit={this.handleGenreSubmit} />
         <UserEditableTextField name="Blurb" multiline={true} currentValue={this.props.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
-        <FileInput accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} submitText="Submit Picture" />
 
-        <ConfirmationButton confirm={"Delete " + this.props.show.title} submit={"Really delete " + this.props.show.title + "?"} onSubmit={this.handleDeleteShow} />
+        <ConfirmationButton confirm={"Delete '" + this.props.show.title + "'"} submit={"Really delete '" + this.props.show.title + "'?"} onSubmit={this.handleDeleteShow} />
         <br />
       </div>
     );

@@ -17,6 +17,11 @@ a:hover {
 }
 
 /*  Edits */
+
+.content {
+  overflow: hidden;
+}
+
 #logout {
   float: right;
 }
@@ -35,7 +40,8 @@ a:hover {
   max-width: 75%;
   max-height: 75%;
   display: block;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .ConfirmationButton {
@@ -46,12 +52,22 @@ a:hover {
   margin: 0;
   padding: 5px 10px;
   width: auto;
-  background-color: #f44336;
   border: none;
   color: white;
 }
 
-#container .confirm-cancel {
+#container .confirm-btn1 {
+  background-color: #f3958e;
+}
+#container .confirm-btn1:hover {
+  background-color: #f44336;
+}
+
+#container .confirm-btn2 {
+  background-color: #f44336;
+}
+
+ #container .confirm-cancel {
   background-color: #cfcfcf;
   color: black;
 }
@@ -72,10 +88,12 @@ a:hover {
 
 .fileInput input {
   padding-bottom: 2px;
+  max-width: 100%;
 }
 
-.fileInput {
-  padding: 5px 0 10px 0;
+#container .fileInput {
+  margin: 15px 0 15px 0;
+  text-align: center;
 }
 
 /* END Edits */
