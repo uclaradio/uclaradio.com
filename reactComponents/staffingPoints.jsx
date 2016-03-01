@@ -309,22 +309,25 @@ var StaffingPointsView = React.createClass({
 	},
 
 	updateStatus: function(statusMessage, newStatus, id) {
-		let recordToUpdateIndex = -1;
+		if (statusMessage !== 'incorrect password') {
+			let recordToUpdateIndex = -1;
 
-		for (let x = 0; x < this.state.records.length; x++) {
-			if (this.state.records[x]._id === id)
-				recordToUpdateIndex = x;
-		}
+			for (let x = 0; x < this.state.records.length; x++) {
+				if (this.state.records[x]._id === id)
+					recordToUpdateIndex = x;
+			}
 
-		const recordToUpdate = this.state.records[recordToUpdateIndex];
+			const recordToUpdate = this.state.records[recordToUpdateIndex];
 
-		const newRecord = JSON.parse(JSON.stringify(recordToUpdate));
+			const newRecord = JSON.parse(JSON.stringify(recordToUpdate));
 
-		newRecord.dateCompleted = new Date(newRecord.dateCompleted);
+			newRecord.dateCompleted = new Date(newRecord.dateCompleted);
 
-		newRecord.status = newStatus;
+			newRecord.status = newStatus;
 
-		var records = [...this.state.records.slice(0, recordToUpdateIndex), newRecord, ...this.state.records.slice(recordToUpdateIndex + 1, this.state.records.length)];
+			var records = [...this.state.records.slice(0, recordToUpdateIndex), newRecord, ...this.state.records.slice(recordToUpdateIndex + 1, this.state.records.length)];
+		} else
+			var records = this.state.records;
 
 		this.setState({
 			records: records,
