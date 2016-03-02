@@ -32,4 +32,29 @@ router.post('/', function(req, res, next) {
 	});
 });
 
+router.get('/view', function(req, res) {
+	res.render('staffingPointsView');
+});
+
+router.post('/view/update', function(req, res, next) {
+	if (req.body.password !== passwords.managerapprovalpassword) {
+		res.end('incorrect password');
+	} else {
+		db.updateStaffingPointStatus(req.body.userId, req.body.status, req.body.managerNotes, function(err, success) {
+			if (err) {
+				res.end(err);
+				console.log(err);
+			}
+			else
+				res.end('point status updated!');
+		});
+	}
+});
+
+router.get('/points', function(req, res, next) {
+	db.getStaffingPoints(function(err, points) {
+		res.send(points);
+	});
+});
+
 module.exports = router;

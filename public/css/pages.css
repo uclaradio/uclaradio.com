@@ -97,3 +97,11 @@ body {
 .demo-card-wide > .mdl-card__title.photovidrequest {
 	background: url('/img/photovidrequest.jpg') center / cover;
 }
+
+.demo-card-wide > .mdl-card__title.winnerinfo {
+	background: url('/img/winnerinfo.jpg') center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.ticketgiveaway {
+	background: url('/img/ticketgiveaway.jpg') center / cover;
+}
