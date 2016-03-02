@@ -88,7 +88,7 @@ router.get('/manager', function(req, res) {
 		res.redirect('/panel');
 	}
 	else {
-		accounts.checkPrivilege(req.session.user.username, accounts.developerPrivilegeName, function(err, hasAccess) {
+		accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
 			if (hasAccess) {
 				var path = require('path');
 				res.sendFile(path.resolve('public/panel/manager.html'));
@@ -112,9 +112,15 @@ router.get('/api/user', function(req, res) {
 	}
 	else {
 		var user = req.session.user;
-		var userData = {"username": user.username, "djName": user.djName, "email": user.email, "phone": user.phone};
-		res.json(userData);
-		//res.json({"username": "senor danger", "djName": "Tommy", "email": "danger@example.com"});
+		// retrieve links relevent to user's privileges (like Manager pages)
+		accounts.getPrivilegeLinksForUser(user.username, function(err, links) {
+			var userData = {"username": user.username, "djName": user.djName, "email": user.email, "phone": user.phone};
+			// append links if appropriate (normal users may not have any)
+			if (err == null && links.length > 0) {
+				userData.links = links;
+			}
+			res.json(userData);
+		});
 	}
 });
 

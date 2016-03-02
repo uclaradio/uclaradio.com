@@ -73,6 +73,9 @@ var UserData = React.createClass({
 
         <br />
         <ShowsList url={this.props.urls.showsURL} showURL={this.props.urls.showURL} addShowURL={this.props.urls.addShowURL} showPicURL={this.props.urls.showPicURL} />
+
+        <br />
+        {(this.state.user.links == null) ? <div /> : <Links links={this.state.user.links} />}
       </div>
     );
   }
@@ -301,6 +304,25 @@ var NewShowForm = React.createClass({
   }
 });
 
+var Links = React.createClass({
+  render: function() {
+    var allLinks = this.props.links.map(function(link) {
+      return (
+      <li key={link.title}>
+        <a href={link.link}>{link.title}</a>
+      </li>
+      );
+    });
+    return (
+      <div className="links">
+        <h2> Links </h2>
+        <p><ul>
+        {allLinks}
+        </ul></p>
+      </div>
+    );
+  }
+});
 
 ReactDOM.render(
   <UserData urls={urls} />,

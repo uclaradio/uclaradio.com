@@ -15,7 +15,7 @@ var UserSchema = new Schema({
 	email: String,
 	djName: String,
 	phone: String
-}, {collection: 'User'});
+});
 
 // Radio shows to show on the site
 var ShowSchema = new Schema({
@@ -46,7 +46,10 @@ var ShowSchema = new Schema({
 var PrivilegeSchema = new Schema({
 	name: String, // name of privilege
 	users: [String],
-	links: [String]
+	links: [{
+		title: String,
+		link: String
+	}]
 });
 db.developerPrivilegeName = "Developer";
 db.managerPrivilegeName = "Manager";
@@ -343,6 +346,17 @@ db.removeShow = function(id, callback) {
 
 /***** Privileges *****/
 
+db.addPrivilege = function(privilege, links, callback) {
+	PrivilegeModel.findOneAndUpdate({name: privilege}, {links: links}, {upsert: true, new: true}, function(err, o) {
+		if (err) {
+			callback(err, false);
+		}
+		else {
+			callback(null, true);
+		}
+	});
+}
+
 /**
 *  Update the privileges table to give or take away a privilege for a user
 *  ...
@@ -382,6 +396,17 @@ db.checkPrivilege = function(username, privilege, callback) {
 			}
 			else { callback(null, false); }
 		}
+	});
+}
+
+db.getPrivilegeLinksForUser = function(username, callback) {
+	PrivilegeModel.find({users: username}, function(err, privileges) {
+		if (err) { console.log("error getting privileges: ", err); }
+		var links = [];
+		for (var i = 0; i < privileges.length; i++) {
+			links = links.concat(privileges[i].links);
+		}
+		callback(err, links);
 	});
 }
 
