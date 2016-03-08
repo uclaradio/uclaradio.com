@@ -187,7 +187,6 @@ var ShowsList = React.createClass({
       return (
       <div key={show.id}>
        <Show show={show} url={showURL} onUpdateShow={handleUpdateShow} onUpdateShowPicture={handleUpdatePicture} onDeleteShow={handleDeleteShow} />
-       <br />
       </div>
       );
     });
@@ -245,7 +244,6 @@ var Show = React.createClass({
         <UserEditableTextField name="Blurb" multiline={true} currentValue={this.props.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
 
         <ConfirmationButton confirm={"Delete '" + this.props.show.title + "'"} submit={"Really delete '" + this.props.show.title + "'?"} onSubmit={this.handleDeleteShow} />
-        <br />
       </div>
     );
   }
@@ -316,9 +314,9 @@ var Links = React.createClass({
     return (
       <div className="links">
         <h2> Links </h2>
-        <p><ul>
+        <ul>
         {allLinks}
-        </ul></p>
+        </ul>
       </div>
     );
   }

@@ -37,8 +37,6 @@ a:hover {
 }
 
 .showPic {
-  max-width: 75%;
-  max-height: 75%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -49,8 +47,8 @@ a:hover {
 }
 
 #container .confirm-btn1, #container .confirm-btn2, #container .confirm-cancel {
-  margin: 0;
-  padding: 5px 10px;
+  margin-right: 10px;
+  padding: 5px 5px;
   width: auto;
   border: none;
   color: white;
@@ -73,27 +71,50 @@ a:hover {
 }
 
 #container h3 {
-  padding-top: 20px;
+  /*padding-top: 10px;*/
+  text-align: center;
 }
+
 
 #container a {
   cursor: pointer;
 }
 
-#container a.disabled {
+
+#container button:disabled {
   cursor: auto;
-  text-decoration: none;
-  color: grey;
+}
+
+.show {
+  width: 75%;
+  margin: 0 auto;
 }
 
 .fileInput input {
   padding-bottom: 2px;
-  max-width: 100%;
+}
+
+.fileInput button {
+  display: table;
+  margin: 0 auto;
 }
 
 #container .fileInput {
   margin: 15px 0 15px 0;
   text-align: center;
+}
+
+.confirmationButton {
+  margin: 25px auto;
+}
+
+.show {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.clear {
+  clear: both;
 }
 
 /* END Edits */
@@ -123,7 +144,7 @@ h1 {
 }
 
 h2 {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #d7d7d7;
   font-size: 2em;
 }
 

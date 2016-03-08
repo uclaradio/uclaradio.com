@@ -27,7 +27,8 @@ var FileInput = React.createClass({
     return (
       <div className="fileInput">
         <input ref="file" type="file" accept={this.props.accept} onChange={this.handleChange} />
-        <br /><a className={this.state.fileSelected ? "enabled" : "disabled"} onClick={this.handleSubmit}>{this.props.submitText}</a>
+        <button disabled={!this.state.fileSelected} onClick={this.handleSubmit}>{this.props.submitText}</button>
+        <div className="clear" />
       </div>
     );
   }
