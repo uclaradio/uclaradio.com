@@ -93,6 +93,8 @@ var StaffingPointsSchema = new Schema({
 	department: String,
 	number: Number,
 	notes: String,
+	managerNotes: String,
+	status: String
 }, {collection: 'StaffingPoints'});
 
 var DjBlurbModel = mongoose.model('DjBlurb', DjBlurbSchema);
@@ -133,15 +135,10 @@ db.getBlurbByShowTitle = function(title, callback) {
 
 //delete a blurb by the title of show
 db.deleteBlurbByShowTitle = function(title, callback){
-	console.log("DB show title is:" + title);
 	DjBlurbModel.findOneAndRemove({showName: title}, function(err){
 		callback(err);
 	});
 };
-
-
-
-
 
 db.getAllBlurbs = function(callback) {
 	DjBlurbModel.find({}, function(err, blurbs) {
@@ -238,6 +235,8 @@ db.addStaffingPoints = function(data, callback) {
 		department: data.department,
 		number: data.numberOfPoints,
 		notes: data.other,
+		managerNotes: "",
+		status: "pending"
 	};
 
 	var staffingPoints = new StaffingPointsModel(staffingPointsData);
@@ -248,8 +247,16 @@ db.addStaffingPoints = function(data, callback) {
 	});
 };
 
+db.updateStaffingPointStatus = function(id, newStatus, managerNotes, callback) {
+	StaffingPointsModel.update({_id: id}, {$set: {'status': newStatus, 'managerNotes': managerNotes}}, { multi: false }, function(err, update) {
+		if (err) console.log(err);
+		callback(err, update);
+	});
+};
+
 db.getStaffingPoints = function(callback) {
 	StaffingPointsModel.find({}, function(err, points) {
+		if (err) console.log(err);
 		callback(err, points);
 	});
 };
@@ -427,7 +434,6 @@ db.insertTimeslotsToSchedule = function(callback) {
 		schedule[0][15].push("12am");
 
 		var addTimeToSchedule = function(coord, lastName, priority) {
-			console.log(coord);
 			if (coord.x === undefined || coord.y === undefined)
 				return;
 			schedule[coord.x][coord.y].push(lastName + priority);
@@ -463,8 +469,6 @@ db.insertTimeslotsToSchedule = function(callback) {
 			coord = getIndexOffOfDayAndTime(shows[i].day10, shows[i].timeslot10);
 			addTimeToSchedule(coord, lastName, '10');
 		}
-
-		console.log(schedule);
 
 		var stringSchedule = '';
 		for (var y = 0; y < schedule[0].length; y++) {

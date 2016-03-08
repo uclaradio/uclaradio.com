@@ -84,6 +84,7 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
 
 
 
+
   var boxShadowHoverCss = "1px 0px " + mediumColor + 
     ", 0px 1px " + darkColor +
     ", 2px 1px " + mediumColor +

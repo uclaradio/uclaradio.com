@@ -22,8 +22,6 @@ var managers = require('./routes/managers');
 var TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
 var panel = require('./routes/panel.js');
 
-
-
 var app = express();
 
 // view engine setup
@@ -61,6 +59,8 @@ app.use('/shows', shows);
 app.use('/manageShows', manageShows);
 app.use('/managers', managers);
 app.use('/GiveawayCalendar', TicketGiveawayCalendar);
+
+// all links to panel/* handled in panel.js
 app.use('/panel', panel);
 
 // catch 404 and forward to error handler
