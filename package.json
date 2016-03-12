@@ -19,7 +19,7 @@
     "mongoose": "^4.0.1",
     "morgan": "~1.5.1",
     "multer": "^0.1.8",
-    "nodemailer": "^2.1.0",
+    "nodemailer": "^2.2.1",
     "public-google-calendar": "^0.1.0",
     "serve-favicon": "^2.2.0"
   },
