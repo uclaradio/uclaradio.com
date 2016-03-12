@@ -87,7 +87,7 @@ head
             .col-md-6
               .form-group
                 label(for='numQuarters') Number of Quarters as a DJ
-                  input.form-control(type='text', name='numQuarters', required)
+                  input.form-control(type='number', name='numQuarters', required)
           .row
             .col-md-6
               .form-group
@@ -105,35 +105,35 @@ head
             .col-md-6
               .form-group
                 label(for='showTitle') Show Title
-                  input.form-control(type='text', name='showTitle')
+                  input.form-control(type='text', name='showTitle', required)
 
             .col-md-6
               .form-group
                 label(for='genre') Show Genre(s)
-                  input.form-control(type='text', name='genre')
+                  input.form-control(type='text', name='genre', required)
           .row
             .col-md-6
               .form-group
                 label(for='length') Length of Show (in hours)
-                  input.form-control(type='number', name='length', min='0', step='1')
+                  input.form-control(type='number', name='length', min='0', step='1', required)
       
           .row
             .col-md-12
               .form-group
                 label(for='showDescription') Show Description (20-40 words)
-                  textarea.form-control(name='showDescription')
+                  textarea.form-control(name='showDescription', required)
 
           .row
             .col-md-12
               .form-group
                 label(for='sampleSet') 5 Song Sample Set
-                  textarea.form-control(name='sampleSet')
+                  textarea.form-control(name='sampleSet', required)
 
           .row
             .col-md-12
               .form-group
                 label(for='talkingPoints') Talking Points
-                  textarea.form-control(name='talkingPoints')
+                  textarea.form-control(name='talkingPoints', required)
 
         .form-container
           .center
@@ -142,35 +142,35 @@ head
             .col-md-6
               .form-group
                 label(for='showTitle2') Show Title
-                  input.form-control(type='text', name='showTitle2')
+                  input.form-control(type='text', name='showTitle2', required)
 
             .col-md-6
               .form-group
                 label(for='genre2') Show Genre(s)
-                  input.form-control(type='text', name='genre2')
+                  input.form-control(type='text', name='genre2', required)
           .row
             .col-md-6
               .form-group
                 label(for='length2') Length of Show (in hours)
-                  input.form-control(type='number', name='length2', min='0', step='1')
+                  input.form-control(type='number', name='length2', min='0', step='1', required)
       
           .row
             .col-md-12
               .form-group
                 label(for='showDescription2') Show Description (20-40 words)
-                  textarea.form-control(name='showDescription2')
+                  textarea.form-control(name='showDescription2', required)
 
           .row
             .col-md-12
               .form-group
                 label(for='sampleSet2') 5 Song Sample Set
-                  textarea.form-control(name='sampleSet2')
+                  textarea.form-control(name='sampleSet2', required)
 
           .row
             .col-md-12
               .form-group
                 label(for='talkingPoints2') Talking Points
-                  textarea.form-control(name='talkingPoints2')
+                  textarea.form-control(name='talkingPoints2', required)
 
         .form-container
           .center
@@ -661,42 +661,42 @@ head
           .row
             .col-md-12
               label(for='preferredShow') Which Show I'd Prefer:
-                textarea.form-control(name='preferredShow')
+                textarea.form-control(name='preferredShow', required)
 
           .row
             .col-md-12
               label(for='whyValuable') Why is your program valuable to UCLARadio.com?
-                textarea.form-control(name='whyValuable')
+                textarea.form-control(name='whyValuable', required)
 
           .row
             .col-md-12
               label(for='howToImprove') Returning DJs, how do you hope to improve your show?
-                textarea.form-control(name='howToImprove')
+                textarea.form-control(name='howToImprove', required)
 
           .row
             .col-md-12
               label(for='threeThingsImproved') What are three things you want to see improved/changed about the station as a whole?
-                textarea.form-control(name='threeThingsImproved')
+                textarea.form-control(name='threeThingsImproved', required)
 
           .row
             .col-md-12
               label(for='whatHasImproved') What things have improved in the station as a whole?
-                textarea.form-control(name='whatHasImproved')
+                textarea.form-control(name='whatHasImproved', required)
 
           .row
             .col-md-12
               label(for='moreListeners') How could UCLARadio.com attract more listeners?
-                textarea.form-control(name='moreListeners')
+                textarea.form-control(name='moreListeners', required)
 
           .row
             .col-md-12
               label(for='otherComments') Other comments you want management to see (your answer will not affect your timeslot):
-                textarea.form-control(name='otherComments')
+                textarea.form-control(name='otherComments', required)
 
           .row
             .col-md-12
               label(for='interestedInReceiving') Would you be interested in receiving info about in station performances and on air interview possibilities?
-                textarea.form-control(name='interestedInReceiving')
+                textarea.form-control(name='interestedInReceiving', required)
 
           .row
             .col-md-12
