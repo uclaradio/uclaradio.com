@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res, next) {
     
 	if (req.body.password != passwords.secretpassword)
-		res.end("Incorrect Password.");	
+		return res.end("Incorrect Password.");	
 
 	// Adds the proposed show to the database.
 	db.addProposedShow(req.body, function(err, proposedShowSaved) {
