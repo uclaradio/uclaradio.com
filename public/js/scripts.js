@@ -142,7 +142,7 @@ $(document).ready(function() {
 
   window.onbeforeunload = function(){
     if(playing) {
-      $.get('http://localhost:3000/analytics/decrement')
+      $.get('http://uclaradio.com/analytics/decrement')
      // Do something
     }
   }
@@ -164,7 +164,7 @@ $(document).ready(function() {
   $("#play-button").click(function() {
     console.log('click!')
     if (!playing) {
-      $.get('http://localhost:3000/analytics/increment')
+      $.get('http://uclaradio.com/analytics/increment')
 
 	  //add the source again if we're on a mobile device since it was removed to stop download.
 	  if (mobile)
@@ -173,7 +173,7 @@ $(document).ready(function() {
       stream.play();
       playing = true;
     } else {
-      $.get('http://localhost:3000/analytics/decrement')
+      $.get('http://uclaradio.com/analytics/decrement')
       stream.pause();
       playing = false;
 
