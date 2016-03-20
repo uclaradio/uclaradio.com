@@ -149,6 +149,12 @@ $(document).ready(function() {
   // OR
   window.addEventListener("beforeunload", function(e){
      // Do something
+    if(playing) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+
+
   }, false);
 
   //Calls mobileBrowserCheck function from mobileBrowserCheck.js.
