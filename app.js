@@ -20,6 +20,7 @@ var manageShows = require('./routes/manageShows');
 var managers = require('./routes/managers');
 var TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
 var notFound = require('./routes/notFound');
+var analytics = require('./routes/analytics');
 
 var app = express();
 
@@ -50,6 +51,7 @@ app.use('/manageShows', manageShows);
 app.use('/managers', managers);
 app.use('/GiveawayCalendar', TicketGiveawayCalendar);
 app.use('/notFound', notFound);
+app.use('/analytics', analytics);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

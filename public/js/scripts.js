@@ -140,6 +140,17 @@ $(document).ready(function() {
   var stream = document.getElementById('stream');
   var playing = false;
 
+  window.onbeforeunload = function(){
+    if(playing) {
+      $.get('http://localhost:3000/analytics/decrement')
+     // Do something
+    }
+  }
+  // OR
+  window.addEventListener("beforeunload", function(e){
+     // Do something
+  }, false);
+
   //Calls mobileBrowserCheck function from mobileBrowserCheck.js.
   //function in that file is taken from detectmobilebrowsers.com
   var mobile = mobileBrowserCheck();
@@ -151,8 +162,9 @@ $(document).ready(function() {
 
   // activate the play button
   $("#play-button").click(function() {
-
+    console.log('click!')
     if (!playing) {
+      $.get('http://localhost:3000/analytics/increment')
 
 	  //add the source again if we're on a mobile device since it was removed to stop download.
 	  if (mobile)
@@ -161,6 +173,7 @@ $(document).ready(function() {
       stream.play();
       playing = true;
     } else {
+      $.get('http://localhost:3000/analytics/decrement')
       stream.pause();
       playing = false;
 
