@@ -5,7 +5,7 @@ function getCount() {
       console.log(response);
       $('#currentListeners').html(response);
      }).fail()
-   }, 5000);
+   }, 1000);
 
 }
 
