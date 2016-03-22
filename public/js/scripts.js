@@ -146,6 +146,13 @@ $(document).ready(function() {
      // Do something
     }
   }
+
+  window.unload = function () { //logic goes here 
+    if(playing) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+  }
   // OR
   window.addEventListener("beforeunload", function(e){
      // Do something
@@ -156,6 +163,17 @@ $(document).ready(function() {
 
 
   }, false);
+
+
+  window.addEventListener("pagehide", function(ev){if(!ev.persisted){
+
+    if(playing) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+
+    
+  } }, false)
 
   //Calls mobileBrowserCheck function from mobileBrowserCheck.js.
   //function in that file is taken from detectmobilebrowsers.com
@@ -178,11 +196,13 @@ $(document).ready(function() {
       stream.play();
       playing = true;
       $.get('http://uclaradio.com/analytics/increment')
+      console.log('play')
 
     } else {
       stream.pause();
       playing = false;
       $.get('http://uclaradio.com/analytics/decrement')
+      console.log('pause')
 
 
 	  //remove the source if the user is on a mobile device to stop data transfer. If we don't do this on mobile,
@@ -205,7 +225,7 @@ $(document).ready(function() {
 
 function checkCarouselData() {
   setTimeout(function() {
-    jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks');
+    jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio.com&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks');
     checkCarouselData();
   }, 30000);
 }
