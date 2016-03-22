@@ -45,14 +45,14 @@ var ShowSchema = new Schema({
 // User privileges (checked for access to manager pages, etc.)
 var PrivilegeSchema = new Schema({
 	name: String, // name of privilege
-	users: [String],
-	links: [{
+	users: [String], // users who have this privilege
+	links: [{ // pages these users can access (should still check permission at each url)
 		title: String,
 		link: String
 	}]
 });
-db.developerPrivilegeName = "Developer";
 db.managerPrivilegeName = "Manager";
+// db.developerPrivilegeName = "Developer";
 
 // Contains last distributed id for a table, in order to provide a unique id for each show, etc.
 var LastIdSchema = new Schema({
@@ -61,6 +61,7 @@ var LastIdSchema = new Schema({
 });
 var showIdKey = "show"; // ids for Show table
 
+var UnverifiedUserModel = mongoose.model('unverifiedUsers', UserSchema);
 var UserModel = mongoose.model('users', UserSchema);
 
 var ShowModel = mongoose.model('shows', ShowSchema);
@@ -108,34 +109,77 @@ db.manualLogin = function(username, pass, callback) {
 	});
 }
 
-// create a new user with the given user data
-db.addNewAccount = function(username, pass, email, djName, callback) {
+// create a new unverified user with the given user data
+db.addNewAccount = function(accountType, userData, callback) {
+	UserModel.findOne({username: userData.username}, function(err, o) {
+		if (o) {
+			callback('username-taken');
+		}
+		else {
+			UserModel.findOne({email: userData.email}, function(err, o) {
+				if (o) {
+					callback('email-taken');
+				}
+				else {
+					if (accountType === 'verified') {
+						// new verified user (will have access to dj panel)
+						var newUser = new UserModel(userData);
+						newUser.save(function(err, userSaved) {
+							callback(err, userSaved);
+						});
+					}
+					else if (accountType === 'unverified') {
+						// unverified user (will need to be verified before logging in)
+						var newUnverifiedUser = new UnverifiedUserModel(userData);
+						newUnverifiedUser.save(function(err, userSaved) {
+							callback(err, userSaved);
+						})
+					}
+				}
+			});
+		}
+	});
+}
+
+db.requestNewAccount = function(username, pass, email, djName, callback) {
 	newData = {
 		"username": username,
 		"email": email,
 		"djName": djName
 	};
+	saltAndHash(pass, function(hash) {
+		newData.pass = hash;
+		db.addNewAccount('unverified', newData, callback);
+	});
+}
 
-	UserModel.findOne({username: newData.username}, function(err, o) {
+db.listAccounts = function(callback) {
+	// get verified 
+	UnverifiedUserModel.find({}, function(err, accounts) {
+		unverifiedUsers = [];
+		for (var i = 0; i < accounts.length; i++) {
+			var user = {"username": accounts[i].username, "email": accounts[i].email};
+			unverifiedUsers.push(user);
+		}
+		UserModel.find({}, function(err, verifiedAccounts) {
+			verifiedUsers = [];
+			for (var i = 0; i < verifiedAccounts.length; i++) {
+				var user = {"username": verifiedAccounts[i].username, "email": verifiedAccounts[i].email};
+				verifiedUsers.push(user);
+			}
+			callback(err, {"verified": verifiedUsers, "unverified": unverifiedUsers});
+		});
+	});
+}
+
+db.verifyAccount = function(username, callback) {
+	UnverifiedUserModel.findOne({username: username}, function(err, o) {
 		if (o) {
-			callback('username-taken');
+			db.addNewAccount('verified', o, callback);
+			UnverifiedUserModel.remove({username: username});
 		}
 		else {
-			UserModel.findOne({email: newData.email}, function(err, o) {
-				if (o) {
-					callback('email-taken');
-				}
-				else {
-					saltAndHash(pass, function(hash) {
-						// create new user
-						newData.pass = hash;
-						var newUser = new UserModel(newData);
-						newUser.save(function(err, userSaved) {
-							callback(err, userSaved);
-						});
-					})
-				}
-			});
+			callback(err, null);
 		}
 	});
 }

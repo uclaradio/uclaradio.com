@@ -70,7 +70,7 @@ router.get('/signup', function(req, res) {
 });
 
 router.post('/signup', function(req, res) {
-	accounts.addNewAccount(req.body['username'], req.body['pass'], req.body['email'], req.body['djName'], function(e) {
+	accounts.requestNewAccount(req.body['username'], req.body['pass'], req.body['email'], req.body['djName'], function(e) {
 		if (e) {
 			res.status(400).send(e);
 		}
@@ -81,6 +81,56 @@ router.post('/signup', function(req, res) {
 });
 
 /***** Managers *****/
+
+var listAccounts = function(req, res) {
+	accounts.listAccounts(function(err, usernames) {
+		res.json(usernames);
+	});
+}
+
+var verifyAccount = function(req, res) {
+	accounts.verifyAccount(req.body.username, function(err, o) {
+		if (o) {
+			// successfully updated
+			res.json("success");
+		}
+		else {
+			console.log("error verifying account:", err);
+			res.status(400).send(e);
+		}
+
+	});
+}
+
+router.post('/manager/api/:link', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
+			if (hasAccess) {
+				var path = require('path');
+				// perform action
+				console.log("searching for", req.params.link);
+				switch (req.params.link) {
+					case 'listAccounts':
+						listAccounts(req, res);
+						break;
+					case 'verify': 
+						verifyAccount(req, res);
+						break;
+					default:
+						res.status(404).send(e);
+						break;
+				}
+			}
+			else {
+				res.status(400).send(e);
+			}
+		});
+	}
+});
 
 router.get('/manager', function(req, res) {
 	if (req.session.user == null) {
@@ -280,7 +330,6 @@ router.post('/api/showPic', function(req, res) {
 	}
 });
 
-/***** Managers *****/
 
 
 module.exports = router;
