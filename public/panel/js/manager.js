@@ -3,7 +3,9 @@
 
 var urls = {url: "/panel/manager/info", 
             listAccounts: "/panel/manager/api/listAccounts",
-            verifyAccount: "/panel/manager/api/verify"};
+            verifyAccount: "/panel/manager/api/verify",
+            delete: "/panel/manager/api/delete",
+            deleteUnverified: "/panel/manager/api/deleteUnverified"};
 
 var Manager = React.createClass({
   // loadDataFromServer: function() {
@@ -62,7 +64,7 @@ var Manager = React.createClass({
   render: function() {
     return (
       <div className="manager">
-        <AccountsList url={this.props.urls.listAccounts} verifyURL={this.props.urls.verifyAccount} />
+        <AccountsList urls={this.props.urls} />
       </div>
     );
   }
@@ -72,7 +74,7 @@ var AccountsList = React.createClass({
   loadDataFromServer: function() {
     console.log("retrieving accounts...");
     $.ajax({
-      url: this.props.url,
+      url: this.props.urls.listAccounts,
       dataType: 'json',
       type: 'POST',
       cache: false,
@@ -83,6 +85,22 @@ var AccountsList = React.createClass({
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
+  },
+  updateUser: function(url, username, oldAccounts) {
+    var updateData = {"username": username};
+      $.ajax({
+        url: url,
+        dataType: 'json',
+        type: 'POST',
+        data: updateData,
+        success: function() {
+          this.loadDataFromServer();
+        }.bind(this),
+        error: function(xhr, status, err) {
+          this.setState({accounts: oldAccounts});
+          console.error(this.props.showURL, status, err.toString());
+        }.bind(this)
+      });
   },
   handleVerifyUser: function(username) {
     var oldAccounts = this.state.accounts;
@@ -97,20 +115,37 @@ var AccountsList = React.createClass({
     }
     // optimistically add show data to present
     this.setState({accounts: newAccounts});
+    this.updateUser(this.props.urls.verifyAccount, username, oldAccounts);
+  },
+  handleDeleteUser: function(username) {
+    var oldAccounts = this.state.accounts;
+    var newAccounts = $.extend(true, [], this.state.accounts);
+    for (var i = 0; i < newAccounts.verified.length; i++) {
+      if (newAccounts.verified[i].username == username) {
+        // remove user from verified
+        newAccounts.verified.splice(i, 1);
+        break;
+      }
+    }
+    // optimistically add show data to present
+    this.setState({accounts: newAccounts});
     var updateData = {"username": username};
-    $.ajax({
-      url: this.props.verifyURL,
-      dataType: 'json',
-      type: 'POST',
-      data: updateData,
-      success: function() {
-        this.loadDataFromServer();
-      }.bind(this),
-      error: function(xhr, status, err) {
-        this.setState({accounts: oldAccounts});
-        console.error(this.props.showURL, status, err.toString());
-      }.bind(this)
-    });
+    this.updateUser(this.props.urls.delete, username, oldAccounts);
+  },
+  handleDeleteUnverifiedUser: function(username) {
+    var oldAccounts = this.state.accounts;
+    var newAccounts = $.extend(true, [], this.state.accounts);
+    for (var i = 0; i < newAccounts.unverified.length; i++) {
+      if (newAccounts.unverified[i].username == username) {
+        // remove user from unverified
+        newAccounts.unverified.splice(i, 1);
+        break;
+      }
+    }
+    // optimistically add show data to present
+    this.setState({accounts: newAccounts});
+    var updateData = {"username": username};
+    this.updateUser(this.props.urls.deleteUnverified, username, oldAccounts);
   },
   getInitialState: function() {
     // accounts: {verified: [], unverified: []}
@@ -122,17 +157,19 @@ var AccountsList = React.createClass({
   render: function() {
     // create list of all shows
     var handleVerifyUser = this.handleVerifyUser;
+    var handleDeleteUnverifiedUser = this.handleDeleteUnverifiedUser;
+    var handleDeleteUser = this.handleDeleteUser;
     var unverified = this.state.accounts.unverified.map(function(unverifiedUser) {
       return (
       <div key={unverifiedUser.username}>
-       <UnverifiedUserAccount user={unverifiedUser} onVerifyUser={handleVerifyUser} />
+       <UnverifiedUserAccount user={unverifiedUser} onVerifyUser={handleVerifyUser} onDelete={handleDeleteUnverifiedUser} />
       </div>
       );
     });
     var verified = this.state.accounts.verified.map(function(verifiedUser) {
       return (
       <div key={verifiedUser.username}>
-       <UserAccount user={verifiedUser} />
+       <UserAccount user={verifiedUser} onDelete={handleDeleteUser} />
       </div>
       );
     });
@@ -152,7 +189,7 @@ var UnverifiedUserAccount = React.createClass({
     this.props.onVerifyUser(this.props.user.username);
   },
   handleRemoveUser: function() {
-    // TO DO: delete user
+    this.props.onDelete(this.props.user.username);
   },
   render: function() {
     return (
@@ -169,7 +206,7 @@ var UnverifiedUserAccount = React.createClass({
 
 var UserAccount = React.createClass({
   handleRemoveUser: function() {
-    // TO DO: delete user
+    this.props.onDelete(this.props.user.username);
   },
   render: function() {
     return (

@@ -208,9 +208,19 @@ db.updatePassword = function(email, newPass, callback) {
 	});
 }
 
-// delete a user with the given id
-db.deleteUser = function(id, callback) {
-	UserModel.remove({_id: getObjectId(id)}, callback);
+// delete a user with the given username
+db.deleteUser = function(username, callback) {
+	UserModel.remove({username: username}, function (e) {
+		callback(e);
+	});
+}
+
+// delete an unverified user with the given id
+db.deleteUnverifiedUser = function(username, callback) {
+	console.log('attempting to delete user:', username);
+	UnverifiedUserModel.remove({username: username}, function (e) {
+		callback(e);
+	});
 }
 
 // perform callback on user with provided email

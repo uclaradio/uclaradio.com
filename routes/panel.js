@@ -86,7 +86,7 @@ var listAccounts = function(req, res) {
 	accounts.listAccounts(function(err, usernames) {
 		res.json(usernames);
 	});
-}
+};
 
 var verifyAccount = function(req, res) {
 	accounts.verifyAccount(req.body.username, function(err, o) {
@@ -96,11 +96,24 @@ var verifyAccount = function(req, res) {
 		}
 		else {
 			console.log("error verifying account:", err);
-			res.status(400).send(e);
+			res.status(400).send();
 		}
-
 	});
-}
+};
+
+var deleteAccount = function(req, res) {
+	accounts.deleteUser(req.body.username, function (e) {
+		if (e) { console.log("error removing show: ", e); res.status(400).send(); }
+		else { res.json("success"); }
+	});
+};
+
+var deleteUnverifiedAccount = function(req, res) {
+	accounts.deleteUnverifiedUser(req.body.username, function (e) {
+		if (e) { console.log("error removing show: ", e); res.status(400).send(); }
+		else { res.json("success"); }
+	});
+};
 
 router.post('/manager/api/:link', function(req, res) {
 	if (req.session.user == null) {
@@ -112,7 +125,6 @@ router.post('/manager/api/:link', function(req, res) {
 			if (hasAccess) {
 				var path = require('path');
 				// perform action
-				console.log("searching for", req.params.link);
 				switch (req.params.link) {
 					case 'listAccounts':
 						listAccounts(req, res);
@@ -120,13 +132,19 @@ router.post('/manager/api/:link', function(req, res) {
 					case 'verify': 
 						verifyAccount(req, res);
 						break;
+					case 'delete':
+						deleteAccount(req, res);
+						break;
+					case 'deleteUnverified':
+						deleteUnverifiedAccount(req, res);
+						break;
 					default:
-						res.status(404).send(e);
+						res.status(404).send();
 						break;
 				}
 			}
 			else {
-				res.status(400).send(e);
+				res.status(400).send();
 			}
 		});
 	}
