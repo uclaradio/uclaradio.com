@@ -1,6 +1,9 @@
 // home.html
 // let DJ edit personal info
 
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 var urls = {url: "/panel/manager/info", 
             listAccounts: "/panel/manager/api/listAccounts",
             verifyAccount: "/panel/manager/api/verify",
@@ -129,7 +132,6 @@ var AccountsList = React.createClass({
     }
     // optimistically add show data to present
     this.setState({accounts: newAccounts});
-    var updateData = {"username": username};
     this.updateUser(this.props.urls.delete, username, oldAccounts);
   },
   handleDeleteUnverifiedUser: function(username) {
@@ -144,7 +146,6 @@ var AccountsList = React.createClass({
     }
     // optimistically add show data to present
     this.setState({accounts: newAccounts});
-    var updateData = {"username": username};
     this.updateUser(this.props.urls.deleteUnverified, username, oldAccounts);
   },
   getInitialState: function() {

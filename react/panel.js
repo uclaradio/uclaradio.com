@@ -1,6 +1,14 @@
 // home.html
 // let DJ edit personal info
 
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+var UserEditableTextField = require('./components/UserEditableTextField.js');
+var UserEditableDateTimeField = require('./components/UserEditableDateTimeField.js');
+var ConfirmationButton = require('./components/ConfirmationButton.js');
+var FileInput = require('./components/FileInput.js');
+
 var urls = {url: "/panel/api/user",
             updateURL: "/panel/api/updateUser",
             showsURL: "/panel/api/shows",

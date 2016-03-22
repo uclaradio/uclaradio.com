@@ -50,7 +50,7 @@ router.get('/home', function(req, res) {
 	}
 	else {
 		var path = require('path');
-		res.sendFile(path.resolve('public/panel/home.html'));
+		res.sendFile(path.resolve('public/panel/panel.html'));
 	}
 });
 

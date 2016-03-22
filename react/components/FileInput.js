@@ -1,6 +1,7 @@
-// upload.js
-// Contains elements used for uploading files in a form
+// FileInput.js
 
+var React = require('react');
+var ReactDOM = require('react-dom');
 
 /**
 *  Upload a file with file input field
@@ -34,4 +35,4 @@ var FileInput = React.createClass({
   }
 });
 
-window.FileInput = FileInput;
+module.exports = FileInput;
