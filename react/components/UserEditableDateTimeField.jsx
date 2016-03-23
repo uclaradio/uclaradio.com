@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-var DateTimeField = require('./DateTimeField.js');
+var DateTimeField = require('./DateTimeField.jsx');
 
 /**
 *  Show current saved value for day/time and let user update data and submit changes

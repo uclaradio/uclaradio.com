@@ -3,12 +3,19 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+// require('elemental/less/elemental.less');
 
 var urls = {url: "/panel/manager/info", 
             listAccounts: "/panel/manager/api/listAccounts",
             verifyAccount: "/panel/manager/api/verify",
             delete: "/panel/manager/api/delete",
             deleteUnverified: "/panel/manager/api/deleteUnverified"};
+
+var Elemental = require('elemental');
+console.log("elemental: ", Elemental);
+var InputGroup = Elemental.InputGroup;
+var FormInput = Elemental.FormInput;
+var Button = Elemental.Button;
 
 var Manager = React.createClass({
   // loadDataFromServer: function() {
@@ -67,6 +74,14 @@ var Manager = React.createClass({
   render: function() {
     return (
       <div className="manager">
+      <InputGroup contiguous>
+        <InputGroup.Section grow>
+          <FormInput type="text" placeholder="Input group field" />
+        </InputGroup.Section>
+        <InputGroup.Section>
+          <Button>Button</Button>
+        </InputGroup.Section>
+      </InputGroup>
         <AccountsList urls={this.props.urls} />
       </div>
     );
@@ -75,7 +90,6 @@ var Manager = React.createClass({
 
 var AccountsList = React.createClass({
   loadDataFromServer: function() {
-    console.log("retrieving accounts...");
     $.ajax({
       url: this.props.urls.listAccounts,
       dataType: 'json',

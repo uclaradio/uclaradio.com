@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 	var webpack = require('webpack');
 
 	// We define two entries. One for our application and one for vendors
-	var entry = { main: './app.js', vendors: ['react'] };
+	// var entry = { main: './react/panel.js', vendors: ['react', 'elemental'] };
 
 	// Creates a special Commons bundle that our application can require from
 	var commonPlugin = [new webpack.optimize.CommonsChunkPlugin("vendors", "vendors.js")];
@@ -12,15 +12,22 @@ module.exports = function(grunt) {
 
 	// The module options takes loaders, in this case transforming JSX to normal
 	// javascript
-	var module = { loaders: [{ test: /\.js$/, loader: 'jsx' }] };
+	var module = { loaders: [{ test: /\.js[x]?$/, loader: 'jsx' }, { test: /\.less$/, loader: 'style!css!less' }] };
 	grunt.initConfig({
 	  webpack: {
 	  	panel: {
-	      entry: { main: './react/panel.js', vendors: ['react'] },
+	      entry: { main: './react/panel.js', vendors: ['react', 'elemental'] },
 	      plugins: commonPlugin.concat(uglifyPlugin),
 	      stats: {
 	        timings: true
 	      },
+	      // files: [{
+       //      expand: true,
+       //      cwd: 'react',
+       //      src: '*.js',
+       //      dest: 'public/build',
+       //      ext: '.min.js'
+       //    }],
 	      output: {
 	        filename: 'panel.js',
 	        path: './public/build'
@@ -29,7 +36,7 @@ module.exports = function(grunt) {
 	    },
 
 	  	managerPanel: {
-	      entry: { main: './react/managerPanel.js', vendors: ['react'] },
+	      entry: { main: './react/managerPanel.js', vendors: ['react', 'elemental'] },
 	      plugins: commonPlugin.concat(uglifyPlugin),
 	      stats: {
 	        timings: true

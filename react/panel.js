@@ -4,10 +4,10 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var UserEditableTextField = require('./components/UserEditableTextField.js');
-var UserEditableDateTimeField = require('./components/UserEditableDateTimeField.js');
-var ConfirmationButton = require('./components/ConfirmationButton.js');
-var FileInput = require('./components/FileInput.js');
+var UserEditableTextField = require('./components/UserEditableTextField.jsx');
+var UserEditableDateTimeField = require('./components/UserEditableDateTimeField.jsx');
+var ConfirmationButton = require('./components/ConfirmationButton.jsx');
+var FileInput = require('./components/FileInput.jsx');
 
 var urls = {url: "/panel/api/user",
             updateURL: "/panel/api/updateUser",
