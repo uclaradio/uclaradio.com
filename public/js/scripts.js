@@ -140,6 +140,41 @@ $(document).ready(function() {
   var stream = document.getElementById('stream');
   var playing = false;
 
+  window.onbeforeunload = function(){
+    if(playing) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+  }
+
+  window.unload = function () { //logic goes here 
+    if(playing) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+  }
+  // OR
+  window.addEventListener("beforeunload", function(e){
+     // Do something
+    if(playing) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+
+
+  }, false);
+
+
+  window.addEventListener("pagehide", function(ev){if(!ev.persisted){
+
+    if(playing) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+
+    
+  } }, false)
+
   //Calls mobileBrowserCheck function from mobileBrowserCheck.js.
   //function in that file is taken from detectmobilebrowsers.com
   var mobile = mobileBrowserCheck();
@@ -151,24 +186,30 @@ $(document).ready(function() {
 
   // activate the play button
   $("#play-button").click(function() {
-
+    console.log('click!')
     if (!playing) {
 
 	  //add the source again if we're on a mobile device since it was removed to stop download.
 	  if (mobile)
-		stream.src="http://stream.uclaradio.com:8000/listen";
+		  stream.src="http://stream.uclaradio.com:8000/listen";
 
       stream.play();
       playing = true;
+      $.get('http://uclaradio.com/analytics/increment')
+      console.log('play')
+
     } else {
       stream.pause();
       playing = false;
+      $.get('http://uclaradio.com/analytics/decrement')
+      console.log('pause')
+
 
 	  //remove the source if the user is on a mobile device to stop data transfer. If we don't do this on mobile,
 	  //data stream will continue until the tab is closed, even if browser is minimized.
-	  if (mobile)
-	    stream.src = '';
-    }
+  	  if (mobile)
+  	    stream.src = '';
+      }
 
     $("#play-icon").toggleClass("fa fa-play fa fa-pause");
     return false;
@@ -184,7 +225,7 @@ $(document).ready(function() {
 
 function checkCarouselData() {
   setTimeout(function() {
-    jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks');
+    jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio.com&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks');
     checkCarouselData();
   }, 30000);
 }
