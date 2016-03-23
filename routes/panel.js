@@ -169,6 +169,46 @@ router.get('/manager', function(req, res) {
 	}
 });
 
+/***** Shows *****/
+
+router.get('/show/:id', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		var path = require('path');
+		res.sendFile(path.resolve('public/panel/show.html'));
+	}
+});
+
+router.get('/api/showData/:id', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.status(400).send();
+	}
+	else {
+		accounts.userHasAccessToShow(req.session.user.username, req.params.id, function(hasAccess) {
+			if (!hasAccess) {
+				// user doesn't have access to this show
+				console.log("user requested show they don't have access to");
+				res.status(400).send();
+				return;
+			}
+			else {
+				accounts.getShowById(req.params.id, function(err, o) {
+					if (o) {
+						res.json(o);
+					}
+					else {
+						res.status(400).send(err);
+					}
+				});
+			}
+		});
+	}
+});
+
 /***** API *****/
 
 /***** Account Info *****/
@@ -246,7 +286,7 @@ router.get('/api/shows', function(req, res) {
 });
 
 // update details for one show 
-router.post('/api/show', function(req, res) {
+router.post('/api/updateShow', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
 		res.redirect('/panel');

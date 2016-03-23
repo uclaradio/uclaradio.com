@@ -18,15 +18,6 @@ body {
 	margin: 80px auto;
 }
 
-.navbar .container {
-  max-width: 100%;
-}
-
-#titleHeader {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
 .well {
 	background-color: white;
 }
@@ -37,6 +28,20 @@ body {
 
 .panel-heading {
   font-weight: bold;
+}
+
+/** Navbar **/
+
+#navbarLogout a {
+  color: #f0657f;
+}
+
+#navbarLogout a:hover {
+  color: #db405d;
+}
+
+.navbar .container {
+  max-width: 100%;
 }
 
 /** ActionTable **/

@@ -16,6 +16,7 @@ var UserSchema = new Schema({
 	djName: String,
 	phone: String
 });
+UserSchema.index({ username: 1});
 
 // Radio shows to show on the site
 var ShowSchema = new Schema({
@@ -41,6 +42,7 @@ var ShowSchema = new Schema({
 		description: String
 	}
 });
+ShowSchema.index({ id: 1});
 
 // User privileges (checked for access to manager pages, etc.)
 var PrivilegeSchema = new Schema({
@@ -383,6 +385,12 @@ db.userHasAccessToShow = function(username, id, callback) {
 
 db.getShowByTitle = function(title, callback) {
 	ShowModel.findOne({title: title}, function(err, o) {
+		callback(err, o);
+	});
+};
+
+db.getShowById = function(id, callback) {
+	ShowModel.findOne({id: id}, function(err, o) {
 		callback(err, o);
 	});
 };

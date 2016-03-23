@@ -53,7 +53,7 @@ var PanelLinksNavbar = React.createClass({
               {links}
             </Nav>
             <Nav pullRight>
-              <NavItem eventKey={1} href="/panel/logout">Log Out</NavItem>
+              <NavItem id="navbarLogout" eventKey={1} href="/panel/logout">Log Out</NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
