@@ -1,0 +1,60 @@
+/** panel.css
+ *  styling for dj panel pages
+ */
+
+
+/** Body **/
+
+body {
+	background-color: #e9eaed;
+}
+
+.container {
+  	max-width: 970px;
+}
+
+#container {
+	margin: 100px auto;
+}
+
+.well {
+	background-color: white;
+}
+
+.container h2, .container h3 {
+	margin: 0px;
+}
+
+.panel-heading {
+  font-weight: bold;
+}
+
+/** ActionTable **/
+
+.action-td {
+  text-align: right;
+}
+
+.table-action1 {
+  color: #66f266;
+  font-weight: bold;
+}
+
+.table-action1:hover {
+  color: #5cb85c;
+  text-decoration: none;
+}
+
+.table-action2 {
+  color: #f0657f;
+  font-weight: bold;
+}
+
+.table-action2:hover {
+  color: #db405d;
+  text-decoration: none;
+}
+
+/*#content {
+	margin: 0px 20px;
+}*/

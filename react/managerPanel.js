@@ -3,7 +3,6 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-// require('elemental/less/elemental.less');
 
 var urls = {url: "/panel/manager/info", 
             listAccounts: "/panel/manager/api/listAccounts",
@@ -11,11 +10,15 @@ var urls = {url: "/panel/manager/info",
             delete: "/panel/manager/api/delete",
             deleteUnverified: "/panel/manager/api/deleteUnverified"};
 
-var Elemental = require('elemental');
-console.log("elemental: ", Elemental);
-var InputGroup = Elemental.InputGroup;
-var FormInput = Elemental.FormInput;
-var Button = Elemental.Button;
+// Custom elements
+var ActionTable = require('./components/ActionTable.jsx');
+
+// Bootstrap elements
+var Grid = require('react-bootstrap').Grid;
+var Row = require('react-bootstrap').Row;
+var Col = require('react-bootstrap').Col;
+var Well = require('react-bootstrap').Well;
+var Panel = require('react-bootstrap').Panel;
 
 var Manager = React.createClass({
   // loadDataFromServer: function() {
@@ -74,20 +77,30 @@ var Manager = React.createClass({
   render: function() {
     return (
       <div className="manager">
-      <InputGroup contiguous>
-        <InputGroup.Section grow>
-          <FormInput type="text" placeholder="Input group field" />
-        </InputGroup.Section>
-        <InputGroup.Section>
-          <Button>Button</Button>
-        </InputGroup.Section>
-      </InputGroup>
-        <AccountsList urls={this.props.urls} />
+        <Grid>
+          <Row>
+            <Col xs={12} md={6}>
+            <Well header="Manager Info">
+              <h2>Manager Info</h2>
+              <p>Name: name</p>
+            </Well>
+            </Col>
+            <Col xs={12} md={6}>
+              <AccountsList urls={this.props.urls} />
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }
 });
 
+const atString1 = "Full Name";
+const atString2 = "Email";
+const atAcceptTitle = "Verify";
+const atRejectTitle = "Delete";
+const atAcceptTooltip = "Verify user is a Radio DJ";
+const atRejectTooltip = "Deny account request";
 var AccountsList = React.createClass({
   loadDataFromServer: function() {
     $.ajax({
@@ -97,6 +110,7 @@ var AccountsList = React.createClass({
       cache: false,
       success: function(accounts) {
         this.setState({accounts: accounts});
+        this.updateTableRows();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -115,6 +129,7 @@ var AccountsList = React.createClass({
         }.bind(this),
         error: function(xhr, status, err) {
           this.setState({accounts: oldAccounts});
+          this.updateTableRows();
           console.error(this.props.showURL, status, err.toString());
         }.bind(this)
       });
@@ -162,25 +177,44 @@ var AccountsList = React.createClass({
     this.setState({accounts: newAccounts});
     this.updateUser(this.props.urls.deleteUnverified, username, oldAccounts);
   },
+  updateTableRows: function() {
+    var makeRows = function(accounts) {
+      var rows = [];
+      console.log("accounts:", accounts);
+      for (var i = 0; i < accounts.length; i++) {
+        var row = {value: accounts[i].username,
+                  string1: accounts[i].username,
+                  string2: accounts[i].email
+                };
+        rows.push(row);
+      }
+      return rows;
+    };
+
+    console.log('unverified:', this.state.accounts.unverified);
+    this.setState({unverifiedRows: makeRows(this.state.accounts.unverified)});
+    this.setState({verifiedRows: makeRows(this.state.accounts.verified)});
+  },
+
   getInitialState: function() {
     // accounts: {verified: [], unverified: []}
-    return {accounts: {unverified: [], verified: []}};
+    return {accounts: {unverified: [], verified: []}, unverifiedRows:[], verifiedRows: []};
   },
   componentDidMount: function() {
     this.loadDataFromServer();
   },
   render: function() {
     // create list of all shows
-    var handleVerifyUser = this.handleVerifyUser;
-    var handleDeleteUnverifiedUser = this.handleDeleteUnverifiedUser;
+    // var handleVerifyUser = this.handleVerifyUser;
+    // var handleDeleteUnverifiedUser = this.handleDeleteUnverifiedUser;
     var handleDeleteUser = this.handleDeleteUser;
-    var unverified = this.state.accounts.unverified.map(function(unverifiedUser) {
-      return (
-      <div key={unverifiedUser.username}>
-       <UnverifiedUserAccount user={unverifiedUser} onVerifyUser={handleVerifyUser} onDelete={handleDeleteUnverifiedUser} />
-      </div>
-      );
-    });
+    // var unverified = this.state.accounts.unverified.map(function(unverifiedUser) {
+    //   return (
+    //   <div key={unverifiedUser.username}>
+    //    <UnverifiedUserAccount user={unverifiedUser} onVerifyUser={handleVerifyUser} onDelete={handleDeleteUnverifiedUser} />
+    //   </div>
+    //   );
+    // });
     var verified = this.state.accounts.verified.map(function(verifiedUser) {
       return (
       <div key={verifiedUser.username}>
@@ -188,12 +222,30 @@ var AccountsList = React.createClass({
       </div>
       );
     });
+        // const atString1 = "Full Name";
+        // const atString2 = "Email";
+        // const atAcceptTitle = "Verify";
+        // const atRejectTitle = "Delete";
+        // const atAcceptTooltip = "Verify user is a Radio DJ";
+        // const atRejectTooltip = "Delete account request";
     return (
       <div className="accountsList">
-        
-        {(this.state.accounts.unverified.length > 0) ? <div><h2> Requested Accounts </h2> {unverified}</div> : <div />}
-        <br />
-        {(this.state.accounts.verified.length > 0) ? <div><h2> DJs </h2> {verified}</div> : <div />}
+        {(this.state.unverifiedRows.length > 0)
+          ?
+          <Panel header="Requested Accounts" bsStyle="warning">
+            <ActionTable rows={this.state.unverifiedRows} string1={atString1} string2={atString2}
+              acceptTitle={atAcceptTitle} rejectTitle={atRejectTitle}
+              acceptTooltip={atAcceptTooltip} rejectTooltip={atRejectTooltip}
+              onAccept={this.handleVerifyUser} onReject={this.handleDeleteUnverifiedUser}
+            />
+          </Panel>
+          : <div />
+        }
+        {(this.state.verifiedRows.length > 0)
+          ?
+          <Panel header="DJs" bsStyle="info"> {verified}</Panel>
+          : <div />
+        }
       </div>
     );
   }

@@ -175,8 +175,10 @@ db.listAccounts = function(callback) {
 db.verifyAccount = function(username, callback) {
 	UnverifiedUserModel.findOne({username: username}, function(err, o) {
 		if (o) {
+			UnverifiedUserModel.remove({username: username}, function (e) {
+				if (e) { console.log("error removing unverified user after verification:", e); }
+			});
 			db.addNewAccount('verified', o, callback);
-			UnverifiedUserModel.remove({username: username});
 		}
 		else {
 			callback(err, null);

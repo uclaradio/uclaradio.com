@@ -1,31 +1,36 @@
+// Gruntfile.js
+// Configuration file for compiling files with Grunt and Webpack
+//
+// Usage: 'grunt' command will compile and minify all *.js
+//   and *.jsx files in ./react and put these in ./public/build
+// 
+// 'grunt watch' can be used for development, this will wait
+//    and automatically recompile any changed files
+
+
 module.exports = function(grunt) {
 	var webpack = require('webpack');
-	var glob = require("glob");
-
-	// We define two entries. One for our application and one for vendors
-	// var entry = { main: './react/panel.js', vendors: ['react', 'elemental'] };
-
-	// Creates a special Commons bundle that our application can require from
-	var commonPlugin = [new webpack.optimize.CommonsChunkPlugin("vendors", "vendors.js")];
-
-	// We need to uglify that code on deploy
-	var uglifyPlugin = [new webpack.optimize.UglifyJsPlugin()];
 
 	// Directory where *.js and *.jsx files will be compiled and placed in ./public/build
 	var directory = 'react';
+
+ 	// vendors will be compiled to a file which can be shared between pages
+ 	var entry = {vendors: ['react', 'react-bootstrap']};
+
 	// go through files in this directory and add them to target entry
  	var files = grunt.file.expand({cwd: directory}, '*.js', '*.jsx');
- 	var entry = {vendors: ['react', 'elemental']};
  	for (var i = 0; i < files.length; i++) {
  		var filename = files[i].replace(/.js[x]?/g, '');
  		entry[filename] = './' + directory + '/' + files[i];
  	}
 
-	console.log("entry:", entry);
-
-	// The module options takes loaders, in this case transforming JSX to normal
-	// javascript
+	// Creates a special Commons bundle that our application can require from
+	var commonPlugin = [new webpack.optimize.CommonsChunkPlugin("vendors", "vendors.js")];
+	// We need to uglify that code on deploy
+	var uglifyPlugin = [new webpack.optimize.UglifyJsPlugin()];
+	// The module options takes loaders, in this case transforming JSX to normal javascript
 	var module = { loaders: [{ test: /\.js[x]?$/, loader: 'jsx' }, { test: /\.less$/, loader: 'style!css!less' }] };
+
 	grunt.initConfig({
 	  webpack: {
 	  	build: {
@@ -42,6 +47,8 @@ module.exports = function(grunt) {
 	    },
 	  }
 	});
+
+	/***** Set up Grunt tasks (for the command line interface 'grunt-cli') *****/
 
 	grunt.loadNpmTasks('grunt-webpack');
 	// build all files in ./react
