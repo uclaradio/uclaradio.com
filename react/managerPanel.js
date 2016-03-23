@@ -12,6 +12,7 @@ var urls = {url: "/panel/manager/info",
 
 // Custom elements
 var ActionTable = require('./components/ActionTable.jsx');
+var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
 
 // Bootstrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -19,6 +20,10 @@ var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
 var Panel = require('react-bootstrap').Panel;
+var Pager = require('react-bootstrap').Pager;
+var PageItem = require('react-bootstrap').PageItem;
+
+const tabs = ["Home", "Manager", "FAQ"];
 
 var Manager = React.createClass({
   // loadDataFromServer: function() {
@@ -78,12 +83,12 @@ var Manager = React.createClass({
     return (
       <div className="manager">
         <Grid>
+          <PanelLinksNavbar />
           <Row>
             <Col xs={12} md={6}>
-            <Well header="Manager Info">
-              <h2>Manager Info</h2>
-              <p>Name: name</p>
-            </Well>
+              <Well>
+                <p>Name: name</p>
+              </Well>
             </Col>
             <Col xs={12} md={6}>
               <AccountsList urls={this.props.urls} />

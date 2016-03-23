@@ -96,21 +96,21 @@ var verifyAccount = function(req, res) {
 		}
 		else {
 			console.log("error verifying account:", err);
-			res.status(400).send();
+			res.status(400).send(err);
 		}
 	});
 };
 
 var deleteAccount = function(req, res) {
 	accounts.deleteUser(req.body.username, function (e) {
-		if (e) { console.log("error removing show: ", e); res.status(400).send(); }
+		if (e) { console.log("error removing show: ", e); res.status(400).send(e); }
 		else { res.json("success"); }
 	});
 };
 
 var deleteUnverifiedAccount = function(req, res) {
 	accounts.deleteUnverifiedUser(req.body.username, function (e) {
-		if (e) { console.log("error removing show: ", e); res.status(400).send(); }
+		if (e) { console.log("error removing show: ", e); res.status(400).send(e); }
 		else { res.json("success"); }
 	});
 };
@@ -144,7 +144,7 @@ router.post('/manager/api/:link', function(req, res) {
 				}
 			}
 			else {
-				res.status(400).send();
+				res.status(400).send(err);
 			}
 		});
 	}
@@ -176,18 +176,28 @@ router.get('/manager', function(req, res) {
 router.get('/api/user', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
-		res.redirect('/panel');
+		res.status(400).send();
+	}
+	else {
+		var user = req.session.user;
+		var userData = {"username": user.username, "djName": user.djName, "email": user.email, "phone": user.phone};
+		res.json(userData);
+	}
+});
+
+router.get('/api/userlinks', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.status(400).send();
 	}
 	else {
 		var user = req.session.user;
 		// retrieve links relevent to user's privileges (like Manager pages)
 		accounts.getPrivilegeLinksForUser(user.username, function(err, links) {
-			var userData = {"username": user.username, "djName": user.djName, "email": user.email, "phone": user.phone};
-			// append links if appropriate (normal users may not have any)
-			if (err == null && links.length > 0) {
-				userData.links = links;
+			if (links) {
+				res.json(links);
 			}
-			res.json(userData);
+			else { res.status(400).send(err); }
 		});
 	}
 });
@@ -195,16 +205,16 @@ router.get('/api/user', function(req, res) {
 router.post('/api/updateUser', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
-		res.redirect('/panel');
+		res.status(400).send();
 	}
 	else {
 		if (req.session.user.username != req.body.username) {
-			res.status(400).send(e);
+			res.status(400).send();
 		}
 		else {
 			// update user info
 			var callback = function(err, user) {
-				if (err) { console.log("failed to update user: ", err); }
+				if (err) { res.status(400).send(err); }
 				else {
 					var userData = {"username": user.username, "djName": user.djName, "email": user.email, "phone": user.phone};
 					res.json(userData);
@@ -253,7 +263,7 @@ router.post('/api/show', function(req, res) {
 			// delete show
 			if (req.body.delete) {
 				accounts.removeShow(req.body.id, function (e) {
-					if (e) { console.log("error removing show: ", e); res.status(400).send(); }
+					if (e) { console.log("error removing show: ", e); res.status(400).send(e); }
 					else { res.json("success"); }
 				});
 				return;
@@ -317,7 +327,7 @@ router.post('/api/showPic', function(req, res) {
 				// user has access to update this show
 				var errorCallback = function(err) {
 					console.log("failed to add show picture: ", err);
-					res.status(400).send();
+					res.status(400).send(err);
 				}
 
 				var picture = req.files.img.path.replace('public/', '/');

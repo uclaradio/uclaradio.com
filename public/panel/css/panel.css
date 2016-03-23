@@ -7,14 +7,24 @@
 
 body {
 	background-color: #e9eaed;
+  font-family: 'Lato', sans-serif;
 }
 
 .container {
   	max-width: 970px;
 }
 
-#container {
-	margin: 100px auto;
+#container.container {
+	margin: 80px auto;
+}
+
+.navbar .container {
+  max-width: 100%;
+}
+
+#titleHeader {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .well {

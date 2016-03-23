@@ -4,11 +4,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var UserEditableTextField = require('./components/UserEditableTextField.jsx');
-var UserEditableDateTimeField = require('./components/UserEditableDateTimeField.jsx');
-var ConfirmationButton = require('./components/ConfirmationButton.jsx');
-var FileInput = require('./components/FileInput.jsx');
-
 var urls = {url: "/panel/api/user",
             updateURL: "/panel/api/updateUser",
             showsURL: "/panel/api/shows",
@@ -16,7 +11,20 @@ var urls = {url: "/panel/api/user",
             addShowURL: "/panel/api/addShow",
             showPicURL: "/panel/api/showPic"};
 
-var UserData = React.createClass({
+// Custom elements
+var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
+var UserEditableTextField = require('./components/UserEditableTextField.jsx');
+var UserEditableDateTimeField = require('./components/UserEditableDateTimeField.jsx');
+var ConfirmationButton = require('./components/ConfirmationButton.jsx');
+var FileInput = require('./components/FileInput.jsx');
+
+// Bootstrap elements
+var Grid = require('react-bootstrap').Grid;
+var Row = require('react-bootstrap').Row;
+var Col = require('react-bootstrap').Col;
+var Well = require('react-bootstrap').Well;
+
+var User = React.createClass({
   loadDataFromServer: function() {
     $.ajax({
       url: this.props.urls.url,
@@ -72,18 +80,26 @@ var UserData = React.createClass({
   },
   render: function() {
     return (
-      <div className="userData">
-        <h2>{this.state.user.username}</h2>
+      <div className="user">
+        <Grid>
+          <PanelLinksNavbar />
+          <Row>
+            <Col xs={12} md={6}>
+              <Well>
+                <h2>{this.state.user.username}</h2>
 
-        <UserEditableTextField name="DJ Name" currentValue={this.state.user.djName} onTextSubmit={this.handleDJNameSubmit} />
-        <UserEditableTextField name="Email" currentValue={this.state.user.email} onTextSubmit={this.handleEmailSubmit} />
-        <UserEditableTextField name="Phone Number" currentValue={this.state.user.phone} onTextSubmit={this.handlePhoneSubmit} />
+                <UserEditableTextField name="DJ Name" currentValue={this.state.user.djName} onTextSubmit={this.handleDJNameSubmit} />
+                <UserEditableTextField name="Email" currentValue={this.state.user.email} onTextSubmit={this.handleEmailSubmit} />
+                <UserEditableTextField name="Phone Number" currentValue={this.state.user.phone} onTextSubmit={this.handlePhoneSubmit} />
 
-        <br />
-        <ShowsList url={this.props.urls.showsURL} showURL={this.props.urls.showURL} addShowURL={this.props.urls.addShowURL} showPicURL={this.props.urls.showPicURL} />
-
-        <br />
-        {(this.state.user.links == null) ? <div /> : <Links links={this.state.user.links} />}
+                <br />
+              </Well>
+            </Col>
+            <Col xs={12} md={6}>
+                <ShowsList url={this.props.urls.showsURL} showURL={this.props.urls.showURL} addShowURL={this.props.urls.addShowURL} showPicURL={this.props.urls.showPicURL} />
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }
@@ -310,27 +326,7 @@ var NewShowForm = React.createClass({
   }
 });
 
-var Links = React.createClass({
-  render: function() {
-    var allLinks = this.props.links.map(function(link) {
-      return (
-      <li key={link.title}>
-        <a href={link.link}>{link.title}</a>
-      </li>
-      );
-    });
-    return (
-      <div className="links">
-        <h2> Links </h2>
-        <ul>
-        {allLinks}
-        </ul>
-      </div>
-    );
-  }
-});
-
 ReactDOM.render(
-  <UserData urls={urls} />,
+  <User urls={urls} />,
   document.getElementById('content')
 );

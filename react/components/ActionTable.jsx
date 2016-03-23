@@ -1,7 +1,6 @@
 // ActionTable.js
 
 var React = require('react');
-var ReactDOM = require('react-dom');
 
 // Bootstrap elements
 var Table = require('react-bootstrap').Table;

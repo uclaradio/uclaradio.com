@@ -53,12 +53,14 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-webpack');
 	// build all files in ./react
 	grunt.registerTask('build', ['webpack:build']);
+
 	// 'watch' task (keep alive)
 	grunt.registerTask('watch', 'Build all files on change', function () {
 		grunt.config.set('webpack.build.keepalive', true);
 		grunt.config.set('webpack.build.watch', true);
-	  	grunt.task.run('webpack:build');
+	  grunt.task.run('webpack:build');
 	});
+
 	// default ('grunt')
 	grunt.registerTask('default', ['build']);
 };
