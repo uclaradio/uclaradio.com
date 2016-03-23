@@ -95,12 +95,19 @@ var Manager = React.createClass({
   }
 });
 
+// user account strings
 const atString1 = "Full Name";
 const atString2 = "Email";
+const atManagerGlyph = "fire";
+// verify user strings
 const atAcceptTitle = "Verify";
-const atRejectTitle = "Delete";
 const atAcceptTooltip = "Verify user is a Radio DJ";
-const atRejectTooltip = "Deny account request";
+// reject unverified user strings
+const atRejectTitleUnverified = "Delete";
+const atRejectTooltipUnverified = "Deny account request";
+// delete verified user strings
+const atRejectTitleVerified = "Remove DJ";
+const atRejectTooltipVerified = "Delete DJ account";
 var AccountsList = React.createClass({
   loadDataFromServer: function() {
     $.ajax({
@@ -180,62 +187,36 @@ var AccountsList = React.createClass({
   updateTableRows: function() {
     var makeRows = function(accounts) {
       var rows = [];
-      console.log("accounts:", accounts);
       for (var i = 0; i < accounts.length; i++) {
         var row = {value: accounts[i].username,
                   string1: accounts[i].username,
-                  string2: accounts[i].email
+                  string2: accounts[i].email,
+                  actionsDisabled: accounts[i].manager
                 };
         rows.push(row);
       }
       return rows;
     };
 
-    console.log('unverified:', this.state.accounts.unverified);
     this.setState({unverifiedRows: makeRows(this.state.accounts.unverified)});
     this.setState({verifiedRows: makeRows(this.state.accounts.verified)});
   },
 
   getInitialState: function() {
-    // accounts: {verified: [], unverified: []}
     return {accounts: {unverified: [], verified: []}, unverifiedRows:[], verifiedRows: []};
   },
   componentDidMount: function() {
     this.loadDataFromServer();
   },
   render: function() {
-    // create list of all shows
-    // var handleVerifyUser = this.handleVerifyUser;
-    // var handleDeleteUnverifiedUser = this.handleDeleteUnverifiedUser;
-    var handleDeleteUser = this.handleDeleteUser;
-    // var unverified = this.state.accounts.unverified.map(function(unverifiedUser) {
-    //   return (
-    //   <div key={unverifiedUser.username}>
-    //    <UnverifiedUserAccount user={unverifiedUser} onVerifyUser={handleVerifyUser} onDelete={handleDeleteUnverifiedUser} />
-    //   </div>
-    //   );
-    // });
-    var verified = this.state.accounts.verified.map(function(verifiedUser) {
-      return (
-      <div key={verifiedUser.username}>
-       <UserAccount user={verifiedUser} onDelete={handleDeleteUser} />
-      </div>
-      );
-    });
-        // const atString1 = "Full Name";
-        // const atString2 = "Email";
-        // const atAcceptTitle = "Verify";
-        // const atRejectTitle = "Delete";
-        // const atAcceptTooltip = "Verify user is a Radio DJ";
-        // const atRejectTooltip = "Delete account request";
     return (
       <div className="accountsList">
         {(this.state.unverifiedRows.length > 0)
           ?
           <Panel header="Requested Accounts" bsStyle="warning">
             <ActionTable rows={this.state.unverifiedRows} string1={atString1} string2={atString2}
-              acceptTitle={atAcceptTitle} rejectTitle={atRejectTitle}
-              acceptTooltip={atAcceptTooltip} rejectTooltip={atRejectTooltip}
+              acceptTitle={atAcceptTitle} rejectTitle={atRejectTitleUnverified}
+              acceptTooltip={atAcceptTooltip} rejectTooltip={atRejectTooltipVerified}
               onAccept={this.handleVerifyUser} onReject={this.handleDeleteUnverifiedUser}
             />
           </Panel>
@@ -243,7 +224,12 @@ var AccountsList = React.createClass({
         }
         {(this.state.verifiedRows.length > 0)
           ?
-          <Panel header="DJs" bsStyle="info"> {verified}</Panel>
+          <Panel header="DJs" bsStyle="info">
+            <ActionTable rows={this.state.verifiedRows} string1={atString1} string2={atString2}
+              rejectTitle={atRejectTitleVerified} rejectTooltip={atRejectTooltipVerified}
+              onReject={this.handleDeleteUser} glyph={atManagerGlyph}
+            />
+          </Panel>
           : <div />
         }
       </div>

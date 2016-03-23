@@ -162,12 +162,18 @@ db.listAccounts = function(callback) {
 			unverifiedUsers.push(user);
 		}
 		UserModel.find({}, function(err, verifiedAccounts) {
-			verifiedUsers = [];
-			for (var i = 0; i < verifiedAccounts.length; i++) {
-				var user = {"username": verifiedAccounts[i].username, "email": verifiedAccounts[i].email};
-				verifiedUsers.push(user);
-			}
-			callback(err, {"verified": verifiedUsers, "unverified": unverifiedUsers});
+			PrivilegeModel.findOne({name: db.managerPrivilegeName}, function(err, o) {
+				verifiedUsers = [];
+				for (var i = 0; i < verifiedAccounts.length; i++) {
+					var user = {"username": verifiedAccounts[i].username, "email": verifiedAccounts[i].email};
+					if (o.users.indexOf(user.username) >= 0) {
+						// user is a manager
+						user.manager = true;
+					}
+					verifiedUsers.push(user);
+				}
+				callback(err, {"verified": verifiedUsers, "unverified": unverifiedUsers});
+			});
 		});
 	});
 }
