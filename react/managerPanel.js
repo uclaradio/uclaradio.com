@@ -4,7 +4,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var urls = {url: "/panel/manager/info", 
+var urls = {managerInfo: "/panel/manager/api/info",
+            managerUpdate: "/panel/manager/api/update",
             listAccounts: "/panel/manager/api/listAccounts",
             verifyAccount: "/panel/manager/api/verify",
             delete: "/panel/manager/api/delete",
@@ -13,6 +14,7 @@ var urls = {url: "/panel/manager/info",
 // Custom elements
 var ActionTable = require('./components/ActionTable.jsx');
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
+var InputEditableTextField = require('./components/InputEditableTextField.jsx');
 
 // Bootstrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -22,72 +24,19 @@ var Well = require('react-bootstrap').Well;
 var Panel = require('react-bootstrap').Panel;
 var Pager = require('react-bootstrap').Pager;
 var PageItem = require('react-bootstrap').PageItem;
+var Button = require('react-bootstrap').Button;
+var Input = require('react-bootstrap').Input;
 
-const tabs = ["Home", "Manager", "FAQ"];
-
-var Manager = React.createClass({
-  // loadDataFromServer: function() {
-  //   $.ajax({
-  //     url: this.props.urls.url,
-  //     dataType: 'json',
-  //     cache: false,
-  //     success: function(user) {
-  //       this.setState({user: user});
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-  //       console.error(this.props.urls.url, status, err.toString());
-  //     }.bind(this)
-  //   });
-  // },
-  // handleDJNameSubmit: function(newDJName) {
-  //   var user = $.extend(true, {}, this.state.user);
-  //   user.djName = newDJName;
-  //   this.handleUserDataSubmit(user);
-  // },
-  // handleEmailSubmit: function(newEmail) {
-  //   var user = $.extend(true, {}, this.state.user);
-  //   user.email = newEmail;
-  //   this.handleUserDataSubmit(user);
-  // },
-  // handlePhoneSubmit: function(newPhone) {
-  //   var user = $.extend(true, {}, this.state.user);
-  //   user.phone = newPhone;
-  //   this.handleUserDataSubmit(user);
-  // },
-  // handleUserDataSubmit: function(updatedUser) {
-  //   var oldUser = this.state.user;
-  //   // Optimistically update local data, will be refreshed or reset after response from server
-  //   updatedUser.username = oldUser.username;
-  //   this.setState({user: updatedUser});
-  //   $.ajax({
-  //     url: this.props.urls.updateURL,
-  //     dataType: 'json',
-  //     type: 'POST',
-  //     data: updatedUser,
-  //     success: function(user) {
-  //       this.setState({user: user});
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-  //       this.setState({user: oldUser});
-  //       console.error(this.props.urls.updateURL, status, err.toString());
-  //     }.bind(this)
-  //   });
-  // },
-  getInitialState: function() {
-    return {};
-  },
-  componentDidMount: function() {
-    // this.loadDataFromServer();
-  },
+var ManagerPage = React.createClass({
   render: function() {
     return (
-      <div className="manager">
+      <div className="managerPage">
         <Grid>
           <PanelLinksNavbar />
           <Row>
             <Col xs={12} md={6}>
               <Well>
-                <p>Name: name</p>
+                <Manager urls={this.props.urls} />
               </Well>
             </Col>
             <Col xs={12} md={6}>
@@ -95,6 +44,77 @@ var Manager = React.createClass({
             </Col>
           </Row>
         </Grid>
+      </div>
+    );
+  }
+});
+
+var Manager = React.createClass({
+  getInitialState: function() {
+    return {manager: {}};
+  },
+  loadDataFromServer: function() {
+    $.ajax({
+      url: this.props.urls.managerInfo,
+      dataType: 'json',
+      type: 'POST',
+      success: function(manager) {
+        this.setState({manager: manager});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.urls.managerInfo, status, err.toString());
+      }.bind(this)
+    });
+  },
+  handleManagerInfoSubmit: function(updatedManager, updatedVar) {
+    var oldManager = this.state.manager;
+    // Optimistically update local data, will be refreshed or reset after response from server
+    this.setState({manager: updatedManager});
+    var updateData = {manager: JSON.stringify(updatedManager)};
+    $.ajax({
+      url: this.props.urls.managerUpdate,
+      dataType: 'json',
+      type: 'POST',
+      data: updateData,
+      success: function(manager) {
+        this.setState({manager: manager});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({manager: oldManager});
+        console.error(this.props.urls.managerUpdate, status, err.toString());
+      }.bind(this)
+    });
+  },
+  handlePositionSubmit: function(position) {
+    var manager = $.extend(true, {}, this.state.manager);
+    manager.position = position;
+    this.handleManagerInfoSubmit(manager);
+  },
+  handleMeetingTimeSubmit: function(meetingTime) {
+    var manager = $.extend(true, {}, this.state.manager);
+    manager.meetingTime = meetingTime;
+    this.handleManagerInfoSubmit(manager);
+  },
+  handleMeetingPlaceSubmit: function(meetingPlace) {
+    var manager = $.extend(true, {}, this.state.manager);
+    manager.meetingPlace = meetingPlace;
+    this.handleManagerInfoSubmit(manager);
+  },
+  componentDidMount: function() {
+    this.loadDataFromServer();
+  },
+  render: function() {
+    return (
+      <div className="manager">
+        <h2>Manager Info</h2>
+        <form className="form-horizontal">
+          <InputEditableTextField title="Position" placeholder="Enter Manager Position"
+            currentValue={this.state.manager.position} onSubmit={this.handlePositionSubmit} />
+          <InputEditableTextField title="Meeting Time" placeholder="Enter Department Meeting Times"
+            currentValue={this.state.manager.meetingTime} onSubmit={this.handleMeetingTimeSubmit} />
+          <InputEditableTextField title="Meeting Location" placeholder="Enter Department Meeting Location"
+            currentValue={this.state.manager.meetingPlace} onSubmit={this.handleMeetingPlaceSubmit} />
+        </form>
       </div>
     );
   }
@@ -113,6 +133,7 @@ const atRejectTooltipUnverified = "Deny account request";
 // delete verified user strings
 const atRejectTitleVerified = "Remove DJ";
 const atRejectTooltipVerified = "Delete DJ account";
+
 var AccountsList = React.createClass({
   loadDataFromServer: function() {
     $.ajax({
@@ -242,43 +263,8 @@ var AccountsList = React.createClass({
   }
 });
 
-var UnverifiedUserAccount = React.createClass({
-  handleVerifyUser: function() {
-    this.props.onVerifyUser(this.props.user.username);
-  },
-  handleRemoveUser: function() {
-    this.props.onDelete(this.props.user.username);
-  },
-  render: function() {
-    return (
-      <div className="unverifiedUserAccount">
-        <p>{this.props.user.username}, email: {this.props.user.email}
-        <button onClick={this.handleVerifyUser}>Verify DJ</button>
-        &emsp;
-        <button className="destructive" onClick={this.handleRemoveUser}>Delete</button>
-        </p>
-      </div>
-    );
-  }
-});
-
-var UserAccount = React.createClass({
-  handleRemoveUser: function() {
-    this.props.onDelete(this.props.user.username);
-  },
-  render: function() {
-    return (
-      <div className="userAccount">
-        <p>{this.props.user.username}, email: {this.props.user.email}
-        <button className="destructive" onClick={this.handleRemoveUser}>Delete</button>
-        </p>
-      </div>
-    );
-  }
-});
-
 
 ReactDOM.render(
-  <Manager urls={urls} />,
+  <ManagerPage urls={urls} />,
   document.getElementById('content')
 );

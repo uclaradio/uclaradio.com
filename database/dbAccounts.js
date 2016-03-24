@@ -17,6 +17,8 @@ var UserSchema = new Schema({
 	phone: String
 });
 UserSchema.index({ username: 1});
+var UnverifiedUserModel = mongoose.model('unverifiedUsers', UserSchema);
+var UserModel = mongoose.model('users', UserSchema);
 
 // Radio shows to show on the site
 var ShowSchema = new Schema({
@@ -43,6 +45,17 @@ var ShowSchema = new Schema({
 	}
 });
 ShowSchema.index({ id: 1});
+var ShowModel = mongoose.model('shows', ShowSchema);
+
+var ManagerSchema = new Schema({
+	username: String,
+	position: String,
+	meetingTime: String,
+	meetingPlace: String,
+	public: Boolean
+});
+ManagerSchema.index({ id: 1});
+var ManagerModel = mongoose.model('managers', ManagerSchema);
 
 // User privileges (checked for access to manager pages, etc.)
 var PrivilegeSchema = new Schema({
@@ -55,6 +68,7 @@ var PrivilegeSchema = new Schema({
 });
 db.managerPrivilegeName = "Manager";
 // db.developerPrivilegeName = "Developer";
+var PrivilegeModel = mongoose.model('privileges', PrivilegeSchema);
 
 // Contains last distributed id for a table, in order to provide a unique id for each show, etc.
 var LastIdSchema = new Schema({
@@ -62,15 +76,8 @@ var LastIdSchema = new Schema({
 	lastId: Number // greatest id of objects created (should increment when creating new ones)
 });
 var showIdKey = "show"; // ids for Show table
-
-var UnverifiedUserModel = mongoose.model('unverifiedUsers', UserSchema);
-var UserModel = mongoose.model('users', UserSchema);
-
-var ShowModel = mongoose.model('shows', ShowSchema);
-
-var PrivilegeModel = mongoose.model('privileges', PrivilegeSchema);
-
 var LastIdModel = mongoose.model('lastIds', LastIdSchema);
+
 
 
 /***** User Account Management *****/
@@ -87,7 +94,7 @@ db.autoLogin = function(username, pass, callback) {
 			callback(null);
 		}
 	});
-}
+};
 
 // log in a user with given username and password, with 'invalid-pass' or 'user-not-found' error msg
 db.manualLogin = function(username, pass, callback) {
@@ -109,7 +116,7 @@ db.manualLogin = function(username, pass, callback) {
 			});
 		}
 	});
-}
+};
 
 // create a new unverified user with the given user data
 db.addNewAccount = function(accountType, userData, callback) {
@@ -141,7 +148,7 @@ db.addNewAccount = function(accountType, userData, callback) {
 			});
 		}
 	});
-}
+};
 
 db.requestNewAccount = function(username, pass, email, djName, callback) {
 	newData = {
@@ -153,7 +160,7 @@ db.requestNewAccount = function(username, pass, email, djName, callback) {
 		newData.pass = hash;
 		db.addNewAccount('unverified', newData, callback);
 	});
-}
+};
 
 db.listAccounts = function(callback) {
 	// get verified 
@@ -178,7 +185,7 @@ db.listAccounts = function(callback) {
 			});
 		});
 	});
-}
+};
 
 db.verifyAccount = function(username, callback) {
 	UnverifiedUserModel.findOne({username: username}, function(err, o) {
@@ -192,7 +199,7 @@ db.verifyAccount = function(username, callback) {
 			callback(err, null);
 		}
 	});
-}
+};
 
 // update email, djName on a user with the given username
 db.updateAccount = function(username, email, djName, phone, callback) {
@@ -201,7 +208,7 @@ db.updateAccount = function(username, email, djName, phone, callback) {
     	if (err) return res.send(500, { error: err });
     	callback(null, o);
 	});
-}
+};
 
 // update password for user with email
 db.updatePassword = function(email, newPass, callback) {
@@ -216,14 +223,14 @@ db.updatePassword = function(email, newPass, callback) {
 			callback(err, null);
 		}
 	});
-}
+};
 
 // delete a user with the given username
 db.deleteUser = function(username, callback) {
 	UserModel.remove({username: username}, function (e) {
 		callback(e);
 	});
-}
+};
 
 // delete an unverified user with the given id
 db.deleteUnverifiedUser = function(username, callback) {
@@ -231,7 +238,7 @@ db.deleteUnverifiedUser = function(username, callback) {
 	UnverifiedUserModel.remove({username: username}, function (e) {
 		callback(e);
 	});
-}
+};
 
 // perform callback on user with provided email
 // db.getUserByEmail = function(email, callback) {
@@ -250,7 +257,7 @@ db.getDJNamesFromUsernames = function(usernames, callback) {
 		}
 		callback(err, djNames);
 	});
-}
+};
 
 // return array of all users
 db.getAllUsers = function(callback) {
@@ -262,54 +269,13 @@ db.getAllUsers = function(callback) {
 			callback(null, res);
 		}
 	});
-}
+};
 
 // remove all users
 db.removeAllUsers = function(callback) {
 	UserModel.remove({}, callback);
-}
+};
 
-
-/***** Encryption *****/
-
-var generateSalt = function() {
-	var set = '0123456789abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ';
-	var salt = '';
-	for (var i = 0; i < 10; i++) {
-		var p = Math.floor(Math.random() * set.length);
-		salt += set[p];
-	}
-	return salt;
-}
-
-var md5 = function(str) {
-	return crypto.createHash('md5').update(str).digest('hex');
-}
-
-var saltAndHash = function(pass, callback) {
-	var salt = generateSalt();
-	callback(salt + md5(pass + salt));
-}
-
-var validatePassword = function(plainPass, hashedPass, callback) {
-	var salt = hashedPass.substr(0, 10);
-	var validHash = salt + md5(plainPass + salt);
-	callback(null, (hashedPass === validHash));
-}
-
-
-/***** Helper Methods *****/
-
-var getObjectId = function(id) {
-	UserModel.findOne({_id: getObjectId(id)}, function(err, res) {
-		if (err) {
-			callback(err);
-		}
-		else {
-			callback(null, res);
-		}
-	});
-}
 
 
 /***** Shows *****/
@@ -350,7 +316,7 @@ db.addNewShow = function(title, day, time, djs, callback) {
 			}
 		});
 	});
-}
+};
 
 db.updateShow = function(id, newData, callback) {
 	ShowModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
@@ -405,13 +371,46 @@ db.getAllShows = function(callback) {
 			callback(null, res);
 		}
 	});
-}
+};
 
 db.removeShow = function(id, callback) {
 	ShowModel.remove({id: id}, function (e) {
 		callback(e);
 	});
+};
+
+
+
+/***** Manager Info *****/
+
+db.managerInfo = function(username, callback) {
+	ManagerModel.findOne({username: username}, function(err, o) {
+		if (!o && !err) {
+			// need to create manager info for user
+			var newData = {username: username};
+			var newManager = new ManagerModel(newData);
+			newManager.save(function(err, saved) {
+				callback(err, saved);
+			});
+		}
+		else {
+			callback(err, o);
+		}
+	});
+};
+
+db.updateManager = function(manager, callback) {
+	ManagerModel.findOneAndUpdate({username: manager.username}, manager, {upsert: true, new: true}, function(err, o) {
+		callback(err, o);
+	});
 }
+
+db.allManagers = function(callback) {
+	ManagerModel.find({}, function(err, managers) {
+		callback(err, managers);
+	});
+}
+
 
 
 /***** Privileges *****/
@@ -425,7 +424,7 @@ db.addPrivilege = function(privilege, links, callback) {
 			callback(null, true);
 		}
 	});
-}
+};
 
 /**
 *  Update the privileges table to give or take away a privilege for a user
@@ -446,7 +445,7 @@ db.updatePrivilege = function(username, privilege, shouldHave, callback) {
 			callback(null, true);
 		}
 	});
-}
+};
 
 /**
 *  Check if a user has a given privilege
@@ -467,7 +466,7 @@ db.checkPrivilege = function(username, privilege, callback) {
 			else { callback(null, false); }
 		}
 	});
-}
+};
 
 db.getPrivilegeLinksForUser = function(username, callback) {
 	PrivilegeModel.find({users: username}, function(err, privileges) {
@@ -478,7 +477,7 @@ db.getPrivilegeLinksForUser = function(username, callback) {
 		}
 		callback(err, links);
 	});
-}
+};
 
 /***** Last Ids *****/
 
@@ -500,5 +499,48 @@ db.setLastTakenId = function(key, lastId, callback) {
 		else { callback(null); }
 	});
 };
+
+
+/***** Encryption *****/
+
+var generateSalt = function() {
+	var set = '0123456789abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQURSTUVWXYZ';
+	var salt = '';
+	for (var i = 0; i < 10; i++) {
+		var p = Math.floor(Math.random() * set.length);
+		salt += set[p];
+	}
+	return salt;
+};
+
+var md5 = function(str) {
+	return crypto.createHash('md5').update(str).digest('hex');
+};
+
+var saltAndHash = function(pass, callback) {
+	var salt = generateSalt();
+	callback(salt + md5(pass + salt));
+};
+
+var validatePassword = function(plainPass, hashedPass, callback) {
+	var salt = hashedPass.substr(0, 10);
+	var validHash = salt + md5(plainPass + salt);
+	callback(null, (hashedPass === validHash));
+};
+
+
+/***** Helper Methods *****/
+
+var getObjectId = function(id) {
+	UserModel.findOne({_id: getObjectId(id)}, function(err, res) {
+		if (err) {
+			callback(err);
+		}
+		else {
+			callback(null, res);
+		}
+	});
+};
+
 
 module.exports = db;

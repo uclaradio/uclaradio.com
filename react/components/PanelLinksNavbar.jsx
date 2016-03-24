@@ -30,13 +30,23 @@ var PanelLinksNavbar = React.createClass({
       }.bind(this)
     });
   },
+  // provided a node element and a link, this function will wrap
+  // a span with class 'navbarSelected' around the element
+  // if the provided link is the same as the current path ('/panel/...')
+  styleLink: function(element, link) {
+    if (link == window.location.pathname) {
+      return <span className="navbarSelected">{element}</span>;
+    }
+    return element;
+  },
   componentDidMount: function() {
     this.loadDataFromServer();
   },
   render: function() {
+    var styleLink = this.styleLink;
     var links = this.state.links.map(function(link, i) {
       return (
-        <NavItem eventKey={i} key={link.link} href={link.link}>{link.title}</NavItem>
+        <NavItem eventKey={i} key={link.link} href={link.link}>{styleLink(link.title, link.link)}</NavItem>
       );
     });
     return (
@@ -44,7 +54,7 @@ var PanelLinksNavbar = React.createClass({
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/panel/home">DJ Panel</a>
+              <a href="/panel/home">{styleLink("DJ Panel", "/panel/home")}</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>

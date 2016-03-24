@@ -6,7 +6,7 @@ var ReactDOM = require('react-dom');
 /**
 *  Show current saved value for a text field and let user update the field and submit changes
 *
-*  @prop name: field being edited: 'Title'
+*  @prop title: field being edited: 'Title'
 *  @prop currentValue: current saved value of the field: 'Some Show'
 *  @prop multiline: should allow user to enter multiple lines of text
 *  @prop onTextSubmit -> function(text): parent's function to be called if 'Submit' is hit
@@ -43,7 +43,7 @@ var UserEditableTextField = React.createClass({
     var textEdit = this.props.multiline ? 
         ( <textarea
           ref="valueInput"
-          placeholder={this.props.name}
+          placeholder={this.props.title}
           value={this.state.text}
           onChange={this.handleTextChange}
         /> )
@@ -52,7 +52,7 @@ var UserEditableTextField = React.createClass({
         <input
           type="text"
           ref="valueInput"
-          placeholder={this.props.name}
+          placeholder={this.props.title}
           value={this.state.text}
           onChange={this.handleTextChange}
         /> );
@@ -68,7 +68,7 @@ var UserEditableTextField = React.createClass({
         </form>
       :
       // locked to user input
-      <p>{this.props.name}: <span className="savedData">{this.props.currentValue}</span> <a onClick={this.toggleEditableField}>Edit</a></p>
+      <p>{this.props.title}: <span className="savedData">{this.props.currentValue}</span> <a onClick={this.toggleEditableField}>Edit</a></p>
     }
     </div>
     );

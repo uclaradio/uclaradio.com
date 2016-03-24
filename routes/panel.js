@@ -82,6 +82,29 @@ router.post('/signup', function(req, res) {
 
 /***** Managers *****/
 
+var managerInfo = function(req, res) {
+	accounts.managerInfo(req.session.user.username, function(err, o) {
+		if (o) {
+			res.json(o);
+		}
+		else { res.status(400).send(err); }
+	});
+};
+
+var updateManager = function(req, res) {
+	// destringify
+	var manager = JSON.parse(req.body.manager);
+	if (manager.username === req.session.user.username) {
+		// only let users update their own manager info
+		accounts.updateManager(manager, function(err, o) {
+			if (o) {
+				res.json(o);
+			}
+			else { res.status(400).send(err); }
+		});
+	}
+};
+
 var listAccounts = function(req, res) {
 	accounts.listAccounts(function(err, usernames) {
 		res.json(usernames);
@@ -126,6 +149,12 @@ router.post('/manager/api/:link', function(req, res) {
 				var path = require('path');
 				// perform action
 				switch (req.params.link) {
+					case 'info':
+						managerInfo(req, res);
+						break;
+					case 'update':
+						updateManager(req, res);
+						break;
 					case 'listAccounts':
 						listAccounts(req, res);
 						break;

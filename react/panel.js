@@ -13,6 +13,7 @@ var urls = {url: "/panel/api/user",
 
 // Custom elements
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
+var InputEditableTextField = require('./components/InputEditableTextField.jsx');
 var UserEditableTextField = require('./components/UserEditableTextField.jsx');
 var UserEditableDateTimeField = require('./components/UserEditableDateTimeField.jsx');
 var ConfirmationButton = require('./components/ConfirmationButton.jsx');
@@ -86,11 +87,16 @@ var User = React.createClass({
           <Row>
             <Col xs={12} md={6}>
               <Well>
-                <h2>{this.state.user.username}</h2>
+                <h2>DJ Info</h2>
 
-                <UserEditableTextField name="DJ Name" currentValue={this.state.user.djName} onTextSubmit={this.handleDJNameSubmit} />
-                <UserEditableTextField name="Email" currentValue={this.state.user.email} onTextSubmit={this.handleEmailSubmit} />
-                <UserEditableTextField name="Phone Number" currentValue={this.state.user.phone} onTextSubmit={this.handlePhoneSubmit} />
+                <form className="form-horizontal">
+                  <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
+                    placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} />
+                  <InputEditableTextField title="Email" currentValue={this.state.user.email}
+                    placeholder="Enter Email" onSubmit={this.handleEmailSubmit} />
+                  <InputEditableTextField title="Phone" currentValue={this.state.user.phone}
+                    placeholder="Enter Phone Number" onSubmit={this.handlePhoneSubmit} />
+                </form>
 
                 <br />
               </Well>
@@ -262,10 +268,10 @@ var Show = React.createClass({
         <h3>{this.props.show.title}</h3>
         <img className="showPic" src={this.props.show.thumbnail || "/img/radio.png" } />
         <FileInput accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} submitText="Submit Picture" />
-        <UserEditableTextField name="Title" currentValue={this.props.show.title} onTextSubmit={this.handleTitleSubmit} />
+        <UserEditableTextField title="Title" currentValue={this.props.show.title} onTextSubmit={this.handleTitleSubmit} />
         <UserEditableDateTimeField day={this.props.show.day} time={this.props.show.time} onDateSubmit={this.handleDateSubmit} />
-        <UserEditableTextField name="Genre" currentValue={this.props.show.genre} onTextSubmit={this.handleGenreSubmit} />
-        <UserEditableTextField name="Blurb" multiline={true} currentValue={this.props.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
+        <UserEditableTextField title="Genre" currentValue={this.props.show.genre} onTextSubmit={this.handleGenreSubmit} />
+        <UserEditableTextField title="Blurb" multiline={true} currentValue={this.props.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
 
         <ConfirmationButton confirm={"Delete '" + this.props.show.title + "'"} submit={"Really delete '" + this.props.show.title + "'?"} onSubmit={this.handleDeleteShow} />
       </div>

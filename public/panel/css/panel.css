@@ -15,7 +15,7 @@ body {
 }
 
 #container.container {
-	margin: 80px auto;
+	margin: 20px auto;
 }
 
 .well {
@@ -23,11 +23,25 @@ body {
 }
 
 .container h2, .container h3 {
-	margin: 0px;
+  text-align: center;
+	margin-top: 0px;
 }
 
 .panel-heading {
   font-weight: bold;
+}
+
+#container a {
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+small {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 /** Navbar **/
@@ -42,6 +56,10 @@ body {
 
 .navbar .container {
   max-width: 100%;
+}
+
+.navbarSelected {
+  color: black;
 }
 
 /** ActionTable **/
@@ -65,7 +83,6 @@ body {
 
 .table-action1:hover {
   color: #5cb85c;
-  text-decoration: none;
 }
 
 .table-action2 {
@@ -75,11 +92,37 @@ body {
 
 .table-action2:hover {
   color: #db405d;
-  text-decoration: none;
 }
 
 .actionGlyph {
   color: #f0ad4e;
+}
+
+/** InputEditableTextField **/
+
+.cancelLink {
+  color: #f0657f;
+}
+
+.cancelLink:hover {
+  color: #db405d;
+}
+
+.inputEditWrapper .input-group-addon {
+  background-color: transparent;
+  border: none;
+}
+
+.inputEditableTextField .control-label {
+  color: #777;
+}
+
+.inputEditableTextField .form-group {
+  margin-bottom: 5px;
+}
+
+.inputEditWrapper {
+  vertical-align: middle;
 }
 
 /*#content {

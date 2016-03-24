@@ -123,10 +123,10 @@ var Show = React.createClass({
         <h3>{this.state.show.title}</h3>
         <img className="showPic" src={this.state.show.thumbnail || "/img/radio.png" } />
         <FileInput accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} submitText="Submit Picture" />
-        <UserEditableTextField name="Title" currentValue={this.state.show.title} onTextSubmit={this.handleTitleSubmit} />
+        <UserEditableTextField title="Title" currentValue={this.state.show.title} onTextSubmit={this.handleTitleSubmit} />
         <UserEditableDateTimeField day={this.state.show.day} time={this.state.show.time} onDateSubmit={this.handleDateSubmit} />
-        <UserEditableTextField name="Genre" currentValue={this.state.show.genre} onTextSubmit={this.handleGenreSubmit} />
-        <UserEditableTextField name="Blurb" multiline={true} currentValue={this.state.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
+        <UserEditableTextField title="Genre" currentValue={this.state.show.genre} onTextSubmit={this.handleGenreSubmit} />
+        <UserEditableTextField title="Blurb" multiline={true} currentValue={this.state.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
 
         <ConfirmationButton confirm={"Delete '" + this.state.show.title + "'"} submit={"Really delete '" + this.state.show.title + "'?"} onSubmit={this.handleDeleteShow} />
       </div>
