@@ -54,7 +54,7 @@ var PanelLinksNavbar = React.createClass({
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/panel/home">{styleLink("DJ Panel", "/panel/home")}</a>
+              <a href="/panel/home">{styleLink("Secret DJ Panel", "/panel/home")}</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>

@@ -6,6 +6,7 @@ var lwip = require('lwip');
 
 
 /***** Main Log In Page *****/
+
 router.get('/', function(req, res) {
 	// check credentials
 	if (req.cookies.username == undefined || req.cookies.pass == undefined) {
@@ -70,7 +71,7 @@ router.get('/signup', function(req, res) {
 });
 
 router.post('/signup', function(req, res) {
-	accounts.requestNewAccount(req.body['username'], req.body['pass'], req.body['email'], req.body['djName'], function(e) {
+	accounts.requestNewAccount(req.body['username'], req.body['pass'], req.body['email'], req.body['fullName'], function(e) {
 		if (e) {
 			res.status(400).send(e);
 		}
@@ -249,7 +250,7 @@ router.get('/api/user', function(req, res) {
 	}
 	else {
 		var user = req.session.user;
-		var userData = {"username": user.username, "djName": user.djName, "email": user.email, "phone": user.phone};
+		var userData = {"username": user.username, "fullName": user.fullName, "djName": user.djName, "email": user.email, "phone": user.phone};
 		res.json(userData);
 	}
 });
@@ -285,11 +286,11 @@ router.post('/api/updateUser', function(req, res) {
 			var callback = function(err, user) {
 				if (err) { res.status(400).send(err); }
 				else {
-					var userData = {"username": user.username, "djName": user.djName, "email": user.email, "phone": user.phone};
+					var userData = {"username": user.username, "fullName": user.fullName, "djName": user.djName, "email": user.email, "phone": user.phone};
 					res.json(userData);
 				}
 			};
-			accounts.updateAccount(req.body.username, req.body.email, req.body.djName, req.body.phone, callback);
+			accounts.updateAccount(req.body.username, req.body.fullName, req.body.email, req.body.djName, req.body.phone, callback);
 		}
 	}
 });
@@ -355,7 +356,7 @@ router.post('/api/updateShow', function(req, res) {
 			// return show with id belonging to logged in user
 			var callback = function(err, show) {
 				if (err) { console.log("error updating show: ", err); }
-				if (show) { res.json("success"); }
+				if (show) { res.json(show); }
 				else { res.status(400).send(); }
 			}
 			accounts.updateShow(req.body.id, newData, callback);

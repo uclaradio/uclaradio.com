@@ -5,6 +5,7 @@ var ReactDOM = require('react-dom');
 
 // Bootstrap elements
 var Button = require('react-bootstrap').Button;
+var ButtonGroup = require('react-bootstrap').ButtonGroup;
 var Input = require('react-bootstrap').Input;
 var FormControls = require('react-bootstrap').FormControls;
 var Glyphicon = require('react-bootstrap').Glyphicon;
@@ -49,8 +50,11 @@ var InputEditableTextField = React.createClass({
   },
   render: function() {
     var editButton = <a onClick={this.toggleEditableField}>Edit</a>;
-    var cancelButton = <Button className="cancelLink" onClick={this.toggleEditableField}>Cancel</Button>;
-    var actionButton = <a onClick={this.handleSubmit}>{this.props.buttonTitle || "Update"}</a>;
+    // var cancelButton = <Button className="cancelLink" onClick={this.toggleEditableField}>Cancel</Button>;
+    var actionButton = <span>
+                        <a onClick={this.handleSubmit}>{this.props.buttonTitle || "Update"}</a>
+                        &emsp;|&emsp;<a className="cancelLink" onClick={this.toggleEditableField}>Cancel</a>
+                       </span>
     return (
       <div className="inputEditableTextField">
       { this.state.editable ?
@@ -64,7 +68,6 @@ var InputEditableTextField = React.createClass({
               ref="input"
               groupClassName="group-class"
               addonAfter={actionButton}
-              buttonAfter={cancelButton}
               labelClassName="col-xs-3"
               wrapperClassName="col-xs-9"
               onChange={this.handleChange} />

@@ -11,12 +11,13 @@ var Schema = mongoose.Schema;
 // Users (DJs)
 var UserSchema = new Schema({
 	username: String,
+	fullName: String,
 	pass: String,
 	email: String,
 	djName: String,
 	phone: String
 });
-UserSchema.index({ username: 1});
+UserSchema.index({username: 1});
 var UnverifiedUserModel = mongoose.model('unverifiedUsers', UserSchema);
 var UserModel = mongoose.model('users', UserSchema);
 
@@ -150,11 +151,11 @@ db.addNewAccount = function(accountType, userData, callback) {
 	});
 };
 
-db.requestNewAccount = function(username, pass, email, djName, callback) {
+db.requestNewAccount = function(username, pass, email, fullName, callback) {
 	newData = {
 		"username": username,
 		"email": email,
-		"djName": djName
+		"fullName": fullName
 	};
 	saltAndHash(pass, function(hash) {
 		newData.pass = hash;
@@ -167,14 +168,15 @@ db.listAccounts = function(callback) {
 	UnverifiedUserModel.find({}, function(err, accounts) {
 		unverifiedUsers = [];
 		for (var i = 0; i < accounts.length; i++) {
-			var user = {"username": accounts[i].username, "email": accounts[i].email};
+			var user = {"username": accounts[i].username, "fullName": accounts[i].fullName, "email": accounts[i].email};
 			unverifiedUsers.push(user);
 		}
 		UserModel.find({}, function(err, verifiedAccounts) {
 			PrivilegeModel.findOne({name: db.managerPrivilegeName}, function(err, o) {
 				verifiedUsers = [];
 				for (var i = 0; i < verifiedAccounts.length; i++) {
-					var user = {"username": verifiedAccounts[i].username, "email": verifiedAccounts[i].email};
+					var user = {"username": verifiedAccounts[i].username, "fullName": verifiedAccounts[i].fullName,
+						"djName": verifiedAccounts[i].djName, "email": verifiedAccounts[i].email};
 					if (o.users.indexOf(user.username) >= 0) {
 						// user is a manager
 						user.manager = true;
@@ -202,8 +204,8 @@ db.verifyAccount = function(username, callback) {
 };
 
 // update email, djName on a user with the given username
-db.updateAccount = function(username, email, djName, phone, callback) {
-	var newData = {"email": email, "djName": djName, "phone": phone};
+db.updateAccount = function(username, fullName, email, djName, phone, callback) {
+	var newData = {"fullName": fullName, "email": email, "djName": djName, "phone": phone};
 	UserModel.findOneAndUpdate({'username': username}, newData, {upsert:false, new:true}, function(err, o) {
     	if (err) return res.send(500, { error: err });
     	callback(null, o);

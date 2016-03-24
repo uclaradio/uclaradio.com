@@ -10,24 +10,24 @@ input(type='hidden', value= user._id)#userId
 		p#sub1.subheading Please tell us a little about yourself.
 		hr
 		fieldset
+			#fullName-cg.control-group
+				label.control-label(for='fullName-tf') Full Name
+				.controls
+					input#fullName-tf(type='text', name='fullName', value= user.fullName)
+			#email-cg.control-group
+				label.control-label(for='email-tf') Email
+				.controls
+					input#email-tf(type='text', name='email', value= user.email)
+			hr
+			p#sub2.subheading
 			#user-cg.control-group
-				label.control-label(for='user-tf') Username
+				label.control-label(for='user-tf') Username (cannot be changed)
 				.controls
 					input#user-tf.disabled(type='text', name='username', value= user.user)
 			#pass-cg.control-group
 				label.control-label(for='pass-tf') Password
 				.controls
 					input#pass-tf(type='password', name='pass', value='')
-			hr
-			p#sub2.subheading
-			#email-cg.control-group
-				label.control-label(for='email-tf') Email
-				.controls
-					input#email-tf(type='text', name='email', value= user.email)
-			#djName-cg.control-group
-				label.control-label(for='djName-tf') DJ Name
-				.controls
-					input#djName-tf(type='text', name='djName', value= user.djName)
 			hr
 			.form-buttons
 				button(type='button',onclick="window.location.href='/panel'")#account-form-btn1.btn back

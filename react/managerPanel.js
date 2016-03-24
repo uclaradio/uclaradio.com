@@ -127,17 +127,13 @@ var Manager = React.createClass({
 });
 
 // user account strings
-const atString1 = "Full Name";
-const atString2 = "Email";
 const atManagerGlyph = "fire";
 // verify user strings
 const atAcceptTitle = "Verify";
 const atAcceptTooltip = "Verify user is a Radio DJ";
 // reject unverified user strings
-const atRejectTitleUnverified = "Delete";
 const atRejectTooltipUnverified = "Deny account request";
 // delete verified user strings
-const atRejectTitleVerified = "Remove DJ";
 const atRejectTooltipVerified = "Delete DJ account";
 
 var AccountsList = React.createClass({
@@ -217,21 +213,21 @@ var AccountsList = React.createClass({
     this.updateUser(this.props.urls.deleteUnverified, username, oldAccounts);
   },
   updateTableRows: function() {
-    var makeRows = function(accounts) {
+    var makeRows = function(accounts, verified) {
       var rows = [];
       for (var i = 0; i < accounts.length; i++) {
         var row = {value: accounts[i].username,
-                  string1: accounts[i].username,
-                  string2: accounts[i].email,
                   actionsDisabled: accounts[i].manager
                 };
+        row['string1'] = verified ? accounts[i].djName : accounts[i].fullName;
+        row['string2'] = verified ? accounts[i].fullName : accounts[i].email;
         rows.push(row);
       }
       return rows;
     };
 
-    this.setState({unverifiedRows: makeRows(this.state.accounts.unverified)});
-    this.setState({verifiedRows: makeRows(this.state.accounts.verified)});
+    this.setState({unverifiedRows: makeRows(this.state.accounts.unverified, false)});
+    this.setState({verifiedRows: makeRows(this.state.accounts.verified, true)});
   },
 
   getInitialState: function() {
@@ -246,8 +242,8 @@ var AccountsList = React.createClass({
         {(this.state.unverifiedRows.length > 0)
           ?
           <Panel header="Requested Accounts" bsStyle="warning">
-            <ActionTable rows={this.state.unverifiedRows} string1={atString1} string2={atString2}
-              acceptTitle={atAcceptTitle} rejectTitle={atRejectTitleUnverified}
+            <ActionTable rows={this.state.unverifiedRows} string1={"Full Name"} string2={"Email"}
+              acceptTitle={atAcceptTitle} rejectTitle={''}
               acceptTooltip={atAcceptTooltip} rejectTooltip={atRejectTooltipVerified}
               onAccept={this.handleVerifyUser} onReject={this.handleDeleteUnverifiedUser}
             />
@@ -257,8 +253,8 @@ var AccountsList = React.createClass({
         {(this.state.verifiedRows.length > 0)
           ?
           <Panel header="DJs" bsStyle="info">
-            <ActionTable rows={this.state.verifiedRows} string1={atString1} string2={atString2}
-              rejectTitle={atRejectTitleVerified} rejectTooltip={atRejectTooltipVerified}
+            <ActionTable rows={this.state.verifiedRows} string1={"DJ Name"} string2={"Full Name"}
+              rejectTitle={''} rejectTooltip={atRejectTooltipVerified}
               onReject={this.handleDeleteUser} glyph={atManagerGlyph}
             />
           </Panel>

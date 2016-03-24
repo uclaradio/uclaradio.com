@@ -10,7 +10,7 @@ var urls = {showURL: "/panel/api/showData/",
 
 // Custom elements
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
-var UserEditableTextField = require('./components/UserEditableTextField.jsx');
+var InputEditableTextField = require('./components/InputEditableTextField.jsx');
 var UserEditableDateTimeField = require('./components/UserEditableDateTimeField.jsx');
 var ConfirmationButton = require('./components/ConfirmationButton.jsx');
 var FileInput = require('./components/FileInput.jsx');
@@ -49,7 +49,8 @@ var ShowPage = React.createClass({
 
 var Show = React.createClass({
   getInitialState: function() {
-    return {show: {}};
+    return {show: {}, titleVerified: false, dateVerified: false,
+      genreVerified: false, blurbVerified: false};
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -64,7 +65,7 @@ var Show = React.createClass({
       }.bind(this)
     });
   },
-  handleShowDataSubmit: function(updatedShow) {
+  handleShowDataSubmit: function(updatedShow, successVar) {
     var oldShow = this.state.show;
     // Optimistically update local data, will be refreshed or reset after response from server
     this.setState({show: updatedShow});
@@ -75,11 +76,15 @@ var Show = React.createClass({
       dataType: 'json',
       type: 'POST',
       data: updatedShow,
-      success: function() {
-        this.loadDataFromServer();
+      success: function(show) {
+        var successState = {show: show};
+        successState[successVar] = true;
+        this.setState(successState);
       }.bind(this),
       error: function(xhr, status, err) {
-        this.setState({show: oldShow});
+        var failedState = {show: oldShow};
+        failedState[successVar] = false;
+        this.setState(failedState);
         console.error(this.props.urls.showUpdateURL, status, err.toString());
       }.bind(this)
     });
@@ -87,23 +92,23 @@ var Show = React.createClass({
   handleTitleSubmit: function(title) {
     var show = $.extend(true, {}, this.state.show);
     show.title = title;
-    this.handleShowDataSubmit(show);
+    this.handleShowDataSubmit(show, 'titleVerified');
   },
   handleDateSubmit: function(day, time) {
     var show = $.extend(true, {}, this.state.show);
     show.day = day;
     show.time = time;
-    this.handleShowDataSubmit(show);
+    this.handleShowDataSubmit(show, 'dateVerified');
   },
   handleGenreSubmit: function(genre) {
     var show = $.extend(true, {}, this.state.show);
     show.genre = genre;
-    this.handleShowDataSubmit(show);
+    this.handleShowDataSubmit(show, 'genreVerified');
   },
   handleBlurbSubmit: function(blurb) {
     var show = $.extend(true, {}, this.state.show);
     show.blurb = blurb;
-    this.handleShowDataSubmit(show);
+    this.handleShowDataSubmit(show, 'blurbVerified');
   },
   handlePictureSubmit: function(img) {
     // this.props.onUpdateShowPicture(this.state.show.id, img);
@@ -123,10 +128,13 @@ var Show = React.createClass({
         <h3>{this.state.show.title}</h3>
         <img className="showPic" src={this.state.show.thumbnail || "/img/radio.png" } />
         <FileInput accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} submitText="Submit Picture" />
-        <UserEditableTextField title="Title" currentValue={this.state.show.title} onTextSubmit={this.handleTitleSubmit} />
+        <InputEditableTextField title="Title" currentValue={this.state.show.title}
+          onSubmit={this.handleTitleSubmit} placeholder="Enter Show Title" verified={this.state.titleVerified} />
         <UserEditableDateTimeField day={this.state.show.day} time={this.state.show.time} onDateSubmit={this.handleDateSubmit} />
-        <UserEditableTextField title="Genre" currentValue={this.state.show.genre} onTextSubmit={this.handleGenreSubmit} />
-        <UserEditableTextField title="Blurb" multiline={true} currentValue={this.state.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
+        <InputEditableTextField title="Genre" currentValue={this.state.show.genre}
+          onSubmit={this.handleGenreSubmit} placeholder="Enter Show Genre" verified={this.state.genreVerified} />
+        <InputEditableTextField title="Blurb" multiline currentValue={this.state.show.blurb}
+          onSubmit={this.handleBlurbSubmit} placeholder="Enter Show Blurb" verified={this.state.blurbVerified} />
 
         <ConfirmationButton confirm={"Delete '" + this.state.show.title + "'"} submit={"Really delete '" + this.state.show.title + "'?"} onSubmit={this.handleDeleteShow} />
       </div>

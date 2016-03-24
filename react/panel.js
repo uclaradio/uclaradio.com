@@ -28,7 +28,7 @@ var Well = require('react-bootstrap').Well;
 var User = React.createClass({
   getInitialState: function() {
     return {user: {username: '', djName: '', email: '', phone: ''},
-      djNameVerified: false, emailVerified: false, phoneVerified: false};
+      djNameVerified: false, emailVerified: false, phoneVerified: false, fullNameVerified: false};
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -71,6 +71,11 @@ var User = React.createClass({
     user.djName = newDJName;
     this.handleUserDataSubmit(user, "djNameVerified");
   },
+  handleFullNameSubmit: function(fullName) {
+    var user = $.extend(true, {}, this.state.user);
+    user.fullName = fullName;
+    this.handleUserDataSubmit(user, "fullNameVerified");
+  },
   handleEmailSubmit: function(newEmail) {
     var user = $.extend(true, {}, this.state.user);
     user.email = newEmail;
@@ -96,6 +101,9 @@ var User = React.createClass({
                 <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
                   placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 
                   verified={this.state.djNameVerified} />
+                <InputEditableTextField title="Full Name" currentValue={this.state.user.fullName}
+                  placeholder="Enter Full Name" onSubmit={this.handleFullNameSubmit}
+                  verified={this.state.fullNameVerified} />
                 <InputEditableTextField title="Email" currentValue={this.state.user.email}
                   placeholder="Enter Email" onSubmit={this.handleEmailSubmit}
                   verified={this.state.emailVerified} />

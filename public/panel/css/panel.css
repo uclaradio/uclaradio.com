@@ -97,6 +97,11 @@ small {
 .actionGlyph {
   color: #f0ad4e;
 }
+/*
+.actionButton .btn-group-vertical .btn-link {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}*/
 
 /** InputEditableTextField **/
 
@@ -135,6 +140,8 @@ small {
 .inputEditWrapper {
   vertical-align: middle;
 }
+
+/* Multiline Text Field */
 
 /*#content {
 	margin: 0px 20px;
