@@ -51,7 +51,8 @@ var ManagerPage = React.createClass({
 
 var Manager = React.createClass({
   getInitialState: function() {
-    return {manager: {}};
+    return {manager: {}, positionVerified: false,
+      meetingTimeVerified: false, meetingLocationVerified: false};
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -66,7 +67,7 @@ var Manager = React.createClass({
       }.bind(this)
     });
   },
-  handleManagerInfoSubmit: function(updatedManager, updatedVar) {
+  handleManagerInfoSubmit: function(updatedManager, successVar) {
     var oldManager = this.state.manager;
     // Optimistically update local data, will be refreshed or reset after response from server
     this.setState({manager: updatedManager});
@@ -77,10 +78,14 @@ var Manager = React.createClass({
       type: 'POST',
       data: updateData,
       success: function(manager) {
-        this.setState({manager: manager});
+        var successState = {manager: manager};
+        successState[successVar] = true;
+        this.setState(successState);
       }.bind(this),
       error: function(xhr, status, err) {
-        this.setState({manager: oldManager});
+        var failedState = {manager: oldManager};
+        failedState[successVar] = false;
+        this.setState(failedState);
         console.error(this.props.urls.managerUpdate, status, err.toString());
       }.bind(this)
     });
@@ -88,17 +93,17 @@ var Manager = React.createClass({
   handlePositionSubmit: function(position) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.position = position;
-    this.handleManagerInfoSubmit(manager);
+    this.handleManagerInfoSubmit(manager, "positionVerified");
   },
   handleMeetingTimeSubmit: function(meetingTime) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.meetingTime = meetingTime;
-    this.handleManagerInfoSubmit(manager);
+    this.handleManagerInfoSubmit(manager, "meetingTimeVerified");
   },
   handleMeetingPlaceSubmit: function(meetingPlace) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.meetingPlace = meetingPlace;
-    this.handleManagerInfoSubmit(manager);
+    this.handleManagerInfoSubmit(manager, "meetingLocationVerified");
   },
   componentDidMount: function() {
     this.loadDataFromServer();
@@ -107,14 +112,15 @@ var Manager = React.createClass({
     return (
       <div className="manager">
         <h2>Manager Info</h2>
-        <form className="form-horizontal">
-          <InputEditableTextField title="Position" placeholder="Enter Manager Position"
-            currentValue={this.state.manager.position} onSubmit={this.handlePositionSubmit} />
-          <InputEditableTextField title="Meeting Time" placeholder="Enter Department Meeting Times"
-            currentValue={this.state.manager.meetingTime} onSubmit={this.handleMeetingTimeSubmit} />
-          <InputEditableTextField title="Meeting Location" placeholder="Enter Department Meeting Location"
-            currentValue={this.state.manager.meetingPlace} onSubmit={this.handleMeetingPlaceSubmit} />
-        </form>
+        <InputEditableTextField title="Position" placeholder="Enter Manager Position"
+          currentValue={this.state.manager.position} onSubmit={this.handlePositionSubmit}
+          verified={this.state.positionVerified} />
+        <InputEditableTextField title="Meeting Time" placeholder="Enter Department Meeting Times"
+          currentValue={this.state.manager.meetingTime} onSubmit={this.handleMeetingTimeSubmit}
+          verified={this.state.meetingTimeVerified} />
+        <InputEditableTextField title="Meeting Location" placeholder="Enter Department Meeting Location"
+          currentValue={this.state.manager.meetingPlace} onSubmit={this.handleMeetingPlaceSubmit}
+          verified={this.state.meetingLocationVerified} />
       </div>
     );
   }

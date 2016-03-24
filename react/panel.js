@@ -26,6 +26,10 @@ var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
 
 var User = React.createClass({
+  getInitialState: function() {
+    return {user: {username: '', djName: '', email: '', phone: ''},
+      djNameVerified: false, emailVerified: false, phoneVerified: false};
+  },
   loadDataFromServer: function() {
     $.ajax({
       url: this.props.urls.url,
@@ -39,22 +43,7 @@ var User = React.createClass({
       }.bind(this)
     });
   },
-  handleDJNameSubmit: function(newDJName) {
-    var user = $.extend(true, {}, this.state.user);
-    user.djName = newDJName;
-    this.handleUserDataSubmit(user);
-  },
-  handleEmailSubmit: function(newEmail) {
-    var user = $.extend(true, {}, this.state.user);
-    user.email = newEmail;
-    this.handleUserDataSubmit(user);
-  },
-  handlePhoneSubmit: function(newPhone) {
-    var user = $.extend(true, {}, this.state.user);
-    user.phone = newPhone;
-    this.handleUserDataSubmit(user);
-  },
-  handleUserDataSubmit: function(updatedUser) {
+  handleUserDataSubmit: function(updatedUser, successVar) {
     var oldUser = this.state.user;
     // Optimistically update local data, will be refreshed or reset after response from server
     updatedUser.username = oldUser.username;
@@ -65,16 +54,32 @@ var User = React.createClass({
       type: 'POST',
       data: updatedUser,
       success: function(user) {
-        this.setState({user: user});
+        var successState = {user: user};
+        successState[successVar] = true;
+        this.setState(successState);
       }.bind(this),
       error: function(xhr, status, err) {
-        this.setState({user: oldUser});
+        var failedState = {user: oldUser};
+        failedState[successVar] = false;
+        this.setState(failedState);
         console.error(this.props.urls.updateURL, status, err.toString());
       }.bind(this)
     });
   },
-  getInitialState: function() {
-    return {user: {username: '', djName: '', email: '', phone: ''}};
+  handleDJNameSubmit: function(newDJName) {
+    var user = $.extend(true, {}, this.state.user);
+    user.djName = newDJName;
+    this.handleUserDataSubmit(user, "djNameVerified");
+  },
+  handleEmailSubmit: function(newEmail) {
+    var user = $.extend(true, {}, this.state.user);
+    user.email = newEmail;
+    this.handleUserDataSubmit(user, "emailVerified");
+  },
+  handlePhoneSubmit: function(newPhone) {
+    var user = $.extend(true, {}, this.state.user);
+    user.phone = newPhone;
+    this.handleUserDataSubmit(user, "phoneVerified");
   },
   componentDidMount: function() {
     this.loadDataFromServer();
@@ -88,17 +93,15 @@ var User = React.createClass({
             <Col xs={12} md={6}>
               <Well>
                 <h2>DJ Info</h2>
-
-                <form className="form-horizontal">
-                  <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
-                    placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} />
-                  <InputEditableTextField title="Email" currentValue={this.state.user.email}
-                    placeholder="Enter Email" onSubmit={this.handleEmailSubmit} />
-                  <InputEditableTextField title="Phone" currentValue={this.state.user.phone}
-                    placeholder="Enter Phone Number" onSubmit={this.handlePhoneSubmit} />
-                </form>
-
-                <br />
+                <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
+                  placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 
+                  verified={this.state.djNameVerified} />
+                <InputEditableTextField title="Email" currentValue={this.state.user.email}
+                  placeholder="Enter Email" onSubmit={this.handleEmailSubmit}
+                  verified={this.state.emailVerified} />
+                <InputEditableTextField title="Phone" currentValue={this.state.user.phone}
+                  placeholder="Enter Phone Number" onSubmit={this.handlePhoneSubmit}
+                  verified={this.state.phoneVerified} />
               </Well>
             </Col>
             <Col xs={12} md={6}>

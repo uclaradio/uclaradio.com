@@ -7,6 +7,7 @@ var ReactDOM = require('react-dom');
 var Button = require('react-bootstrap').Button;
 var Input = require('react-bootstrap').Input;
 var FormControls = require('react-bootstrap').FormControls;
+var Glyphicon = require('react-bootstrap').Glyphicon;
 
 /**
 *  Show current saved value for a text field and let user update the field and submit changes
@@ -20,6 +21,7 @@ var FormControls = require('react-bootstrap').FormControls;
 *  @prop currentValue: current saved value of the field: 'Some Show'
 *  @prop multiline: should allow user to enter multiple lines of text
 *  @prop onSubmit -> function(text): parent's function to be called if 'Submit' is hit
+*  @prop verified: should show indicator that the value was successfully... whatever
 *
 *  @state value: current value being entered
 *  @state editable: should let the user edit the field
@@ -37,10 +39,8 @@ var InputEditableTextField = React.createClass({
   },
   handleSubmit: function(e) {
     var value = this.state.value.trim();
-    if (value) {
-      this.props.onSubmit(value)
-      this.setState({value: '', editable: false});
-    }
+    this.props.onSubmit(value)
+    this.setState({value: '', editable: false});
   },
   componentDidUpdate: function(e) {
     if (this.state.editable && this.state.currentlyEditing) {
@@ -49,31 +49,40 @@ var InputEditableTextField = React.createClass({
   },
   render: function() {
     var editButton = <a onClick={this.toggleEditableField}>Edit</a>;
-    var cancelButton = <a className="cancelLink" onClick={this.toggleEditableField}>Cancel</a>;
-    var actionButton = <Button onClick={this.handleSubmit}>{this.props.buttonTitle || "Update"}</Button>;
+    var cancelButton = <Button className="cancelLink" onClick={this.toggleEditableField}>Cancel</Button>;
+    var actionButton = <a onClick={this.handleSubmit}>{this.props.buttonTitle || "Update"}</a>;
     return (
       <div className="inputEditableTextField">
       { this.state.editable ?
         <div>
-          <Input
-            type={this.props.multiline ? "textarea" :"text"}
-            value={this.state.value}
-            placeholder={this.props.placeholder}
-            label={this.props.title}
-            ref="input"
-            groupClassName="group-class"
-            buttonAfter={actionButton}
-            addonAfter={cancelButton}
-            labelClassName="col-xs-3"
-            wrapperClassName="col-xs-9"
-            onChange={this.handleChange} />
+          <form className="form-horizontal" onSubmit={this.handleSubmit}>
+            <Input
+              type={this.props.multiline ? "textarea" :"text"}
+              value={this.state.value}
+              placeholder={this.props.placeholder}
+              label={this.props.title}
+              ref="input"
+              groupClassName="group-class"
+              addonAfter={actionButton}
+              buttonAfter={cancelButton}
+              labelClassName="col-xs-3"
+              wrapperClassName="col-xs-9"
+              onChange={this.handleChange} />
+          </form>
         </div>
       :
       // locked to user input
+      <form className="form-horizontal">
       <FormControls.Static label={this.props.title} labelClassName="col-xs-3"
       wrapperClassName="inputEditWrapper col-xs-9" addonAfter={editButton}>
-        {this.props.currentValue}
+        {this.props.currentValue
+          ?
+          <span>{this.props.currentValue} {this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>
+          :
+          <span className="placeholder">{this.props.placeholder}</span>
+        }
       </FormControls.Static>
+      </form>
     }
     </div>
     );

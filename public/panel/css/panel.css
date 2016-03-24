@@ -117,8 +117,19 @@ small {
   color: #777;
 }
 
+.inputEditableTextField .placeholder {
+  color: #b2b2b2;
+}
+
 .inputEditableTextField .form-group {
   margin-bottom: 5px;
+}
+
+.inputEditableTextField .verifiedGlyph {
+  padding-left: 3px;
+  padding-right: 3px;
+  vertical-align: top;
+  color: #5cb85c;
 }
 
 .inputEditWrapper {
