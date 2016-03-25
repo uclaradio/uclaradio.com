@@ -172,12 +172,38 @@ a:hover, .btn-link:hover, .btn-link:focus {
   bottom: -5px;
 }
 
+/** Show List **/
+
+.showListImg {
+  width: 100%;
+  max-width: 80px;
+  margin: 10px auto;
+}
+
+.showListTitle {
+  margin-top: 15px;
+}
+
+.showListTitle, .showListSubtitle {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.showListSubtitle {
+  clear: both;
+}
+
+.noPads {
+  padding: 0;
+}
+
 /**** !! Panel Page Specific !! ****/
 
-#showImg {
+.showImg {
   width: 100%;
   max-width: 300px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
 }
+

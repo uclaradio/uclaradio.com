@@ -2,6 +2,9 @@
 
 var React = require('react');
 
+// Helper files
+var Dates = require('./misc/Dates.js')
+
 // Bootstrap elements
 var Button = require('react-bootstrap').Button;
 var ButtonGroup = require('react-bootstrap').ButtonGroup;
@@ -9,31 +12,6 @@ var DropdownButton = require('react-bootstrap').DropdownButton;
 var MenuItem = require('react-bootstrap').MenuItem;
 var Input = require('react-bootstrap').Input;
 var Glyphicon = require('react-bootstrap').Glyphicon;
-
-const dayFromVar = function(day) {
-  switch (day) {
-    case 'Mon':
-      return 'Monday';
-    case 'Tue':
-      return 'Tuesday';
-    case 'Wed':
-      return 'Wednesday';
-    case 'Thu':
-      return 'Thursday';
-    case 'Fri':
-      return 'Friday';
-    case 'Sat':
-      return 'Saturday';
-    case 'Sun':
-      return 'Sunday';
-    default:
-      return '';
-  }
-};
-
-const availableDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-const availableTimes = ['12am', '1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am',
-                        '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm'];
 
 /**
 *  Show current saved value for day/time and let user update data and submit changes
@@ -79,11 +57,11 @@ var InputEditableDateTimeField = React.createClass({
                         <a onClick={this.handleSubmit}>{this.props.buttonTitle || "Update"}</a>
                         &emsp;&emsp;&emsp;<a className="cancelLink" onClick={this.toggleEditableField}>Cancel</a>
                        </span>
-    var days = availableDays.map(function(day) {
-      return <MenuItem key={day} eventKey={day}>{dayFromVar(day)}</MenuItem>;
+    var days = Dates.availableDays.map(function(day) {
+      return <MenuItem key={day} eventKey={day}>{Dates.dayFromVar(day)}</MenuItem>;
     });
 
-    var times = availableTimes.map(function(time) {
+    var times = Dates.availableTimes.map(function(time) {
       return <MenuItem key={time} eventKey={time}>{time}</MenuItem>;
     });
     return (
@@ -94,7 +72,7 @@ var InputEditableDateTimeField = React.createClass({
             { this.state.editable ?
               // field edit/submittable
                 <ButtonGroup>
-                  <DropdownButton id="day" title={dayFromVar(this.state.day) || <span className="placeholder">Day</span>}
+                  <DropdownButton id="day" title={Dates.dayFromVar(this.state.day) || <span className="placeholder">Day</span>}
                   onSelect={this.handleDayChange} key={this.state.day}>
                     {days}
                   </DropdownButton>
@@ -107,7 +85,7 @@ var InputEditableDateTimeField = React.createClass({
               // locked to user input
               <span className="customInput">
                 { (this.props.day && this.props.time) ?
-                  <span>{dayFromVar(this.props.day)} {this.props.time} {this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>
+                  <span>{Dates.dayFromVar(this.props.day)} {this.props.time} {this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>
                   :
                   <span className="placeholder">{this.props.placeholder}</span>
                 }

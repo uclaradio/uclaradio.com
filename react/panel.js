@@ -8,6 +8,7 @@ var urls = {url: "/panel/api/user",
             updateURL: "/panel/api/updateUser",
             showsURL: "/panel/api/shows",
             showURL: "/panel/api/show",
+            showLink: "/panel/show",
             addShowURL: "/panel/api/addShow",
             showPicURL: "/panel/api/showPic"};
 
@@ -18,6 +19,7 @@ var UserEditableTextField = require('./components/UserEditableTextField.jsx');
 var UserEditableDateTimeField = require('./components/UserEditableDateTimeField.jsx');
 var ConfirmationButton = require('./components/ConfirmationButton.jsx');
 var FileInput = require('./components/FileInput.jsx');
+var ShowList = require('./components/ShowList.jsx');
 
 // Bootstrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -113,7 +115,7 @@ var User = React.createClass({
               </Well>
             </Col>
             <Col xs={12} md={6}>
-                <ShowsList url={this.props.urls.showsURL} showURL={this.props.urls.showURL} addShowURL={this.props.urls.addShowURL} showPicURL={this.props.urls.showPicURL} />
+                <UserShowsList urls={this.props.urls} />
             </Col>
           </Row>
         </Grid>
@@ -122,17 +124,17 @@ var User = React.createClass({
   }
 });
 
-var ShowsList = React.createClass({
+var UserShowsList = React.createClass({
   loadDataFromServer: function() {
     $.ajax({
-      url: this.props.url,
+      url: this.props.urls.showsURL,
       dataType: 'json',
       cache: false,
       success: function(shows) {
         this.setState({shows: shows});
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error(this.props.urls.showsURL, status, err.toString());
       }.bind(this)
     });
   },
@@ -143,7 +145,7 @@ var ShowsList = React.createClass({
     localShowData.id = oldShows[oldShows.length-1] + 1; // give new show a temporary id so React has a key for the show element
     this.setState({shows: this.state.shows.concat([localShowData])});
     $.ajax({
-      url: this.props.addShowURL,
+      url: this.props.urls.addShowURL,
       dataType: 'json',
       type: 'POST',
       data: showData,
@@ -152,65 +154,65 @@ var ShowsList = React.createClass({
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({shows: oldShows});
-        console.error(this.props.addShowURL, status, err.toString());
+        console.error(this.props.urls.addShowURL, status, err.toString());
       }.bind(this)
     });
   },
-  handleUpdateShow: function(showData) {
-    var oldShows = this.state.shows;
-    var newShows = $.extend(true, [], this.state.shows);
-    for (var i = 0; i < newShows.length; i++) {
-      if (newShows[i].id == showData.id) {
-        // found show to update
-        newShows[i] = showData;
-        break;
-      }
-    }
-    // optimistically add show data to present
-    this.setState({shows: newShows});
-    // encode array as JSON to send to server
-    showData.djs = JSON.stringify(showData.djs);
-    $.ajax({
-      url: this.props.showURL,
-      dataType: 'json',
-      type: 'POST',
-      data: showData,
-      success: function() {
-        this.loadDataFromServer();
-      }.bind(this),
-      error: function(xhr, status, err) {
-        this.setState({shows: oldShows});
-        console.error(this.props.showURL, status, err.toString());
-      }.bind(this)
-    });
-  },
-  handleUpdatePicture: function(id, img) {
-    var formData = new FormData();
-    formData.append("img", img);
-    formData.append("id", id);
-    var request = new XMLHttpRequest();
-    request.open("POST", this.props.showPicURL);
-    var loadData = this.loadDataFromServer;
-    request.onload = function(e) {
-      if (request.status == 200) { loadData(); }
-    };
-    request.send(formData);
-  },
-  handleDeleteShow: function(show) {
-    show.delete = true;
-    $.ajax({
-      url: this.props.showURL,
-      dataType: 'json',
-      type: 'POST',
-      data: show,
-      success: function() {
-        this.loadDataFromServer();
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.showURL, status, err.toString());
-      }.bind(this)
-    });
-  },
+  // handleUpdateShow: function(showData) {
+  //   var oldShows = this.state.shows;
+  //   var newShows = $.extend(true, [], this.state.shows);
+  //   for (var i = 0; i < newShows.length; i++) {
+  //     if (newShows[i].id == showData.id) {
+  //       // found show to update
+  //       newShows[i] = showData;
+  //       break;
+  //     }
+  //   }
+  //   // optimistically add show data to present
+  //   this.setState({shows: newShows});
+  //   // encode array as JSON to send to server
+  //   showData.djs = JSON.stringify(showData.djs);
+  //   $.ajax({
+  //     url: this.props.showURL,
+  //     dataType: 'json',
+  //     type: 'POST',
+  //     data: showData,
+  //     success: function() {
+  //       this.loadDataFromServer();
+  //     }.bind(this),
+  //     error: function(xhr, status, err) {
+  //       this.setState({shows: oldShows});
+  //       console.error(this.props.showURL, status, err.toString());
+  //     }.bind(this)
+  //   });
+  // },
+  // handleUpdatePicture: function(id, img) {
+  //   var formData = new FormData();
+  //   formData.append("img", img);
+  //   formData.append("id", id);
+  //   var request = new XMLHttpRequest();
+  //   request.open("POST", this.props.showPicURL);
+  //   var loadData = this.loadDataFromServer;
+  //   request.onload = function(e) {
+  //     if (request.status == 200) { loadData(); }
+  //   };
+  //   request.send(formData);
+  // },
+  // handleDeleteShow: function(show) {
+  //   show.delete = true;
+  //   $.ajax({
+  //     url: this.props.showURL,
+  //     dataType: 'json',
+  //     type: 'POST',
+  //     data: show,
+  //     success: function() {
+  //       this.loadDataFromServer();
+  //     }.bind(this),
+  //     error: function(xhr, status, err) {
+  //       console.error(this.props.showURL, status, err.toString());
+  //     }.bind(this)
+  //   });
+  // },
   getInitialState: function() {
     // shows: {title, day, time}
     return {shows: []};
@@ -220,21 +222,20 @@ var ShowsList = React.createClass({
   },
   render: function() {
     // create list of all shows
-    var showURL = this.props.showURL;
-    var handleUpdateShow = this.handleUpdateShow;
-    var handleDeleteShow = this.handleDeleteShow;
-    var handleUpdatePicture = this.handleUpdatePicture;
-    var allShows = this.state.shows.map(function(show) {
-      return (
-      <div key={show.id}>
-       <Show show={show} url={showURL} onUpdateShow={handleUpdateShow} onUpdateShowPicture={handleUpdatePicture} onDeleteShow={handleDeleteShow} />
-      </div>
-      );
-    });
+    var showURL = this.props.urls.showURL;
+    // var handleUpdateShow = this.handleUpdateShow;
+    // var handleDeleteShow = this.handleDeleteShow;
+    // var handleUpdatePicture = this.handleUpdatePicture;
+    // var allShows = this.state.shows.map(function(show) {
+    //   return (
+    //   <div key={show.id}>
+    //    <Show show={show} url={showURL} onUpdateShow={handleUpdateShow} onUpdateShowPicture={handleUpdatePicture} onDeleteShow={handleDeleteShow} />
+    //   </div>
+    //   );
+    // });
     return (
-      <div className="showsList">
-        <h2> Shows </h2>
-        {allShows}
+      <div className="userShowsList">
+        <ShowList url={this.props.urls.showLink} shows={this.state.shows} placeholder="/img/radio.png" />
         <br />
         <NewShowForm onNewShowSubmit={this.handleUserSubmitNewShow}/>
       </div>
