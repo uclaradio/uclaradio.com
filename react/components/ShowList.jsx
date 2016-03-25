@@ -13,6 +13,13 @@ var ListGroup = require('react-bootstrap').ListGroup;
 var ListGroupItem = require('react-bootstrap').ListGroupItem;
 var Image = require('react-bootstrap').Image;
 
+/**
+*  Presents a list of show objects with a standard format
+*
+*  @prop url: url href to add '/showID' to
+*  @prop placeholder: img src to display if no image set
+*  @prop shows -> [{show...}]: shows to list
+*/
 var ShowList = React.createClass({
   render: function() {
     var url = this.props.url;

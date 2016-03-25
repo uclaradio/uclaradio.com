@@ -350,6 +350,7 @@ router.post('/api/updateShow', function(req, res) {
 				"blurb": req.body.blurb,
 				"picture": req.body.picture,
 				"thumbnail": req.body.thumbnail,
+				"public": req.body.public,
 				"pages": req.body.pages,
 				"episodes": req.body.episodes
 			};

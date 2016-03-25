@@ -15,6 +15,7 @@ var urls = {managerInfo: "/panel/manager/api/info",
 var ActionTable = require('./components/ActionTable.jsx');
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
 var InputEditableTextField = require('./components/InputEditableTextField.jsx');
+var InputCheckbox = require('./components/InputCheckbox.jsx');
 
 // Bootstrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -51,7 +52,7 @@ var ManagerPage = React.createClass({
 
 var Manager = React.createClass({
   getInitialState: function() {
-    return {manager: {}, positionVerified: false,
+    return {manager: {}, positionVerified: false, publicVerified: false,
       meetingTimeVerified: false, meetingLocationVerified: false};
   },
   loadDataFromServer: function() {
@@ -72,6 +73,10 @@ var Manager = React.createClass({
     // Optimistically update local data, will be refreshed or reset after response from server
     this.setState({manager: updatedManager});
     var updateData = {manager: JSON.stringify(updatedManager)};
+    // don't mark as verified yet
+    var unverifiedState = {};
+    unverifiedState[successVar] = false;
+    this.setState(unverifiedState);
     $.ajax({
       url: this.props.urls.managerUpdate,
       dataType: 'json',
@@ -83,9 +88,7 @@ var Manager = React.createClass({
         this.setState(successState);
       }.bind(this),
       error: function(xhr, status, err) {
-        var failedState = {manager: oldManager};
-        failedState[successVar] = false;
-        this.setState(failedState);
+        this.setState({manager: oldManager});
         console.error(this.props.urls.managerUpdate, status, err.toString());
       }.bind(this)
     });
@@ -105,6 +108,11 @@ var Manager = React.createClass({
     manager.meetingPlace = meetingPlace;
     this.handleManagerInfoSubmit(manager, "meetingLocationVerified");
   },
+  handlePublicSubmit: function(checked) {
+    var manager = $.extend(true, {}, this.state.manager);
+    manager.public = checked;
+    this.handleManagerInfoSubmit(manager, "publicVerified");
+  },
   componentDidMount: function() {
     this.loadDataFromServer();
   },
@@ -121,6 +129,8 @@ var Manager = React.createClass({
         <InputEditableTextField title="Meeting Location" placeholder="Enter Department Meeting Location"
           currentValue={this.state.manager.meetingPlace} onSubmit={this.handleMeetingPlaceSubmit}
           verified={this.state.meetingLocationVerified} />
+        <InputCheckbox title="Public" details="Show my info on Manager's Board" checked={this.state.manager.public}
+          onSelect={this.handlePublicSubmit} verified={this.state.publicVerified} />
       </div>
     );
   }

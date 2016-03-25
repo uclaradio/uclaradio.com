@@ -50,6 +50,10 @@ var User = React.createClass({
     // Optimistically update local data, will be refreshed or reset after response from server
     updatedUser.username = oldUser.username;
     this.setState({user: updatedUser});
+    // don't mark as verified yet
+    var unverifiedState = {};
+    unverifiedState[successVar] = false;
+    this.setState(unverifiedState);
     $.ajax({
       url: this.props.urls.updateURL,
       dataType: 'json',
@@ -61,9 +65,7 @@ var User = React.createClass({
         this.setState(successState);
       }.bind(this),
       error: function(xhr, status, err) {
-        var failedState = {user: oldUser};
-        failedState[successVar] = false;
-        this.setState(failedState);
+        this.setState({user: oldUser});
         console.error(this.props.urls.updateURL, status, err.toString());
       }.bind(this)
     });
@@ -158,34 +160,6 @@ var UserShowsList = React.createClass({
       }.bind(this)
     });
   },
-  // handleUpdateShow: function(showData) {
-  //   var oldShows = this.state.shows;
-  //   var newShows = $.extend(true, [], this.state.shows);
-  //   for (var i = 0; i < newShows.length; i++) {
-  //     if (newShows[i].id == showData.id) {
-  //       // found show to update
-  //       newShows[i] = showData;
-  //       break;
-  //     }
-  //   }
-  //   // optimistically add show data to present
-  //   this.setState({shows: newShows});
-  //   // encode array as JSON to send to server
-  //   showData.djs = JSON.stringify(showData.djs);
-  //   $.ajax({
-  //     url: this.props.showURL,
-  //     dataType: 'json',
-  //     type: 'POST',
-  //     data: showData,
-  //     success: function() {
-  //       this.loadDataFromServer();
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-  //       this.setState({shows: oldShows});
-  //       console.error(this.props.showURL, status, err.toString());
-  //     }.bind(this)
-  //   });
-  // },
   // handleUpdatePicture: function(id, img) {
   //   var formData = new FormData();
   //   formData.append("img", img);
@@ -221,71 +195,11 @@ var UserShowsList = React.createClass({
     this.loadDataFromServer();
   },
   render: function() {
-    // create list of all shows
-    var showURL = this.props.urls.showURL;
-    // var handleUpdateShow = this.handleUpdateShow;
-    // var handleDeleteShow = this.handleDeleteShow;
-    // var handleUpdatePicture = this.handleUpdatePicture;
-    // var allShows = this.state.shows.map(function(show) {
-    //   return (
-    //   <div key={show.id}>
-    //    <Show show={show} url={showURL} onUpdateShow={handleUpdateShow} onUpdateShowPicture={handleUpdatePicture} onDeleteShow={handleDeleteShow} />
-    //   </div>
-    //   );
-    // });
     return (
       <div className="userShowsList">
         <ShowList url={this.props.urls.showLink} shows={this.state.shows} placeholder="/img/radio.png" />
         <br />
         <NewShowForm onNewShowSubmit={this.handleUserSubmitNewShow}/>
-      </div>
-    );
-  }
-});
-
-var Show = React.createClass({
-  getInitialState: function() {
-    return {};
-  },
-  handleTitleSubmit: function(title) {
-    var updatedShow = this.props.show;
-    updatedShow.title = title;
-    this.props.onUpdateShow(updatedShow);
-  },
-  handleDateSubmit: function(day, time) {
-    var updatedShow = this.props.show;
-    updatedShow.day = day;
-    updatedShow.time = time;
-    this.props.onUpdateShow(updatedShow);
-  },
-  handleGenreSubmit: function(genre) {
-    var updatedShow = this.props.show;
-    updatedShow.genre = genre;
-    this.props.onUpdateShow(updatedShow);
-  },
-  handleBlurbSubmit: function(blurb) {
-    var updatedShow = this.props.show;
-    updatedShow.blurb = blurb;
-    this.props.onUpdateShow(updatedShow);
-  },
-  handlePictureSubmit: function(img) {
-    this.props.onUpdateShowPicture(this.props.show.id, img);
-  },
-  handleDeleteShow: function() {
-    this.props.onDeleteShow(this.props.show);
-  },
-  render: function() {
-    return (
-      <div className="show">
-        <h3>{this.props.show.title}</h3>
-        <img className="showPic" src={this.props.show.thumbnail || "/img/radio.png" } />
-        <FileInput accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} submitText="Submit Picture" />
-        <UserEditableTextField title="Title" currentValue={this.props.show.title} onTextSubmit={this.handleTitleSubmit} />
-        <UserEditableDateTimeField day={this.props.show.day} time={this.props.show.time} onDateSubmit={this.handleDateSubmit} />
-        <UserEditableTextField title="Genre" currentValue={this.props.show.genre} onTextSubmit={this.handleGenreSubmit} />
-        <UserEditableTextField title="Blurb" multiline={true} currentValue={this.props.show.blurb} onTextSubmit={this.handleBlurbSubmit} />
-
-        <ConfirmationButton confirm={"Delete '" + this.props.show.title + "'"} submit={"Really delete '" + this.props.show.title + "'?"} onSubmit={this.handleDeleteShow} />
       </div>
     );
   }

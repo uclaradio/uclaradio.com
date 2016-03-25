@@ -12,6 +12,7 @@ var urls = {showURL: "/panel/api/showData/",
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
 var InputEditableTextField = require('./components/InputEditableTextField.jsx');
 var InputEditableDateTimeField = require('./components/InputEditableDateTimeField.jsx');
+var InputCheckbox = require('./components/InputCheckbox.jsx');
 var ConfirmationButton = require('./components/ConfirmationButton.jsx');
 var FileInput = require('./components/FileInput.jsx');
 
@@ -45,7 +46,7 @@ var ShowPage = React.createClass({
 var Show = React.createClass({
   getInitialState: function() {
     return {show: {}, titleVerified: false, dateVerified: false,
-      genreVerified: false, blurbVerified: false};
+      genreVerified: false, blurbVerified: false, publicVerified: false};
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -66,6 +67,10 @@ var Show = React.createClass({
     this.setState({show: updatedShow});
     // Stringify arrays so they reach the server
     updatedShow.djs = JSON.stringify(updatedShow.djs);
+    // don't mark as verified yet
+    var unverifiedState = {};
+    unverifiedState[successVar] = false;
+    this.setState(unverifiedState);
     $.ajax({
       url: this.props.urls.showUpdateURL,
       dataType: 'json',
@@ -77,9 +82,7 @@ var Show = React.createClass({
         this.setState(successState);
       }.bind(this),
       error: function(xhr, status, err) {
-        var failedState = {show: oldShow};
-        failedState[successVar] = false;
-        this.setState(failedState);
+        this.setState({show: oldShow});
         console.error(this.props.urls.showUpdateURL, status, err.toString());
       }.bind(this)
     });
@@ -104,6 +107,11 @@ var Show = React.createClass({
     var show = $.extend(true, {}, this.state.show);
     show.blurb = blurb;
     this.handleShowDataSubmit(show, 'blurbVerified');
+  },
+  handlePublicSubmit: function(checked) {
+    var show = $.extend(true, {}, this.state.show);
+    show.public = checked;
+    this.handleShowDataSubmit(show, 'publicVerified');
   },
   handlePictureSubmit: function(img) {
     // this.props.onUpdateShowPicture(this.state.show.id, img);
@@ -137,6 +145,8 @@ var Show = React.createClass({
                   onSubmit={this.handleGenreSubmit} placeholder="Enter Show Genre" verified={this.state.genreVerified} />
                 <InputEditableTextField title="Blurb" multiline currentValue={this.state.show.blurb}
                   onSubmit={this.handleBlurbSubmit} placeholder="Enter Show Blurb" verified={this.state.blurbVerified} />
+                <InputCheckbox title="Public" details="Make Show Public" checked={this.state.show.public}
+                  onSelect={this.handlePublicSubmit} verified={this.state.publicVerified} />
 
                 <ConfirmationButton confirm={"Delete '" + this.state.show.title + "'"} submit={"Really delete '" + this.state.show.title + "'?"} onSubmit={this.handleDeleteShow} />
               </Col>
