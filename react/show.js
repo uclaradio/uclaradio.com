@@ -132,7 +132,7 @@ var Show = React.createClass({
                 <InputEditableTextField title="Title" currentValue={this.state.show.title}
                   onSubmit={this.handleTitleSubmit} placeholder="Enter Show Title" verified={this.state.titleVerified} />
                 <InputEditableDateTimeField title="Time" day={this.state.show.day} time={this.state.show.time}
-                  onDateSubmit={this.handleDateSubmit} placeholder="Enter Show Time" />
+                  onDateSubmit={this.handleDateSubmit} placeholder="Enter Show Time" verified={this.state.dateVerified} />
                 <InputEditableTextField title="Genre" currentValue={this.state.show.genre}
                   onSubmit={this.handleGenreSubmit} placeholder="Enter Show Genre" verified={this.state.genreVerified} />
                 <InputEditableTextField title="Blurb" multiline currentValue={this.state.show.blurb}

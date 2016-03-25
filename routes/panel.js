@@ -250,7 +250,7 @@ router.get('/api/user', function(req, res) {
 	}
 	else {
 		var user = req.session.user;
-		var userData = {"username": user.username, "fullName": user.fullName, "djName": user.djName, "email": user.email, "phone": user.phone};
+		var userData = accounts.webSafeUser(user);
 		res.json(userData);
 	}
 });
@@ -286,7 +286,7 @@ router.post('/api/updateUser', function(req, res) {
 			var callback = function(err, user) {
 				if (err) { res.status(400).send(err); }
 				else {
-					var userData = {"username": user.username, "fullName": user.fullName, "djName": user.djName, "email": user.email, "phone": user.phone};
+					var userData = accounts.webSafeUser(user);
 					res.json(userData);
 				}
 			};

@@ -80,6 +80,14 @@ var showIdKey = "show"; // ids for Show table
 var LastIdModel = mongoose.model('lastIds', LastIdSchema);
 
 
+db.webSafeUser = function(user) {
+	return {"username": user.username,
+		 			"fullName": user.fullName,
+			 			"djName": user.djName,
+			  		 "email": user.email,
+			  		 "phone": user.phone};
+};
+
 
 /***** User Account Management *****/
 

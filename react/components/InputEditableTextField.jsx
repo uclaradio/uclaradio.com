@@ -39,6 +39,7 @@ var InputEditableTextField = React.createClass({
     this.setState({value: this.props.currentValue, editable: !this.state.editable, currentlyEditing: true})
   },
   handleSubmit: function(e) {
+    e.preventDefault();
     var value = this.state.value.trim();
     this.props.onSubmit(value)
     this.setState({value: '', editable: false});
@@ -57,7 +58,7 @@ var InputEditableTextField = React.createClass({
                        </span>
     return (
       <div className="inputEditableTextField">
-        <form className="form-horizontal">
+        <form className="form-horizontal" onSubmit={this.handleSubmit}>
           { this.state.editable ?
             <Input
               type={this.props.multiline ? "textarea" :"text"}

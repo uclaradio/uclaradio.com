@@ -2,19 +2,13 @@
 
 var React = require('react');
 
-// Custom elements
-var DateTimeField = require('./DateTimeField.jsx');
-
 // Bootstrap elements
-var Grid = require('react-bootstrap').Grid;
-var Row = require('react-bootstrap').Row;
-var Col = require('react-bootstrap').Col;
 var Button = require('react-bootstrap').Button;
 var ButtonGroup = require('react-bootstrap').ButtonGroup;
 var DropdownButton = require('react-bootstrap').DropdownButton;
 var MenuItem = require('react-bootstrap').MenuItem;
-var FormControls = require('react-bootstrap').FormControls;
 var Input = require('react-bootstrap').Input;
+var Glyphicon = require('react-bootstrap').Glyphicon;
 
 const dayFromVar = function(day) {
   switch (day) {
@@ -73,11 +67,10 @@ var InputEditableDateTimeField = React.createClass({
     e.preventDefault();
     var day = this.state.day.trim();
     var time = this.state.time.trim();
-    if (!day || !time) {
-      return;
+    if (day && time) {
+      this.props.onDateSubmit(day, time);
+      this.setState({day: 'Mon', time: '10am', editable: false});
     }
-    this.props.onDateSubmit(day, time);
-    this.setState({day: 'Mon', time: '10am', editable: false});
   },
   render: function() {
     var editButton = <a className="customInput" onClick={this.toggleEditableField}>Edit</a>;
