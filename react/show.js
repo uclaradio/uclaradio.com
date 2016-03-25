@@ -11,7 +11,7 @@ var urls = {showURL: "/panel/api/showData/",
 // Custom elements
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
 var InputEditableTextField = require('./components/InputEditableTextField.jsx');
-var UserEditableDateTimeField = require('./components/UserEditableDateTimeField.jsx');
+var InputEditableDateTimeField = require('./components/InputEditableDateTimeField.jsx');
 var ConfirmationButton = require('./components/ConfirmationButton.jsx');
 var FileInput = require('./components/FileInput.jsx');
 
@@ -20,6 +20,7 @@ var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
+var Image = require('react-bootstrap').Image;
 
 var ShowPage = React.createClass({
   getShowIDFromURL: function() {
@@ -32,16 +33,10 @@ var ShowPage = React.createClass({
   render: function() {
     return (
       <div className="showPage">
-        <Grid>
+        <Grid fluid>
           <PanelLinksNavbar />
-          <Row>
-            <Col xs={12} md={6}>
-              <Well>
-                <Show urls={this.props.urls} showID={this.state.showID} />
-              </Well>
-            </Col>
-          </Row>
         </Grid>
+        <Show urls={this.props.urls} showID={this.state.showID} />
       </div>
     );
   }
@@ -125,18 +120,29 @@ var Show = React.createClass({
   render: function() {
     return (
       <div className="show">
-        <h3>{this.state.show.title}</h3>
-        <img className="showPic" src={this.state.show.thumbnail || "/img/radio.png" } />
-        <FileInput accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} submitText="Submit Picture" />
-        <InputEditableTextField title="Title" currentValue={this.state.show.title}
-          onSubmit={this.handleTitleSubmit} placeholder="Enter Show Title" verified={this.state.titleVerified} />
-        <UserEditableDateTimeField day={this.state.show.day} time={this.state.show.time} onDateSubmit={this.handleDateSubmit} />
-        <InputEditableTextField title="Genre" currentValue={this.state.show.genre}
-          onSubmit={this.handleGenreSubmit} placeholder="Enter Show Genre" verified={this.state.genreVerified} />
-        <InputEditableTextField title="Blurb" multiline currentValue={this.state.show.blurb}
-          onSubmit={this.handleBlurbSubmit} placeholder="Enter Show Blurb" verified={this.state.blurbVerified} />
+        <Grid>
+          <Well>
+            <Row>
+              <Col xs={12} md={4}>
+                <Image id="showImg" src={this.state.show.thumbnail || "/img/radio.png" } responsive rounded />
+              </Col>
+              <Col xs={12} md={8}>
+                <h3>{this.state.show.title}</h3>
+                <FileInput accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} submitText="Submit Picture" />
+                <InputEditableTextField title="Title" currentValue={this.state.show.title}
+                  onSubmit={this.handleTitleSubmit} placeholder="Enter Show Title" verified={this.state.titleVerified} />
+                <InputEditableDateTimeField title="Time" day={this.state.show.day} time={this.state.show.time}
+                  onDateSubmit={this.handleDateSubmit} placeholder="Enter Show Time" />
+                <InputEditableTextField title="Genre" currentValue={this.state.show.genre}
+                  onSubmit={this.handleGenreSubmit} placeholder="Enter Show Genre" verified={this.state.genreVerified} />
+                <InputEditableTextField title="Blurb" multiline currentValue={this.state.show.blurb}
+                  onSubmit={this.handleBlurbSubmit} placeholder="Enter Show Blurb" verified={this.state.blurbVerified} />
 
-        <ConfirmationButton confirm={"Delete '" + this.state.show.title + "'"} submit={"Really delete '" + this.state.show.title + "'?"} onSubmit={this.handleDeleteShow} />
+                <ConfirmationButton confirm={"Delete '" + this.state.show.title + "'"} submit={"Really delete '" + this.state.show.title + "'?"} onSubmit={this.handleDeleteShow} />
+              </Col>
+            </Row>
+          </Well>
+        </Grid>
       </div>
     );
   }

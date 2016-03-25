@@ -353,6 +353,7 @@ router.post('/api/updateShow', function(req, res) {
 				"pages": req.body.pages,
 				"episodes": req.body.episodes
 			};
+			console.log("body: ", req.body);
 			// return show with id belonging to logged in user
 			var callback = function(err, show) {
 				if (err) { console.log("error updating show: ", err); }

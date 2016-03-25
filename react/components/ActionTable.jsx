@@ -43,7 +43,7 @@ var ActionButtons = React.createClass({
           ?
           <OverlayTrigger placement="top" overlay={tooltip1} delayShow={500}>
             <Button className="table-action1" bsStyle="link" onClick={this.handleAccept} disabled={this.props.actionsDisabled}>
-              <Glyphicon glyph="ok" />&ensp;{this.props.acceptTitle}
+              <Glyphicon glyph="ok" />{this.props.acceptTitle}
             </Button>
           </OverlayTrigger>
           :
@@ -52,7 +52,7 @@ var ActionButtons = React.createClass({
 
           <OverlayTrigger placement="top" overlay={tooltip2} delayShow={500}>
             <Button className="table-action2" bsStyle="link" onClick={this.handleReject} disabled={this.props.actionsDisabled}>
-              <Glyphicon glyph="remove" />&ensp;{this.props.rejectTitle}
+              <Glyphicon glyph="remove" />{this.props.rejectTitle}
             </Button>
           </OverlayTrigger>
 

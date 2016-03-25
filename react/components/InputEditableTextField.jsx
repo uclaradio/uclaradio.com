@@ -57,9 +57,8 @@ var InputEditableTextField = React.createClass({
                        </span>
     return (
       <div className="inputEditableTextField">
-      { this.state.editable ?
-        <div>
-          <form className="form-horizontal" onSubmit={this.handleSubmit}>
+        <form className="form-horizontal">
+          { this.state.editable ?
             <Input
               type={this.props.multiline ? "textarea" :"text"}
               value={this.state.value}
@@ -71,23 +70,19 @@ var InputEditableTextField = React.createClass({
               labelClassName="col-xs-3"
               wrapperClassName="col-xs-9"
               onChange={this.handleChange} />
-          </form>
-        </div>
-      :
-      // locked to user input
-      <form className="form-horizontal">
-      <FormControls.Static label={this.props.title} labelClassName="col-xs-3"
-      wrapperClassName="inputEditWrapper col-xs-9" addonAfter={editButton}>
-        {this.props.currentValue
-          ?
-          <span>{this.props.currentValue} {this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>
           :
-          <span className="placeholder">{this.props.placeholder}</span>
-        }
-      </FormControls.Static>
-      </form>
-    }
-    </div>
+          // locked to user input
+          <FormControls.Static label={this.props.title} labelClassName="col-xs-3"
+          wrapperClassName="inputEditWrapper col-xs-9" addonAfter={editButton}>
+            { this.props.currentValue ?
+              <span>{this.props.currentValue} {this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>
+              :
+              <span className="placeholder">{this.props.placeholder}</span>
+            }
+          </FormControls.Static>
+          }
+        </form>
+      </div>
     );
   }
 });
