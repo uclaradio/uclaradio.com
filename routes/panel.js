@@ -322,7 +322,8 @@ router.post('/api/updateShow', function(req, res) {
 		res.redirect('/panel');
 	}
 	else {
-		accounts.userHasAccessToShow(req.session.user.username, req.body.id, function(hasAccess) {
+		var showData = JSON.parse(req.body.show);
+		accounts.userHasAccessToShow(req.session.user.username, showData.id, function(hasAccess) {
 			// user doesn't have access to this show
 			if (!hasAccess) {
 				console.log("user requested invalid show");
@@ -331,37 +332,21 @@ router.post('/api/updateShow', function(req, res) {
 			}
 
 			// delete show
-			if (req.body.delete) {
-				accounts.removeShow(req.body.id, function (e) {
-					if (e) { console.log("error removing show: ", e); res.status(400).send(e); }
-					else { res.json("success"); }
-				});
-				return;
-			}
+			// if (req.body.delete) {
+			// 	accounts.removeShow(req.body.id, function (e) {
+			// 		if (e) { console.log("error removing show: ", e); res.status(400).send(e); }
+			// 		else { res.json("success"); }
+			// 	});
+			// 	return;
+			// }
 
-			var djs = JSON.parse(req.body.djs);
-
-			var newData = {
-				"title": req.body.title,
-				"day": req.body.day,
-				"time": req.body.time,
-				"djs": djs,
-				"genre": req.body.genre,
-				"blurb": req.body.blurb,
-				"picture": req.body.picture,
-				"thumbnail": req.body.thumbnail,
-				"public": req.body.public,
-				"pages": req.body.pages,
-				"episodes": req.body.episodes
-			};
-			console.log("body: ", req.body);
 			// return show with id belonging to logged in user
 			var callback = function(err, show) {
 				if (err) { console.log("error updating show: ", err); }
 				if (show) { res.json(show); }
 				else { res.status(400).send(); }
 			}
-			accounts.updateShow(req.body.id, newData, callback);
+			accounts.updateShow(showData.id, showData, callback);
 		});
 	}
 });

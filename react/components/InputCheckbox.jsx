@@ -21,10 +21,10 @@ var InputCheckbox = React.createClass({
   },
   render: function() {
     return (
-      <form className="form-horizontal">
+      <form className="inputCheckbox form-horizontal">
         <Input label={this.props.title} labelClassName="col-xs-3" wrapperClassName="col-xs-9 inputCheckbox">
-          <Input type="checkbox" checked={this.props.checked} onChange={this.handleChange} readOnly
-            label={<span className="placeholder">{this.props.details}{this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>} />
+          <Input type="checkbox" checked={this.props.checked} onChange={this.handleChange}
+            label={<span className={this.props.checked ? '' : 'placeholder'}>{this.props.details}{this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>} />
         </Input>
       </form>
     );

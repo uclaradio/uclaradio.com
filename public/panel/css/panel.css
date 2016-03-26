@@ -123,13 +123,15 @@ a:hover, .btn-link:hover, .btn-link:focus {
   border: none;
 }
 
-.inputEditableTextField .form-group {
+/*.inputEditableTextField .form-group*/
+.form-group {
   margin-bottom: 5px;
 }
 
+/*
 .inputEditWrapper {
   vertical-align: middle;
-}
+}*/
 
 .inputCheckbox .form-group {
   margin-left: 0;
@@ -143,7 +145,7 @@ a:hover, .btn-link:hover, .btn-link:focus {
  padding-right: 5px;
 }
 
-.placeholder {
+.placeholder, a.disabled, a.disabled:hover {
   color: #b2b2b2;
 }
 
@@ -175,6 +177,23 @@ a:hover, .btn-link:hover, .btn-link:focus {
 .input-group-addon .customInput {
   position: relative;
   bottom: -5px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.fileUpload {
+  margin-top: 7px;
+}
+
+.fileUpload.glyphicon {
+  float: left;
+}
+
+.fileUpload .input-group .input-group-addon {
+  background-color: transparent;
+  border: none;
 }
 
 /** Show List **/

@@ -13,8 +13,8 @@ var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
 var InputEditableTextField = require('./components/InputEditableTextField.jsx');
 var InputEditableDateTimeField = require('./components/InputEditableDateTimeField.jsx');
 var InputCheckbox = require('./components/InputCheckbox.jsx');
+var InputFileUpload = require('./components/InputFileUpload.jsx');
 var ConfirmationButton = require('./components/ConfirmationButton.jsx');
-var FileInput = require('./components/FileInput.jsx');
 
 // Bootstrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -46,7 +46,7 @@ var ShowPage = React.createClass({
 var Show = React.createClass({
   getInitialState: function() {
     return {show: {}, titleVerified: false, dateVerified: false,
-      genreVerified: false, blurbVerified: false, publicVerified: false};
+      genreVerified: false, blurbVerified: false, publicVerified: false, artVerified: false};
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -66,7 +66,7 @@ var Show = React.createClass({
     // Optimistically update local data, will be refreshed or reset after response from server
     this.setState({show: updatedShow});
     // Stringify arrays so they reach the server
-    updatedShow.djs = JSON.stringify(updatedShow.djs);
+    var safeShow = JSON.stringify(updatedShow);
     // don't mark as verified yet
     var unverifiedState = {};
     unverifiedState[successVar] = false;
@@ -75,7 +75,7 @@ var Show = React.createClass({
       url: this.props.urls.showUpdateURL,
       dataType: 'json',
       type: 'POST',
-      data: updatedShow,
+      data: {show: safeShow},
       success: function(show) {
         var successState = {show: show};
         successState[successVar] = true;
@@ -86,6 +86,35 @@ var Show = React.createClass({
         console.error(this.props.urls.showUpdateURL, status, err.toString());
       }.bind(this)
     });
+  },
+  verifyShowArt: function() {
+    this.setState({artVerified: true});
+  },
+  unverifyShowArt: function() {
+    this.setState({artVerified: false});
+  },
+  handleShowArtSubmit: function(data) {
+    if (!data) { return; }
+
+    var formData = new FormData();
+    formData.append("img", data);
+    formData.append("id", this.state.show.id);
+    var request = new XMLHttpRequest();
+    request.open("POST", this.props.urls.showPicURL);
+    var loadData = this.loadDataFromServer;
+    var verify = this.verifyShowArt;
+    var unverify = this.unverifyShowArt;
+    unverify();
+    request.onload = function(e) {
+      if (request.status == 200) {
+        loadData();
+        verify();
+      }
+      else {
+        unverify();
+      }
+    };
+    request.send(formData);
   },
   handleTitleSubmit: function(title) {
     var show = $.extend(true, {}, this.state.show);
@@ -113,10 +142,6 @@ var Show = React.createClass({
     show.public = checked;
     this.handleShowDataSubmit(show, 'publicVerified');
   },
-  handlePictureSubmit: function(img) {
-    // this.props.onUpdateShowPicture(this.state.show.id, img);
-    console.log("handlePictureSubmit not defined");
-  },
   handleDeleteShow: function() {
     // this.props.onDeleteShow(this.state.show);
     console.log("handeDeleteShow not defined");
@@ -136,7 +161,7 @@ var Show = React.createClass({
               </Col>
               <Col xs={12} md={8}>
                 <h3>{this.state.show.title}</h3>
-                <FileInput accept=".png,.gif,.jpg,.jpeg" onChange={this.handlePictureSubmit} submitText="Submit Picture" />
+                <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Art" onSubmit={this.handleShowArtSubmit} verified={this.state.artVerified} />
                 <InputEditableTextField title="Title" currentValue={this.state.show.title}
                   onSubmit={this.handleTitleSubmit} placeholder="Enter Show Title" verified={this.state.titleVerified} />
                 <InputEditableDateTimeField title="Time" day={this.state.show.day} time={this.state.show.time}

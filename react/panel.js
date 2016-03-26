@@ -105,12 +105,12 @@ var User = React.createClass({
                 <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
                   placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 
                   verified={this.state.djNameVerified} />
-                <InputEditableTextField title="Full Name" currentValue={this.state.user.fullName}
-                  placeholder="Enter Full Name" onSubmit={this.handleFullNameSubmit}
-                  verified={this.state.fullNameVerified} />
                 <InputEditableTextField title="Email" currentValue={this.state.user.email}
                   placeholder="Enter Email" onSubmit={this.handleEmailSubmit}
                   verified={this.state.emailVerified} />
+                <InputEditableTextField title="Full Name" currentValue={this.state.user.fullName}
+                  placeholder="Enter Full Name" onSubmit={this.handleFullNameSubmit}
+                  verified={this.state.fullNameVerified} />
                 <InputEditableTextField title="Phone" currentValue={this.state.user.phone}
                   placeholder="Enter Phone Number" onSubmit={this.handlePhoneSubmit}
                   verified={this.state.phoneVerified} />
