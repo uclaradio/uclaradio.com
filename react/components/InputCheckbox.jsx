@@ -24,7 +24,7 @@ var InputCheckbox = React.createClass({
       <form className="inputCheckbox form-horizontal">
         <Input label={this.props.title} labelClassName="col-xs-3" wrapperClassName="col-xs-9 inputCheckbox">
           <Input type="checkbox" checked={this.props.checked} onChange={this.handleChange}
-            label={<span className={this.props.checked ? '' : 'placeholder'}>{this.props.details}{this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>} />
+            label={<span className={this.props.checked ? 'checkboxInner' : 'placeholder checkboxInner'}>{this.props.details}{this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>} />
         </Input>
       </form>
     );

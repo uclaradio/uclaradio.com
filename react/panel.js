@@ -26,6 +26,12 @@ var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
+var ButtonGroup = require('react-bootstrap').ButtonGroup;
+var DropdownButton = require('react-bootstrap').DropdownButton;
+var MenuItem = require('react-bootstrap').MenuItem;
+
+// Helper files
+var Dates = require('./components/misc/Dates.js');
 
 var User = React.createClass({
   getInitialState: function() {
@@ -234,18 +240,33 @@ var NewShowForm = React.createClass({
     this.setState(this.getInitialState());
   },
   render: function() {
+    var days = Dates.availableDays.map(function(day) {
+      return <MenuItem key={day} eventKey={day}>{Dates.dayFromVar(day)}</MenuItem>;
+    });
+
+    var times = Dates.availableTimes.map(function(time) {
+      return <MenuItem key={time} eventKey={time}>{time}</MenuItem>;
+    });
     return (
       <div className="newShowForm">
         { this.state.editable ?
           <form onSubmit={this.handleSubmit}>
             <input
               type="text"
-              id="no_bottom_margins"
               placeholder= "Show Title"
               value={this.state.title}
               onChange={this.handleTitleChange}
             />
-            &ensp;<DateTimeField day={this.state.day} time={this.state.time} onDayChange={this.handleDayChange} onTimeChange={this.handleTimeChange} />
+            &ensp;<ButtonGroup>
+                  <DropdownButton id="day" title={Dates.dayFromVar(this.state.day) || <span className="placeholder">Day</span>}
+                  onSelect={this.handleDayChange} key={this.state.day}>
+                    {days}
+                  </DropdownButton>
+                  <DropdownButton id="time" title={this.state.time || <span className="placeholder">Time</span>}
+                  onSelect={this.handleTimeChange} key={this.state.time}>
+                    {times}
+                  </DropdownButton>
+                </ButtonGroup>
             &ensp;<input type="submit" id="no_bottom_margins" value="Submit" />
             &ensp;<a onClick={this.toggleEditableField}>Cancel</a>
           </form>

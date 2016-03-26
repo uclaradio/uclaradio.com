@@ -3,10 +3,9 @@
 var React = require('react');
 
 // Helper files
-var Dates = require('./misc/Dates.js')
+var Dates = require('./misc/Dates.js');
 
 // Bootstrap elements
-var Button = require('react-bootstrap').Button;
 var ButtonGroup = require('react-bootstrap').ButtonGroup;
 var DropdownButton = require('react-bootstrap').DropdownButton;
 var MenuItem = require('react-bootstrap').MenuItem;
