@@ -49,7 +49,7 @@ var ActionButtons = React.createClass({
           :
           <div />
           }
-
+          {this.props.children}
           <OverlayTrigger placement="top" overlay={tooltip2} delayShow={500}>
             <Button className="table-action2" bsStyle="link" onClick={this.handleReject} disabled={this.props.actionsDisabled}>
               <Glyphicon glyph="remove" />{this.props.rejectTitle}
@@ -66,6 +66,7 @@ var ActionButtons = React.createClass({
 *  Table with two string columns and one or two action buttons (accept/reject, reject)
 * 
 *  @prop string1: string title of the first column
+*  @prop placeholders1: string placeholder of the first column
 *  @prop string2: string title of the second column
 *  @prop acceptTitle: string title of the accept action if it exists
 *  @prop rejectTitle: string title of the reject action
@@ -84,11 +85,12 @@ var ActionTable = React.createClass({
     var rejectTitle = this.props.rejectTitle;
     var acceptTooltip = this.props.acceptTooltip;
     var rejectTooltip = this.props.rejectTooltip;
+    var placeholders1 = this.props.placeholders1;
     var tableBody = this.props.rows.map(function(row) {
       return (
         <tr key={row.value}>
           <td>
-          {row.string1}
+          {row.string1 || <span className="placeholder">{placeholders1[Math.floor(Math.random()*placeholders1.length)]}</span>}
           { row.actionsDisabled
             ?
             <span className="actionGlyph">&ensp;<Glyphicon glyph={glyph} /></span>

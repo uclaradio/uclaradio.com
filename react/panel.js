@@ -241,21 +241,23 @@ var NewShowForm = React.createClass({
               type="text"
               placeholder= "Show Title"
               value={this.state.title}
+              className="noBottom"
               onChange={this.handleTitleChange}
             />
-            &ensp;
-            <ButtonGroup>
-              <DropdownButton id="day" title={Dates.dayFromVar(this.state.day) || <span className="placeholder">Day</span>}
-              onSelect={this.handleDayChange} key={this.state.day}>
-                {days}
-              </DropdownButton>
-              <DropdownButton id="time" title={this.state.time || <span className="placeholder">Time</span>}
-              onSelect={this.handleTimeChange} key={this.state.time}>
-                {times}
-              </DropdownButton>
-            </ButtonGroup>
-            &ensp;<Button onClick={this.handleSubmit}>Submit</Button>
-            &ensp;<Button className="cancelLink" onClick={this.toggleEditableField}>Cancel</Button>
+            <div className="centered">
+              <ButtonGroup className="lightPadding">
+                <DropdownButton id="day" title={Dates.dayFromVar(this.state.day) || <span className="placeholder">Day</span>}
+                onSelect={this.handleDayChange} key={this.state.day}>
+                  {days}
+                </DropdownButton>
+                <DropdownButton id="time" title={this.state.time || <span className="placeholder">Time</span>}
+                onSelect={this.handleTimeChange} key={this.state.time}>
+                  {times}
+                </DropdownButton>
+              </ButtonGroup>
+              <Button onClick={this.handleSubmit} className="lightPadding">Submit</Button>
+              <Button className="cancelLink lightPadding" onClick={this.toggleEditableField}>Cancel</Button>
+            </div>
           </form>
           :
           // locked to user input

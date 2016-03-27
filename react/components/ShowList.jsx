@@ -25,10 +25,10 @@ var ShowList = React.createClass({
     var url = this.props.url;
     var placeholder = this.props.placeholder;
     var shows = this.props.shows.map(function(show) {
-      return <ListGroupItem href={url+'/'+show.id} key={show.id}>
+      return <ListGroupItem href={url+'/'+show.id} key={show.id} className="listShow">
               <Grid>
                 <Row>
-                  <Col xs={2} className="noPads">
+                  <Col xs={2} className="noPads centered">
                     <Image src={show.picture || placeholder} className="showListImg" thumbnail />
                   </Col>
                   <Col xs={10}>

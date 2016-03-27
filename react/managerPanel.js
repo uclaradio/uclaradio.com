@@ -264,6 +264,7 @@ var AccountsList = React.createClass({
           ?
           <Panel header="DJs" bsStyle="info">
             <ActionTable rows={this.state.verifiedRows} string1={"DJ Name"} string2={"Full Name"}
+            placeholders1={['DJ Hagfish', 'DJ Bed Bugs', 'DJ Nickelback']}
               rejectTitle={''} rejectTooltip={atRejectTooltipVerified}
               onReject={this.handleDeleteUser} glyph={atManagerGlyph}
             />

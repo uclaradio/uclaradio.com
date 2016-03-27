@@ -6,7 +6,8 @@
 /** Body **/
 
 body {
-	background-color: #e9eaed;
+  /*background-color: #e9eaed;*/
+  background-color: #f1efef;
   font-family: 'Lato', sans-serif;
 }
 
@@ -195,12 +196,30 @@ a:hover, .btn-link:hover, .btn-link:focus {
   border: none;
 }
 
+input[type="file"] {
+  width: 100%;
+}
+
+.confirmationButton {
+  margin-top: 25px;
+}
+
+.lightPadding {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 /** Show List **/
 
 .showListImg {
   width: 100%;
   max-width: 80px;
-  margin: 10px auto;
+  margin: 0 auto;
+}
+
+.listShow {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .showListTitle {
@@ -222,6 +241,10 @@ a:hover, .btn-link:hover, .btn-link:focus {
 
 .centered {
   text-align: center;
+}
+
+.noBottom {
+  margin-bottom: 0;
 }
 
 /**** !! Panel Page Specific !! ****/

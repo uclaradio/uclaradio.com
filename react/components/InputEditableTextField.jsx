@@ -39,11 +39,11 @@ var InputEditableTextField = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
     var value = this.state.value.trim();
-    this.props.onSubmit(value)
+    this.props.onSubmit(value);
     this.setState({value: '', editable: false});
   },
   componentDidUpdate: function(e) {
-    if (this.state.editable && this.state.currentlyEditing) {
+    if (this.state.editable && this.state.currentlyEditing && !this.props.multiline) {
       ReactDOM.findDOMNode(this.refs.input.getInputDOMNode()).select();
     }
   },
