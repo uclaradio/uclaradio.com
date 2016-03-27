@@ -12,6 +12,7 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 *  Input file upload element
 *
 *  @prop title: title of the input
+*  @prop accept: file types that should be accepted
 *  @prop onSubmit -> function(img): function to call on file submit
 *  @prop details: help details
 *  @prop verified: should indicate input data was... whatever
@@ -40,7 +41,9 @@ var InputFileUpload = React.createClass({
     return (
       <form className="inputFileUpload form-horizontal">
         <Input label={this.props.title} labelClassName="col-xs-3" wrapperClassName="col-xs-9">
-          <span>{this.props.verified ? <Glyphicon className="verifiedGlyph fileUpload" glyph="ok" /> : ''}<Input type="file" ref="input" onChange={this.handleChange} addonAfter={submitButton} wrapperClassName="fileUpload" /></span>
+          <span>{this.props.verified ? <Glyphicon className="verifiedGlyph fileUpload" glyph="ok" /> : ''}
+            <Input type="file" ref="input" accept={this.props.accept} onChange={this.handleChange} addonAfter={submitButton} wrapperClassName="fileUpload" />
+          </span>
         </Input>
       </form>
     );

@@ -2,6 +2,10 @@
 
 var React = require('react');
 
+// Bootstrap elements
+var Button = require('react-bootstrap').Button;
+var ButtonGroup = require('react-bootstrap').ButtonGroup;
+
 /**
 *  Allows user to confirm a button submission
 *
@@ -18,12 +22,14 @@ var ConfirmationButton = React.createClass({
   },
   render: function() {
     return (
-      <div className="confirmationButton">
+      <div className="confirmationButton centered">
       { this.state.unlock ? 
-        <div><button className="confirm-btn2" onClick={this.props.onSubmit}>{this.props.submit}</button>
-        <button className="confirm-cancel" onClick={this.toggleUnlock}>Cancel</button></div>
+        <ButtonGroup>
+          <Button className="delete" onClick={this.props.onSubmit}>{this.props.submit}</Button>
+          <Button onClick={this.toggleUnlock}>Cancel</Button>
+        </ButtonGroup>
         :
-        <button className="confirm-btn1" onClick={this.toggleUnlock}>{this.props.confirm}</button>
+        <Button className="delete" onClick={this.toggleUnlock}>{this.props.confirm}</Button>
       }
       </div>
     );

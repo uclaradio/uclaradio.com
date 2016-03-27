@@ -4,8 +4,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 // Bootstrap elements
-var Button = require('react-bootstrap').Button;
-var ButtonGroup = require('react-bootstrap').ButtonGroup;
 var Input = require('react-bootstrap').Input;
 var FormControls = require('react-bootstrap').FormControls;
 var Glyphicon = require('react-bootstrap').Glyphicon;

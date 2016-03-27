@@ -331,15 +331,6 @@ router.post('/api/updateShow', function(req, res) {
 				return;
 			}
 
-			// delete show
-			// if (req.body.delete) {
-			// 	accounts.removeShow(req.body.id, function (e) {
-			// 		if (e) { console.log("error removing show: ", e); res.status(400).send(e); }
-			// 		else { res.json("success"); }
-			// 	});
-			// 	return;
-			// }
-
 			// return show with id belonging to logged in user
 			var callback = function(err, show) {
 				if (err) { console.log("error updating show: ", err); }
@@ -347,6 +338,29 @@ router.post('/api/updateShow', function(req, res) {
 				else { res.status(400).send(); }
 			}
 			accounts.updateShow(showData.id, showData, callback);
+		});
+	}
+});
+
+// delete show 
+router.post('/api/deleteShow', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		accounts.userHasAccessToShow(req.session.user.username, req.body.id, function(hasAccess) {
+			// user doesn't have access to this show
+			if (!hasAccess) {
+				console.log("user requested invalid show");
+				res.status(400).send();
+				return;
+			}
+
+			accounts.removeShow(req.body.id, function (e) {
+				if (e) { console.log("error removing show: ", e); res.status(400).send(e); }
+				else { res.json("success"); }
+			});
 		});
 	}
 });

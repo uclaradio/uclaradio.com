@@ -27,11 +27,35 @@ var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
 var ButtonGroup = require('react-bootstrap').ButtonGroup;
+var Button = require('react-bootstrap').Button;
+var Input = require('react-bootstrap').Input;
 var DropdownButton = require('react-bootstrap').DropdownButton;
 var MenuItem = require('react-bootstrap').MenuItem;
 
 // Helper files
 var Dates = require('./components/misc/Dates.js');
+
+var PanelPage = React.createClass({
+  render: function() {
+    return (
+      <div className="panelPage">
+        <Grid>
+          <PanelLinksNavbar />
+          <Row>
+            <Col xs={12} md={6}>
+              <Well>
+                <User urls={this.props.urls} />
+              </Well>
+            </Col>
+            <Col xs={12} md={6}>
+                <UserShowsList urls={this.props.urls} />
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    );
+  }
+});
 
 var User = React.createClass({
   getInitialState: function() {
@@ -102,37 +126,30 @@ var User = React.createClass({
   render: function() {
     return (
       <div className="user">
-        <Grid>
-          <PanelLinksNavbar />
-          <Row>
-            <Col xs={12} md={6}>
-              <Well>
-                <h2>DJ Info</h2>
-                <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
-                  placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 
-                  verified={this.state.djNameVerified} />
-                <InputEditableTextField title="Email" currentValue={this.state.user.email}
-                  placeholder="Enter Email" onSubmit={this.handleEmailSubmit}
-                  verified={this.state.emailVerified} />
-                <InputEditableTextField title="Full Name" currentValue={this.state.user.fullName}
-                  placeholder="Enter Full Name" onSubmit={this.handleFullNameSubmit}
-                  verified={this.state.fullNameVerified} />
-                <InputEditableTextField title="Phone" currentValue={this.state.user.phone}
-                  placeholder="Enter Phone Number" onSubmit={this.handlePhoneSubmit}
-                  verified={this.state.phoneVerified} />
-              </Well>
-            </Col>
-            <Col xs={12} md={6}>
-                <UserShowsList urls={this.props.urls} />
-            </Col>
-          </Row>
-        </Grid>
+        <h2>DJ Info</h2>
+        <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
+          placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 
+          verified={this.state.djNameVerified} />
+        <InputEditableTextField title="Email" currentValue={this.state.user.email}
+          placeholder="Enter Email" onSubmit={this.handleEmailSubmit}
+          verified={this.state.emailVerified} />
+        <InputEditableTextField title="Full Name" currentValue={this.state.user.fullName}
+          placeholder="Enter Full Name" onSubmit={this.handleFullNameSubmit}
+          verified={this.state.fullNameVerified} />
+        <InputEditableTextField title="Phone" currentValue={this.state.user.phone}
+          placeholder="Enter Phone Number" onSubmit={this.handlePhoneSubmit}
+          verified={this.state.phoneVerified} />
       </div>
     );
   }
 });
 
+
 var UserShowsList = React.createClass({
+  getInitialState: function() {
+    // shows: {title, day, time}
+    return {shows: []};
+  },
   loadDataFromServer: function() {
     $.ajax({
       url: this.props.urls.showsURL,
@@ -166,37 +183,6 @@ var UserShowsList = React.createClass({
       }.bind(this)
     });
   },
-  // handleUpdatePicture: function(id, img) {
-  //   var formData = new FormData();
-  //   formData.append("img", img);
-  //   formData.append("id", id);
-  //   var request = new XMLHttpRequest();
-  //   request.open("POST", this.props.showPicURL);
-  //   var loadData = this.loadDataFromServer;
-  //   request.onload = function(e) {
-  //     if (request.status == 200) { loadData(); }
-  //   };
-  //   request.send(formData);
-  // },
-  // handleDeleteShow: function(show) {
-  //   show.delete = true;
-  //   $.ajax({
-  //     url: this.props.showURL,
-  //     dataType: 'json',
-  //     type: 'POST',
-  //     data: show,
-  //     success: function() {
-  //       this.loadDataFromServer();
-  //     }.bind(this),
-  //     error: function(xhr, status, err) {
-  //       console.error(this.props.showURL, status, err.toString());
-  //     }.bind(this)
-  //   });
-  // },
-  getInitialState: function() {
-    // shows: {title, day, time}
-    return {shows: []};
-  },
   componentDidMount: function() {
     this.loadDataFromServer();
   },
@@ -204,7 +190,6 @@ var UserShowsList = React.createClass({
     return (
       <div className="userShowsList">
         <ShowList url={this.props.urls.showLink} shows={this.state.shows} placeholder="/img/radio.png" />
-        <br />
         <NewShowForm onNewShowSubmit={this.handleUserSubmitNewShow}/>
       </div>
     );
@@ -218,11 +203,11 @@ var NewShowForm = React.createClass({
   handleTitleChange: function(e) {
     this.setState({title: e.target.value});
   },
-  handleDayChange: function(e) {
-    this.setState({day: e.target.value});
+  handleDayChange: function(e, day) {
+    this.setState({day: day});
   },
-  handleTimeChange: function(e) {
-    this.setState({time: e.target.value});
+  handleTimeChange: function(e, time) {
+    this.setState({time: time});
   },
   toggleEditableField: function(e) {
     this.setState({text: '', editable: !this.state.editable})
@@ -251,28 +236,30 @@ var NewShowForm = React.createClass({
       <div className="newShowForm">
         { this.state.editable ?
           <form onSubmit={this.handleSubmit}>
-            <input
+            <h4>New Show</h4>
+            <Input
               type="text"
               placeholder= "Show Title"
               value={this.state.title}
               onChange={this.handleTitleChange}
             />
-            &ensp;<ButtonGroup>
-                  <DropdownButton id="day" title={Dates.dayFromVar(this.state.day) || <span className="placeholder">Day</span>}
-                  onSelect={this.handleDayChange} key={this.state.day}>
-                    {days}
-                  </DropdownButton>
-                  <DropdownButton id="time" title={this.state.time || <span className="placeholder">Time</span>}
-                  onSelect={this.handleTimeChange} key={this.state.time}>
-                    {times}
-                  </DropdownButton>
-                </ButtonGroup>
-            &ensp;<input type="submit" id="no_bottom_margins" value="Submit" />
-            &ensp;<a onClick={this.toggleEditableField}>Cancel</a>
+            &ensp;
+            <ButtonGroup>
+              <DropdownButton id="day" title={Dates.dayFromVar(this.state.day) || <span className="placeholder">Day</span>}
+              onSelect={this.handleDayChange} key={this.state.day}>
+                {days}
+              </DropdownButton>
+              <DropdownButton id="time" title={this.state.time || <span className="placeholder">Time</span>}
+              onSelect={this.handleTimeChange} key={this.state.time}>
+                {times}
+              </DropdownButton>
+            </ButtonGroup>
+            &ensp;<Button onClick={this.handleSubmit}>Submit</Button>
+            &ensp;<Button className="cancelLink" onClick={this.toggleEditableField}>Cancel</Button>
           </form>
           :
           // locked to user input
-          <p><a onClick={this.toggleEditableField}>+ Add New Show</a></p>
+          <p className="centered"><a onClick={this.toggleEditableField}>+ Add New Show</a></p>
         }
       </div>
     );
@@ -280,6 +267,6 @@ var NewShowForm = React.createClass({
 });
 
 ReactDOM.render(
-  <User urls={urls} />,
+  <PanelPage urls={urls} />,
   document.getElementById('content')
 );

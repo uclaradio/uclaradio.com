@@ -6,7 +6,9 @@ var ReactDOM = require('react-dom');
 
 var urls = {showURL: "/panel/api/showData/",
             showUpdateURL: "/panel/api/updateShow",
-            showPicURL: "/panel/api/showPic"};
+            showPicURL: "/panel/api/showPic",
+            deleteShowURL: "/panel/api/deleteShow",
+            deleteRedirectURL: "/panel"};
 
 // Custom elements
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
@@ -143,8 +145,18 @@ var Show = React.createClass({
     this.handleShowDataSubmit(show, 'publicVerified');
   },
   handleDeleteShow: function() {
-    // this.props.onDeleteShow(this.state.show);
-    console.log("handeDeleteShow not defined");
+    $.ajax({
+      url: this.props.urls.deleteShowURL,
+      dataType: 'json',
+      type: 'POST',
+      data: {"id": this.state.show.id},
+      success: function() {
+        location.href = this.props.urls.deleteRedirectURL;
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.urls.deleteShowURL, status, err.toString());
+      }.bind(this)
+    });
   },
 
   componentDidMount: function() {

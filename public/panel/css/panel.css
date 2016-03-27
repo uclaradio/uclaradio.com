@@ -23,7 +23,7 @@ body {
 	background-color: white;
 }
 
-.container h2, .container h3 {
+.container h2, .container h3, .container h4 {
   text-align: center;
 	margin-top: 0px;
 }
@@ -110,11 +110,11 @@ a:hover, .btn-link:hover, .btn-link:focus {
 
 /** InputEditableTextField **/
 
-.cancelLink {
+.cancelLink, .delete {
   color: #f0657f;
 }
 
-.cancelLink:hover {
+.cancelLink:hover, .delete:hover {
   color: #db405d;
 }
 
@@ -218,6 +218,10 @@ a:hover, .btn-link:hover, .btn-link:focus {
 
 .noPads {
   padding: 0;
+}
+
+.centered {
+  text-align: center;
 }
 
 /**** !! Panel Page Specific !! ****/
