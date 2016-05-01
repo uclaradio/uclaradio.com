@@ -31,7 +31,7 @@ var Schedule = React.createClass({
 		var currentDay = this.state.day;
 		var handleClick = this.handleButtonClick;
 		return ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"].map(function(day, i) {
-			var className = (i == currentDay) ? "pop-button schedule-button selected" : "pop-button schedule-button";
+			var className = (i == currentDay) ? "schedule-button selected pop-button" : "schedule-button pop-button";
 			return <a key={i} className={className} role="button" onClick={()=>handleClick(i)}>{day}</a>;
 		});
 	},

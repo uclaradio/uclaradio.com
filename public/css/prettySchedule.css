@@ -1,5 +1,9 @@
 
 
+.container {
+	padding: 15px;
+}
+
 .schedule {
 	width: 100%;
 	max-width: 800px;
@@ -16,13 +20,7 @@ h1 {
 }
 
 .schedule-button {
-	background-color: rgb(203, 24, 29);
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.schedule-button.selected {
-	background-color: #00aeef;
+	margin: 10px;
 }
 
 #scheduleButtons {
