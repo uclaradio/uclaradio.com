@@ -74,7 +74,6 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
     $(this).css("background-color", "");
     $(this).css("color", "black")
   });
-  $(".pop-button").css('background-color', lightColor);
   $(".cbp-contentslider").css("border", "4px solid" + lightColor);
   $(".cbp-contentslider nav a").css("border-right", "4px solid" + lightColor);
   $(".cbp-contentslider h3").css("border-bottom", "4px solid" + lightColor);
@@ -101,23 +100,14 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
     ", 1px 2px " + darkColor;
   //console.log(boxShadowActiveCss);
 
+  injectStyles('.pop-button { background-color: ' + lightColor + '}');
+  injectStyles('.pop-button.selected { background-color: ' + darkColor + '}');
+  injectStyles('.pop-button:hover { box-shadow: ' + boxShadowHoverCss + '}');
+  injectStyles('.pop-button:hover.selected { box-shadow: none}');
+  injectStyles('.pop-button:focus { box-shadow: ' + boxShadowActiveCss + '}');
 
-  $(".pop-button").hover(
-      function() {
-        $(this).css('box-shadow', boxShadowHoverCss);
-      },
-      function() {
-        $(this).css('box-shadow', '');
-      }
-      );
-  $(".pop-button").focus(
-      function() {
-        $(this).css('box-shadow', boxShadowHoverCss);
-      },
-      function() {
-        $(this).css('box-shadow', '');
-      }
-      );
+  // injectStyles('.pop-button:hover.selected { box-shadow: ' + boxShadowHoverCss + '}');
+  // injectStyles('.pop-button:focus.selected { box-shadow: ' + boxShadowActiveCss + '}');
 
   // activated by mousedown
   $(".pop-button").mousedown(

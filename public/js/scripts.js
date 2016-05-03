@@ -1,3 +1,6 @@
+
+
+
 //to inline style rules to the html document on load
 //purpose: to change the color of the left and right buttons
 function injectStyles(rule) {
@@ -95,6 +98,7 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
 
   $(document).mouseup(
     function() {
+      console.log("ran it")
       $(".pop-button").css('box-shadow', boxShadowCss);
     }
   );
@@ -137,11 +141,32 @@ function setPageTheme(colorScheme) {
 
 $(document).ready(function() {
 
+  /////////////////////
+  //detect browsers
+  /////////////////////
+  var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+  var is_explorer = navigator.userAgent.indexOf('MSIE') > -1;
+  var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
+  var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+  var is_opera = navigator.userAgent.toLowerCase().indexOf("op") > -1;
+  if ((is_chrome)&&(is_safari)) {is_safari=false;}
+  if ((is_chrome)&&(is_opera)) {is_chrome=false;}
+
+
+
+
   var stream = document.getElementById('stream');
   var playing = false;
 
   window.onbeforeunload = function(){
-    if(playing) {
+    if(playing && !is_safari) {
+      $.get('http://localhost:3000/analytics/decrement')
+     // Do something
+    }
+  }
+
+  window.unload = function () { //logic goes here 
+    if(playing && !is_safari) {
       $.get('http://uclaradio.com/analytics/decrement')
      // Do something
     }
@@ -149,13 +174,24 @@ $(document).ready(function() {
   // OR
   window.addEventListener("beforeunload", function(e){
      // Do something
-    if(playing) {
+    if(playing && !is_safari) {
       $.get('http://uclaradio.com/analytics/decrement')
      // Do something
     }
 
 
   }, false);
+
+
+  window.addEventListener("pagehide", function(ev){if(!ev.persisted){
+
+    if(playing && !is_safari) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+
+    
+  } }, false)
 
   //Calls mobileBrowserCheck function from mobileBrowserCheck.js.
   //function in that file is taken from detectmobilebrowsers.com
@@ -177,12 +213,18 @@ $(document).ready(function() {
 
       stream.play();
       playing = true;
-      $.get('http://uclaradio.com/analytics/increment')
+      if(!is_safari) {
+        $.get('http://uclaradio.com/analytics/increment')
+        console.log('play')
+      }
 
     } else {
       stream.pause();
       playing = false;
-      $.get('http://uclaradio.com/analytics/decrement')
+      if(!is_safari) {
+          $.get('http://uclaradio.com/analytics/decrement')
+          console.log('pause')
+      }
 
 
 	  //remove the source if the user is on a mobile device to stop data transfer. If we don't do this on mobile,
