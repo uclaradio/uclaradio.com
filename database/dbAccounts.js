@@ -48,6 +48,13 @@ var ShowSchema = new Schema({
 ShowSchema.index({ id: 1});
 var ShowModel = mongoose.model('shows', ShowSchema);
 
+// Frequently Asked Questions
+var FAQSchema = new Schema({
+	question: String,
+	answer: String
+});
+var FAQModel = mongoose.model('faqs', FAQSchema);
+
 var ManagerSchema = new Schema({
 	username: String,
 	position: String,
@@ -73,10 +80,12 @@ var PrivilegeModel = mongoose.model('privileges', PrivilegeSchema);
 
 // Contains last distributed id for a table, in order to provide a unique id for each show, etc.
 var LastIdSchema = new Schema({
+	id: Number,
 	key: String, // name of table
 	lastId: Number // greatest id of objects created (should increment when creating new ones)
 });
 var showIdKey = "show"; // ids for Show table
+var faqIdKey = "faq"; // ids for FAQ table
 var LastIdModel = mongoose.model('lastIds', LastIdSchema);
 
 
@@ -287,6 +296,60 @@ db.removeAllUsers = function(callback) {
 };
 
 
+// create a new faq question with the given data
+db.addNewFAQ = function(question, answer, callback) {
+	db.getNextAvailableId(faqIdKey, function(nextId) {
+		// console.log("nextId: ", nextId);
+		newData = {
+			"id": nextId,
+			"question": question,
+			"answer": answer
+		};
+
+		FAQModel.findOne({id: newData.id}, function(err, o) {
+			if (o) {
+				callback('id-taken');
+			}
+			else {
+				var newQuestion = new FAQModel(newData);
+				newQuestion.save(function(err, saved) {
+					callback(err, saved);
+					if (saved) {
+						db.setLastTakenId(faqIdKey, nextId, function(err) {
+							if (err) { console.log("error setting next id for faqs: ", err); }
+						});
+					}
+				});
+			}
+		});
+	});
+};
+
+db.updateFAQs = function(id, newData, callback) {
+	FAQModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
+    	if (err) { callback(err); }
+    	else { callback(null, o); }
+	});
+};
+
+// return array of all faq questions
+db.getAllFAQs = function(callback) {
+	FAQModel.find(function(err, res) {
+		if (err) {
+			callback(err);
+		}
+		else {
+			callback(null, res);
+		}
+	});
+};
+
+// delete a faq question with the given id
+db.deleteFAQ = function(id, callback) {
+	FAQModel.remove({id: id}, function (e) {
+		callback(e);
+	});
+};
 
 /***** Shows *****/
 

@@ -64,6 +64,7 @@ router.get('/logout', function(req, res) {
 	res.redirect('/panel');
 });
 
+
 /***** New Accounts *****/
 
 router.get('/signup', function(req, res) {
@@ -79,6 +80,66 @@ router.post('/signup', function(req, res) {
 			res.redirect('/panel');
 		}
 	});
+});
+
+
+/***** FAQ *****/
+
+router.get('/faq', function(req, res) {
+	var path = require('path');
+	res.sendFile(path.resolve('public/panel/faq.html'));
+});
+
+router.get('/api/faq', function(req, res) {
+	// accounts.getAllFAQs(function(err, o) {
+	// 	if (o) {
+	// 		res.json(o);
+	// 	}
+	// 	else {
+	// 		res.status(400).send(err);
+	// 	}
+	res.json([{"id": 1, "question": "How do I get staff points?", "answer": "[staffing points information]"}]);
+});
+
+router.post('/api/faq', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
+			if (hasAccess) {
+				var path = require('path');
+				// perform action
+				switch (req.params.link) {
+					case 'info':
+						managerInfo(req, res);
+						break;
+					case 'update':
+						updateManager(req, res);
+						break;
+					case 'listAccounts':
+						listAccounts(req, res);
+						break;
+					case 'verify': 
+						verifyAccount(req, res);
+						break;
+					case 'delete':
+						deleteAccount(req, res);
+						break;
+					case 'deleteUnverified':
+						deleteUnverifiedAccount(req, res);
+						break;
+					default:
+						res.status(404).send();
+						break;
+				}
+			}
+			else {
+				res.status(400).send(err);
+			}
+		});
+	}
 });
 
 /***** Managers *****/
@@ -255,17 +316,18 @@ router.get('/api/user', function(req, res) {
 	}
 });
 
+var defaultLinks = [{"title": "FAQ", "link": "/panel/faq"}];
 router.get('/api/userlinks', function(req, res) {
 	if (req.session.user == null) {
-		// not logged in, redirect to log in page
-		res.status(400).send();
+		res.json({"loggedin": false, "links":defaultLinks});
 	}
 	else {
 		var user = req.session.user;
 		// retrieve links relevent to user's privileges (like Manager pages)
 		accounts.getPrivilegeLinksForUser(user.username, function(err, links) {
+			links = links.concat(defaultLinks);
 			if (links) {
-				res.json(links);
+				res.json({"loggedin": true, "links":links});
 			}
 			else { res.status(400).send(err); }
 		});

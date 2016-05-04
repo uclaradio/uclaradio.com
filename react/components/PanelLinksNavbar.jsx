@@ -22,8 +22,8 @@ var PanelLinksNavbar = React.createClass({
       url: linksURL,
       dataType: 'json',
       cache: false,
-      success: function(links) {
-        this.setState({links: links});
+      success: function(o) {
+        this.setState({links: o.links, loggedin: o.loggedin});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(linksURL, status, err.toString());
@@ -46,7 +46,7 @@ var PanelLinksNavbar = React.createClass({
     var styleLink = this.styleLink;
     var links = this.state.links.map(function(link, i) {
       return (
-        <NavItem eventKey={i} key={link.link} href={link.link}>{styleLink(link.title, link.link)}</NavItem>
+        <NavItem eventKey={i} key={i} href={link.link}>{styleLink(link.title, link.link)}</NavItem>
       );
     });
     return (
@@ -62,9 +62,14 @@ var PanelLinksNavbar = React.createClass({
             <Nav>
               {links}
             </Nav>
+            {this.state.loggedin
+              ?
             <Nav pullRight>
               <NavItem id="navbarLogout" eventKey={1} href="/panel/logout">Log Out</NavItem>
             </Nav>
+            :
+            ''
+            }
           </Navbar.Collapse>
         </Navbar>
       </div>
