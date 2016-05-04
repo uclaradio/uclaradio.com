@@ -1,11 +1,8 @@
 
 /** FAQ **/
 
-.questionEdit .input {
-  margin: 10px;
-  clear: both;
+.floatingSelect {
+  margin: 20px;
 }
 
-.questionEdit {
-  margin: 15px;
-}
+

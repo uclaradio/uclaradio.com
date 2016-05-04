@@ -13,6 +13,7 @@ var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
 var Accordion = require('react-bootstrap').Accordion;
 var Panel = require('react-bootstrap').Panel;
 var Input = require('react-bootstrap').Input;
+var Button = require('react-bootstrap').Button;
 
 var FAQPage = React.createClass({
   getInitialState: function() {
@@ -110,11 +111,11 @@ var FAQPage = React.createClass({
           <PanelLinksNavbar />
           {this.state.editing
           ?
-          <div className="editQuestions">
+          <div className="editQuestions centered">
             {faqs}
             <FloatingSelect submit="+ Add New Question" handleSubmit={this.addQuestion} />
-            <FloatingSelect submit="Submit" handleSubmit={this.submitData}
-              cancel="Cancel" handleCancel={this.toggleEditing} />
+            <Button onClick={this.submitData} className="lightPadding">Submit</Button>
+            <Button className="cancelLink lightPadding" onClick={this.toggleEditing}>Cancel</Button>
           </div>
           :
           <div className="questions">
