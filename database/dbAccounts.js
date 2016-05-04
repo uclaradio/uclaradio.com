@@ -50,6 +50,7 @@ var ShowModel = mongoose.model('shows', ShowSchema);
 
 // Frequently Asked Questions
 var FAQSchema = new Schema({
+	id: Number,
 	question: String,
 	answer: String
 });
@@ -295,45 +296,39 @@ db.removeAllUsers = function(callback) {
 	UserModel.remove({}, callback);
 };
 
-
-// create a new faq question with the given data
-db.addNewFAQ = function(question, answer, callback) {
-	db.getNextAvailableId(faqIdKey, function(nextId) {
-		// console.log("nextId: ", nextId);
-		newData = {
-			"id": nextId,
-			"question": question,
-			"answer": answer
-		};
-
-		FAQModel.findOne({id: newData.id}, function(err, o) {
-			if (o) {
-				callback('id-taken');
-			}
-			else {
-				var newQuestion = new FAQModel(newData);
-				newQuestion.save(function(err, saved) {
-					callback(err, saved);
-					if (saved) {
-						db.setLastTakenId(faqIdKey, nextId, function(err) {
-							if (err) { console.log("error setting next id for faqs: ", err); }
-						});
-					}
-				});
-			}
-		});
-	});
-};
+/***** FAQ *****/
 
 db.updateFAQs = function(newFAQs, callback) {
-	console.log("updating faqs:", newFAQs);
 	newFAQs.map(function(faq) {
 		FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
 	    	if (err) { console.log("error updating faqs:", err); }
-	    	else { console.log("updated:", o); }
 		});
 	});
-	db.getAllFAQs(callback);
+	db.getAllFAQs(function(err, o) {
+		if (o) {
+			var staleIds = [];
+			for (var i = 0; i < o.length; i++) {
+				var old = o[i];
+				console.log("old:", old);
+				staleIds.push(old.id);
+			}
+			for (var i = 0; i < newFAQs.length; i++) {
+				var faq = newFAQs[i];
+				if (staleIds.indexOf(faq.id) > -1) {
+					staleIds.splice(staleIds.indexOf(faq.id), 1);
+				}
+			}
+			console.log("removing ids:", staleIds);
+			FAQModel.remove({id: {$in: staleIds}}, function(e) {
+				if (e) { console.log("error removing faq:", e); }
+			});
+			callback(null, o);
+		}
+		else {
+			callback(err);
+		}
+
+	});
 };
 
 // return array of all faq questions

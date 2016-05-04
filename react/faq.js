@@ -37,14 +37,32 @@ var FAQPage = React.createClass({
   updateFAQ: function(faqs) {
     this.setState({tempFAQs: faqs});
   },
+  updateQuestion: function(qid, value) {
+    var faqs = this.state.tempFAQs;
+    var faq = faqs[qid];
+    faq.question = value;
+    faqs[qid] = faq;
+    this.setState({tempFAQs: faqs});
+  },
+  updateAnswer: function(qid, value) {
+    var faqs = this.state.tempFAQs;
+    var faq = faqs[qid];
+    faq.answer = value;
+    faqs[qid] = faq;
+    this.setState({tempFAQs: faqs});
+  },
   addQuestion: function() {
     var faqs = this.state.tempFAQs;
     var lastID = (faqs.length > 0) ? faqs[faqs.length-1].id + 1 : 1;
     faqs.push({"id": lastID, "question": "", "answer": ""});
     this.setState({tempFAQs: faqs});
   },
+  deleteQuestion: function(qid) {
+    var faqs = this.state.tempFAQs;
+    faqs.splice(qid, 1);
+    this.setState({tempFAQs: faqs});
+  },
   submitData: function() {
-    console.log("updating data");
     var oldFAQs = this.state.faqs;
     // optimistically update local info
     this.setState({faqs: this.state.tempFAQs});
@@ -54,7 +72,7 @@ var FAQPage = React.createClass({
       type: 'POST',
       data: {faqs: JSON.stringify(this.state.tempFAQs)},
       success: function(faqs) {
-        this.setState({editing: false, faqs: faqs, tempFAQs: []});
+        this.setState({editing: false, tempFAQs: []});
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({faqs: oldFAQs});
@@ -63,28 +81,40 @@ var FAQPage = React.createClass({
     });
   },
   toggleEditing: function() {
-    var faqsCopy = $.extend(true, {}, {faqs: this.state.faqs});
-    this.setState({tempFAQs: faqsCopy.faqs, editing: !this.state.editing});
+    this.setState({tempFAQs: this.state.faqs, editing: !this.state.editing});
   },
   componentDidMount: function() {
     this.loadDataFromServer();
   },
   render: function() {
-    var questions = this.state.faqs.map(function(faq, i) {
-      return (<Panel header={faq.question} eventKey={i} key={i}>
-                {faq.answer}
-              </Panel>
-            );
-    });
+    if (this.state.editing) {
+      var updateQuestion = this.updateQuestion;
+      var updateAnswer = this.updateAnswer;
+      var deleteQuestion = this.deleteQuestion;
+      var faqs = this.state.faqs.map(function(question, i) {
+        return (<QuestionEdit key={i} qid={i} question={question.question} answer={question.answer}
+                  handleUpdateQuestion={updateQuestion} handleUpdateAnswer={updateAnswer} handleDelete={deleteQuestion} />
+              );
+      });
+    }
+    else {
+      var questions = this.state.faqs.map(function(faq, i) {
+        return (<Panel header={faq.question} eventKey={i} key={i}>
+                  {faq.answer}
+                </Panel>
+              );
+      });
+    }
     return (
       <div className="faqPage">
           <PanelLinksNavbar />
           {this.state.editing
           ?
           <div className="editQuestions">
-          <FAQEdit faqs={this.state.tempFAQs} updateFAQ={this.updateFAQ} addQuestion={this.addQuestion} />
-          <FloatingSelect submit="Submit" handleSubmit={this.submitData}
-            cancel="Cancel" handleCancel={this.toggleEditing} />
+            {faqs}
+            <FloatingSelect submit="+ Add New Question" handleSubmit={this.addQuestion} />
+            <FloatingSelect submit="Submit" handleSubmit={this.submitData}
+              cancel="Cancel" handleCancel={this.toggleEditing} />
           </div>
           :
           <div className="questions">
@@ -104,6 +134,43 @@ var FAQPage = React.createClass({
   }
 });
 
+var QuestionEdit = React.createClass({
+  updateQuestion: function(e) {
+    this.props.handleUpdateQuestion(this.props.qid, e.target.value);
+  },
+  updateAnswer: function(e) {
+    this.props.handleUpdateAnswer(this.props.qid, e.target.value);
+  },
+  deleteQuestion: function() {
+    this.props.handleDelete(this.props.qid);
+  },
+  render: function() {
+    return (
+      <div className="questionEdit">
+        <p>Question {this.props.qid + 1} <a className="cancelLink rightFloat" onClick={this.deleteQuestion}>Delete</a></p>
+        <form className="form-horizontal">
+          <Input
+            type="text"
+            value={this.props.question}
+            placeholder="Question"
+            ref="input"
+            groupClassName="input"
+            wrapperClassName="col-xs-12"
+            onChange={this.updateQuestion} />
+          <Input
+            type="textarea"
+            value={this.props.answer}
+            placeholder="Answer"
+            ref="input"
+            groupClassName="input"
+            wrapperClassName="col-xs-12"
+            onChange={this.updateAnswer} />
+          </form>
+      </div>
+    );
+  }
+});
+
 var FloatingSelect = React.createClass({
   render: function() {
     return (
@@ -117,73 +184,6 @@ var FloatingSelect = React.createClass({
           ''
         }
         </p>
-      </div>
-    );
-  }
-});
-
-var FAQEdit = React.createClass({
-  getInitialState: function() {
-    return {faqs: this.props.faqs};
-  },
-  updateQuestion: function(qid, value) {
-    var faqs = this.props.faqs;
-    var faq = faqs[qid];
-    faq.question = value;
-    faqs[qid] = faq;
-    this.props.updateFAQ(faqs);
-  },
-  updateAnswer: function(qid, value) {
-    var faqs = this.props.faqs;
-    var faq = faqs[qid];
-    faq.answer = value;
-    faqs[qid] = faq;
-    this.props.updateFAQ(faqs);
-  },
-  render: function() {
-    var updateQuestion = this.updateQuestion;
-    var updateAnswer = this.updateAnswer;
-    var faqs = this.props.faqs.map(function(question, i) {
-      return (<QuestionEdit key={i} qid={i} question={question.question} answer={question.answer}
-                handleUpdateQuestion={updateQuestion} handleUpdateAnswer={updateAnswer} />
-            );
-    });
-    return (
-      <div className="faqEdit">
-        {faqs}
-        <FloatingSelect submit="+ Add New Question" handleSubmit={this.props.addQuestion} />
-      </div>
-    );
-  }
-});
-
-var QuestionEdit = React.createClass({
-  updateQuestion: function(e) {
-    this.props.handleUpdateQuestion(this.props.qid, e.target.value);
-  },
-  updateAnswer: function(e) {
-    this.props.handleUpdateAnswer(this.props.qid, e.target.value);
-  },
-  render: function() {
-    return (
-      <div className="questionEdit">
-        <p>Question {this.props.qid}</p>
-        <Input
-          type="text"
-          value={this.props.question}
-          placeholder="Question"
-          ref="input"
-          groupClassName="input"
-          wrapperClassName="col-xs-12"
-          onChange={this.updateQuestion} />
-        <Input
-          type="textarea"
-          value={this.props.answer}
-          placeholder="Answer"
-          ref="input"
-          groupClassName="input"
-          wrapperClassName="col-xs-12"
-          onChange={this.updateAnswer} />
       </div>
     );
   }
