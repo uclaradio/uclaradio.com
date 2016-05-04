@@ -63,6 +63,7 @@ var ManagerSchema = new Schema({
   position: String,
   meetingTime: String,
   meetingPlace: String,
+  departmentInfo: String,
   public: Boolean
 });
 ManagerSchema.index({ id: 1});
@@ -304,17 +305,13 @@ db.removeAllUsers = function(callback) {
 /***** FAQ *****/
 
 db.updateFAQs = function(newFAQs, callback) {
-	newFAQs.map(function(faq) {
-		FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
-	    	if (err) { console.log("error updating faqs:", err); }
-		});
-	});
 	db.getAllFAQs(function(err, o) {
 		if (o) {
+			// remove any not in the new faqs
 			var staleIds = [];
+			var newIds = [];
 			for (var i = 0; i < o.length; i++) {
 				var old = o[i];
-				console.log("old:", old);
 				staleIds.push(old.id);
 			}
 			for (var i = 0; i < newFAQs.length; i++) {
@@ -322,10 +319,30 @@ db.updateFAQs = function(newFAQs, callback) {
 				if (staleIds.indexOf(faq.id) > -1) {
 					staleIds.splice(staleIds.indexOf(faq.id), 1);
 				}
+				else {
+					newIds.push(faq.id);
+				}
 			}
-			console.log("removing ids:", staleIds);
+			// remove old stale faqs
 			FAQModel.remove({id: {$in: staleIds}}, function(e) {
 				if (e) { console.log("error removing faq:", e); }
+			});
+			// update and insert new faqs
+			newFAQs.map(function(faq) {
+				db.getNextAvailableId(faqIdKey, function(nextId) {
+					var makeNewId = (newIds.indexOf(faq.id) > -1);
+					if (makeNewId) {
+						faq.id = nextId;
+					}
+					FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
+				    	if (err) { console.log("error updating faqs:", err); }
+				    	else {
+                db.setLastTakenId(faqIdKey, nextId, function(err) {
+                  if (err) { console.log("error setting next id for faqs: ", err); }
+                });
+              }
+					});
+				});
 			});
 			callback(null, o);
 		}

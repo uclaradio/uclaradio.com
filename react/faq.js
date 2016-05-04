@@ -82,7 +82,7 @@ var FAQPage = React.createClass({
     });
   },
   toggleEditing: function() {
-    this.setState({tempFAQs: this.state.faqs, editing: !this.state.editing});
+    this.setState({tempFAQs: this.state.faqs.slice(0), editing: !this.state.editing});
   },
   componentDidMount: function() {
     this.loadDataFromServer();
@@ -92,7 +92,7 @@ var FAQPage = React.createClass({
       var updateQuestion = this.updateQuestion;
       var updateAnswer = this.updateAnswer;
       var deleteQuestion = this.deleteQuestion;
-      var faqs = this.state.faqs.map(function(question, i) {
+      var faqs = this.state.tempFAQs.map(function(question, i) {
         return (<QuestionEdit key={i} qid={i} question={question.question} answer={question.answer}
                   handleUpdateQuestion={updateQuestion} handleUpdateAnswer={updateAnswer} handleDelete={deleteQuestion} />
               );
@@ -111,11 +111,15 @@ var FAQPage = React.createClass({
           <PanelLinksNavbar />
           {this.state.editing
           ?
-          <div className="editQuestions centered">
+          <div className="editQuestions">
             {faqs}
-            <FloatingSelect submit="+ Add New Question" handleSubmit={this.addQuestion} />
-            <Button onClick={this.submitData} className="lightPadding">Submit</Button>
-            <Button className="cancelLink lightPadding" onClick={this.toggleEditing}>Cancel</Button>
+            <div className="mainActions">
+              <a onClick={this.addQuestion}>+ Add New Question</a>
+              <span className="rightFloat">
+                <Button onClick={this.submitData} className="lightPadding">Submit</Button>
+                <Button className="cancelLink lightPadding" onClick={this.toggleEditing}>Cancel</Button>
+              </span>
+            </div>
           </div>
           :
           <div className="questions">
@@ -124,7 +128,7 @@ var FAQPage = React.createClass({
             </Accordion>
             {this.state.editable
             ?
-              <FloatingSelect submit="Edit" handleSubmit={this.toggleEditing} />
+              <p className="mainActions"><a className="rightFloat" onClick={this.toggleEditing}>Edit</a></p>
             :
               ''
             }
@@ -148,7 +152,7 @@ var QuestionEdit = React.createClass({
   render: function() {
     return (
       <div className="questionEdit">
-        <p>Question {this.props.qid + 1} <a className="cancelLink rightFloat" onClick={this.deleteQuestion}>Delete</a></p>
+        <p className="actions">Question {this.props.qid + 1} <a className="cancelLink rightFloat" onClick={this.deleteQuestion}>Delete</a></p>
         <form className="form-horizontal">
           <Input
             type="text"
@@ -167,24 +171,6 @@ var QuestionEdit = React.createClass({
             wrapperClassName="col-xs-12"
             onChange={this.updateAnswer} />
           </form>
-      </div>
-    );
-  }
-});
-
-var FloatingSelect = React.createClass({
-  render: function() {
-    return (
-      <div className="floatingSelect">
-        <p className="centered">
-        <a onClick={this.props.handleSubmit}>{this.props.submit}</a>
-        {this.props.cancel
-          ?
-            <span className="leftMargin"><a className="cancelLink" onClick={this.props.handleCancel}>{this.props.cancel}</a></span>
-          :
-          ''
-        }
-        </p>
       </div>
     );
   }

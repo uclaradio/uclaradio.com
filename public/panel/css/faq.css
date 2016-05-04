@@ -1,8 +1,14 @@
 
 /** FAQ **/
 
-.floatingSelect {
+.actions {
+  margin: 10px;
+}
+
+.mainActions {
   margin: 20px;
 }
 
-
+.questionEdit {
+	margin-bottom: 20px;
+}

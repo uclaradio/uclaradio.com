@@ -118,7 +118,6 @@ router.post('/api/faq', function(req, res) {
 		res.status(400).send(err);
 	}
 	else {
-		console.log("body:", req.body);
 		accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
 			if (hasAccess && req.body.faqs) {
 				console.log('updating');
@@ -321,7 +320,7 @@ router.get('/api/userlinks', function(req, res) {
 			if (links) {
 				res.json({"loggedin": true, "links":links});
 			}
-			else { res.status(400).send(err); }
+			else { res.status(400).send(); }
 		});
 	}
 });

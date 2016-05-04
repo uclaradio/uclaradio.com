@@ -53,7 +53,7 @@ var ManagerPage = React.createClass({
 var Manager = React.createClass({
   getInitialState: function() {
     return {manager: {}, positionVerified: false, publicVerified: false,
-      meetingTimeVerified: false, meetingLocationVerified: false};
+      meetingTimeVerified: false, meetingLocationVerified: false, departmentInfoVerified: false};
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -108,6 +108,11 @@ var Manager = React.createClass({
     manager.meetingPlace = meetingPlace;
     this.handleManagerInfoSubmit(manager, "meetingLocationVerified");
   },
+  handleDepartmentInfoSubmit: function(departmentInfo) {
+    var manager = $.extend(true, {}, this.state.manager);
+    manager.departmentInfo = departmentInfo;
+    this.handleManagerInfoSubmit(manager, "departmentInfoVerified");
+  },
   handlePublicSubmit: function(checked) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.public = checked;
@@ -129,6 +134,9 @@ var Manager = React.createClass({
         <InputEditableTextField title="Meeting Location" placeholder="Enter Department Meeting Location"
           currentValue={this.state.manager.meetingPlace} onSubmit={this.handleMeetingPlaceSubmit}
           verified={this.state.meetingLocationVerified} />
+        <InputEditableTextField title="Department Info" placeholder="Enter Department Info"
+        currentValue={this.state.manager.departmentInfo} onSubmit={this.handleDepartmentInfoSubmit}
+        verified={this.state.departmentInfoVerified} multiline />
         <InputCheckbox title="Public" details="Show my info on Manager's Board" checked={this.state.manager.public}
           onSelect={this.handlePublicSubmit} verified={this.state.publicVerified} />
       </div>
