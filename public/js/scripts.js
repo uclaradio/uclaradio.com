@@ -1,3 +1,6 @@
+
+
+
 //to inline style rules to the html document on load
 //purpose: to change the color of the left and right buttons
 function injectStyles(rule) {
@@ -95,6 +98,7 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
 
   $(document).mouseup(
     function() {
+      console.log("ran it")
       $(".pop-button").css('box-shadow', boxShadowCss);
     }
   );
@@ -137,8 +141,57 @@ function setPageTheme(colorScheme) {
 
 $(document).ready(function() {
 
+  /////////////////////
+  //detect browsers
+  /////////////////////
+  var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+  var is_explorer = navigator.userAgent.indexOf('MSIE') > -1;
+  var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
+  var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+  var is_opera = navigator.userAgent.toLowerCase().indexOf("op") > -1;
+  if ((is_chrome)&&(is_safari)) {is_safari=false;}
+  if ((is_chrome)&&(is_opera)) {is_chrome=false;}
+
+
+
+
   var stream = document.getElementById('stream');
   var playing = false;
+
+  window.onbeforeunload = function(){
+    if(playing && !is_safari) {
+      $.get('http://localhost:3000/analytics/decrement')
+     // Do something
+    }
+  }
+
+  window.unload = function () { //logic goes here 
+    if(playing && !is_safari) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+  }
+  // OR
+  window.addEventListener("beforeunload", function(e){
+     // Do something
+    if(playing && !is_safari) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+
+
+  }, false);
+
+
+  window.addEventListener("pagehide", function(ev){if(!ev.persisted){
+
+    if(playing && !is_safari) {
+      $.get('http://uclaradio.com/analytics/decrement')
+     // Do something
+    }
+
+    
+  } }, false)
 
   //Calls mobileBrowserCheck function from mobileBrowserCheck.js.
   //function in that file is taken from detectmobilebrowsers.com
@@ -151,24 +204,34 @@ $(document).ready(function() {
 
   // activate the play button
   $("#play-button").click(function() {
-
+    console.log('click!')
     if (!playing) {
 
 	  //add the source again if we're on a mobile device since it was removed to stop download.
 	  if (mobile)
-		stream.src="http://stream.uclaradio.com:8000/listen";
+		  stream.src="http://stream.uclaradio.com:8000/listen";
 
       stream.play();
       playing = true;
+      if(!is_safari) {
+        $.get('http://uclaradio.com/analytics/increment')
+        console.log('play')
+      }
+
     } else {
       stream.pause();
       playing = false;
+      if(!is_safari) {
+          $.get('http://uclaradio.com/analytics/decrement')
+          console.log('pause')
+      }
+
 
 	  //remove the source if the user is on a mobile device to stop data transfer. If we don't do this on mobile,
 	  //data stream will continue until the tab is closed, even if browser is minimized.
-	  if (mobile)
-	    stream.src = '';
-    }
+  	  if (mobile)
+  	    stream.src = '';
+      }
 
     $("#play-icon").toggleClass("fa fa-play fa fa-pause");
     return false;

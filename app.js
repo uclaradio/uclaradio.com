@@ -21,6 +21,8 @@ var manageShows = require('./routes/manageShows');
 var managers = require('./routes/managers');
 var TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
 var panel = require('./routes/panel.js');
+var notFound = require('./routes/notFound');
+var analytics = require('./routes/analytics');
 
 var app = express();
 
@@ -59,6 +61,8 @@ app.use('/shows', shows);
 app.use('/manageShows', manageShows);
 app.use('/managers', managers);
 app.use('/GiveawayCalendar', TicketGiveawayCalendar);
+app.use('/notFound', notFound);
+app.use('/analytics', analytics);
 
 // all links to panel/* handled in panel.js
 app.use('/panel', panel);
@@ -67,7 +71,8 @@ app.use('/panel', panel);
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  res.render('notFound');
+
 });
 
 // error handlers

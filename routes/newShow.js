@@ -14,15 +14,15 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res, next) {
     
 	if (req.body.password != passwords.secretpassword)
-		res.end("Incorrect Password.");	
+		return res.end("Incorrect Password. You can find it in the Staff Lounge!");	
 
 	// Adds the proposed show to the database.
 	db.addProposedShow(req.body, function(err, proposedShowSaved) {
-		if (err) next(err);
+		if (err) console.log(err);
 		if (proposedShowSaved)
 			res.render('newShow', {status: 'Show successfully submitted!'});
 		else
-			res.render('newShow', {status: 'Try again! Something went wrong :^('});
+			res.render('newShow', {status: err || 'Try again! Something went wrong :^('});
 	});
 });
 

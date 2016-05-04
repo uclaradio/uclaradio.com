@@ -8,7 +8,7 @@ head
          
     meta(name='viewport', content='width=device-width, initial-scale=1')
          
-    title UCLA Radio
+    title Page does not exist
     // jQuery (necessary for Bootstrap's JavaScript plugins)
     script(src='https://code.jquery.com/jquery-2.1.1.min.js')
     // bootstrap
@@ -28,8 +28,7 @@ head
     // Our stylesheets/scripts
     link(rel='stylesheet', type='text/css', href='css/main.css')
     link(rel='stylesheet', type='text/css', href='css/newBlurb.css')
-    link(rel='stylesheet', type='text/css', href='css/schedule.css')
-    link(rel='stylesheet', type='text/css', href='css/prettySchedule.css')
+    link(rel='stylesheet', type='text/css', href='css/notFound.css')
          
     link(rel='icon', href='favicon.ico', type='image/x-icon')
 
@@ -45,12 +44,12 @@ head
          
     .container(role='main')
       a(href='/')
-        img#logo(src='img/logo.png', alt='UCLA RADIO')
+        img#logo(src='img/logo.png', alt='URL NOT FOUND DUDE')
 
       #submissionStatus
+        h1 Dude.. Where's my link?
 
-        #FootHold
-         .container
+        img#notFound(src="http://i.imgur.com/facVhBw.png")
       .footer
         br
         .row
@@ -73,11 +72,6 @@ head
             a.pop-button.twitter(href='https://twitter.com/UCLAradio', target='_blank')
               i.fa.fa-twitter-square.fa-2x
 
-script(src='https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js')
-script(src='https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js')
-script(src='https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js')
-script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js')
-script(src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js')
 
-script(src='js/react/schedule-s16.js', type='text/babel')
+
 script(src='js/newBlurb.js')
