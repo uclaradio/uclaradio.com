@@ -91,49 +91,41 @@ router.get('/faq', function(req, res) {
 });
 
 router.get('/api/faq', function(req, res) {
-	// accounts.getAllFAQs(function(err, o) {
-	// 	if (o) {
-	// 		res.json(o);
-	// 	}
-	// 	else {
-	// 		res.status(400).send(err);
-	// 	}
-	res.json([{"id": 1, "question": "How do I get staff points?", "answer": "[staffing points information]"}]);
+	accounts.getAllFAQs(function(err, o) {
+		if (o) {
+			var response = {faqs: o};
+			if (req.session.user == null) {
+				res.json(response);
+			}
+			else {
+				accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
+					// let managers edit
+					response.editable = hasAccess;
+					res.json(response);
+				});
+			}
+		}
+		else {
+			res.status(400).send(err);
+		}
+	});
+	// res.json({editable: true, faqs: [{"id": 1, "question": "How do I get staff points?", "answer": "[staffing points information]"}]});
 });
 
 router.post('/api/faq', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
-		res.redirect('/panel');
+		res.status(400).send(err);
 	}
 	else {
+		console.log("body:", req.body);
 		accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
-			if (hasAccess) {
-				var path = require('path');
-				// perform action
-				switch (req.params.link) {
-					case 'info':
-						managerInfo(req, res);
-						break;
-					case 'update':
-						updateManager(req, res);
-						break;
-					case 'listAccounts':
-						listAccounts(req, res);
-						break;
-					case 'verify': 
-						verifyAccount(req, res);
-						break;
-					case 'delete':
-						deleteAccount(req, res);
-						break;
-					case 'deleteUnverified':
-						deleteUnverifiedAccount(req, res);
-						break;
-					default:
-						res.status(404).send();
-						break;
-				}
+			if (hasAccess && req.body.faqs) {
+				console.log('updating');
+				accounts.updateFAQs(JSON.parse(req.body.faqs), function(err, o) {
+					if (o) { res.json(o); }
+					else { res.status(400).send(err); }
+				});
 			}
 			else {
 				res.status(400).send(err);

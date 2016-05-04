@@ -54,6 +54,10 @@ a:hover, .btn-link:hover, .btn-link:focus {
   float: right;
 }
 
+.leftMargin {
+  margin-left: 15px;
+}
+
 /** Navbar **/
 
 #navbarLogout a {

@@ -325,11 +325,15 @@ db.addNewFAQ = function(question, answer, callback) {
 	});
 };
 
-db.updateFAQs = function(id, newData, callback) {
-	FAQModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
-    	if (err) { callback(err); }
-    	else { callback(null, o); }
+db.updateFAQs = function(newFAQs, callback) {
+	console.log("updating faqs:", newFAQs);
+	newFAQs.map(function(faq) {
+		FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
+	    	if (err) { console.log("error updating faqs:", err); }
+	    	else { console.log("updated:", o); }
+		});
 	});
+	db.getAllFAQs(callback);
 };
 
 // return array of all faq questions
