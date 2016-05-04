@@ -251,13 +251,17 @@ input[type="file"] {
   margin-bottom: 0;
 }
 
-/**** !! Panel Page Specific !! ****/
+/**** Pictures ****/
 
-.showImg {
+.pic {
   width: 100%;
   max-width: 300px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 20px;
+}
+
+.profile {
+  max-width: 150px;
 }
 

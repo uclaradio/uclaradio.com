@@ -307,6 +307,29 @@ router.get('/api/user', function(req, res) {
 	}
 });
 
+router.post('/api/user', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.status(400).send();
+	}
+	else {
+		var user = JSON.parse(req.body.user);
+		if (req.session.user.username !== user.username) {
+			res.status(400).send();
+		}
+		else {
+			// update user info
+			accounts.updateAccount(user, function(err, user) {
+				if (err) { res.status(400).send(err); }
+				else {
+					var userData = accounts.webSafeUser(user);
+					res.json(userData);
+				}
+			});
+		}
+	}
+});
+
 var defaultLinks = [{"title": "FAQ", "link": "/panel/faq"}];
 router.get('/api/userlinks', function(req, res) {
 	if (req.session.user == null) {
@@ -325,26 +348,27 @@ router.get('/api/userlinks', function(req, res) {
 	}
 });
 
-router.post('/api/updateUser', function(req, res) {
+router.post('/api/userPic', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
-		res.status(400).send();
+		res.redirect('/panel');
 	}
 	else {
-		if (req.session.user.username != req.body.username) {
-			res.status(400).send();
+		// user has access to update this show
+		var errorCallback = function(err) {
+			console.log("failed to add show picture: ", err);
+			res.status(400).send(err);
 		}
-		else {
-			// update user info
-			var callback = function(err, user) {
-				if (err) { res.status(400).send(err); }
-				else {
-					var userData = accounts.webSafeUser(user);
-					res.json(userData);
-				}
-			};
-			accounts.updateAccount(req.body.username, req.body.fullName, req.body.email, req.body.djName, req.body.phone, callback);
-		}
+
+		var picture = req.files.img.path.replace('public/', '/');
+		var newData = {"picture": picture, "username": req.body.username};
+		accounts.updateAccount(newData, function(err, o) {
+			if (err) { errorCallback(err); }
+			else {
+				// updated successfully!
+				res.json("success");
+			}
+		});
 	}
 });
 

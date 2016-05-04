@@ -15,6 +15,7 @@ var UserSchema = new Schema({
   pass: String,
   email: String,
   djName: String,
+  picture: String, // relative url to image file
   phone: String
 });
 UserSchema.index({username: 1});
@@ -96,6 +97,7 @@ db.webSafeUser = function(user) {
   return {"username": user.username,
           "fullName": user.fullName,
             "djName": user.djName,
+           "picture": user.picture,
              "email": user.email,
              "phone": user.phone};
 };
@@ -228,28 +230,27 @@ db.verifyAccount = function(username, callback) {
 };
 
 // update email, djName, etc. on a user with the given username
-db.updateAccount = function(username, fullName, email, djName, phone, callback) {
-  var newData = {"fullName": fullName, "email": email, "djName": djName, "phone": phone};
-  UserModel.findOneAndUpdate({'username': username}, newData, {upsert:false, new:true}, function(err, o) {
-      if (err) return res.send(500, { error: err });
-      callback(null, o);
+db.updateAccount = function(newData, callback) {
+  UserModel.findOneAndUpdate({'username': newData.username}, newData, {upsert:false, new:true}, function(err, o) {
+      if (err) { callback(err); }
+      else { callback(null, o); }
   });
 };
 
 // update password for user with email
-db.updatePassword = function(email, newPass, callback) {
-  UserModel.findOne({email: email}, function(err, o) {
-    if (o) {
-      saltAndHash(newPass, function(hash) {
-        o.pass = hash;
-        UserModel.save(o, {safe: true}, callback);
-      });
-    }
-    else {
-      callback(err, null);
-    }
-  });
-};
+// db.updatePassword = function(email, newPass, callback) {
+//   UserModel.findOne({email: email}, function(err, o) {
+//     if (o) {
+//       saltAndHash(newPass, function(hash) {
+//         o.pass = hash;
+//         UserModel.save(o, {safe: true}, callback);
+//       });
+//     }
+//     else {
+//       callback(err, null);
+//     }
+//   });
+// };
 
 // delete a user with the given username
 db.deleteUser = function(username, callback) {

@@ -5,20 +5,16 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var urls = {url: "/panel/api/user",
-            updateURL: "/panel/api/updateUser",
+            picURL: "/panel/api/userPic",
             showsURL: "/panel/api/shows",
-            showURL: "/panel/api/show",
             showLink: "/panel/show",
-            addShowURL: "/panel/api/addShow",
-            showPicURL: "/panel/api/showPic"};
+            addShowURL: "/panel/api/addShow"};
 
 // Custom elements
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
 var InputEditableTextField = require('./components/InputEditableTextField.jsx');
-var UserEditableTextField = require('./components/UserEditableTextField.jsx');
-var UserEditableDateTimeField = require('./components/UserEditableDateTimeField.jsx');
 var ConfirmationButton = require('./components/ConfirmationButton.jsx');
-var FileInput = require('./components/FileInput.jsx');
+var InputFileUpload = require('./components/InputFileUpload.jsx');
 var ShowList = require('./components/ShowList.jsx');
 
 // Bootstrap elements
@@ -31,6 +27,7 @@ var Button = require('react-bootstrap').Button;
 var Input = require('react-bootstrap').Input;
 var DropdownButton = require('react-bootstrap').DropdownButton;
 var MenuItem = require('react-bootstrap').MenuItem;
+var Image = require('react-bootstrap').Image;
 
 // Helper files
 var Dates = require('./components/misc/Dates.js');
@@ -85,10 +82,10 @@ var User = React.createClass({
     unverifiedState[successVar] = false;
     this.setState(unverifiedState);
     $.ajax({
-      url: this.props.urls.updateURL,
+      url: this.props.urls.url,
       dataType: 'json',
       type: 'POST',
-      data: updatedUser,
+      data: {user: JSON.stringify(updatedUser)},
       success: function(user) {
         var successState = {user: user};
         successState[successVar] = true;
@@ -96,7 +93,7 @@ var User = React.createClass({
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({user: oldUser});
-        console.error(this.props.urls.updateURL, status, err.toString());
+        console.error(this.props.urls.url, status, err.toString());
       }.bind(this)
     });
   },
@@ -120,6 +117,35 @@ var User = React.createClass({
     user.phone = newPhone;
     this.handleUserDataSubmit(user, "phoneVerified");
   },
+  verifyPic: function() {
+    this.setState({picVerified: true});
+  },
+  unverifyPic: function() {
+    this.setState({picVerified: false});
+  },
+  handlePicSubmit: function(data) {
+    if (!data) { return; }
+
+    var formData = new FormData();
+    formData.append("img", data);
+    formData.append("username", this.state.user.username);
+    var request = new XMLHttpRequest();
+    request.open("POST", this.props.urls.picURL);
+    var loadData = this.loadDataFromServer;
+    var verify = this.verifyPic;
+    var unverify = this.unverifyPic;
+    unverify();
+    request.onload = function(e) {
+      if (request.status == 200) {
+        loadData();
+        verify();
+      }
+      else {
+        unverify();
+      }
+    };
+    request.send(formData);
+  },
   componentDidMount: function() {
     this.loadDataFromServer();
   },
@@ -127,6 +153,8 @@ var User = React.createClass({
     return (
       <div className="user">
         <h2>DJ Info</h2>
+        <Image className="pic profile" src={this.state.user.picture || "/img/bear.jpg" } responsive circle />
+        <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Profile" onSubmit={this.handlePicSubmit} verified={this.state.picVerified} />
         <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
           placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 
           verified={this.state.djNameVerified} />

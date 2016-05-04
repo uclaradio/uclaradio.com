@@ -46,7 +46,7 @@ app.use(session({
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(multer({ dest: './public/blurbImages/'}));
+app.use(multer({ dest: './public/uploads/'}));
 
 app.use('/', routes);
 app.use('/newBlurb', newBlurb);

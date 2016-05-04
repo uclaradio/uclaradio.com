@@ -14,8 +14,23 @@ var Accordion = require('react-bootstrap').Accordion;
 var Panel = require('react-bootstrap').Panel;
 var Input = require('react-bootstrap').Input;
 var Button = require('react-bootstrap').Button;
+var Grid = require('react-bootstrap').Grid;
+
 
 var FAQPage = React.createClass({
+  render: function() {
+    return (
+      <div className="panelPage">
+        <Grid>
+          <PanelLinksNavbar />
+          <FAQ urls={this.props.urls} />
+        </Grid>
+      </div>
+    );
+  }
+});
+
+var FAQ = React.createClass({
   getInitialState: function() {
     return {faqs: [], tempFAQs: [], editable: false, editing: false};
   },
@@ -107,8 +122,7 @@ var FAQPage = React.createClass({
       });
     }
     return (
-      <div className="faqPage">
-          <PanelLinksNavbar />
+      <div className="faq">
           {this.state.editing
           ?
           <div className="editQuestions">
