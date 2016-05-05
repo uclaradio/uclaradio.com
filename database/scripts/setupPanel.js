@@ -1,6 +1,6 @@
 var accounts = require('../db.js'); // included to connect to database
 var accounts = require('../dbAccounts.js');
-var passwords = require('/passwords.json');
+var passwords = require('../../passwords.json');
 
 console.log("Setting up Secret DJ Panel...");
 
