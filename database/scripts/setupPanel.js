@@ -17,7 +17,7 @@ accounts.addPrivilege(accounts.managerPrivilegeName, links, callback);
 /***** Create General Manager Account *****/
 
  // requestNewAccount = function(username, pass, email, fullName, callback)
-accounts.requestNewAccount("gm", passwords.gmpass, "General Manager", function(err, saved) {
+accounts.requestNewAccount("gm", passwords.gmpass, "chrislaganiere@gmail.com", "General Manager", function(err, saved) {
   if (err) { console.log("error creating gm account:", err); }
 });
 
