@@ -353,6 +353,25 @@ db.removeAllUsers = function(callback) {
 /***** FAQ *****/
 
 db.updateFAQs = function(newFAQs, callback) {
+	 // FAQModel.remove({}, callback(err) {
+	//  	if (err) { console.log("error deleting faqs:", err); }
+	//  	else {
+	//  		// update and insert new faqs
+	// 		newFAQs.map(function(faq) {
+	// 			FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
+	// 	    	if (err) { callback(err); }
+	// 	    	else {
+	// 					var updatedFAQs = [];
+	// 					for (var i = 0; i < o.length; i++) {
+	// 						updatedFAQs.push(db.webSafeFAQ(o[i]));
+	// 					}
+	// 					callback(null, updatedFAQs);
+	// 				}
+ //        });
+	// 		});
+	// 	}
+	// });
+ // };
 	db.getAllFAQs(function(err, o) {
 		if (o) {
 			// remove any not in the new faqs
