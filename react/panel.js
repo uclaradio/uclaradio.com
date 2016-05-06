@@ -123,6 +123,9 @@ var User = React.createClass({
   unverifyPic: function() {
     this.setState({picVerified: false});
   },
+  updateUserState: function(user) {
+    this.setState({user: user});
+  },
   handlePicSubmit: function(data) {
     if (!data) { return; }
 
@@ -134,8 +137,8 @@ var User = React.createClass({
     var loadData = this.loadDataFromServer;
     var verify = this.verifyPic;
     var unverify = this.unverifyPic;
+    var updateUser = this.updateUserState;
     unverify();
-    var updateUser = function(user) { this.setState({user: user}); }
     request.onload = function(e) {
       if (request.status == 200) {
         updateUser(request.response);
