@@ -135,10 +135,10 @@ var User = React.createClass({
     var verify = this.verifyPic;
     var unverify = this.unverifyPic;
     unverify();
+    var updateUser = function(user) { this.setState({user: user}); }
     request.onload = function(e) {
       if (request.status == 200) {
-        var user = request.response;
-        this.setState({user: user});
+        updateUser(request.response);
         verify();
       }
       else {
