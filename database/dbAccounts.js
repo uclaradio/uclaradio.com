@@ -221,7 +221,8 @@ db.verifyAccount = function(username, callback) {
       UnverifiedUserModel.remove({username: username}, function (e) {
         if (e) { console.log("error removing unverified user after verification:", e); }
       });
-      db.addNewAccount('verified', o, callback);
+      var verifiedUser = {username: o.username, email: o.email, fullName: o.fullName};
+      db.addNewAccount('verified', verifiedUser, callback);
     }
     else {
       callback(err, null);
