@@ -19,12 +19,15 @@ accounts.addPrivilege(accounts.managerPrivilegeName, links, callback);
  // requestNewAccount = function(username, pass, email, fullName, callback)
 accounts.requestNewAccount("gm", passwords.gmpass, "chrislaganiere@gmail.com", "General Manager", function(err, saved) {
   if (err) { console.log("error creating gm account:", err); }
+  else if (o) {
+    accounts.verifyAccount("gm", function(err, o) {
+      if (err) { console.log("error validating gm user", err); }
+    });
+  }
 });
 
 // db.verifyAccount = function(username, callback)
-accounts.verifyAccount("gm", function(err, o) {
-  if (err) { console.log("error validating gm user", err); }
-});
+
 
 // updatePrivilege = function(username, privilege, shouldHave, callback)
 accounts.updatePrivilege("gm", accounts.managerPrivilegeName, true, callback);
