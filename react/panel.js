@@ -137,7 +137,8 @@ var User = React.createClass({
     unverify();
     request.onload = function(e) {
       if (request.status == 200) {
-        loadData();
+        var user = request.response;
+        this.setState({user: user});
         verify();
       }
       else {

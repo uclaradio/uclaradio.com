@@ -362,11 +362,11 @@ router.post('/api/userPic', function(req, res) {
 
 		var picture = req.files.img.path.replace('public/', '/');
 		var newData = {"picture": picture, "username": req.body.username};
-		accounts.updateAccount(newData, function(err, o) {
+		accounts.updateAccount(newData, function(err, user) {
 			if (err) { errorCallback(err); }
 			else {
 				// updated successfully!
-				res.json("success");
+				res.json(user);
 			}
 		});
 	}
