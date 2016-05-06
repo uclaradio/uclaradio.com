@@ -51,7 +51,7 @@ router.get('/home', function(req, res) {
 	}
 	else {
 		var path = require('path');
-		res.sendFile(path.resolve('public/panel/panel.html'));
+		res.sendFile(path.join(__dirname, '../public/panel/panel.html'));
 	}
 });
 
@@ -87,7 +87,7 @@ router.post('/signup', function(req, res) {
 
 router.get('/faq', function(req, res) {
 	var path = require('path');
-	res.sendFile(path.resolve('public/panel/faq.html'));
+	res.sendFile(path.join(__dirname, '../public/panel/faq.html'));
 });
 
 router.get('/api/faq', function(req, res) {
@@ -241,7 +241,7 @@ router.get('/manager', function(req, res) {
 		accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
 			if (hasAccess) {
 				var path = require('path');
-				res.sendFile(path.resolve('public/panel/manager.html'));
+				res.sendFile(path.join(__dirname, '../public/panel/manager.html'));
 			}
 			else {
 				// redirect to home page
@@ -260,7 +260,7 @@ router.get('/show/:id', function(req, res) {
 	}
 	else {
 		var path = require('path');
-		res.sendFile(path.resolve('public/panel/show.html'));
+		res.sendFile(path.join(__dirname, '../public/panel/show.html'));
 	}
 });
 
