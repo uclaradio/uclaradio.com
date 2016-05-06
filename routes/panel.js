@@ -479,27 +479,14 @@ router.post('/api/showPic', function(req, res) {
 				}
 
 				var picture = req.files.img.path.replace('public/', '/');
-				var thumbnail = req.files.img.path.replace('public/', '/').replace('.jpg','thumbnail.jpg').replace('.png', 'thumbnail.png').replace('.jpeg', 'thumbnail.jpeg').replace('.gif', 'thumbnail.gif');
-
-				// compress image
-				lwip.open(req.files.img.path, function(err, image) {
+				// update show data with new pictures
+				var newData = {"picture": picture};
+				accounts.updateShow(req.body.id, newData, function(err, o) {
 					if (err) { errorCallback(err); }
-
-					var options = { quality: 30 };
-
-					image.writeFile('public/' + thumbnail, options , function(err) {
-						if (err) { errorCallback(err); }
-
-						// update show data with new pictures
-						var newData = {"picture": picture, "thumbnail": thumbnail};
-						accounts.updateShow(req.body.id, newData, function(err, o) {
-							if (err) { errorCallback(err); }
-							else {
-								// updated successfully!
-								res.json("success");
-							}
-						});
-					});
+					else {
+						// updated successfully!
+						res.json("success");
+					}
 				});
 			}
 		});

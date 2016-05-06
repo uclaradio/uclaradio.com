@@ -126,6 +126,12 @@ db.webSafeManager = function(manager) {
 					  public: manager.public};
 }
 
+db.webSafeFAQ = function(faq) {
+	return {id: faq.id,
+		question: faq.question,
+			answer: faq.answer};
+}
+
 /***** User Account Management *****/
 
 // log in a user with given username and password hash, with unspecific error msg
@@ -255,10 +261,27 @@ db.verifyAccount = function(username, callback) {
 
 // update email, djName, etc. on a user with the given username
 db.updateAccount = function(newData, callback) {
-  UserModel.findOneAndUpdate({'username': newData.username}, newData, {upsert:false, new:true}, function(err, o) {
-      if (err) { callback(err); }
-      else { callback(null, db.webSafeUser(o)); }
-  });
+	var update = function() {
+	  UserModel.findOneAndUpdate({'username': newData.username}, newData, {upsert:false, new:true}, function(err, o) {
+	      if (err) { callback(err); }
+	      else { callback(null, db.webSafeUser(o)); }
+	  });
+	};
+
+	UserModel.findOne({'username': newData.username}, function(err, o) {
+		if (o) {
+			if (o.picture !== newData.picture) {
+				var path = require('path');
+				fs.unlink(path.resolve('public'+o.picture), function() {
+					update();
+				});
+			}
+			else {
+				update();
+			}
+		}
+		else { callback(err); }
+	});
 };
 
 // update password for user with email
@@ -369,7 +392,11 @@ db.updateFAQs = function(newFAQs, callback) {
 					});
 				});
 			});
-			callback(null, o);
+			var updatedFAQs = [];
+			for (var i = 0; i < o.length; i++) {
+				updatedFAQs.push(db.webSafeFAQ(o[i]));
+			}
+			callback(null, updatedFAQs);
 		}
 		else {
 			callback(err);
@@ -387,7 +414,7 @@ db.getAllFAQs = function(callback) {
 		else {
 			var faqs = [];
 			for (var i = 0; i < res.length; i++) {
-				faqs.push(db.websafeFAQ(res[i]));
+				faqs.push(db.webSafeFAQ(res[i]));
 			}
 			callback(null, faqs);
 		}
