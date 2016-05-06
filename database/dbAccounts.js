@@ -102,6 +102,29 @@ db.webSafeUser = function(user) {
              "phone": user.phone};
 };
 
+db.webSafeShow = function(show) {
+	return {title: show.title,
+						 id: show.id,
+						day: show.day,
+					 time: show.time,
+						djs: show.djs,
+					genre: show.genre,
+					blurb: show.blurb,
+				picture: show.picture,
+			thumbnail: show.thumbnail,
+				 public: show.public,
+				 	pages: show.pages,
+			 episodes: show.episodes};
+}
+
+db.webSafeManager = function(manager) {
+	return {username: manager.username,
+					position: manager.position,
+			 meetingTime: manager.meetingTime,
+			meetingPlace: manager.meetingPlace,
+		departmentInfo: manager.departmentInfo,
+					  public: manager.public};
+}
 
 /***** User Account Management *****/
 
@@ -234,7 +257,7 @@ db.verifyAccount = function(username, callback) {
 db.updateAccount = function(newData, callback) {
   UserModel.findOneAndUpdate({'username': newData.username}, newData, {upsert:false, new:true}, function(err, o) {
       if (err) { callback(err); }
-      else { callback(null, o); }
+      else { callback(null, db.webSafeUser(o)); }
   });
 };
 
@@ -362,7 +385,11 @@ db.getAllFAQs = function(callback) {
 			callback(err);
 		}
 		else {
-			callback(null, res);
+			var faqs = [];
+			for (var i = 0; i < res.length; i++) {
+				faqs.push(db.websafeFAQ(res[i]));
+			}
+			callback(null, faqs);
 		}
 	});
 };
@@ -415,10 +442,26 @@ db.addNewShow = function(title, day, time, djs, callback) {
 };
 
 db.updateShow = function(id, newData, callback) {
-  ShowModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
-      if (err) { callback(err); }
-      else { callback(null, o); }
-  });
+	var update = function() {
+		ShowModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
+		      if (err) { callback(err); }
+		      else { callback(null, db.webSafeShow(o)); }
+		  });
+	}
+	ShowModel.findOne({id: id}, function(err, o) {
+		if (o) {
+			if (o.picture !== newData.picture) {
+				var path = require('path');
+				fs.unlink(path.resolve('public'+o.picture), function() {
+					update();
+				});
+			}
+		  else {
+		  	update();
+		  }
+		}
+		else { callback(err); }
+	});
 };
 
 db.getShowsForUser = function(djUsername, callback) {
@@ -447,13 +490,14 @@ db.userHasAccessToShow = function(username, id, callback) {
 
 db.getShowByTitle = function(title, callback) {
   ShowModel.findOne({title: title}, function(err, o) {
-    callback(err, o);
+  	o._id = null;
+    callback(err, db.webSafeShow(o));
   });
 };
 
 db.getShowById = function(id, callback) {
   ShowModel.findOne({id: id}, function(err, o) {
-    callback(err, o);
+    callback(err, db.webSafeShow(o));
   });
 };
 
@@ -486,18 +530,18 @@ db.managerInfo = function(username, callback) {
       var newData = {username: username};
       var newManager = new ManagerModel(newData);
       newManager.save(function(err, saved) {
-        callback(err, saved);
+        callback(err, db.webSafeManager(saved));
       });
     }
     else {
-      callback(err, o);
+      callback(err, db.webSafeManager(o));
     }
   });
 };
 
 db.updateManager = function(manager, callback) {
   ManagerModel.findOneAndUpdate({username: manager.username}, manager, {upsert: true, new: true}, function(err, o) {
-    callback(err, o);
+    callback(err, db.webSafeManager(o));
   });
 }
 
