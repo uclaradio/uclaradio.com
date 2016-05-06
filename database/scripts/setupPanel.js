@@ -23,7 +23,7 @@ accounts.requestNewAccount("gm", passwords.gmpass, "chrislaganiere@gmail.com", "
 
 // db.verifyAccount = function(username, callback)
 accounts.verifyAccount("gm", function(err, o) {
-  if (err) { console.log("error validating gm user"); }
+  if (err) { console.log("error validating gm user", err); }
 });
 
 // updatePrivilege = function(username, privilege, shouldHave, callback)
