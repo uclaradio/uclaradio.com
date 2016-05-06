@@ -141,7 +141,7 @@ var User = React.createClass({
     unverify();
     request.onload = function(e) {
       if (request.status == 200) {
-        updateUser(request.response);
+        updateUser(JSON.parse(request.response));
         verify();
       }
       else {
