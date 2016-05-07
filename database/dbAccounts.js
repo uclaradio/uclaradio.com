@@ -102,6 +102,35 @@ db.webSafeUser = function(user) {
              "phone": user.phone};
 };
 
+db.webSafeShow = function(show) {
+	return {title: show.title,
+						 id: show.id,
+						day: show.day,
+					 time: show.time,
+						djs: show.djs,
+					genre: show.genre,
+					blurb: show.blurb,
+				picture: show.picture,
+			thumbnail: show.thumbnail,
+				 public: show.public,
+				 	pages: show.pages,
+			 episodes: show.episodes};
+}
+
+db.webSafeManager = function(manager) {
+	return {username: manager.username,
+					position: manager.position,
+			 meetingTime: manager.meetingTime,
+			meetingPlace: manager.meetingPlace,
+		departmentInfo: manager.departmentInfo,
+					  public: manager.public};
+}
+
+db.webSafeFAQ = function(faq) {
+	return {id: faq.id,
+		question: faq.question,
+			answer: faq.answer};
+}
 
 /***** User Account Management *****/
 
@@ -232,10 +261,27 @@ db.verifyAccount = function(username, callback) {
 
 // update email, djName, etc. on a user with the given username
 db.updateAccount = function(newData, callback) {
-  UserModel.findOneAndUpdate({'username': newData.username}, newData, {upsert:false, new:true}, function(err, o) {
-      if (err) { callback(err); }
-      else { callback(null, o); }
-  });
+	var update = function() {
+	  UserModel.findOneAndUpdate({'username': newData.username}, newData, {upsert:false, new:true}, function(err, o) {
+	      if (err) { callback(err); }
+	      else { callback(null, db.webSafeUser(o)); }
+	  });
+	};
+
+	UserModel.findOne({'username': newData.username}, function(err, o) {
+		if (o) {
+			if (o.picture !== newData.picture) {
+				var path = require('path');
+				fs.unlink(path.resolve('public'+o.picture), function() {
+					update();
+				});
+			}
+			else {
+				update();
+			}
+		}
+		else { callback(err); }
+	});
 };
 
 // update password for user with email
@@ -307,6 +353,25 @@ db.removeAllUsers = function(callback) {
 /***** FAQ *****/
 
 db.updateFAQs = function(newFAQs, callback) {
+	 // FAQModel.remove({}, callback(err) {
+	//  	if (err) { console.log("error deleting faqs:", err); }
+	//  	else {
+	//  		// update and insert new faqs
+	// 		newFAQs.map(function(faq) {
+	// 			FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
+	// 	    	if (err) { callback(err); }
+	// 	    	else {
+	// 					var updatedFAQs = [];
+	// 					for (var i = 0; i < o.length; i++) {
+	// 						updatedFAQs.push(db.webSafeFAQ(o[i]));
+	// 					}
+	// 					callback(null, updatedFAQs);
+	// 				}
+ //        });
+	// 		});
+	// 	}
+	// });
+ // };
 	db.getAllFAQs(function(err, o) {
 		if (o) {
 			// remove any not in the new faqs
@@ -346,7 +411,11 @@ db.updateFAQs = function(newFAQs, callback) {
 					});
 				});
 			});
-			callback(null, o);
+			var updatedFAQs = [];
+			for (var i = 0; i < o.length; i++) {
+				updatedFAQs.push(db.webSafeFAQ(o[i]));
+			}
+			callback(null, updatedFAQs);
 		}
 		else {
 			callback(err);
@@ -362,7 +431,11 @@ db.getAllFAQs = function(callback) {
 			callback(err);
 		}
 		else {
-			callback(null, res);
+			var faqs = [];
+			for (var i = 0; i < res.length; i++) {
+				faqs.push(db.webSafeFAQ(res[i]));
+			}
+			callback(null, faqs);
 		}
 	});
 };
@@ -415,10 +488,26 @@ db.addNewShow = function(title, day, time, djs, callback) {
 };
 
 db.updateShow = function(id, newData, callback) {
-  ShowModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
-      if (err) { callback(err); }
-      else { callback(null, o); }
-  });
+	var update = function() {
+		ShowModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
+		      if (err) { callback(err); }
+		      else { callback(null, db.webSafeShow(o)); }
+		  });
+	}
+	ShowModel.findOne({id: id}, function(err, o) {
+		if (o) {
+			if (o.picture !== newData.picture) {
+				var path = require('path');
+				fs.unlink(path.resolve('public'+o.picture), function() {
+					update();
+				});
+			}
+		  else {
+		  	update();
+		  }
+		}
+		else { callback(err); }
+	});
 };
 
 db.getShowsForUser = function(djUsername, callback) {
@@ -447,13 +536,14 @@ db.userHasAccessToShow = function(username, id, callback) {
 
 db.getShowByTitle = function(title, callback) {
   ShowModel.findOne({title: title}, function(err, o) {
-    callback(err, o);
+  	o._id = null;
+    callback(err, db.webSafeShow(o));
   });
 };
 
 db.getShowById = function(id, callback) {
   ShowModel.findOne({id: id}, function(err, o) {
-    callback(err, o);
+    callback(err, db.webSafeShow(o));
   });
 };
 
@@ -486,18 +576,18 @@ db.managerInfo = function(username, callback) {
       var newData = {username: username};
       var newManager = new ManagerModel(newData);
       newManager.save(function(err, saved) {
-        callback(err, saved);
+        callback(err, db.webSafeManager(saved));
       });
     }
     else {
-      callback(err, o);
+      callback(err, db.webSafeManager(o));
     }
   });
 };
 
 db.updateManager = function(manager, callback) {
   ManagerModel.findOneAndUpdate({username: manager.username}, manager, {upsert: true, new: true}, function(err, o) {
-    callback(err, o);
+    callback(err, db.webSafeManager(o));
   });
 }
 

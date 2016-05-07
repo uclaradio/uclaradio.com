@@ -51,7 +51,7 @@ router.get('/home', function(req, res) {
 	}
 	else {
 		var path = require('path');
-		res.sendFile(path.join(__dirname, '../public/panel/panel.html'));
+		res.sendFile(path.resolve('public/panel/panel.html'));
 	}
 });
 
@@ -87,7 +87,7 @@ router.post('/signup', function(req, res) {
 
 router.get('/faq', function(req, res) {
 	var path = require('path');
-	res.sendFile(path.join(__dirname, '../public/panel/faq.html'));
+	res.sendFile(path.resolve('public/panel/faq.html'));
 });
 
 router.get('/api/faq', function(req, res) {
@@ -241,7 +241,7 @@ router.get('/manager', function(req, res) {
 		accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
 			if (hasAccess) {
 				var path = require('path');
-				res.sendFile(path.join(__dirname, '../public/panel/manager.html'));
+				res.sendFile(path.resolve('public/panel/manager.html'));
 			}
 			else {
 				// redirect to home page
@@ -260,7 +260,7 @@ router.get('/show/:id', function(req, res) {
 	}
 	else {
 		var path = require('path');
-		res.sendFile(path.join(__dirname, '../public/panel/show.html'));
+		res.sendFile(path.resolve('public/panel/show.html'));
 	}
 });
 
@@ -362,11 +362,11 @@ router.post('/api/userPic', function(req, res) {
 
 		var picture = req.files.img.path.replace('public/', '/');
 		var newData = {"picture": picture, "username": req.body.username};
-		accounts.updateAccount(newData, function(err, o) {
+		accounts.updateAccount(newData, function(err, user) {
 			if (err) { errorCallback(err); }
 			else {
 				// updated successfully!
-				res.json("success");
+				res.json(user);
 			}
 		});
 	}
@@ -479,27 +479,14 @@ router.post('/api/showPic', function(req, res) {
 				}
 
 				var picture = req.files.img.path.replace('public/', '/');
-				var thumbnail = req.files.img.path.replace('public/', '/').replace('.jpg','thumbnail.jpg').replace('.png', 'thumbnail.png').replace('.jpeg', 'thumbnail.jpeg').replace('.gif', 'thumbnail.gif');
-
-				// compress image
-				lwip.open(req.files.img.path, function(err, image) {
+				// update show data with new pictures
+				var newData = {"picture": picture};
+				accounts.updateShow(req.body.id, newData, function(err, o) {
 					if (err) { errorCallback(err); }
-
-					var options = { quality: 30 };
-
-					image.writeFile('public/' + thumbnail, options , function(err) {
-						if (err) { errorCallback(err); }
-
-						// update show data with new pictures
-						var newData = {"picture": picture, "thumbnail": thumbnail};
-						accounts.updateShow(req.body.id, newData, function(err, o) {
-							if (err) { errorCallback(err); }
-							else {
-								// updated successfully!
-								res.json("success");
-							}
-						});
-					});
+					else {
+						// updated successfully!
+						res.json("success");
+					}
 				});
 			}
 		});
