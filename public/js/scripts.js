@@ -98,6 +98,7 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
 
   $(document).mouseup(
     function() {
+      console.log("ran it")
       $(".pop-button").css('box-shadow', boxShadowCss);
     }
   );
