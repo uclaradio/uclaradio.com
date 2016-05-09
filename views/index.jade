@@ -46,6 +46,8 @@ head
       ga('send', 'pageview');
 
   body
+    a(href='http://spark.ucla.edu/uclaradio')
+      img(src='/img/splashText.svg' id='pledgeDrive')
 
     audio#stream(src='http://stream.uclaradio.com:8000/listen', preload='none')
 
@@ -133,9 +135,11 @@ head
               i.fa.fa-twitter-square.fa-2x
 
 
+  
 
 script(src='slick/slick.min.js')
 
 script(src='js/recent_tracks.js')
 script(src='js/carousel.js')
 script(src='js/scripts.js')
+script(src='js/pledge.js')
