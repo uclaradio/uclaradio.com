@@ -1,0 +1,26 @@
+a#splashLink {
+	width: 80%;
+	display: block;
+	margin: 50px auto;
+	text-align: center;
+}
+
+img {
+	width: 100%;
+}
+
+a#button {
+	width: 80%;
+	display: block;
+	margin: 50px auto;
+	text-align: center;
+}
+
+html {
+	background: url(/img/splashBackground.svg) no-repeat center center fixed;
+	background-size: cover;
+}
+
+body {
+	background: transparent;
+}
