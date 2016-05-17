@@ -38,7 +38,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(multer({ dest: './public/blurbImages/'}));
 
-app.use('/index', routes);
+app.use('/', routes);
 app.use('/newBlurb', newBlurb);
 app.use('/newShow', newShow);
 app.use('/staffingPoints', staffingPoints);
@@ -53,7 +53,6 @@ app.use('/managers', managers);
 app.use('/GiveawayCalendar', TicketGiveawayCalendar);
 app.use('/notFound', notFound);
 app.use('/analytics', analytics);
-app.use('/', splash);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
