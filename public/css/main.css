@@ -156,6 +156,7 @@ mark
 
 .apply-button {
   text-align: center;
+  margin-top: 50px !important;
   margin-bottom: 50px !important;
   font-size: 35px !important;
   cursor: pointer;
