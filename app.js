@@ -21,7 +21,6 @@ var managers = require('./routes/managers');
 var TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
 var notFound = require('./routes/notFound');
 var analytics = require('./routes/analytics');
-var splash = require('./routes/splash');
 
 var app = express();
 
