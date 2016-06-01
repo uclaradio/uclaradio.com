@@ -602,7 +602,7 @@ db.allManagers = function(callback) {
 /***** Privileges *****/
 
 db.addPrivilege = function(privilege, links, callback) {
-  PrivilegeModel.findOneAndUpdate({name: privilege}, {links: links}, {upsert: true, new: true}, function(err, o) {
+  PrivilegeModel.findOneAndUpdate({name: privilege}, {links: links, users: []}, {upsert: true, new: true}, function(err, o) {
     if (err) {
       callback(err, false);
     }
