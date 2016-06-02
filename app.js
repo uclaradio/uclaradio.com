@@ -23,7 +23,7 @@ var TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
 var panel = require('./routes/panel.js');
 var notFound = require('./routes/notFound');
 var analytics = require('./routes/analytics');
-
+var api = require('./routes/api');
 var app = express();
 
 // view engine setup
@@ -63,7 +63,7 @@ app.use('/managers', managers);
 app.use('/GiveawayCalendar', TicketGiveawayCalendar);
 app.use('/notFound', notFound);
 app.use('/analytics', analytics);
-
+app.use('/api', api);
 // all links to panel/* handled in panel.js
 app.use('/panel', panel);
 
