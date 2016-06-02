@@ -565,6 +565,12 @@ db.removeShow = function(id, callback) {
   });
 };
 
+// show for timeslot: used for currently playing show
+db.getBlurbByTimeslotAndDay = function(time, day, callback) {
+  ShowModel.findOne({time: time, day: day}, function(err, blurb) {
+    callback(err, blurb);
+  });
+};
 
 
 /***** Manager Info *****/

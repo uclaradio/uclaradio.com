@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../database/db');
+var db2 = require('../database/dbAccounts');
 
 router.get('/', function(req, res) {
 	var info = getTimeAndDay();
 
-	db.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
+	db2.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
 		if (blurb)
-			blurb.djName = blurb.djName.join(',');
+			blurb.djName = blurb.djs.join(',');
 
 		res.render('index', {blurb: blurb});
 	});
