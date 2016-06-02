@@ -58,7 +58,7 @@ head
                 span(id="name") #{manager.name}
             .main
               .pic
-                img(src="#{manager.photo}")
+                img(src="#{manager.picture}")
               .info
                 .meetings
                   h1 MEETINGS: 
@@ -69,10 +69,6 @@ head
                   ul
                     li
                       a(href="mailto:#{manager.email}") email me!
-                .show
-                  h1 SHOW: 
-                  ul
-                    li #{manager.showName} (#{manager.showTime})
 
 
 script(src='js/newBlurb.js')

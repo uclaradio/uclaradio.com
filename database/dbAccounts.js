@@ -62,6 +62,7 @@ var FAQModel = mongoose.model('faqs', FAQSchema);
 var ManagerSchema = new Schema({
   username: String,
   position: String,
+  email: String,
   meetingTime: String,
   meetingPlace: String,
   departmentInfo: String,
@@ -120,6 +121,7 @@ db.webSafeShow = function(show) {
 db.webSafeManager = function(manager) {
 	return {username: manager.username,
 					position: manager.position,
+             email: manager.email,
 			 meetingTime: manager.meetingTime,
 			meetingPlace: manager.meetingPlace,
 		departmentInfo: manager.departmentInfo,
@@ -597,9 +599,32 @@ db.updateManager = function(manager, callback) {
   });
 }
 
+// get all managers with user data too (name, pictures, show)
 db.allManagers = function(callback) {
   ManagerModel.find({}, function(err, managers) {
-    callback(err, managers);
+    if (err) { callback(err); }
+    else {
+      var usernames = [];
+      managers.map(function(m) {
+        usernames.push(m.username);
+      });
+      UserModel.find({username: {$in: usernames}}, function(err, users) {
+        if (err) { callback(err, null); }
+        else {
+          var nameMap = {};
+          var pictureMap = {};
+          users.map(function(u) {
+            nameMap[u.username] = u.fullName;
+            pictureMap[u.username] = u.picture;
+          });
+          managers.map(function(m) {
+            m.name = nameMap[m.username];
+            m.picture = pictureMap[m.username];
+          });
+          callback(err, managers);
+        }
+      });
+    }
   });
 }
 
