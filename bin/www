@@ -8,18 +8,54 @@ var app = require('../app');
 var debug = require('debug')('uclaradio.github.io:server');
 var http = require('http');
 
-/**
- * Get port from environment and store in Express.
- */
 
-var port = normalizePort(process.env.PORT || '80');
+// Get command-line argument (node bin/www dev)
+// Possible values:
+//   * dev: development environment, run on port 3000 with http
+//   * prod: production, run on port 80 with https
+//
+var env = process.argv[2] || 'dev';
+switch (env) {
+    case 'dev':
+        var port = normalizePort(process.env.PORT || '3000');
+        var useSSL = false;
+        break;
+    case 'prod':
+        var port = normalizePort(process.env.PORT || '80');
+        var useSSL = true;
+        break;
+}
+
+
+
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
+if (useSSL) {
+  /**
+   * Create HTTP(S) server.
+   */
+  var https = require('spdy');
+  var LEX = require('letsencrypt-express').testing();
+  var lex = LEX.create({
+      configDir: require('os').homedir() + '/letsencrypt/etc',
+      approveRegistration: function (hostname, cb) {
+          cb(null, {
+              domains: [hostname],
+              email: 'chrislaganiere@gmail.com',
+              agreeTos: true
+             });
+          }
+      });
+  http.createServer(LEX.createAcmeResponder(lex, function redirectHttps(req, res) {
+      res.setHeader('Location', 'https://' + req.headers.host + req.url);
+      res.statusCode = 302;
+      res.end('<!-- Please use HTTPS instead -->');
+  })).listen(80);
+  var server = https.createServer(lex.httpsOptions, LEX.createAcmeResponder(lex, app)).listen(443);
+}
+else {
+  var server = http.createServer(app);
+}
 
 /**
  * Listen on provided port, on all network interfaces.
