@@ -30,6 +30,8 @@ router.get('/schedule', function(req, res) {
 	});
 });
 
+
+
 router.get('/nowplaying', function(req, res) {
 	var info = getTimeAndDay();
 
@@ -75,5 +77,33 @@ router.get('/djs', function(req, res) {
 		}
 	});
 });
+
+/* Helper Functions */
+
+function getTimeAndDay() {
+	var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	var date = new Date();
+
+	var day = days[date.getDay()];
+	var time = date.getHours();
+
+	//Change the time into the format our db is expecting
+	//AKA 12pm, 10am, 1pm: hour followed by am or pm
+	if (time === 0) {
+		time = '12am';
+	} else if (time < 12) {
+		time += 'am';
+	} else if (time == 12) {
+		time = '12pm';
+	} else {
+		time -= 12;
+		time += 'pm';
+	}
+
+	return {
+		day: day,
+		time: time
+	};
+}
 
 module.exports = router;
