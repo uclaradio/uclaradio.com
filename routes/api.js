@@ -30,6 +30,30 @@ router.get('/schedule', function(req, res) {
 	});
 });
 
+router.get('/nowplaying', function(req, res) {
+	var info = getTimeAndDay();
+
+	db.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
+		if (blurb) {
+			res.setHeader('Content-Type', 'application/json');
+			res.send(JSON.stringify(blurb));
+		}
+		else {
+			res.status(400).send(err);
+		}
+	});
+
+
+	accounts.getAllShows(function(err, o) {
+		if (o) {
+			res.json({shows: o.filter(checkPublic)});
+		}
+		else {
+			res.status(400).send(err);
+		}
+	});
+});
+
 // router.get('/dj/:id', function(req, res) {
 // 	accounts.getShowById(req.params.id, function(err, o) {
 // 		if (o) {
