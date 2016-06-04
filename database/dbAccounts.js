@@ -342,7 +342,11 @@ db.getAllUsers = function(callback) {
       callback(err);
     }
     else {
-      callback(null, res);
+      var users = [];
+      for (var i = 0; i < res.length; i++) {
+        users.push(db.webSafeUser(res[i]));
+      }
+      callback(null, faqs);
     }
   });
 };
