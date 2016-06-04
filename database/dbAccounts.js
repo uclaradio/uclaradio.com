@@ -346,7 +346,7 @@ db.getAllUsers = function(callback) {
       for (var i = 0; i < res.length; i++) {
         users.push(db.webSafeUser(res[i]));
       }
-      callback(null, faqs);
+      callback(null, users);
     }
   });
 };
