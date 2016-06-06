@@ -53,7 +53,8 @@ var ManagerPage = React.createClass({
 var Manager = React.createClass({
   getInitialState: function() {
     return {manager: {}, positionVerified: false, publicVerified: false,
-      meetingTimeVerified: false, meetingLocationVerified: false, departmentInfoVerified: false};
+      meetingTimeVerified: false, meetingLocationVerified: false,
+      emailVerified: false, departmentInfoVerified: false};
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -108,6 +109,11 @@ var Manager = React.createClass({
     manager.meetingPlace = meetingPlace;
     this.handleManagerInfoSubmit(manager, "meetingLocationVerified");
   },
+  handleEmailSubmit: function(email) {
+    var manager = $.extend(true, {}, this.state.manager);
+    manager.email = email;
+    this.handleManagerInfoSubmit(manager, "emailVerified");
+  },
   handleDepartmentInfoSubmit: function(departmentInfo) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.departmentInfo = departmentInfo;
@@ -134,6 +140,9 @@ var Manager = React.createClass({
         <InputEditableTextField title="Meeting Location" placeholder="Enter Department Meeting Location"
           currentValue={this.state.manager.meetingPlace} onSubmit={this.handleMeetingPlaceSubmit}
           verified={this.state.meetingLocationVerified} />
+        <InputEditableTextField title="Email" placeholder="Enter Department Email"
+        currentValue={this.state.manager.email} onSubmit={this.handleEmailSubmit}
+        verified={this.state.emailVerified} />
         <InputEditableTextField title="Department Info" placeholder="Enter Department Info"
         currentValue={this.state.manager.departmentInfo} onSubmit={this.handleDepartmentInfoSubmit}
         verified={this.state.departmentInfoVerified} multiline />

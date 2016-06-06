@@ -66,8 +66,8 @@ var InputEditableTextField = React.createClass({
               ref="input"
               groupClassName="group-class"
               addonAfter={actionButton}
-              labelClassName="col-xs-3"
-              wrapperClassName="col-xs-9"
+              labelClassName="col-xs-12 col-sm-3"
+              wrapperClassName="col-xs-12 col-sm-9"
               onChange={this.handleChange} />
           :
           // locked to user input
