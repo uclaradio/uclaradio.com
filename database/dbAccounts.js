@@ -360,75 +360,28 @@ db.removeAllUsers = function(callback) {
 /***** FAQ *****/
 
 db.updateFAQs = function(newFAQs, callback) {
-	 // FAQModel.remove({}, callback(err) {
-	//  	if (err) { console.log("error deleting faqs:", err); }
-	//  	else {
-	//  		// update and insert new faqs
-	// 		newFAQs.map(function(faq) {
-	// 			FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
-	// 	    	if (err) { callback(err); }
-	// 	    	else {
-	// 					var updatedFAQs = [];
-	// 					for (var i = 0; i < o.length; i++) {
-	// 						updatedFAQs.push(db.webSafeFAQ(o[i]));
-	// 					}
-	// 					callback(null, updatedFAQs);
-	// 				}
- //        });
-	// 		});
-	// 	}
-	// });
- // };
-	db.getAllFAQs(function(err, o) {
-		if (o) {
-			// remove any not in the new faqs
-			var staleIds = [];
-			var newIds = [];
-			for (var i = 0; i < o.length; i++) {
-				var old = o[i];
-				staleIds.push(old.id);
-			}
-			for (var i = 0; i < newFAQs.length; i++) {
-				var faq = newFAQs[i];
-				if (staleIds.indexOf(faq.id) > -1) {
-					staleIds.splice(staleIds.indexOf(faq.id), 1);
-				}
-				else {
-					newIds.push(faq.id);
-				}
-			}
-			// remove old stale faqs
-			FAQModel.remove({id: {$in: staleIds}}, function(e) {
-				if (e) { console.log("error removing faq:", e); }
-			});
-			// update and insert new faqs
-			newFAQs.map(function(faq) {
-				db.getNextAvailableId(faqIdKey, function(nextId) {
-					var makeNewId = (newIds.indexOf(faq.id) > -1);
-					if (makeNewId) {
-						faq.id = nextId;
-					}
-					FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
-				    	if (err) { console.log("error updating faqs:", err); }
-				    	else {
-                db.setLastTakenId(faqIdKey, nextId, function(err) {
-                  if (err) { console.log("error setting next id for faqs: ", err); }
-                });
-              }
-					});
-				});
-			});
-			var updatedFAQs = [];
-			for (var i = 0; i < o.length; i++) {
-				updatedFAQs.push(db.webSafeFAQ(o[i]));
-			}
-			callback(null, updatedFAQs);
-		}
-		else {
-			callback(err);
-		}
-
+	// remove all old faqs
+	FAQModel.remove({}, function(e) {
+		if (e) { console.log("error removing faqs:", e); }
 	});
+	// update and insert new faqs
+	newFAQs.map(function(faq) {
+		db.getNextAvailableId(faqIdKey, function(nextId) {
+			var makeNewId = (newIds.indexOf(faq.id) > -1);
+			if (makeNewId) {
+				faq.id = nextId;
+			}
+			FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
+		    	if (err) { console.log("error updating faqs:", err); }
+		    	else {
+            db.setLastTakenId(faqIdKey, nextId, function(err) {
+              if (err) { console.log("error setting next id for faqs: ", err); }
+            });
+          }
+			});
+		});
+	});
+	callback(null, newFAQs);
 };
 
 // return array of all faq questions
