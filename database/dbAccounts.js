@@ -366,16 +366,8 @@ db.updateFAQs = function(newFAQs, callback) {
 	});
 	// update and insert new faqs
 	newFAQs.map(function(faq) {
-		db.getNextAvailableId(faqIdKey, function(nextId) {
-			faq.id = nextId;
-			FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
-		    	if (err) { console.log("error updating faqs:", err); }
-		    	else {
-            db.setLastTakenId(faqIdKey, nextId, function(err) {
-              if (err) { console.log("error setting next id for faqs: ", err); }
-            });
-          }
-			});
+		FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
+	    	if (err) { console.log("error updating faqs:", err); }
 		});
 	});
 	callback(null, newFAQs);
