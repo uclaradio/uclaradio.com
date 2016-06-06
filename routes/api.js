@@ -36,7 +36,7 @@ router.get('/nowplaying', function(req, res) {
 	var info = getTimeAndDay();
 
 	accounts.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
-		if (blurb) {
+		if (blurb && blurb.public) {
 			res.setHeader('Content-Type', 'application/json');
 			res.send(JSON.stringify(blurb));
 		}
