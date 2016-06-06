@@ -362,15 +362,19 @@ db.removeAllUsers = function(callback) {
 db.updateFAQs = function(newFAQs, callback) {
 	// remove all old faqs
 	FAQModel.remove({}, function(e) {
-		if (e) { console.log("error removing faqs:", e); }
+		if (e) {
+      console.log("error removing faqs:", e);
+      callback(e);
+    }
+    else {
+      FAQModel.insert(newFAQs, {}, function(err, faqs) {
+        if (err) { console.log("error updating faqs:", err); }
+        else {
+          callback(null, faqs);        
+        }
+      });
+    }
 	});
-	// update and insert new faqs
-	newFAQs.map(function(faq) {
-		FAQModel.findOneAndUpdate({'id': faq.id}, faq, {upsert:true, new:true}, function(err, o) {
-	    	if (err) { console.log("error updating faqs:", err); }
-		});
-	});
-	callback(null, newFAQs);
 };
 
 // return array of all faq questions
