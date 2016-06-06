@@ -92,6 +92,7 @@ var showIdKey = "show"; // ids for Show table
 var faqIdKey = "faq"; // ids for FAQ table
 var LastIdModel = mongoose.model('lastIds', LastIdSchema);
 
+
 // only include properties that are safe to send to the client
 db.webSafeUser = function(user) {
   return {"username": user.username,
@@ -461,14 +462,19 @@ db.addNewShow = function(title, day, time, djs, callback) {
       "djs": djs
     };
 
+    //Searches for a show with the same title.
     ShowModel.findOne({title: newData.title}, function(err, o) {
       if (o) {
-        callback('title-taken');
+        var text = "409: Duplicate Title Conflict - Show already scheduled for '" + o.day + " " + o.time + "'!";
+        err = text;
+        callback(text);
       }
       else {
         ShowModel.findOne({day: newData.day, time: newData.time}, function(err, o) {
           if (o) {
-            callback('time-taken');
+            err = text;
+            text = "409: Schedule conflict - timeslot conflicts with '" + o.title + "'!";
+            callback(text);
           }
           else {
             var newShow = new ShowModel(newData);

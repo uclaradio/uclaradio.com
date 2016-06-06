@@ -8,8 +8,11 @@ var callback = function(err, privilegeSaved) { if (err) { console.log("error occ
 
 // links to make available to managers
 var links = [];
-var managerPanel = {title: "Manager Panel", link: "/panel/manager"};
+var managerPanel = {title: "Manage Panel", link: "/panel/manager"};
 links.push(managerPanel);
+
+var changeLog = {title: "Change Log", link: "/panel/manager"};
+links.push(changeLog);
 
 // addPrivilege = function(privilege, links, callback)
 accounts.addPrivilege(accounts.managerPrivilegeName, links, callback);

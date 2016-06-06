@@ -392,6 +392,10 @@ function getIndexOffOfDayAndTime(day, time) {
 	};
 }
 
+/* TODO: Modify Function such that if there is already a show scheduled
+at the timeslot, an error with the title of the show is returned.
+
+*/
 db.insertTimeslotsToSchedule = function(callback) {
 	var namesHandledSoFar = [];
 	ProposedShowModel.find({}, function(err, shows) {

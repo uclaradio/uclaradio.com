@@ -447,10 +447,14 @@ router.post('/api/addShow', function(req, res) {
 		// not logged in, redirect to log in page
 		res.redirect('/panel');
 	}
-	else {
+	else {//err: String - 'Conflict: information about conflicting schedule'
 		var callback = function(err, saved) {
-			if (err) { console.log("failed to add show for user: ", err); }
-
+			if (err) { 
+				res.send(409, {error: err});
+				
+				console.log("Failed:", err); 
+			}
+4
 			if (saved) {
 				// return full list of shows
 				res.redirect('/panel/api/shows');

@@ -8,7 +8,9 @@ var urls = {url: "/panel/api/user",
             picURL: "/panel/api/userPic",
             showsURL: "/panel/api/shows",
             showLink: "/panel/show",
-            addShowURL: "/panel/api/addShow"};
+            addShowURL: "/panel/api/addShow",
+            changeLog: "/panel/changeLog" //TBD
+            };
 
 // Custom elements
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
@@ -211,6 +213,10 @@ var UserShowsList = React.createClass({
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({shows: oldShows});
+        var response = xhr.responseText.match(/[0-9].*!/);
+
+        alert(response);
+        
         console.error(this.props.urls.addShowURL, status, err.toString());
       }.bind(this)
     });
@@ -290,12 +296,13 @@ var NewShowForm = React.createClass({
               <Button onClick={this.handleSubmit} className="lightPadding">Submit</Button>
               <Button className="cancelLink lightPadding" onClick={this.toggleEditableField}>Cancel</Button>
             </div>
-          </form>
+          </form>            
           :
           // locked to user input
-          <p className="centered"><a onClick={this.toggleEditableField}>+ Add New Show</a></p>
+          <p className="centered"><a onClick={this.toggleEditableField}>+ Add New Show</a></p>  
+
         }
-      </div>
+      </div> 
     );
   }
 });

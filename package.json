@@ -24,7 +24,6 @@
     "less": "^2.6.1",
     "less-loader": "^2.2.2",
     "letsencrypt-express": "^1.1.5",
-    "lwip": "0.0.8",
     "mongoose": "^4.0.1",
     "morgan": "~1.5.1",
     "multer": "^0.1.8",
@@ -38,7 +37,8 @@
     "spdy": "^3.3.2",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "kerberos": "~0.0.17"
   },
   "devDependencies": {
     "babel-cli": "^6.6.0",
