@@ -505,17 +505,41 @@ db.getShowById = function(id, callback) {
   });
 };
 
-// return array of all users
+// get all managers with user data too (name, pictures, show)
 db.getAllShows = function(callback) {
-  ShowModel.find(function(err, res) {
-    if (err) {
-      callback(err);
-    }
+  ShowModel.find({}, function(err, shows) {
+    if (err) { callback(err); }
     else {
-      callback(null, res);
+      var usernames = [];
+      shows.map(function(show) {
+        show.djs.map(function(dj) {
+          usernames.push(dj);
+        })
+      });
+      UserModel.find({username: {$in: usernames}}, function(err, users) {
+        if (err) { callback(err, null); }
+        else {
+          // create a dictionary of all users username->djName
+          var nameMap = {};
+          users.map(function(u) {
+            nameMap[u.username] = u.fullName;
+          });
+
+          for (var s = 0; s < shows.length; s++) {
+            var show = db.webSafeShow(shows[s]);
+            var djList = {};
+            show.djs.map(function(dj) {
+              djList[dj] = nameMap[dj];
+            });
+            show["djs"] = djList;
+            shows[s] = show;
+          }
+          callback(null, shows);
+        }
+      });
     }
   });
-};
+}
 
 db.removeShow = function(id, callback) {
   ShowModel.remove({id: id}, function (e) {
@@ -525,8 +549,33 @@ db.removeShow = function(id, callback) {
 
 // show for timeslot: used for currently playing show
 db.getBlurbByTimeslotAndDay = function(time, day, callback) {
-  ShowModel.findOne({time: time, day: day}, function(err, blurb) {
-    callback(err, blurb);
+  ShowModel.findOne({time: time, day: day}, function(err, show) {
+    if (err || show == null) {
+      callback(err);
+    }
+    else {
+      UserModel.find({username: {$in: show.djs}}, function(err, users) {
+        if (err) {
+          console.log(err);
+          callback(err);
+        }
+        else {
+          // create a dictionary of all users username->djName
+          var nameMap = {};
+          users.map(function(u) {
+            nameMap[u.username] = u.fullName;
+          });
+
+          var safeShow = db.webSafeShow(show);
+          var djList = {};
+          show.djs.map(function(dj) {
+            djList[dj] = nameMap[dj];
+          });
+          safeShow["djs"] = djList;
+          callback(null, safeShow);
+        }
+      })
+    }
   });
 };
 
