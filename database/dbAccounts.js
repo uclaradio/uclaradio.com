@@ -494,8 +494,13 @@ db.userHasAccessToShow = function(username, id, callback) {
 
 db.getShowByTitle = function(title, callback) {
   ShowModel.findOne({title: title}, function(err, o) {
-  	o._id = null;
-    callback(err, db.webSafeShow(o));
+    if (o) {
+      o._id = null;
+      callback(err, db.webSafeShow(o));
+    }
+    else {
+      callback(err);
+    }
   });
 };
 
@@ -522,7 +527,7 @@ db.getAllShows = function(callback) {
           // create a dictionary of all users username->djName
           var nameMap = {};
           users.map(function(u) {
-            nameMap[u.username] = u.fullName;
+            nameMap[u.username] = u.djName;
           });
 
           for (var s = 0; s < shows.length; s++) {
@@ -563,7 +568,7 @@ db.getBlurbByTimeslotAndDay = function(time, day, callback) {
           // create a dictionary of all users username->djName
           var nameMap = {};
           users.map(function(u) {
-            nameMap[u.username] = u.fullName;
+            nameMap[u.username] = u.djName;
           });
 
           var safeShow = db.webSafeShow(show);

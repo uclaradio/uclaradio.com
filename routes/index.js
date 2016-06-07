@@ -7,8 +7,15 @@ router.get('/', function(req, res) {
 	var info = getTimeAndDay();
 
 	db2.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
-		if (blurb)
-			blurb.djName = blurb.djs.join(',');
+		var combined = "";
+		var comma = false;
+		for (user in blurb.djs) {
+			if (comma) { combined += ", "; }
+			else { comma = true; }
+
+			combined += blurb.djs[user];
+		}
+		blurb.djName = combined;
 
 		res.render('index', {blurb: blurb});
 	});
