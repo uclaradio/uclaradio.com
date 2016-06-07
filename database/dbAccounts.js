@@ -367,7 +367,7 @@ db.updateFAQs = function(newFAQs, callback) {
       callback(e);
     }
     else {
-      FAQModel.insert(newFAQs, {}, function(err, faqs) {
+      FAQModel.collection.insert(newFAQs, {}, function(err, faqs) {
         if (err) { console.log("error updating faqs:", err); }
         else {
           callback(null, faqs);        
