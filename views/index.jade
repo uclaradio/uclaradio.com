@@ -71,11 +71,13 @@ head
               p LISTEN
 
           .col-md-4
-            #blurb-title
-              h1= blurb.showName
+            if (blurb.title)
+              #blurb-title
+                h1= blurb.title
 
-            .djName
-              h3= blurb.djName
+            if (blurb.djName)
+              .djName
+                h3= blurb.djName
 
             if blurb.genre
               #genre
@@ -85,10 +87,11 @@ head
               p= blurb.description
 
             #link
-              a(href='#{blurb.link}', target='_blank') Check us out!
+              if (blurb.link)
+                a(href='#{blurb.link}', target='_blank') Check us out!
 
-          if (blurb.picture)
-            .col-md-4
+          .col-md-4
+            if (blurb.picture)
               img#blurb-image(src='#{blurb.picture}')
 
       .row

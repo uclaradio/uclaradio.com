@@ -17,7 +17,9 @@ router.get('/', function(req, res) {
 					if (comma) { combined += ", "; }
 					else { comma = true; }
 
-					combined += blurb.djs[user];
+					if (blurb.djs[user]) {
+						combined += blurb.djs[user];
+					}
 				}
 			}
 			blurb.djName = combined;

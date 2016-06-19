@@ -283,6 +283,23 @@ accounts.getDJNamesFromUsernames = function(usernames, callback) {
   });
 };
 
+accounts.getDJNameMap = function(usernames, callback) {
+  UserModel.find({username: {$in: usernames}}, function(err, users) {
+    if (err) {
+      console.log(err);
+      callback(err);
+    }
+    else {
+      // create a dictionary of all users username->djName
+      var nameMap = {};
+      users.map(function(u) {
+        nameMap[u.username] = u.djName;
+      });
+      callback(null, nameMap);
+    }
+  });
+}
+
 // return array of all users
 accounts.getAllUsers = function(callback) {
   UserModel.find(function(err, res) {

@@ -61,14 +61,20 @@ head
                 img(src="#{manager.picture}")
               .info
                 .meetings
-                  h1 MEETINGS: 
-                  ul
-                    li #{manager.meetingTime} (#{manager.meetingPlace})
+                  h1 MEETINGS:
+                  if (manager.meetingTime)
+                    if (manager.meetingPlace)
+                      ul
+                        li #{manager.meetingTime} (#{manager.meetingPlace})
+                    else
+                      ul
+                        li #{manager.meetingTime}
                 .contact
                   h1 CONTACT: 
-                  ul
-                    li
-                      a(href="mailto:#{manager.email}") email me!
+                  if (manager.email)
+                    ul
+                      li
+                        a(href="mailto:#{manager.email}") email me!
 
 
 script(src='js/newBlurb.js')

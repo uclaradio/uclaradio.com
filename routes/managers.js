@@ -3,6 +3,7 @@
 
 var express = require('express');
 var router = express.Router();
+var helper_funcs = require('./helper_funcs');
 var accounts = require('../database/accounts');
 
 router.get('/', function(req, res) {

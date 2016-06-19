@@ -165,35 +165,26 @@ shows.getShowById = function(id, callback) {
 
 // get all shows with user data too (name, picture, djs)
 shows.getAllShows = function(callback) {
-  ShowModel.find({}, function(err, shows) {
+  ShowModel.find({}, function(err, allShows) {
     if (err) { callback(err); }
     else {
       var usernames = [];
-      shows.map(function(show) {
+      allShows.map(function(show) {
         show.djs.map(function(dj) {
           usernames.push(dj);
         })
       });
-      UserModel.find({username: {$in: usernames}}, function(err, users) {
-        if (err) { callback(err, null); }
-        else {
-          // create a dictionary of all users username->djName
-          var nameMap = {};
-          users.map(function(u) {
-            nameMap[u.username] = u.djName;
+      accounts.getDJNameMap(usernames, function(err, nameMap) {
+        for (var s = 0; s < allShows.length; s++) {
+          var show = shows.webSafeShow(allShows[s]);
+          var djList = {};
+          show.djs.map(function(dj) {
+            djList[dj] = nameMap[dj];
           });
-
-          for (var s = 0; s < shows.length; s++) {
-            var show = shows.webSafeShow(shows[s]);
-            var djList = {};
-            show.djs.map(function(dj) {
-              djList[dj] = nameMap[dj];
-            });
-            show["djs"] = djList;
-            shows[s] = show;
-          }
-          callback(null, shows);
+          show["djs"] = djList;
+          allShows[s] = show;
         }
+        callback(null, allShows);
       });
     }
   });
@@ -211,28 +202,16 @@ shows.getShowByTimeslotAndDay = function(time, day, callback) {
     if (err || show == null) {
       callback(err);
     }
-    else {
-      UserModel.find({username: {$in: show.djs}}, function(err, users) {
-        if (err) {
-          console.log(err);
-          callback(err);
-        }
-        else {
-          // create a dictionary of all users username->djName
-          var nameMap = {};
-          users.map(function(u) {
-            nameMap[u.username] = u.djName;
-          });
-
-          var safeShow = shows.webSafeShow(show);
-          var djList = {};
-          show.djs.map(function(dj) {
-            djList[dj] = nameMap[dj];
-          });
-          safeShow["djs"] = djList;
-          callback(null, safeShow);
-        }
-      })
+    else {// usernames: show.djs
+      accounts.getDJNameMap(show.djs, function(err, nameMap) {
+        var safeShow = shows.webSafeShow(show);
+        var djList = {};
+        show.djs.map(function(dj) {
+          djList[dj] = nameMap[dj];
+        });
+        safeShow["djs"] = djList;
+        callback(null, safeShow);
+      });
     }
   });
 };
