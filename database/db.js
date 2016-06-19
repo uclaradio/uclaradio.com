@@ -5,7 +5,7 @@ var helper_funcs = require('../routes/helper_funcs');
 var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
  
-mongoose.connect('mongodb://localhost/local');
+mongoose.connect('mongodb://localhost/uclaradio');
 
 var db = {};
 

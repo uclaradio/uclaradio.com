@@ -8,11 +8,8 @@ var callback = function(err, privilegeSaved) { if (err) { console.log("error occ
 
 // links to make available to managers
 var links = [];
-var managerPanel = {title: "Manage Panel", link: "/panel/manager"};
+var managerPanel = {title: "Manager Panel", link: "/panel/manager"};
 links.push(managerPanel);
-
-var changeLog = {title: "Change Log", link: "/panel/manager"};
-links.push(changeLog);
 
 // addPrivilege = function(privilege, links, callback)
 accounts.addPrivilege(accounts.managerPrivilegeName, links, callback);
@@ -36,3 +33,4 @@ accounts.requestNewAccount("gm", passwords.gmpass, "chrislaganiere@gmail.com", "
 accounts.updatePrivilege("gm", accounts.managerPrivilegeName, true, callback);
 
 console.log("Finished setting up Secret DJ Panel");
+process.exit();
