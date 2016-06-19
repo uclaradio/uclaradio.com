@@ -8,16 +8,12 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 
 var routes = require('./routes/index');
-var newBlurb = require('./routes/newBlurb');
-var newShow = require('./routes/newShow');
 var staffingPoints = require('./routes/staffingPoints');
-var proposedShows = require('./routes/proposedShows');
 var ios = require('./routes/ios');
 var schedule = require('./routes/schedule');
 var pages = require('./routes/pages');
 var calendar = require('./routes/calendar');
-var shows = require('./routes/shows');
-var manageShows = require('./routes/manageShows');
+var showsPages = require('./routes/shows');
 var managers = require('./routes/managers');
 var TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
 var panel = require('./routes/panel.js');
@@ -25,12 +21,6 @@ var notFound = require('./routes/notFound');
 var analytics = require('./routes/analytics');
 var api = require('./routes/api');
 var app = express();
-
-// data
-var accounts = require('./database/accounts');
-var shows = require('./database/shows');
-var faqs = require('./database/faqs');
-var staffingPoints = require('./database/staffingPoints');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,16 +45,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(multer({ dest: './public/uploads/'}));
 
 app.use('/', routes);
-app.use('/newBlurb', newBlurb);
-app.use('/newShow', newShow);
 app.use('/staffingPoints', staffingPoints);
-app.use('/proposedShows', proposedShows);
 app.use('/ios', ios);
 app.use('/schedule', schedule);
 app.use('/pages', pages);
 app.use('/calendar', calendar);
-app.use('/shows', shows);
-app.use('/manageShows', manageShows);
+app.use('/shows', showsPages);
 app.use('/managers', managers);
 app.use('/GiveawayCalendar', TicketGiveawayCalendar);
 app.use('/notFound', notFound);

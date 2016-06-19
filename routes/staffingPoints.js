@@ -4,8 +4,9 @@ var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 var router = express.Router();
-var db = require('../database/db');
 var passwords = require('../passwords.json');
+
+var points = require('../database/points');
 
 router.get('/', function(req, res) {
 	res.render('staffingPointsForm', {status: ''});
@@ -17,7 +18,7 @@ router.post('/', function(req, res, next) {
 		return res.end("Incorrect Password.");	
 
 	// Adds the proposed show to the database.
-	db.addStaffingPoints(req.body, function(err, staffingPointsSaved) {
+	points.addStaffingPoints(req.body, function(err, staffingPointsSaved) {
 		console.log('adding staffing points');
 
 		if (err) {
@@ -40,7 +41,7 @@ router.post('/view/update', function(req, res, next) {
 	if (req.body.password !== passwords.managerapprovalpassword) {
 		res.end('incorrect password');
 	} else {
-		db.updateStaffingPointStatus(req.body.userId, req.body.status, req.body.managerNotes, function(err, success) {
+		points.updateStaffingPointStatus(req.body.userId, req.body.status, req.body.managerNotes, function(err, success) {
 			if (err) {
 				res.end(err);
 				console.log(err);
@@ -52,7 +53,7 @@ router.post('/view/update', function(req, res, next) {
 });
 
 router.get('/points', function(req, res, next) {
-	db.getStaffingPoints(function(err, points) {
+	points.getStaffingPoints(function(err, points) {
 		res.send(points);
 	});
 });

@@ -8,6 +8,7 @@ require('./db');
 require('./accounts');
 
 var mongoose = require('mongoose');
+var fs = require('fs');
 
 var shows = {};
 
@@ -73,16 +74,12 @@ shows.addNewShow = function(title, day, time, djs, callback) {
     //Searches for a show with the same title.
     ShowModel.findOne({title: newData.title}, function(err, o) {
       if (o) {
-        var text = "409: Duplicate Title Conflict - Show already scheduled for '" + o.day + " " + o.time + "'!";
-        err = text;
-        callback(text);
+        callback('title-taken');
       }
       else {
         ShowModel.findOne({day: newData.day, time: newData.time}, function(err, o) {
           if (o) {
-            err = text;
-            text = "409: Schedule conflict - timeslot conflicts with '" + o.title + "'!";
-            callback(text);
+            callback('time-taken');
           }
           else {
             var newShow = new ShowModel(newData);

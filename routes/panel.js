@@ -4,6 +4,10 @@
 var express = require('express');
 var router = express.Router();
 
+var accounts = require('../database/accounts');
+var shows = require('../database/shows');
+var faqs = require('../database/faqs');
+
 /***** Main Log In Page *****/
 
 router.get('/', function(req, res) {
@@ -119,7 +123,7 @@ router.post('/api/faq', function(req, res) {
 	else {
 		accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
 			if (hasAccess && req.body.faqs) {
-				accounts.updateFAQs(JSON.parse(req.body.faqs), function(err, o) {
+				faqs.updateFAQs(JSON.parse(req.body.faqs), function(err, o) {
 					if (o) { res.json(o); }
 					else { res.status(400).send(err); }
 				});
@@ -445,14 +449,10 @@ router.post('/api/addShow', function(req, res) {
 		// not logged in, redirect to log in page
 		res.redirect('/panel');
 	}
-	else {//err: String - 'Conflict: information about conflicting schedule'
+	else {
 		var callback = function(err, saved) {
-			if (err) { 
-				res.send(409, {error: err});
-				
-				console.log("Failed:", err); 
-			}
-4
+			if (err) { console.log("failed to add show for user: ", err); }
+			
 			if (saved) {
 				// return full list of shows
 				res.redirect('/panel/api/shows');

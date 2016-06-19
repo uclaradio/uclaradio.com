@@ -3,6 +3,8 @@
 
 var express = require('express');
 var router = express.Router();
+var accounts = require('../database/accounts');
+var shows = require('../database/shows');
 
 //return all shows
 router.get('/', function(req, res) {

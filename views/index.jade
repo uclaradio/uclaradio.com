@@ -87,8 +87,9 @@ head
             #link
               a(href='#{blurb.link}', target='_blank') Check us out!
 
-          .col-md-4
-            img#blurb-image(src='#{blurb.picture}')
+          if (blurb.picture)
+            .col-md-4
+              img#blurb-image(src='#{blurb.picture}')
 
       .row
         .apply-div

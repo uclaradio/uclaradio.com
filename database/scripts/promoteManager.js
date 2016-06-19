@@ -1,5 +1,9 @@
-var db = require('../db.js');
-var accounts = require('../dbAccounts.js');
+// promoteManager.js
+// Promotes a user to a manager position
+//
+// usage: node .../promoteManager.js [username]
+
+var accounts = require('../accounts.js');
 
 var user = process.argv[2];
 if (user == null) {

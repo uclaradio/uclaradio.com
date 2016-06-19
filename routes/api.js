@@ -1,6 +1,9 @@
 // api.js
 // User-Facing API for public data
 
+var accounts = require('../database/accounts');
+var shows = require('../database/shows');
+
 var express = require('express');
 var router = express.Router();
 
@@ -9,7 +12,7 @@ function checkPublic(show) {
 };
 
 router.get('/show/:id', function(req, res) {
-	accounts.getShowById(req.params.id, function(err, o) {
+	shows.getShowById(req.params.id, function(err, o) {
 		if (o && o.public) {
 			res.json(o);
 		}
@@ -20,7 +23,7 @@ router.get('/show/:id', function(req, res) {
 });
 
 router.get('/schedule', function(req, res) {
-	accounts.getAllShows(function(err, o) {
+	shows.getAllShows(function(err, o) {
 		if (o) {
 			res.json({shows: o.filter(checkPublic)});
 		}
@@ -35,7 +38,7 @@ router.get('/schedule', function(req, res) {
 router.get('/nowplaying', function(req, res) {
 	var info = getTimeAndDay();
 
-	accounts.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
+	shows.getShowByTimeslotAndDay(info.time, info.day, function(err, blurb) {
 		if (blurb && blurb.public) {
 			res.setHeader('Content-Type', 'application/json');
 			res.send(JSON.stringify(blurb));
@@ -47,7 +50,7 @@ router.get('/nowplaying', function(req, res) {
 });
 
 // router.get('/dj/:id', function(req, res) {
-// 	accounts.getShowById(req.params.id, function(err, o) {
+// 	shows.getShowById(req.params.id, function(err, o) {
 // 		if (o) {
 // 			res.json(o);
 // 		}

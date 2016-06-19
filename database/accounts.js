@@ -6,6 +6,7 @@ require('./db');
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var fs = require('fs');
 
 var accounts = {};
 
@@ -173,16 +174,18 @@ accounts.listAccounts = function(callback) {
     }
     UserModel.find({}, function(err, verifiedAccounts) {
     	// also indicate if user is a manager
-      PrivilegeModel.findOne({name: accounts.managerPrivilegeName}, function(err, o) {
+      PrivilegeModel.findOne({name: accounts.managerPrivilegeName}, function(err, privilegeUsers) {
         verifiedUsers = [];
-        for (var i = 0; i < verifiedAccounts.length; i++) {
-          var user = {"username": verifiedAccounts[i].username, "fullName": verifiedAccounts[i].fullName,
-            "djName": verifiedAccounts[i].djName, "email": verifiedAccounts[i].email};
-          if (o.users.indexOf(user.username) >= 0) {
-            // user is a manager
-            user.manager = true;
+        if (privilegeUsers != null) {
+          for (var i = 0; i < verifiedAccounts.length; i++) {
+            var user = {"username": verifiedAccounts[i].username, "fullName": verifiedAccounts[i].fullName,
+              "djName": verifiedAccounts[i].djName, "email": verifiedAccounts[i].email};
+            if (privilegeUsers.users.indexOf(user.username) >= 0) {
+              // user is a manager
+              user.manager = true;
+            }
+            verifiedUsers.push(user);
           }
-          verifiedUsers.push(user);
         }
         callback(err, {"verified": verifiedUsers, "unverified": unverifiedUsers});
       });

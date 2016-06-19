@@ -30,10 +30,10 @@ faqs.updateFAQs = function(newFAQs, callback) {
       callback(e);
     }
     else {
-      FAQModel.collection.insert(newFAQs, {}, function(err, faqs) {
+      FAQModel.collection.insert(newFAQs, {}, function(err, allFAQs) {
         if (err) { console.log("error updating faqs:", err); }
         else {
-          callback(null, faqs);        
+          callback(null, allFAQs);        
         }
       });
     }
@@ -47,11 +47,11 @@ faqs.getAllFAQs = function(callback) {
       callback(err);
     }
     else {
-      var faqs = [];
+      var allFAQs = [];
       for (var i = 0; i < res.length; i++) {
-        faqs.push(faqs.webSafeFAQ(res[i]));
+        allFAQs.push(faqs.webSafeFAQ(res[i]));
       }
-      callback(null, faqs);
+      callback(null, allFAQs);
     }
   });
 };

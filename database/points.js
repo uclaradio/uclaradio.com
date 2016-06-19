@@ -3,7 +3,7 @@ require('./db');
 
 var mongoose = require('mongoose');
 
-var staffingPoints = {};
+var points = {};
 
 var StaffingPointsSchema = new mongoose.Schema({
   fullName: String,
@@ -18,7 +18,7 @@ var StaffingPointsSchema = new mongoose.Schema({
 
 var StaffingPointsModel = mongoose.model('StaffingPoints', StaffingPointsSchema);
 
-staffingPoints.addStaffingPoints = function(data, callback) {
+points.addStaffingPoints = function(data, callback) {
   staffingPointsData = {
     fullName: data.fullName,
     dateCompleted: data.dateCompleted,
@@ -38,14 +38,14 @@ staffingPoints.addStaffingPoints = function(data, callback) {
   });
 };
 
-staffingPoints.updateStaffingPointStatus = function(id, newStatus, managerNotes, callback) {
+points.updateStaffingPointStatus = function(id, newStatus, managerNotes, callback) {
   StaffingPointsModel.update({_id: id}, {$set: {'status': newStatus, 'managerNotes': managerNotes}}, { multi: false }, function(err, update) {
     if (err) console.log(err);
     callback(err, update);
   });
 };
 
-staffingPoints.getStaffingPoints = function(callback) {
+points.getStaffingPoints = function(callback) {
   StaffingPointsModel.find({}, function(err, points) {
     if (err) console.log(err);
     callback(err, points);
@@ -136,4 +136,4 @@ staffingPoints.getStaffingPoints = function(callback) {
 //  };
 // }
 
-module.exports = staffingPoints;
+module.exports = points;

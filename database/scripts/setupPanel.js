@@ -1,36 +1,42 @@
-var accounts = require('../db.js'); // included to connect to database
-var accounts = require('../dbAccounts.js');
+// setupPanel.js
+// Set up user panel with first account: 
+//
+// - username: gm
+// - password: [whatever is in passwords.json under 'gmpass']
+//
+// usage: node .../setupPanel.js
+
+var accounts = require('../accounts');
 var passwords = require('../../passwords.json');
 
 console.log("Setting up Secret DJ Panel...");
-
-var callback = function(err, privilegeSaved) { if (err) { console.log("error occurred saving privilege");}};
 
 // links to make available to managers
 var links = [];
 var managerPanel = {title: "Manager Panel", link: "/panel/manager"};
 links.push(managerPanel);
 
-// addPrivilege = function(privilege, links, callback)
-accounts.addPrivilege(accounts.managerPrivilegeName, links, callback);
+/***** Create Manager Privilege *****/
 
-/***** Create General Manager Account *****/
+accounts.addPrivilege(accounts.managerPrivilegeName, links, function(err, success) {
 
- // requestNewAccount = function(username, pass, email, fullName, callback)
-accounts.requestNewAccount("gm", passwords.gmpass, "chrislaganiere@gmail.com", "General Manager", function(err, saved) {
-  if (err) { console.log("error creating gm account:", err); }
-  else if (saved) {
-    accounts.verifyAccount("gm", function(err, o) {
-      if (err) { console.log("error validating gm user", err); }
-    });
-  }
+  /***** Create General Manager Account *****/
+
+  // requestNewAccount = function(username, pass, email, fullName, callback)
+  accounts.requestNewAccount("gm", passwords.gmpass, "radio.web@media.ucla.edu", "General Manager", function(err, saved) {
+    if (err) { console.log("error creating gm account:", err); }
+    else if (saved) {
+      accounts.verifyAccount("gm", function(err, o) {
+        if (err) { console.log("error validating gm user", err); }
+
+        /***** Add new manager account to privilege *****/
+
+        // updatePrivilege = function(username, privilege, shouldHave, callback)
+        accounts.updatePrivilege("gm", accounts.managerPrivilegeName, true, function(err, success) {
+          console.log("Finished setting up Secret DJ Panel");
+          process.exit();
+        });
+      });
+    }
+  });
 });
-
-// db.verifyAccount = function(username, callback)
-
-
-// updatePrivilege = function(username, privilege, shouldHave, callback)
-accounts.updatePrivilege("gm", accounts.managerPrivilegeName, true, callback);
-
-console.log("Finished setting up Secret DJ Panel");
-process.exit();
