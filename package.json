@@ -7,6 +7,7 @@
     "postinstall": "babel reactComponents --out-dir public/js/react"
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "body-parser": "^1.12.2",
     "connect-mongo": "0.8.2",
     "content-type": "^1.0.1",
@@ -21,6 +22,7 @@
     "grunt-webpack": "^1.0.11",
     "jade": "~1.9.2",
     "jsx-loader": "^0.13.2",
+    "kerberos": "~0.0.17",
     "less": "^2.6.1",
     "less-loader": "^2.2.2",
     "letsencrypt-express": "^1.1.5",
@@ -38,8 +40,7 @@
     "spdy": "^3.3.2",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1",
-    "kerberos": "~0.0.17"
+    "webpack-dev-server": "^1.14.1"
   },
   "devDependencies": {
     "babel-cli": "^6.6.0",

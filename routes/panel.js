@@ -120,7 +120,6 @@ router.post('/api/faq', function(req, res) {
 	else {
 		accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
 			if (hasAccess && req.body.faqs) {
-				console.log('updating');
 				accounts.updateFAQs(JSON.parse(req.body.faqs), function(err, o) {
 					if (o) { res.json(o); }
 					else { res.status(400).send(err); }
