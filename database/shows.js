@@ -5,7 +5,7 @@
 require('./db');
 
 // user accounts
-require('./accounts');
+var accounts = require('./accounts');
 
 var mongoose = require('mongoose');
 var fs = require('fs');
@@ -61,8 +61,8 @@ shows.webSafeShow = function(show) {
 
 // create a new show with the given data
 shows.addNewShow = function(title, day, time, djs, callback) {
-  shows.getNextAvailableId(showIdKey, function(nextId) {
-    // console.log("nextId: ", nextId);
+  accounts.getNextAvailableId(accounts.showIdKey, function(nextId) {
+    console.log("nextId: ", nextId);
     newData = {
       "title": title,
       "id": nextId,
@@ -86,7 +86,7 @@ shows.addNewShow = function(title, day, time, djs, callback) {
             newShow.save(function(err, saved) {
               callback(err, saved);
               if (saved) {
-                shows.setLastTakenId(showIdKey, nextId, function(err) {
+                accounts.setLastTakenId(accounts.showIdKey, nextId, function(err) {
                   if (err) { console.log("error setting next id for shows: ", err); }
                 });
               }

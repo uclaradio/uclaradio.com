@@ -272,7 +272,7 @@ router.get('/api/showData/:id', function(req, res) {
 		res.status(400).send();
 	}
 	else {
-		accounts.userHasAccessToShow(req.session.user.username, req.params.id, function(hasAccess) {
+		shows.userHasAccessToShow(req.session.user.username, req.params.id, function(hasAccess) {
 			if (!hasAccess) {
 				// user doesn't have access to this show
 				console.log("user requested show they don't have access to");
@@ -280,7 +280,7 @@ router.get('/api/showData/:id', function(req, res) {
 				return;
 			}
 			else {
-				accounts.getShowById(req.params.id, function(err, o) {
+				shows.getShowById(req.params.id, function(err, o) {
 					if (o) {
 						res.json(o);
 					}
@@ -402,7 +402,7 @@ router.post('/api/updateShow', function(req, res) {
 	}
 	else {
 		var showData = JSON.parse(req.body.show);
-		accounts.userHasAccessToShow(req.session.user.username, showData.id, function(hasAccess) {
+		shows.userHasAccessToShow(req.session.user.username, showData.id, function(hasAccess) {
 			// user doesn't have access to this show
 			if (!hasAccess) {
 				console.log("user requested invalid show");
@@ -450,17 +450,17 @@ router.post('/api/addShow', function(req, res) {
 		res.redirect('/panel');
 	}
 	else {
-		var callback = function(err, saved) {
-			if (err) { console.log("failed to add show for user: ", err); }
-			
-			if (saved) {
+		shows.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], function(err, saved) {
+			if (err) {
+				console.log("failed to add show for user: ", err); 
+				res.json({"success": false, "err": err});
+			}
+
+			else {
 				// return full list of shows
 				res.redirect('/panel/api/shows');
 			}
-			else { res.status(400).send(); }
-		}
-		// addNewShow = function(title, day, time, djs, callback) {
-		shows.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], callback);
+		});
 	}
 });
 
