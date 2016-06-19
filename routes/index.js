@@ -1,12 +1,13 @@
+// index.js
+// Front page
+
 var express = require('express');
 var router = express.Router();
-var db = require('../database/db');
-var db2 = require('../database/dbAccounts');
 
 router.get('/', function(req, res) {
 	var info = getTimeAndDay();
 
-	db2.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
+	shows.getShowByTimeslotAndDay(info.time, info.day, function(err, blurb) {
 		if (blurb != null) {
 			var combined = "";
 			var comma = false;
@@ -29,7 +30,7 @@ router.get('/', function(req, res) {
 router.get('/blurbinfo', function(req, res, next) {
 	var info = getTimeAndDay();
 
-	db.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
+	shows.getShowByTimeslotAndDay(info.time, info.day, function(err, blurb) {
 		if (blurb)
 			blurb.djName = blurb.djName.join(',');
 

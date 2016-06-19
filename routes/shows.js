@@ -1,14 +1,14 @@
+// shows.js
+// List of shows and show details pages
+
 var express = require('express');
 var router = express.Router();
-var accounts = require('../database/dbAccounts');
-var helper_funcs = require('./helper_funcs.js')
-
 
 //return all shows
 router.get('/', function(req, res) {
 
 
-	accounts.getAllShows(function(err, shows) {
+	shows.getAllShows(function(err, shows) {
 		//assign order
 		shows = helper_funcs.AppendValueSoSort(shows);
 
@@ -56,7 +56,7 @@ router.get('/:show', function (req, res) {
 	//UNSAFE characters
 	show = helper_funcs.decode_safe_url(req.params.show);
 
-	accounts.getShowByTitle(show, function(err, show) {
+	shows.getShowByTitle(show, function(err, show) {
 		if (show == null) {
 			console.log("no show");
 			res.redirect('/');

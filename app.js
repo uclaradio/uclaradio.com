@@ -26,6 +26,12 @@ var analytics = require('./routes/analytics');
 var api = require('./routes/api');
 var app = express();
 
+// data
+var accounts = require('./database/accounts');
+var shows = require('./database/shows');
+var faqs = require('./database/faqs');
+var staffingPoints = require('./database/staffingPoints');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

@@ -1,9 +1,8 @@
+// panel.js
+// Staff user panel pages and API
+
 var express = require('express');
 var router = express.Router();
-var db = require('../database/db');
-var accounts = require('../database/dbAccounts.js');
-var lwip = require('lwip');
-
 
 /***** Main Log In Page *****/
 
@@ -91,7 +90,7 @@ router.get('/faq', function(req, res) {
 });
 
 router.get('/api/faq', function(req, res) {
-	accounts.getAllFAQs(function(err, o) {
+	faqs.getAllFAQs(function(err, o) {
 		if (o) {
 			var response = {faqs: o};
 			if (req.session.user == null) {
@@ -387,7 +386,7 @@ router.get('/api/shows', function(req, res) {
 				res.json(shows);
 			}
 		}
-		accounts.getShowsForUser(req.session.user.username, callback);
+		shows.getShowsForUser(req.session.user.username, callback);
 	}
 });
 
@@ -413,7 +412,7 @@ router.post('/api/updateShow', function(req, res) {
 				if (show) { res.json(show); }
 				else { res.status(400).send(); }
 			}
-			accounts.updateShow(showData.id, showData, callback);
+			shows.updateShow(showData.id, showData, callback);
 		});
 	}
 });
@@ -425,7 +424,7 @@ router.post('/api/deleteShow', function(req, res) {
 		res.redirect('/panel');
 	}
 	else {
-		accounts.userHasAccessToShow(req.session.user.username, req.body.id, function(hasAccess) {
+		shows.userHasAccessToShow(req.session.user.username, req.body.id, function(hasAccess) {
 			// user doesn't have access to this show
 			if (!hasAccess) {
 				console.log("user requested invalid show");
@@ -433,7 +432,7 @@ router.post('/api/deleteShow', function(req, res) {
 				return;
 			}
 
-			accounts.removeShow(req.body.id, function (e) {
+			shows.removeShow(req.body.id, function (e) {
 				if (e) { console.log("error removing show: ", e); res.status(400).send(e); }
 				else { res.json("success"); }
 			});
@@ -461,7 +460,7 @@ router.post('/api/addShow', function(req, res) {
 			else { res.status(400).send(); }
 		}
 		// addNewShow = function(title, day, time, djs, callback) {
-		accounts.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], callback);
+		shows.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], callback);
 	}
 });
 
@@ -471,7 +470,7 @@ router.post('/api/showPic', function(req, res) {
 		res.redirect('/panel');
 	}
 	else {
-		accounts.userHasAccessToShow(req.session.user.username, req.body.id, function(hasAccess) {
+		shows.userHasAccessToShow(req.session.user.username, req.body.id, function(hasAccess) {
 			if (!hasAccess) { res.status(400).send(); }
 
 			else {
@@ -484,7 +483,7 @@ router.post('/api/showPic', function(req, res) {
 				var picture = req.files.img.path.replace('public/', '/');
 				// update show data with new pictures
 				var newData = {"picture": picture};
-				accounts.updateShow(req.body.id, newData, function(err, o) {
+				shows.updateShow(req.body.id, newData, function(err, o) {
 					if (err) { errorCallback(err); }
 					else {
 						// updated successfully!

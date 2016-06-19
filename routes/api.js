@@ -1,8 +1,8 @@
+// api.js
+// User-Facing API for public data
+
 var express = require('express');
 var router = express.Router();
-var db = require('../database/db');
-var accounts = require('../database/dbAccounts.js');
-var lwip = require('lwip');
 
 function checkPublic(show) {
 	return show.public;

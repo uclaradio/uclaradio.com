@@ -1,11 +1,16 @@
+// managers.js
+// List all public managers
+
 var express = require('express');
 var router = express.Router();
-var db = require('../database/dbAccounts');
-var helper_funcs = require('./helper_funcs.js');
 
 router.get('/', function(req, res) {
 	
-	db.allManagers(function(err, managers) {
+	accounts.allManagers(function(err, managers) {
+
+    managers = managers.filter(function(manager) {
+      return manager.public;
+    });
 
 		// sort by position name
 		managers.sort(helper_funcs.sort_by('position', false, false));
