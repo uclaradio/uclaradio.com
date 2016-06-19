@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 
@@ -19,9 +20,10 @@ var shows = require('./routes/shows');
 var manageShows = require('./routes/manageShows');
 var managers = require('./routes/managers');
 var TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
+var panel = require('./routes/panel.js');
 var notFound = require('./routes/notFound');
 var analytics = require('./routes/analytics');
-
+var api = require('./routes/api');
 var app = express();
 
 // view engine setup
@@ -34,8 +36,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(session({
+  key: "mysite.sid.uid.whatever",
+  secret: "faeb4453e5d14fe6f6d04637f78077c76c73d1b4",
+  cookie: {
+    maxAge: 2678400000 // 31 days
+  },
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(multer({ dest: './public/blurbImages/'}));
+app.use(multer({ dest: './public/uploads/'}));
 
 app.use('/', routes);
 app.use('/newBlurb', newBlurb);
@@ -52,6 +63,9 @@ app.use('/managers', managers);
 app.use('/GiveawayCalendar', TicketGiveawayCalendar);
 app.use('/notFound', notFound);
 app.use('/analytics', analytics);
+app.use('/api', api);
+// all links to panel/* handled in panel.js
+app.use('/panel', panel);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,38 @@
+// FileInput.js
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+/**
+*  Upload a file with file input field
+*
+*  @prop onChange: function(event) -> call when file chosen to upload
+*  @prop accept: file types to accept
+*  @prop submitText: text to display as submit button
+*/
+var FileInput = React.createClass({
+  getInitialState: function() {
+    return {"fileSelected": false};
+  },
+  handleChange: function() {
+    var file = ReactDOM.findDOMNode(this.refs.file).files[0];
+    this.setState({"fileSelected": (file != null)});
+  },
+  handleSubmit: function() {
+    var file = ReactDOM.findDOMNode(this.refs.file).files[0];
+    if (this.props.onChange && file) {
+      this.props.onChange(file);
+    }
+  },
+  render: function() {
+    return (
+      <div className="fileInput">
+        <input ref="file" type="file" accept={this.props.accept} onChange={this.handleChange} />
+        <button disabled={!this.state.fileSelected} onClick={this.handleSubmit}>{this.props.submitText}</button>
+        <div className="clear" />
+      </div>
+    );
+  }
+});
+
+module.exports = FileInput;

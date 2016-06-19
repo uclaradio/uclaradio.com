@@ -1,13 +1,25 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../database/db');
+var db2 = require('../database/dbAccounts');
 
 router.get('/', function(req, res) {
 	var info = getTimeAndDay();
 
-	db.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
-		if (blurb)
-			blurb.djName = blurb.djName.join(',');
+	db2.getBlurbByTimeslotAndDay(info.time, info.day, function(err, blurb) {
+		if (blurb != null) {
+			var combined = "";
+			var comma = false;
+			if (blurb.djs != null) {
+				for (user in blurb.djs) {
+					if (comma) { combined += ", "; }
+					else { comma = true; }
+
+					combined += blurb.djs[user];
+				}
+			}
+			blurb.djName = combined;
+		}
 
 		res.render('index', {blurb: blurb});
 	});

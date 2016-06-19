@@ -1,0 +1,165 @@
+body {
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+  padding: 30px;
+}
+
+a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/*  Edits */
+
+.content {
+  overflow: hidden;
+}
+
+#logout {
+  float: right;
+}
+
+/*form input, form button {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}*/
+
+.savedData {
+  font-weight: bold;
+  white-space: pre-wrap;
+}
+
+.showPic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ConfirmationButton {
+  padding-top: 10px;
+}
+
+#container .confirm-btn1, #container .confirm-btn2, #container .confirm-cancel {
+  margin-right: 10px;
+  padding: 5px 5px;
+  width: auto;
+  border: none;
+  color: white;
+}
+
+#container .confirm-btn1 {
+  background-color: #f3958e;
+}
+#container .confirm-btn1:hover {
+  background-color: #f44336;
+}
+
+#container .confirm-btn2 {
+  background-color: #f44336;
+}
+
+ #container .confirm-cancel {
+  background-color: #cfcfcf;
+  color: black;
+}
+
+#container h3 {
+  /*padding-top: 10px;*/
+  text-align: center;
+}
+
+
+#container a {
+  cursor: pointer;
+}
+
+
+#container button:disabled {
+  cursor: auto;
+}
+
+.show {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.fileInput input {
+  padding-bottom: 2px;
+}
+
+.fileInput button {
+  display: table;
+  margin: 0 auto;
+}
+
+#container .fileInput {
+  margin: 15px 0 15px 0;
+  text-align: center;
+}
+
+.confirmationButton {
+  margin: 25px auto;
+}
+
+.show {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.clear {
+  clear: both;
+}
+
+/* END Edits */
+
+code {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
+  font-size: 12px;
+  margin: 0 2px;
+  padding: 0 5px;
+}
+
+h1, h2, h3, h4 {
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0;
+}
+
+h1 {
+  border-bottom: 1px solid #ddd;
+  font-size: 2.5em;
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0;
+}
+
+h2 {
+  border-bottom: 1px solid #d7d7d7;
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+p, ul {
+  margin: 15px 0;
+}
+
+ul {
+  padding-left: 30px;
+}

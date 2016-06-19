@@ -5,7 +5,7 @@ var helper_funcs = require('../routes/helper_funcs');
 var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
  
-mongoose.connect('mongodb://localhost/local', options);
+mongoose.connect('mongodb://localhost/local');
 
 var db = {};
 
@@ -392,6 +392,10 @@ function getIndexOffOfDayAndTime(day, time) {
 	};
 }
 
+/* TODO: Modify Function such that if there is already a show scheduled
+at the timeslot, an error with the title of the show is returned.
+
+*/
 db.insertTimeslotsToSchedule = function(callback) {
 	var namesHandledSoFar = [];
 	ProposedShowModel.find({}, function(err, shows) {

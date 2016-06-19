@@ -1,0 +1,267 @@
+/** panel.css
+ *  styling for dj panel pages
+ */
+
+
+/** Body **/
+
+body {
+  /*background-color: #e9eaed;*/
+  background-color: #f1efef;
+  font-family: 'Lato', sans-serif;
+}
+
+#main.container {
+  max-width: 970px;
+	margin: 20px auto;
+}
+
+.container {
+  max-width: 100%;
+}
+
+.well {
+	background-color: white;
+}
+
+.container h2, .container h3, .container h4 {
+  text-align: center;
+	margin-top: 0px;
+}
+
+.panel-heading {
+  font-weight: bold;
+}
+
+#main a {
+  cursor: pointer;
+}
+
+a:hover, .btn-link:hover, .btn-link:focus {
+  text-decoration: none;
+}
+
+.glyphicon {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.verticalMiddle {
+  vertical-align: middle;
+}
+
+.rightFloat {
+  float: right;
+}
+
+.leftMargin {
+  margin-left: 15px;
+}
+
+/** Navbar **/
+
+#navbarLogout a {
+  color: #f0657f;
+}
+
+#navbarLogout a:hover {
+  color: #db405d;
+}
+
+.navbarSelected {
+  color: black;
+}
+
+/** ActionTable **/
+
+.actionTable .table {
+  margin-bottom: 0px;
+}
+
+.actionTable .table td {
+  vertical-align: middle;
+}
+
+.action-td {
+  text-align: right;
+}
+
+.table-action1 {
+  color: #66f266;
+  font-weight: bold;
+}
+
+.table-action1:hover {
+  color: #5cb85c;
+}
+
+.table-action2 {
+  color: #f0657f;
+  font-weight: bold;
+}
+
+.table-action2:hover {
+  color: #db405d;
+}
+
+.actionGlyph {
+  color: #f0ad4e;
+}
+/*
+.actionButton .btn-group-vertical .btn-link {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}*/
+
+/** InputEditableTextField **/
+
+.cancelLink, .delete {
+  color: #f0657f;
+}
+
+.cancelLink:hover, .delete:hover {
+  color: #db405d;
+}
+
+.inputEditWrapper .input-group-addon {
+  background-color: transparent;
+  border: none;
+}
+
+/*.inputEditableTextField .form-group*/
+.form-group {
+  margin-bottom: 5px;
+}
+
+/*
+.inputEditWrapper {
+  vertical-align: middle;
+}*/
+
+.checkbox {
+  padding-left: 15px;
+}
+
+/** Forms **/
+
+.dateTimeField .col-md-6 {
+ padding-left: 5px;
+ padding-right: 5px;
+}
+
+.placeholder, a.disabled, a.disabled:hover {
+  color: #b2b2b2;
+}
+
+.control-label, .fieldLabel {
+  color: #777;
+}
+
+.fieldLabel {
+  float: right;
+  padding-right: 7px;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.verifiedGlyph {
+  vertical-align: top;
+  color: #5cb85c;
+}
+
+.input-group-addon {
+  vertical-align: middle;
+}
+
+.input-group .customInput {
+  position: relative;
+  bottom: -7px;
+}
+
+.input-group-addon .customInput {
+  position: relative;
+  bottom: -5px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.fileUpload {
+  margin-top: 7px;
+}
+
+.fileUpload.glyphicon {
+  float: left;
+}
+
+.fileUpload .input-group .input-group-addon {
+  background-color: transparent;
+  border: none;
+}
+
+input[type="file"] {
+  width: 100%;
+}
+
+.confirmationButton {
+  margin-top: 25px;
+}
+
+.lightPadding {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/** Show List **/
+
+.showListImg {
+  width: 100%;
+  max-width: 80px;
+  margin: 0 auto;
+}
+
+.listShow {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.showListTitle {
+  margin-top: 15px;
+}
+
+.showListTitle, .showListSubtitle {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.showListSubtitle {
+  clear: both;
+}
+
+.noPads {
+  padding: 0;
+}
+
+.centered {
+  text-align: center;
+}
+
+.noBottom {
+  margin-bottom: 0;
+}
+
+/**** Pictures ****/
+
+.pic {
+  width: 100%;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.profile {
+  max-width: 150px;
+}
+

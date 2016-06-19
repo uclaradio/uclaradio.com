@@ -1,47 +1,47 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../database/db');
+var accounts = require('../database/dbAccounts');
 var helper_funcs = require('./helper_funcs.js')
 
 
-//return all blurbs
+//return all shows
 router.get('/', function(req, res) {
 
 
-	db.getAllBlurbs(function(err, blurbs) {
+	accounts.getAllShows(function(err, shows) {
 		//assign order
-		blurbs = helper_funcs.AppendValueSoSort(blurbs);
+		shows = helper_funcs.AppendValueSoSort(shows);
 
-		//make sure blurbs are unique for 2 hour shows (djs have to input twice)
-		blurbs = helper_funcs.getUniqueBlurbs(blurbs);
+		//make sure shows are unique for 2 hour shows (djs have to input twice)
+		shows = helper_funcs.getUniqueBlurbs(shows);
 
 		//sort by order assigned
-		blurbs.sort(helper_funcs.sort_by('order', false, false));
+		shows.sort(helper_funcs.sort_by('order', false, false));
 
 		var urls = [];
 
-		//so we can populate each slide in the page that shows all the blurbs
+		//so we can populate each slide in the page that shows all the shows
 		var showsByDay = {"Sun":[], "Mon":[], "Tue":[], "Wed":[], "Thu":[], "Fri":[], "Sat":[] };
 		
-		for(var i = 0; i < blurbs.length; i++) {
+		for(var i = 0; i < shows.length; i++) {
 			
 
 			//get rid of unsafe url characters
-			blurbs[i].url = helper_funcs.encode_safe_url(blurbs[i].showName);
+			shows[i].url = helper_funcs.encode_safe_url(shows[i].title);
 
 			//shorten show name to fit within the width of the profpic in the catslider
-			blurbs[i].showName = helper_funcs.truncateName(blurbs[i].showName, 22);
+			shows[i].title = helper_funcs.truncateName(shows[i].title, 22);
 
 			//get day of week
-			dayOfweek = blurbs[i].day;
+			dayOfweek = shows[i].day;
 
 			//each ul in content slider list which represent day of week in thedjs.jade will use showsByDAy
-			showsByDay[dayOfweek].push(blurbs[i]);
+			showsByDay[dayOfweek].push(shows[i]);
 		}
 
-		blurbs.sort(helper_funcs.sort_by('showName', false, function(a){ return a.toUpperCase()}));
+		shows.sort(helper_funcs.sort_by('title', false, function(a){ return a.toUpperCase()}));
 
-		res.render('allShowsPage', {blurbs: blurbs, urls: urls, showsByDay: showsByDay})
+		res.render('allShowsPage', {shows: shows, urls: urls, showsByDay: showsByDay})
 	});
 
 });
@@ -54,16 +54,23 @@ router.get('/:show', function (req, res) {
 	//since database contains spaces rather than underscores present in url
 	
 	//UNSAFE characters
-	show = helper_funcs.decode_safe_url(show);
+	show = helper_funcs.decode_safe_url(req.params.show);
 
-	db.getBlurbByShowTitle(show, function(err, blurb) {
-		//console.log(blurb.djName);
-		if(blurb == null) {
+	accounts.getShowByTitle(show, function(err, show) {
+		if (show == null) {
+			console.log("no show");
 			res.redirect('/');
 		}
-		else{
-			res.render('showPage', {blurb: blurb});
-			//res.send('<html><body><h1>Hello World ' + blurb.djName[0] + '</h1></body></html>');
+		else {
+			// get dj names for djs (saved as username)
+			// getUserById = function(id, callback) {
+			accounts.getDJNamesFromUsernames(show.djs, function(err, o) {
+				if (err) { console.log("could not get djNames for users:", err); }
+				else {
+					show.djNames = o;
+				}
+				res.render('showPage', {show: show});
+			});
 		}
 	});
 });
