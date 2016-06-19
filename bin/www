@@ -30,6 +30,8 @@ switch (env) {
 app.set('port', port);
 
 if (useSSL) {
+  var uclaradioHostname = "uclaradio.com";
+  var webEmail = "radio.web@media.ucla.edu";
   /**
    * Create HTTP(S) server.
    */
@@ -37,13 +39,15 @@ if (useSSL) {
   var LEX = require('letsencrypt-express').testing();
   var lex = LEX.create({
       configDir: require('os').homedir() + '/letsencrypt/etc',
-      approveRegistration: function (hostname, cb) {
-          cb(null, {
-              domains: [hostname],
-              email: 'chrislaganiere@gmail.com',
-              agreeTos: true
-             });
+      approveRegistration: function (hostname, approve) {
+        if (hostname === uclaradioHostname) {
+          approve(null, {
+            domains: [hostname],
+            email: webEmail,
+            agreeTos: true
+           });
           }
+        }
       });
   http.createServer(LEX.createAcmeResponder(lex, function redirectHttps(req, res) {
       res.setHeader('Location', 'https://' + req.headers.host + req.url);
