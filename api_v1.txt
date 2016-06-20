@@ -1,0 +1,116 @@
+API Endpoints v1
+
+Urls for our RESTful API, with objects being updated as they are passed back and forth.
+All parameters passed back and forth are json objects with stringified values.
+
+
+/*** API: Mobile Apps ***/
+
+  /api/schedule (GET)
+    * Get a list of all shows in the current schedule
+    -> {shows: [show1, show2, ...]}
+
+  /api/nowplaying (GET)
+    * Get the current show object
+    -> {show: show1}
+
+  /api/djs (GET)
+    * Get a list of all djs with their information public
+    -> {djs: [dj1, dj2, ...]}
+
+  /api/dj/:id (GET)
+    * Get a list of related objects for a dj (shows they host)
+    * also used by web panel
+    -> {shows: [show2, show9]}
+
+  /api/show/:id (GET)
+    * Get show object with the given id (episodes, social media)
+    * also used by web panel
+    -> {show: show2, episodes: [episode1, episode2, ...], links: [link1, link2, ...]}
+
+
+/*** API: Web Panel ***/
+
+  /api/user/:id (GET)
+    !!! private: return 400 error unless user queried is the same as the logged in user
+    * Get user object with the given id
+    -> {user: user3}
+
+  /api/user/:id (POST)
+    !!! private: return 400 error unless logged in user is the same as the queried user or a manager
+    * Update information for the logged in user 
+    PARAMS: {user: updatedUser}
+    FILES: none or {pic: pictureFile}
+    -> {success: true, user: updatedUser} or {success: false}
+
+  /api/dj/:id (GET)
+    * Get a list of related objects for a dj (shows they host)
+    * also used by mobile apps
+    -> {shows: [show2, show9]}
+
+  /api/show/:id (GET)
+    * Get show object with the given id (episodes, social media)
+    * also used by mobile apps
+    -> {show: show2, episodes: [episode1, episode2, ...], links: [link1, link2, ...]}
+
+  /api/show/:id (POST)
+    !!! private: return 400 error unless logged in user is a host of the queried show or a manager
+    * Update information for a specific show (blurb, show time, ...)
+    PARAMS: {show: updatedShow}
+    FILES: none or {pic: pictureFile}
+    -> {success: true, show: updatedShow} or {success: false}
+
+  /api/newshow (POST)
+    !!! private: return 400 error unless logged in user is a dj
+    * Create a new show with some given data
+    PARAMS: {show: showData}
+    -> {success: true, show: show1} or {success: false}
+
+  /api/manager/:id (GET)
+    !!! private: return 400 error unless logged in user is a manager
+    * Get manager object with the given id
+    -> {manager: manager4}
+
+  /api/manager/:id (POST)
+    !!! private: return 400 error unless logged in user is the same as the manager
+    * Update manager information the logged in user
+    PARAMS: {manager: updatedManager}
+    -> {success: true, manager: updatedManager} or {success: false}
+
+  /api/users (GET)
+    !!! private: return 400 error unless logged in user is a manager
+    * Return all user objects and unverified user objects
+    -> {users: [user1, user2, ...], unverifiedusers: [unverified1, unverified2, ...]}
+
+  /api/user/:id (DELETE)
+    !!! private: return 400 error unless logged in user is a manager
+    * Delete user object with the specified id
+    -> {success: true} or {success: false}
+
+  /api/unverified (POST)
+    !!! private: return 400 error unless logged in user is a manager
+    * Update unverified user with the given id by deleting request or converting to verified user
+    PARAMS: {id: unverifiedID, delete: true OR verify: true}
+    -> {success: true} or {success: false}
+
+  /api/faqs (GET)
+    * Return internal list of frequently asked questions
+    -> {faqs: [faq1, faq2, ...]}
+
+  /api/faq/:id (POST)
+    !!! private: return 400 error unless logged in user is a manager
+    * Update information for a specific faq question
+    PARAMS: {faq: updatedFaq}
+    -> {faqs: [updatedFaq, faq2, ...]}
+
+  /api/faq/:id (DELETE)
+    !!! private: return 400 error unless logged in user is a manager
+    * Delete faq question object with the given id
+    -> {success: true, faqs: [faq2, faq4, ...]} or {success: false}
+
+  /api/newfaq (POST)
+    !!! private: return 400 error unless logged in user is a manager
+    * Create a new faq question object with the given data
+    PARAMS: {faq: newFAQ}
+    -> {success: true, faqs: [newFAQ, faq2, ...]} or {success: false}
+
