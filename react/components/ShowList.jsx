@@ -11,7 +11,9 @@ var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var ListGroup = require('react-bootstrap').ListGroup;
 var ListGroupItem = require('react-bootstrap').ListGroupItem;
-var Image = require('react-bootstrap').Image;
+
+// Custom elements
+var SquareImage = require('./SquareImage.jsx');
 
 /**
 *  Presents a list of show objects with a standard format
@@ -29,7 +31,7 @@ var ShowList = React.createClass({
               <Grid>
                 <Row>
                   <Col xs={2} className="noPads centered">
-                    <Image src={show.picture || placeholder} className="showListImg" thumbnail />
+                    <SquareImage src={show.picture || placeholder} className="showListImg squarePic" thumbnail />
                   </Col>
                   <Col xs={10}>
                     <h4 className="showListTitle">{show.title} <small>({Dates.dayFromVar(show.day)} {show.time})</small></h4>

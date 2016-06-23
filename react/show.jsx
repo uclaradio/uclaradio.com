@@ -17,6 +17,7 @@ var InputEditableDateTimeField = require('./components/InputEditableDateTimeFiel
 var InputCheckbox = require('./components/InputCheckbox.jsx');
 var InputFileUpload = require('./components/InputFileUpload.jsx');
 var ConfirmationButton = require('./components/ConfirmationButton.jsx');
+var SquareImage = require('./components/SquareImage.jsx');
 
 // Bootstrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -169,7 +170,7 @@ var Show = React.createClass({
           <Well>
             <Row>
               <Col xs={12} md={4}>
-                <Image className="pic" src={this.state.show.picture || "/img/radio.png" } responsive rounded />
+                <SquareImage src={this.state.show.picture || "/img/radio.png" } responsive rounded />
               </Col>
               <Col xs={12} md={8}>
                 <h3>{this.state.show.title}</h3>

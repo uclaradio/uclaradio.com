@@ -215,12 +215,6 @@ input[type="file"] {
 
 /** Show List **/
 
-.showListImg {
-  width: 100%;
-  max-width: 80px;
-  margin: 0 auto;
-}
-
 .listShow {
   padding-top: 15px;
   padding-bottom: 15px;
@@ -253,16 +247,14 @@ input[type="file"] {
 
 /**** Pictures ****/
 
-.pic {
+.squareImagePic {
   width: 100%;
-  max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
-  background-size: cover;
 }
 
-.profile {
-  max-width: 150px;
+.user .squareImage {
+  width: 150px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 

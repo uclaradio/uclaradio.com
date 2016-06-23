@@ -16,6 +16,7 @@ var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
 var InputEditableTextField = require('./components/InputEditableTextField.jsx');
 var InputFileUpload = require('./components/InputFileUpload.jsx');
 var ShowList = require('./components/ShowList.jsx');
+var SquareImage = require('./components/SquareImage.jsx');
 
 // Bootstrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -157,12 +158,10 @@ var User = React.createClass({
     $('.pic.profile').css({'height':imageWidth+'px'});
   },
   render: function() {
-    var pictureSource = this.state.user.picture || "/img/bear.jpg";
-    var pictureStyle = {backgroundImage: "url(" + pictureSource + ")"};
     return (
       <div className="user">
         <h2>DJ Info</h2>
-        <Image className="pic profile" style={pictureStyle} responsive circle />
+        <SquareImage src={this.state.user.picture || "/img/bear.jpg"} responsive circle />
         <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Profile" onSubmit={this.handlePicSubmit} verified={this.state.picVerified} />
         <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
           placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 
