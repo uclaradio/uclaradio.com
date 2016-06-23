@@ -133,9 +133,11 @@ shows.getShowsForUser = function(djUsername, callback) {
 };
 
 shows.userHasAccessToShow = function(username, id, callback) {
-  ShowModel.findOne({id: id, djs: username}, function(err, o) {
-    if (o) { callback(true); }
-    else { callback(false); }
+  accounts.isManager(username, function(err, isManager) {
+    ShowModel.findOne({id: id, djs: username}, function(err, o) {
+      if (isManager || o) { callback(true); }
+      else { callback(false); }
+    });
   });
 };
 
@@ -187,6 +189,17 @@ shows.getAllShows = function(callback) {
         callback(null, allShows);
       });
     }
+  });
+}
+
+// get all shows without user data or anything
+shows.getAllShowsOnly = function(callback) {
+  ShowModel.find({}, function(err, allShows) {
+    var response = [];
+    for (var s = 0; s < allShows.length; s++) {
+      response.push(shows.webSafeShow(allShows[s]));
+    }
+    callback(err, response);
   });
 }
 

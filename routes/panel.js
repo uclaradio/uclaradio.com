@@ -377,20 +377,43 @@ router.post('/api/userPic', function(req, res) {
 
 /***** Show Info *****/
 
-router.get('/api/shows', function(req, res) {
+router.get('/api/usershows', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
 		res.redirect('/panel');
 	}
 	else {
 		// return list of shows belonging to current user
-		var callback = function(err, shows) {
+		shows.getShowsForUser(req.session.user.username, function(err, shows) {
 			if (err) { console.log("failed to retrieve shows for user: ", err); }
 			else {
 				res.json(shows);
 			}
-		}
-		shows.getShowsForUser(req.session.user.username, callback);
+		});
+	}
+});
+
+router.get('/api/allshows', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		accounts.isManager(req.session.user.username, function(err, isManager) {
+			if (isManager) {
+				shows.getAllShowsOnly(function(err, allShows) {
+					if (err) {
+						res.status(400).send();
+					}
+					else {
+						res.json(allShows);
+					}
+				});
+			}
+			else {
+				res.status(400).send();
+			}
+		});
 	}
 });
 
@@ -458,7 +481,7 @@ router.post('/api/addShow', function(req, res) {
 
 			else {
 				// return full list of shows
-				res.redirect('/panel/api/shows');
+				res.redirect('/panel/api/usershows');
 			}
 		});
 	}

@@ -347,6 +347,10 @@ accounts.promoteToManager = function(username, callback) {
   });
 }
 
+accounts.isManager = function(username, callback) {
+  accounts.checkPrivilege(username, accounts.managerPrivilegeName, callback);
+}
+
 accounts.managerInfo = function(username, callback) {
   ManagerModel.findOne({username: username}, function(err, o) {
     if (!o && !err) {

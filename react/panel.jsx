@@ -6,7 +6,7 @@ var ReactDOM = require('react-dom');
 
 var urls = {url: "/panel/api/user",
             picURL: "/panel/api/userPic",
-            showsURL: "/panel/api/shows",
+            showsURL: "/panel/api/usershows",
             showLink: "/panel/show",
             addShowURL: "/panel/api/addShow"
             };

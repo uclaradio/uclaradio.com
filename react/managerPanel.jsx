@@ -6,6 +6,8 @@ var ReactDOM = require('react-dom');
 
 var urls = {managerInfo: "/panel/manager/api/info",
             managerUpdate: "/panel/manager/api/update",
+            allShows: "/panel/api/allshows",
+            showLink: "/panel/show",
             listAccounts: "/panel/manager/api/listAccounts",
             verifyAccount: "/panel/manager/api/verify",
             delete: "/panel/manager/api/delete",
@@ -16,6 +18,7 @@ var ActionTable = require('./components/ActionTable.jsx');
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
 var InputEditableTextField = require('./components/InputEditableTextField.jsx');
 var InputCheckbox = require('./components/InputCheckbox.jsx');
+var ShowList = require('./components/ShowList.jsx');
 
 // Bootstrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -35,6 +38,7 @@ var ManagerPage = React.createClass({
               <Well>
                 <Manager urls={this.props.urls} />
               </Well>
+              <ManagerShowsList urls={this.props.urls} />
             </Col>
             <Col xs={12} md={6}>
               <AccountsList urls={this.props.urls} />
@@ -144,6 +148,37 @@ var Manager = React.createClass({
         verified={this.state.departmentInfoVerified} multiline />
         <InputCheckbox title="Public" details="Show my info on Manager's Board" checked={this.state.manager.public}
           onSelect={this.handlePublicSubmit} verified={this.state.publicVerified} />
+      </div>
+    );
+  }
+});
+
+
+var ManagerShowsList = React.createClass({
+  getInitialState: function() {
+    // shows: {title, day, time}
+    return {shows: []};
+  },
+  loadDataFromServer: function() {
+    $.ajax({
+      url: this.props.urls.allShows,
+      dataType: 'json',
+      cache: false,
+      success: function(shows) {
+        this.setState({shows: shows});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.urls.allShows, status, err.toString());
+      }.bind(this)
+    });
+  },
+  componentDidMount: function() {
+    this.loadDataFromServer();
+  },
+  render: function() {
+    return (
+      <div className="userShowsList">
+        <ShowList url={this.props.urls.showLink} shows={this.state.shows} placeholder="/img/radio.png" />
       </div>
     );
   }
