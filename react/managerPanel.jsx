@@ -178,7 +178,9 @@ var ManagerShowsList = React.createClass({
   render: function() {
     return (
       <div className="userShowsList">
-        <ShowList url={this.props.urls.showLink} shows={this.state.shows} placeholder="/img/radio.png" />
+        <h4>Shows</h4>
+        <ShowList url={this.props.urls.showLink} shows={this.state.shows}
+          placeholder="/img/radio.png" short />
       </div>
     );
   }
