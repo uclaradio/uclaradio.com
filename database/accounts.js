@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var fs = require('fs');
 
+var mail = require('../services/mail');
+
 var accounts = {};
 
 // Users (DJs)
@@ -198,7 +200,13 @@ accounts.verifyAccount = function(username, callback) {
         if (e) { console.log("error removing unverified user after verification:", e); }
       });
       var verifiedUser = {username: o.username, email: o.email, fullName: o.fullName, pass: o.pass};
-      accounts.addNewAccount('verified', verifiedUser, callback);
+      accounts.addNewAccount('verified', verifiedUser, function(err, saved) {
+        if (saved) {
+          // account verified! let them know with an email
+          mail.confirmAccount(o.email, o.username);
+        }
+        callback(err, saved);
+      });
     }
     else {
       callback(err, null);
@@ -320,6 +328,24 @@ accounts.removeAllUsers = function(callback) {
 
 
 /***** Manager Info *****/
+
+accounts.promoteToManager = function(username, callback) {
+  accounts.updatePrivilege(username, accounts.managerPrivilegeName, true, function(err, saved) {
+    if (saved) {
+      UserModel.findOne({'username': username}, function(err, o) {
+        if (saved && o) {
+          // user was successfully promoted. Let them know with an email!
+          console.log("emailing", username);
+          mail.confirmManager(o.email);
+        }
+        else {
+          console.log("didn't email");
+        }
+        callback(err, saved);
+      })
+    }
+  });
+}
 
 accounts.managerInfo = function(username, callback) {
   ManagerModel.findOne({username: username}, function(err, o) {

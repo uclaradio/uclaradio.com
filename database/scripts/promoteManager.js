@@ -11,7 +11,7 @@ if (user == null) {
   process.exit(1);
 }
 else {
-  accounts.updatePrivilege(user, accounts.managerPrivilegeName, true, function(err, saved) {
+  accounts.promoteToManager(user, function(err, saved) {
     if (saved) {
       console.log("successfully promoted", user, "to manager");
       process.exit();
