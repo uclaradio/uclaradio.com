@@ -14,7 +14,6 @@ var urls = {url: "/panel/api/user",
 // Custom elements
 var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
 var InputEditableTextField = require('./components/InputEditableTextField.jsx');
-var ConfirmationButton = require('./components/ConfirmationButton.jsx');
 var InputFileUpload = require('./components/InputFileUpload.jsx');
 var ShowList = require('./components/ShowList.jsx');
 
@@ -135,7 +134,6 @@ var User = React.createClass({
     formData.append("username", this.state.user.username);
     var request = new XMLHttpRequest();
     request.open("POST", this.props.urls.picURL);
-    var loadData = this.loadDataFromServer;
     var verify = this.verifyPic;
     var unverify = this.unverifyPic;
     var updateUser = this.updateUserState;
@@ -153,12 +151,18 @@ var User = React.createClass({
   },
   componentDidMount: function() {
     this.loadDataFromServer();
+
+    // make profile image square
+    var imageWidth = $('.pic.profile').width();
+    $('.pic.profile').css({'height':imageWidth+'px'});
   },
   render: function() {
+    var pictureSource = this.state.user.picture || "/img/bear.jpg";
+    var pictureStyle = {backgroundImage: "url(" + pictureSource + ")"};
     return (
       <div className="user">
         <h2>DJ Info</h2>
-        <Image className="pic profile" src={this.state.user.picture || "/img/bear.jpg" } responsive circle />
+        <Image className="pic profile" style={pictureStyle} responsive circle />
         <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Profile" onSubmit={this.handlePicSubmit} verified={this.state.picVerified} />
         <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
           placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 

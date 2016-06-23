@@ -166,26 +166,23 @@ accounts.requestNewAccount = function(username, pass, email, fullName, callback)
 // list all accounts, verified and unverified
 accounts.listAccounts = function(callback) {
   // get verified 
-  UnverifiedUserModel.find({}, function(err, accounts) {
+  UnverifiedUserModel.find({}, function(err, unverifiedAccounts) {
     unverifiedUsers = [];
-    for (var i = 0; i < accounts.length; i++) {
-      var user = {"username": accounts[i].username, "fullName": accounts[i].fullName, "email": accounts[i].email};
+    for (var i = 0; i < unverifiedAccounts.length; i++) {
+      var user = {"username": unverifiedAccounts[i].username, "fullName": unverifiedAccounts[i].fullName, "email": unverifiedAccounts[i].email};
       unverifiedUsers.push(user);
     }
     UserModel.find({}, function(err, verifiedAccounts) {
     	// also indicate if user is a manager
       PrivilegeModel.findOne({name: accounts.managerPrivilegeName}, function(err, privilegeUsers) {
         verifiedUsers = [];
-        if (privilegeUsers != null) {
-          for (var i = 0; i < verifiedAccounts.length; i++) {
-            var user = {"username": verifiedAccounts[i].username, "fullName": verifiedAccounts[i].fullName,
-              "djName": verifiedAccounts[i].djName, "email": verifiedAccounts[i].email};
-            if (privilegeUsers.users.indexOf(user.username) >= 0) {
-              // user is a manager
-              user.manager = true;
-            }
-            verifiedUsers.push(user);
+        for (var i = 0; i < verifiedAccounts.length; i++) {
+          var user = accounts.webSafeUser(verifiedAccounts[i]);
+          if (privilegeUsers != null && privilegeUsers.users.indexOf(user.username) >= 0) {
+            // user is a manager
+            user.manager = true;
           }
+          verifiedUsers.push(user);
         }
         callback(err, {"verified": verifiedUsers, "unverified": unverifiedUsers});
       });

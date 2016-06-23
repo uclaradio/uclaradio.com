@@ -23,10 +23,6 @@ var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
 var Panel = require('react-bootstrap').Panel;
-var Pager = require('react-bootstrap').Pager;
-var PageItem = require('react-bootstrap').PageItem;
-var Button = require('react-bootstrap').Button;
-var Input = require('react-bootstrap').Input;
 
 var ManagerPage = React.createClass({
   render: function() {
@@ -157,9 +153,7 @@ var Manager = React.createClass({
 const atManagerGlyph = "fire";
 // verify user strings
 const atAcceptTitle = "Verify";
-const atAcceptTooltip = "Verify user is a Radio DJ";
-// reject unverified user strings
-const atRejectTooltipUnverified = "Deny account request";
+const atAcceptTooltip = "Verify user is a Radio DJ";;
 // delete verified user strings
 const atRejectTooltipVerified = "Delete DJ account";
 
