@@ -198,14 +198,14 @@ accounts.verifyAccount = function(username, callback) {
     if (o) {
       UnverifiedUserModel.remove({username: username}, function (e) {
         if (e) { console.log("error removing unverified user after verification:", e); }
-      });
-      var verifiedUser = {username: o.username, email: o.email, fullName: o.fullName, pass: o.pass};
-      accounts.addNewAccount('verified', verifiedUser, function(err, saved) {
-        if (saved) {
-          // account verified! let them know with an email
-          mail.confirmAccount(o.email, o.username);
-        }
-        callback(err, saved);
+        var verifiedUser = {username: o.username, email: o.email, fullName: o.fullName, pass: o.pass};
+        accounts.addNewAccount('verified', verifiedUser, function(err, saved) {
+          if (saved) {
+            // account verified! let them know with an email
+            mail.confirmAccount(o.email, o.username);
+          }
+          callback(err, saved);
+        });
       });
     }
     else {
