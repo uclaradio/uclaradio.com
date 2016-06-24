@@ -192,9 +192,9 @@ shows.getAllShows = function(callback) {
   });
 }
 
-// get all shows without user data or anything
-shows.getAllShowsOnly = function(callback) {
-  ShowModel.find({}, function(err, allShows) {
+// get all shows marked as public
+shows.getAllPublicShows = function(callback) {
+  ShowModel.find({"public": true}, function(err, allShows) {
     var response = [];
     for (var s = 0; s < allShows.length; s++) {
       response.push(shows.webSafeShow(allShows[s]));

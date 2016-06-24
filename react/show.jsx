@@ -25,6 +25,7 @@ var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
 var Image = require('react-bootstrap').Image;
+var FormControls = require('react-bootstrap').FormControls;
 
 var ShowPage = React.createClass({
   getShowIDFromURL: function() {
@@ -164,6 +165,19 @@ var Show = React.createClass({
     this.loadDataFromServer();
   },
   render: function() {
+    var djs = "";
+    if (this.state.show.djs != null) {
+      var useComma = false;
+      this.state.show.djs.map(function(djName) {
+        if (useComma) {
+          djs += ", ";
+        }
+        else {
+          useComma = true;
+        }
+        djs += djName;
+      });
+    }
     return (
       <div className="show">
         <Grid>
@@ -175,6 +189,12 @@ var Show = React.createClass({
               <Col xs={12} md={8}>
                 <h3>{this.state.show.title}</h3>
                 <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Art" onSubmit={this.handleShowArtSubmit} verified={this.state.artVerified} />
+                <form className="form-horizontal">
+                  <FormControls.Static label="DJs" labelClassName="col-xs-3"
+                    wrapperClassName="inputEditWrapper col-xs-9">
+                    {djs}
+                  </FormControls.Static>
+                </form>
                 <InputEditableTextField title="Title" currentValue={this.state.show.title}
                   onSubmit={this.handleTitleSubmit} placeholder="Enter Show Title" verified={this.state.titleVerified} />
                 <InputEditableDateTimeField title="Time" day={this.state.show.day} time={this.state.show.time}

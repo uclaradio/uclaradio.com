@@ -282,7 +282,12 @@ router.get('/api/showData/:id', function(req, res) {
 			else {
 				shows.getShowById(req.params.id, function(err, o) {
 					if (o) {
-						res.json(o);
+						accounts.getDJNamesFromUsernames(o.djs, function(err, djList) {
+							if (djList) {
+								o.djs = djList;
+							}
+							res.json(o);
+						});
 					}
 					else {
 						res.status(400).send(err);
@@ -401,7 +406,7 @@ router.get('/api/allshows', function(req, res) {
 	else {
 		accounts.isManager(req.session.user.username, function(err, isManager) {
 			if (isManager) {
-				shows.getAllShowsOnly(function(err, allShows) {
+				shows.getAllPublicShows(function(err, allShows) {
 					if (err) {
 						res.status(400).send();
 					}

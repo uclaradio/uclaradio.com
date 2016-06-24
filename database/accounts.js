@@ -278,11 +278,12 @@ accounts.deleteUnverifiedUser = function(username, callback) {
 
 // perform callback on user with provided id
 accounts.getDJNamesFromUsernames = function(usernames, callback) {
-  console.log("finding usernames:", usernames);
   UserModel.find({username: {$in: usernames}}, function(err, users) {
     var djNames = [];
     for (var i = 0; i < users.length; i++) {
-      djNames.push(users[i].djName);
+      if (users[i].djName) {
+        djNames.push(users[i].djName);
+      }
     }
     callback(err, djNames);
   });
