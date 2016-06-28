@@ -59,6 +59,10 @@ app.use('/api', api);
 // all links to panel/* handled in panel.js
 app.use('/panel', panel);
 
+app.use('/faq', function(req, res, next) {
+  res.redirect('/panel/faq');
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -90,6 +94,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
