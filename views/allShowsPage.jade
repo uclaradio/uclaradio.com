@@ -70,7 +70,10 @@ head
                     li
                       #sample
                           a(href="/shows/"+show.url)
-                            img(src=show.picture)
+                            if(show.picture)
+                              img(src=show.picture)
+                            else
+                              img(src="/img/radio.png")
                       p=show.title+ " (" +show.time + ")"
                       br
 
