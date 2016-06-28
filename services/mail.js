@@ -4,6 +4,18 @@ var passwords = require('../passwords.json');
 
 var mail = {};
 
+// create reusable transporter object using the default SMTP transport
+var smtpConfig = {
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // use SSL
+    auth: {
+        user: passwords.emailuser,
+        pass: passwords.emailpass
+    }
+};
+var transporter = nodemailer.createTransport(smtpConfig);
+
 /**
 Send a user an email confirming their DJ account.
 */
@@ -23,18 +35,6 @@ mail.confirmManager = function(email) {
 
 // send mail with defined transport object
 mail.send = function(to, subject, body) {
-
-  // create reusable transporter object using the default SMTP transport
-  var smtpConfig = {
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true, // use SSL
-      auth: {
-          user: passwords.emailuser,
-          pass: passwords.emailpass
-      }
-  };
-  var transporter = nodemailer.createTransport(smtpConfig);
 
   // setup e-mail data with unicode symbols
   var mailOptions = {
