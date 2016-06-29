@@ -72,12 +72,12 @@ shows.addNewShow = function(title, day, time, djs, callback) {
     };
 
     //Searches for a show with the same title.
-    ShowModel.findOne({title: newData.title}, function(err, o) {
+    ShowModel.findOne({public: true, title: newData.title}, function(err, o) {
       if (o) {
         callback('title-taken');
       }
       else {
-        ShowModel.findOne({day: newData.day, time: newData.time}, function(err, o) {
+        ShowModel.findOne({public: true, day: newData.day, time: newData.time}, function(err, o) {
           if (o) {
             callback('time-taken');
           }
@@ -167,7 +167,7 @@ shows.getShowById = function(id, callback) {
 
 // get all shows with user data too (name, picture, djs)
 shows.getAllShows = function(callback) {
-  ShowModel.find({}, function(err, allShows) {
+  ShowModel.find({public: true}, function(err, allShows) {
     if (err) { callback(err); }
     else {
       var usernames = [];
