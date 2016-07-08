@@ -1,4 +1,4 @@
-## UCLARadio - uclaradio.com
+## UCLA Radio - uclaradio.com
 
 This is the complete code for UCLA Radio's website, Node.js server and API. We also have an open-source [iOS app](https://github.com/uclaradio/uclaradio-iOS) and an [Android app](https://github.com/uclaradio/uclaradio-Android) in development.
 
