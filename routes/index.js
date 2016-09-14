@@ -43,6 +43,11 @@ router.get('/blurbinfo', function(req, res, next) {
 
 });
 
+router.get('/beta', function(req, res) {
+	var path = require('path');
+	res.sendFile(path.resolve('public/frontpage.html'));
+});
+
 
 router.get('/pledgedrive', function(req, res, next) {
 	res.render('pledgedrive');

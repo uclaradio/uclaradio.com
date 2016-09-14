@@ -1,0 +1,15 @@
+/**
+  Radio Frontpage
+**/
+
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+#main {
+  margin: 20 auto;
+  width: 100%;
+  max-width: 1200px;
+  /*background-color: red;*/
+}
