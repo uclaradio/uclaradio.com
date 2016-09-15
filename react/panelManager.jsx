@@ -4,23 +4,27 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var urls = {managerInfo: "/panel/manager/api/info",
-            managerUpdate: "/panel/manager/api/update",
-            allShows: "/panel/api/allshows",
-            showLink: "/panel/show",
-            listAccounts: "/panel/manager/api/listAccounts",
-            verifyAccount: "/panel/manager/api/verify",
-            delete: "/panel/manager/api/delete",
-            deleteUnverified: "/panel/manager/api/deleteUnverified"};
+var urls = {
+  managerInfo: "/panel/manager/api/info",
+  managerUpdate: "/panel/manager/api/update",
+  allShows: "/panel/api/allshows",
+  showLink: "/panel/show",
+  listAccounts: "/panel/manager/api/listAccounts",
+  verifyAccount: "/panel/manager/api/verify",
+  delete: "/panel/manager/api/delete",
+  deleteUnverified: "/panel/manager/api/deleteUnverified"
+};
 
-// Custom elements
-var ActionTable = require('./components/ActionTable.jsx');
-var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
-var InputEditableTextField = require('./components/InputEditableTextField.jsx');
-var InputCheckbox = require('./components/InputCheckbox.jsx');
-var ShowList = require('./components/ShowList.jsx');
+// Panel Elements
+var ActionTable = require('./panel/ActionTable.jsx');
+var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
+var ShowList = require('./panel/ShowList.jsx');
 
-// Bootstrap elements
+// Inputs
+var InputEditableTextField = require('./inputs/InputEditableTextField.jsx');
+var InputCheckbox = require('./inputs/InputCheckbox.jsx');
+
+// Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;

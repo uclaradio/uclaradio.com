@@ -2,8 +2,11 @@
 
 var React = require('react');
 
-// Helper files
-var Dates = require('./misc/Dates.js');
+// Misc
+var Dates = require('../misc/Dates.js');
+
+// Panel elements
+var SquareImage = require('./SquareImage.jsx');
 
 // Boostrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -11,9 +14,6 @@ var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var ListGroup = require('react-bootstrap').ListGroup;
 var ListGroupItem = require('react-bootstrap').ListGroupItem;
-
-// Custom elements
-var SquareImage = require('./SquareImage.jsx');
 
 /**
 *  Presents a list of show objects with a standard format

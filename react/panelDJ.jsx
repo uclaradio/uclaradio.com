@@ -4,21 +4,27 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var urls = {url: "/panel/api/user",
-            picURL: "/panel/api/userPic",
-            showsURL: "/panel/api/usershows",
-            showLink: "/panel/show",
-            addShowURL: "/panel/api/addShow"
-            };
+var urls = {
+  url: "/panel/api/user",
+  picURL: "/panel/api/userPic",
+  showsURL: "/panel/api/usershows",
+  showLink: "/panel/show",
+  addShowURL: "/panel/api/addShow"
+};
 
-// Custom elements
-var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
-var InputEditableTextField = require('./components/InputEditableTextField.jsx');
-var InputFileUpload = require('./components/InputFileUpload.jsx');
-var ShowList = require('./components/ShowList.jsx');
-var SquareImage = require('./components/SquareImage.jsx');
+// Panel Elements
+var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
+var ShowList = require('./panel/ShowList.jsx');
+var SquareImage = require('./panel/SquareImage.jsx');
 
-// Bootstrap elements
+// Inputs
+var InputEditableTextField = require('./inputs/InputEditableTextField.jsx');
+var InputFileUpload = require('./inputs/InputFileUpload.jsx');
+
+// Misc
+var Dates = require('./misc/Dates.js');
+
+// Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
@@ -29,9 +35,6 @@ var Input = require('react-bootstrap').Input;
 var DropdownButton = require('react-bootstrap').DropdownButton;
 var MenuItem = require('react-bootstrap').MenuItem;
 var Image = require('react-bootstrap').Image;
-
-// Helper files
-var Dates = require('./components/misc/Dates.js');
 
 var PanelPage = React.createClass({
   render: function() {

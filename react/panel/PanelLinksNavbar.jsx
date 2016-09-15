@@ -2,12 +2,12 @@
 
 var React = require('react');
 
+var linksURL = "/panel/api/userlinks";
+
 // Bootstrap elements
 var Navbar = require('react-bootstrap').Navbar;
 var Nav = require('react-bootstrap').Nav;
 var NavItem = require('react-bootstrap').NavItem;
-
-var linksURL = "/panel/api/userlinks";
 
 /**
 *  Navbar which loads links available to the current user logged

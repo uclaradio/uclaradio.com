@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-// Bootstrap elements
+// Bootstrap Elements
 var Button = require('react-bootstrap').Button;
 var ButtonGroup = require('react-bootstrap').ButtonGroup;
 

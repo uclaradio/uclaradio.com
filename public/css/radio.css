@@ -2,14 +2,51 @@
   Radio Frontpage
 **/
 
+/*** Common Styling ***/
 
 body {
   font-family: 'Titillium Web', sans-serif;
 }
 
 #main {
-  margin: 20 auto;
+  margin: 20px auto;
   width: 100%;
   max-width: 1200px;
-  /*background-color: red;*/
+}
+
+/* Trianglify */
+
+.canvasCanvas {
+  position: fixed;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+}
+
+.canvasContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.triangleCanvasContent {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+/*** Frontpage styling ***/
+
+h1, h2, h3 {
+  margin-top: 10px;
+}
+
+.frontWell {
+  border: none;
+  box-shadow: none;
+  /* 0.6 opacity background */
+  background-color: rgba(255, 255, 255, 0.6) ;
 }

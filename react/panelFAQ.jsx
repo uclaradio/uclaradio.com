@@ -4,10 +4,12 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var urls = {url: "/panel/api/faq"};
+var urls = {
+  url: "/panel/api/faq"
+};
 
-// Custom elements
-var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
+// Panel Elements
+var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
 
 // Boostrap Components
 var Accordion = require('react-bootstrap').Accordion;
@@ -15,7 +17,6 @@ var Panel = require('react-bootstrap').Panel;
 var Input = require('react-bootstrap').Input;
 var Button = require('react-bootstrap').Button;
 var Grid = require('react-bootstrap').Grid;
-
 
 var FAQPage = React.createClass({
   render: function() {

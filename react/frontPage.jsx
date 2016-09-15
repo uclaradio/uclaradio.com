@@ -3,9 +3,9 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var TriangleCanvas = require('./components/TriangleCanvas.jsx');
 
-// Custom elements
+// FrontPage Elements
+var TriangleCanvas = require('./frontpage/TriangleCanvas.jsx');
 
 // Bootstrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -14,7 +14,7 @@ var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
 
 // Custom
-var theme = require('./components/misc/theme');
+var theme = require('./misc/theme');
 
 var FrontPage = React.createClass({
   render: function() {

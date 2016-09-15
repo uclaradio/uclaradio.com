@@ -4,22 +4,26 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var urls = {showURL: "/panel/api/showData/",
-            showUpdateURL: "/panel/api/updateShow",
-            showPicURL: "/panel/api/showPic",
-            deleteShowURL: "/panel/api/deleteShow",
-            deleteRedirectURL: "/panel"};
+var urls = {
+  showURL: "/panel/api/showData/",
+  showUpdateURL: "/panel/api/updateShow",
+  showPicURL: "/panel/api/showPic",
+  deleteShowURL: "/panel/api/deleteShow",
+  deleteRedirectURL: "/panel"
+};
 
-// Custom elements
-var PanelLinksNavbar = require('./components/PanelLinksNavbar.jsx');
-var InputEditableTextField = require('./components/InputEditableTextField.jsx');
-var InputEditableDateTimeField = require('./components/InputEditableDateTimeField.jsx');
-var InputCheckbox = require('./components/InputCheckbox.jsx');
-var InputFileUpload = require('./components/InputFileUpload.jsx');
-var ConfirmationButton = require('./components/ConfirmationButton.jsx');
-var SquareImage = require('./components/SquareImage.jsx');
+// Panel Elements
+var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
+var SquareImage = require('./panel/SquareImage.jsx');
 
-// Bootstrap elements
+// Inputs
+var InputEditableTextField = require('./inputs/InputEditableTextField.jsx');
+var InputEditableDateTimeField = require('./inputs/InputEditableDateTimeField.jsx');
+var InputCheckbox = require('./inputs/InputCheckbox.jsx');
+var InputFileUpload = require('./inputs/InputFileUpload.jsx');
+var ConfirmationButton = require('./inputs/ConfirmationButton.jsx');
+
+// Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
