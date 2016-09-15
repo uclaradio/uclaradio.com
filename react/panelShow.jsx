@@ -28,7 +28,6 @@ var Grid = require('react-bootstrap').Grid;
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
-var Image = require('react-bootstrap').Image;
 var FormControls = require('react-bootstrap').FormControls;
 
 var ShowPage = React.createClass({

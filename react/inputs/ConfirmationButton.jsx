@@ -1,4 +1,4 @@
-// UserEditableDateTimeField.js
+// UserEditableDateTimeField.jsx
 
 var React = require('react');
 
