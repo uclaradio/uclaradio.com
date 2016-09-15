@@ -3,17 +3,78 @@
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var TriangleCanvas = require('./components/TriangleCanvas.jsx');
 
-var Theme = require('./components/misc/theme');
+var theme = require('./components/misc/theme');
 
 var FrontPage = React.createClass({
-  componentDidMount: function() {
-    Theme.style();
-  },
   render: function() {
     return (
       <div className="frontPage">
-      ayyy lmao
+        <TriangleCanvas xColors={theme.timezoneColorScheme()}>
+          <div class="container" id="main">
+            <div className="frontPage">
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+            <p>ayyy lmao</p>
+
+            </div>
+          </div>
+        </TriangleCanvas>
       </div>
     )
   }  

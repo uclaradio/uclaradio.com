@@ -33,7 +33,12 @@ theme.randColorScheme = function(timeOfDay) {
   return choice;
 };
 
-theme.colorScheme = function() {
+/**
+  Calculate color scheme for current time
+
+  @return array of color strings
+*/
+theme.timezoneColorScheme = function() {
   // UCLA is located 7 hours behind UTC. Use UTC time so our
   // background colors will be synchronized wherever you are in the world.
   var hour = new Date().getUTCHours();
@@ -93,47 +98,47 @@ theme.colorScheme = function() {
 //   );
 // }
 
-theme.setPageTheme = function(colorScheme) {
-  var midnight = false;
-  var dark = null;
-  var medium = null;
-  var light = null;
+// theme.setPageTheme = function(colorScheme) {
+//   var midnight = false;
+//   var dark = null;
+//   var medium = null;
+//   var light = null;
 
-  if (colorScheme === "Greys") { // midnight space theme
-    midnight = true;
-    var filename = '/img/nebula' + Math.floor(Math.random()*3) + '.jpg';
-    var backgroundAttribute = "background: url(" + filename +
-      ") no-repeat center center fixed";
-    document.body.setAttribute('style', backgroundAttribute);
-    dark = '#292e49';
-    medium = '#2d4b56';
-    light = '#30716d';
-  }
-  else {
-    console.log(colorScheme);
-    var colors = ColorBrewer[colorScheme][9];
-    var pattern = Trianglify({width: window.innerWidth,
-      height: window.innerHeight,
-      variance: 0.0,
-      cell_size: 175,
-      x_colors: colors})
-    document.body.setAttribute('style', 'background: ' +
-        pattern.dataUrl + ' no-repeat center center fixed');
+//   if (colorScheme === "Greys") { // midnight space theme
+//     midnight = true;
+//     var filename = '/img/nebula' + Math.floor(Math.random()*3) + '.jpg';
+//     var backgroundAttribute = "background: url(" + filename +
+//       ") no-repeat center center fixed";
+//     document.body.setAttribute('style', backgroundAttribute);
+//     dark = '#292e49';
+//     medium = '#2d4b56';
+//     light = '#30716d';
+//   }
+//   else {
+//     console.log(colorScheme);
+//     var colors = ColorBrewer[colorScheme][9];
+//     var pattern = Trianglify({width: window.innerWidth,
+//       height: window.innerHeight,
+//       variance: 0.0,
+//       cell_size: 175,
+//       x_colors: colors})
+//     document.body.setAttribute('style', 'background: ' +
+//         pattern.dataUrl + ' no-repeat center center fixed');
 
-    dark = colors[8];
-    medium = colors[7];
-    light = colors[6];
-  }
+//     dark = colors[8];
+//     medium = colors[7];
+//     light = colors[6];
+//   }
 
-  // Now set the buttons based on color scheme
+//   // Now set the buttons based on color scheme
 
-  // check if it is "dark" theme or not
-  // need to change the drop shadow as well as button
-  // setButtons(dark, medium, light, midnight);
-}
+//   // check if it is "dark" theme or not
+//   // need to change the drop shadow as well as button
+//   // setButtons(dark, medium, light, midnight);
+// }
 
-theme.style = function() {
-  theme.setPageTheme(theme.colorScheme())
-}
+// theme.style = function() {
+//   theme.setPageTheme(theme.colorScheme())
+// }
 
 module.exports = theme;
