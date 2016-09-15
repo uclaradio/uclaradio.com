@@ -72,7 +72,8 @@ h1, h2, h3 {
 
 .streamBar {
   width: 100%;
-  padding: 10px 25px;
+  padding: 15px 25px;
+  line-height: 20px;
   position: fixed;
   left: 0;
   bottom: 0;

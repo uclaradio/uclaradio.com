@@ -18,7 +18,9 @@ var FrontPageNavbar = React.createClass({
             className="frontPageNavbarItem">SHOWS</NavItem>
           <NavItem eventKey={2} href="#" className="frontPageNavbarItem">DJS</NavItem>
           <NavItem eventKey={4} href="#" className="frontPageNavbarItem">CALENDAR</NavItem>
-          <NavDropdown eventKey={3} title="MORE" id="basic-nav-dropdown" className="frontPageNavbarItem">
+          <NavItem eventKey={2} href="#" className="frontPageNavbarItem">SCHEDULE</NavItem>
+          <NavItem eventKey={4} href="#" className="frontPageNavbarItem">BLOG</NavItem>
+          <NavDropdown eventKey={3} title="" id="basic-nav-dropdown" className="frontPageNavbarItem">
             <MenuItem eventKey={3.1}>CONTACT</MenuItem>
             <MenuItem eventKey={3.2}>MEDIA</MenuItem>
             <MenuItem eventKey={3.4}>BLOG</MenuItem>

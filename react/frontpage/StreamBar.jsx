@@ -6,7 +6,7 @@ var StreamBar = React.createClass({
   render: function() {
     return (
       <div className="streamBar">
-        Now playing...
+        ▶ <span style={{paddingLeft: 10}}>Now playing...</span>
       </div>
     );
   }

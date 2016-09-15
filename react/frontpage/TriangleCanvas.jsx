@@ -23,19 +23,9 @@ var TriangleCanvas = React.createClass({
     };
   },
   componentDidMount: function() {
-    window.addEventListener('resize', this.handleResize);
     this.renderCanvas();
-  },
-  componentWillUnmount: function() {
-    window.removeEventListener('resize', this.handleResize);
   },
   componentDidUpdate: function() {
-    this.renderCanvas();
-  },
-  /**
-  Handle change in window size
-  */
-  handleResize: function(e) {
     this.renderCanvas();
   },
   renderCanvas: function() {

@@ -165,7 +165,7 @@ shows.getShowById = function(id, callback) {
   });
 };
 
-// get all shows with user data too (name, picture, djs)
+// get all public shows with user data too (name, picture, djs)
 shows.getAllShows = function(callback) {
   ShowModel.find({public: true}, function(err, allShows) {
     if (err) { callback(err); }
