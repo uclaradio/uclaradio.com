@@ -5,6 +5,15 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var TriangleCanvas = require('./components/TriangleCanvas.jsx');
 
+// Custom elements
+
+// Bootstrap elements
+var Grid = require('react-bootstrap').Grid;
+var Row = require('react-bootstrap').Row;
+var Col = require('react-bootstrap').Col;
+var Well = require('react-bootstrap').Well;
+
+// Custom
 var theme = require('./components/misc/theme');
 
 var FrontPage = React.createClass({
@@ -13,66 +22,39 @@ var FrontPage = React.createClass({
       <div className="frontPage">
         <TriangleCanvas xColors={theme.timezoneColorScheme()}>
           <div class="container" id="main">
-            <div className="frontPage">
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
-            <p>ayyy lmao</p>
+            <Grid>
 
-            </div>
+              <Col xs={12} lg={3} lgPush={9}>
+                <Well className="frontWell">
+                  <h2>Now Playing</h2>
+                  <img style={{maxWidth: 100, maxHeight: 100, paddingBottom: 10}}
+                    src="http://images.8tracks.com/cover/i/002/789/269/rsz_1on_stage_us_8track_2_big-9449.jpg?rect=0,0,596,596&q=98&fm=jpg&fit=max" />
+                  <p>Best Coast</p>
+                </Well>
+              </Col>
+
+              <Col xs={12} lg={6}>
+                <Well className="frontWell">
+                  <h2>Content</h2>
+                  <p>8/16 - ayyy lmao</p>
+                  <p>7/16 - ayyy lmao</p>
+                  <p>6/16 - ayyy lmao</p>
+                  <p>5/16 - ayyy lmao</p>
+                  <p>3/16 - ayyy lmao</p>
+                  <p>1/16 - ayyy lmao</p>
+                </Well>
+              </Col>
+
+              <Col xs={12} lg={3} lgPull={9}>
+                <Well className="frontWell">
+                  <h2>About</h2>
+                  <img style={{maxWidth: 200, maxHeight: 200, paddingBottom: 10}}
+                    src="/img/radio.png" />
+                  <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union. Donate and Support</p>
+                </Well>
+              </Col>
+
+            </Grid>
           </div>
         </TriangleCanvas>
       </div>

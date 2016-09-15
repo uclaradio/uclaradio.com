@@ -40,7 +40,6 @@ var TriangleCanvas = React.createClass({
   },
   renderCanvas: function() {
     var canvas = document.getElementById('daCanvas');
-    console.log("x_colors:", this.props.xColors)
     var pattern = Trianglify({
       width: window.innerWidth,
       height: window.innerHeight,
