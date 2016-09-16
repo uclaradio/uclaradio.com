@@ -26,7 +26,7 @@ var FrontPage = React.createClass({
           <div class="container" id="main">
             <Grid>
 
-              <Col xs={12} lg={3} lgPush={9}>
+              <Col xs={12} md={3} mdPush={9}>
                 <Well className="frontWell">
                   <h2>Current Show</h2>
                   <img style={{maxWidth: 100, maxHeight: 100, paddingBottom: 10}}
@@ -35,7 +35,7 @@ var FrontPage = React.createClass({
                 </Well>
               </Col>
 
-              <Col xs={12} lg={6}>
+              <Col xs={12} md={6}>
                 <FrontPageNavbar />
                 <Well className="frontWell">
                   <h2>Content</h2>
@@ -57,9 +57,9 @@ var FrontPage = React.createClass({
                 </Well>
               </Col>
 
-              <Col xs={12} lg={3} lgPull={9}>
+              <Col xs={12} md={3} mdPull={9}>
                 <Well className="frontWell">
-                  <img style={{maxWidth: 200, maxHeight: 200, paddingBottom: 10}}
+                  <img style={{width: "100%", maxWidth: 200, maxHeight: 200, paddingBottom: 10}}
                     src="/img/radio.png" />
                   <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union. Donate and Support</p>
                 </Well>

@@ -54,19 +54,35 @@ h1, h2, h3 {
 
 .frontPageNavbar {
   margin-bottom: 10px;
-  margin-left: -5px;
-  margin-right: -5px;
+}
+
+.collapsedNav {
+  padding-top: 10px;
 }
 
 .frontPageNavbarItem > a {
-  margin-left: 5px;
-  margin-right: 5px;
-  border-radius: 4px;
+  margin: 0px 5px;
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-.frontPageNavbarItem > a:focus, .frontPageNavbarItem > li > a:hover {
-  text-decoration: none;
+.frontPageNavbarItem.leftMost > a {
+  margin: 0 5px 0 0;
+}
+
+.frontPageNavbarItem.rightMost > a {
+  margin: 0 0 0 5px;
+}
+
+.frontPageNavbarItem.fullWidth > a {
+  margin: 5px 0;
+}
+
+.frontPageNavbarItem.fullWidth.topMost > a {
+  margin: 0 0 5px 0;
+}
+
+.frontPageNavbarItem > a:focus, .frontPageNavbarItem > a:hover {
+  /*text-decoration: none;*/
   background-color: rgba(255, 255, 255, 0.9);
 }
 
