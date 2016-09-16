@@ -53,32 +53,22 @@ h1, h2, h3 {
 }
 
 .frontPageNavbar {
-  margin-bottom: 10px;
+  margin-bottom: 10pt;
 }
 
-.collapsedNav {
+/*.collapsedNav {
   padding-top: 10px;
+}
+*/
+
+.frontPageNavbarItem.collapsed {
+  /*height: 50pt;*/
+  padding-top: 10pt;
 }
 
 .frontPageNavbarItem > a {
-  margin: 0px 5px;
+  margin: 0pt 5pt;
   background-color: rgba(255, 255, 255, 0.6);
-}
-
-.frontPageNavbarItem.leftMost > a {
-  margin: 0 5px 0 0;
-}
-
-.frontPageNavbarItem.rightMost > a {
-  margin: 0 0 0 5px;
-}
-
-.frontPageNavbarItem.fullWidth > a {
-  margin: 5px 0;
-}
-
-.frontPageNavbarItem.fullWidth.topMost > a {
-  margin: 0 0 5px 0;
 }
 
 .frontPageNavbarItem > a:focus, .frontPageNavbarItem > a:hover {
@@ -86,10 +76,26 @@ h1, h2, h3 {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
+.frontPageNavbarItem.leftMost > a {
+  margin: 0 5pt 0 0;
+}
+
+.frontPageNavbarItem.rightMost > a {
+  margin: 0 0 0 5pt;
+}
+
+.frontPageNavbarItem.fullWidth > a {
+  margin: 5pt 0;
+}
+
+.frontPageNavbarItem.fullWidth.topMost > a {
+  margin: 0 0 5pt 0;
+}
+
 .streamBar {
   width: 100%;
-  padding: 15px 25px;
-  line-height: 20px;
+  padding: 10pt 25pt;
+  line-height: 20pt;
   position: fixed;
   left: 0;
   bottom: 0;

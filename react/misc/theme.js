@@ -12,8 +12,8 @@ var ColorBrewer = require('colorbrewer');
 theme.randColorScheme = function(timeOfDay) {
   var colors, choice;
   switch(timeOfDay) {
-    case 'night': // blacks, greys
-        colors = ['Greys'];
+    case 'night': // blacks, greys, pink
+        colors = ['Greys', 'RdPu'];
         break;
     case 'morning': // oranges, yellows, reds, greens
         colors = ['Reds', 'Oranges', 'YlOrBr', 'YlOrRd', 'OrRd',
