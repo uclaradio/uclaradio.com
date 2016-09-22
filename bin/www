@@ -31,42 +31,41 @@ app.set('port', port);
 
 if (useSSL) {
   var uclaradioHostname = "uclaradio.com";
+  var wwwHostname = "www.uclaradio.com";
   var webEmail = "radio.web@media.ucla.edu";
   /**
    * Create HTTP(S) server.
    */
   var https = require('spdy');
-  var LEX = require('letsencrypt-express').testing();
+  var LEX = require('letsencrypt-express');
   var lex = LEX.create({
-      configDir: require('os').homedir() + '/letsencrypt/etc',
-      approveRegistration: function (hostname, approve) {
-        if (hostname === uclaradioHostname) {
-          approve(null, {
-            domains: [hostname],
-            email: webEmail,
-            agreeTos: true
-           });
-          }
-        }
-      });
-  http.createServer(LEX.createAcmeResponder(lex, function redirectHttps(req, res) {
-      res.setHeader('Location', 'https://' + req.headers.host + req.url);
-      res.statusCode = 302;
-      res.end('<!-- Please use HTTPS instead -->');
-  })).listen(80);
-  var server = https.createServer(lex.httpsOptions, LEX.createAcmeResponder(lex, app)).listen(443);
+    server: 'staging',
+    challenges: { 'http-01': require('le-challenge-fs').create({ webrootPath: '/tmp/acme-challenges' }) },
+    store: require('le-store-certbot').create({ webrootPath: '/tmp/acme-challenges' }),
+    approveDomains: [uclaradioHostname, wwwHostname],
+    email: webEmail,
+    agreeTos: true
+  });
+
+  http.createServer(lex.middleware(require('redirect-https')())).listen(80, function () {
+    console.log("Listening for ACME http-01 challenges on", this.address());
+  });
+
+  https.createServer(lex.httpsOptions, lex.middleware(app)).listen(443, function () {
+    console.log("Listening for ACME tls-sni-01 challenges and serve app on", this.address());
+  });
 }
 else {
   var server = http.createServer(app);
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
 }
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.

@@ -24,7 +24,7 @@
     "jsx-loader": "^0.13.2",
     "less": "^2.6.1",
     "less-loader": "^2.2.2",
-    "letsencrypt-express": "^1.1.5",
+    "letsencrypt-express": "^2.0.3",
     "lwip": "0.0.9",
     "mongoose": "^4.0.1",
     "morgan": "~1.5.1",
