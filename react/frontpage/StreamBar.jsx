@@ -21,13 +21,14 @@ var StreamBar = React.createClass({
       // pause
       stream.pause();
       if (isMobile.any()) {
-        stream.pause();
+        stream.src = "";
       }
       this.setState({playing: false});
     } else {
       // play
       if (isMobile.any()) {
         stream.src = "http://stream.uclaradio.com:8000/listen";
+        stream.load();
       }
       stream.play();
       this.setState({playing: true});
