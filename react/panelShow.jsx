@@ -171,14 +171,15 @@ var Show = React.createClass({
     var djs = "";
     if (this.state.show.djs != null) {
       var useComma = false;
-      this.state.show.djs.map(function(djName) {
+      var djMap = this.state.show.djs;
+      Object.keys(djMap).forEach(function (username) {
         if (useComma) {
           djs += ", ";
         }
         else {
           useComma = true;
         }
-        djs += djName;
+        djs += djMap[username];
       });
     }
     return (

@@ -280,14 +280,9 @@ router.get('/api/showData/:id', function(req, res) {
 				return;
 			}
 			else {
-				shows.getShowById(req.params.id, function(err, o) {
+				shows.getDJMappedShow(req.params.id, function(err, o) {
 					if (o) {
-						accounts.getDJNamesFromUsernames(o.djs, function(err, djList) {
-							if (djList) {
-								o.djs = djList;
-							}
-							res.json(o);
-						});
+						res.json(o);
 					}
 					else {
 						res.status(400).send(err);
@@ -438,12 +433,32 @@ router.post('/api/updateShow', function(req, res) {
 				return;
 			}
 
+			// map djs back to usernames
+			var djUsernames = [];
+			Object.keys(showData.djs).forEach(function (username) {
+        djUsernames += username;
+      });
+      showData.djs = djUsernames;
+
 			// return show with id belonging to logged in user
 			var callback = function(err, show) {
-				if (err) { console.log("error updating show: ", err); }
-				if (show) { res.json(show); }
-				else { res.status(400).send(); }
-			}
+				if (err) {
+					console.log("error updating show: ", err);
+				}
+
+				if (show) {
+					shows.getDJMappedShow(show.id, function(err, o) {
+						if (o) {
+							res.json(o);
+						} else {
+							res.status(400).send();
+						}
+					});
+				} else {
+					res.status(400).send();
+				}
+			};
+
 			shows.updateShow(showData.id, showData, callback);
 		});
 	}

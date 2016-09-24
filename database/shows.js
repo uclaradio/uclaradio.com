@@ -161,9 +161,33 @@ shows.getShowByTitle = function(title, callback) {
 
 shows.getShowById = function(id, callback) {
   ShowModel.findOne({id: id}, function(err, o) {
-    callback(err, shows.webSafeShow(o));
+    if (err || o == null) {
+      callback(err);
+      return;
+    }
+    var show = shows.webSafeShow(o);
+    callback(err, show);
   });
 };
+
+shows.getDJMappedShow = function(id, callback) {
+  ShowModel.findOne({id: id}, function(err, o) {
+    if (err || o == null) {
+      callback(err);
+      return;
+    }
+
+    var usernames = [];
+    o.djs.map(function(dj) {
+      usernames.push(dj);
+    });
+    accounts.getDJNameMap(usernames, function(err, nameMap) {
+      var show = shows.webSafeShow(o);
+      show["djs"] = nameMap;
+      callback(err, show);
+    })
+  });
+}
 
 // get all public shows with user data too (name, picture, djs)
 shows.getAllShows = function(callback) {

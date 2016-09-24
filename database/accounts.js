@@ -280,9 +280,11 @@ accounts.deleteUnverifiedUser = function(username, callback) {
 accounts.getDJNamesFromUsernames = function(usernames, callback) {
   UserModel.find({username: {$in: usernames}}, function(err, users) {
     var djNames = [];
-    for (var i = 0; i < users.length; i++) {
-      if (users[i].djName) {
-        djNames.push(users[i].djName);
+    if (users != null) {
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].djName) {
+          djNames.push(users[i].djName);
+        }
       }
     }
     callback(err, djNames);
@@ -299,7 +301,11 @@ accounts.getDJNameMap = function(usernames, callback) {
       // create a dictionary of all users username->djName
       var nameMap = {};
       users.map(function(u) {
-        nameMap[u.username] = u.djName;
+        if (u.djName != null) {
+          nameMap[u.username] = u.djName;
+        } else {
+          nameMap[u.username] = u.username;
+        }
       });
       callback(null, nameMap);
     }
