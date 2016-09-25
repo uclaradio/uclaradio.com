@@ -301,7 +301,7 @@ accounts.getDJNameMap = function(usernames, callback) {
       // create a dictionary of all users username->djName
       var nameMap = {};
       users.map(function(u) {
-        if (u.djName != null) {
+        if (u.djName != null && u.djName.trim()) {
           nameMap[u.username] = u.djName;
         } else {
           nameMap[u.username] = u.username;
