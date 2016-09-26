@@ -3,11 +3,8 @@
 var React = require('react');
 
 // Bootstrap Elements
-var Navbar = require('react-bootstrap').Navbar;
 var Nav = require('react-bootstrap').Nav;
 var NavItem = require('react-bootstrap').NavItem;
-var NavDropdown = require('react-bootstrap').NavDropdown;
-var MenuItem = require('react-bootstrap').MenuItem;
 var Collapse = require('react-bootstrap').Collapse;
 
 /**

@@ -142,6 +142,7 @@ h1, h2, h3 {
 
 .trackInfo {
   vertical-align: middle;
+  text-align: center;
   display: inline-block;
   width: 33%;
   padding: 0 auto;
@@ -152,40 +153,3 @@ h1, h2, h3 {
   color: white;
 }
 
-/* Sliding animation */
-
-.collapsedStreamInfo-enter {
-  transform: translate(-100%);
-}
-
-.collapsedStreamInfo-enter.collapsedStreamInfo-enter-active {
-  transform: translate(0%);
-  transition: transform 1000ms ease-in-out;
-}
-
-.collapsedStreamInfo-leave {
-  transform: translate(0%);
-}
-
-.collapsedStreamInfo-leave.collapsedStreamInfo-leave-active {
-  transform: translate(100%);
-  transition: transform 1000ms ease-in-out;
-}
-
-.expandedStreamInfo-enter {
-  transform: translate(100%);
-}
-
-.expandedStreamInfo-enter.expandedStreamInfo-enter-active {
-  transform: translate(0%);
-  transition: transform 1000ms ease-in-out;
-}
-
-.expandedStreamInfo-leave {
-  transform: translate(0%);
-}
-
-.expandedStreamInfo-leave.expandedStreamInfo-leave-active {
-  transform: translate(-100%);
-  transition: transform 1000ms ease-in-out;
-}

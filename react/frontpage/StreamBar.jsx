@@ -8,7 +8,8 @@ var Col = require('react-bootstrap').Col;
 var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+// Open-Source Components
+// var Slider = require('react-slick');
 
 var sampleTracks = [
   {
@@ -95,12 +96,7 @@ var RecentlyPlayed = React.createClass({
     return (
       <div className="streamContent">
         <div className="streamElement">
-          <ReactCSSTransitionGroup 
-              transitionName="collapsedStreamInfo" 
-              transitionEnterTimeout={500} 
-              transitionLeaveTimeout={500}>
             <span className="currentlyPlaying">{this.currentSongInfo()}</span>
-          </ReactCSSTransitionGroup>
         </div>
         <div className="streamElement" onClick={this.toggleExpanded}>
           <span className="expandAction">PLAY HISTORY</span>
@@ -112,23 +108,17 @@ var RecentlyPlayed = React.createClass({
     return (
       <div className="streamContent">
         <div className="streamElement">
-          <ReactCSSTransitionGroup 
-            transitionName="expandedStreamInfo" 
-            transitionEnterTimeout={500} 
-            transitionLeaveTimeout={500}>
             { this.state.recentTracks.map(function(track) {
                 return (
                   <div className="trackInfo">
                     <a href={track.url}>
                       <img src={track.image} />
                       <div>{track.name}</div>
-                      <div>{track.artist}</div>
                     </a>
                   </div>
                 );
               })
             }
-          </ReactCSSTransitionGroup>
         </div>
         <div className="streamElement" onClick={this.toggleExpanded}>
           <span className="expandAction">HIDE</span>

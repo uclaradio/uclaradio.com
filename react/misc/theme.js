@@ -1,7 +1,7 @@
 var theme = {};
 
-var Trianglify = require('trianglify');
-var ColorBrewer = require('colorbrewer');
+// var Trianglify = require('trianglify');
+// var ColorBrewer = require('colorbrewer');
 
 /**
   Calculate color scheme
