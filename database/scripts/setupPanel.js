@@ -24,8 +24,10 @@ accounts.addPrivilege(accounts.managerPrivilegeName, links, function(err, succes
 
   // requestNewAccount = function(username, pass, email, fullName, callback)
   accounts.requestNewAccount("gm", passwords.gmpass, "radio.web@media.ucla.edu", "General Manager", function(err, saved) {
-    if (err) { console.log("error creating gm account:", err); }
-    else if (saved) {
+    if (err) {
+      console.log("error creating gm account:", err);
+      process.exit();
+    } else if (saved) {
       accounts.verifyAccount("gm", function(err, o) {
         if (err) { console.log("error validating gm user", err); }
 
