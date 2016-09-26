@@ -10,8 +10,6 @@ body {
 
 #main {
   margin: 20px auto;
-  width: 100%;
-  max-width: 1200px;
 }
 
 /* Trianglify */
@@ -48,7 +46,7 @@ h1, h2, h3 {
   border: none;
   box-shadow: none;
   /* 0.6 opacity background */
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.75);
   text-align: center;
 }
 
@@ -92,6 +90,8 @@ h1, h2, h3 {
   margin: 0 0 5pt 0;
 }
 
+/** Stream Bar **/
+
 .streamBar {
   width: 100%;
   padding: 10pt 25pt;
@@ -101,4 +101,91 @@ h1, h2, h3 {
   bottom: 0;
   color: white;
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+.streamContent {
+  display: table;
+  width: 100%;
+  padding: 10pt;
+  font-size: 120%;
+}
+
+.streamContent > .streamElement {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.playToggle {
+  cursor: pointer;
+}
+
+.playButton > .glyphicon {
+  font-size: 20pt;
+  vertical-align: middle;
+}
+
+.playText {
+  padding-left: 10pt;
+  vertical-align: middle;
+}
+
+/** Stream Bar Recently Played **/
+
+.recentlyPlayed {
+  width: 100%;
+}
+
+.expandAction {
+  float: right;
+  cursor: pointer;
+}
+
+.trackInfo {
+  vertical-align: middle;
+  display: inline-block;
+  width: 33%;
+  padding: 0 auto;
+}
+
+.trackInfo > a, .trackInfo > a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+/* Sliding animation */
+
+.collapsedStreamInfo-enter {
+  transform: translate(-100%);
+}
+
+.collapsedStreamInfo-enter.collapsedStreamInfo-enter-active {
+  transform: translate(0%);
+  transition: transform 1000ms ease-in-out;
+}
+
+.collapsedStreamInfo-leave {
+  transform: translate(0%);
+}
+
+.collapsedStreamInfo-leave.collapsedStreamInfo-leave-active {
+  transform: translate(100%);
+  transition: transform 1000ms ease-in-out;
+}
+
+.expandedStreamInfo-enter {
+  transform: translate(100%);
+}
+
+.expandedStreamInfo-enter.expandedStreamInfo-enter-active {
+  transform: translate(0%);
+  transition: transform 1000ms ease-in-out;
+}
+
+.expandedStreamInfo-leave {
+  transform: translate(0%);
+}
+
+.expandedStreamInfo-leave.expandedStreamInfo-leave-active {
+  transform: translate(-100%);
+  transition: transform 1000ms ease-in-out;
 }
