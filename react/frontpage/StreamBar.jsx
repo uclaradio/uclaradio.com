@@ -4,12 +4,12 @@ var React = require('react');
 
 // Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
-var Col = require('react-bootstrap').Col;
 var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
+var Collapse = require('react-bootstrap').Collapse;
 
 // Open-Source Components
-// var Slider = require('react-slick');
+var Slider = require('react-slick');
 
 var sampleTracks = [
   {
@@ -35,7 +35,7 @@ var sampleTracks = [
 var stream;
 var StreamBar = React.createClass({
   getInitialState: function() {
-    return {playing: false};
+    return {playing: false, expanded: false};
   },
   componentDidMount: function() {
     stream = document.getElementById('stream');
@@ -61,21 +61,26 @@ var StreamBar = React.createClass({
       this.setState({playing: true});
     }
   },
+  toggleExpanded: function() {
+    this.setState({expanded: !this.state.expanded});
+  },
   render: function() {
     return (
       <div className="streamBar">
         <Grid>
-          <Col xs={12} md={4}>
-            <div onClick={this.togglePlay} className="streamContent playToggle">
-              <span className="streamElement playButton"><Glyphicon glyph={this.state.playing ? "pause" : "play"} /></span>
-              <span className="streamElement playText">
+          <RecentlyPlayed expanded={this.state.expanded} />
+
+          <div className="streamContent">
+            <div onClick={this.toggleExpanded}>
+              <span className="expandAction">{this.state.expanded ? "HIDE RECENT TRACKS" : "SHOW RECENT TRACKS"}</span>
+            </div>
+            <div onClick={this.togglePlay} className="playToggle">
+              <span className="playButton"><Glyphicon glyph={this.state.playing ? "pause" : "play"} /></span>
+              <span className="playText">
                 LIVE STREAM: Opposites Attract
               </span>
             </div>
-          </Col>
-          <Col xs={12} md={8}>
-            <RecentlyPlayed />
-          </Col>
+          </div>
         </Grid>
       </div>
     );
@@ -84,56 +89,34 @@ var StreamBar = React.createClass({
 
 var RecentlyPlayed = React.createClass({
   getInitialState: function() {
-    return {expanded: false, recentTracks: sampleTracks};
+    return {recentTracks: sampleTracks, mounted: false};
   },
-  toggleExpanded: function() {
-    this.setState({expanded: !this.state.expanded});
-  },
-  currentSongInfo: function() {
-    return 'Magic Potion - "Cheddar Lane"';
-  },
-  collapsedContent: function() {
-    return (
-      <div className="streamContent">
-        <div className="streamElement">
-            <span className="currentlyPlaying">{this.currentSongInfo()}</span>
-        </div>
-        <div className="streamElement" onClick={this.toggleExpanded}>
-          <span className="expandAction">PLAY HISTORY</span>
-        </div>
-      </div>
-    );
-  },
-  expandedContent: function() {
-    return (
-      <div className="streamContent">
-        <div className="streamElement">
-            { this.state.recentTracks.map(function(track) {
-                return (
-                  <div className="trackInfo">
-                    <a href={track.url}>
-                      <img src={track.image} />
-                      <div>{track.name}</div>
-                    </a>
-                  </div>
-                );
-              })
-            }
-        </div>
-        <div className="streamElement" onClick={this.toggleExpanded}>
-          <span className="expandAction">HIDE</span>
-        </div>
-      </div>
-    );
+  componentDidMount: function() {
+    this.setState({mounted: true})
   },
   render: function() {
     return (
       <div className="recentlyPlayed">
-        { this.state.expanded ?
-          this.expandedContent()
-          : 
-          this.collapsedContent()
-        }
+
+        <Collapse in={this.props.expanded || !this.state.mounted}>
+        <div className="recentContent">
+        <Slider arrows dots
+          slidesToShow={5}
+          responsive={[
+            { breakpoint: 768, settings: { slidesToShow: 2 } },
+            { breakpoint: 992, settings: { slidesToShow: 4 } } ]}>
+          { this.state.recentTracks.map(function(track) {
+              return (
+                <div className="trackInfo" key={track.artist+track.name}>
+                  <img src={track.image} />
+                  <div>{track.name}</div>
+                </div>
+              );
+            })
+          }
+        </Slider>
+        </div>
+        </Collapse>
       </div>
     );
   }

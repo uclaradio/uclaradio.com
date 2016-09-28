@@ -94,29 +94,12 @@ h1, h2, h3 {
 
 .streamBar {
   width: 100%;
-  padding: 10pt 25pt;
   line-height: 20pt;
   position: fixed;
   left: 0;
   bottom: 0;
   color: white;
   background-color: rgba(0, 0, 0, 0.6);
-}
-
-.streamContent {
-  display: table;
-  width: 100%;
-  padding: 10pt;
-  font-size: 120%;
-}
-
-.streamContent > .streamElement {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.playToggle {
-  cursor: pointer;
 }
 
 .playButton > .glyphicon {
@@ -129,10 +112,22 @@ h1, h2, h3 {
   vertical-align: middle;
 }
 
+.playButton, .playText {
+  cursor: pointer;
+}
+
 /** Stream Bar Recently Played **/
 
+.streamContent {
+  padding: 10pt;
+}
+
 .recentlyPlayed {
-  width: 100%;
+  overflow: hidden;
+}
+
+.recentContent {
+  display: block;
 }
 
 .expandAction {
@@ -141,11 +136,10 @@ h1, h2, h3 {
 }
 
 .trackInfo {
-  vertical-align: middle;
+  margin: 0 auto;
+  padding: 10pt;
   text-align: center;
-  display: inline-block;
   width: 33%;
-  padding: 0 auto;
 }
 
 .trackInfo > a, .trackInfo > a:hover {
@@ -153,3 +147,14 @@ h1, h2, h3 {
   color: white;
 }
 
+.trackInfo > img {
+  margin: 0 auto;
+}
+
+.slick-slider {
+  margin: 0 25px;
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  bottom: 0;
+}

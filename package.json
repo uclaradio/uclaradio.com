@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "postinstall": "babel reactComponents --out-dir public/js/react"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^0.8.7",
@@ -35,6 +34,7 @@
     "react": "^0.14.7",
     "react-bootstrap": "^0.28.3",
     "react-dom": "^0.14.7",
+    "react-slick": "^0.14.4",
     "serve-favicon": "^2.2.0",
     "spdy": "^3.3.2",
     "style-loader": "^0.13.0",
