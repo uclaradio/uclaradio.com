@@ -54,13 +54,7 @@ h1, h2, h3 {
   margin-bottom: 10pt;
 }
 
-/*.collapsedNav {
-  padding-top: 10px;
-}
-*/
-
 .frontPageNavbarItem.collapsed {
-  /*height: 50pt;*/
   padding-top: 10pt;
 }
 
@@ -103,7 +97,8 @@ h1, h2, h3 {
 }
 
 .playButton > .glyphicon {
-  font-size: 20pt;
+  font-size: 20px;
+  height: 20pt;
   vertical-align: middle;
 }
 
@@ -112,8 +107,9 @@ h1, h2, h3 {
   vertical-align: middle;
 }
 
-.playButton, .playText {
+.playButton, .playText, .expandAction {
   cursor: pointer;
+  height: 20pt;
 }
 
 /** Stream Bar Recently Played **/
@@ -132,7 +128,6 @@ h1, h2, h3 {
 
 .expandAction {
   float: right;
-  cursor: pointer;
 }
 
 .trackInfo {
