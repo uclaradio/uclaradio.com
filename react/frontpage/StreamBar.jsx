@@ -29,6 +29,42 @@ var sampleTracks = [
     "name": "Nu Metall",
     "url": "https://www.last.fm/music/Kablam/_/Nu+Metall",
     "image": "https://lastfm-img2.akamaized.net/i/u/64s/8db108e9a2725ed009adc262886b5b14.png"
+  },
+  {
+    "artist": "Bibio",
+    "name": "Town & Country",
+    "url": "https://www.last.fm/music/Bibio/_/Town+&+Country",
+    "image": "https://lastfm-img2.akamaized.net/i/u/64s/8058d75819ab70c2e3bae4e436046469.png",
+  },
+  {
+    "artist": "Broncho",
+    "name": "Stay Loose",
+    "url": "https://www.last.fm/music/Broncho/_/Stay+Loose",
+    "image": "https://lastfm-img2.akamaized.net/i/u/64s/f990e852bb7c42c7c2dd17da86a89974.png"
+  },
+  {
+    "artist": "Kablam",
+    "name": "Nu Metall",
+    "url": "https://www.last.fm/music/Kablam/_/Nu+Metall",
+    "image": "https://lastfm-img2.akamaized.net/i/u/64s/8db108e9a2725ed009adc262886b5b14.png"
+  },
+  {
+    "artist": "Bibio",
+    "name": "Town & Country",
+    "url": "https://www.last.fm/music/Bibio/_/Town+&+Country",
+    "image": "https://lastfm-img2.akamaized.net/i/u/64s/8058d75819ab70c2e3bae4e436046469.png",
+  },
+  {
+    "artist": "Broncho",
+    "name": "Stay Loose",
+    "url": "https://www.last.fm/music/Broncho/_/Stay+Loose",
+    "image": "https://lastfm-img2.akamaized.net/i/u/64s/f990e852bb7c42c7c2dd17da86a89974.png"
+  },
+  {
+    "artist": "Kablam",
+    "name": "Nu Metall",
+    "url": "https://www.last.fm/music/Kablam/_/Nu+Metall",
+    "image": "https://lastfm-img2.akamaized.net/i/u/64s/8db108e9a2725ed009adc262886b5b14.png"
   }
 ];
 
@@ -89,25 +125,33 @@ var StreamBar = React.createClass({
 
 var RecentlyPlayed = React.createClass({
   getInitialState: function() {
-    return {recentTracks: sampleTracks, mounted: false};
+    return {recentTracks: sampleTracks, mounted: false, prepared: false};
   },
   componentDidMount: function() {
     this.setState({mounted: true})
+  },
+  onEntered: function() {
+    if (!this.state.prepared) {
+      this.setState({prepared: true});
+      console.log("prepared");
+    }
   },
   render: function() {
     return (
       <div className="recentlyPlayed">
 
-        <Collapse in={this.props.expanded || !this.state.mounted}>
+        <Collapse in={this.props.expanded || !this.state.mounted}
+          style={this.state.prepared ? null : {display: "none"}}
+          onEntered={this.onEntered}>
         <div className="recentContent">
-        <Slider arrows dots
+        <Slider arrows infinite={false}
           slidesToShow={5}
           responsive={[
             { breakpoint: 768, settings: { slidesToShow: 2 } },
             { breakpoint: 992, settings: { slidesToShow: 4 } } ]}>
-          { this.state.recentTracks.map(function(track) {
+          { this.state.recentTracks.map(function(track, i) {
               return (
-                <div className="trackInfo" key={track.artist+track.name}>
+                <div className="trackInfo" key={track.artist+track.name+i}>
                   <img src={track.image} />
                   <div>{track.name}</div>
                 </div>

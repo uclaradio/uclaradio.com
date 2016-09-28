@@ -137,7 +137,7 @@ h1, h2, h3 {
 
 .trackInfo {
   margin: 0 auto;
-  padding: 10pt;
+  padding-top: 10pt;
   text-align: center;
   width: 33%;
 }
@@ -154,7 +154,6 @@ h1, h2, h3 {
 .slick-slider {
   margin: 0 25px;
   position: relative;
-  overflow: hidden;
   top: 0;
   bottom: 0;
 }
