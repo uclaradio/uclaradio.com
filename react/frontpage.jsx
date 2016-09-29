@@ -16,7 +16,6 @@ var RectImage = require('./common/RectImage.jsx');
 // Bootstrap elements
 var Bootstrap = require('react-bootstrap');
 var Grid = Bootstrap.Grid;
-var Row = Bootstrap.Row;
 var Col = Bootstrap.Col;
 
 // Custom
@@ -62,8 +61,10 @@ var FrontPage = React.createClass({
 
               <Col xs={12} md={3}>
                 <div className="radioInfo frontWell">
-                  <RectImage maxWidth="250px"
-                    src="/img/uclaradio-black.png" />
+                  <a href="/beta">
+                    <RectImage maxWidth="250px"
+                      src="/img/uclaradio-black.png" />
+                  </a>
                   <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union.</p>
                   <p>Donate and Support</p>
                 </div>

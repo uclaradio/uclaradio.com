@@ -4,7 +4,6 @@ var React = require('react');
 
 // Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
-var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 var Collapse = require('react-bootstrap').Collapse;
 

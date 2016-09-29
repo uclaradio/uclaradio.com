@@ -16,13 +16,28 @@ Navigation bar for the stream frontpage, which has collapsing rows and selectabl
 */
 var FrontPageNavbar = React.createClass({
   getInitialState: function() {
-    return {open: false, activeKey: 1};
+    return {open: false, activeKey: 0};
   },
   toggleOpen: function(selectedKey) {
-    if (selectedKey === 4) {
-      this.setState({open: !this.state.open});
-    } else {
-      this.setState({activeKey: selectedKey});
+    switch(selectedKey) {
+      case 1:
+        window.open("/shows", "_blank");
+        break;
+      case 2:
+        window.open("/GiveawayCalendar", "_blank");
+        break;
+      case 3:
+        window.open("http://apply.dailybruin.com/applications/ucla-radio/", "_blank");
+        break;
+      case 4:
+        this.setState({open: !this.state.open});
+        break;
+      case 5:
+        window.open("https://uclaradio.tumblr.com/", "_blank");
+        break;
+      default:
+        this.setState({activeKey: selectedKey});
+        break;
     }
   },
   render: function() {
@@ -31,19 +46,10 @@ var FrontPageNavbar = React.createClass({
         { /** Large devices, hidden on xs **/ }
         <Nav justified bsStyle="pills" className="hidden-xs" activeKey={this.state.activeKey} onSelect={this.toggleOpen}>
           <NavItem eventKey={1} href="#" className="frontPageNavbarItem leftMost">SHOWS</NavItem>
-          <NavItem eventKey={2} href="#" className="frontPageNavbarItem">DJS</NavItem>
-          <NavItem eventKey={3} href="#" className="frontPageNavbarItem">EVENTS</NavItem>
-          <NavItem eventKey={4} href="#" className="frontPageNavbarItem rightMost expandToggle">{this.state.open ? "LESS" : "MORE"}</NavItem>
+          <NavItem eventKey={2} href="#" className="frontPageNavbarItem">GIVEAWAYS</NavItem>
+          <NavItem eventKey={3} href="#" className="frontPageNavbarItem">APPLY</NavItem>
+          <NavItem eventKey={5} href="#" className="frontPageNavbarItem rightMost">BLOG</NavItem>
         </Nav>
-        <Collapse in={this.state.open} className="hidden-xs">
-          <Nav justified bsStyle="pills" className="collapsedNav" activeKey={this.state.activeKey} onSelect={this.toggleOpen}>
-            <NavItem eventKey={5} href="#" className="frontPageNavbarItem leftMost collapsed">BLOG</NavItem>
-            <NavItem eventKey={6} href="#" className="frontPageNavbarItem collapsed">BLOG</NavItem>
-            <NavItem eventKey={7} href="#" className="frontPageNavbarItem collapsed">BLOG</NavItem>
-            <NavItem eventKey={8} href="#" className="frontPageNavbarItem collapsed">BLOG</NavItem>
-            <NavItem eventKey={9} href="#" className="frontPageNavbarItem rightMost collapsed">BLOG</NavItem>
-          </Nav>
-        </Collapse>
 
         { /** Extra Small devices, hidden on sm, md, lg **/ }
         <Nav justified bsStyle="pills" className="hidden-sm hidden-md hidden-lg" activeKey={this.state.activeKey} onSelect={this.toggleOpen}>
@@ -52,13 +58,9 @@ var FrontPageNavbar = React.createClass({
         <Collapse in={this.state.open} className="hidden-sm hidden-md hidden-lg collapsedNav">
           <Nav justified bsStyle="pills" activeKey={this.state.activeKey} onSelect={this.toggleOpen}>
             <NavItem eventKey={1} href="#" className="frontPageNavbarItem fullWidth topMost">SHOWS</NavItem>
-            <NavItem eventKey={2} href="#" className="frontPageNavbarItem fullWidth">DJS</NavItem>
-            <NavItem eventKey={3} href="#" className="frontPageNavbarItem fullWidth">EVENTS</NavItem>
+            <NavItem eventKey={2} href="#" className="frontPageNavbarItem fullWidth">GIVEAWAYS</NavItem>
+            <NavItem eventKey={3} href="#" className="frontPageNavbarItem fullWidth">APPLY</NavItem>
             <NavItem eventKey={5} href="#" className="frontPageNavbarItem fullWidth">BLOG</NavItem>
-            <NavItem eventKey={6} href="#" className="frontPageNavbarItem fullWidth">BLOG</NavItem>
-            <NavItem eventKey={7} href="#" className="frontPageNavbarItem fullWidth">BLOG</NavItem>
-            <NavItem eventKey={8} href="#" className="frontPageNavbarItem fullWidth">BLOG</NavItem>
-            <NavItem eventKey={9} href="#" className="frontPageNavbarItem fullWidth">BLOG</NavItem>
           </Nav>
         </Collapse>
       </div>

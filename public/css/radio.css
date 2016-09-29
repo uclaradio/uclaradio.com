@@ -103,7 +103,7 @@ h4 {
 
 /** Radio Info **/
 
-.radioInfo > .rectImage {
+.radioInfo .rectImage {
   margin: 0 auto 10px auto;
 }
 
