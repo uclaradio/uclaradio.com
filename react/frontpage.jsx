@@ -7,17 +7,45 @@ var ReactDOM = require('react-dom');
 // FrontPage Elements
 var TriangleCanvas = require('./frontpage/TriangleCanvas.jsx');
 var FrontPageNavbar = require('./frontpage/FrontPageNavbar.jsx');
-var StreamBar = require('./frontpage/StreamBar.jsx')
+var StreamBar = require('./frontpage/StreamBar.jsx');
+var LiveShowInfo = require('./frontpage/LiveShowInfo.jsx');
+
+// Common Elements
+var RectImage = require('./common/RectImage.jsx');
 
 // Bootstrap elements
-var Grid = require('react-bootstrap').Grid;
-var Row = require('react-bootstrap').Row;
-var Col = require('react-bootstrap').Col;
+var Bootstrap = require('react-bootstrap');
+var Grid = Bootstrap.Grid;
+var Row = Bootstrap.Row;
+var Col = Bootstrap.Col;
 
 // Custom
 var theme = require('./misc/theme');
 
+var nowPlayingURL = "/api/nowplaying";
+
 var FrontPage = React.createClass({
+  getInitialState: function() {
+    return {
+      
+    };
+  },
+  componentDidMount: function() {
+    this.updateRecentTracks();
+  },
+  updateRecentTracks: function() {
+    $.ajax({
+      url: nowPlayingURL,
+      dataType: 'json',
+      cache: false,
+      success: function(nowPlaying) {
+        this.setState({show: nowPlaying});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(nowPlayingURL, status, err.toString());
+      }.bind(this)
+    });
+  },
   render: function() {
     return (
       <div className="frontPage">
@@ -26,8 +54,8 @@ var FrontPage = React.createClass({
             <Grid>
 
               <Col xs={12} md={3}>
-                <div className="frontWell">
-                  <img style={{width: "100%", maxWidth: 200, maxHeight: 200, paddingBottom: 10}}
+                <div className="radioInfo frontWell">
+                  <RectImage maxWidth="250px"
                     src="/img/uclaradio-black.png" />
                   <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union.</p>
                   <p>Donate and Support</p>
@@ -57,12 +85,7 @@ var FrontPage = React.createClass({
               </Col>
 
               <Col xs={12} md={3}>
-                <div className="frontWell">
-                  <h2>Current Show</h2>
-                  <img style={{maxWidth: 100, maxHeight: 100, paddingBottom: 10}}
-                    src="http://images.8tracks.com/cover/i/002/789/269/rsz_1on_stage_us_8track_2_big-9449.jpg?rect=0,0,596,596&q=98&fm=jpg&fit=max" />
-                  <p>Best Coast</p>
-                </div>
+                <LiveShowInfo show={this.state.show} title="Now Playing" />
               </Col>
 
             </Grid>

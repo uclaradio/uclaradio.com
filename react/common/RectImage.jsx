@@ -43,7 +43,7 @@ var RectImage = React.createClass({
       <div className="rectImage">
         <Rectangle aspectRatio={this.props.aspectRatio} style={rectangleStyle}>
           <Image style={pictureStyle} className="rectImagePic"
-          thumbnail={this.props.thumbnail} responsive={this.props.responsive}
+          thumbnail={this.props.thumbnail} responsive
           circle={this.props.circle} rounded={this.props.rounded} />
         </Rectangle>
       </div>

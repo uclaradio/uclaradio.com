@@ -188,7 +188,7 @@ var Show = React.createClass({
           <Well>
             <Row>
               <Col xs={12} md={4}>
-                <RectImage src={this.state.show.picture || "/img/radio.png" } responsive rounded maxWidth="380px" />
+                <RectImage src={this.state.show.picture || "/img/radio.png" } rounded maxWidth="380px" />
               </Col>
               <Col xs={12} md={8}>
                 <h3>{this.state.show.title}</h3>

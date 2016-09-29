@@ -164,7 +164,7 @@ var User = React.createClass({
     return (
       <div className="user">
         <h2>DJ Info</h2>
-        <RectImage src={this.state.user.picture || "/img/bear.jpg"} responsive circle />
+        <RectImage src={this.state.user.picture || "/img/bear.jpg"} circle />
         <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Profile" onSubmit={this.handlePicSubmit} verified={this.state.picVerified} />
         <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
           placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 

@@ -2,5 +2,6 @@
 /* Styling for common components */
 
 .rectImage {
+  display: block;
   margin: 10px auto;
 }

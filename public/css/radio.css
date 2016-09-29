@@ -42,6 +42,10 @@ h1, h2, h3 {
   margin-top: 10px;
 }
 
+h4 {
+  margin-top: 0px;
+}
+
 .frontWell {
   border: none;
   box-shadow: none;
@@ -95,6 +99,39 @@ h1, h2, h3 {
 .frontPageNavbarItem.fullWidth.expandToggle {
   max-width: none;
   min-width: none;
+}
+
+/** Radio Info **/
+
+.radioInfo > .rectImage {
+  margin: 0 auto 10px auto;
+}
+
+/** Live Show Info **/
+
+.liveShowBanner {
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.showDetails {
+  margin-top: 15px;
+}
+
+.showDetails > .time, .liveShowInfo > .djs, .liveShowInfo > .blurb {
+  color: #656565;
+}
+
+.showDetails > .time, .liveShowInfo > .djs {
+  font-weight: bold;
+}
+
+.liveShowBanner > .showDetails {
+  text-align: left;
+}
+
+.showDetails > .genre {
+  float: right;
 }
 
 /** Stream Bar **/

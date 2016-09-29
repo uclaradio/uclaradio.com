@@ -82,7 +82,11 @@ Recently played tracks collapsable slider
 */
 var RecentlyPlayed = React.createClass({
   getInitialState: function() {
-    return {recentTracks: [], mounted: false, prepared: false};
+    return {
+      recentTracks: [],
+      mounted: false,
+      prepared: false
+    };
   },
   componentDidMount: function() {
     this.setState({mounted: true})
