@@ -247,11 +247,7 @@ input[type="file"] {
 
 /**** Pictures ****/
 
-.squareImagePic {
-  width: 100%;
-}
-
-.user .squareImage {
+.user .rectImage {
   width: 150px;
   margin-bottom: 20px;
   margin-left: auto;

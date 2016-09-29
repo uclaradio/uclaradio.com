@@ -14,7 +14,7 @@ var urls = {
 
 // Panel Elements
 var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-var SquareImage = require('./panel/SquareImage.jsx');
+var RectImage = require('./common/RectImage.jsx');
 
 // Inputs
 var InputEditableTextField = require('./inputs/InputEditableTextField.jsx');
@@ -188,7 +188,7 @@ var Show = React.createClass({
           <Well>
             <Row>
               <Col xs={12} md={4}>
-                <SquareImage src={this.state.show.picture || "/img/radio.png" } responsive rounded />
+                <RectImage src={this.state.show.picture || "/img/radio.png" } responsive rounded maxWidth="380px" />
               </Col>
               <Col xs={12} md={8}>
                 <h3>{this.state.show.title}</h3>

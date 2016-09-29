@@ -102,8 +102,6 @@ var RecentlyPlayed = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(rawTracks) {
-        console.log(rawTracks);
-        InteractionManager.runAfterInteractions(function() {
         var truncateName = this.truncateName;
         var tracks = rawTracks.recenttracks.track.map(function(rawTrack) {
           return {
@@ -112,7 +110,6 @@ var RecentlyPlayed = React.createClass({
             "url": rawTrack.url,
             "image": rawTrack.image[1]["#text"] != "" ? rawTrack.image[1]["#text"] : "/img/no_album_artwork.jpg"
           };
-        })
         });
         if (!tracks) {
           tracks = [];

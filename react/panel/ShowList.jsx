@@ -6,7 +6,7 @@ var React = require('react');
 var Dates = require('../misc/Dates.js');
 
 // Panel elements
-var SquareImage = require('./SquareImage.jsx');
+var RectImage = require('../common/RectImage.jsx');
 
 // Boostrap elements
 var Grid = require('react-bootstrap').Grid;
@@ -38,7 +38,7 @@ var ShowList = React.createClass({
                 <Grid>
                   <Row>
                     <Col xs={2} className="noPads centered">
-                      <SquareImage src={show.picture || placeholder} className="showListImg squarePic" thumbnail />
+                      <RectImage src={show.picture || placeholder} className="showListImg rectPic" thumbnail />
                     </Col>
                     <Col xs={10}>
                         {title}

@@ -9,7 +9,7 @@ body {
 }
 
 #main {
-  margin: 20px auto;
+  margin: 20px auto 50px auto;
 }
 
 /* Trianglify */
@@ -49,6 +49,7 @@ h1, h2, h3 {
   /* 0.6 opacity background */
   background-color: rgba(255, 255, 255, 0.75);
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .frontPageNavbar {
@@ -153,13 +154,10 @@ h1, h2, h3 {
   color: white;
 }
 
-.trackInfo > img {
-  margin: 0 auto;
-}
-
 .trackImage {
   height: 64px;
   height: 64px;
+  margin: 0 auto 5px auto;
 }
 
 .trackArtist {

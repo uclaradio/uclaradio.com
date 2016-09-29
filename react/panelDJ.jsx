@@ -15,7 +15,7 @@ var urls = {
 // Panel Elements
 var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
 var ShowList = require('./panel/ShowList.jsx');
-var SquareImage = require('./panel/SquareImage.jsx');
+var RectImage = require('./common/RectImage.jsx');
 
 // Inputs
 var InputEditableTextField = require('./inputs/InputEditableTextField.jsx');
@@ -164,7 +164,7 @@ var User = React.createClass({
     return (
       <div className="user">
         <h2>DJ Info</h2>
-        <SquareImage src={this.state.user.picture || "/img/bear.jpg"} responsive circle />
+        <RectImage src={this.state.user.picture || "/img/bear.jpg"} responsive circle />
         <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Profile" onSubmit={this.handlePicSubmit} verified={this.state.picVerified} />
         <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
           placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 
