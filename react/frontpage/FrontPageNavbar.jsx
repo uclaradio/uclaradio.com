@@ -33,7 +33,7 @@ var FrontPageNavbar = React.createClass({
           <NavItem eventKey={1} href="#" className="frontPageNavbarItem leftMost">SHOWS</NavItem>
           <NavItem eventKey={2} href="#" className="frontPageNavbarItem">DJS</NavItem>
           <NavItem eventKey={3} href="#" className="frontPageNavbarItem">EVENTS</NavItem>
-          <NavItem eventKey={4} href="#" className="frontPageNavbarItem rightMost">MORE</NavItem>
+          <NavItem eventKey={4} href="#" className="frontPageNavbarItem rightMost expandToggle">{this.state.open ? "LESS" : "MORE"}</NavItem>
         </Nav>
         <Collapse in={this.state.open} className="hidden-xs">
           <Nav justified bsStyle="pills" className="collapsedNav" activeKey={this.state.activeKey} onSelect={this.toggleOpen}>
@@ -47,7 +47,7 @@ var FrontPageNavbar = React.createClass({
 
         { /** Extra Small devices, hidden on sm, md, lg **/ }
         <Nav justified bsStyle="pills" className="hidden-sm hidden-md hidden-lg" activeKey={this.state.activeKey} onSelect={this.toggleOpen}>
-          <NavItem eventKey={4} href="#" className="frontPageNavbarItem fullWidth">MORE</NavItem>
+          <NavItem eventKey={4} href="#" className="frontPageNavbarItem fullWidth expandToggle">{this.state.open ? "LESS" : "MORE"}</NavItem>
         </Nav>
         <Collapse in={this.state.open} className="hidden-sm hidden-md hidden-lg collapsedNav">
           <Nav justified bsStyle="pills" activeKey={this.state.activeKey} onSelect={this.toggleOpen}>

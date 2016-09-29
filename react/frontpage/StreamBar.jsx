@@ -11,64 +11,17 @@ var Collapse = require('react-bootstrap').Collapse;
 // Open-Source Components
 var Slider = require('react-slick');
 
-var sampleTracks = [
-  {
-    "artist": "Bibio",
-    "name": "Town & Country",
-    "url": "https://www.last.fm/music/Bibio/_/Town+&+Country",
-    "image": "https://lastfm-img2.akamaized.net/i/u/64s/8058d75819ab70c2e3bae4e436046469.png",
-  },
-  {
-    "artist": "Broncho",
-    "name": "Stay Loose",
-    "url": "https://www.last.fm/music/Broncho/_/Stay+Loose",
-    "image": "https://lastfm-img2.akamaized.net/i/u/64s/f990e852bb7c42c7c2dd17da86a89974.png"
-  },
-  {
-    "artist": "Kablam",
-    "name": "Nu Metall",
-    "url": "https://www.last.fm/music/Kablam/_/Nu+Metall",
-    "image": "https://lastfm-img2.akamaized.net/i/u/64s/8db108e9a2725ed009adc262886b5b14.png"
-  },
-  {
-    "artist": "Bibio",
-    "name": "Town & Country",
-    "url": "https://www.last.fm/music/Bibio/_/Town+&+Country",
-    "image": "https://lastfm-img2.akamaized.net/i/u/64s/8058d75819ab70c2e3bae4e436046469.png",
-  },
-  {
-    "artist": "Broncho",
-    "name": "Stay Loose",
-    "url": "https://www.last.fm/music/Broncho/_/Stay+Loose",
-    "image": "https://lastfm-img2.akamaized.net/i/u/64s/f990e852bb7c42c7c2dd17da86a89974.png"
-  },
-  {
-    "artist": "Kablam",
-    "name": "Nu Metall",
-    "url": "https://www.last.fm/music/Kablam/_/Nu+Metall",
-    "image": "https://lastfm-img2.akamaized.net/i/u/64s/8db108e9a2725ed009adc262886b5b14.png"
-  },
-  {
-    "artist": "Bibio",
-    "name": "Town & Country",
-    "url": "https://www.last.fm/music/Bibio/_/Town+&+Country",
-    "image": "https://lastfm-img2.akamaized.net/i/u/64s/8058d75819ab70c2e3bae4e436046469.png",
-  },
-  {
-    "artist": "Broncho",
-    "name": "Stay Loose",
-    "url": "https://www.last.fm/music/Broncho/_/Stay+Loose",
-    "image": "https://lastfm-img2.akamaized.net/i/u/64s/f990e852bb7c42c7c2dd17da86a89974.png"
-  },
-  {
-    "artist": "Kablam",
-    "name": "Nu Metall",
-    "url": "https://www.last.fm/music/Kablam/_/Nu+Metall",
-    "image": "https://lastfm-img2.akamaized.net/i/u/64s/8db108e9a2725ed009adc262886b5b14.png"
-  }
-];
+var trackURL = "https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json";
+var streamURL = "http://stream.uclaradio.com:8000/listen";
 
 var stream;
+
+/**
+Black floating audio stream bar that sits at bottom of screen,
+plays audio and shows recent tracks
+
+@prop currentShowTitle: title of currently playing show, or null
+*/
 var StreamBar = React.createClass({
   getInitialState: function() {
     return {playing: false, expanded: false};
@@ -90,7 +43,7 @@ var StreamBar = React.createClass({
     } else {
       // play
       if (isMobile.any()) {
-        stream.src = "http://stream.uclaradio.com:8000/listen";
+        stream.src = streamURL;
         stream.load();
       }
       stream.play();
@@ -113,7 +66,7 @@ var StreamBar = React.createClass({
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton"><Glyphicon glyph={this.state.playing ? "pause" : "play"} /></span>
               <span className="playText">
-                LIVE STREAM: Opposites Attract
+                { this.props.currentShowTitle ? "LIVE STREAM: " + this.props.currentShowTitle : "LIVE STREAM" }
               </span>
             </div>
           </div>
@@ -123,23 +76,58 @@ var StreamBar = React.createClass({
   }
 });
 
+/**
+Recently played tracks collapsable slider
+@prop expanded: should show recently played tracks
+*/
 var RecentlyPlayed = React.createClass({
   getInitialState: function() {
-    return {recentTracks: sampleTracks, mounted: false, prepared: false};
+    return {recentTracks: [], mounted: false, prepared: false};
   },
   componentDidMount: function() {
     this.setState({mounted: true})
+    this.updateRecentTracks();
   },
   onEntered: function() {
     if (!this.state.prepared) {
       this.setState({prepared: true});
-      console.log("prepared");
     }
+  },
+  truncateName: function(name, l) {
+    return name.length > l ? name.substr(0,l-2) + "\u2026" : name;
+  },
+  updateRecentTracks: function() {
+    $.ajax({
+      url: trackURL,
+      dataType: 'json',
+      cache: false,
+      success: function(rawTracks) {
+        console.log(rawTracks);
+        // InteractionManager.runAfterInteractions(function() {
+        var truncateName = this.truncateName;
+        var tracks = rawTracks.recenttracks.track.map(function(rawTrack) {
+          return {
+            "artist": truncateName(rawTrack.artist["#text"], 22),
+            "name": truncateName(rawTrack.name, 22),
+            "url": rawTrack.url,
+            "image": rawTrack.image[1]["#text"] != "" ? rawTrack.image[1]["#text"] : "/img/no_album_artwork.jpg"
+          };
+        });
+        // });
+        if (!tracks) {
+          tracks = [];
+        }
+        this.setState({recentTracks: tracks});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(trackURL, status, err.toString());
+      }.bind(this)
+    });
   },
   render: function() {
     return (
       <div className="recentlyPlayed">
-
+        { (!this.state.recentTracks || this.state.recentTracks.length == 0) ? null :
         <Collapse in={this.props.expanded || !this.state.mounted}
           style={this.state.prepared ? null : {display: "none"}}
           onEntered={this.onEntered}>
@@ -152,8 +140,9 @@ var RecentlyPlayed = React.createClass({
           { this.state.recentTracks.map(function(track, i) {
               return (
                 <div className="trackInfo" key={track.artist+track.name+i}>
-                  <img src={track.image} />
-                  <div>{track.name}</div>
+                  <img className="trackImage" src={track.image} />
+                  <div className="trackName">{track.name}</div>
+                  <div className="trackArtist">{track.artist}</div>
                 </div>
               );
             })
@@ -161,6 +150,7 @@ var RecentlyPlayed = React.createClass({
         </Slider>
         </div>
         </Collapse>
+      }
       </div>
     );
   }

@@ -45,6 +45,7 @@ h1, h2, h3 {
 .frontWell {
   border: none;
   box-shadow: none;
+  padding: 19px;
   /* 0.6 opacity background */
   background-color: rgba(255, 255, 255, 0.75);
   text-align: center;
@@ -60,6 +61,7 @@ h1, h2, h3 {
 
 .frontPageNavbarItem > a {
   margin: 0pt 5pt;
+  border-radius: 0 !important;
   background-color: rgba(255, 255, 255, 0.6);
 }
 
@@ -84,6 +86,16 @@ h1, h2, h3 {
   margin: 0 0 5pt 0;
 }
 
+.frontPageNavbarItem.expandToggle {
+  max-width: 80px;
+  min-width: 80px;
+}
+
+.frontPageNavbarItem.fullWidth.expandToggle {
+  max-width: none;
+  min-width: none;
+}
+
 /** Stream Bar **/
 
 .streamBar {
@@ -93,7 +105,7 @@ h1, h2, h3 {
   left: 0;
   bottom: 0;
   color: white;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
 .playButton > .glyphicon {
@@ -104,7 +116,6 @@ h1, h2, h3 {
 
 .playText {
   padding-left: 10pt;
-  vertical-align: middle;
 }
 
 .playButton, .playText, .expandAction {
@@ -144,6 +155,19 @@ h1, h2, h3 {
 
 .trackInfo > img {
   margin: 0 auto;
+}
+
+.trackImage {
+  height: 64px;
+  height: 64px;
+}
+
+.trackArtist {
+  color: #cacaca;
+}
+
+.trackName, .trackArtist {
+  line-height: 20px;
 }
 
 .slick-slider {
