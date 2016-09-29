@@ -28,8 +28,9 @@ var FrontPage = React.createClass({
               <Col xs={12} md={3}>
                 <div className="frontWell">
                   <img style={{width: "100%", maxWidth: 200, maxHeight: 200, paddingBottom: 10}}
-                    src="/img/radio.png" />
-                  <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union. Donate and Support</p>
+                    src="/img/uclaradio-black.png" />
+                  <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union.</p>
+                  <p>Donate and Support</p>
                 </div>
               </Col>
 
