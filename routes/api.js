@@ -44,7 +44,7 @@ router.get('/nowplaying', function(req, res) {
 			res.send(JSON.stringify(blurb));
 		}
 		else {
-			res.status(400).send(err);
+			res.send(JSON.stringify({status: "no show playing"}));
 		}
 	});
 });

@@ -88,9 +88,14 @@ var RecentlyPlayed = React.createClass({
       prepared: false
     };
   },
+  componentWillUnmount: function() {
+    clearInterval(this.interval);
+  },
   componentDidMount: function() {
     this.setState({mounted: true})
     this.updateRecentTracks();
+    // refresh tracks every 30 seconds
+    this.interval = setInterval(this.updateRecentTracks, 30*1000);
   },
   onEntered: function() {
     if (!this.state.prepared) {
@@ -142,8 +147,12 @@ var RecentlyPlayed = React.createClass({
               return (
                 <div className="trackInfo" key={track.artist+track.name+i}>
                   <img className="trackImage" src={track.image} />
-                  <div className="trackName">{track.name}</div>
-                  <div className="trackArtist">{track.artist}</div>
+                  <div className="trackName">
+                    <a href={track.url} target="_blank">{track.name}</a>
+                  </div>
+                  <div className="trackArtist">
+                    <a href={track.url} target="_blank">{track.artist}</a>
+                  </div>
                 </div>
               );
             })

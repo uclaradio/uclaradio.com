@@ -25,9 +25,6 @@ var TriangleCanvas = React.createClass({
   componentDidMount: function() {
     this.renderCanvas();
   },
-  componentDidUpdate: function() {
-    this.renderCanvas();
-  },
   renderCanvas: function() {
     var canvas = document.getElementById('daCanvas');
     var pattern = Trianglify({

@@ -118,19 +118,19 @@ h4 {
   margin-top: 15px;
 }
 
-.showDetails > .time, .liveShowInfo > .djs, .liveShowInfo > .blurb {
+.showDetails .time, .liveShowInfo .djs, .liveShowInfo .blurb {
   color: #656565;
 }
 
-.showDetails > .time, .liveShowInfo > .djs {
+.showDetails .time, .liveShowInfo .djs {
   font-weight: bold;
 }
 
-.liveShowBanner > .showDetails {
+.liveShowBanner .showDetails {
   text-align: left;
 }
 
-.showDetails > .genre {
+.showDetails .genre {
   float: right;
 }
 
@@ -186,7 +186,7 @@ h4 {
   width: 33%;
 }
 
-.trackInfo > a, .trackInfo > a:hover {
+.trackInfo a, .trackInfo a:hover {
   text-decoration: none;
   color: white;
 }
@@ -197,7 +197,7 @@ h4 {
   margin: 0 auto 5px auto;
 }
 
-.trackArtist {
+.trackArtist a {
   color: #cacaca;
 }
 

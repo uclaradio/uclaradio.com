@@ -30,10 +30,15 @@ var FrontPage = React.createClass({
       
     };
   },
-  componentDidMount: function() {
-    this.updateRecentTracks();
+  componentWillUnmount: function() {
+    clearInterval(this.interval);
   },
-  updateRecentTracks: function() {
+  componentDidMount: function() {
+    this.updateNowPlaying();
+    // refresh tracks every 30 seconds
+    this.interval = setInterval(this.updateNowPlaying, 30*1000);
+  },
+  updateNowPlaying: function() {
     $.ajax({
       url: nowPlayingURL,
       dataType: 'json',
@@ -42,11 +47,13 @@ var FrontPage = React.createClass({
         this.setState({show: nowPlaying});
       }.bind(this),
       error: function(xhr, status, err) {
+        this.setState({show: null});
         console.error(nowPlayingURL, status, err.toString());
       }.bind(this)
     });
   },
   render: function() {
+    var showShow = this.state.show && this.state.show.title != null;
     return (
       <div className="frontPage">
         <TriangleCanvas xColors={theme.timezoneColorScheme()}>
@@ -62,7 +69,7 @@ var FrontPage = React.createClass({
                 </div>
               </Col>
 
-              <Col xs={12} md={6}>
+              <Col xs={12} md={showShow ? 6 : 9}>
                 <FrontPageNavbar />
                 <div className="frontWell">
                   <h2>Content</h2>
@@ -84,8 +91,8 @@ var FrontPage = React.createClass({
                 </div>
               </Col>
 
-              <Col xs={12} md={3}>
-                <LiveShowInfo show={this.state.show} title="Now Playing" />
+              <Col xs={12} md={showShow ? 3 : 0}>
+                <LiveShowInfo show={showShow ? this.state.show : null} title="Now Playing" />
               </Col>
 
             </Grid>
