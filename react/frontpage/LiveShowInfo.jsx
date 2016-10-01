@@ -41,7 +41,7 @@ var LiveShowInfo = React.createClass({
             }
             <div className="showDetails">
               <span className="time">{this.props.show.day + " " + this.props.show.time}</span>
-              <span className="genre">{this.truncateName(this.props.show.genre || "", 22)}</span>
+              <span className="genre">{this.truncateName(this.props.show.genre || "", 18)}</span>
             </div>
             <RectImage responsive
                         src={this.props.show.picture || defaultShowPic} />

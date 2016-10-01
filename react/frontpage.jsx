@@ -59,7 +59,7 @@ var FrontPage = React.createClass({
           <div class="container" id="main">
             <Grid>
 
-              <Col xs={12} md={3}>
+              <Col xs={12} md={3} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
                 <div className="radioInfo frontWell">
                   <a href="/beta">
                     <RectImage maxWidth="250px"
@@ -70,29 +70,15 @@ var FrontPage = React.createClass({
                 </div>
               </Col>
 
-              <Col xs={12} md={showShow ? 6 : 9}>
+              <Col xs={12} md={showShow ? 6 : 9} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
                 <FrontPageNavbar />
                 <div className="frontWell">
                   <h2>Content</h2>
-                  <p>8/16 - ayyy lmao</p>
-                  <p>7/16 - ayyy lmao</p>
-                  <p>6/16 - ayyy lmao</p>
-                  <p>5/16 - ayyy lmao</p>
-                  <p>3/16 - ayyy lmao</p>
-                  <p>1/16 - ayyy lmao</p>
-                  <p>Put lots of info heree</p>
-                  <p>Put lots of info heree</p>
-                  <p>Put lots of info heree</p>
-                  <p>Put lots of info heree</p>
-                  <p>Put lots of info heree</p>
-                  <p>Put lots of info heree</p>
-                  <p>Put lots of info heree</p>
-                  <p>Put lots of info heree</p>
-                  <p>Put lots of info heree</p>
+                  <p>Put yerrr info heree</p>
                 </div>
               </Col>
 
-              <Col xs={12} md={showShow ? 3 : 0}>
+              <Col xs={12} md={showShow ? 3 : 0} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
                 <LiveShowInfo show={showShow ? this.state.show : null} title="Now Playing" />
               </Col>
 
