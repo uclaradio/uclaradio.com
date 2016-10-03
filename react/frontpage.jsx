@@ -53,6 +53,7 @@ var FrontPage = React.createClass({
   },
   render: function() {
     var showShow = this.state.show && this.state.show.title != null;
+    var loremIpsum = <div><p>Lorem ipsum dolor sit amet, iriure sanctus eos te, in has fierent vituperatoribus, deserunt senserit et quo. No vix amet eripuit interpretaris, nam sint quot quaerendum eu. Duo ne wisi quodsi mediocritatem, inani minimum moderatius mea et, te legimus albucius mel. Tation prompta hendrerit no est, lorem ignota theophrastus has ut. No his wisi novum, est nostrud facilis appetere no, te vel autem summo nemore. </p><p>Eius harum vis id, eam exerci possit oporteat ut. Ei mutat delicatissimi pro, ius ceteros singulis cu, no mea zril legimus honestatis. Eu per probo singulis, ad eam dicant utinam. Ut sea latine nonumes. </p><p>At erant altera omnesque his, qui an discere lobortis, id laudem democritum eum. Case appellantur his te, eu putent offendit vis. Possim utamur reformidans ius ea, eum feugiat saperet ad, in has mucius recusabo quaerendum. Ea velit dicta mel, iriure maluisset eos cu. Nec aperiri vocibus ea, te vim lorem suavitate. At his illud liber saperet. </p><p>Mei adhuc docendi gloriatur in, case habemus vim ad, vix te aliquip imperdiet theophrastus. Qui ex eripuit liberavisse, sit dolorum sensibus ea, ut congue munere eligendi vim. Eos ei soluta labitur appellantur. Est putant recteque in, cu rebum convenire mei, ad mea velit constituam temporibus. Probo autem assum vim cu, dicam ceteros partiendo in qui, eos ipsum lorem salutandi an. </p><p>Nonumy inciderint in nec, in per eirmod omnium recusabo. In deserunt salutatus est. Suavitate democritum voluptatibus ius cu, saperet evertitur ut eam. Quot graeco dolorem nec at, vis ad probo petentium maiestatis.</p></div>;
     return (
       <div className="frontPage">
         <TriangleCanvas xColors={theme.timezoneColorScheme()}>
@@ -74,7 +75,7 @@ var FrontPage = React.createClass({
                 <FrontPageNavbar />
                 <div className="frontWell">
                   <h2>Content</h2>
-                  <p>Put yerrr info heree</p>
+                  {loremIpsum}
                 </div>
               </Col>
 
@@ -88,7 +89,7 @@ var FrontPage = React.createClass({
         </TriangleCanvas>
       </div>
     )
-  }  
+  }
 });
 
 ReactDOM.render(
