@@ -10,8 +10,16 @@
 	padding:  .25rem;
 	width:  100%;
 	margin-bottom: 5%;
+	transition: box-shadow 0.5s;
 }
 
+.waterfall-box:hover {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.waterfall-box:visited {
+	box-shadow: 0px;
+}
 .waterfall-box-content {
 	position:relative;
 	display: block;
