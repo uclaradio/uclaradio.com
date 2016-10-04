@@ -20,7 +20,23 @@ var WaterFallContent = React.createClass({
 	render: function () {
 		return(
 			 <div className='waterfall-content'> 
-			{this.state.facebookPosts.map(function(el){ return(<a href={el['link']}><div className='waterfall-box'><div className='waterfall-box-content'>{el['full_picture'] && <img src={el['full_picture']} />}<div className='waterfall-box-content-text'>{el['message']}</div></div></div></a>)})}
+			{ this.state.facebookPosts.map (function(el) {
+					return (
+						<a href={el['link']}>
+							<div className='waterfall-box'>
+								<div className='waterfall-box-content'>
+
+								{ el['full_picture'] && <img src={el['full_picture']} /> }
+
+								<div className='waterfall-box-content-text'>
+									{ el['message'] }
+								</div>
+								</div>
+							</div>
+						</a>
+					);
+				})
+			}
 			</div>
 		);
 	}
