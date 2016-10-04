@@ -4,7 +4,6 @@ var React = require('react');
 
 // Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
-var Button = require('react-bootstrap').Button;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 var Collapse = require('react-bootstrap').Collapse;
 
@@ -24,7 +23,11 @@ plays audio and shows recent tracks
 */
 var StreamBar = React.createClass({
   getInitialState: function() {
-    return {playing: false, expanded: false};
+    return {
+      playing: false,
+      expanded: false,
+      hasReset: false
+    };
   },
   componentDidMount: function() {
     stream = document.getElementById('stream');
@@ -53,11 +56,18 @@ var StreamBar = React.createClass({
   toggleExpanded: function() {
     this.setState({expanded: !this.state.expanded});
   },
+  onReset: function() {
+    this.setState({hasReset: true, expanded: true});
+    document.getElementById("focusAnchor").focus();
+  },
   render: function() {
     return (
       <div className="streamBar">
         <Grid>
-          <RecentlyPlayed expanded={this.state.expanded} />
+          <div style={this.state.hasReset ? null : {opacity: "0", height: "0"}}>
+            <RecentlyPlayed expanded={this.state.expanded}
+              reset={!this.state.hasReset} onReset={this.onReset} />
+          </div>
 
           <div className="streamContent">
             <div onClick={this.toggleExpanded}>
@@ -85,21 +95,30 @@ var RecentlyPlayed = React.createClass({
     return {
       recentTracks: [],
       mounted: false,
-      prepared: false
+      prepared: false,
+      hasReset: false
     };
   },
   componentWillUnmount: function() {
     clearInterval(this.interval);
   },
   componentDidMount: function() {
-    this.setState({mounted: true})
     this.updateRecentTracks();
     // refresh tracks every 30 seconds
     this.interval = setInterval(this.updateRecentTracks, 30*1000);
+    this.setState({mounted: true})
   },
   onEntered: function() {
     if (!this.state.prepared) {
       this.setState({prepared: true});
+    }
+    if (this.props.reset && !this.state.hasReset) {
+      this.setState({hasReset: true});
+    }
+  },
+  onExited: function() {
+    if (this.props.reset) {
+      this.props.onReset();
     }
   },
   truncateName: function(name, l) {
@@ -134,9 +153,9 @@ var RecentlyPlayed = React.createClass({
     return (
       <div className="recentlyPlayed">
         { (!this.state.recentTracks || this.state.recentTracks.length == 0) ? null :
-        <Collapse in={this.props.expanded || !this.state.mounted}
-          style={this.state.prepared ? null : {display: "none"}}
-          onEntered={this.onEntered}>
+        <Collapse in={this.props.expanded || !this.state.mounted || (this.props.reset && !this.state.hasReset)}
+          transitionAppear
+          onEntered={this.onEntered} onExited={this.onExited}>
         <div className="recentContent">
         <Slider arrows infinite={false}
           slidesToShow={5}
@@ -145,7 +164,7 @@ var RecentlyPlayed = React.createClass({
             { breakpoint: 992, settings: { slidesToShow: 4 } } ]}>
           { this.state.recentTracks.map(function(track, i) {
               return (
-                <div className="trackInfo" key={track.artist+track.name+i}>
+                <div id="focusAnchor" className="trackInfo" key={track.artist+track.name+i}>
                   <img className="trackImage" src={track.image} />
                   <div className="trackName">
                     <a href={track.url} target="_blank">{track.name}</a>
