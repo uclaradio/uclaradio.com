@@ -1,0 +1,28 @@
+.waterfall-content {
+	-moz-column-width: 17em;
+	-moz-column-gap: 0.5em;
+	-webkit-column-width: 17em;
+	-webkit-column-gap:0.5em;
+}
+
+.waterfall-box {
+	display: inline-block;
+	padding:  .25rem;
+	width:  100%;
+	margin-bottom: 5%;
+}
+
+.waterfall-box-content {
+	position:relative;
+	display: block;
+	background-color: yellow;
+}
+
+.waterfall-box-content img {
+	width: 100%;
+}
+
+.waterfall-box-content-text {
+	padding: 5%;
+	background-color: white;
+}
