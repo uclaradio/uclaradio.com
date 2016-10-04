@@ -57,7 +57,7 @@ var StreamBar = React.createClass({
     this.setState({expanded: !this.state.expanded});
   },
   onReset: function() {
-    this.setState({hasReset: true, expanded: true});
+    this.setState({hasReset: true});
     document.getElementById("focusAnchor").focus();
   },
   render: function() {

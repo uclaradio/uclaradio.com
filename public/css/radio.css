@@ -12,6 +12,10 @@ body {
   margin: 20px auto 50px auto;
 }
 
+a {
+  color: black;
+}
+
 /* Trianglify */
 
 .canvasCanvas {
