@@ -68,20 +68,17 @@ var FrontPage = React.createClass({
                   </a>
                   <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union.</p>
                 </div>
+                <LiveShowInfo show={showShow ? this.state.show : null} title="Now Playing" />
               </Col>
 
-              <Col xs={12} md={showShow ? 6 : 9} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
+              <Col xs={12} md={9} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
                 <FrontPageNavbar />
                 <WaterFallContent />
               </Col>
 
-              <Col xs={12} md={showShow ? 3 : 0} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
-                <LiveShowInfo show={showShow ? this.state.show : null} title="Now Playing" />
-              </Col>
-
             </Grid>
           </div>
-        <StreamBar />
+        <StreamBar currentShowTitle={showShow ? this.state.show.title : null} />
         </TriangleCanvas>
       </div>
     )

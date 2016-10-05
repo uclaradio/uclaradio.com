@@ -5,11 +5,11 @@
 /*** Common Styling ***/
 
 body {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'apercuregular';
 }
 
 #main {
-  margin: 20px auto 50px auto;
+  margin: 20px auto 175px auto;
 }
 
 a {
@@ -76,7 +76,7 @@ h4 {
 
 .frontPageNavbarItem > a:focus, .frontPageNavbarItem > a:hover {
   /*text-decoration: none;*/
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: white !important;
 }
 
 .frontPageNavbarItem.leftMost > a {

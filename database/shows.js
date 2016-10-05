@@ -121,6 +121,16 @@ shows.updateShow = function(id, newData, callback) {
   });
 };
 
+shows.addUser = function(id, username, callback) {
+  ShowModel.findOneAndUpdate({'id': id}, {$push: {djs: username}}, {new: true}, function(err, o) {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, shows.webSafeShow(o));
+    }
+  });
+}
+
 shows.getShowsForUser = function(djUsername, callback) {
   ShowModel.find({djs: djUsername}, function(err, res) {
     if (err) {

@@ -76,7 +76,7 @@ var StreamBar = React.createClass({
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton"><Glyphicon glyph={this.state.playing ? "pause" : "play"} /></span>
               <span className="playText">
-                { this.props.currentShowTitle ? "LIVE STREAM: " + this.props.currentShowTitle : "LIVE STREAM" }
+                { this.props.currentShowTitle ? "LIVE: " + this.props.currentShowTitle : "LIVE STREAM" }
               </span>
             </div>
           </div>
