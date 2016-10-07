@@ -58,7 +58,6 @@ var StreamBar = React.createClass({
   },
   onReset: function() {
     this.setState({hasReset: true});
-    document.getElementById("focusAnchor").focus();
   },
   render: function() {
     return (
@@ -115,6 +114,7 @@ var RecentlyPlayed = React.createClass({
     if (this.props.reset && !this.state.hasReset) {
       this.setState({hasReset: true});
     }
+    document.getElementById("focusAnchor").focus();
   },
   onExited: function() {
     if (this.props.reset) {
