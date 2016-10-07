@@ -38,3 +38,26 @@
 .waterfall-box-content-text {
 	padding: 5%;
 }
+
+.waterfall-box-content-text-date {
+    overflow: hidden;
+    text-align: center;
+}
+.waterfall-box-content-text-date:before,
+.waterfall-box-content-text-date:after {
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+}
+.waterfall-box-content-text-date:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+.waterfall-box-content-text-date:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
