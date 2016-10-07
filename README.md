@@ -1,4 +1,4 @@
-## UCLA Radio - uclaradio.com
+# UCLA Radio - uclaradio.com
 
 This is the complete code for UCLA Radio's website, Node.js server and API. We also have an open-source [iOS app](https://github.com/uclaradio/uclaradio-iOS) and an [Android app](https://github.com/uclaradio/uclaradio-Android) in development.
 
@@ -6,7 +6,7 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 
 How to run locally:
 * Ensure you have Mongo installed and a Mongo db instance is running
-  * Mac: run setup.sh on your Mac with [homebrew](http://brew.sh/) installed to set up node and MongoDB automatically
+  * Mac: run `setup.sh` on your Mac with [homebrew](http://brew.sh/) installed to set up node and MongoDB automatically
 * In the project root directory, run `npm install` to install dependencies (may need sudo)
 * Run `node bin/www` to start the server for development
 * Point your browser to `http://localhost:3000/` :heart_eyes:
@@ -16,9 +16,9 @@ To run on the server:
 * Run `node bin/www prod` to start the server for production (will require HTTPS and listen on port 80)
 
 
-#### Building things
+### Building things
 
-###### Directories
+##### Directories
 
 `./routes`: url handlers (e.g. what happens when you load `uclaradio.com/calendar`)
 
@@ -26,11 +26,11 @@ To run on the server:
 
 `./public`: everything we have public on the site. For your images, JavaScript, CSS, HTML and what have you
 
-`./views`: Jade templates. Right now many front-end pages are in Jade, hopefully we will redesign them in React soon
+`./views`: Jade templates. Right now many front-end pages are in Jade, hopefully we will redesign them in Javascript soon
 
 `./react`: React front-end pages. Reusable components like UI elements are in `/react/components`
 
-###### Using Routes
+##### Using Routes
 
 This segment from `./routes/api.js` is a good example of how routes and data models work:
 ```javascript
@@ -49,7 +49,7 @@ router.get('/schedule', function(req, res) {
 });
 ```
 
-###### React
+##### React
 
 React files must be compiled to actual javascript before a browser can use them, because they do things like this:
 ```javascript
@@ -63,7 +63,7 @@ Do so with Grunt, which automates Webpack:
   * run `grunt watch` to automatically recompile whenever you hit save!
 * add `.../build/[x].min.js` as a script in your HTML files
 
-###### React + API
+##### React + API
 
 We prefer using a front-end web app and an API over static templates, because apps can be interactive. Our internal staff panel / content management system works this way:
 
@@ -101,10 +101,10 @@ router.get('/api/shows', function(req, res) {
 ```
 
 
-#### Requirements for new code
+### Requirements for new code
 
 As a student-run organization, UCLA Radio is especially liable to technical debt. We have some goals for cleaning up our codebase in the future, but most importantly new code should:
 * Have data models written with __SQL__ (PostgreSQL) instead of MongoDB because we've had problems with Mongo and it's not what students are taught at UCLA
-* Have new front-end pages in __React__ / HTML. We prefer using React with an API to complicated templates
+* Have new front-end pages in __React__. We prefer using a front-end framework with an API to complicated templates
 * Delete files that are not used anymore. It's okay, get rid of clutter
 * Follow an organized structure. Put things in the right directories
