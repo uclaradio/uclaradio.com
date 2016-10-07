@@ -1,27 +1,24 @@
 // WaterFallContent.jsx
-
 var React = require('react');
-var passwords = require('../../passwords.json');
 var Dates = require('../misc/Dates.js');
-var numberOfFBPosts = 7;
-var FB = "https://graph.facebook.com/uclaradio?fields=posts.limit("+numberOfFBPosts+"){full_picture,message,created_time,link}&access_token=" + passwords["FB_API_KEY"];
+var SocialMedia = "/getSocialMedia"
 var WaterFallContent = React.createClass({
 	getInitialState: function() {
 		return {
-			facebookPosts: []
+			socialMediaPosts: []
 		};
 	},
 	componentWillMount: function() {
-		this.serverRequest = $.get(FB, function (result) {
+		this.serverRequest = $.get(SocialMedia, function (result) {
 			this.setState({
-				facebookPosts:result['posts']['data']
+				socialMediaPosts:result['posts']['data']
 			});
 		}.bind(this));
 	},
 	render: function () {
 		return(
 			 <div className='waterfall-content'> 
-			{ this.state.facebookPosts.map (function(el) {
+			{ this.state.socialMediaPosts.map (function(el) {
 					return (
 						<a href={el['link']}>
 							<div className='waterfall-box'>
@@ -33,7 +30,6 @@ var WaterFallContent = React.createClass({
 									<div className='waterfall-box-content-text'>
 										{
 											<div className='waterfall-box-content-text-date'>{formateDate(el['created_time'])}</div> 
-											// el['message']
 										}
 										{
 											el['message']
