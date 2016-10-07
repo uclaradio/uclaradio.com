@@ -94,11 +94,9 @@ head
             if (blurb.picture)
               img#blurb-image(src='#{blurb.picture}')
 
-      .row
-        .apply-div
-          a(href="https://spark.ucla.edu/project/2265").pop-button.apply-button DONATE
-      // .row
-        // img#sotm(src='img/sotm_may_2016.png', alt='Show of the Month: Avocado Club')
+      // Temp banner for Trails & Ways
+      .row(style="text-align: center;")
+        img(src='images/trailsnways.jpg', alt='Trails & Ways info', style="width: 70%")
 
       .row
         br
@@ -128,8 +126,6 @@ head
             a.bott-button.pop-button(target='_blank', role='button', href='/shows') SHOWS
 
             a.bott-button.pop-button(target='_blank', role='button', href='/GiveawayCalendar') GIVEAWAYS
-
-            a.bott-button.pop-button(target='_blank', role='button', href='http://apply.dailybruin.com/ucla-radio') APPLY
 
           span#social.col-xs-12.col-sm-12.col-lg-3
             a.pop-button.facebook(href='https://www.facebook.com/UCLARadio', target='_blank')
