@@ -57,8 +57,7 @@ var StreamBar = React.createClass({
     this.setState({expanded: !this.state.expanded});
   },
   onReset: function() {
-    this.setState({hasReset: true, expanded: true});
-    document.getElementById("focusAnchor").focus();
+    this.setState({hasReset: true});
   },
   render: function() {
     return (
@@ -76,7 +75,7 @@ var StreamBar = React.createClass({
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton"><Glyphicon glyph={this.state.playing ? "pause" : "play"} /></span>
               <span className="playText">
-                { this.props.currentShowTitle ? "LIVE STREAM: " + this.props.currentShowTitle : "LIVE STREAM" }
+                { this.props.currentShowTitle ? "LIVE: " + this.props.currentShowTitle : "LIVE STREAM" }
               </span>
             </div>
           </div>
@@ -115,6 +114,7 @@ var RecentlyPlayed = React.createClass({
     if (this.props.reset && !this.state.hasReset) {
       this.setState({hasReset: true});
     }
+    document.getElementById("focusAnchor").focus();
   },
   onExited: function() {
     if (this.props.reset) {

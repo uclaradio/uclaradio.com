@@ -1,0 +1,63 @@
+.waterfall-content {
+	-moz-column-width: 17em;
+	-moz-column-gap: 0.5em;
+	-webkit-column-width: 17em;
+	-webkit-column-gap:0.5em;
+}
+
+.waterfall-box {
+	display: inline-block;
+	padding:  .25rem;
+	width:  100%;
+	margin-bottom: 5%;
+	transition: box-shadow 0.5s;
+}
+
+.waterfall-box:hover {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.waterfall-box:visited {
+	box-shadow: 0px;
+}
+
+.waterfall-box-content {
+	position:relative;
+	display: block;
+	background-color: rgba(255, 255, 255, 0.75);
+}
+
+.waterfall-box-content:hover {
+	background-color: white;
+}
+
+.waterfall-box-content img {
+	width: 100%;
+}
+
+.waterfall-box-content-text {
+	padding: 5%;
+}
+
+.waterfall-box-content-text-date {
+    overflow: hidden;
+    text-align: center;
+}
+.waterfall-box-content-text-date:before,
+.waterfall-box-content-text-date:after {
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+}
+.waterfall-box-content-text-date:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+.waterfall-box-content-text-date:after {
+    left: 0.5em;
+    margin-right: -50%;
+}

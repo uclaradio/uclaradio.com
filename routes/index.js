@@ -4,6 +4,11 @@
 var express = require('express');
 var router = express.Router();
 var shows = require('../database/shows');
+var passwords = require('../passwords');
+var requestify = require('requestify'); 
+var numberOfFBPosts = 7;
+var FB = "https://graph.facebook.com/uclaradio?fields=posts.limit("+numberOfFBPosts+"){full_picture,message,created_time,link}&access_token=" + passwords["FB_API_KEY"];
+
 
 router.get('/', function(req, res) {
 	var info = getTimeAndDay();
@@ -48,6 +53,11 @@ router.get('/beta', function(req, res) {
 	res.sendFile(path.resolve('public/frontpage.html'));
 });
 
+router.get('/getSocialMedia', function(req, res) {
+	requestify.get(FB).then(function(response) {
+	    res.send(response.getBody());
+	});
+});
 
 router.get('/pledgedrive', function(req, res, next) {
 	res.render('pledgedrive');

@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 	// We need to uglify that code on deploy
 	var uglifyPlugin = [new webpack.optimize.UglifyJsPlugin()];
 	// The module options takes loaders, in this case transforming JSX to normal javascript
-	var module = { loaders: [{ test: /\.js[x]?$/, loader: 'jsx' }, { test: /\.less$/, loader: 'style!css!less' }] };
+	var module = { loaders: [{ test: /\.js[x]?$/, loader: 'jsx' }, { test: /\.less$/, loader: 'style!css!less'}, { test: /\.json$/, loader: 'json'}] };
 
 	grunt.initConfig({
 	  webpack: {
