@@ -71,9 +71,15 @@ router.get('/djs', function(req, res) {
 	});
 });
 
+// static data
 router.get('/giveawayDescription', function(req, res) {
 	res.json({info: "We give a lot of tickets away to our listeners.. Tune in and follow us on Facebook and Instagram for your chance to see these shows!"});
-})
+});
+
+// static data
+router.get('/streamURL', function(req, res) {
+	res.json({url: "http://stream.uclaradio.com:8000/listen"});
+});
 
 /* Helper Functions */
 
