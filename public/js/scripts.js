@@ -209,7 +209,7 @@ $(document).ready(function() {
 
 	  //add the source again if we're on a mobile device since it was removed to stop download.
 	  if (mobile)
-		  stream.src="http://stream.uclaradio.com:8000/listen";
+		  stream.src="http://uclaradio.com:8000/;";
 
       stream.play();
       playing = true;
