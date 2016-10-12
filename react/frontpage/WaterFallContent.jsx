@@ -25,7 +25,7 @@ var WaterFallContent = React.createClass({
 								<div className='waterfall-box-content'>
 
 								{ el['full_picture'] && <img src={el['full_picture']} /> }
-								{
+								{ el['message'] && 
 									!el['message'].includes("http") && 
 									<div className='waterfall-box-content-text'>
 										{
