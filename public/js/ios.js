@@ -138,23 +138,21 @@ $(document).ready(function() {
 
   // activate the play button
   $("#play-button").click(function() {
-
-    if (!playing) {
-
-	  //add the source again if we're on a mobile device since it was removed to stop download.
-	  if (mobile)
-		stream.src="http://stream.uclaradio.com:8000/listen";
-
+    if (playing) {
+      // pause
+      stream.pause();
+      if (mobile) {
+        stream.src = "";
+      }
+      playing = false;
+    } else {
+      // play
+      if (mobile) {
+        stream.src = "http://stream.uclaradio.com:8000/listen";
+        stream.load();
+      }
       stream.play();
       playing = true;
-    } else {
-      stream.pause();
-      playing = false;
-
-	  //remove the source if the user is on a mobile device to stop data transfer. If we don't do this on mobile,
-	  //data stream will continue until the tab is closed, even if browser is minimized.
-	  if (mobile)
-	    stream.src = '';
     }
 
     $("#play-icon").toggleClass("fa fa-play fa fa-pause");
