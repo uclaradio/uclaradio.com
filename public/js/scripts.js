@@ -159,14 +159,14 @@ $(document).ready(function() {
 
   window.onbeforeunload = function(){
     if(playing && !is_safari) {
-      $.get('http://localhost:3000/analytics/decrement')
+      $.get('https://localhost:3000/analytics/decrement')
      // Do something
     }
   }
 
   window.unload = function () { //logic goes here 
     if(playing && !is_safari) {
-      $.get('http://uclaradio.com/analytics/decrement')
+      $.get('https://uclaradio.com/analytics/decrement')
      // Do something
     }
   }
@@ -174,7 +174,7 @@ $(document).ready(function() {
   window.addEventListener("beforeunload", function(e){
      // Do something
     if(playing && !is_safari) {
-      $.get('http://uclaradio.com/analytics/decrement')
+      $.get('https://uclaradio.com/analytics/decrement')
      // Do something
     }
 
@@ -185,7 +185,7 @@ $(document).ready(function() {
   window.addEventListener("pagehide", function(ev){if(!ev.persisted){
 
     if(playing && !is_safari) {
-      $.get('http://uclaradio.com/analytics/decrement')
+      $.get('https://uclaradio.com/analytics/decrement')
      // Do something
     }
 
@@ -234,7 +234,7 @@ $(document).ready(function() {
 
 function checkCarouselData() {
   setTimeout(function() {
-    jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks');
+    jQuery.getScript('https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks');
     checkCarouselData();
   }, 30000);
 }
