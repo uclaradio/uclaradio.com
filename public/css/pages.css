@@ -109,3 +109,7 @@ body {
 .demo-card-wide > .mdl-card__title.ticketgiveaway {
 	background: url('/img/ticketgiveaway.jpg') center / cover;
 }
+
+.demo-card-wide > .mdl-card__title.archive {
+	background: url('/img/archive.png') center / cover;
+}
