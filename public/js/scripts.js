@@ -98,7 +98,6 @@ function setButtons(darkColor, mediumColor, lightColor, midnight) {
 
   $(document).mouseup(
     function() {
-      console.log("ran it")
       $(".pop-button").css('box-shadow', boxShadowCss);
     }
   );
@@ -160,14 +159,14 @@ $(document).ready(function() {
 
   window.onbeforeunload = function(){
     if(playing && !is_safari) {
-      $.get('http://localhost:3000/analytics/decrement')
+      $.get('https://localhost:3000/analytics/decrement')
      // Do something
     }
   }
 
   window.unload = function () { //logic goes here 
     if(playing && !is_safari) {
-      $.get('http://uclaradio.com/analytics/decrement')
+      $.get('https://uclaradio.com/analytics/decrement')
      // Do something
     }
   }
@@ -175,7 +174,7 @@ $(document).ready(function() {
   window.addEventListener("beforeunload", function(e){
      // Do something
     if(playing && !is_safari) {
-      $.get('http://uclaradio.com/analytics/decrement')
+      $.get('https://uclaradio.com/analytics/decrement')
      // Do something
     }
 
@@ -186,7 +185,7 @@ $(document).ready(function() {
   window.addEventListener("pagehide", function(ev){if(!ev.persisted){
 
     if(playing && !is_safari) {
-      $.get('http://uclaradio.com/analytics/decrement')
+      $.get('https://uclaradio.com/analytics/decrement')
      // Do something
     }
 
@@ -204,34 +203,22 @@ $(document).ready(function() {
 
   // activate the play button
   $("#play-button").click(function() {
-    console.log('click!')
-    if (!playing) {
-
-	  //add the source again if we're on a mobile device since it was removed to stop download.
-	  if (mobile)
-		  stream.src="http://uclaradio.com:8000/;";
-
+    if (playing) {
+      // pause
+      stream.pause();
+      if (mobile) {
+        stream.src = "";
+      }
+      playing = false;
+    } else {
+      // play
+      if (mobile) {
+        stream.src = "http://uclaradio.com:8000/;";
+        stream.load();
+      }
       stream.play();
       playing = true;
-      if(!is_safari) {
-        $.get('http://uclaradio.com/analytics/increment')
-        console.log('play')
-      }
-
-    } else {
-      stream.pause();
-      playing = false;
-      if(!is_safari) {
-          $.get('http://uclaradio.com/analytics/decrement')
-          console.log('pause')
-      }
-
-
-	  //remove the source if the user is on a mobile device to stop data transfer. If we don't do this on mobile,
-	  //data stream will continue until the tab is closed, even if browser is minimized.
-  	  if (mobile)
-  	    stream.src = '';
-      }
+    }
 
     $("#play-icon").toggleClass("fa fa-play fa fa-pause");
     return false;
@@ -247,7 +234,7 @@ $(document).ready(function() {
 
 function checkCarouselData() {
   setTimeout(function() {
-    jQuery.getScript('http://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks');
+    jQuery.getScript('https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks');
     checkCarouselData();
   }, 30000);
 }

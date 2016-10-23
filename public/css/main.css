@@ -150,6 +150,16 @@ mark
   width: 100%;
 }
 
+#oppositesattract {
+  width: 80%;
+}
+
+@media only screen and (max-width: 760px) {
+  #oppositesattract {
+    width: 100%
+  }
+}
+
 .apply-div {
   text-align: center;
 }
