@@ -11,7 +11,7 @@ var Collapse = require('react-bootstrap').Collapse;
 var Slider = require('react-slick');
 
 var trackURL = "https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json";
-var streamURL = "http://stream.uclaradio.com:8000/listen";
+var streamURL = "http://uclaradio.com:8000/;";
 
 var stream;
 

@@ -138,6 +138,7 @@ $(document).ready(function() {
 
   // activate the play button
   $("#play-button").click(function() {
+
     if (playing) {
       // pause
       stream.pause();
@@ -148,7 +149,7 @@ $(document).ready(function() {
     } else {
       // play
       if (mobile) {
-        stream.src = "http://stream.uclaradio.com:8000/listen";
+        stream.src = "http://uclaradio.com:8000/;";
         stream.load();
       }
       stream.play();

@@ -78,7 +78,7 @@ router.get('/giveawayDescription', function(req, res) {
 
 // static data
 router.get('/streamURL', function(req, res) {
-	res.json({url: "http://stream.uclaradio.com:8000/listen"});
+	res.json({url: "http://uclaradio.com:8000/;"});
 });
 
 /* Helper Functions */

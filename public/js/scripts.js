@@ -213,7 +213,7 @@ $(document).ready(function() {
     } else {
       // play
       if (mobile) {
-        stream.src = "http://stream.uclaradio.com:8000/listen";
+        stream.src = "http://uclaradio.com:8000/;";
         stream.load();
       }
       stream.play();
