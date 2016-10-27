@@ -1,3 +1,9 @@
+// staffingPoints.jsx
+// let managers approve staffing points
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 var NameFilter = React.createClass({
 	updateFilterName: function() {
 		this.props.handleFilterChange({
@@ -31,15 +37,15 @@ var DateFilter = React.createClass({
 		});
 	},
 
-	convertDateToHTMLFormat: (date) => {
+	convertDateToHTMLFormat: function(date) {
 		const year = date.getFullYear();
-		let month = date.getMonth() + 1;
+		var month = date.getMonth() + 1;
 		month = month + "";
 
 		if (month.length === 1)
 			month = "0" + month;
 
-		let day = date.getDate() + "";
+		var day = date.getDate() + "";
 
 		if (day.length === 1)
 			day = "0" + day + "";
@@ -310,9 +316,9 @@ var StaffingPointsView = React.createClass({
 
 	updateStatus: function(statusMessage, newStatus, id) {
 		if (statusMessage !== 'incorrect password') {
-			let recordToUpdateIndex = -1;
+			var recordToUpdateIndex = -1;
 
-			for (let x = 0; x < this.state.records.length; x++) {
+			for (var x = 0; x < this.state.records.length; x++) {
 				if (this.state.records[x]._id === id)
 					recordToUpdateIndex = x;
 			}
@@ -325,7 +331,7 @@ var StaffingPointsView = React.createClass({
 
 			newRecord.status = newStatus;
 
-			var records = [...this.state.records.slice(0, recordToUpdateIndex), newRecord, ...this.state.records.slice(recordToUpdateIndex + 1, this.state.records.length)];
+			var records = [this.state.records.slice(0, recordToUpdateIndex), newRecord, this.state.records.slice(recordToUpdateIndex + 1, this.state.records.length)];
 		} else
 			var records = this.state.records;
 
