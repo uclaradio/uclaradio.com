@@ -11,7 +11,7 @@ var WaterFallContent = React.createClass({
 	componentWillMount: function() {
 		this.serverRequest = $.get(SocialMedia, function (result) {
 			this.setState({
-				socialMediaPosts:result['posts']['data']
+				socialMediaPosts:result
 			});
 		}.bind(this));
 	},
@@ -20,10 +20,10 @@ var WaterFallContent = React.createClass({
 			 <div className='waterfall-content'> 
 			{ this.state.socialMediaPosts.map (function(el) {
 					return (
+						(el['platform'] == 'FB') &&
 						<a href={el['link']} target="_blank" key={el['link']}>
 							<div className='waterfall-box'>
 								<div className='waterfall-box-content'>
-
 								{ el['full_picture'] && <img src={el['full_picture']} /> }
 								{ el['message'] && 
 									!el['message'].includes("http") && 
