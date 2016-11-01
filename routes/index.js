@@ -3,12 +3,16 @@
 
 var express = require('express');
 var router = express.Router();
+var async = require('async');
 var shows = require('../database/shows');
 var passwords = require('../passwords');
-var requestify = require('requestify'); 
-var numberOfFBPosts = 7;
-var FB = "https://graph.facebook.com/uclaradio?fields=posts.limit("+numberOfFBPosts+"){full_picture,message,created_time,link}&access_token=" + passwords["FB_API_KEY"];
+var requestify = require('requestify');
 
+var numberOfFBPosts = 7;
+var numberOfTUMBLRPosts = 3;
+var FB = "https://graph.facebook.com/uclaradio?fields=posts.limit("+numberOfFBPosts+"){full_picture,message,created_time,link}&access_token=" + passwords["FB_API_KEY"];
+var TUMBLR = "https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key="+passwords["TUMBLR_API_KEY"]+"&limit="+numberOfTUMBLRPosts;
+var socialMediaURLs = [FB, TUMBLR];
 
 router.get('/', function(req, res) {
 	var info = getTimeAndDay();
@@ -53,10 +57,42 @@ router.get('/beta', function(req, res) {
 	res.sendFile(path.resolve('public/frontpage.html'));
 });
 
+
 router.get('/getSocialMedia', function(req, res) {
-	requestify.get(FB).then(function(response) {
-	    res.send(response.getBody());
+	async.map(socialMediaURLs, function(url, callback) {
+	    requestify.get(url).then(function (response) {
+	    	var data = response.getBody();
+	    	switch(url) {
+	    		case FB:
+	    			data['posts']['data'].forEach(function(post){
+	    				post['platform'] = 'FB';
+	    				post['created_time'] = new Date(post['created_time']);
+	    			});
+	    			callback(null, data['posts']['data']);
+	    			break;
+	    		case TUMBLR:
+	    			data['response']['posts'].forEach(function(post){
+	    				post['platform'] = 'TUMBLR';
+	    				post['created_time'] = new Date(post['date']);
+	    			});
+	    			callback(null, data['response']['posts']);
+	    			break;
+	    	}
+	    }).fail(function(response){
+	    	callback(true, null);
+	    });
+	}, function(err, allSocialMediaPosts) {
+	    if (!err) {
+	    	allSocialMediaPosts = [].concat.apply([], allSocialMediaPosts).sort(function(postA, postB) {
+	    		return postA['created_time'] > postB['created_time'];
+	    	});
+	    	//console.log(results);
+	    	res.send(allSocialMediaPosts);
+	    } else {
+	        res.send(404);
+	    }
 	});
+
 });
 
 router.get('/pledgedrive', function(req, res, next) {
