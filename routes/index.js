@@ -79,18 +79,14 @@ router.get('/getSocialMedia', function(req, res) {
 	    			break;
 	    	}
 	    }).fail(function(response){
-	    	callback(true, null);
+	    	callback(null, []);
 	    });
 	}, function(err, allSocialMediaPosts) {
-	    if (!err) {
 	    	allSocialMediaPosts = [].concat.apply([], allSocialMediaPosts).sort(function(postA, postB) {
-	    		return postA['created_time'] > postB['created_time'];
+	    		return postA['created_time'] < postB['created_time'];
 	    	});
 	    	//console.log(results);
 	    	res.send(allSocialMediaPosts);
-	    } else {
-	        res.send(404);
-	    }
 	});
 
 });
