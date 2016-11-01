@@ -1,44 +1,61 @@
 // WaterFallContent.jsx
 var React = require('react');
 var Dates = require('../misc/Dates.js');
-var SocialMedia = "/getSocialMedia"
+var Waterfall = require('./responsive_waterfall.js');
+var SocialMedia = "/getSocialMedia";
+
 var WaterFallContent = React.createClass({
 	getInitialState: function() {
 		return {
+			newData: false,
 			socialMediaPosts: []
 		};
 	},
 	componentWillMount: function() {
 		this.serverRequest = $.get(SocialMedia, function (result) {
 			this.setState({
+				newData: true,
 				socialMediaPosts:result
 			});
 		}.bind(this));
 	},
-	render: function () {
+	componentDidUpdate: function() {
+		console.log("ugh");
+		if(this.state.newData == true) {
+			console.log("newDATA");
+			var waterfall = new Waterfall({ minBoxWidth: 250 });
+			this.setState({
+				newData: false
+			});
+		}
+
+	},
+	render: function() {
 		return(
-			 <div className='waterfall-content'> 
+			 <div className='wf-container'>
 			{ this.state.socialMediaPosts.map (function(el) {
 					return (
-						(el['platform'] == 'FB') &&
-						<a href={el['link']} target="_blank" key={el['link']}>
-							<div className='waterfall-box'>
-								<div className='waterfall-box-content'>
-								{ el['full_picture'] && <img src={el['full_picture']} /> }
-								{ el['message'] && 
-									!el['message'].includes("http") && 
-									<div className='waterfall-box-content-text'>
-										{
-											<div className='waterfall-box-content-text-date'>{formateDate(el['created_time'])}</div> 
-										}
-										{
-											el['message']
-										}
+							<div className='wf-box'>
+								<a href={ (el['link'] || el['post_url'])} target="_blank" key={el['link']}>
+									<div className='wf-box-content'>
+									{ (el['platform'] == 'TUMBLR') && 
+										<div className='wf-box-content-blog'>{el['summary']}</div>}
+									{ (el['platform'] == 'FB') && el['full_picture'] && 
+										<img src={el['full_picture']} /> }
+									{ (el['platform'] == 'FB') && el['message'] && 
+										!el['message'].includes("http") && 
+										<div className='wf-box-content-text'>
+											{
+												<div className='wf-box-content-text-date'>{formateDate(el['created_time'])}</div> 
+											}
+											{
+												el['message']
+											}
+										</div>
+									}
 									</div>
-								}
-								</div>
+								</a>
 							</div>
-						</a>
 					);
 				})
 			}

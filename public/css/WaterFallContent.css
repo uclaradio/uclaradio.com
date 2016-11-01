@@ -1,53 +1,74 @@
-.waterfall-content {
-	-moz-column-width: 17em;
-	-moz-column-gap: 0.5em;
-	-webkit-column-width: 17em;
-	-webkit-column-gap:0.5em;
+.wf-container {
+    margin: 0 auto;   
+    margin-right: -.5em;
+    margin-left: -.5em;
 }
 
-.waterfall-box {
-	display: inline-block;
-	padding:  .25rem;
-	width:  100%;
-	margin-bottom: 5%;
-	transition: box-shadow 0.5s;
+.wf-container a:hover {
+    text-decoration: none;
+}
+.wf-container a:active {
+    text-decoration: underline;
 }
 
-/*
-moves in safari -- removing shadow for now
-*/
-/*.waterfall-box:hover {
-	box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.19);
-}*/
-
-.waterfall-box:visited {
-	box-shadow: 0px;
+.wf-container a:visited {
+    text-decoration: none;
 }
 
-.waterfall-box-content {
+.wf-container:before,.wf-container:after {
+    content: '';
+    display: table;
+}
+.wf-container:after {
+    clear: both;
+}
+.wf-box {
+	padding:  .5rem;
+    /*margin: 2%;*/
+    /*padding: 2%;*/
+}
+.wf-box img { 
+    display: block;
+    width: 100%;
+}
+.wf-box .content {
+    border: 1px solid #ccc;
+    border-top-width: 0;
+    padding: 5px 8px;
+}
+.wf-column {
+    float: left;
+}
+
+.wf-box-content {
 	position:relative;
 	display: block;
 	background-color: rgba(255, 255, 255, 0.75);
 }
 
-.waterfall-box-content:hover {
+.wf-box-content:hover {
 	background-color: white;
 }
 
-.waterfall-box-content img {
+.wf-box-content img {
 	width: 100%;
 }
 
-.waterfall-box-content-text {
+.wf-box-content-blog {
+	padding: 5%;
+	font-size: 200%;
+}
+
+.wf-box-content-text {
 	padding: 5%;
 }
 
-.waterfall-box-content-text-date {
+.wf-box-content-text-date {
     overflow: hidden;
     text-align: center;
 }
-.waterfall-box-content-text-date:before,
-.waterfall-box-content-text-date:after {
+.wf-box-content-text-date:before,
+.wf-box-content-text-date:after {
     background-color: #000;
     content: "";
     display: inline-block;
@@ -56,11 +77,11 @@ moves in safari -- removing shadow for now
     vertical-align: middle;
     width: 50%;
 }
-.waterfall-box-content-text-date:before {
+.wf-box-content-text-date:before {
     right: 0.5em;
     margin-left: -50%;
 }
-.waterfall-box-content-text-date:after {
+.wf-box-content-text-date:after {
     left: 0.5em;
     margin-right: -50%;
 }
