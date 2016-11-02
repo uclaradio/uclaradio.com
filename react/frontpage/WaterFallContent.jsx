@@ -20,15 +20,14 @@ var WaterFallContent = React.createClass({
 		}.bind(this));
 	},
 	componentDidUpdate: function() {
-		console.log("ugh");
+		//once data has been recieved from the GET requests and formatted on the page
+		//this will cause cards on radio to reorganize to row-wise chronology
 		if(this.state.newData == true) {
-			console.log("newDATA");
 			var waterfall = new Waterfall({ minBoxWidth: 250 });
 			this.setState({
 				newData: false
 			});
 		}
-
 	},
 	render: function() {
 		return(
