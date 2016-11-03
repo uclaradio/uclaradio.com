@@ -126,3 +126,31 @@
     left: 0.5em;
     margin-right: -50%;
 }
+
+.dj-tile {
+	width: 150px;
+	display: inline-block;
+	text-align: center;
+	margin: 1%;
+    transition: box-shadow 0.5s;
+}
+
+
+.dj-tile-info {
+	position:relative;
+	display: block;
+	background-color: rgba(255, 255, 255, 0.75);
+	padding: 5%;
+    margin-top: -10px;
+}
+
+
+.dj-tile:hover {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.dj-tile-info:hover {
+	background: white;
+}
+
+
