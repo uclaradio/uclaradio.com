@@ -68,8 +68,7 @@ var containsHttp = function(myString) {
 }
 
 var formateDate = function(dateString) {
-	var arr = "2010-03-15 10:30:00".split(/[- :]/),
-    date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
+    var date = new Date(dateString);
 	return Dates.availableDays[date.getDay()] + ", " + date.getMonth() + "/" + date.getDate();
 }
 module.exports = WaterFallContent;
