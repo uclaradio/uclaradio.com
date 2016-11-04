@@ -60,7 +60,13 @@ router.get('/beta', function(req, res) {
 
 router.get('/getSocialMedia', function(req, res) {
 	async.map(socialMediaURLs, function(url, callback) {
-	    requestify.get(url).then(function (response) {
+	    requestify.get(url, {
+	    	cache: {
+	    		cache: true,
+	    		//cache for 30*60*60*1000 milliseconds
+	    		expires: 108000000
+	    	}
+	    }).then(function (response) {
 	    	var data = response.getBody();
 	    	switch(url) {
 	    		case FB:
