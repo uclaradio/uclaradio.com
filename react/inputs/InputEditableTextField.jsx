@@ -34,7 +34,7 @@ var InputEditableTextField = React.createClass({
     this.setState({value: e.target.value, currentlyEditing: false});
   },
   toggleEditableField: function(e) {
-    this.setState({value: this.props.currentValue, editable: !this.state.editable, currentlyEditing: true})
+    this.setState({value: this.props.currentValue, editable: !this.state.editable, currentlyEditing: true});
   },
   handleSubmit: function(e) {
     e.preventDefault();
@@ -53,7 +53,7 @@ var InputEditableTextField = React.createClass({
     var actionButton = <span>
                         <a onClick={this.handleSubmit}>{this.props.buttonTitle || "Update"}</a>
                         &emsp;|&emsp;<a className="cancelLink" onClick={this.toggleEditableField}>Cancel</a>
-                       </span>
+                       </span>;
     return (
       <div className="inputEditableTextField">
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
