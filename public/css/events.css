@@ -1,0 +1,122 @@
+.monthEvents{
+	display: block; 
+	height: auto;
+	overflow: auto; 
+	width: 100%;
+	clear: both; 
+	margin: 10px;
+}
+
+.bandName{
+	text-align:left;
+	margin: 0px;
+}
+
+.venue{
+	color: white;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 0px;
+}
+
+.enterLabel{
+	color: white;
+	text-align: right;
+	font-size: 12px;
+	font-style: italic;
+	position: absolute;
+	bottom: 7px;
+	right: 7px;
+	margin-bottom: 0px;
+}
+
+.separator{
+	color: white; 
+	text-align: center; 
+	font-size: 18px;
+	font-family: Georgia, serif; 
+	margin-bottom: 0;
+}
+
+.bandPic{
+	height: 200px;
+	width: 200px;
+}
+
+.event{
+	display: inline-block;
+	height: auto;
+	width: 200px;
+	margin: 5px;
+	float: left;
+	position: relative;
+	cursor: pointer;
+}
+
+.eventOverlay{
+	position: absolute;
+	top: 30%;
+	left: 12.5%;
+	width: 150px;
+}
+
+.showDate{
+	color: white; 
+	text-align: center;
+	font-size: 18px;
+	font-family: Georgia, serif;
+	font-style: italic;
+	margin-bottom: 0
+}
+
+.showLabel{
+	margin: 10px; 
+	display: inline;
+}
+
+.formGroup{
+	margin: 10px;
+}
+
+.formLabel{
+	display: inline;
+}
+
+.formInput{
+	background-color: grey;
+	border-style: none;
+	width: 75%;
+}
+
+.formButton{
+	border-radius: 0;
+	position: absolute;
+	left: 40%;
+}
+
+.showDesc{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	display: inline;
+	font-style: italic;
+	color: blue;
+	font-family: serif;
+}
+
+.eventBlock{
+	clear: both;
+	height: auto;
+}
+
+.modal-content{
+	border-radius: 0;
+	opacity: 0.85;
+	height: 200px;
+	width: 500px;
+}
+
+.enterContest{
+	position: fixed;
+	top: 30%;
+	vertical-align: middle;
+}
