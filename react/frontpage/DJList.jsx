@@ -23,7 +23,7 @@ var DJList = React.createClass({
         });
 
         return (
-            <div className='dj-list'>
+            <div>
             {djs}
             </div>
         );

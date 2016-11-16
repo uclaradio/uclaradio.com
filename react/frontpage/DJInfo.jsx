@@ -1,6 +1,7 @@
 // DJInfo.jsx
 var React = require('react');
 var defaultDJPic = "/img/radio.png"
+var baseURL = "https://uclaradio.com";
 
 // Common Elements
 var RectImage = require('../common/RectImage.jsx');
@@ -12,7 +13,7 @@ var DJInfo = React.createClass({
             return defaultDJPic;
         }
         else {
-            return "https://uclaradio.com"+picURL;
+            return baseURL+picURL;
         }
     },
     render: function() {
