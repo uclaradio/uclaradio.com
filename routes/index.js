@@ -97,6 +97,10 @@ router.get('/getSocialMedia', function(req, res) {
 
 });
 
+router.get('/blog', function(req, res, next) {
+	res.redirect('http://uclaradio.tumblr.com');
+})
+
 router.get('/pledgedrive', function(req, res, next) {
 	res.render('pledgedrive');
 });
