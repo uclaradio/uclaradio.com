@@ -53,13 +53,16 @@ var WaterFallContent = React.createClass({
             			paginatedDataInProgress: true
             		});
 
-					this.serverRequest = $.get(getMoreFBPosts, function (result) {
-    					result['data'].map(function(el) {
+					this.serverRequest = $.post(getMoreFBPosts, {
+							until: this.state.fb_pagination_until
+						},function (result) {
+    					result['social_media'].map(function(el) {
     						var dateString = formatDate(el['created_time']);
     						var boxHandle = newNode(el['full_picture'], el['message'], dateString);
     						waterfall.addBox(boxHandle);
     					});
 						this.setState({
+							fb_pagination_until: result['fb_pagination_until'],
 							paginatedDataInProgress: false
 						});
 					}.bind(this));            		
