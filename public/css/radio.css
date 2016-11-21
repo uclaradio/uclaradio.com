@@ -217,19 +217,26 @@ h4 {
 }
 
 /* DJ List */ 
-.dj-tile {
+
+.djList {
+  text-align: center;
+}
+
+.djTile {
   width: 150px;
+  height: 220px;
   display: inline-block;
   text-align: center;
   margin: 1%;
-    transition: box-shadow 0.5s;
+  transition: box-shadow 0.5s;
+  overflow: hidden;
 }
 
-.dj-tile:hover > .dj-tile-info{
+.djTile:hover > .djTileInfo{
   text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
 }
 
-.dj-tile-info {
+.djTileInfo {
   position:relative;
   display: block;
   padding: 5%;
