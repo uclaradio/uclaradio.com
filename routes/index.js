@@ -59,6 +59,8 @@ router.get('/beta', function(req, res) {
 
 
 router.get('/getSocialMedia', function(req, res) {
+	var FB_pagination_token;
+	var FB_pagination_until;
 	async.map(socialMediaURLs, function(url, callback) {
 	    requestify.get(url, {
 	    	cache: {
@@ -70,6 +72,9 @@ router.get('/getSocialMedia', function(req, res) {
 	    	var data = response.getBody();
 	    	switch(url) {
 	    		case FB:
+	    			var fb_pagination_tools = getFBPaginationTools(data['posts']['paging']['next']);
+	    			FB_pagination_token = fb_pagination_tools[0];
+	    			FB_pagination_until = fb_pagination_tools[1];
 	    			data['posts']['data'].forEach(function(post){
 	    				post['platform'] = 'FB';
 	    				post['created_time'] = new Date(post['created_time']);
@@ -91,8 +96,13 @@ router.get('/getSocialMedia', function(req, res) {
 	    	allSocialMediaPosts = [].concat.apply([], allSocialMediaPosts).sort(function(postA, postB) {
 	    		return postA['created_time'] < postB['created_time'];
 	    	});
+	    	var result = {
+	    		social_media: allSocialMediaPosts,
+	    		fb_pagination_token: FB_pagination_token,  
+	    		fb_pagination_until: FB_pagination_until
+	    	};
 	    	//console.log(results);
-	    	res.send(allSocialMediaPosts);
+	    	res.send(result);
 	});
 
 });
@@ -104,6 +114,17 @@ router.get('/blog', function(req, res, next) {
 router.get('/pledgedrive', function(req, res, next) {
 	res.render('pledgedrive');
 });
+
+
+//you should be familiar with facebook's 'next' URLS before modifying this function
+function getFBPaginationTools(url) {
+	information = url.split('__paging_token=');
+	paging_token = information[1];
+	until = information[0].split('&').join('=').split('=');
+	until = until[until.length-2];
+	return [paging_token, until];
+}
+
 
 function getTimeAndDay() {
 	var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
