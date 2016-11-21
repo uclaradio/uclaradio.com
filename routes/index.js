@@ -107,6 +107,14 @@ router.get('/getSocialMedia', function(req, res) {
 
 });
 
+
+router.get('/getMoreFBPosts', function(req, res) {
+	var url = getNextFBPosts("1477077277");
+	requestify.get(url).then(function(response){
+		res.send(response.getBody());
+	})
+})
+
 router.get('/blog', function(req, res, next) {
 	res.redirect('http://uclaradio.tumblr.com');
 })
@@ -125,6 +133,9 @@ function getFBPaginationTools(url) {
 	return [paging_token, until];
 }
 
+function getNextFBPosts(FB_pagination_until) {
+	return "https://graph.facebook.com/v2.7/214439101900173/posts?fields=full_picture,message,created_time,link&limit=10&access_token="+passwords["FB_API_KEY"]+"&until=" + FB_pagination_until;
+}
 
 function getTimeAndDay() {
 	var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
