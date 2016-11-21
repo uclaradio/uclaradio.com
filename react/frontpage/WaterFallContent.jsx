@@ -3,9 +3,9 @@ var React = require('react');
 var Dates = require('../misc/Dates.js');
 var Waterfall = require('./responsive_waterfall.js');
 var SocialMedia = "/getSocialMedia";
+var getMoreFBPosts = "/getMoreFBPosts";
 var waterfall;
 var boxHandle = newNode();
-
 
 var WaterFallContent = React.createClass({
 	getInitialState: function() {
@@ -53,12 +53,11 @@ var WaterFallContent = React.createClass({
             			paginatedDataInProgress: true
             		});
 
-					this.serverRequest = $.get(SocialMedia, function (result) {
-    					result['social_media'].map(function(el) {
-    						if(el['platform'] == 'FB') {
-    							var boxHandle = newNode(el['full_picture'], el['message'], el['created_time']);
-    							waterfall.addBox(boxHandle);
-    						}
+					this.serverRequest = $.get(getMoreFBPosts, function (result) {
+    					result['data'].map(function(el) {
+    						var dateString = formatDate(el['created_time']);
+    						var boxHandle = newNode(el['full_picture'], el['message'], dateString);
+    						waterfall.addBox(boxHandle);
     					});
 						this.setState({
 							paginatedDataInProgress: false
@@ -124,14 +123,15 @@ function newNode(full_picture, summary, created_time) {
     var box_content_text = document.createElement('div');
         box_content_text.className = 'wf-box-content-text';
     var box_content_date = document.createElement('div');
-     	box_content_date.className = 'wf-box-content-date';
-     	console.log(created_time);
-     	//created_time = formatDate(created_time);
-    	box_content_date.appendChild(document.createTextNode("hello"));
+     	box_content_date.className = 'wf-box-content-text-date';
+     	box_content_date.appendChild(document.createTextNode(created_time));
     box_content_text.appendChild(box_content_date);
     box_content_text.appendChild(document.createTextNode(summary));
+    summary = String(summary);
     box_content.appendChild(box_content_text);
-    box.appendChild(box_content);
+    if(!summary.includes("http")) {
+    	box.appendChild(box_content);    
+    }
     return box;
 }
 
