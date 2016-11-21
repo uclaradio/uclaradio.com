@@ -59,8 +59,7 @@ router.get('/beta', function(req, res) {
 
 
 router.get('/getSocialMedia', function(req, res) {
-	var FB_pagination_token;
-	var FB_pagination_until;
+	var FB_pagination_until; //get the index of the last facebook post basically
 	async.map(socialMediaURLs, function(url, callback) {
 	    requestify.get(url, {
 	    	cache: {
@@ -72,9 +71,7 @@ router.get('/getSocialMedia', function(req, res) {
 	    	var data = response.getBody();
 	    	switch(url) {
 	    		case FB:
-	    			var fb_pagination_tools = getFBPaginationTools(data['posts']['paging']['next']);
-	    			FB_pagination_token = fb_pagination_tools[0];
-	    			FB_pagination_until = fb_pagination_tools[1];
+	    			FB_pagination_until = getFBPaginationTools(data['posts']['paging']['next']);
 	    			data['posts']['data'].forEach(function(post){
 	    				post['platform'] = 'FB';
 	    				post['created_time'] = new Date(post['created_time']);
@@ -98,20 +95,27 @@ router.get('/getSocialMedia', function(req, res) {
 	    	});
 	    	var result = {
 	    		social_media: allSocialMediaPosts,
-	    		fb_pagination_token: FB_pagination_token,  
 	    		fb_pagination_until: FB_pagination_until
 	    	};
-	    	//console.log(results);
 	    	res.send(result);
 	});
 
 });
 
-
-router.get('/getMoreFBPosts', function(req, res) {
-	var url = getNextFBPosts("1477077277");
-	requestify.get(url).then(function(response){
-		res.send(response.getBody());
+router.post('/getMoreFBPosts', function(req, res) {
+	var url = getNextFBPosts(req.body.until);
+	requestify.get(url, {
+    	cache: {
+    		cache: true,
+    		//cache for 30*60*60*1000 milliseconds
+    		expires: 108000000
+    	}	
+	}).then(function(response){
+		response = response.getBody();
+		res.send({
+			social_media: response['data'],
+			fb_pagination_until: getFBPaginationTools(response['paging']['next'])
+		});
 	})
 })
 
@@ -123,14 +127,11 @@ router.get('/pledgedrive', function(req, res, next) {
 	res.render('pledgedrive');
 });
 
-
 //you should be familiar with facebook's 'next' URLS before modifying this function
 function getFBPaginationTools(url) {
-	information = url.split('__paging_token=');
-	paging_token = information[1];
-	until = information[0].split('&').join('=').split('=');
-	until = until[until.length-2];
-	return [paging_token, until];
+	paging_token = 0;
+	until = url.split('until=')[1].split('&')[0]-1;
+	return until;
 }
 
 function getNextFBPosts(FB_pagination_until) {
