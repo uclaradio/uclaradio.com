@@ -225,11 +225,13 @@ h4 {
     transition: box-shadow 0.5s;
 }
 
+.dj-tile:hover > .dj-tile-info{
+  text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
+}
 
 .dj-tile-info {
   position:relative;
   display: block;
-  background-color: rgba(255, 255, 255, 0.75);
   padding: 5%;
     margin-top: -10px;
 }

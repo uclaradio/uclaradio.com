@@ -19,9 +19,9 @@ var DJInfo = React.createClass({
     render: function() {
     	return (
     		<div className="dj-tile">
-    			<RectImage maxWidth="200px" src={this.getDJImage(this.props.picture)} />
+    			<RectImage maxWidth="200px" src={this.getDJImage(this.props.picture)} circle />
     			<div className="dj-tile-info">
-    				<h5>{this.props.name}</h5>
+    				<h4>{this.props.name}</h4>
     			</div>
     		</div>
     	);

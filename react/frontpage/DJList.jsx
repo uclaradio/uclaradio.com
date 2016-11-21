@@ -13,7 +13,7 @@ var DJList = React.createClass({
     componentWillMount: function() {
         this.serverRequest = $.get(DJUrl, function(result) {
             this.setState({
-                djs:result['djs']
+                djs:data
             });
         }.bind(this));
     }, 
