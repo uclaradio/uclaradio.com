@@ -120,9 +120,11 @@ function newNode(full_picture, summary, created_time, link) {
     a.href = link;
     var box_content = document.createElement('div');
     box_content.className = 'wf-box-content';
-    var image = document.createElement('img');
-    image.src = full_picture;
-    box_content.appendChild(image);
+    if(full_picture) {
+	    var image = document.createElement('img');
+	    image.src = full_picture;
+	    box_content.appendChild(image);
+    }
     var box_content_text = document.createElement('div');
         box_content_text.className = 'wf-box-content-text';
     var box_content_date = document.createElement('div');
