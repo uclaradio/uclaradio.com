@@ -20,8 +20,7 @@ var WaterFallContent = React.createClass({
 				initialData: true,
 				paginatedDataInProgress: false,
 				socialMediaPosts:result['social_media'],
-				fb_pagination_until:result['fb_pagination_until'],
-				fb_pagination_token:result['fb_pagination_token']
+				fb_pagination_until:result['fb_pagination_until']
 			});
 		}.bind(this));
 	},
@@ -52,7 +51,7 @@ var WaterFallContent = React.createClass({
             		this.setState({
             			paginatedDataInProgress: true
             		});
-
+            		//request next set of Facebook posts
 					this.serverRequest = $.post(getMoreFBPosts, {
 							until: this.state.fb_pagination_until
 						},function (result) {
@@ -110,7 +109,7 @@ function checkSlide(elem) {
         var screenHeight = (document.documentElement.scrollTop || document.body.scrollTop) +
                            (document.documentElement.clientHeight || document.body.clientHeight);
         var elemHeight = elem.offsetTop + elem.offsetHeight / 2;
-        return elemHeight < 1.25*screenHeight;
+        return elemHeight < 1.5*screenHeight;
     }
 }
 
@@ -141,11 +140,11 @@ function newNode(full_picture, summary, created_time, link) {
     return box;
 }
 
-var containsHttp = function(myString) {
+function containsHttp(myString) {
 	return myString.split(" ").map(function(el) { return el.includes("http") ? "click" : el }).join(' ');
 }
 
-var formatDate = function(dateString) {
+function formatDate(dateString) {
     var date = String(dateString);
     date = new Date(date.split('T')[0]);
 	return (date.getMonth()+1) + "/" + (date.getDate()+1) + "/" + (date.getYear() + 1900);
