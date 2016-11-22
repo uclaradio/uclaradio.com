@@ -29,7 +29,7 @@ var nowPlayingURL = "/api/nowplaying";
 var FrontPage = React.createClass({
   getInitialState: function() {
     return {
-      
+      show: null
     };
   },
   componentWillUnmount: function() {
