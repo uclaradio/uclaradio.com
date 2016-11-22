@@ -57,8 +57,7 @@ var WaterFallContent = React.createClass({
 							until: this.state.fb_pagination_until
 						},function (result) {
     					result['social_media'].map(function(el) {
-    						var dateString = formatDate(el['created_time']);
-    						var boxHandle = newNode(el['full_picture'], el['message'], dateString, el['link']);
+    						var boxHandle = newNode(el['full_picture'], el['message'], String(formatDate(el['created_time'])), el['link']);
     						waterfall.addBox(boxHandle);
     					});
 						this.setState({
@@ -107,16 +106,16 @@ var WaterFallContent = React.createClass({
 
 
 function checkSlide(elem) {
-        if(elem) {
-            var screenHeight = (document.documentElement.scrollTop || document.body.scrollTop) +
-                               (document.documentElement.clientHeight || document.body.clientHeight);
-            var elemHeight = elem.offsetTop + elem.offsetHeight / 2;
-            return elemHeight < 1.25*screenHeight;
-        }
+    if(elem) {
+        var screenHeight = (document.documentElement.scrollTop || document.body.scrollTop) +
+                           (document.documentElement.clientHeight || document.body.clientHeight);
+        var elemHeight = elem.offsetTop + elem.offsetHeight / 2;
+        return elemHeight < 1.25*screenHeight;
+    }
 }
 
-function newNode(full_picture, summary, created_time, link) {        
-    var box = document.createElement('div');
+function newNode(full_picture, summary, created_time, link) {  
+	var box = document.createElement('div');
     box.className = 'wf-box';
     var a = document.createElement('a');
     a.href = link;
@@ -129,6 +128,7 @@ function newNode(full_picture, summary, created_time, link) {
         box_content_text.className = 'wf-box-content-text';
     var box_content_date = document.createElement('div');
      	box_content_date.className = 'wf-box-content-text-date';
+     	created_time = String(created_time);
      	box_content_date.appendChild(document.createTextNode(created_time));
     box_content_text.appendChild(box_content_date);
     box_content_text.appendChild(document.createTextNode(summary));
@@ -146,7 +146,9 @@ var containsHttp = function(myString) {
 }
 
 var formatDate = function(dateString) {
-    var date = new Date(dateString);
-	return Dates.availableDays[date.getDay()] + ", " + date.getMonth() + "/" + date.getDate();
+    var date = String(dateString);
+    date = new Date(date.split('T')[0]);
+	return (date.getMonth()+1) + "/" + (date.getDate()+1) + "/" + (date.getYear() + 1900);
 }
+
 module.exports = WaterFallContent;
