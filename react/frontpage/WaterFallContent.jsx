@@ -58,7 +58,7 @@ var WaterFallContent = React.createClass({
 						},function (result) {
     					result['social_media'].map(function(el) {
     						var dateString = formatDate(el['created_time']);
-    						var boxHandle = newNode(el['full_picture'], el['message'], dateString);
+    						var boxHandle = newNode(el['full_picture'], el['message'], dateString, el['link']);
     						waterfall.addBox(boxHandle);
     					});
 						this.setState({
@@ -111,13 +111,15 @@ function checkSlide(elem) {
             var screenHeight = (document.documentElement.scrollTop || document.body.scrollTop) +
                                (document.documentElement.clientHeight || document.body.clientHeight);
             var elemHeight = elem.offsetTop + elem.offsetHeight / 2;
-            return elemHeight < screenHeight;
+            return elemHeight < 1.25*screenHeight;
         }
 }
 
-function newNode(full_picture, summary, created_time) {        
+function newNode(full_picture, summary, created_time, link) {        
     var box = document.createElement('div');
     box.className = 'wf-box';
+    var a = document.createElement('a');
+    a.href = link;
     var box_content = document.createElement('div');
     box_content.className = 'wf-box-content';
     var image = document.createElement('img');
@@ -132,8 +134,9 @@ function newNode(full_picture, summary, created_time) {
     box_content_text.appendChild(document.createTextNode(summary));
     summary = String(summary);
     box_content.appendChild(box_content_text);
+    a.appendChild(box_content);
     if(!summary.includes("http")) {
-    	box.appendChild(box_content);    
+    	box.appendChild(a);    
     }
     return box;
 }
