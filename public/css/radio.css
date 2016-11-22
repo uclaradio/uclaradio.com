@@ -240,15 +240,6 @@ h4 {
   position:relative;
   display: block;
   padding: 5%;
-    margin-top: -10px;
-}
-
-
-.dj-tile:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.dj-tile-info:hover {
-  background: white;
+  margin-top: -10px;
 }
 
