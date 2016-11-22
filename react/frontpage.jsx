@@ -10,6 +10,8 @@ var FrontPageNavbar = require('./frontpage/FrontPageNavbar.jsx');
 var StreamBar = require('./frontpage/StreamBar.jsx');
 var LiveShowInfo = require('./frontpage/LiveShowInfo.jsx');
 var WaterFallContent = require('./frontpage/WaterFallContent.jsx');
+var DJInfo = require('./frontpage/DJInfo.jsx');
+var DJList = require('./frontpage/DJList.jsx');
 
 // Common Elements
 var RectImage = require('./common/RectImage.jsx');
@@ -73,7 +75,7 @@ var FrontPage = React.createClass({
 
               <Col xs={12} md={9} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
                 <FrontPageNavbar />
-                <WaterFallContent />
+                <DJList />
               </Col>
 
             </Grid>
