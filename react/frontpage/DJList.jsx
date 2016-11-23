@@ -24,7 +24,7 @@ var DJList = React.createClass({
     }, 
     render: function() {
         var djs = this.state.djs.map(function(dj){
-            return <DJInfo name={dj.djName ? dj.djName : dj.fullName} picture={dj.picture} key={dj.id} />
+            return <DJInfo name={dj.djName ? dj.djName : dj.fullName} picture={dj.picture} key={dj.username} />
         });
 
         return (
