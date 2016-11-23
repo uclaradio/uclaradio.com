@@ -11,12 +11,10 @@ var getMoreFBPostsURL = "/getMoreFBPosts";
 
 // local vars
 var waterfall;
-var boxHandle;
 
 var WaterFallContent = React.createClass({
   getInitialState: function() {
     return {
-      newData: false,
       socialMediaPosts: []
     };
   },
@@ -52,8 +50,7 @@ var WaterFallContent = React.createClass({
   // Add post objects from API to waterfall content as DOM elements
   appendPosts: function(newPosts) {
     newPosts.map(function(el) {
-      var boxHandle = nodeFromPost(el);
-      waterfall.addBox(boxHandle);
+      waterfall.addBox(nodeFromPost(el));
     });
   },
   handleScroll: function(event) {
@@ -80,7 +77,6 @@ var WaterFallContent = React.createClass({
     );
   }
 });
-
 
 function checkSlide(elem) {
   if (elem) {
@@ -116,15 +112,18 @@ function newNode(full_picture, summary, created_time, link, platform) {
     box_content.appendChild(image);
   }
   var box_content_text = document.createElement('div');
-  if (platform === "TUMBLR") {
-    box_content_text.className = 'wf-box-content-blog';
-  } else {
-    box_content_text.className = 'wf-box-content-text';
-    var box_content_date = document.createElement('div');
-    box_content_date.className = 'wf-box-content-text-date';
-    created_time = String(created_time);
-    box_content_date.appendChild(document.createTextNode(created_time));
-    box_content_text.appendChild(box_content_date);
+  switch(platform) {
+    case "FB":
+      box_content_text.className = 'wf-box-content-text';
+      var box_content_date = document.createElement('div');
+      box_content_date.className = 'wf-box-content-text-date';
+      created_time = String(created_time);
+      box_content_date.appendChild(document.createTextNode(created_time));
+      box_content_text.appendChild(box_content_date);
+      break;
+    case "TUMBLR":
+      box_content_text.className = 'wf-box-content-blog';
+      break;
   }
   box_content_text.appendChild(document.createTextNode(summary));
   summary = String(summary);
