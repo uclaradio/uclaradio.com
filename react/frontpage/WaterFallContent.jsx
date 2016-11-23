@@ -11,7 +11,6 @@ var getMoreFBPostsURL = "/getMoreFBPosts";
 
 // local vars
 var waterfall;
-var boxHandle;
 
 var WaterFallContent = React.createClass({
   getInitialState: function() {
@@ -53,7 +52,9 @@ var WaterFallContent = React.createClass({
   appendPosts: function(newPosts) {
     newPosts.map(function(el) {
       var boxHandle = nodeFromPost(el);
-      waterfall.addBox(boxHandle);
+      if (boxHandle) {
+        waterfall.addBox(boxHandle);
+      }
     });
   },
   handleScroll: function(event) {
@@ -103,6 +104,10 @@ function nodeFromPost(post) {
 
 // create new DOM element representing post with provided content
 function newNode(full_picture, summary, created_time, link, platform) {  
+  if (!full_picture && (!summary || summary.includes("http"))) {
+    return null;
+  }
+
   var box = document.createElement('div');
   box.className = 'wf-box';
   var a = document.createElement('a');
@@ -130,9 +135,9 @@ function newNode(full_picture, summary, created_time, link, platform) {
   summary = String(summary);
   if (!summary.includes("http")) {
     box_content.appendChild(box_content_text);
-    a.appendChild(box_content);
-    box.appendChild(a);
   }
+  a.appendChild(box_content);
+  box.appendChild(a);
   return box;
 }
 
