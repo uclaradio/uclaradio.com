@@ -37,6 +37,7 @@ var FrontPage = React.createClass({
     this.updateNowPlaying();
     // refresh tracks every 30 seconds
     this.interval = setInterval(this.updateNowPlaying, 30*1000);
+    alerts("ayyy");
   },
   updateNowPlaying: function() {
     $.ajax({
