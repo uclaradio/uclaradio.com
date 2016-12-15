@@ -39,9 +39,7 @@ var TriangleCanvas = React.createClass({
       <div className="triangleCanvas">
         <canvas className="canvasCanvas" id="daCanvas" />
         <div className="canvasContent">
-          <div className="triangleCanvasContent">
             {this.props.children}
-          </div>
         </div>
       </div>
     );
