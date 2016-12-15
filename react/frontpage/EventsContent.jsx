@@ -5,86 +5,57 @@ var Modal = require('react-bootstrap').Modal;
 var Input = require('react-bootstrap').Input;
 var FormControls = require('react-bootstrap').FormControls;
 var Button = require('react-bootstrap').Button;
-if (typeof Button === 'undefined' || Button === null) {
-    console.log("issues!!\n");
-}
 
+//content of events page
 var EventsContent = React.createClass({
-	render: function() {
-		return(
-			 <div className='wf-container'>
-			{ JSON.parse(this.props.data).events.map (function(el) {
-					return (
-						<div className="monthEvents" key={el['month']}>
-							<h1>{el['month']}</h1>
-							<div className="eventBlock">
-								{el['arr'].map( function(event){
-									return (
-										<Event event={event} key={event['id']}/>
-									);
-								})
-								}
-							</div>
-						</div>
-					);
-				})
-			}
-			</div>
-		);
-	}
-});
-
-var Event = React.createClass({
 	getInitialState: function(){
 		return{
-			hover: false,
-			showModal: false
+			currentShow: null
 		};
 	},
-	mouseEnter: function(){
-		this.setState({hover: true});
-	},
-	mouseLeave: function(){
-		this.setState({hover: false});
-	},
-	showModal: function(){
-		this.setState({showModal: true})
+	showModal: function(e){
+		var target = e.target
+		while(target.className != "event" && target !== document)
+			target = target.parentNode;
+		if(target !== document)
+			this.setState({currentShow: target.getElementsByClassName("bandName")[0].innerHTML});
 	},
 	hideModal: function(){
-		this.setState({showModal: false})
+		this.setState({currentShow: null})
 	},
-	render: function(){
-		var hoverStyle = {display: "none"};
-		if(this.state.hover){
-			hoverStyle = {height: 200, width: 200, backgroundColor: "grey", opacity:"0.8", position: "absolute", bottom: 0, left: 0, right: 0, display: "inline"};
-		}
+	render: function() {
 		return(
-		<div>
-			<div className="event" onClick={this.showModal} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-				<p className="bandName">{getBandName(this.props.event['summary'])}</p>
-				<img src="https://avatars3.githubusercontent.com/u/7256558?v=3&s=466" className="bandPic"/>
-				<div style={hoverStyle}>
-					<div className="eventOverlay">
-						<p className="showDate">{formatDate(this.props.event['start'])}</p>
-						<p className="separator">... ... ...</p>
-						<p className="venue">{getVenue(this.props.event['summary'])}</p>
-					</div>
-					<p className="enterLabel">(click to enter contest)</p>
-				</div>
-			</div>
-			<Modal show={this.state.showModal} onHide={this.hideModal} className="enterContest">
-				<EnterContest show={this.props.event['summary']}/>
-			</Modal>
-		</div>
-		);
-	}
-});
-
-var EnterContest = React.createClass({
-	render: function(){
-		return (
+			<div className='wf-container' onClick={this.showModal}>
+				{JSON.parse(this.props.data).events.map (function(el) {
+						return (
+							<div className="monthEvents" key={el['month']}>
+								<h1>{el['month']}</h1>
+								<div className="eventBlock">
+									{el['arr'].map( function(event){
+										return (
+										<div className="event" key={event['id']}>
+											<p className="bandName">{getBandName(event['summary'])}</p>
+											<img src="https://avatars3.githubusercontent.com/u/7256558?v=3&s=466" className="bandPic"/>
+											<div className="overlay">
+												<div className="eventOverlay">
+													<p className="showDate">{formatDate(event['start'])}</p>
+													<p className="separator">... ... ...</p>
+													<p className="venue">{getVenue(event['summary'])}</p>
+												</div>
+												<p className="enterLabel">(click to enter contest)</p>
+											</div>
+										</div>											
+										);
+									})
+									}
+								</div>
+							</div>
+						);
+					})
+				}
+				<Modal show={this.state.currentShow} onHide={this.hideModal} className="enterContest">
 			<Modal.Body style={{marginTop: 20}}>
-				<p className="showLabel">SHOW: </p><p className="showDesc">{this.props.show}</p>
+				<p className="showLabel">SHOW: </p><p className="showDesc">{this.state.currentShow}</p>
 				<form>
 					<div className="formGroup">
 						<p className="formLabel">ENTER NAME: </p>
@@ -99,6 +70,8 @@ var EnterContest = React.createClass({
 					</Button>
 				</form>
 			</Modal.Body>
+				</Modal>
+			</div>
 		);
 	}
 });

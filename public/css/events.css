@@ -108,11 +108,16 @@
 	height: auto;
 }
 
+.modal-dialog{
+	width: 500px;
+}
+
 .modal-content{
 	border-radius: 0;
 	opacity: 0.85;
 	height: 200px;
 	width: 500px;
+	margin: 0;
 }
 
 .enterContest{
@@ -120,3 +125,24 @@
 	top: 30%;
 	vertical-align: middle;
 }
+
+.overlay{
+	height: 200px;
+	width: 200px;
+	background-color: grey;
+	opacity: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: inline;
+}
+		
+.overlay:hover{
+	opacity: 0.8;
+};
+
+
+
+
+
