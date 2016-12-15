@@ -4,12 +4,7 @@
 	overflow: auto; 
 	width: 100%;
 	clear: both; 
-	margin: 10px;
-}
-
-.bandName{
-	text-align:left;
-	margin: 0px;
+	margin-bottom: 10px;
 }
 
 .venue{
@@ -20,13 +15,13 @@
 }
 
 .enterLabel{
-	color: white;
+	color: black;
 	text-align: right;
-	font-size: 12px;
+	font-size: 14px;
 	font-style: italic;
 	position: absolute;
-	bottom: 7px;
-	right: 7px;
+	bottom: 0px;
+	right: 5px;
 	margin-bottom: 0px;
 }
 
@@ -39,18 +34,23 @@
 }
 
 .bandPic{
-	height: 200px;
-	width: 200px;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline;
 }
 
 .event{
 	display: inline-block;
-	height: auto;
+	height: 200px;
 	width: 200px;
 	margin: 5px;
 	float: left;
 	position: relative;
 	cursor: pointer;
+	overflow: hidden;
 }
 
 .eventOverlay{
@@ -60,7 +60,22 @@
 	width: 150px;
 }
 
-.showDate{
+.eventDate{
+	color: white;
+	text-align: center;
+	font-size: 160px;
+	line-height: 200px;
+	font-weight: bold;
+	opacity: 0.35;
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	margin: 0;
+}
+
+.bandName{
 	color: white; 
 	text-align: center;
 	font-size: 18px;
@@ -126,10 +141,9 @@
 	vertical-align: middle;
 }
 
-.overlay{
+.hoverOverlay{
 	height: 200px;
-	width: 200px;
-	background-color: grey;
+	width: 101%;
 	opacity: 0;
 	position: absolute;
 	bottom: 0;
@@ -137,12 +151,75 @@
 	right: 0;
 	display: inline;
 }
+.hoverOverlay:hover{
+	opacity: .85;
+}
+
+.overlayWrapper{
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline;
+}
+
+.overlayWrapper .overlay{
+	height: 100%;
+	width: 100%;
+	background-color: grey;
+	opacity: .85;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline;
+}
 		
-.overlay:hover{
-	opacity: 0.8;
-};
+.overlayWrapper:hover .overlay{
+	opacity: 0;
+}
 
+.overlayWrapper .hoverOverlay{
+	height: 20px;
+	width: 100%;
+	background-color: white;
+	opacity: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: inline;
+}
 
+.overlayWrapper:hover .hoverOverlay{
+	opacity: .8;
+}
+
+.colorKey{
+	display: block;
+	margin: 0;
+}
+
+.colorKeyLabel{
+	display: inline-block;
+	position: relative;
+	margin-right: 20px;
+}
+
+.colorKeyLabel p{
+	display: inline;
+	font-size: 16px;
+}
+
+.dot{
+	background-color: grey;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
+
+}
 
 
 
