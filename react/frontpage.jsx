@@ -1,26 +1,32 @@
 // frontpage.jsx
 // Radio Front Page
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+// React-Router
+import { Router, Route, IndexRoute, browserHistory} from 'react-router';
+// Redux / React-Redux
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './frontpage/reducers/';
+
+const store = createStore(reducer);
 
 // FrontPage Elements
-var TriangleCanvas = require('./frontpage/TriangleCanvas.jsx');
-var FrontPageNavbar = require('./frontpage/FrontPageNavbar.jsx');
-var StreamBar = require('./frontpage/StreamBar.jsx');
-var LiveShowInfo = require('./frontpage/LiveShowInfo.jsx');
-var WaterFallContent = require('./frontpage/WaterFallContent.jsx');
+import TriangleCanvas from './frontpage/TriangleCanvas.jsx';
+import FrontPageNavbar from './frontpage/FrontPageNavbar.jsx';
+import StreamBar from './frontpage/StreamBar.jsx';
+import LiveShowInfo from './frontpage/LiveShowInfo.jsx';
+import WaterFallContent from './frontpage/WaterFallContent.jsx';
 
 // Common Elements
-var RectImage = require('./common/RectImage.jsx');
+import RectImage from './common/RectImage.jsx';
 
 // Bootstrap elements
-var Bootstrap = require('react-bootstrap');
-var Grid = Bootstrap.Grid;
-var Col = Bootstrap.Col;
+import { Bootstrap, Grid, Col } from 'react-bootstrap';
 
 // Custom
-var theme = require('./misc/theme');
+import theme from './misc/theme';
 
 var nowPlayingURL = "/api/nowplaying";
 
@@ -37,7 +43,6 @@ var FrontPage = React.createClass({
     this.updateNowPlaying();
     // refresh tracks every 30 seconds
     this.interval = setInterval(this.updateNowPlaying, 30*1000);
-    alerts("ayyy");
   },
   updateNowPlaying: function() {
     $.ajax({
@@ -74,7 +79,7 @@ var FrontPage = React.createClass({
 
               <Col xs={12} md={9} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
                 <FrontPageNavbar />
-                <WaterFallContent />
+                { this.props.children }
               </Col>
 
             </Grid>
@@ -86,7 +91,12 @@ var FrontPage = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <FrontPage />,
-  document.getElementById('content')
-);
+ReactDOM.render((
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/beta" component={FrontPage}>
+        <IndexRoute component={WaterFallContent} />
+      </Route>
+    </Router>
+  </Provider>
+), document.getElementById('content'))
