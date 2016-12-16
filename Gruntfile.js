@@ -9,18 +9,16 @@
 
 
 module.exports = function(grunt) {
+	// use webpack to compile & minify
 	var webpack = require('webpack');
 
-	new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-	});
+	// use plugin to set env variables
+	var InlineEnviromentVariablesPlugin = require('inline-environment-variables-webpack-plugin');
 
-	// Directory where *.js and *.jsx files will be compiled and placed in ./public/build
+	// Directory where *.js and *.jsx files will be compiled from, to be placed in ./public/build
 	var directory = 'react';
-
- 	// vendors will be compiled to a file which can be shared between pages
- 	var entry = {vendors: ['react', 'react-bootstrap', 'trianglify']};
-
+ 	// vendors to be compiled to a single file which can be shared between pages (vendors.min.js)
+ 	var entry = {vendors: ['react', 'react-bootstrap']};
 	// go through files in this directory and add them to target entry
  	var files = grunt.file.expand({cwd: directory}, '*.js', '*.jsx');
  	for (var i = 0; i < files.length; i++) {
@@ -29,9 +27,12 @@ module.exports = function(grunt) {
  	}
 
 	// Creates a special Commons bundle that our application can require from
-	var commonPlugin = [new webpack.optimize.CommonsChunkPlugin("vendors", "vendors.js")];
+	var commonPlugin = new webpack.optimize.CommonsChunkPlugin("vendors", "vendors.js");
 	// We need to uglify that code on deploy
-	var uglifyPlugin = [new webpack.optimize.UglifyJsPlugin()];
+	var uglifyPlugin = new webpack.optimize.UglifyJsPlugin();
+	// Use plugin to set process.env variables
+	var envVariablesPlugin = new InlineEnviromentVariablesPlugin({ NODE_ENV: 'production' });
+
 	// The module options takes loaders, in this case transforming JSX to normal javascript
 	var module = {
 		loaders: [
@@ -55,7 +56,7 @@ module.exports = function(grunt) {
 	  webpack: {
 	  	build: {
 	      entry: entry,
-	      plugins: commonPlugin.concat(uglifyPlugin),
+	      plugins: [commonPlugin, uglifyPlugin, envVariablesPlugin],
 	      stats: {
 	        timings: true
 	      },
