@@ -17,7 +17,7 @@ var LiveShowInfo = React.createClass({
   djString: function(djMap) {
     var djString = "";
     var addComma = false;
-    for (dj in djMap) {
+    for (var dj in djMap) {
       if (addComma) {
         djString += ", ";
       }
