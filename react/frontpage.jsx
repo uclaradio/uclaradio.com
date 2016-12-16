@@ -18,6 +18,7 @@ import FrontPageNavbar from './frontpage/FrontPageNavbar.jsx';
 import StreamBar from './frontpage/StreamBar.jsx';
 import LiveShowInfo from './frontpage/LiveShowInfo.jsx';
 import WaterFallContent from './frontpage/WaterFallContent.jsx';
+import DJList from './frontpage/DJList.jsx';
 
 // Common Elements
 import RectImage from './common/RectImage.jsx';
@@ -96,6 +97,7 @@ ReactDOM.render((
     <Router history={browserHistory}>
       <Route path="/beta" component={FrontPage}>
         <IndexRoute component={WaterFallContent} />
+        <Route path="/beta/djs" component={DJList} />
       </Route>
     </Router>
   </Provider>
