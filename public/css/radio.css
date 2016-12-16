@@ -13,24 +13,21 @@ body {
 }
 
 a {
-  color: black !important;
-}
-
-img {
-  content: "";
+  color: black;
 }
 
 /* Trianglify */
 
 .canvasCanvas {
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: -1;
   height: 100%;
   width: 100%;
 }
 
 .canvasContent {
-  position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
@@ -38,10 +35,13 @@ img {
   width: 100%;
 }
 
-.triangleCanvasContent {
-  position: relative;
+.triangleCanvas{
   height: 100%;
   width: 100%;
+  top: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*** Frontpage styling ***/
@@ -73,6 +73,7 @@ h4 {
 }
 
 .frontPageNavbarItem > a {
+  color: black !important;
   margin: 0pt 5pt;
   border-radius: 0 !important;
   background-color: rgba(255, 255, 255, 0.6);
@@ -151,6 +152,7 @@ h4 {
   left: 0;
   bottom: 0;
   color: white;
+  z-index: 2;
   background-color: rgba(0, 0, 0, 0.85);
 }
 
@@ -246,6 +248,3 @@ h4 {
   padding: 5%;
   margin-top: -10px;
 }
-
-
-

@@ -113,8 +113,9 @@ var RecentlyPlayed = React.createClass({
     }
     if (this.props.reset && !this.state.hasReset) {
       this.setState({hasReset: true});
+    } else {
+      document.getElementById("focusAnchor").focus();
     }
-    document.getElementById("focusAnchor").focus();
   },
   onExited: function() {
     if (this.props.reset) {
