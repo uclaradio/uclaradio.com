@@ -52,11 +52,6 @@ router.get('/blurbinfo', function(req, res, next) {
 
 });
 
-router.get('/beta', function(req, res) {
-	var path = require('path');
-	res.sendFile(path.resolve('public/frontpage.html'));
-});
-
 
 router.get('/getSocialMedia', function(req, res) {
 	var FB_pagination_until; //get the index of the last facebook post basically

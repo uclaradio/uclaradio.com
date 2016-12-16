@@ -13,7 +13,11 @@ body {
 }
 
 a {
-  color: black;
+  color: black !important;
+}
+
+img {
+  content: "";
 }
 
 /* Trianglify */
@@ -74,7 +78,7 @@ h4 {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-.frontPageNavbarItem > a:focus, .frontPageNavbarItem > a:hover {
+.active.frontPageNavbarItem > a, .frontPageNavbarItem > a:focus, .frontPageNavbarItem > a:hover {
   /*text-decoration: none;*/
   background-color: white !important;
 }

@@ -3,9 +3,9 @@
 var React = require('react');
 
 // Bootstrap Elements
-var Nav = require('react-bootstrap').Nav;
-var NavItem = require('react-bootstrap').NavItem;
-var Collapse = require('react-bootstrap').Collapse;
+import { Nav, NavItem, Collapse } from 'react-bootstrap';
+
+import { LinkContainer } from 'react-router-bootstrap';
 
 /**
 Navigation bar for the stream frontpage, which has collapsing rows and selectable tabs
@@ -23,9 +23,9 @@ var FrontPageNavbar = React.createClass({
       case 1:
         window.open("/shows", "_blank");
         break;
-      case 2:
-        window.open("/GiveawayCalendar", "_blank");
-        break;
+      // case 2:
+      //   window.open("/GiveawayCalendar", "_blank");
+      //   break;
       case 3:
         window.open("http://apply.dailybruin.com/applications/ucla-radio/", "_blank");
         break;
@@ -45,8 +45,10 @@ var FrontPageNavbar = React.createClass({
       <div className="frontPageNavbar">
         { /** Large devices, hidden on xs **/ }
         <Nav justified bsStyle="pills" className="hidden-xs" activeKey={this.state.activeKey} onSelect={this.toggleOpen}>
-          <NavItem eventKey={1} href="#" className="frontPageNavbarItem leftMost">SHOWS</NavItem>
-          <NavItem eventKey={2} href="#" className="frontPageNavbarItem">GIVEAWAYS</NavItem>
+          <LinkContainer to="/beta/djs">
+            <NavItem className="frontPageNavbarItem leftMost">DJs</NavItem>
+          </LinkContainer>
+          <NavItem eventKey={1} href="#" className="frontPageNavbarItem">SHOWS</NavItem>
           <NavItem eventKey={3} href="#" className="frontPageNavbarItem">APPLY</NavItem>
           <NavItem eventKey={5} href="#" className="frontPageNavbarItem rightMost">BLOG</NavItem>
         </Nav>
@@ -57,8 +59,10 @@ var FrontPageNavbar = React.createClass({
         </Nav>
         <Collapse in={this.state.open} className="hidden-sm hidden-md hidden-lg collapsedNav">
           <Nav justified bsStyle="pills" activeKey={this.state.activeKey} onSelect={this.toggleOpen}>
-            <NavItem eventKey={1} href="#" className="frontPageNavbarItem fullWidth topMost">SHOWS</NavItem>
-            <NavItem eventKey={2} href="#" className="frontPageNavbarItem fullWidth">GIVEAWAYS</NavItem>
+            <LinkContainer to="/beta/djs">
+              <NavItem className="frontPageNavbarItem fullWidth topMost">DJs</NavItem>
+            </LinkContainer>
+            <NavItem eventKey={1} href="#" className="frontPageNavbarItem fullWidth">SHOWS</NavItem>
             <NavItem eventKey={3} href="#" className="frontPageNavbarItem fullWidth">APPLY</NavItem>
             <NavItem eventKey={5} href="#" className="frontPageNavbarItem fullWidth">BLOG</NavItem>
           </Nav>

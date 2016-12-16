@@ -14,10 +14,7 @@ var Rectangle = require('react-rectangle');
 *
 *  @prop src: image source url
 *  @prop maxWidth: maximum width value
-*  @prop thumbnail: Image should be thumbnail
-*  @prop responsive: Image should be responsive
 *  @prop circle: Image should be circle
-*  @prop rounded: Image should be rounded
 */
 var RectImage = React.createClass({
   getDefaultProps: function() {
@@ -35,6 +32,9 @@ var RectImage = React.createClass({
       height: "100%",
       backgroundSize: "cover"
     };
+    if (this.props.circle) {
+      pictureStyle.borderRadius = "50%";
+    }
     var rectangleStyle = {
       maxWidth: this.props.maxWidth,
       margin: "0 auto"
@@ -42,9 +42,7 @@ var RectImage = React.createClass({
     return (
       <div className="rectImage">
         <Rectangle aspectRatio={this.props.aspectRatio} style={rectangleStyle}>
-          <Image style={pictureStyle} className="rectImagePic"
-          thumbnail={this.props.thumbnail} responsive
-          circle={this.props.circle} rounded={this.props.rounded} />
+          <div style={pictureStyle} className="rectImagePic" />
         </Rectangle>
       </div>
     );

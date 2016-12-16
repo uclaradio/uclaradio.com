@@ -63,12 +63,13 @@ app.use('/faq', function(req, res, next) {
   res.redirect('/panel/faq');
 });
 
-// catch 404 and forward to error handler
+// catch 404 and forward to frontpage
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  res.render('notFound');
-
+  // var err = new Error('Not Found');
+  // err.status = 404;
+  // res.render('notFound');
+  var path = require('path');
+  res.sendFile(path.resolve('public/frontpage.html'));
 });
 
 // error handlers

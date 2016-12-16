@@ -4,7 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // React-Router
-import { Router, Route, IndexRoute, browserHistory} from 'react-router';
+import { Router, Route, IndexRoute, browserHistory, Link } from 'react-router';
 // Redux / React-Redux
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -69,10 +69,10 @@ var FrontPage = React.createClass({
 
               <Col xs={12} md={3} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
                 <div className="radioInfo frontWell">
-                  <a href="/beta">
+                  <Link to="/beta">
                     <RectImage maxWidth="250px"
                       src="/img/uclaradio-black.png" />
-                  </a>
+                  </Link>
                   <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union.</p>
                 </div>
                 <LiveShowInfo show={showShow ? this.state.show : null} title="Now Playing" />
