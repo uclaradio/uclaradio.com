@@ -1,15 +1,19 @@
 /**
 _common.scss
 
-Global sass styles for events tab of new frontpage
+Global sass styles for new frontpage
 **/
 
 
-// constants
+/** Constants **/
+
+// spacing between block-like elements on the frontpage
+//  (1/2 of the space between columns, between waterfall boxes)
 $box-padding: 5pt;
 
-// animations
-@mixin fade-animation($startOpacity, $endOpacity) {
-    from { opacity: $startOpacity; }
-    to   { opacity: $endOpacity; }
+/** Animations **/
+
+@mixin fade-animation($start-opacity, $end-opacity) {
+    from { opacity: $start-opacity; }
+    to   { opacity: $end-opacity; }
 }

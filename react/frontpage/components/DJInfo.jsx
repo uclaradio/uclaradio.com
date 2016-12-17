@@ -1,9 +1,10 @@
 // DJInfo.jsx
-var React = require('react');
-var defaultDJPic = "/img/bear_transparent.png"
+import React from 'react';
 
 // Common Elements
-var RectImage = require('../common/RectImage.jsx');
+import RectImage from '../../common/RectImage.jsx';
+
+var defaultDJPic = "/img/bear_transparent.png";
 
 /*
 DJInfo: UI element showing information for a dj

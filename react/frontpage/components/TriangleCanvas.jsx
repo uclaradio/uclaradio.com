@@ -1,7 +1,9 @@
 // TriangleCanvas.jsx
 
-var React = require('react');
-var Trianglify = require('trianglify');
+import React from 'react';
+import Trianglify from 'trianglify';
+
+require('./TriangleCanvas.scss');
 
 /**
 Canvas with Trianglify styling applied, equal in size to current window,

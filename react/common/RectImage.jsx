@@ -1,12 +1,15 @@
 // RectImage.jsx
 
-var React = require('react');
+import React from 'react';
 
 // Bootstrap Elements
-var Image = require('react-bootstrap').Image;
+import Image from 'react-bootstrap';
 
 // Open-Source Elements
-var Rectangle = require('react-rectangle');
+import Rectangle from 'react-rectangle';
+
+// styling
+require('./RectImage.scss');
 
 /**
 *  Wrapper for Image which keeps its frame square, sets height equal to width

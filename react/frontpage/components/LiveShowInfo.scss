@@ -1,0 +1,36 @@
+/**
+LiveShowInfo.scss
+
+Sass styling for currently playing show info component in frontpage
+**/
+
+@import '../common';
+
+.liveShowBanner {
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.showDetails {
+  margin-top: 15px;
+}
+
+.liveShowInfo {
+  margin-top: 2*$box-padding;
+}
+
+.showDetails .time, .liveShowInfo .djs, .liveShowInfo .blurb {
+  color: #656565;
+}
+
+.showDetails .time, .liveShowInfo .djs {
+  font-weight: bold;
+}
+
+.liveShowBanner .showDetails {
+  text-align: left;
+}
+
+.showDetails .genre {
+  float: right;
+}

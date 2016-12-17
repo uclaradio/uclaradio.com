@@ -1,0 +1,55 @@
+/**
+EventsTab.scss
+
+Sass styling for events tab of new frontpage
+**/
+
+@import 'common';
+
+
+body {
+  font-family: 'apercuregular';
+}
+
+#main {
+  margin: 20px auto 175px auto;
+}
+
+a {
+  color: black;
+}
+
+// Frontpage styling
+
+h1, h2, h3 {
+  margin-top: 10px;
+}
+
+h4 {
+  margin-top: 0px;
+}
+
+.frontWell {
+  border: none;
+  box-shadow: none;
+  padding: 15px;
+  /* 0.6 opacity background */
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.frontpageCol {
+  padding-left: $box-padding;
+  padding-right: $box-padding;
+}
+
+// Radio Info
+
+.active > .radioInfo > .rectImage {
+  background-color: rgba(255, 255, 255, 0.20);
+}
+
+.radioInfo > .rectImage:hover, .radioInfo > .rectImage:focus {
+  background-color: rgba(255, 255, 255, 0.25);
+}

@@ -7,6 +7,9 @@ import { Nav, NavItem, Collapse } from 'react-bootstrap';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
+// styling
+require('./FrontPageNavbar.scss');
+
 /**
 Navigation bar for the stream frontpage, which has collapsing rows and selectable tabs
 */

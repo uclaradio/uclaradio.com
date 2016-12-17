@@ -1,9 +1,12 @@
 // LiveShowInfo.jsx
 
-var React = require('react');
+import React from 'react';
 
 // Common Elements
-var RectImage = require('../common/RectImage.jsx');
+import RectImage from '../../common/RectImage.jsx';
+
+// styling
+require('./LiveShowInfo.scss');
 
 var defaultShowPic = "/img/radio.png"
 

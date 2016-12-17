@@ -1,0 +1,31 @@
+/**
+TriangleCanvas.scss
+
+Sass styling for trianglify canvas component
+**/
+
+.canvasCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+}
+
+.canvasContent {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.triangleCanvas{
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+}

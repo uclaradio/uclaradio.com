@@ -13,12 +13,12 @@ import reducer from './frontpage/reducers/';
 const store = createStore(reducer);
 
 // FrontPage Elements
-import TriangleCanvas from './frontpage/TriangleCanvas.jsx';
-import FrontPageNavbar from './frontpage/FrontPageNavbar.jsx';
-import StreamBar from './frontpage/StreamBar.jsx';
-import LiveShowInfo from './frontpage/LiveShowInfo.jsx';
+import TriangleCanvas from './frontpage/components/TriangleCanvas.jsx';
+import FrontPageNavbar from './frontpage/components/FrontPageNavbar.jsx';
+import StreamBar from './frontpage/components/StreamBar.jsx';
+import LiveShowInfo from './frontpage/components/LiveShowInfo.jsx';
 import WaterFallContent from './frontpage/components/WaterFallContent.jsx';
-import DJList from './frontpage/DJList.jsx';
+import DJList from './frontpage/components/DJList.jsx';
 import EventsTab from './frontpage/components/EventsTab.jsx';
 
 // Common Elements
@@ -28,7 +28,10 @@ import RectImage from './common/RectImage.jsx';
 import { Bootstrap, Grid, Col } from 'react-bootstrap';
 
 // Custom
-import theme from './misc/theme';
+import theme from './common/theme';
+
+// styling
+require('./frontpage/frontpage.scss');
 
 var nowPlayingURL = "/api/nowplaying";
 

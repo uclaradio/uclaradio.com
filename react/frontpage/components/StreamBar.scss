@@ -1,0 +1,84 @@
+/**
+StreamBar.scss
+
+Sass styling for frontpage stream bar component
+**/
+
+/** Stream Bar **/
+
+.streamBar {
+  width: 100%;
+  line-height: 20pt;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  color: white;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.playButton > .glyphicon {
+  font-size: 20px;
+  height: 20pt;
+  vertical-align: middle;
+}
+
+.playText {
+  padding-left: 10pt;
+}
+
+.playButton, .playText, .expandAction {
+  cursor: pointer;
+  height: 20pt;
+}
+
+/** Stream Bar Recently Played **/
+
+.streamContent {
+  padding: 10pt;
+}
+
+.recentlyPlayed {
+  overflow: hidden;
+}
+
+.recentContent {
+  display: block;
+}
+
+.expandAction {
+  float: right;
+}
+
+.trackInfo {
+  margin: 0 auto;
+  padding-top: 10pt;
+  text-align: center;
+  width: 33%;
+}
+
+.trackInfo a, .trackInfo a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.trackImage {
+  height: 64px;
+  height: 64px;
+  margin: 0 auto 5px auto;
+}
+
+.trackArtist a {
+  color: #cacaca;
+}
+
+.trackName, .trackArtist {
+  line-height: 20px;
+}
+
+.slick-slider {
+  margin: 0 25px;
+  position: relative;
+  top: 0;
+  bottom: 0;
+}

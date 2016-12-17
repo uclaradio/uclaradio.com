@@ -1,14 +1,15 @@
 // StreamBar.jsx
 
-var React = require('react');
+import React from 'react';
 
 // Bootstrap Elements
-var Grid = require('react-bootstrap').Grid;
-var Glyphicon = require('react-bootstrap').Glyphicon;
-var Collapse = require('react-bootstrap').Collapse;
+import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
 
 // Open-Source Components
-var Slider = require('react-slick');
+import Slider from 'react-slick';
+
+// styling
+require('./StreamBar.scss');
 
 var trackURL = "https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json";
 var streamURL = "http://uclaradio.com:8000/;";

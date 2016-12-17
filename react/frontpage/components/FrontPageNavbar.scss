@@ -1,0 +1,54 @@
+/**
+FrontPageNavbar.scss
+
+Sass styling for navbar on frontpage
+**/
+
+@import '../common';
+
+
+.frontPageNavbar {
+  margin-bottom: $box-padding;
+}
+
+.frontPageNavbarItem.collapsed {
+  padding-top: 2*$box-padding;
+}
+
+.frontPageNavbarItem > a {
+  color: black !important;
+  margin: 0pt $box-padding;
+  border-radius: 0 !important;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.active.frontPageNavbarItem > a, .frontPageNavbarItem > a:focus, .frontPageNavbarItem > a:hover {
+  /*text-decoration: none;*/
+  background-color: white !important;
+}
+
+.frontPageNavbarItem.leftMost > a {
+  margin: 0 $box-padding 0 0;
+}
+
+.frontPageNavbarItem.rightMost > a {
+  margin: 0 0 0 $box-padding;
+}
+
+.frontPageNavbarItem.fullWidth > a {
+  margin: $box-padding 0;
+}
+
+.frontPageNavbarItem.fullWidth.topMost > a {
+  margin: 0 0 $box-padding 0;
+}
+
+.frontPageNavbarItem.expandToggle {
+  max-width: 80px;
+  min-width: 80px;
+}
+
+.frontPageNavbarItem.fullWidth.expandToggle {
+  max-width: none;
+  min-width: none;
+}
