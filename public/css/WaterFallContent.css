@@ -1,8 +1,6 @@
 
 .wf-container {
-    margin: 0 auto;   
-    margin-right: -.5em;
-    margin-left: -.5em;
+    margin: 0 -5pt;
 }
 
 .wf-container a:hover {
@@ -24,7 +22,7 @@
     clear: both;
 }
 .wf-box {
-	padding:  .5rem;
+	padding:  5pt;
     /*margin: 2%;*/
     /*padding: 2%;*/
     -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */

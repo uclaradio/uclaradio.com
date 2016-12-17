@@ -59,13 +59,18 @@ h4 {
   box-shadow: none;
   padding: 15px;
   /* 0.6 opacity background */
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(255, 255, 255, 0.5);
   text-align: center;
   margin-bottom: 15px;
 }
 
+.frontpageCol {
+  padding-left: 5pt;
+  padding-right: 5pt;
+}
+
 .frontPageNavbar {
-  margin-bottom: 6pt;
+  margin-bottom: 5pt;
 }
 
 .frontPageNavbarItem.collapsed {
@@ -112,8 +117,12 @@ h4 {
 
 /** Radio Info **/
 
-.radioInfo .rectImage {
-  margin: 0 auto 10px auto;
+.active > .radioInfo > .rectImage {
+  background-color: rgba(255, 255, 255, 0.20);
+}
+
+.radioInfo > .rectImage:hover, .radioInfo > .rectImage:focus {
+  background-color: rgba(255, 255, 255, 0.25);
 }
 
 /** Live Show Info **/
@@ -125,6 +134,11 @@ h4 {
 
 .showDetails {
   margin-top: 15px;
+}
+
+.liveShowInfo {
+  margin-top: 10pt;
+  margin-bottom: 10pt;
 }
 
 .showDetails .time, .liveShowInfo .djs, .liveShowInfo .blurb {
