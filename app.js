@@ -6,6 +6,10 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var socket_io = require('socket.io');
+var app = express();
+var io = socket_io();
+app.io = io;
 
 var routes = require('./routes/index');
 var staffingPoints = require('./routes/staffingPoints');
@@ -20,7 +24,14 @@ var panel = require('./routes/panel.js');
 var notFound = require('./routes/notFound');
 var analytics = require('./routes/analytics');
 var api = require('./routes/api');
-var app = express();
+var chat = require('./routes/chat')(io);
+
+// //socket io events
+// io.on( "connection", function( socket )
+// {
+//     console.log( "A user connected" );
+// });
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,6 +67,7 @@ app.use('/GiveawayCalendar', TicketGiveawayCalendar);
 app.use('/notFound', notFound);
 app.use('/analytics', analytics);
 app.use('/api', api);
+app.use('/chat', chat);
 // all links to panel/* handled in panel.js
 app.use('/panel', panel);
 
