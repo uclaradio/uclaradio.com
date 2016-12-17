@@ -1,9 +1,10 @@
-// EventsContent.jsx
+// EventsTab.jsx
 import React from 'react';
 
 // Common Elements
 import RectImage from '../common/RectImage.jsx';
 
+require('./EventsTab.scss');
 
 var eventsData = JSON.parse('[\
     {"month":"October",\
@@ -34,7 +35,7 @@ var eventsData = JSON.parse('[\
     ]}]');
 
 //content of events page
-var EventsContent = React.createClass({
+var EventsTab = React.createClass({
 	render: function() {
 		// describe colors with events legend
 		var legend = ["Giveaway", "UCLA Radio Presents", "Campus Event", "Local Event"].map((event) => {
@@ -47,7 +48,7 @@ var EventsContent = React.createClass({
 		});
 
 		return(
-			<div className="eventsContent">
+			<div className="eventsTab">
 				<div className="colorKey">
 					{legend}
 				</div>
@@ -123,4 +124,4 @@ var formatDate = function(dateString) {
 	return date.getDate();
 };
 
-module.exports = EventsContent;
+module.exports = EventsTab;

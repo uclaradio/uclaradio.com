@@ -19,7 +19,7 @@ import StreamBar from './frontpage/StreamBar.jsx';
 import LiveShowInfo from './frontpage/LiveShowInfo.jsx';
 import WaterFallContent from './frontpage/WaterFallContent.jsx';
 import DJList from './frontpage/DJList.jsx';
-import EventsContent from './frontpage/EventsContent.jsx';
+import EventsTab from './frontpage/EventsTab.jsx';
 
 // Common Elements
 import RectImage from './common/RectImage.jsx';
@@ -101,7 +101,7 @@ ReactDOM.render((
       <Route path="/beta" component={FrontPage}>
         <IndexRoute component={WaterFallContent} />
         <Route path="/beta/djs" component={DJList} />
-        <Route path="/beta/events" component={EventsContent} />
+        <Route path="/beta/events" component={EventsTab} />
       </Route>
     </Router>
   </Provider>

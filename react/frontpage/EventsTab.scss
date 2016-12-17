@@ -1,8 +1,19 @@
 /**
-Events.css
+EventsTab.scss
 
-Styling for events tab of new frontpage
+Sass styling for events tab of new frontpage
 **/
+
+
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #ffffffa;
+
+
+@mixin fade-animation($startOpacity, $endOpacity) {
+    from { opacity: $startOpacity; }
+    to   { opacity: $endOpacity; }
+}
+
 
 
 @keyframes lightfadein {

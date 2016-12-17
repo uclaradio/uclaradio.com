@@ -2,7 +2,7 @@
 // Configuration file for compiling files with Grunt and Webpack
 //
 // Usage: 'grunt' command will compile and minify all *.js
-//   and *.jsx files in ./react and put these in ./public/build
+//   and *.jsx files in ./react (not subdirectories) and put these in ./public/build
 // 
 // 'grunt watch' can be used for development, this will wait
 //    and automatically recompile any changed files
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 	// go through files in this directory and add them to target entry
  	var files = grunt.file.expand({cwd: directory}, '*.js', '*.jsx');
  	for (var i = 0; i < files.length; i++) {
- 		var filename = files[i].replace(/.js[x]?/g, '');
+ 		var filename = files[i].replace(/.js[x]?/g, '.min.js');
  		entry[filename] = './' + directory + '/' + files[i];
  	}
 
@@ -36,50 +36,53 @@ module.exports = function(grunt) {
 	// The module options takes loaders, in this case transforming JSX to normal javascript
 	var module = {
 		loaders: [
-			{ test: /\.js[x]?$/,
+			{
+				test: /\.js[x]?$/,
 				loader: 'babel',
 				exclude: /node_modules/,
 				query: {
-          presets: ['es2015', 'react']
-        }
+					presets: ['es2015', 'react']
+				}
 			},
-			{ test: /\.less$/,
-				loader: 'style!css!less'
+			{
+				test: /\.scss$/,
+				loaders: ["style-loader", "css-loader", "sass-loader"]
 			},
-			{ test: /\.json$/,
+			{
+				test: /\.json$/,
 				loader: 'json'
 			}
 		]
 	};
 
 	grunt.initConfig({
-	  webpack: {
-	  	build: {
-	      entry: entry,
-	      plugins: [commonPlugin, uglifyPlugin, envVariablesPlugin],
-	      stats: {
-	        timings: true
-	      },
-	      output: {
-	        filename: '[name].min.js',
-	        path: './public/build'
-	      },
-	      module: module
-	    },
-	  }
+		webpack: {
+			build: {
+				entry: entry,
+				plugins: [commonPlugin, uglifyPlugin, envVariablesPlugin],
+				stats: {
+					timings: true
+				},
+				output: {
+					filename: '[name]',
+					path: './public/build'
+				},
+				module: module
+			},
+		}
 	});
 
 	/***** Set up Grunt tasks (for the command line interface 'grunt-cli') *****/
 
 	grunt.loadNpmTasks('grunt-webpack');
 	// build all files in ./react
-	grunt.registerTask('build', ['webpack:build']);
+	grunt.registerTask('build', ['webpack:build', 'sass']);
 
 	// 'watch' task (keep alive)
 	grunt.registerTask('watch', 'Build all files on change', function () {
 		grunt.config.set('webpack.build.keepalive', true);
 		grunt.config.set('webpack.build.watch', true);
-	  grunt.task.run('webpack:build');
+	 	grunt.task.run(['webpack:build']);
 	});
 
 	// default ('grunt')
