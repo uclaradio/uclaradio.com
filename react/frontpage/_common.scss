@@ -11,6 +11,9 @@ Global sass styles for new frontpage
 //  (1/2 of the space between columns, between waterfall boxes)
 $box-padding: 5pt;
 
+$link-color: rgba(255, 255, 255, 0.6);
+$link-hover-color: white;
+
 /** Animations **/
 
 @mixin fade-animation($start-opacity, $end-opacity) {

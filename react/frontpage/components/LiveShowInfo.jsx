@@ -2,8 +2,11 @@
 
 import React from 'react';
 
-// Common Elements
+// Common Components
 import RectImage from '../../common/RectImage.jsx';
+
+// Bootstrap Components
+import { Glyphicon } from 'react-bootstrap';
 
 // styling
 require('./LiveShowInfo.scss');
@@ -34,24 +37,23 @@ var LiveShowInfo = React.createClass({
   },
   render: function() {
     if (!this.props.show) {
-      return <div classname="liveShowInfo"></div>;
+      return <div classname="liveShowInfoEmpty"></div>;
     } else {
       return (
-        <div className="liveShowInfo frontWell">
+        <div className="liveShowInfo">
+          { this.props.title &&
+            <p className="infoHeader"><Glyphicon glyph="volume-up"/>{this.props.title}</p>
+          }
           <div className="liveShowBanner">
-            { !this.props.title ? "" :
-              <h3>{this.props.title}</h3>
-            }
+            <RectImage
+              src={this.props.show.picture || defaultShowPic} />
             <div className="showDetails">
-              <span className="time">{this.props.show.day + " " + this.props.show.time}</span>
-              <span className="genre">{this.truncateName(this.props.show.genre || "", 18)}</span>
+              <p className="showTitle">{this.props.show.title || ""}</p>
+              <p className="djs">{this.djString(this.props.show.djs || {})}</p>
             </div>
-            <RectImage responsive
-                        src={this.props.show.picture || defaultShowPic} />
+            
+            { /*<span className="genre">{this.truncateName(this.props.show.genre || "", 18)}</span> */ }
           </div>
-          <h4>{this.props.show.title || ""}</h4>
-          <p className="djs">{this.djString(this.props.show.djs || {})}</p>
-          <p className="blurb">{this.props.show.blurb || ""}</p>
         </div>
       );
     }

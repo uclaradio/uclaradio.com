@@ -46,10 +46,14 @@ h4 {
 
 // Radio Info
 
-.active > .radioInfo > .rectImage {
+.active > .radioBanner > .rectImage {
   background-color: rgba(255, 255, 255, 0.20);
 }
 
-.radioInfo > .rectImage:hover, .radioInfo > .rectImage:focus {
+.radioBanner > .rectImage:hover, .radioBanner > .rectImage:focus {
   background-color: rgba(255, 255, 255, 0.25);
+}
+
+.radioInfo {
+  margin: 2*$box-padding 5px;
 }

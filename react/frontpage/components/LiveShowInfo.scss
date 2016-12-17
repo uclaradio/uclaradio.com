@@ -6,31 +6,46 @@ Sass styling for currently playing show info component in frontpage
 
 @import '../common';
 
+.liveShowInfo {
+  margin: 2*$box-padding auto 0 auto;
+  max-width: 350px;
+}
+
+.infoHeader {
+	font-family: Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: italic;
+	margin: 5px 5px;
+}
+
+.infoHeader .glyphicon {
+	margin: 0 5px;
+}
+
 .liveShowBanner {
-  max-width: 280px;
+  padding: 5px;
+  background-color: $link-color;
+  cursor: pointer;
+}
+
+.liveShowInfo .liveShowBanner {
   margin: 0 auto;
 }
 
-.showDetails {
-  margin-top: 15px;
+.liveShowBanner .rectImage {
+	margin: 0 !important;
+	width: 30%;
+	display: inline-block;
+	vertical-align: top;
 }
 
-.liveShowInfo {
-  margin-top: 2*$box-padding;
+.liveShowInfo .showDetails {
+  padding: 5px 10px;
+  width: 70%;
+  display: inline-block;
+  vertical-align: top;
 }
 
-.showDetails .time, .liveShowInfo .djs, .liveShowInfo .blurb {
-  color: #656565;
-}
-
-.showDetails .time, .liveShowInfo .djs {
-  font-weight: bold;
-}
-
-.liveShowBanner .showDetails {
-  text-align: left;
-}
-
-.showDetails .genre {
-  float: right;
+.showDetails .showTitle {
+	font-size: 18px;
 }

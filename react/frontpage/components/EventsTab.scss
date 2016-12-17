@@ -11,7 +11,8 @@ $event-width: 200px;
 $event-margin: 5px;
 $overlay-opacity: 0.85;
 $overlay-duration: 0.85s;
-$font-stack: Helvetica, sans-serif;
+$sans-serif-font: Helvetica, sans-serif;
+$serif-font: Georgia, serif;
 
 // fadein animations
 @keyframes lightfadein { @include fade-animation(0, $overlay-opacity) } 
@@ -48,6 +49,7 @@ $font-stack: Helvetica, sans-serif;
 	height: $event-width;
 	width: $event-width;
 	margin: $event-margin;
+	// font-family: $sans-serif-font;
 	color: white;
 	position: relative;
 	cursor: pointer;
@@ -70,7 +72,7 @@ $font-stack: Helvetica, sans-serif;
 
 .separator {
 	font-size: 18px;
-	font-family: Georgia, serif;
+	font-family: $serif-font;
 	line-height: 10px;
 }
 
@@ -96,7 +98,7 @@ $font-stack: Helvetica, sans-serif;
 
 .bandName {
 	font-size: 18px;
-	font-family: Georgia, serif;
+	font-family: $serif-font;
 	font-style: italic;
 	margin-bottom: 0
 }
