@@ -9,13 +9,35 @@ module.exports = function(io) {
 		res.sendFile(path.resolve('public/frontpage.html'));
 	});
 
-    io.on('connection', function(socket) { 
-        console.log('connected to chat');
+    io.on('connection', function(socket) {
+    	
+    	//new user joined
+    	socket.on('add user', function(username) {
+			// we store the username in the socket session for this client
+    		socket.user = username;
+    		var message = username + ' has joined the conversation.';
+    		socket.broadcast.emit('new message', {
+    			event: 'connected',
+    			user: socket.user
+    		});
+    	});
+
+    	//automatically disconnects user
+    	socket.on('disconnect', function(){
+    		console.log(socket.user + " has left.");
+    		var message = socket.user + 'has left the conversation'
+    		socket.broadcast.emit('new message', {
+    			event: 'disconnected',
+    			user: socket.user
+    		});
+    	});
+
+    	//new message sent
 		socket.on('new message', function (data) {
 		// we tell the client to execute 'new message'
 			socket.broadcast.emit('new message', {
-			  //username: socket.username,
-			  message: 'server sending data to client'
+			  text: data.text,
+			  user: data.user
 			});
 			console.log(data);
 		});
