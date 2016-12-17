@@ -1,0 +1,15 @@
+/**
+_common.scss
+
+Global sass styles for events tab of new frontpage
+**/
+
+
+// constants
+$box-padding: 5pt;
+
+// animations
+@mixin fade-animation($startOpacity, $endOpacity) {
+    from { opacity: $startOpacity; }
+    to   { opacity: $endOpacity; }
+}

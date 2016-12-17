@@ -17,9 +17,9 @@ import TriangleCanvas from './frontpage/TriangleCanvas.jsx';
 import FrontPageNavbar from './frontpage/FrontPageNavbar.jsx';
 import StreamBar from './frontpage/StreamBar.jsx';
 import LiveShowInfo from './frontpage/LiveShowInfo.jsx';
-import WaterFallContent from './frontpage/WaterFallContent.jsx';
+import WaterFallContent from './frontpage/components/WaterFallContent.jsx';
 import DJList from './frontpage/DJList.jsx';
-import EventsTab from './frontpage/EventsTab.jsx';
+import EventsTab from './frontpage/components/EventsTab.jsx';
 
 // Common Elements
 import RectImage from './common/RectImage.jsx';

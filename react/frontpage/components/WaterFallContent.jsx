@@ -2,8 +2,11 @@
 // Displays social media content in a ResponsiveWaterfall
 
 import React from 'react';
-import Dates from '../misc/Dates.js';
-import Waterfall from '../misc/ResponsiveWaterfall.js';
+import Dates from './misc/Dates.js';
+import Waterfall from './misc/ResponsiveWaterfall.js';
+
+// styling
+require('./WaterFallContent.scss');
 
 // API urls
 var SocialMediaURL = "/getSocialMedia";

@@ -2,8 +2,9 @@
 import React from 'react';
 
 // Common Elements
-import RectImage from '../common/RectImage.jsx';
+import RectImage from '../../common/RectImage.jsx';
 
+// styling
 require('./EventsTab.scss');
 
 var eventsData = JSON.parse('[\
