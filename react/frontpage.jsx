@@ -24,8 +24,16 @@ var theme = require('./misc/theme');
 
 var nowPlayingURL = "/api/nowplaying";
 
+var socket = io();
+
 var FrontPage = React.createClass({
   getInitialState: function() {
+    socket.on('new message', function (data) {
+        console.log(data);
+        socket.emit('client event', { socket: 'io' });
+    });
+    var message = "client sending data to server";
+    socket.emit('new message', message);
     return {
       show: null
     };

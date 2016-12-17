@@ -26,7 +26,11 @@
   <body>
     <audio id="stream" src="http://uclaradio.com:8000/;" preload="none"></audio>
     <div id="content"></div>
+  </body>
+    <!-- socket.io.js must be referenced before compiled react files (builds) -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- compiled react filed (builds) -->
     <script src="/build/vendors.js"></script>
     <script src="/build/frontpage.min.js"></script>
-  </body>
 </html>
