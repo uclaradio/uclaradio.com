@@ -66,7 +66,13 @@ Styling for events tab of new frontpage
 
 .eventsContent {
 	margin-top: 15px;
-	text-align: center
+	text-align: center;
+}
+
+@media screen and (min-width: 48em){
+    .eventsContent{
+        text-align: left;
+    }
 }
 
 .monthEvents {
