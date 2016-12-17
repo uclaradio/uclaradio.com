@@ -87,6 +87,7 @@ Styling for events tab of new frontpage
 
 .event {
 	display: inline-block;
+	text-align: center;
 	height: 200px;
 	width: 200px;
 	margin: 5px;
