@@ -10,6 +10,7 @@ var FrontPageNavbar = require('./frontpage/FrontPageNavbar.jsx');
 var StreamBar = require('./frontpage/StreamBar.jsx');
 var LiveShowInfo = require('./frontpage/LiveShowInfo.jsx');
 var WaterFallContent = require('./frontpage/WaterFallContent.jsx');
+var ChatBox = require('./frontpage/ChatBox.jsx');
 
 // Common Elements
 var RectImage = require('./common/RectImage.jsx');
@@ -24,16 +25,8 @@ var theme = require('./misc/theme');
 
 var nowPlayingURL = "/api/nowplaying";
 
-var socket = io();
-
 var FrontPage = React.createClass({
   getInitialState: function() {
-    socket.on('new message', function (data) {
-        console.log(data);
-        socket.emit('client event', { socket: 'io' });
-    });
-    var message = "client sending data to server";
-    socket.emit('new message', message);
     return {
       show: null
     };
@@ -81,6 +74,7 @@ var FrontPage = React.createClass({
 
               <Col xs={12} md={9} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
                 <FrontPageNavbar />
+                <ChatBox />
                 <WaterFallContent />
               </Col>
 
