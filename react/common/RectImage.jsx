@@ -45,7 +45,9 @@ var RectImage = React.createClass({
     };
     return (
       <Rectangle className="rectImage" aspectRatio={this.props.aspectRatio} style={rectangleStyle}>
-        <div style={pictureStyle} className="rectImagePic" />
+        <div style={pictureStyle} className="rectImagePic">
+          {this.props.children}
+        </div>
       </Rectangle>
     );
   }

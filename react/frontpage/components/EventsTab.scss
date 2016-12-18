@@ -31,7 +31,7 @@ $serif-font: Georgia, serif;
 
 .eventsTab {
 	margin-top: 2*$box-padding;
-	text-align: center
+	text-align: center;
 }
 
 .monthEvents {
@@ -44,6 +44,12 @@ $serif-font: Georgia, serif;
 	font-size: 0;
 }
 
+@media screen and (min-width: 48em) {
+	.allEvents {
+		text-align: left;
+	}
+}
+
 .event {
 	display: inline-block;
 	height: $event-width;
@@ -51,6 +57,7 @@ $serif-font: Georgia, serif;
 	margin: $event-margin;
 	// font-family: $sans-serif-font;
 	color: white;
+	text-align: center;
 	position: relative;
 	cursor: pointer;
 }

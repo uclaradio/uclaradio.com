@@ -67,7 +67,8 @@ var FrontPage = React.createClass({
     var showShow = this.state.show && this.state.show.title != null;
     return (
       <div className="frontPage">
-        <TriangleCanvas xColors={theme.timezoneColorScheme()}>
+        { /* <TriangleCanvas xColors={theme.timezoneColorScheme()}> */ }
+        <TriangleCanvas xColors="Spectral">
           <div class="container" id="main">
             <Grid>
 
@@ -86,7 +87,9 @@ var FrontPage = React.createClass({
 
               <Col xs={12} md={9} className="frontpageCol">
                 <div className="promoBanner">
-                  <RectImage src="/img/sotm_november_2016.png" aspectRatio={5} />
+                  <RectImage src="/img/sotm_november_2016.png" aspectRatio={5}>
+                    <div className="overlay" />
+                  </RectImage>
                 </div>
                 <FrontPageNavbar />
                 { this.props.children }
