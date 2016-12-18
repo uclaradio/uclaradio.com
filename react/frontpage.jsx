@@ -72,12 +72,12 @@ var FrontPage = React.createClass({
             <Grid>
 
               <Col xs={12} md={3} className="frontpageCol">
-                  <IndexLink to="/beta" activeClassName="active">
-                    <div className="radioBanner">
-                      <RectImage maxWidth="350px"
-                        src="/img/uclaradio-white.png" />
-                    </div>
-                  </IndexLink>
+                <IndexLink to="/beta" activeClassName="active">
+                  <div className="radioBanner">
+                    <RectImage maxWidth="350px"
+                      src="/img/uclaradio-white.png" />
+                  </div>
+                </IndexLink>
                 <LiveShowInfo show={showShow ? this.state.show : null} title="Now Playing" />
                 <div className="radioInfo">
                   <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union.</p>
@@ -85,6 +85,9 @@ var FrontPage = React.createClass({
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
+                <div className="promoBanner">
+                  <RectImage src="/img/sotm_november_2016.png" aspectRatio={5} />
+                </div>
                 <FrontPageNavbar />
                 { this.props.children }
               </Col>

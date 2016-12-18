@@ -9,6 +9,7 @@ Sass styling for frontpage stream bar component
 .streamBar {
   width: 100%;
   line-height: 20pt;
+  font-size: 10pt;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -25,6 +26,7 @@ Sass styling for frontpage stream bar component
 
 .playText {
   padding-left: 10pt;
+  font-size: 11pt;
 }
 
 .playButton, .playText, .expandAction {

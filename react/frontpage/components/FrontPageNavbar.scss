@@ -17,6 +17,7 @@ Sass styling for navbar on frontpage
 
 .frontPageNavbarItem > a {
   color: black !important;
+  font-size: 12pt;
   margin: 0pt $box-padding;
   border-radius: 0 !important;
   background-color: $link-color;
@@ -36,16 +37,20 @@ Sass styling for navbar on frontpage
 }
 
 .frontPageNavbarItem.fullWidth > a {
-  margin: $box-padding 0;
+  margin: $box-padding 0 0 0;
 }
 
-.frontPageNavbarItem.fullWidth.topMost > a {
-  margin: 0 0 $box-padding 0;
-}
+// .frontPageNavbarItem.fullWidth.topMost > a {
+//   margin: 2* 0 $box-padding 0;
+// }
 
 .frontPageNavbarItem.expandToggle {
   max-width: 80px;
   min-width: 80px;
+}
+
+.frontPageNavbarItem.fullWidth.expandToggle > a {
+  margin: 0;
 }
 
 .frontPageNavbarItem.fullWidth.expandToggle {

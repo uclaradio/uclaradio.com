@@ -9,10 +9,11 @@ Sass styling for events tab of new frontpage
 
 body {
   font-family: 'apercuregular';
+  font-size: 11pt;
 }
 
 #main {
-  margin: 20px auto 175px auto;
+  margin: 20pt auto 175px auto;
 }
 
 a {
@@ -29,15 +30,15 @@ h4 {
   margin-top: 0px;
 }
 
-.frontWell {
-  border: none;
-  box-shadow: none;
-  padding: 15px;
-  /* 0.6 opacity background */
-  background-color: rgba(255, 255, 255, 0.5);
-  text-align: center;
-  margin-bottom: 15px;
-}
+// .frontWell {
+//   border: none;
+//   box-shadow: none;
+//   padding: 15px;
+//   /* 0.6 opacity background */
+//   background-color: rgba(255, 255, 255, 0.5);
+//   text-align: center;
+//   margin-bottom: 15px;
+// }
 
 .frontpageCol {
   padding-left: $box-padding;
@@ -51,9 +52,18 @@ h4 {
 }
 
 .radioBanner > .rectImage:hover, .radioBanner > .rectImage:focus {
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.35);
 }
 
 .radioInfo {
-  margin: 2*$box-padding 5px;
+  margin: 2*$box-padding 0;
+  padding: 0 10pt;
+}
+
+// Banner
+
+.promoBanner {
+  background-color: white;
+  margin-bottom: 10pt;
+  cursor: pointer;
 }

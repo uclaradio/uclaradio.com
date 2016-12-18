@@ -8,6 +8,8 @@ import RectImage from '../../common/RectImage.jsx';
 // Bootstrap Components
 import { Glyphicon } from 'react-bootstrap';
 
+import { Link } from 'react-router';
+
 // styling
 require('./LiveShowInfo.scss');
 
@@ -44,16 +46,18 @@ var LiveShowInfo = React.createClass({
           { this.props.title &&
             <p className="infoHeader"><Glyphicon glyph="volume-up"/>{this.props.title}</p>
           }
-          <div className="liveShowBanner">
-            <RectImage
-              src={this.props.show.picture || defaultShowPic} />
-            <div className="showDetails">
-              <p className="showTitle">{this.props.show.title || ""}</p>
-              <p className="djs">{this.djString(this.props.show.djs || {})}</p>
+          <Link to="#">
+            <div className="liveShowBanner">
+              <RectImage
+                src={this.props.show.picture || defaultShowPic} />
+              <div className="showDetails">
+                <p className="showTitle">{this.props.show.title || ""}</p>
+                <p className="djs">{this.djString(this.props.show.djs || {})}</p>
+              </div>
+              
+              { /*<span className="genre">{this.truncateName(this.props.show.genre || "", 18)}</span> */ }
             </div>
-            
-            { /*<span className="genre">{this.truncateName(this.props.show.genre || "", 18)}</span> */ }
-          </div>
+          </Link>
         </div>
       );
     }

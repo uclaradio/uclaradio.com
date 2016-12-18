@@ -152,6 +152,14 @@ var RecentlyPlayed = React.createClass({
     });
   },
   render: function() {
+    const slideSettings = {
+      infinite: false,
+      arrows: true,
+      slidesToShow: 5,
+      responsive: [
+        { breakpoint: 768, settings: { slidesToShow: 2 } },
+        { breakpoint: 992, settings: { slidesToShow: 4 } } ]
+    };
     return (
       <div className="recentlyPlayed">
         { (!this.state.recentTracks || this.state.recentTracks.length == 0) ? null :
@@ -159,11 +167,7 @@ var RecentlyPlayed = React.createClass({
           transitionAppear
           onEntered={this.onEntered} onExited={this.onExited}>
         <div className="recentContent">
-        <Slider arrows infinite={false}
-          slidesToShow={5}
-          responsive={[
-            { breakpoint: 768, settings: { slidesToShow: 2 } },
-            { breakpoint: 992, settings: { slidesToShow: 4 } } ]}>
+        <Slider {...slideSettings}>
           { this.state.recentTracks.map(function(track, i) {
               return (
                 <div id="focusAnchor" className="trackInfo" key={track.artist+track.name+i}>

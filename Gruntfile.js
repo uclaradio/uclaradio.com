@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 	// We need to uglify that code on deploy
 	var uglifyPlugin = new webpack.optimize.UglifyJsPlugin();
 	// Use plugin to set process.env variables
-	var envVariablesPlugin = new InlineEnviromentVariablesPlugin({ NODE_ENV: 'production' });
+	var envVariablesPlugin = new InlineEnviromentVariablesPlugin({ NODE_ENV: process.env.NODE_ENV });
 
 	// The module options takes loaders, in this case transforming JSX to normal javascript
 	var module = {

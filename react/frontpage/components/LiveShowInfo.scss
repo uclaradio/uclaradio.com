@@ -8,14 +8,14 @@ Sass styling for currently playing show info component in frontpage
 
 .liveShowInfo {
   margin: 2*$box-padding auto 0 auto;
-  max-width: 350px;
+  // max-width: 350px;
 }
 
 .infoHeader {
 	font-family: Helvetica, sans-serif;
 	font-size: 16px;
 	font-style: italic;
-	margin: 5px 5px;
+	margin: 5px 0;
 }
 
 .infoHeader .glyphicon {
@@ -25,7 +25,11 @@ Sass styling for currently playing show info component in frontpage
 .liveShowBanner {
   padding: 5px;
   background-color: $link-color;
-  cursor: pointer;
+  // cursor: pointer;
+}
+
+.liveShowBanner:hover {
+  background-color: $link-hover-color;
 }
 
 .liveShowInfo .liveShowBanner {
@@ -35,6 +39,7 @@ Sass styling for currently playing show info component in frontpage
 .liveShowBanner .rectImage {
 	margin: 0 !important;
 	width: 30%;
+	max-width: 100px;
 	display: inline-block;
 	vertical-align: top;
 }

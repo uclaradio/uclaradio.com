@@ -12,12 +12,13 @@ import Rectangle from 'react-rectangle';
 require('./RectImage.scss');
 
 /**
-*  Wrapper for Image which keeps its frame square, sets height equal to width
+*  Wrapper for Image which keeps its frame rectangular, sets height equal to width
 *  Centers image with scale-to-fill if you set the background
 *
 *  @prop src: image source url
 *  @prop maxWidth: maximum width value
 *  @prop circle: Image should be circle
+*  @prop aspectRatio: float ratio for image
 */
 var RectImage = React.createClass({
   getDefaultProps: function() {

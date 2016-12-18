@@ -58,7 +58,7 @@ $fadein-duration: 2s;
 .wf-box .content {
     border: 1px solid #ccc;
     border-top-width: 0;
-    padding: 5px 8px;
+    padding: 5pt 8pt;
 }
 
 .wf-column {
@@ -85,12 +85,12 @@ $fadein-duration: 2s;
 }
 
 .wf-box-content-blog {
-	padding: 5%;
-	font-size: 200%;
+	padding: 15pt;
+	font-size: 14pt;
 }
 
 .wf-box-content-text {
-	padding: 5%;
+	padding: 10pt;
 }
 
 .wf-box-content-text-date {
@@ -108,11 +108,11 @@ $fadein-duration: 2s;
     width: 50%;
 }
 .wf-box-content-text-date:before {
-    right: 0.5em;
+    right: 10pt;
     margin-left: -50%;
 }
 .wf-box-content-text-date:after {
-    left: 0.5em;
+    left: 10pt;
     margin-right: -50%;
 }
 
