@@ -46,7 +46,7 @@ var LiveShowInfo = React.createClass({
           { this.props.title &&
             <p className="infoHeader"><Glyphicon glyph="volume-up"/>{this.props.title}</p>
           }
-          <Link to="#">
+          <Link to="/beta/shows">
             <div className="liveShowBanner">
               <RectImage
                 src={this.props.show.picture || defaultShowPic} />

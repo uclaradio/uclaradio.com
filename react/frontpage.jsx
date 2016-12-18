@@ -4,13 +4,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // React-Router
-import { Router, Route, IndexRoute, browserHistory, IndexLink } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory, Link, IndexLink } from 'react-router';
 // Redux / React-Redux
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './frontpage/reducers/';
-
-const store = createStore(reducer);
+// const store = createStore(reducer);
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 // FrontPage Elements
 import TriangleCanvas from './frontpage/components/TriangleCanvas.jsx';
@@ -20,6 +20,8 @@ import LiveShowInfo from './frontpage/components/LiveShowInfo.jsx';
 import WaterFallContent from './frontpage/components/WaterFallContent.jsx';
 import DJList from './frontpage/components/DJList.jsx';
 import EventsTab from './frontpage/components/EventsTab.jsx';
+
+import ShowsTab from './frontpage/containers/ShowsTab.jsx';
 
 // Common Elements
 import RectImage from './common/RectImage.jsx';
@@ -87,9 +89,11 @@ var FrontPage = React.createClass({
 
               <Col xs={12} md={9} className="frontpageCol">
                 <div className="promoBanner">
-                  <RectImage src="/img/sotm_november_2016.png" aspectRatio={5}>
-                    <div className="overlay" />
-                  </RectImage>
+                  <Link to="/beta/shows">
+                    <RectImage src="/img/sotm_november_2016.png" aspectRatio={5}>
+                      <div className="overlay" />
+                    </RectImage>
+                  </Link>
                 </div>
                 <FrontPageNavbar />
                 { this.props.children }
@@ -111,7 +115,8 @@ ReactDOM.render((
         <IndexRoute component={WaterFallContent} />
         <Route path="/beta/djs" component={DJList} />
         <Route path="/beta/events" component={EventsTab} />
+        <Route path="/beta/shows" components={ShowsTab} />
       </Route>
     </Router>
   </Provider>
-), document.getElementById('content'))
+), document.getElementById('content'));

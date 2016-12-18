@@ -1,14 +1,11 @@
-// import { combineReducers } from 'redux'
+import { combineReducers } from 'redux'
 
-// const app = combineReducers({
-	
-// })
+import events from './events';
+import shows from './shows';
 
-const app = (state = {}, action) => {
-	switch (action.type) {
-		default:
-			return state
-	}
-}
+const frontpage = combineReducers({
+	events,
+	shows
+});
 
-export default app
+export default frontpage;

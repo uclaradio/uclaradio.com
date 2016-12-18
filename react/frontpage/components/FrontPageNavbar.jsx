@@ -19,9 +19,9 @@ var FrontPageNavbar = React.createClass({
   },
   toggleOpen: function(selectedKey) {
     switch(selectedKey) {
-      case 1:
-        window.open("/shows", "_blank");
-        break;
+      // case 1:
+      //   window.open("/shows", "_blank");
+      //   break;
       // Actions to implement in the future
       // case 2:
       //   window.open("/GiveawayCalendar", "_blank");
@@ -50,7 +50,9 @@ var FrontPageNavbar = React.createClass({
           <LinkContainer to="/beta/events">
             <NavItem className="frontPageNavbarItem">Events</NavItem>
           </LinkContainer>
-          <NavItem eventKey={1} href="#" className="frontPageNavbarItem">Shows</NavItem>
+          <LinkContainer to="/beta/shows">
+            <NavItem className="frontPageNavbarItem">Shows</NavItem>
+          </LinkContainer>
           <NavItem eventKey={5} href="#" className="frontPageNavbarItem rightMost">Blog</NavItem>
         </Nav>
 
@@ -66,7 +68,9 @@ var FrontPageNavbar = React.createClass({
             <LinkContainer to="/beta/events">
               <NavItem className="frontPageNavbarItem fullWidth">Events</NavItem>
             </LinkContainer>
-            <NavItem eventKey={1} href="#" className="frontPageNavbarItem fullWidth">Shows</NavItem>
+            <LinkContainer to="/beta/shows">
+              <NavItem className="frontPageNavbarItem fullWidth">Shows</NavItem>
+            </LinkContainer>
             <NavItem eventKey={5} href="#" className="frontPageNavbarItem fullWidth">Blog</NavItem>
           </Nav>
         </Collapse>
