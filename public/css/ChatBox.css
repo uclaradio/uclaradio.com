@@ -1,0 +1,17 @@
+
+.chat-box {
+    transition: opacity 500ms ease-in-out, height 500ms ease-in-out;
+	height: 20em;
+	display: fixed;
+	overflow-y: scroll;
+	width: 100%;
+}
+
+.chat-box-wrapper {
+
+}
+
+/*.chat-icon {
+	width: 100px !important;
+	text-align: center !important;
+}*/

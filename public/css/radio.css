@@ -165,6 +165,16 @@ h4 {
   height: 20pt;
 }
 
+.chatIcon {
+  height: 20pt;
+  padding-left: 10pt;
+}
+
+.musicIcon {
+  height: 20pt;
+  padding-left: 10pt;
+}
+
 /** Stream Bar Recently Played **/
 
 .streamContent {
