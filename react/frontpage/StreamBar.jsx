@@ -1,6 +1,7 @@
 // StreamBar.jsx
 
 var React = require('react');
+var ChatBox = require('./ChatBox.jsx');
 
 // Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
@@ -26,6 +27,7 @@ var StreamBar = React.createClass({
     return {
       playing: false,
       expanded: false,
+      chatForm: false,
       hasReset: false
     };
   },
@@ -56,21 +58,33 @@ var StreamBar = React.createClass({
   toggleExpanded: function() {
     this.setState({expanded: !this.state.expanded});
   },
+  togggleChatForm: function() {
+    this.setState({chatForm: !this.state.chatForm});
+  },
   onReset: function() {
     this.setState({hasReset: true});
   },
   render: function() {
     return (
       <div className="streamBar">
+        <Collapse in={this.state.chatForm}>
+          <div className='chat-box-wrapper'>
+            <ChatBox />
+          </div>
+        </Collapse>
         <Grid>
           <div style={this.state.hasReset ? null : {opacity: "0", height: "0"}}>
             <RecentlyPlayed expanded={this.state.expanded}
               reset={!this.state.hasReset} onReset={this.onReset} />
           </div>
-
           <div className="streamContent">
+            <div onClick={this.togggleChatForm} className="expandAction">
+                <img className="chatIcon" src={this.state.chatForm ? "./img/icons/chat_clicked.svg" : "./img/icons/chat.svg"} />
+            </div>
             <div onClick={this.toggleExpanded}>
-              <span className="expandAction">{this.state.expanded ? "HIDE RECENT TRACKS" : "SHOW RECENT TRACKS"}</span>
+              <span className="expandAction">
+                <img className="musicIcon" src={this.state.expanded ? "./img/icons/music_clicked.svg" : "./img/icons/music.svg"} />
+              </span>
             </div>
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton"><Glyphicon glyph={this.state.playing ? "pause" : "play"} /></span>

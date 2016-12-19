@@ -74,7 +74,6 @@ var FrontPage = React.createClass({
 
               <Col xs={12} md={9} style={{paddingLeft: "7.5px", paddingRight: "7.5px"}}>
                 <FrontPageNavbar />
-                <ChatBox />
                 <WaterFallContent />
               </Col>
 

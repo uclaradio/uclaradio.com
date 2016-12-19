@@ -14,8 +14,6 @@ var Event = React.createClass({
 
 var Message = React.createClass({
   render: function() {
-  	console.log("ugh");
-  	console.log(this.props);
       return (
           ( this.props.user != this.props.viewing_user &&
           	<div className="message">
@@ -34,7 +32,6 @@ var Message = React.createClass({
 
 var MessageList = React.createClass({
   render: function() {
-  	console.log(this.props.user);
   	var viewing_user = this.props.user;
       return (
           <div className='messages'>
@@ -103,12 +100,11 @@ var ChatBox = React.createClass({
     return {user: username, messages:[], text: ''};
   },
   componentDidMount: function() {
-	socket.on('new message', this.messageRecieve);
+	   socket.on('new message', this.messageRecieve);
   },
   messageRecieve: function(message) {
       var messages = this.state.messages;
       messages.push(message);
-      console.log(messages);
       this.setState({messages: messages});
   },
   handleMessageSubmit: function(message) {
