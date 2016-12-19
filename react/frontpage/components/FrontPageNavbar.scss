@@ -36,24 +36,38 @@ Sass styling for navbar on frontpage
   margin: 0 0 0 $box-padding;
 }
 
+.frontPageNavbarItem.fullWidth {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .frontPageNavbarItem.fullWidth > a {
+  margin: $box-padding 0 $box-padding 0;
+}
+
+.frontPageNavbarItem.fullWidth.topMost > a {
+  margin: 0 0 $box-padding 0;
+}
+
+.frontPageNavbarItem.fullWidth.bottomMost > a {
   margin: $box-padding 0 0 0;
 }
 
-// .frontPageNavbarItem.fullWidth.topMost > a {
-//   margin: 2* 0 $box-padding 0;
+.frontPageNavbarItem .expandToggle {
+  display: inline-block;
+  width: 30pt;
+}
+
+// .frontPageNavbarItem.expandToggle {
+//   max-width: 80px;
+//   min-width: 80px;
 // }
 
-.frontPageNavbarItem.expandToggle {
-  max-width: 80px;
-  min-width: 80px;
-}
+// .frontPageNavbarItem.fullWidth.expandToggle > a {
+//   margin: 0;
+// }
 
-.frontPageNavbarItem.fullWidth.expandToggle > a {
-  margin: 0;
-}
-
-.frontPageNavbarItem.fullWidth.expandToggle {
-  max-width: none;
-  min-width: none;
-}
+// .frontPageNavbarItem.fullWidth.expandToggle {
+//   max-width: none;
+//   min-width: none;
+// }

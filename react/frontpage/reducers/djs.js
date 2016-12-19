@@ -1,11 +1,26 @@
 // djs.js
 // reducers for actions related to frontpage djs
 
-const djs = (state = [], action) => {
+const initialState = {
+	djs: [],
+	fetching: false
+};
+
+const djs = (state = initialState, action) => {
 	switch(action.type) {
 		case 'UPDATE_DJS':
 			// simply replace djs with new data
-			return action.djs;
+			return Object.assign({}, state, {
+				djs: action.djs
+			});
+		case 'STARTED_FETCHING':
+			return Object.assign({}, state, {
+				fetching: true
+			});
+		case 'STOPPED_FETCHING':
+			return Object.assign({}, state, {
+				fetching: false
+			});
 		default:
 			return state;
 	}

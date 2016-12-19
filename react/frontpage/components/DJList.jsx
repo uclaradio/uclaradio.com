@@ -1,8 +1,9 @@
 // DJList.jsx
 
-var React = require('react');
+import React from 'react';
 
-var DJInfo = require('./DJInfo.jsx');
+import DJInfo from './DJInfo.jsx';
+import Loader from './Loader.jsx';
 
 var DJUrl = "/api/djs";
 
@@ -10,6 +11,7 @@ var DJUrl = "/api/djs";
 DJList: fetches a json list of djs from API and displays data
 
 @prop djs: array of dj objects
+@prop fetching: currently fetching objects
 @prop updateDJs: callback to fetch updated dj list from server
 */
 var DJList = React.createClass({
@@ -17,7 +19,6 @@ var DJList = React.createClass({
     this.props.updateDJs();
   }, 
   render: function() {
-    console.log("save us dj?", this.props.djs);
     var djs = this.props.djs.map(function(dj) {
       return <DJInfo
         name={dj.djName || dj.fullName}
@@ -27,7 +28,11 @@ var DJList = React.createClass({
 
     return (
       <div className="djList">
-        {djs}
+        { this.props.fetching && this.props.djs.length == 0 ?
+          <Loader />
+        :
+          djs
+        }
       </div>
     );
   } 

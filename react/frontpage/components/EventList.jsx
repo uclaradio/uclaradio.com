@@ -4,6 +4,8 @@ import React from 'react';
 // Common Elements
 import RectImage from '../../common/RectImage.jsx';
 
+import Loader from './Loader.jsx';
+
 // styling
 require('./EventList.scss');
 
@@ -19,6 +21,7 @@ const colors = {
 Content of events page
 
 @prop events: list of event objects
+@prop fetching: currently fetching objects
 @prop updateEvents: callback action to fetch updated events from server
 **/
 var EventList = React.createClass({
@@ -38,16 +41,19 @@ var EventList = React.createClass({
 
 		return (
 			<div className="eventsTab">
-				<div className="colorKey">
-					{legend}
-				</div>
-				<div>
-					{ this.props.events.map (function(event) {
+				{ this.props.fetching && this.props.events.length == 0 ?
+					<Loader />
+				:
+					<div>
+						<div className="colorKey">
+							{legend}
+						</div>
+						{ this.props.events.map (function(month) {
 							return (
-								<div className="monthEvents" key={event['month']}>
-									<h1>{event['month']}</h1>
+								<div className="monthEvents" key={month['month']}>
+									<h1>{month['month']}</h1>
 									<div className="allEvents">
-										{ event['arr'].map( function(event) {
+										{ month['arr'].map(function(event) {
 											return (
 												<div className="event" key={event['id']}>
 													<RectImage src={event['image']} />
@@ -67,13 +73,13 @@ var EventList = React.createClass({
 												</div>											
 											);
 										})
-										}
+									}
 									</div>
 								</div>
-							);
-						})
-					}
-				</div>
+							)
+						}) }
+					</div>
+				}
 			</div>
 		);
 	}

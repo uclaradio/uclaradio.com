@@ -84,6 +84,18 @@ $fadein-duration: 2s;
 	width: 100%;
 }
 
+.wf-box-content .overlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.wf-box-content:hover .overlay {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
 .wf-box-content-blog {
 	padding: 15pt;
 	font-size: 14pt;

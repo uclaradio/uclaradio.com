@@ -3,6 +3,7 @@
 
 import React from 'react';
 import Waterfall from './misc/ResponsiveWaterfall.js';
+import Loader from './Loader.jsx';
 
 // styling
 require('./WaterFallContent.scss');
@@ -17,13 +18,15 @@ var waterfall;
 var WaterFallContent = React.createClass({
   getInitialState: function() {
     return {
-      socialMediaPosts: []
+      socialMediaPosts: [],
+      fetching: true
     };
   },
   componentDidMount: function() {
     // Get initial data
     $.get(SocialMediaURL, function (result) {
       this.setState({
+        fetching: false,
         paginatedDataInProgress: false,
         fb_pagination_until:result['fb_pagination_until']
       }, function () {
@@ -77,7 +80,10 @@ var WaterFallContent = React.createClass({
   },
   render: function() {
     return (
-      <div className='wf-container'>
+      <div className="WaterFallContent">
+        { this.state.fetching && <Loader /> }
+        <div className='wf-container'>
+        </div>
       </div>
     );
   }
@@ -119,6 +125,10 @@ function newNode(full_picture, summary, created_time, link, platform) {
     var image = document.createElement('img');
     image.src = full_picture;
     box_content.appendChild(image);
+
+    var overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    box_content.appendChild(overlay);
   }
   var box_content_text = document.createElement('div');
   switch(platform) {

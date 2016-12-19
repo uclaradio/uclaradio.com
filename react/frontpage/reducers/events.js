@@ -1,11 +1,26 @@
 // events.js
 // reducers for actions related to frontpage events
 
-const events = (state = [], action) => {
+const initialState = {
+	events: [],
+	fetching: false
+};
+
+const events = (state = initialState, action) => {
 	switch (action.type) {
 		case 'UPDATE_EVENTS':
 			// simply replace events with new data
-			return action.events
+			return Object.assign({}, state, {
+				events: action.events
+			});
+		case 'STARTED_FETCHING':
+			return Object.assign({}, state, {
+				fetching: true
+			});
+		case 'STOPPED_FETCHING':
+			return Object.assign({}, state, {
+				fetching: false
+			});
 		default:
 			return state;
 	}

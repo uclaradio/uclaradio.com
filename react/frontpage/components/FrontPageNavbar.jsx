@@ -17,23 +17,25 @@ var FrontPageNavbar = React.createClass({
   getInitialState: function() {
     return {open: false};
   },
-  toggleOpen: function(selectedKey) {
+  handleClick: function(selectedKey) {
     switch(selectedKey) {
-      // case 1:
-      //   window.open("/shows", "_blank");
-      //   break;
-      // Actions to implement in the future
-      // case 2:
-      //   window.open("/GiveawayCalendar", "_blank");
-      //   break;
-      // case 3:
-      //   window.open("http://apply.dailybruin.com/applications/ucla-radio/", "_blank");
-      //   break;
+      case 1:
+        window.open("http://uclaradio.tumblr.com", "_blank");
+        break;
+      case 2:
+        window.open("/managers", "_blank");
+        break;
+      case 3:
+        window.open("http://apply.dailybruin.com/applications/ucla-radio/", "_blank");
+        break;
       case 4:
-        this.setState({open: !this.state.open});
+        window.open("http://last.fm/user/uclaradio", "_blank");
         break;
       case 5:
-        window.open("https://uclaradio.tumblr.com/", "_blank");
+        window.open("/panel", "_blank");
+        break;
+      case 10:
+        this.setState({open: !this.state.open});
         break;
       default:
         break;
@@ -43,7 +45,7 @@ var FrontPageNavbar = React.createClass({
     return (
       <div className="frontPageNavbar">
         { /** Large devices, hidden on xs **/ }
-        <Nav justified bsStyle="pills" className="hidden-xs" onSelect={this.toggleOpen}>
+        <Nav justified bsStyle="pills" className="hidden-xs" onSelect={this.handleClick}>
           <LinkContainer to="/beta/djs">
             <NavItem className="frontPageNavbarItem leftMost">DJs</NavItem>
           </LinkContainer>
@@ -53,25 +55,38 @@ var FrontPageNavbar = React.createClass({
           <LinkContainer to="/beta/shows">
             <NavItem className="frontPageNavbarItem">Shows</NavItem>
           </LinkContainer>
-          <NavItem eventKey={5} href="#" className="frontPageNavbarItem rightMost">Blog</NavItem>
+          <NavItem eventKey={10} className="frontPageNavbarItem rightMost"><span className="expandToggle">{this.state.open ? "Less" : "More"}</span></NavItem>
         </Nav>
+        <Collapse in={this.state.open} className="hidden-xs">
+          <Nav justified bsStyle="pills" onSelect={this.handleClick}>
+            <NavItem eventKey={1} className="frontPageNavbarItem leftMost collapsed">Blog</NavItem>
+            <NavItem eventKey={2} className="frontPageNavbarItem collapsed">Managers</NavItem>
+            <NavItem eventKey={3} className="frontPageNavbarItem collapsed">Apply</NavItem>
+            <NavItem eventKey={4} className="frontPageNavbarItem collapsed">Air Plays</NavItem>
+            <NavItem eventKey={5} className="frontPageNavbarItem rightMost collapsed">Staff Panel</NavItem>
+          </Nav>
+        </Collapse>
 
         { /** Extra Small devices, hidden on sm, md, lg **/ }
-        <Nav justified bsStyle="pills" className="hidden-sm hidden-md hidden-lg" onSelect={this.toggleOpen}>
-          <NavItem eventKey={4} href="#" className="frontPageNavbarItem fullWidth expandToggle">{this.state.open ? "Less" : "More"}</NavItem>
+        <Nav justified bsStyle="pills" className="hidden-sm hidden-md hidden-lg" onSelect={this.handleClick}>
+          <LinkContainer to="/beta/djs">
+            <NavItem className="frontPageNavbarItem fullWidth topMost">DJs</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/beta/events">
+            <NavItem className="frontPageNavbarItem fullWidth">Events</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/beta/shows">
+            <NavItem className="frontPageNavbarItem fullWidth">Shows</NavItem>
+          </LinkContainer>
+          <NavItem eventKey={10} className="frontPageNavbarItem fullWidth bottomMost"><div className="expandToggle">{this.state.open ? "Less" : "More"}</div></NavItem>
         </Nav>
-        <Collapse in={this.state.open} className="hidden-sm hidden-md hidden-lg collapsedNav">
-          <Nav justified bsStyle="pills" onSelect={this.toggleOpen}>
-            <LinkContainer to="/beta/djs">
-              <NavItem className="frontPageNavbarItem fullWidth topMost">DJs</NavItem>
-            </LinkContainer>
-            <LinkContainer to="/beta/events">
-              <NavItem className="frontPageNavbarItem fullWidth">Events</NavItem>
-            </LinkContainer>
-            <LinkContainer to="/beta/shows">
-              <NavItem className="frontPageNavbarItem fullWidth">Shows</NavItem>
-            </LinkContainer>
-            <NavItem eventKey={5} href="#" className="frontPageNavbarItem fullWidth">Blog</NavItem>
+        <Collapse in={this.state.open} className="hidden-sm hidden-md hidden-lg">
+          <Nav justified bsStyle="pills" onSelect={this.handleClick}>
+            <NavItem eventKey={1} className="frontPageNavbarItem fullWidth">Blog</NavItem>
+            <NavItem eventKey={2} className="frontPageNavbarItem fullWidth">Managers</NavItem>
+            <NavItem eventKey={3} className="frontPageNavbarItem fullWidth">Apply</NavItem>
+            <NavItem eventKey={4} className="frontPageNavbarItem fullWidth">Air Plays</NavItem>
+            <NavItem eventKey={5} className="frontPageNavbarItem fullWidth bottomMost">Staff Panel</NavItem>
           </Nav>
         </Collapse>
       </div>
