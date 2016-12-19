@@ -9,19 +9,21 @@ import { Router, Route, IndexRoute, browserHistory, Link, IndexLink } from 'reac
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './frontpage/reducers/';
-// const store = createStore(reducer);
+
+// enable dev tools... could also use: const store = createStore(reducer);
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-// FrontPage Elements
+// Frontpage Components
 import TriangleCanvas from './frontpage/components/TriangleCanvas.jsx';
 import FrontPageNavbar from './frontpage/components/FrontPageNavbar.jsx';
 import StreamBar from './frontpage/components/StreamBar.jsx';
 import LiveShowInfo from './frontpage/components/LiveShowInfo.jsx';
 import WaterFallContent from './frontpage/components/WaterFallContent.jsx';
-import DJList from './frontpage/components/DJList.jsx';
-import EventsTab from './frontpage/components/EventsTab.jsx';
 
+// Frontpage Containers
 import ShowsTab from './frontpage/containers/ShowsTab.jsx';
+import EventsTab from './frontpage/containers/EventsTab.jsx';
+import DJsTab from './frontpage/containers/DJsTab.jsx';
 
 // Common Elements
 import RectImage from './common/RectImage.jsx';
@@ -37,7 +39,7 @@ require('./frontpage/frontpage.scss');
 
 var nowPlayingURL = "/api/nowplaying";
 
-var FrontPage = React.createClass({
+var Frontpage = React.createClass({
   getInitialState: function() {
     return {
       show: null
@@ -111,9 +113,9 @@ var FrontPage = React.createClass({
 ReactDOM.render((
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/beta" component={FrontPage}>
+      <Route path="/beta" component={Frontpage}>
         <IndexRoute component={WaterFallContent} />
-        <Route path="/beta/djs" component={DJList} />
+        <Route path="/beta/djs" component={DJsTab} />
         <Route path="/beta/events" component={EventsTab} />
         <Route path="/beta/shows" components={ShowsTab} />
       </Route>

@@ -11,7 +11,7 @@ Implemented as a presentational component (view)
 @prop updateShows: callback to update all listed shows
 **/
 var ShowList = React.createClass({
-	componentDidMount() {
+	componentWillMount() {
 		this.props.updateShows();
 	},
 	render() {
