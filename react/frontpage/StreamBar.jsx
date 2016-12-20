@@ -128,7 +128,7 @@ var RecentlyPlayed = React.createClass({
     if (this.props.reset && !this.state.hasReset) {
       this.setState({hasReset: true});
     }
-    document.getElementById("focusAnchor").focus();
+    document.getElementsByClassName("trackInfo").focus();
   },
   onExited: function() {
     if (this.props.reset) {
@@ -150,9 +150,11 @@ var RecentlyPlayed = React.createClass({
             "artist": truncateName(rawTrack.artist["#text"], 22),
             "name": truncateName(rawTrack.name, 22),
             "url": rawTrack.url,
-            "image": rawTrack.image[1]["#text"] != "" ? rawTrack.image[1]["#text"] : "/img/no_album_artwork.jpg"
+            "image": rawTrack.image[1]["#text"] != "" ? rawTrack.image[1]["#text"] : "/img/no_album_artwork.jpg",
+            "nowPlaying": rawTrack["@attr"] != null
           };
         });
+        console.log(tracks);
         if (!tracks) {
           tracks = [];
         }
@@ -178,14 +180,14 @@ var RecentlyPlayed = React.createClass({
             { breakpoint: 992, settings: { slidesToShow: 4 } } ]}>
           { this.state.recentTracks.map(function(track, i) {
               return (
-                <div id="focusAnchor" className="trackInfo" key={track.artist+track.name+i}>
-                  <img className="trackImage" src={track.image} />
-                  <div className="trackName">
-                    <a href={track.url} target="_blank">{track.name}</a>
-                  </div>
-                  <div className="trackArtist">
-                    <a href={track.url} target="_blank">{track.artist}</a>
-                  </div>
+                <div id={ track.nowPlaying ? "nowPlaying":""} className="trackInfo" key={track.artist+track.name+i}>
+                    <img className="trackImage" src={track.image} />
+                    <div className="trackName">
+                      <a href={track.url} target="_blank">{track.name}</a>
+                    </div>
+                    <div className="trackArtist">
+                      <a href={track.url} target="_blank">{track.artist}</a>
+                    </div>
                 </div>
               );
             })
