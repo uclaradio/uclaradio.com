@@ -2,19 +2,20 @@ var React = require('react');
 var socket = io();
 
 //disconnect or connected users
-var Event = React.createClass({
-  render: function() {
-      return (
-          <div className="message">
-              <strong>{this.props.user} has {this.props.event}</strong>
-          </div>
-      );
-  }
-});
+// var Event = React.createClass({
+//   render: function() {
+//       return (
+//           <div className="message">
+//               <strong>{this.props.user} has {this.props.event}</strong>
+//           </div>
+//       );
+//   }
+// });
 
 var Message = React.createClass({
   render: function() {
       return (
+        <div className="message-bubble"> {
           ( this.props.user != this.props.viewing_user &&
           	<div className="message">
               <strong>{this.props.user}: </strong> 
@@ -25,6 +26,8 @@ var Message = React.createClass({
           	<span>{this.props.text}</span>
           	</div>
           )
+        }
+        </div>
 
       );
   }
@@ -39,17 +42,23 @@ var MessageList = React.createClass({
               {
                   this.props.messages.map(function(message, i) {
                       return (
-                          (message.event && 
-                          	<Event
-                          	 event={message.event}
-                          	 user={message.user}
-                          	/>)
-                          || <Message
+                          //(
+                          //   message.event && 
+                          // 	<Event
+                          // 	 event={message.event}
+                          // 	 user={message.user}
+                          // 	/>)
+                          // ||
+                          <span> {
+                            !message.event && 
+                            <Message
                               key={i}
                               user={message.user}
                               text={message.text}
                               viewing_user={viewing_user}
-                          	/>
+                          	/> }
+                            <br />
+                          </span>
                       );
                   })
               }
@@ -94,18 +103,21 @@ var MessageForm = React.createClass({
 
 var ChatBox = React.createClass({
   getInitialState: function() {
-  	var number = getRandomInt(0, 10);
-  	var username = number > 5 ? 'Elaine' : 'Cosmo';
-  	socket.emit('add user', username);
-    return {user: username, messages:[], text: ''};
+  	socket.emit('add user');
+    return {user: '', messages:[], text: ''};
   },
   componentDidMount: function() {
 	   socket.on('new message', this.messageRecieve);
+     socket.on('assign username', this.setUsername);
   },
   messageRecieve: function(message) {
       var messages = this.state.messages;
       messages.push(message);
       this.setState({messages: messages});
+  },
+  setUsername: function(username) {
+      console.log(username);
+      this.setState({user:username});
   },
   handleMessageSubmit: function(message) {
       socket.emit('new message', message);
@@ -127,9 +139,5 @@ var ChatBox = React.createClass({
   }
 })
 
-
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 module.exports = ChatBox;

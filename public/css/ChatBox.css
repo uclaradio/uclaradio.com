@@ -1,3 +1,8 @@
+.message-bubble {
+	background-image: url("http://www.electricspec.com/Images/positive.jpg");
+	display: inline-block;
+	float:right;
+}
 
 .chat-box {
     transition: opacity 500ms ease-in-out, height 500ms ease-in-out;
