@@ -39,6 +39,8 @@ require('./frontpage/frontpage.scss');
 
 var nowPlayingURL = "/api/nowplaying";
 
+var sampleFeaturedShow = {"title":"Pirate Radio","id":12,"day":"Mon","time":"10pm","djs":{"chris":"DJ Jamburglar"},"genre":"Psychedelic","blurb":"Life is a trip... Sail away to undiscovered psychic frontiers with underground psychedelic jams","public":true,"pages":[],"episodes":[]};
+
 var Frontpage = React.createClass({
   getInitialState: function() {
     return {
@@ -80,23 +82,25 @@ var Frontpage = React.createClass({
                 <IndexLink to="/beta" activeClassName="active">
                   <div className="radioBanner">
                     <RectImage maxWidth="350px"
-                      src="/img/uclaradio-white.png" />
+                      src="/img/uclaradio-black.png" />
                   </div>
                 </IndexLink>
-                <LiveShowInfo show={showShow ? this.state.show : null} title="Now Playing" />
-                <div className="radioInfo">
+                <LiveShowInfo show={showShow ? this.state.show : null}
+                  title="Current Show" activeClassName="active" />
+                <LiveShowInfo show={sampleFeaturedShow} title="Spotlight" />
+                { /* <div className="radioInfo">
                   <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union.</p>
-                </div>
+                </div> */ }
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
-                <div className="promoBanner">
+                { /* <div className="promoBanner">
                   <Link to="/beta/shows">
-                    <RectImage src="/img/sotm_november_2016.png" aspectRatio={5}>
+                    <RectImage src="/img/sotmoctober2015cut.png" aspectRatio={5}>
                       <div className="overlay" />
                     </RectImage>
                   </Link>
-                </div>
+                </div> */ }
                 <FrontPageNavbar />
                 { this.props.children }
               </Col>

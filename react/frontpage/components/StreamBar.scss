@@ -13,7 +13,7 @@ Sass styling for frontpage stream bar component
   position: fixed;
   left: 0;
   bottom: 0;
-  color: white;
+  color: white !important;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.85);
 }
@@ -61,7 +61,7 @@ Sass styling for frontpage stream bar component
 
 .trackInfo a, .trackInfo a:hover {
   text-decoration: none;
-  color: white;
+  color: white !important;
 }
 
 .trackImage {
@@ -71,7 +71,7 @@ Sass styling for frontpage stream bar component
 }
 
 .trackArtist a {
-  color: #cacaca;
+  color: #cacaca !important;
 }
 
 .trackName, .trackArtist {

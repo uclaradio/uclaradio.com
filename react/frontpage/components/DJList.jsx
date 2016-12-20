@@ -15,7 +15,7 @@ DJList: fetches a json list of djs from API and displays data
 @prop updateDJs: callback to fetch updated dj list from server
 */
 var DJList = React.createClass({
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.props.updateDJs();
   }, 
   render: function() {

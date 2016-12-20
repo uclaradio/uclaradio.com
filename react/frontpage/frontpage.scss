@@ -17,7 +17,7 @@ body {
 }
 
 a {
-  color: black;
+  color: black !important;
 }
 
 // Frontpage styling
@@ -37,12 +37,16 @@ h4 {
 
 // Radio Info
 
-.active > .radioBanner > .rectImage {
-  background-color: rgba(255, 255, 255, 0.20);
+.radioBanner {
+  margin-bottom: 4*$box-padding;
 }
 
+// .active > .radioBanner > .rectImage {
+//   background-color: rgba(white, 0.35);
+// }
+
 .radioBanner > .rectImage:hover, .radioBanner > .rectImage:focus {
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: rgba(white, 0.5);
 }
 
 .radioInfo {
@@ -67,5 +71,5 @@ h4 {
 }
 
 .promoBanner:hover .overlay {
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: $link-image-hover-color;
 }
