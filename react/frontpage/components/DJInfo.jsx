@@ -13,18 +13,13 @@ DJInfo: UI element showing information for a dj
 */
 var DJInfo = React.createClass({
     getDJImage: function(picURL) {
-        if (picURL) {
-            return picURL;
-        }
-        return defaultDJPic;
+        return picURL || defaultDJPic;
     },
     render: function() {
     	return (
     		<div className="djTile">
     			<RectImage maxWidth="200px" src={this.getDJImage(this.props.picture)} circle />
-    			<div className="djTileInfo">
-    				<h4>{this.props.name}</h4>
-    			</div>
+                <div className="djTileOverlay"><div className="djName">{this.props.name}</div></div>
     		</div>
     	);
     } 
