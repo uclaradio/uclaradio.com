@@ -19,6 +19,7 @@ var defaultShowPic = "/img/radio.png"
 Floating div with image and relevant info for a show
 
 @prop title: (optional) title to show above show
+@prop activeClassName
 @prop show: show to present
 */
 var LiveShowInfo = React.createClass({
@@ -44,9 +45,9 @@ var LiveShowInfo = React.createClass({
       return (
         <div className="liveShowInfo">
           { this.props.title &&
-            <p className="infoHeader"><Glyphicon glyph="volume-up"/>{this.props.title}</p>
+            <p className="infoHeader">{ /* <Glyphicon glyph="volume-up"/> */ }{this.props.title}</p>
           }
-          <Link to="/beta/shows">
+          <Link to="/beta/shows" activeClassName={this.props.activeClassName}>
             <div className="liveShowBanner">
               <RectImage
                 src={this.props.show.picture || defaultShowPic} />

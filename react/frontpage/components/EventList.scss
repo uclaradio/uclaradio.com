@@ -8,7 +8,7 @@ Sass styling for events tab of new frontpage
 
 // constants
 $event-width: 200px;
-$event-margin: 5px;
+$event-margin: 5pt;
 $overlay-opacity: 0.85;
 $overlay-duration: 0.85s;
 $sans-serif-font: Helvetica, sans-serif;
@@ -30,7 +30,7 @@ $serif-font: Georgia, serif;
 
 
 .eventsTab {
-	margin-top: 2*$box-padding;
+	margin: 2*$box-padding -5pt 10pt -5pt;
 	text-align: center;
 }
 

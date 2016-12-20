@@ -3,7 +3,7 @@
 var React = require('react');
 
 // Bootstrap Elements
-import { Nav, NavItem, Collapse } from 'react-bootstrap';
+import { Nav, NavItem, Collapse, NavDropdown, MenuItem } from 'react-bootstrap';
 
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -47,15 +47,31 @@ var FrontPageNavbar = React.createClass({
         { /** Large devices, hidden on xs **/ }
         <Nav justified bsStyle="pills" className="hidden-xs" onSelect={this.handleClick}>
           <LinkContainer to="/beta/djs">
-            <NavItem className="frontPageNavbarItem leftMost">DJs</NavItem>
+            <NavItem className="frontPageNavbarItem leftMost">
+              <span className="equalWidth">
+                DJs
+              </span>
+            </NavItem>
           </LinkContainer>
           <LinkContainer to="/beta/events">
-            <NavItem className="frontPageNavbarItem">Events</NavItem>
+            <NavItem className="frontPageNavbarItem">
+              <span className="equalWidth">
+                Events
+              </span>
+            </NavItem>
           </LinkContainer>
           <LinkContainer to="/beta/shows">
-            <NavItem className="frontPageNavbarItem">Shows</NavItem>
+            <NavItem className="frontPageNavbarItem">
+              <span className="equalWidth">
+                Shows
+              </span>
+            </NavItem>
           </LinkContainer>
-          <NavItem eventKey={10} className="frontPageNavbarItem rightMost"><span className="expandToggle">{this.state.open ? "Less" : "More"}</span></NavItem>
+          <NavItem eventKey={10} className="frontPageNavbarItem rightMost">
+            <span className="equalWidth">
+              { this.state.open ? "Less" : "More" }
+            </span>
+          </NavItem>
         </Nav>
         <Collapse in={this.state.open} className="hidden-xs">
           <Nav justified bsStyle="pills" onSelect={this.handleClick}>
@@ -78,17 +94,14 @@ var FrontPageNavbar = React.createClass({
           <LinkContainer to="/beta/shows">
             <NavItem className="frontPageNavbarItem fullWidth">Shows</NavItem>
           </LinkContainer>
-          <NavItem eventKey={10} className="frontPageNavbarItem fullWidth bottomMost"><div className="expandToggle">{this.state.open ? "Less" : "More"}</div></NavItem>
+          <NavDropdown title="More" className="frontPageNavbarItem fullWidth bottomMost">
+            <MenuItem onClick={()=>{this.handleClick(1)}}>Blog</MenuItem>
+            <MenuItem onClick={()=>{this.handleClick(2)}}>Managers</MenuItem>
+            <MenuItem onClick={()=>{this.handleClick(3)}}>Apply</MenuItem>
+            <MenuItem onClick={()=>{this.handleClick(4)}}>Air Plays</MenuItem>
+            <MenuItem onClick={()=>{this.handleClick(5)}}>Staff Panel</MenuItem>
+          </NavDropdown>
         </Nav>
-        <Collapse in={this.state.open} className="hidden-sm hidden-md hidden-lg">
-          <Nav justified bsStyle="pills" onSelect={this.handleClick}>
-            <NavItem eventKey={1} className="frontPageNavbarItem fullWidth">Blog</NavItem>
-            <NavItem eventKey={2} className="frontPageNavbarItem fullWidth">Managers</NavItem>
-            <NavItem eventKey={3} className="frontPageNavbarItem fullWidth">Apply</NavItem>
-            <NavItem eventKey={4} className="frontPageNavbarItem fullWidth">Air Plays</NavItem>
-            <NavItem eventKey={5} className="frontPageNavbarItem fullWidth bottomMost">Staff Panel</NavItem>
-          </Nav>
-        </Collapse>
       </div>
     );
   }
