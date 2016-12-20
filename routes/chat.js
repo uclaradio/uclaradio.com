@@ -3,6 +3,7 @@
 module.exports = function(io) {
 	var express = require('express');
 	var router = express.Router();
+    var accounts = require('../database/accounts');
 
 	router.get('/', function(req, res) {
 		var path = require('path');
@@ -10,16 +11,17 @@ module.exports = function(io) {
 	});
 
     io.on('connection', function(socket) {
-    	
     	//new user joined
-    	socket.on('add user', function(username) {
+    	socket.on('add user', function() {
 			// we store the username in the socket session for this client
-    		socket.user = username;
-    		var message = username + ' has joined the conversation.';
-    		socket.broadcast.emit('new message', {
-    			event: 'connected',
-    			user: socket.user
-    		});
+    		// socket.user = username;
+    		// var message = username + ' has joined the conversation.';
+    		// socket.broadcast.emit('new message', {
+    		// 	event: 'connected',
+    		// 	user: socket.user
+    		// });
+            var username = "User " + getRandomInt(0, 1000);
+            socket.emit('assign username', username);
     	});
 
     	//automatically disconnects user
@@ -45,3 +47,7 @@ module.exports = function(io) {
 
     return router;
 };
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
