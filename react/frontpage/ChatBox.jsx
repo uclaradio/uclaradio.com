@@ -15,7 +15,7 @@ var socket = io();
 var Message = React.createClass({
   render: function() {
       return (
-        <div className="message-bubble"> {
+        <div className="message-bubble" style={ (this.props.user == this.props.viewing_user) ? {float: "right"} : null}> {
           ( this.props.user != this.props.viewing_user &&
           	<div className="message">
               <strong>{this.props.user}: </strong> 
