@@ -19,7 +19,7 @@ var defaultShowPic = "/img/radio.png"
 Floating div with image and relevant info for a show
 
 @prop title: (optional) title to show above show
-@prop activeClassName
+@prop glyph: (optional) glyph to show at left of title
 @prop show: show to present
 */
 var ShowInfo = React.createClass({
@@ -38,6 +38,9 @@ var ShowInfo = React.createClass({
   truncateName: function(name, l) {
     return name.length > l ? name.substr(0,l-2) + "\u2026" : name;
   },
+  urlFromShow: function(show) {
+    return "/beta/show/" + show.id;
+  },
   render: function() {
     if (!this.props.show) {
       return <div classname="showInfoEmpty"></div>;
@@ -45,9 +48,12 @@ var ShowInfo = React.createClass({
       return (
         <div className="showInfo">
           { this.props.title &&
-            <p className="infoHeader">{ /* <Glyphicon glyph="volume-up"/> */ }{this.props.title}</p>
+            <p className="infoHeader">
+              { this.props.glyph ? <Glyphicon glyph={this.props.glyph}/> : null }
+              { this.props.title }
+            </p>
           }
-          <Link to="/beta/shows" activeClassName={this.props.activeClassName}>
+          <Link to={this.urlFromShow(this.props.show)} activeClassName="active">
             <div className="showBanner">
               <RectImage
                 src={this.props.show.picture || defaultShowPic} />

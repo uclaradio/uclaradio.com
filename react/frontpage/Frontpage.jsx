@@ -9,6 +9,7 @@ import { Router, Route, IndexRoute, browserHistory, Link, IndexLink } from 'reac
 import ShowsTab from './containers/ShowsTab.jsx';
 import EventsTab from './containers/EventsTab.jsx';
 import DJsTab from './containers/DJsTab.jsx';
+import ShowContainer from './containers/ShowContainer.jsx';
 
 // Frontpage Components (Views)
 import TriangleCanvas from './components/TriangleCanvas.jsx';
@@ -63,9 +64,9 @@ const FrontpageContent = React.createClass({
                       src="/img/uclaradio-black.png" />
                   </div>
                 </IndexLink>
-                <ShowInfo show={showPlaying ? this.props.nowPlaying : null}
-                  title="Current Show" activeClassName="active" />
-                <ShowInfo show={sampleFeaturedShow} title="Spotlight" />
+                <ShowInfo title="Current Show" glyph="volume-up"
+                  show={showPlaying ? this.props.nowPlaying : null} />
+                <ShowInfo title="Spotlight" show={sampleFeaturedShow} />
                 { /* <div className="radioInfo">
                   <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union.</p>
                 </div> */ }
@@ -105,6 +106,7 @@ const Frontpage = React.createClass({
           <Route path="/beta/djs" component={DJsTab} />
           <Route path="/beta/events" component={EventsTab} />
           <Route path="/beta/shows" components={ShowsTab} />
+          <Route path="/beta/show/:showID" component={ShowContainer} />
         </Route>
       </Router>
     );

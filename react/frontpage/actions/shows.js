@@ -22,4 +22,27 @@ export const updateNowPlaying = (showID) => ({
 export const addUpdateShow = (show) => ({
 	type: 'ADD_UPDATE_SHOW',
 	show: show
-})
+});
+
+/**
+Helpers
+**/
+
+// Fetch updated show schedule from server and update store via dispatch
+const scheduleURL = "/api/schedule";
+export const fetchUpdatedShows = (dispatch) => {
+  dispatch(startFetching());
+  $.ajax({
+    url: scheduleURL,
+    dataType: 'json',
+    cache: false,
+    success: function(data) {
+      dispatch(stopFetching());
+      dispatch(updateShows(data.shows));
+    }.bind(this),
+    error: function(xhr, status, err) {
+      dispatch(stopFetching());
+      console.error(scheduleURL, status, err.toString());
+    }.bind(this)
+  });
+}

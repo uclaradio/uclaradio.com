@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { Link } from 'react-router';
+
 import Loader from './Loader.jsx';
 
 require('./ShowList.scss');
@@ -17,6 +19,9 @@ var ShowList = React.createClass({
 	componentWillMount() {
 		this.props.updateShows();
 	},
+  urlFromShow: function(show) {
+    return "/beta/show/" + show.id;
+  },
 	render() {
 		return (
 			<div className="showList">
@@ -25,7 +30,9 @@ var ShowList = React.createClass({
 				:
 				  this.props.shows.map((show) => (
 						<div key={show.id}>
-							<h3>{show.day + " " + show.time + ": "}{show.title}</h3>
+							<Link to={this.urlFromShow(show)}>
+								<h3>{show.day + " " + show.time + ": "}{show.title}</h3>
+							</Link>
 							<p>{show.blurb}</p>
 							<br />
 						</div>
