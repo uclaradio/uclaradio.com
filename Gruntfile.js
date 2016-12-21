@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 	// go through files in this directory and add them to target entry
  	var files = grunt.file.expand({cwd: directory}, '*.js', '*.jsx');
  	for (var i = 0; i < files.length; i++) {
- 		var filename = files[i].replace(/.js[x]?/g, '.min.js');
+ 		var filename = files[i].replace(/.js[x]?/g, '.min.js').toLowerCase();
  		entry[filename] = './' + directory + '/' + files[i];
  	}
 

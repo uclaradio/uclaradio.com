@@ -13,3 +13,13 @@ export const startFetching = () => ({
 export const stopFetching = () => ({
 	type: 'STOPPED_FETCHING'
 });
+
+export const updateNowPlaying = (showID) => ({
+	type: 'UPDATE_NOW_PLAYING',
+	showID: showID
+});
+
+export const addUpdateShow = (show) => ({
+	type: 'ADD_UPDATE_SHOW',
+	show: show
+})

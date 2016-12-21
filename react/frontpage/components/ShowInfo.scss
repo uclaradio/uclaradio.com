@@ -1,12 +1,12 @@
 /**
-LiveShowInfo.scss
+ShowInfo.scss
 
 Sass styling for currently playing show info component in frontpage
 **/
 
 @import '../common';
 
-.liveShowInfo {
+.showInfo {
   margin: 0 auto 2*$box-padding auto;
   // max-width: 350px;
 }
@@ -22,27 +22,27 @@ Sass styling for currently playing show info component in frontpage
 	margin: 0 5px;
 }
 
-.liveShowBanner {
+.showBanner {
   padding: 5px;
   // background-color: $link-color;
   // cursor: pointer;
 }
 
-.liveShowBanner:hover, .active .liveShowBanner:hover {
+.showBanner:hover, .active .showBanner:hover {
   // background-color: $link-hover-color;
   background-color: $link-image-hover-color;
 }
 
-.active .liveShowBanner {
+.active .showBanner {
   // background-color: $link-hover-color;
   background-color: $link-image-active-color;
 }
 
-.liveShowInfo .liveShowBanner {
+.showInfo .showBanner {
   margin: 0 auto;
 }
 
-.liveShowBanner .rectImage {
+.showBanner .rectImage {
 	margin: 0 !important;
 	width: 30%;
 	max-width: 100px;
@@ -50,7 +50,7 @@ Sass styling for currently playing show info component in frontpage
 	vertical-align: top;
 }
 
-.liveShowInfo .showDetails {
+.showInfo .showDetails {
   padding: 5px 10px;
   width: 70%;
   display: inline-block;

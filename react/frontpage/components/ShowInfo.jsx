@@ -1,4 +1,4 @@
-// LiveShowInfo.jsx
+// ShowInfo.jsx
 
 import React from 'react';
 
@@ -11,7 +11,7 @@ import { Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router';
 
 // styling
-require('./LiveShowInfo.scss');
+require('./ShowInfo.scss');
 
 var defaultShowPic = "/img/radio.png"
 
@@ -22,7 +22,7 @@ Floating div with image and relevant info for a show
 @prop activeClassName
 @prop show: show to present
 */
-var LiveShowInfo = React.createClass({
+var ShowInfo = React.createClass({
   djString: function(djMap) {
     var djString = "";
     var addComma = false;
@@ -40,15 +40,15 @@ var LiveShowInfo = React.createClass({
   },
   render: function() {
     if (!this.props.show) {
-      return <div classname="liveShowInfoEmpty"></div>;
+      return <div classname="showInfoEmpty"></div>;
     } else {
       return (
-        <div className="liveShowInfo">
+        <div className="showInfo">
           { this.props.title &&
             <p className="infoHeader">{ /* <Glyphicon glyph="volume-up"/> */ }{this.props.title}</p>
           }
           <Link to="/beta/shows" activeClassName={this.props.activeClassName}>
-            <div className="liveShowBanner">
+            <div className="showBanner">
               <RectImage
                 src={this.props.show.picture || defaultShowPic} />
               <div className="showDetails">
@@ -65,4 +65,4 @@ var LiveShowInfo = React.createClass({
   }
 });
 
-module.exports = LiveShowInfo;
+module.exports = ShowInfo;
