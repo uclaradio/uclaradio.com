@@ -5,24 +5,21 @@ import React from 'react';
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
 
-// Bootstrap Components
-import { Glyphicon } from 'react-bootstrap';
-
 import { Link } from 'react-router';
 
 // styling
 require('./ShowInfo.scss');
 
-var defaultShowPic = "/img/radio.png"
+const defaultShowPic = "/img/radio.png";
 
 /**
 Floating div with image and relevant info for a show
 
 @prop title: (optional) title to show above show
-@prop glyph: (optional) glyph to show at left of title
 @prop show: show to present
 */
-var ShowInfo = React.createClass({
+const ShowInfo = React.createClass({
+  // creates readable string from DJ dictionary returned from the server
   djString: function(djMap) {
     var djString = "";
     var addComma = false;
@@ -39,7 +36,7 @@ var ShowInfo = React.createClass({
     return name.length > l ? name.substr(0,l-2) + "\u2026" : name;
   },
   urlFromShow: function(show) {
-    return "/beta/show/" + show.id;
+    return "/beta/shows/" + show.id;
   },
   render: function() {
     if (!this.props.show) {
@@ -49,7 +46,6 @@ var ShowInfo = React.createClass({
         <div className="showInfo">
           { this.props.title &&
             <p className="infoHeader">
-              { this.props.glyph ? <Glyphicon glyph={this.props.glyph}/> : null }
               { this.props.title }
             </p>
           }

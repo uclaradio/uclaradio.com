@@ -20,7 +20,7 @@ var ShowList = React.createClass({
 		this.props.updateShows();
 	},
   urlFromShow: function(show) {
-    return "/beta/show/" + show.id;
+    return "/beta/shows/" + show.id;
   },
 	render() {
 		return (

@@ -9,8 +9,14 @@ import Loader from './Loader.jsx';
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
 
+// styling
+require('./ShowPage.scss');
+
+const defaultShowPic = "/img/radio.png";
+
 /**
-Page content displaying full description of a show, with blurb, picture, djs.. everything
+Page content for individual show
+Displays full description of a show, with blurb, picture, djs.. everything
 
 @prop show: show object
 @prop fetching: currently fetching shows
@@ -22,8 +28,22 @@ const ShowPage = React.createClass({
 			this.props.updateShows();
 		}
 	},
+  // creates readable string from DJ dictionary returned from the server
+  djString: function(djMap) {
+    var djString = "";
+    var addComma = false;
+    for (var dj in djMap) {
+      if (addComma) {
+        djString += ", ";
+      }
+      djString += djMap[dj];
+      addComma = true;
+    }
+    return djString;
+  },
 	render: function() {
-		if (!this.props.show) {
+		var show = this.props.show;
+		if (!show) {
 			return (
 				<div className="showPage">
 					{ this.props.fetching ?
@@ -36,9 +56,13 @@ const ShowPage = React.createClass({
 		}
 		return (
 			<div className="showPage">
-				<RectImage maxWidth="350px" src={this.props.show.picture} />
-				<h3>{this.props.show.title}</h3>
-				<p>{this.props.show.blurb}</p>
+				<p>{show.day + " " + show.time} / {show.genre}</p>
+				<RectImage maxWidth="350px" src={show.picture || defaultShowPic} />
+				<div className="showInfo">
+					<h3>{show.title}</h3>
+					<p>{this.djString(show.djs)}</p>
+					<p>{show.blurb}</p>
+				</div>
 			</div>
 		);
 	}

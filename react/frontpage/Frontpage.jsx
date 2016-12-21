@@ -64,17 +64,15 @@ const FrontpageContent = React.createClass({
                       src="/img/uclaradio-black.png" />
                   </div>
                 </IndexLink>
-                <ShowInfo title="Current Show" glyph="volume-up"
+                <ShowInfo title="Current Show"
                   show={showPlaying ? this.props.nowPlaying : null} />
                 <ShowInfo title="Spotlight" show={sampleFeaturedShow} />
-                { /* <div className="radioInfo">
-                  <p>UCLA Radio is an entirely student-run radio station. We broadcast all day, every day from a secret cave in Ackerman Student Union.</p>
-                </div> */ }
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
                 <div className="promoBanner">
                   <Link to="/beta/shows">
+                    { /* Sample data: Show of the month from last year */ }
                     <RectImage src="/img/sotmoctober2015cut.png" aspectRatio={5}>
                       <div className="overlay" />
                     </RectImage>
@@ -106,7 +104,7 @@ const Frontpage = React.createClass({
           <Route path="/beta/djs" component={DJsTab} />
           <Route path="/beta/events" component={EventsTab} />
           <Route path="/beta/shows" components={ShowsTab} />
-          <Route path="/beta/show/:showID" component={ShowContainer} />
+          <Route path="/beta/shows/:showID" component={ShowContainer} />
         </Route>
       </Router>
     );
