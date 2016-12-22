@@ -62,6 +62,14 @@ h4 {
 
 .frontPageNavbar {
   margin-bottom: 6pt;
+      /*to handle very long words*/
+      word-wrap: break-word;
+-ms-word-break: break-all;
+     word-break: break-all;
+     word-break: break-word;
+-webkit-hyphens: auto;
+   -moz-hyphens: auto;
+        hyphens: auto;
 }
 
 .frontPageNavbarItem.collapsed {
@@ -224,4 +232,12 @@ h4 {
   position: relative;
   top: 0;
   bottom: 0;
+}
+
+
+#nowPlaying {
+  background-size: 50% 100%;
+  /*transform: rotate(50deg);*/
+  background-image: url("../img/icons/currentSong.gif");
+  animation: example infinite;
 }

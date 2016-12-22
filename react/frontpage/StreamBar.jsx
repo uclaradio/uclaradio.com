@@ -67,12 +67,14 @@ var StreamBar = React.createClass({
   render: function() {
     return (
       <div className="streamBar">
-        <Collapse in={this.state.chatForm}>
-          <div className='chat-box-wrapper'>
-            <ChatBox />
-          </div>
-        </Collapse>
         <Grid>
+          <div>
+            <Collapse in={this.state.chatForm}>
+              <div>
+                <ChatBox />
+              </div>
+            </Collapse>
+          </div>
           <div style={this.state.hasReset ? null : {opacity: "0", height: "0"}}>
             <RecentlyPlayed expanded={this.state.expanded}
               reset={!this.state.hasReset} onReset={this.onReset} />
