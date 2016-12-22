@@ -14,9 +14,6 @@ $overlay-duration: 0.25s;
 $sans-serif-font: Helvetica, sans-serif;
 $serif-font: Georgia, serif;
 
-@include fade-animation("eventfadein", 0.0, $overlay-opacity);
-@include fade-animation("eventfadeout", $overlay-opacity, 0.0);
-
 .eventsTab {
 	margin: 2*$box-padding -5pt 10pt -5pt;
 	text-align: center;
@@ -115,17 +112,16 @@ $serif-font: Georgia, serif;
 	height: 100%;
 	width: 100%;
 	background-color: grey;
-	opacity: $overlay-opacity;
 	position: absolute;
 	top: 0;
 	left: 0;
 	z-index: 1;
-    @include animations("eventfadein", $overlay-duration);
+	opacity: $overlay-opacity;
+  	transition: opacity $overlay-duration;
 }
 		
 .overlayWrapper:hover .overlay {
 	opacity: 0;
-    @include animations("eventfadeout", $overlay-duration);
 }
 
 .overlayWrapper .hoverOverlay {

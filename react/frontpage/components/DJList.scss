@@ -10,9 +10,6 @@ Sass styling for frontpage djs list
 $overlay-opacity: 0.80;
 $overlay-duration: 0.25s;
 
-@include fade-animation("djsfadein", 0.0, $overlay-opacity);
-@include fade-animation("djsfadeout", $overlay-opacity, 0.0);
-
 .djList {
   text-align: center;
   width: 100%;
@@ -24,6 +21,7 @@ $overlay-duration: 0.25s;
   display: inline-block;
   margin: 1%;
   position: relative;
+  cursor: pointer;
 }
 
 .djName {
@@ -53,7 +51,7 @@ $overlay-duration: 0.25s;
   border-radius: 50%;
   background-color: white;
   opacity: 0;
-  @include animations("djsfadeout", $overlay-duration);
+  transition: opacity $overlay-duration;
 }
 
 .djTile:hover > .djTileInfo, .djTile.empty {
@@ -62,5 +60,4 @@ $overlay-duration: 0.25s;
 
 .djTileOverlay:hover, .djTile.empty .djTileOverlay {
   opacity: $overlay-opacity;
-  @include animations("djsfadein", $overlay-duration);
 }

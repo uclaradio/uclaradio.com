@@ -54,16 +54,18 @@ var EventList = React.createClass({
 									<h1>{month['month']}</h1>
 									<div className="allEvents">
 										{ month['arr'].map(function(event) {
+											var start = formatDate(event['start']);
+											var eventColor = getBackgroundColor(event['type']);
 											return (
 												<div className="event" key={event['id']}>
 													<RectImage src={event['image']} />
 													<div className="overlayWrapper">
-														<div className="overlay" style={{backgroundColor: getBackgroundColor(event['type'])}}>
-															<p className="eventDate">{formatDate(event['start'])}</p>
+														<div className="overlay" style={{backgroundColor: eventColor}}>
+															<p className="eventDate">{start}</p>
 															<div className="eventOverlay">
-																<p className="bandName">{getBandName(event['summary'])}</p>
+																<p className="bandName">{event['host']}</p>
 																<p className="separator">. . .&nbsp;&nbsp;&nbsp;. . .&nbsp;&nbsp;&nbsp;. . .</p>
-																<p className="venue">{getVenue(event['summary'])}</p>
+																<p className="venue">{event['location']}</p>
 															</div>
 														</div>
 														<div className="hoverOverlay">
@@ -89,13 +91,14 @@ var getBackgroundColor = function(type){
 	return colors[type] || defaultColor;
 };
 
-var getBandName = function(desc){
-	return desc.substring(0, desc.indexOf("@") - 1);
-};
+// Useful if we revert to google calendar
+// var getBandName = function(desc){
+// 	return desc.substring(0, desc.indexOf("@") - 1);
+// };
 
-var getVenue = function(desc){
-	return desc.substring(desc.indexOf("@") + 2);
-};
+// var getVenue = function(desc){
+// 	return desc.substring(desc.indexOf("@") + 2);
+// };
 
 var formatDate = function(dateString) {
   var date = new Date(dateString);
