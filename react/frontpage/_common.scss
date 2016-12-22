@@ -18,7 +18,26 @@ $link-image-active-color: rgba(white, 0.35);
 
 /** Animations **/
 
-@mixin fade-animation($start-opacity, $end-opacity) {
+@mixin fade($start-opacity, $end-opacity) {
     from { opacity: $start-opacity; }
     to   { opacity: $end-opacity; }
+}
+
+// use once at top of file
+@mixin fade-animation($animationName, $start-opacity, $end-opacity) {
+	@keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) }
+	@-moz-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Firefox < 16 */
+	@-webkit-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Safari, Chrome and Opera > 12.1 */
+	@-ms-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Internet Explorer */
+	@-o-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Opera < 12.1 */
+}
+
+// use wherever animation is active
+@mixin animations($animationName, $duration) {
+    -webkit-animation: $animationName $duration; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: $animationName $duration; /* Firefox < 16 */
+        -ms-animation: $animationName $duration; /* Internet Explorer */
+         -o-animation: $animationName $duration; /* Opera < 12.1 */
+            animation: $animationName $duration;
+
 }

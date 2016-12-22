@@ -9,13 +9,7 @@ Sass styling for events tab of new frontpage
 // constants
 $fadein-duration: 2s;
 
-// fadein animations
-@keyframes fadein { @include fade-animation(0, 1) } 
-@-moz-keyframes fadein { @include fade-animation(0, 1) } /* Firefox < 16 */
-@-webkit-keyframes fadein { @include fade-animation(0, 1) } /* Safari, Chrome and Opera > 12.1 */
-@-ms-keyframes fadein { @include fade-animation(0, 1) } /* Internet Explorer */
-@-o-keyframes fadein { @include fade-animation(0, 1) } /* Opera < 12.1 */
-
+@include fade-animation("waterfallfadein", 0.0, 1.0);
 
 .wf-container {
     margin: 0 -5pt;
@@ -43,11 +37,7 @@ $fadein-duration: 2s;
 	padding:  5pt;
     /*margin: 2%;*/
     /*padding: 2%;*/
-    -webkit-animation: fadein $fadein-duration; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein $fadein-duration; /* Firefox < 16 */
-        -ms-animation: fadein $fadein-duration; /* Internet Explorer */
-         -o-animation: fadein $fadein-duration; /* Opera < 12.1 */
-            animation: fadein $fadein-duration;
+    @include animations("waterfallfadein", $fadein-duration);
 }
 
 .wf-box img { 
@@ -69,11 +59,7 @@ $fadein-duration: 2s;
 	position:relative;
 	display: block;
 	background-color: rgba(255, 255, 255, 0.75);
-    -webkit-animation: fadein $fadein-duration; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein $fadein-duration; /* Firefox < 16 */
-        -ms-animation: fadein $fadein-duration; /* Internet Explorer */
-         -o-animation: fadein $fadein-duration; /* Opera < 12.1 */
-            animation: fadein $fadein-duration;
+    @include animations("waterfallfadein", $fadein-duration);
 }
 
 .wf-box-content:hover {

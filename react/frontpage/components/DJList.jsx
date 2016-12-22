@@ -5,6 +5,8 @@ import React from 'react';
 import DJInfo from './DJInfo.jsx';
 import Loader from './Loader.jsx';
 
+require('./DJList.scss');
+
 var DJUrl = "/api/djs";
 
 /*

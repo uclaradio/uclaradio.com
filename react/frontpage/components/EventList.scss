@@ -10,24 +10,12 @@ Sass styling for events tab of new frontpage
 $event-width: 200px;
 $event-margin: 5pt;
 $overlay-opacity: 0.85;
-$overlay-duration: 0.85s;
+$overlay-duration: 0.25s;
 $sans-serif-font: Helvetica, sans-serif;
 $serif-font: Georgia, serif;
 
-// fadein animations
-@keyframes lightfadein { @include fade-animation(0, $overlay-opacity) } 
-@-moz-keyframes lightfadein { @include fade-animation(0, $overlay-opacity) } /* Firefox < 16 */
-@-webkit-keyframes lightfadein { @include fade-animation(0, $overlay-opacity) } /* Safari, Chrome and Opera > 12.1 */
-@-ms-keyframes lightfadein { @include fade-animation(0, $overlay-opacity) } /* Internet Explorer */
-@-o-keyframes lightfadein { @include fade-animation(0, $overlay-opacity) } /* Opera < 12.1 */
-
-// fadeout animations
-@keyframes lightfadeout { @include fade-animation($overlay-opacity, 0) } 
-@-moz-keyframes lightfadeout { @include fade-animation($overlay-opacity, 0) } /* Firefox < 16 */
-@-webkit-keyframes lightfadeout { @include fade-animation($overlay-opacity, 0) } /* Safari, Chrome and Opera > 12.1 */
-@-ms-keyframes lightfadeout { @include fade-animation($overlay-opacity, 0) } /* Internet Explorer */
-@-o-keyframes lightfadeout { @include fade-animation($overlay-opacity, 0) } /* Opera < 12.1 */
-
+@include fade-animation("eventfadein", 0.0, $overlay-opacity);
+@include fade-animation("eventfadeout", $overlay-opacity, 0.0);
 
 .eventsTab {
 	margin: 2*$box-padding -5pt 10pt -5pt;
@@ -132,20 +120,12 @@ $serif-font: Georgia, serif;
 	top: 0;
 	left: 0;
 	z-index: 1;
-    -webkit-animation: lightfadein $overlay-duration; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: lightfadein $overlay-duration; /* Firefox < 16 */
-        -ms-animation: lightfadein $overlay-duration; /* Internet Explorer */
-         -o-animation: lightfadein $overlay-duration; /* Opera < 12.1 */
-            animation: lightfadein $overlay-duration;
+    @include animations("eventfadein", $overlay-duration);
 }
 		
 .overlayWrapper:hover .overlay {
 	opacity: 0;
-    -webkit-animation: lightfadeout $overlay-duration; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: lightfadeout $overlay-duration; /* Firefox < 16 */
-        -ms-animation: lightfadeout $overlay-duration; /* Internet Explorer */
-         -o-animation: lightfadeout $overlay-duration; /* Opera < 12.1 */
-            animation: lightfadeout $overlay-duration;
+    @include animations("eventfadeout", $overlay-duration);
 }
 
 .overlayWrapper .hoverOverlay {
