@@ -134,16 +134,10 @@ function newNode(full_picture, summary, created_time, link, platform) {
   }
   box_content_text.appendChild(document.createTextNode(summary));
   summary = String(summary);
-  if (!summary.includes("http")) {
-    box_content.appendChild(box_content_text);
-  }
+  box_content.appendChild(box_content_text);
   a.appendChild(box_content);
   box.appendChild(a);
   return box;
-}
-
-function containsHttp(myString) {
-  return myString.split(" ").map(function(el) { return el.includes("http") ? "click" : el }).join(' ');
 }
 
 function formatDate(dateString) {
