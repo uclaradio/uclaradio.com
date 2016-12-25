@@ -4,13 +4,12 @@ module.exports = function(io) {
 	var express = require('express');
 	var router = express.Router();
     var Set = require("collections/set");
+    var Map = require("collections/map");
     var accounts = require('../database/accounts');
+    var messages = require('../database/messages');
 
-    /*
-        Since guest's session will last only as long as the browser, 
-        I think it's acceptable to store in memory here.
-    */
-    var guests = new Set();
+
+    var guests = new Map();
 
 	router.get('/', function(req, res) {
 		var path = require('path');
@@ -20,31 +19,33 @@ module.exports = function(io) {
     io.on('connection', function(socket) {
     	//new user joined
     	socket.on('add user', function() {
-			// we store the username in the socket session for this client
-    		// socket.user = username;
-    		// var message = username + ' has joined the conversation.';
-    		// socket.broadcast.emit('new message', {
-    		// 	event: 'connected',
-    		// 	user: socket.user
-    		// });
-            var username;
-            do {
-                username = "Guest" + getRandomInt(0, 1000) + getRandomInt(0, 10000);
-            } while(guests.has(username));
-            guests.add(username);
+            var username = generateUsername();
+            if(username in guests) {
+                guests[username] = guests[username] + 1;
+            } else {
+                guests[username] = 1;
+            }
+            username = username + '-' + guests[username];
             socket.username = username;
             socket.emit('assign username', username);
     	});
 
+        //if the DB reset, this will be important
+        socket.on('check if username exists', function(username) {
+            if(username == null) {
+                socket.emit('username not found');
+            } else {
+                username = username.split('-')[0];
+                if(!(username in guests)) {
+                    socket.emit('username not found');
+                }
+            };
+        });
+
     	//automatically disconnects user
     	socket.on('disconnect', function(){
             guests.delete(socket.username);
-    		// console.log(socket.user + " has left.");
-    		// var message = socket.user + 'has left the conversation'
-    		// socket.broadcast.emit('new message', {
-    		// 	event: 'disconnected',
-    		// 	user: socket.user
-    		// });
+            console.log(socket.username + " deleted.");
     	});
 
     	//new message sent
@@ -54,12 +55,17 @@ module.exports = function(io) {
 			  text: data.text,
 			  user: data.user
 			});
+            messages.saveMessage(data);
 			console.log(data);
 		});
     });
 
     return router;
 };
+
+function generateUsername() {
+  return "Guest" + getRandomInt(0, 1000) + getRandomInt(0, 1000) + getRandomInt(0, 1000);
+}
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
