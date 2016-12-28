@@ -48,9 +48,11 @@ const fetchUpdatedNowPlaying = (dispatch) => {
     dataType: 'json',
     cache: false,
     success: function(nowPlaying) {
-    	var showID = nowPlaying.id;
-      dispatch(updateNowPlaying(showID));
-      dispatch(addUpdateShow(nowPlaying));
+    	if (nowPlaying.title) {
+	    	var showID = nowPlaying.id;
+	      dispatch(updateNowPlaying(showID));
+	      dispatch(addUpdateShow(nowPlaying));
+    	}
     }.bind(this),
     error: function(xhr, status, err) {
       console.error(nowPlayingURL, status, err.toString());

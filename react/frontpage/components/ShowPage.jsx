@@ -9,6 +9,8 @@ import Loader from './Loader.jsx';
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
 
+import  { Link } from 'react-router';
+
 // styling
 require('./ShowPage.scss');
 
@@ -56,7 +58,7 @@ const ShowPage = React.createClass({
 		}
 		return (
 			<div className="showPage">
-				<p>{show.day + " " + show.time} / {show.genre}</p>
+				<p><Link to="/beta/shows">{show.day + " " + show.time}</Link> / {show.genre}</p>
 				<RectImage maxWidth="350px" src={show.picture || defaultShowPic} />
 				<div className="showInfo">
 					<h3>{show.title}</h3>

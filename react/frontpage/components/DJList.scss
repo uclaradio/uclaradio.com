@@ -21,7 +21,12 @@ $overlay-duration: 0.25s;
   display: inline-block;
   margin: 1%;
   position: relative;
-  cursor: pointer;
+}
+
+.djTile.full {
+  border-radius: 50%;
+  background-color: white;
+  overflow: hidden;
 }
 
 .djName {
@@ -48,10 +53,12 @@ $overlay-duration: 0.25s;
   top: 0;
   left: 0;
   z-index: 1;
-  border-radius: 50%;
+  cursor: pointer;
   background-color: white;
   opacity: 0;
   transition: opacity $overlay-duration;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .djTile:hover > .djTileInfo, .djTile.empty {

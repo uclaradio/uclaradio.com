@@ -16,11 +16,15 @@ var DJInfo = React.createClass({
         return picURL || defaultDJPic;
     },
     render: function() {
-        var className = this.props.picture == null ? "djTile empty" : "djTile";
+        var className = this.props.picture == null ? "djTile empty" : "djTile full";
     	return (
     		<div className={className}>
     			<RectImage maxWidth="200px" src={this.getDJImage(this.props.picture)} circle />
-                <div className="djTileOverlay"><p className="djName">{this.props.name}</p></div>
+                <div className="djTileOverlay">
+                    <p className="djName">
+                        {this.props.name}
+                    </p>
+                </div>
     		</div>
     	);
     } 
