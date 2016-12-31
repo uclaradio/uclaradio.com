@@ -1,10 +1,13 @@
 var React = require('react');
 var List = require("collections/list");
+var cookie = require('react-cookie');
 
 var Bootstrap = require('react-bootstrap');
 var Grid = Bootstrap.Grid;
 var Col = Bootstrap.Col;
 var socket = io();
+
+var getPreviousMessagesURL = "/chat/getNext";
 
 var Message = React.createClass({
   render: function() {
@@ -47,7 +50,7 @@ var Message = React.createClass({
 
 var MessageList = React.createClass({
   componentDidUpdate: function() {
-    scrollToBottom();
+    this.props.scrollToBottom();
   },
   render: function() {
   	var viewing_user = this.props.user;
@@ -114,13 +117,29 @@ var MessageForm = React.createClass({
 
 var ChatBox = React.createClass({
   getInitialState: function() {
-  	socket.emit('add user');
+    var username = cookie.load('username');
+    socket.emit('check if username exists', username);
     var messages = new List();
-    return {user: '', messages:messages, text: ''};
+    return {user: username, messages:messages, text: ''};
   },
   componentDidMount: function() {
-     socket.on('new message', this.messageRecieve);
-     socket.on('assign username', this.setUsername);
+    socket.on('new message', this.messageRecieve);
+    socket.on('assign username', this.setUsername);
+    socket.on('username not found', this.usernameNotFound);
+    this.getNext(null, null, null);
+  },
+  getNext: function(id, volume, callback) {
+    $.get(getPreviousMessagesURL, function(previousMessages) {
+        var messages = this.state.messages;
+        previousMessages.map(function(message){
+          var formatted = {
+              user : message.user,
+              text : message.text
+          };
+          messages.push(message);
+        });
+        this.setState({messages: messages});
+      }.bind(this));
   },
   messageRecieve: function(message) {
     var messages = this.state.messages;
@@ -128,8 +147,14 @@ var ChatBox = React.createClass({
     this.setState({messages: messages});
   },
   setUsername: function(username) {
-    console.log(username);
+    console.log('no cookie existed;');
+    var d = new Date();
+    d.setDate(d.getDate()+(2*365));
+    cookie.save('username', username, {path: '/', expires:d});
     this.setState({user:username});
+  },
+  usernameNotFound: function() {
+    socket.emit('add user');
   },
   handleMessageSubmit: function(message) {
     socket.emit('new message', message);
@@ -146,6 +171,7 @@ var ChatBox = React.createClass({
               		<MessageList
               			messages={this.state.messages}
               			user={this.state.user}
+                    scrollToBottom={this.props.scrollToBottom}
               		/>
               </div>
             </div>
@@ -162,12 +188,6 @@ var ChatBox = React.createClass({
     );
   }
 })
-
-function scrollToBottom() {
-    var objDiv = document.getElementById("chat-box");
-    objDiv.scrollTop = objDiv.scrollHeight;
-    console.log('scrolled to bottom');
-}
 
 function imageURL(url) {
     return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);

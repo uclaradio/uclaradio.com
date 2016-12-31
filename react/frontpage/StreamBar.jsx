@@ -7,6 +7,7 @@ var ChatBox = require('./ChatBox.jsx');
 var Grid = require('react-bootstrap').Grid;
 var Glyphicon = require('react-bootstrap').Glyphicon;
 var Collapse = require('react-bootstrap').Collapse;
+var Tooltip = require('react-bootstrap').Tooltip;
 
 // Open-Source Components
 var Slider = require('react-slick');
@@ -69,9 +70,9 @@ var StreamBar = React.createClass({
       <div className="streamBar">
         <Grid>
           <div>
-            <Collapse in={this.state.chatForm}>
+            <Collapse in={this.state.chatForm} onEntering={scrollToBottom}>
               <div>
-                <ChatBox />
+                <ChatBox scrollToBottom={scrollToBottom}/>
               </div>
             </Collapse>
           </div>
@@ -203,7 +204,13 @@ var RecentlyPlayed = React.createClass({
   }
 })
 
+
 /** Helper functions **/
+
+function scrollToBottom() {
+  var objDiv = document.getElementById("chat-box");
+  objDiv.scrollTop = objDiv.scrollHeight;
+};
 
 var isMobile = {
   Android: function() {
