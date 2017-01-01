@@ -21,4 +21,12 @@ messages.saveMessage = function(data) {
 	message.save();
 };
 
+messages.next = function(id, volume, callback) {
+	var param = id != "" ? {_id:{"$lt": mongoose.Types.ObjectId(id)}} : null;
+	var promise = MessageModel.find(param).limit(volume).sort({"_id":-1}); 
+	promise.then(function(data){
+		callback(data);
+	})
+}
+
 module.exports = messages;

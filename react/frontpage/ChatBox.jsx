@@ -11,6 +11,12 @@ var getPreviousMessagesURL = "/chat/getNext";
 
 var Message = React.createClass({
   render: function() {
+    var date = new Date(this.props.date);
+      var Month = date.getMonth() + 1;
+      var Day = date.getDay() + 1;
+      var Hour = date.getHours();
+      var Minute = date.getMinutes();
+      var Second = date.getSeconds();
       return (
         <div className="message"> 
         {
@@ -39,7 +45,10 @@ var Message = React.createClass({
               <br />
               <span id="message-username-tag" 
               style={ (this.props.user == this.props.viewing_user) ? {float: "right"} : {float: "left"}}>
-                {this.props.user}
+                <span className="message-username-tag-username">
+                  {this.props.user}
+                </span>
+                {" " /*+ Month + "/" + Day + " "*/ + Hour + ":" + Minute + ":" + Second}
               </span>  
           	</div>
         }
@@ -50,7 +59,7 @@ var Message = React.createClass({
 
 var MessageList = React.createClass({
   componentDidUpdate: function() {
-    this.props.scrollToBottom();
+    // this.props.scrollToBottom();
   },
   render: function() {
   	var viewing_user = this.props.user;
@@ -65,6 +74,7 @@ var MessageList = React.createClass({
                               key={i}
                               user={message.user}
                               text={message.text}
+                              date={message.date}
                               viewing_user={viewing_user}
                           	/> }
                             <br />
@@ -85,11 +95,11 @@ var MessageForm = React.createClass({
   handleSubmit: function(e) {
       e.preventDefault();
       var str = this.state.text.replace(/\s/g, '');
-      console.log(str);
       if(str != '') {
         var message = {
             user : this.props.user,
-            text : this.state.text
+            text : this.state.text,
+            date : new Date()
         }
         this.props.onMessageSubmit(message); 
         this.setState({ text: '' });
@@ -126,28 +136,40 @@ var ChatBox = React.createClass({
     socket.on('new message', this.messageRecieve);
     socket.on('assign username', this.setUsername);
     socket.on('username not found', this.usernameNotFound);
-    this.getNext(null, null, null);
+    this.getNext(null, 10);
   },
-  getNext: function(id, volume, callback) {
-    $.get(getPreviousMessagesURL, function(previousMessages) {
+  /*
+  @param id
+  @param volume
+  */
+  getNext: function(id, volume) {
+    $.post(getPreviousMessagesURL, {
+        id: id,
+        volume: volume,
+      }, function(previousMessages) {
         var messages = this.state.messages;
         previousMessages.map(function(message){
           var formatted = {
+                id : message._id,
               user : message.user,
-              text : message.text
+              text : message.text,
+              date : message.date
           };
-          messages.push(message);
+          console.log(formatted);
+          messages.unshift(formatted);
         });
-        this.setState({messages: messages});
+        var message_db_cursor = messages.peek().id;
+        console.log(message_db_cursor + "\n");
+        this.setState({messages: messages, message_db_cursor: message_db_cursor});
       }.bind(this));
   },
   messageRecieve: function(message) {
-    var messages = this.state.messages;
-    messages.push(message);
-    this.setState({messages: messages});
+    this.state.messages.push(message);
+    // var messages = this.state.messages;
+    // messages.push(message);
+    this.setState({messages: this.state.messages});
   },
   setUsername: function(username) {
-    console.log('no cookie existed;');
     var d = new Date();
     d.setDate(d.getDate()+(2*365));
     cookie.save('username', username, {path: '/', expires:d});
@@ -159,6 +181,11 @@ var ChatBox = React.createClass({
   handleMessageSubmit: function(message) {
     socket.emit('new message', message);
     this.messageRecieve(message);
+    this.props.scrollToBottom();
+  },
+  appendMessage: function() {
+    this.getNext(this.state.message_db_cursor, 10);
+    console.log("appendMessage clicked!!!!");
   },
   render: function() {
     return (
@@ -182,6 +209,9 @@ var ChatBox = React.createClass({
                   onMessageSubmit={this.handleMessageSubmit}
                   user={this.state.user}
               />
+              <button onClick={this.appendMessage}>
+                Activate Lasers
+              </button>
         </Col>
       </Grid>
       </span>

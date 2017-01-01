@@ -3,11 +3,14 @@
 module.exports = function(io) {
 	var express = require('express');
 	var router = express.Router();
+
+    //Data Structures
     var Set = require("collections/set");
     var Map = require("collections/map");
+
+    //DB
     var accounts = require('../database/accounts');
     var messages = require('../database/messages');
-
 
     var guests = new Map();
 
@@ -15,6 +18,21 @@ module.exports = function(io) {
 		var path = require('path');
 		res.sendFile(path.resolve('public/frontpage.html'));
 	});
+
+    router.get('/getNext', function(req, res) {
+        messages.next(null, 10, function(data) {
+            res.send(data);
+        })
+    });
+
+    router.post('/getNext', function(req, res) {
+        var id = req.body.id;
+        var volume = req.body.volume;
+        messages.next(id, volume, function(data) {
+            console.log(data);
+            res.send(data);
+        })
+    });
 
     io.on('connection', function(socket) {
     	//new user joined
@@ -53,7 +71,8 @@ module.exports = function(io) {
 		// we tell the client to execute 'new message'
 			socket.broadcast.emit('new message', {
 			  text: data.text,
-			  user: data.user
+			  user: data.user,
+              date: new Date()
 			});
             messages.saveMessage(data);
 			console.log(data);

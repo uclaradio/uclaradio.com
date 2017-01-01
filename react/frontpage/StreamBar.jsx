@@ -70,7 +70,7 @@ var StreamBar = React.createClass({
       <div className="streamBar">
         <Grid>
           <div>
-            <Collapse in={this.state.chatForm} onEntering={scrollToBottom}>
+            <Collapse in={/*this.state.chatForm*/ true} onEntered={scrollToBottom}>
               <div>
                 <ChatBox scrollToBottom={scrollToBottom}/>
               </div>
@@ -208,6 +208,7 @@ var RecentlyPlayed = React.createClass({
 /** Helper functions **/
 
 function scrollToBottom() {
+  console.log('scrolled to bottom');
   var objDiv = document.getElementById("chat-box");
   objDiv.scrollTop = objDiv.scrollHeight;
 };

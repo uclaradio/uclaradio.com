@@ -114,3 +114,7 @@ input:focus {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.message-username-tag-username {
+	color: yellow;
+}
