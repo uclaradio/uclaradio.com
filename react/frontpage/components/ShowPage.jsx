@@ -25,7 +25,7 @@ Displays full description of a show, with blurb, picture, djs.. everything
 @prop updateShows: callback to update all listed shows
 **/
 const ShowPage = React.createClass({
-	componentWillMount() {
+	componentDidUpdate() {
 		if (this.props.show == null) {
 			this.props.updateShows();
 		}

@@ -23,6 +23,10 @@ Sass styling for navbar on frontpage
   background-color: $link-color;
 }
 
+.dropdownNavbarItem {
+  font-size: 12pt;
+}
+
 .active.frontPageNavbarItem > a, .frontPageNavbarItem > a:focus, .frontPageNavbarItem > a:hover {
   /*text-decoration: none;*/
   background-color: $link-hover-color !important;

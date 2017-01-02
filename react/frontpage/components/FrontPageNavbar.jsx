@@ -95,11 +95,11 @@ var FrontPageNavbar = React.createClass({
             <NavItem className="frontPageNavbarItem fullWidth">Shows</NavItem>
           </LinkContainer>
           <NavDropdown title="More" className="frontPageNavbarItem fullWidth bottomMost">
-            <MenuItem onClick={()=>{this.handleClick(1)}}>Blog</MenuItem>
-            <MenuItem onClick={()=>{this.handleClick(2)}}>Managers</MenuItem>
-            <MenuItem onClick={()=>{this.handleClick(3)}}>Apply</MenuItem>
-            <MenuItem onClick={()=>{this.handleClick(4)}}>Air Plays</MenuItem>
-            <MenuItem onClick={()=>{this.handleClick(5)}}>Staff Panel</MenuItem>
+            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(1)}}>Blog</MenuItem>
+            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(2)}}>Managers</MenuItem>
+            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(3)}}>Apply</MenuItem>
+            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(4)}}>Air Plays</MenuItem>
+            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(5)}}>Staff Panel</MenuItem>
           </NavDropdown>
         </Nav>
       </div>
