@@ -70,7 +70,7 @@ var StreamBar = React.createClass({
       <div className="streamBar">
         <Grid>
           <div>
-            <Collapse in={/*this.state.chatForm*/ true} onEntered={scrollToBottom}>
+            <Collapse in={this.state.chatForm} onEntering={scrollToBottom}>
               <div>
                 <ChatBox scrollToBottom={scrollToBottom}/>
               </div>

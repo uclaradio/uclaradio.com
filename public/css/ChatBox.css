@@ -100,7 +100,6 @@ input:focus {
 
 }
 
-
 .my-message #message-body-tag{
 	background-color: #5775F7;
 	color: white;
@@ -117,4 +116,42 @@ input:focus {
 
 .message-username-tag-username {
 	color: yellow;
+}
+
+#load_more_wrapper {
+	height: 4em;
+	top: 100px;
+}
+
+#load_more {
+	margin-top: 20px;
+	border-radius: 20px;
+ 	top: 50%;
+  	transform: translateY(-50%);
+	border: none;
+	background-color: yellow;
+	color: black;
+	width: 5em;
+	height: 3em;
+	font-size: 1em;
+	transition: width 0.1s, height 0.1s, font-size 0.1s, border-radius 0.1s;
+}
+
+#load_more:hover {
+	border-radius: 30px;
+	width: 5.2em;
+	height: 3.2em;
+	font-size: 1.2em;
+	transition: width 0.1s, height 0.1s, font-size 0.1s, border-radius 0.1s;
+}
+
+#load_more:focus {
+	outline: none;
+}
+
+#load_more:active {
+    width: 5em;
+    height: 3em;
+    font-size: 1em;
+    outline: none;
 }

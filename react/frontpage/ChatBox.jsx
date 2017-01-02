@@ -9,6 +9,8 @@ var socket = io();
 
 var getPreviousMessagesURL = "/chat/getNext";
 
+var newMessage = false;
+
 var Message = React.createClass({
   render: function() {
     var date = new Date(this.props.date);
@@ -59,12 +61,15 @@ var Message = React.createClass({
 
 var MessageList = React.createClass({
   componentDidUpdate: function() {
-    // this.props.scrollToBottom();
+    if(newMessage == true) {
+      this.props.scrollToBottom();
+      newMessage = false;
+    }
   },
   render: function() {
   	var viewing_user = this.props.user;
       return (
-          <div className='messages'>
+          <div id='messages' className='messages'>
               {
                   this.props.messages.map(function(message, i) {
                       return (
@@ -104,6 +109,7 @@ var MessageForm = React.createClass({
         this.props.onMessageSubmit(message); 
         this.setState({ text: '' });
       }
+      this.props.scrollToBottom;
   },
   //fill in form field as user types with what is specified in value=
   changeHandler: function(e) {
@@ -138,10 +144,6 @@ var ChatBox = React.createClass({
     socket.on('username not found', this.usernameNotFound);
     this.getNext(null, 10);
   },
-  /*
-  @param id
-  @param volume
-  */
   getNext: function(id, volume) {
     $.post(getPreviousMessagesURL, {
         id: id,
@@ -164,6 +166,7 @@ var ChatBox = React.createClass({
       }.bind(this));
   },
   messageRecieve: function(message) {
+    newMessage = true;
     this.state.messages.push(message);
     // var messages = this.state.messages;
     // messages.push(message);
@@ -183,9 +186,9 @@ var ChatBox = React.createClass({
     this.messageRecieve(message);
     this.props.scrollToBottom();
   },
-  appendMessage: function() {
+  retrieveOlderMessages: function() {
     this.getNext(this.state.message_db_cursor, 10);
-    console.log("appendMessage clicked!!!!");
+    console.log("retrieveOlderMessages clicked!!!!");
   },
   render: function() {
     return (
@@ -195,6 +198,13 @@ var ChatBox = React.createClass({
           <div className='chat-box-fade-top'>
             <div className='chat-box-fade-bottom'>
               <div id='chat-box'>
+                  <div id="load_more_wrapper">
+                    <center>
+                      <button id="load_more" onClick={this.retrieveOlderMessages}>
+                        More
+                      </button>
+                    </center>
+                  </div>
               		<MessageList
               			messages={this.state.messages}
               			user={this.state.user}
@@ -208,10 +218,8 @@ var ChatBox = React.createClass({
               <MessageForm
                   onMessageSubmit={this.handleMessageSubmit}
                   user={this.state.user}
+                  scrollToBottom={this.props.scrollToBottom}
               />
-              <button onClick={this.appendMessage}>
-                Activate Lasers
-              </button>
         </Col>
       </Grid>
       </span>
