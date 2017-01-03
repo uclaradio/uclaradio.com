@@ -17,12 +17,27 @@ input {
 }
 
 input:focus {
-	border: solid 2px #5775F7;
+	border: solid 2px #DEB887;
 	outline: none;
 }
 
 .message_form {
 	padding-top: 10%;
+	width: 100%;
+}
+
+@media only screen and (min-width: 450px) {
+	/*ensure that chat images are full size on mobile */
+	.message_form {
+		padding-top: 5%;
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	/*ensure that chat images are full size on mobile */
+	.message_form {
+		padding-top: 40%;
+	}
 }
 
 .message {
@@ -95,10 +110,6 @@ input:focus {
 
 }
 
-@media only screen and (max-width: 400px) {
-	/*ensure that chat images are full size on mobile */
-
-}
 
 .my-message #message-body-tag{
 	background-color: #5775F7;
@@ -124,13 +135,14 @@ input:focus {
 }
 
 #load_more {
+	letter-spacing: 2px;
 	margin-top: 20px;
 	border-radius: 20px;
  	top: 50%;
   	transform: translateY(-50%);
 	border: none;
-	background-color: yellow;
-	color: black;
+	background-color: #DEB887;
+	color: white;
 	width: 5em;
 	height: 3em;
 	font-size: 1em;

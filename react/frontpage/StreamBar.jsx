@@ -157,7 +157,6 @@ var RecentlyPlayed = React.createClass({
             "nowPlaying": rawTrack["@attr"] != null
           };
         });
-        console.log(tracks);
         if (!tracks) {
           tracks = [];
         }
@@ -208,7 +207,6 @@ var RecentlyPlayed = React.createClass({
 /** Helper functions **/
 
 function scrollToBottom() {
-  console.log('scrolled to bottom');
   var objDiv = document.getElementById("chat-box");
   objDiv.scrollTop = objDiv.scrollHeight;
 };

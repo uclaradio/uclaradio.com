@@ -5,6 +5,7 @@ var cookie = require('react-cookie');
 var Bootstrap = require('react-bootstrap');
 var Grid = Bootstrap.Grid;
 var Col = Bootstrap.Col;
+var Row = Bootstrap.Row;
 var socket = io();
 
 var getPreviousMessagesURL = "/chat/getNext";
@@ -117,6 +118,7 @@ var MessageForm = React.createClass({
   },
   render: function() {
       return(
+        <span>
           <div className='message_form'>
               <form onSubmit={this.handleSubmit}>
                   <input
@@ -124,8 +126,16 @@ var MessageForm = React.createClass({
                       value={this.state.text}
                       placeholder="Write a Message"
                   />
+                  <br /><br />
+                  <div id="load_more_wrapper">
+                    <center>
+                      <input type="submit" value="SEND" id="load_more">
+                      </input>
+                    </center>
+                  </div>
               </form>
           </div>
+        </span>
       );
   }
 });
@@ -157,11 +167,9 @@ var ChatBox = React.createClass({
               text : message.text,
               date : message.date
           };
-          console.log(formatted);
           messages.unshift(formatted);
         });
         var message_db_cursor = messages.peek().id;
-        console.log(message_db_cursor + "\n");
         this.setState({messages: messages, message_db_cursor: message_db_cursor});
       }.bind(this));
   },
@@ -188,7 +196,6 @@ var ChatBox = React.createClass({
   },
   retrieveOlderMessages: function() {
     this.getNext(this.state.message_db_cursor, 10);
-    console.log("retrieveOlderMessages clicked!!!!");
   },
   render: function() {
     return (
@@ -201,7 +208,7 @@ var ChatBox = React.createClass({
                   <div id="load_more_wrapper">
                     <center>
                       <button id="load_more" onClick={this.retrieveOlderMessages}>
-                        More
+                        MORE
                       </button>
                     </center>
                   </div>
