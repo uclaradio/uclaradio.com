@@ -58,7 +58,7 @@ const FrontpageContent = React.createClass({
             <Grid>
 
               <Col xs={12} md={3} className="frontpageCol">
-                <IndexLink to="/beta" activeClassName="active">
+                <IndexLink to="/" activeClassName="active">
                   <div className="radioBanner">
                     <RectImage maxWidth="350px"
                       src="/img/uclaradio-black.png" />
@@ -71,7 +71,7 @@ const FrontpageContent = React.createClass({
 
               <Col xs={12} md={9} className="frontpageCol">
                 <div className="promoBanner">
-                  <Link to="/beta/shows">
+                  <Link to="/shows">
                     { /* Sample data: Show of the month from last year */ }
                     <RectImage src="/img/sotmoctober2015cut.png" aspectRatio={5}>
                       <div className="overlay" />
@@ -99,12 +99,12 @@ const Frontpage = React.createClass({
   render: function() {
     return (
       <Router history={browserHistory}>
-        <Route path="/beta" component={props => <FrontpageContent {...this.props} {...props} />}>
+        <Route path="/" component={props => <FrontpageContent {...this.props} {...props} />}>
           <IndexRoute component={WaterFallContent} />
-          <Route path="/beta/djs" component={DJsTab} />
-          <Route path="/beta/events" component={EventsTab} />
-          <Route path="/beta/shows" components={ShowsTab} />
-          <Route path="/beta/shows/:showID" component={ShowContainer} />
+          <Route path="/djs" component={DJsTab} />
+          <Route path="/events" component={EventsTab} />
+          <Route path="/shows" components={ShowsTab} />
+          <Route path="/shows/:showID" component={ShowContainer} />
         </Route>
       </Router>
     );

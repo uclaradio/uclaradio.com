@@ -46,21 +46,21 @@ var FrontPageNavbar = React.createClass({
       <div className="frontPageNavbar">
         { /** Large devices, hidden on xs **/ }
         <Nav justified bsStyle="pills" className="hidden-xs" onSelect={this.handleClick}>
-          <LinkContainer to="/beta/djs">
+          <LinkContainer to="/djs">
             <NavItem className="frontPageNavbarItem leftMost">
               <span className="equalWidth">
                 DJs
               </span>
             </NavItem>
           </LinkContainer>
-          <LinkContainer to="/beta/events">
+          <LinkContainer to="/events">
             <NavItem className="frontPageNavbarItem">
               <span className="equalWidth">
                 Events
               </span>
             </NavItem>
           </LinkContainer>
-          <LinkContainer to="/beta/shows">
+          <LinkContainer to="/shows">
             <NavItem className="frontPageNavbarItem">
               <span className="equalWidth">
                 Shows
@@ -85,13 +85,13 @@ var FrontPageNavbar = React.createClass({
 
         { /** Extra Small devices, hidden on sm, md, lg **/ }
         <Nav justified bsStyle="pills" className="hidden-sm hidden-md hidden-lg" onSelect={this.handleClick}>
-          <LinkContainer to="/beta/djs">
+          <LinkContainer to="/djs">
             <NavItem className="frontPageNavbarItem fullWidth topMost">DJs</NavItem>
           </LinkContainer>
-          <LinkContainer to="/beta/events">
+          <LinkContainer to="/events">
             <NavItem className="frontPageNavbarItem fullWidth">Events</NavItem>
           </LinkContainer>
-          <LinkContainer to="/beta/shows">
+          <LinkContainer to="/shows">
             <NavItem className="frontPageNavbarItem fullWidth">Shows</NavItem>
           </LinkContainer>
           <NavDropdown title="More" className="frontPageNavbarItem fullWidth bottomMost">

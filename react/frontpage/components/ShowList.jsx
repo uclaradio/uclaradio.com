@@ -19,9 +19,9 @@ var ShowList = React.createClass({
 	componentWillMount() {
 		this.props.updateShows();
 	},
-  urlFromShow: function(show) {
-    return "/beta/shows/" + show.id;
-  },
+	urlFromShow: function(show) {
+		return "/shows/" + show.id;
+	},
 	render() {
 		return (
 			<div className="showList">

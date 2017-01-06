@@ -36,7 +36,7 @@ const ShowInfo = React.createClass({
     return name.length > l ? name.substr(0,l-2) + "\u2026" : name;
   },
   urlFromShow: function(show) {
-    return "/beta/shows/" + show.id;
+    return "/shows/" + show.id;
   },
   render: function() {
     if (!this.props.show) {

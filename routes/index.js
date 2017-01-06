@@ -14,31 +14,6 @@ var FB = "https://graph.facebook.com/uclaradio?fields=posts.limit("+numberOfFBPo
 var TUMBLR = "https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key="+passwords["TUMBLR_API_KEY"]+"&limit="+numberOfTUMBLRPosts;
 var socialMediaURLs = [FB, TUMBLR];
 
-router.get('/', function(req, res) {
-	var info = getTimeAndDay();
-
-	shows.getShowByTimeslotAndDay(info.time, info.day, function(err, blurb) {
-		if (blurb != null) {
-			var combined = "";
-			var comma = false;
-			if (blurb.djs != null) {
-				for (user in blurb.djs) {
-					if (comma) { combined += ", "; }
-					else { comma = true; }
-
-					if (blurb.djs[user]) {
-						combined += blurb.djs[user];
-					}
-				}
-			}
-			blurb.djName = combined;
-		}
-
-		res.render('index', {blurb: blurb});
-	});
-
-});
-
 router.get('/blurbinfo', function(req, res, next) {
 	var info = getTimeAndDay();
 
