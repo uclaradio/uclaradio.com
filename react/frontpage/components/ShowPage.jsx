@@ -58,7 +58,7 @@ const ShowPage = React.createClass({
 		}
 		return (
 			<div className="showPage">
-				<p><Link to="/shows">{show.day + " " + show.time}</Link> / {show.genre}</p>
+				<p><Link to="/shows">{show.day + " " + show.time}</Link>{show.genre && (" / " + show.genre)}</p>
 				<RectImage maxWidth="350px" src={show.picture || defaultShowPic} />
 				<div className="showInfo">
 					<h3>{show.title}</h3>

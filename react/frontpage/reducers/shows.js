@@ -13,6 +13,16 @@ const shows = (state = initialState, action) => {
 			return Object.assign({}, state, {
 				shows: action.shows
 			});
+		// update now playing show id
+		case 'UPDATE_NOW_PLAYING':
+			return Object.assign({}, state, {
+				nowPlayingID: action.showID
+			});
+		// update shows by adding a show, replacing old copy if necessary
+		case 'ADD_UPDATE_SHOW':
+			return Object.assign({}, state, {
+				shows: addOrReplaceObjectWithID(state.shows, action.show)
+			});
 		// should indicate in UI that shows fetching started
 		case 'STARTED_FETCHING':
 			return Object.assign({}, state, {
@@ -23,16 +33,6 @@ const shows = (state = initialState, action) => {
 			return Object.assign({}, state, {
 				fetching: false
 			});
-		// update now playing show id
-		case 'UPDATE_NOW_PLAYING':
-			return Object.assign({}, state, {
-				nowPlayingID: action.showID
-			});
-		// update shows by adding a show, replacing old copy if necessary
-		case 'ADD_UPDATE_SHOW':
-			return Object.assign({}, state, {
-				shows: addOrReplaceObjectWithID(state.shows, action.show)
-			})
 		default:
 			return state;
 	};

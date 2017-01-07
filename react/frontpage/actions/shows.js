@@ -45,4 +45,4 @@ export const fetchUpdatedShows = (dispatch) => {
       console.error(scheduleURL, status, err.toString());
     }.bind(this)
   });
-}
+};
