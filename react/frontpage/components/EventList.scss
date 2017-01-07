@@ -41,10 +41,12 @@ $serif-font: Georgia, serif;
 	width: $event-width;
 	margin: $event-margin;
 	// font-family: $sans-serif-font;
-	color: white;
 	text-align: center;
 	position: relative;
-	cursor: pointer;
+}
+
+.event a {
+	color: white !important;
 }
 
 .venue {

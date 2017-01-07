@@ -10,6 +10,7 @@ import ShowsTab from './containers/ShowsTab.jsx';
 import EventsTab from './containers/EventsTab.jsx';
 import DJsTab from './containers/DJsTab.jsx';
 import ShowContainer from './containers/ShowContainer.jsx';
+import EventContainer from './containers/EventContainer.jsx';
 
 // Frontpage Components (Views)
 import TriangleCanvas from './components/TriangleCanvas.jsx';
@@ -105,6 +106,7 @@ const Frontpage = React.createClass({
           <Route path="/events" component={EventsTab} />
           <Route path="/shows" components={ShowsTab} />
           <Route path="/shows/:showID" component={ShowContainer} />
+          <Route path="/events/:eventID" component={EventContainer} />
         </Route>
       </Router>
     );

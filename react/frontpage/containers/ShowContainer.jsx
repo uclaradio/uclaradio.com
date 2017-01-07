@@ -1,5 +1,5 @@
 // ShowContainer.jsx
-// redux container for show page component
+// redux container for single show page component
 
 import { connect } from 'react-redux';
 import ShowPage from '../components/ShowPage.jsx';

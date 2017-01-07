@@ -1,9 +1,12 @@
 // EventTab.jsx
+// list of events in events tab of frontpage
+
 import React from 'react';
+
+import { Link } from 'react-router';
 
 // Common Elements
 import RectImage from '../../common/RectImage.jsx';
-
 import Loader from './Loader.jsx';
 
 // styling
@@ -54,24 +57,26 @@ var EventList = React.createClass({
 									<h1>{month['month']}</h1>
 									<div className="allEvents">
 										{ month['arr'].map(function(event) {
-											var start = formatDate(event['start']);
-											var eventColor = getBackgroundColor(event['type']);
+											var start = formatDate(event.start);
+											var eventColor = getBackgroundColor(event.type);
 											return (
-												<div className="event" key={event['id']}>
-													<RectImage src={event['image']} />
-													<div className="overlayWrapper">
-														<div className="overlay" style={{backgroundColor: eventColor}}>
-															<p className="eventDate">{start}</p>
-															<div className="eventOverlay">
-																<p className="bandName">{event['host']}</p>
-																<p className="separator">. . .&nbsp;&nbsp;&nbsp;. . .&nbsp;&nbsp;&nbsp;. . .</p>
-																<p className="venue">{event['location']}</p>
+												<div className="event" key={event.id}>
+													<Link to={"/events/" + event.id}>
+														<RectImage src={event.image} />
+														<div className="overlayWrapper">
+															<div className="overlay" style={{backgroundColor: eventColor}}>
+																<p className="eventDate">{start}</p>
+																<div className="eventOverlay">
+																	<p className="bandName">{event.host}</p>
+																	<p className="separator">. . .&nbsp;&nbsp;&nbsp;. . .&nbsp;&nbsp;&nbsp;. . .</p>
+																	<p className="venue">{event.location}</p>
+																</div>
+															</div>
+															<div className="hoverOverlay">
+																<p className="enterLabel">click for more details</p>
 															</div>
 														</div>
-														<div className="hoverOverlay">
-															<p className="enterLabel">click for more details</p>
-														</div>
-													</div>
+													</Link>
 												</div>											
 											);
 										})
