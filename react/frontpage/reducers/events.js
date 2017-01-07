@@ -13,6 +13,11 @@ const events = (state = initialState, action) => {
 			return Object.assign({}, state, {
 				events: action.events
 			});
+		case 'UPDATE_GROUPS':
+			// use for groups (months) of events
+			return Object.assign({}, state, {
+				groups: action.groups
+			});
 		case 'STARTED_FETCHING':
 			return Object.assign({}, state, {
 				fetching: true

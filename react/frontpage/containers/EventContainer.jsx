@@ -9,7 +9,7 @@ import { fetchUpdatedEvents } from '../actions/events';
 const mapStateToProps = (state, ownProps) => {
 	var eventID = ownProps.params['eventID'];
 	return {
-		event: eventFromGroups(eventID, state.events.events),
+		event: state.events.events[eventID],
 		fetching: state.events.fetching
 	};
 };
@@ -24,24 +24,5 @@ const EventContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(EventPage);
-
-/**
-Helpers
-**/
-
-const eventFromGroups = (eventID, eventGroups) => {
-	for (var groupIndex = 0; groupIndex < eventGroups.length; groupIndex++) {
-		for (var eventIndex = 0; eventIndex < eventGroups[groupIndex].arr.length; eventIndex++) {
-			var event = eventGroups[groupIndex].arr[eventIndex];
-			console.log('event', event.id);
-			if (event.id === eventID) {
-				console.log('found');
-				return event;
-			}
-		}
-	}
-	console.log('didnt find');
-	return null;
-}
 
 export default EventContainer;

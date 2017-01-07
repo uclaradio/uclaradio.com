@@ -23,7 +23,7 @@ const colors = {
 /**
 Content of events page
 
-@prop events: list of event objects
+@prop eventGroups: list of groups of event objects, each with a title (months)
 @prop fetching: currently fetching objects
 @prop updateEvents: callback action to fetch updated events from server
 **/
@@ -44,19 +44,19 @@ var EventList = React.createClass({
 
 		return (
 			<div className="eventsTab">
-				{ this.props.fetching && this.props.events.length == 0 ?
+				{ this.props.fetching && this.props.eventGroups.length == 0 ?
 					<Loader />
 				:
 					<div>
 						<div className="colorKey">
 							{legend}
 						</div>
-						{ this.props.events.map (function(month) {
+						{ this.props.eventGroups.map (function(month) {
 							return (
-								<div className="monthEvents" key={month['month']}>
-									<h1>{month['month']}</h1>
+								<div className="monthEvents" key={month.title}>
+									<h1>{month.title}</h1>
 									<div className="allEvents">
-										{ month['arr'].map(function(event) {
+										{ month.events.map(function(event) {
 											var start = formatDate(event.start);
 											var eventColor = getBackgroundColor(event.type);
 											return (
