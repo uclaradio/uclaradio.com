@@ -1,0 +1,62 @@
+/**
+ShowInfo.scss
+
+Sass styling for currently playing show info component in frontpage
+**/
+
+@import '../common';
+
+.showInfo {
+  margin: 0 auto 2*$box-padding auto;
+  // max-width: 350px;
+}
+
+.infoHeader {
+	font-family: Helvetica, sans-serif;
+	font-size: 16px;
+	font-style: italic;
+	margin: 5px 0;
+}
+
+.infoHeader .glyphicon {
+	margin: 0 5px;
+}
+
+.showBanner {
+  padding: 5px;
+  // background-color: $link-color;
+  // cursor: pointer;
+}
+
+.showBanner:hover, .active .showBanner:hover {
+  // background-color: $link-hover-color;
+  background-color: $link-image-hover-color;
+}
+
+.active .showBanner {
+  // background-color: $link-hover-color;
+  background-color: $link-image-active-color;
+}
+
+.showInfo .showBanner {
+  margin: 0 auto;
+}
+
+.showBanner .rectImage {
+	margin: 0 !important;
+	width: 30%;
+	max-width: 100px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.showInfo .showDetails {
+  padding: 5px 10px;
+  width: 70%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.showDetails .showTitle {
+	font-size: 18px;
+}

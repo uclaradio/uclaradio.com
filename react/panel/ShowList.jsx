@@ -3,7 +3,7 @@
 var React = require('react');
 
 // Misc
-var Dates = require('../misc/Dates.js');
+var Dates = require('../common/Dates.js');
 
 // Panel elements
 var RectImage = require('../common/RectImage.jsx');

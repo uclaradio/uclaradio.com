@@ -1,0 +1,70 @@
+/**
+DJList.scss
+
+Sass styling for frontpage djs list
+**/
+
+@import '../common';
+
+// constants
+$overlay-opacity: 0.80;
+$overlay-duration: 0.25s;
+
+.djList {
+  text-align: center;
+  width: 100%;
+}
+
+.djTile {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  margin: 1%;
+  position: relative;
+}
+
+.djTile.full {
+  border-radius: 50%;
+  background-color: white;
+  overflow: hidden;
+}
+
+.djName {
+  max-width: 145px;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.djTileInfo {
+  position:relative;
+  display: block;
+  padding: 5%;
+  margin-top: -10px;
+}
+
+.djTileOverlay {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  cursor: pointer;
+  background-color: white;
+  opacity: 0;
+  transition: opacity $overlay-duration;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.djTile:hover > .djTileInfo, .djTile.empty {
+  text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
+}
+
+.djTileOverlay:hover, .djTile.empty .djTileOverlay {
+  opacity: $overlay-opacity;
+}

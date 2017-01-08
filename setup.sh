@@ -17,6 +17,8 @@ sudo chown -R $USER /data/db
 echo 'installing npm packages'
 ## note: might need to update if 'node-gyp rebuild' fails
 # npm explore npm -g -- npm install node-gyp@latest
+## might have to install cairo for dependent npm packages
+# brew install cairo
 sudo npm install
 
 cp defaultPasswords.json passwords.json

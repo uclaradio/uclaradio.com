@@ -10,10 +10,8 @@ var multer = require('multer');
 var routes = require('./routes/index');
 var staffingPoints = require('./routes/staffingPoints');
 var ios = require('./routes/ios');
-// var schedule = require('./routes/schedule');
 var pages = require('./routes/pages');
 var calendar = require('./routes/calendar');
-var showsPages = require('./routes/shows');
 var managers = require('./routes/managers');
 var TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
 var panel = require('./routes/panel.js');
@@ -47,28 +45,26 @@ app.use(multer({ dest: './public/uploads/'}));
 app.use('/', routes);
 app.use('/staffingPoints', staffingPoints);
 app.use('/ios', ios);
-// app.use('/schedule', schedule);
 app.use('/pages', pages);
 app.use('/calendar', calendar);
-app.use('/shows', showsPages);
 app.use('/managers', managers);
 app.use('/GiveawayCalendar', TicketGiveawayCalendar);
 app.use('/notFound', notFound);
 app.use('/analytics', analytics);
 app.use('/api', api);
-// all links to panel/* handled in panel.js
 app.use('/panel', panel);
 
 app.use('/faq', function(req, res, next) {
   res.redirect('/panel/faq');
 });
 
-// catch 404 and forward to error handler
+// catch 404 and forward to frontpage
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  res.render('notFound');
-
+  // var err = new Error('Not Found');
+  // err.status = 404;
+  // res.render('notFound');
+  var path = require('path');
+  res.sendFile(path.resolve('public/frontpage.html'));
 });
 
 // error handlers

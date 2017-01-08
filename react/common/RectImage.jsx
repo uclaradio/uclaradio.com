@@ -1,23 +1,24 @@
 // RectImage.jsx
 
-var React = require('react');
+import React from 'react';
 
 // Bootstrap Elements
-var Image = require('react-bootstrap').Image;
+import Image from 'react-bootstrap';
 
 // Open-Source Elements
-var Rectangle = require('react-rectangle');
+import Rectangle from 'react-rectangle';
+
+// styling
+require('./RectImage.scss');
 
 /**
-*  Wrapper for Image which keeps its frame square, sets height equal to width
+*  Wrapper for Image which keeps its frame rectangular, sets height equal to width
 *  Centers image with scale-to-fill if you set the background
 *
 *  @prop src: image source url
 *  @prop maxWidth: maximum width value
-*  @prop thumbnail: Image should be thumbnail
-*  @prop responsive: Image should be responsive
 *  @prop circle: Image should be circle
-*  @prop rounded: Image should be rounded
+*  @prop aspectRatio: float ratio for image
 */
 var RectImage = React.createClass({
   getDefaultProps: function() {
@@ -35,18 +36,19 @@ var RectImage = React.createClass({
       height: "100%",
       backgroundSize: "cover"
     };
+    if (this.props.circle) {
+      pictureStyle.borderRadius = "50%";
+    }
     var rectangleStyle = {
       maxWidth: this.props.maxWidth,
       margin: "0 auto"
     };
     return (
-      <div className="rectImage">
-        <Rectangle aspectRatio={this.props.aspectRatio} style={rectangleStyle}>
-          <Image style={pictureStyle} className="rectImagePic"
-          thumbnail={this.props.thumbnail} responsive
-          circle={this.props.circle} rounded={this.props.rounded} />
-        </Rectangle>
-      </div>
+      <Rectangle className="rectImage" aspectRatio={this.props.aspectRatio} style={rectangleStyle}>
+        <div style={pictureStyle} className="rectImagePic">
+          {this.props.children}
+        </div>
+      </Rectangle>
     );
   }
 });

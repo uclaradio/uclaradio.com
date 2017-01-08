@@ -18,11 +18,11 @@ var ShowList = require('./panel/ShowList.jsx');
 var RectImage = require('./common/RectImage.jsx');
 
 // Inputs
-var InputEditableTextField = require('./inputs/InputEditableTextField.jsx');
-var InputFileUpload = require('./inputs/InputFileUpload.jsx');
+var InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
+var InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
 
 // Misc
-var Dates = require('./misc/Dates.js');
+var Dates = require('./common/Dates.js');
 
 // Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
