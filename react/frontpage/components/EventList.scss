@@ -1,0 +1,159 @@
+/**
+EventTab.scss
+
+Sass styling for events tab of new frontpage
+**/
+
+@import '../common';
+
+// constants
+$event-width: 200px;
+$event-margin: 5pt;
+$overlay-opacity: 0.85;
+$overlay-duration: 0.25s;
+$sans-serif-font: Helvetica, sans-serif;
+$serif-font: Georgia, serif;
+
+.eventsTab {
+	margin: 2*$box-padding -5pt 10pt -5pt;
+	text-align: center;
+}
+
+.monthEvents {
+	overflow: auto;
+	clear: both;
+	margin: 0 auto;
+}
+
+.allEvents {
+	font-size: 0;
+}
+
+@media screen and (min-width: 48em) {
+	.allEvents {
+		text-align: left;
+	}
+}
+
+.event {
+	display: inline-block;
+	height: $event-width;
+	width: $event-width;
+	margin: $event-margin;
+	// font-family: $sans-serif-font;
+	text-align: center;
+	position: relative;
+}
+
+.event a {
+	color: white !important;
+}
+
+.venue {
+	font-size: 14px;
+}
+
+.enterLabel {
+	color: black;
+	text-align: right;
+	font-size: 14px;
+	font-style: italic;
+	position: absolute;
+	bottom: 0px;
+	right: $event-margin;
+	margin-bottom: 0px;
+}
+
+.separator {
+	font-size: 18px;
+	font-family: $serif-font;
+	line-height: 10px;
+}
+
+.eventOverlay {
+	position: absolute;
+	top: 30%;
+	left: 12.5%;
+	width: 150px;
+}
+
+.eventDate {
+	font-size: 160px;
+	line-height: $event-width;
+	font-weight: bold;
+	opacity: 0.35;
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	margin: 0;
+}
+
+.bandName {
+	font-size: 18px;
+	font-family: $serif-font;
+	font-style: italic;
+	margin-bottom: 0
+}
+
+.hoverOverlay {
+	width: 100%;
+	opacity: 0;
+}
+
+.hoverOverlay:hover {
+	opacity: $overlay-opacity;
+}
+
+.overlayWrapper {
+	width: 100%;
+}
+
+.overlayWrapper .overlay {
+	height: 100%;
+	width: 100%;
+	background-color: grey;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	opacity: $overlay-opacity;
+  	transition: opacity $overlay-duration;
+}
+		
+.overlayWrapper:hover .overlay {
+	opacity: 0;
+}
+
+.overlayWrapper .hoverOverlay {
+	height: 20px;
+	width: 100%;
+	background-color: white;
+	opacity: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: inline;
+}
+
+.overlayWrapper:hover .hoverOverlay {
+	opacity: $overlay-opacity;
+}
+
+.colorKeyLabel {
+	display: inline-block;
+	position: relative;
+	margin-right: 20px;
+	font-size: 16px;
+}
+
+.dot {
+	background-color: grey;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
+}

@@ -21,8 +21,8 @@ var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
 var ShowList = require('./panel/ShowList.jsx');
 
 // Inputs
-var InputEditableTextField = require('./inputs/InputEditableTextField.jsx');
-var InputCheckbox = require('./inputs/InputCheckbox.jsx');
+var InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
+var InputCheckbox = require('./panel/inputs/InputCheckbox.jsx');
 
 // Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;

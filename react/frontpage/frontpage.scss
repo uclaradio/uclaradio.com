@@ -1,0 +1,75 @@
+/**
+frontpage.scss
+
+Sass styling for new frontpage
+**/
+
+@import 'common';
+
+
+body {
+  font-family: 'apercuregular';
+  font-size: 11pt;
+}
+
+#main {
+  margin: 20pt auto 175px auto;
+}
+
+a {
+  color: black !important;
+}
+
+// Frontpage styling
+
+h1, h2, h3 {
+  margin-top: 10px;
+}
+
+h4 {
+  margin-top: 0px;
+}
+
+.frontpageCol {
+  padding-left: $box-padding;
+  padding-right: $box-padding;
+}
+
+// Radio Info
+
+.radioBanner {
+  margin-bottom: 4*$box-padding;
+}
+
+// .active > .radioBanner > .rectImage {
+//   background-color: rgba(white, 0.35);
+// }
+
+.radioBanner > .rectImage:hover, .radioBanner > .rectImage:focus {
+  background-color: rgba(white, 0.5);
+}
+
+.radioInfo {
+  margin: 2*$box-padding 0;
+  padding: 0 10pt;
+}
+
+// Banner
+
+.promoBanner {
+  background-color: white;
+  margin-bottom: 10pt;
+  cursor: pointer;
+}
+
+.promoBanner .overlay {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.promoBanner:hover .overlay {
+  background-color: $link-image-active-color;
+}

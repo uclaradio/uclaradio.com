@@ -1,0 +1,24 @@
+/**
+EventPage.scss
+
+Sass styling for individual event's page in new frontpage
+**/
+
+.eventPage {
+	margin: 10pt 0;
+	padding: 10pt 20pt;
+}
+
+$image-width: 30%;
+.eventPage .rectImage {
+	margin: 0 !important;
+	display: inline-block;
+	vertical-align: top;
+	width: $image-width;
+}
+
+.eventPage .eventInfo {
+	display: inline-block;
+	width: 100% - $image-width;
+	padding: 10pt 20pt;
+}

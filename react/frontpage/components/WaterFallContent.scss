@@ -1,0 +1,117 @@
+/**
+EventsTab.scss
+
+Sass styling for events tab of new frontpage
+**/
+
+@import '../common';
+
+// constants
+$fadein-duration: 2s;
+
+@include fade-animation("waterfallfadein", 0.0, 1.0);
+
+.wf-container {
+    margin: 0 -5pt;
+}
+
+.wf-container a:hover {
+    text-decoration: none;
+}
+.wf-container a:active {
+    text-decoration: underline;
+}
+
+.wf-container a:visited {
+    text-decoration: none;
+}
+
+.wf-container:before,.wf-container:after {
+    content: '';
+    display: table;
+}
+.wf-container:after {
+    clear: both;
+}
+.wf-box {
+	padding:  5pt;
+    /*margin: 2%;*/
+    /*padding: 2%;*/
+    @include animations("waterfallfadein", $fadein-duration);
+}
+
+.wf-box img { 
+    display: block;
+    width: 100%;
+}
+
+.wf-box .content {
+    border: 1px solid #ccc;
+    border-top-width: 0;
+    padding: 5pt 8pt;
+}
+
+.wf-column {
+    float: left;
+}
+
+.wf-box-content {
+	position:relative;
+	display: block;
+	background-color: rgba(255, 255, 255, 0.75);
+    @include animations("waterfallfadein", $fadein-duration);
+}
+
+.wf-box-content:hover {
+	background-color: white;
+}
+
+.wf-box-content img {
+	width: 100%;
+}
+
+.wf-box-content .overlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.wf-box-content:hover .overlay {
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+.wf-box-content-blog {
+	padding: 15pt;
+	font-size: 14pt;
+}
+
+.wf-box-content-text {
+	padding: 10pt;
+}
+
+.wf-box-content-text-date {
+    overflow: hidden;
+    text-align: center;
+}
+.wf-box-content-text-date:before,
+.wf-box-content-text-date:after {
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+}
+.wf-box-content-text-date:before {
+    right: 10pt;
+    margin-left: -50%;
+}
+.wf-box-content-text-date:after {
+    left: 10pt;
+    margin-right: -50%;
+}
+
+
