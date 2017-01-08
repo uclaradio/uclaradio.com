@@ -10,7 +10,6 @@ var multer = require('multer');
 var routes = require('./routes/index');
 var staffingPoints = require('./routes/staffingPoints');
 var ios = require('./routes/ios');
-// var schedule = require('./routes/schedule');
 var pages = require('./routes/pages');
 var calendar = require('./routes/calendar');
 var managers = require('./routes/managers');
@@ -46,7 +45,6 @@ app.use(multer({ dest: './public/uploads/'}));
 app.use('/', routes);
 app.use('/staffingPoints', staffingPoints);
 app.use('/ios', ios);
-// app.use('/schedule', schedule);
 app.use('/pages', pages);
 app.use('/calendar', calendar);
 app.use('/managers', managers);
@@ -54,7 +52,6 @@ app.use('/GiveawayCalendar', TicketGiveawayCalendar);
 app.use('/notFound', notFound);
 app.use('/analytics', analytics);
 app.use('/api', api);
-// all links to panel/* handled in panel.js
 app.use('/panel', panel);
 
 app.use('/faq', function(req, res, next) {

@@ -65,16 +65,17 @@ const FrontpageContent = React.createClass({
                       src="/img/uclaradio-black.png" />
                   </div>
                 </IndexLink>
+                { /* Show Spotlight */ }
                 <ShowInfo title="Current Show"
                   show={showPlaying ? this.props.nowPlaying : null} />
                 <ShowInfo title="Spotlight" show={sampleFeaturedShow} />
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
+                { /* Show of the Month */ }
                 <div className="promoBanner">
                   <Link to="/shows">
-                    { /* Sample data: Show of the month from last year */ }
-                    <RectImage src="/img/sotmoctober2015cut.png" aspectRatio={5}>
+                    <RectImage src="/img/sotm_january_2017.png" aspectRatio={5}>
                       <div className="overlay" />
                     </RectImage>
                   </Link>
