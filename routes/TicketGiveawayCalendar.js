@@ -8,90 +8,91 @@ var transporter = nodemailer.createTransport('smtps://radio.promotions%40media.u
 
 
 var PublicGoogleCalendar = require('public-google-calendar')
-  , publicGoogleCalendar = new PublicGoogleCalendar({ calendarId: 'media.ucla.edu_u701v206t0p4hfes93rkdjtghg@group.calendar.google.com' });
+  , publicGoogleCalendar = new PublicGoogleCalendar({ calendarId: 'radio.web@media.ucla.edu' });
 
+var fetchEvents = function(callback) {
+  publicGoogleCalendar.getEvents(function(err, events) {
+    if (err) {
+      console.log(err.message);
+      callback(null);
+    }
+    // events is now array of all calendar events
+    var currDate = new Date();
+    var Year = currDate.getYear();
+    var Month = currDate.getMonth();
+    var currDate = currDate.getDate();
+    events = events.filter(function(el) {
+        return (el["start"].getMonth() >= Month) 
+        && (el["start"].getYear() == Year) 
+        && !((el["start"].getMonth() == Month) && (el["start"].getDate() < currDate))
+    })
+    events = events.reverse();
+
+    var eventsByMonth = [{month:"January", arr:[]},
+                        {month:"February", arr:[]},
+                        {month:"March", arr:[]},
+                        {month:"April", arr:[]},
+                        {month:"May", arr:[]},
+                        {month:"June", arr:[]},
+                        {month:"July", arr:[]},
+                        {month:"August", arr:[]},
+                        {month:"September", arr:[]},
+                        {month:"October", arr:[]},
+                        {month:"November", arr:[]},
+                        {month:"December", arr:[]}];
+
+    for(var i = 0; i < events.length; i++) {
+      eventsByMonth[events[i]["start"].getMonth()].arr.push(events[i]);
+    }
+    eventsByMonth = eventsByMonth.filter(function(el) {
+      return el.arr.length != 0;
+    })
+    callback(eventsByMonth);
+  });
+};
 
 router.get('/', function(req, res, next) {
-    publicGoogleCalendar.getEvents(function(err, events) {
-      if (err) { return console.log(err.message); }
-      // events is now array of all calendar events
-      var currDate = new Date();
-      var Year = currDate.getYear();
-      var Month = currDate.getMonth();
-      var currDate = currDate.getDate();
-      events = events.filter(function(el) {
-          return (el["start"].getMonth() >= Month) 
-          && (el["start"].getYear() == Year) 
-          && !((el["start"].getMonth() == Month) && (el["start"].getDate() < currDate))
-      })
-      events = events.reverse();
-
-      var eventsByMonth = [{month:"January", arr:[]},
-                          {month:"February", arr:[]},
-                          {month:"March", arr:[]},
-                          {month:"April", arr:[]},
-                          {month:"May", arr:[]},
-                          {month:"June", arr:[]},
-                          {month:"July", arr:[]},
-                          {month:"August", arr:[]},
-                          {month:"September", arr:[]},
-                          {month:"October", arr:[]},
-                          {month:"November", arr:[]},
-                          {month:"December", arr:[]}];
-
-      for(var i = 0; i < events.length; i++) {
-        eventsByMonth[events[i]["start"].getMonth()].arr.push(events[i]);
-      }
-      eventsByMonth = eventsByMonth.filter(function(el) {
-        return el.arr.length != 0;
-      })
-      console.log(eventsByMonth);
-      var mobileEvents = eventsByMonth;
-      //console.log(events[0]);
-      res.render('TicketGiveawayCalendar', {eventsByMonth: eventsByMonth, mobileEvents: mobileEvents});
-
-    });
+  fetchEvents(function(eventsByMonth) {
+    var mobileEvents = eventsByMonth;
+    res.render('TicketGiveawayCalendar', {eventsByMonth: eventsByMonth, mobileEvents: mobileEvents});
+  });
 });
 
 // json verson for apps
 router.get('/data', function(req, res, next) {
-    publicGoogleCalendar.getEvents(function(err, events) {
-      if (err) { return console.log(err.message); }
-      // events is now array of all calendar events
-      var currDate = new Date();
-      var Year = currDate.getYear();
-      var Month = currDate.getMonth();
-      var currDate = currDate.getDate();
-      events = events.filter(function(el) {
-          return (el["start"].getMonth() >= Month) 
-          && (el["start"].getYear() == Year) 
-          && !((el["start"].getMonth() == Month) && (el["start"].getDate() < currDate))
-      })
-      events = events.reverse();
+  fetchEvents(function(eventsByMonth) {
+    res.json({events: eventsByMonth});
+  });
+});
 
-      var eventsByMonth = [{month:"January", arr:[]},
-                          {month:"February", arr:[]},
-                          {month:"March", arr:[]},
-                          {month:"April", arr:[]},
-                          {month:"May", arr:[]},
-                          {month:"June", arr:[]},
-                          {month:"July", arr:[]},
-                          {month:"August", arr:[]},
-                          {month:"September", arr:[]},
-                          {month:"October", arr:[]},
-                          {month:"November", arr:[]},
-                          {month:"December", arr:[]}];
+// json verson for apps v2
+router.get('/data2', function(req, res, next) {
+  fetchEvents(function(eventsByMonth) {
+    var summaryPattern = /([^@]*)@([^@]*)/g;
+    var descriptionImagePattern = /image: "([^"]*)"/g;
+    var cleanedMonths = eventsByMonth.map(function(month) {
+      return cleanedEvents = month.arr.map(function(event) {
+        var e = event;
+        // assume giveaway
+        e.type = "Giveaway";
 
-      for(var i = 0; i < events.length; i++) {
-        eventsByMonth[events[i]["start"].getMonth()].arr.push(events[i]);
-      }
-      eventsByMonth = eventsByMonth.filter(function(el) {
-        return el.arr.length != 0;
-      })
-      //console.log(events[0]);
-      res.json({events: eventsByMonth});
+        // get host, location from summary
+        var match = summaryPattern.exec(e.summary);
+        if (match != null) {
+          e.host = match[1].trim();
+          e.location = match[2].trim();
+        }
 
+        // get image from description
+        match = descriptionImagePattern.exec(e.description);
+        if (match != null) {
+          e.image = match[1].trim();
+        }
+        return e;
+      });
     });
+    res.json({events: eventsByMonth});
+  });
 });
 
 
