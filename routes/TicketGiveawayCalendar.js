@@ -8,7 +8,7 @@ var transporter = nodemailer.createTransport('smtps://radio.promotions%40media.u
 
 
 var PublicGoogleCalendar = require('public-google-calendar')
-  , publicGoogleCalendar = new PublicGoogleCalendar({ calendarId: 'radio.web@media.ucla.edu' });
+  , publicGoogleCalendar = new PublicGoogleCalendar({ calendarId: 'media.ucla.edu_u701v206t0p4hfes93rkdjtghg@group.calendar.google.com' });
 
 var fetchEvents = function(callback) {
   publicGoogleCalendar.getEvents(function(err, events) {
@@ -84,10 +84,11 @@ router.get('/data2', function(req, res, next) {
         }
 
         // get image from description
-        match = descriptionImagePattern.exec(e.description);
-        if (match != null) {
-          e.image = match[1].trim();
-        }
+        // match = descriptionImagePattern.exec(e.description);
+        // if (match != null) {
+        //   e.image = match[1].trim();
+        // }
+        e.image = e.description;
         return e;
       });
     });

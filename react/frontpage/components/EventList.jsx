@@ -20,6 +20,8 @@ const colors = {
 	"Local Event": "#cca437",	//orange
 }
 
+const defaultEventPic = "/img/radio.png";
+
 /**
 Content of events page
 
@@ -62,7 +64,7 @@ var EventList = React.createClass({
 											return (
 												<div className="event" key={event.id}>
 													<Link to={"/events/" + event.id}>
-														<RectImage src={event.image} />
+														<RectImage src={event.image || defaultEventPic} />
 														<div className="overlayWrapper">
 															<div className="overlay" style={{backgroundColor: eventColor}}>
 																<p className="eventDate">{start}</p>
