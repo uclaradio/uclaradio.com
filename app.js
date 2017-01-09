@@ -26,13 +26,6 @@ var analytics = require('./routes/analytics');
 var api = require('./routes/api');
 var chat = require('./routes/chat')(io);
 
-// //socket io events
-// io.on( "connection", function( socket )
-// {
-//     console.log( "A user connected" );
-// });
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
