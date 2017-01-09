@@ -131,7 +131,7 @@ var RecentlyPlayed = React.createClass({
     if (this.props.reset && !this.state.hasReset) {
       this.setState({hasReset: true});
     }
-    document.getElementsByClassName("trackInfo").focus();
+    document.getElementById("trackInfo").focus();
   },
   onExited: function() {
     if (this.props.reset) {

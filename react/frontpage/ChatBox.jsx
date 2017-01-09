@@ -201,7 +201,7 @@ var ChatBox = React.createClass({
     return (
       <span>
       <Grid>
-        <Col xs={12} md={9}>
+        <Col xs={12} md={5}>
           <div className='chat-box-fade-top'>
             <div className='chat-box-fade-bottom'>
               <div id='chat-box'>
