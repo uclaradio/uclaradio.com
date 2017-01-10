@@ -146,7 +146,7 @@ function newNode(full_picture, summary, created_time, link, platform) {
   }
   box_content_text.appendChild(document.createTextNode(summary));
   summary = String(summary);
-  if (!summary.includes("http")) {
+  if (!summary.includes("http") && !summary.includes("undefined")) {
     box_content.appendChild(box_content_text);
   }
   a.appendChild(box_content);
