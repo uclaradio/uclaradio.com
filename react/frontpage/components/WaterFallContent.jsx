@@ -102,7 +102,7 @@ function checkSlide(elem) {
 function nodeFromPost(post) {
   var link = post['link'] || post['post_url'];
   var picture = post['full_picture'];
-  var summary = post['summary'] || post['message'];
+  var summary = post['summary'] || post['message'] || "";
   var created = formatDate(post['created_time']);
   var platform = post['platform'] || "FB";
   return newNode(picture, summary, created, link, platform);
