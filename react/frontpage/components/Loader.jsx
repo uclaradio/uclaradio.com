@@ -18,7 +18,7 @@ import Loading from 'react-loading';
 
 const Loader = () => (
 	<div className="loader">
-		<Loading type='spin' />
+		<center><img src="./img/icons/loading.gif" /></center>
 	</div>
 );
 
