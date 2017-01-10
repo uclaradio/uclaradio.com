@@ -36,7 +36,7 @@ input:focus {
 @media only screen and (min-width: 1000px) {
 	/*ensure that chat images are full size on mobile */
 	.message_form {
-		padding-top: 40%;
+		padding-top: 30%;
 	}
 }
 
@@ -137,6 +137,7 @@ input:focus {
 #load_more {
 	letter-spacing: 2px;
 	margin-top: 20px;
+	padding: 0px;
 	border-radius: 20px;
  	top: 50%;
   	transform: translateY(-50%);

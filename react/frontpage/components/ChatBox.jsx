@@ -201,7 +201,7 @@ var ChatBox = React.createClass({
     return (
       <span>
       <Grid>
-        <Col xs={12} md={5}>
+        <Col xs={12} md={8}>
           <div className='chat-box-fade-top'>
             <div className='chat-box-fade-bottom'>
               <div id='chat-box'>
@@ -221,7 +221,7 @@ var ChatBox = React.createClass({
             </div>
           </div>
         </Col>
-        <Col xs={12} md={3}>
+        <Col xs={12} md={4}>
               <MessageForm
                   onMessageSubmit={this.handleMessageSubmit}
                   user={this.state.user}

@@ -84,3 +84,8 @@ Sass styling for frontpage stream bar component
   top: 0;
   bottom: 0;
 }
+
+#nowPlaying {
+  background-size: 50% 100%;
+  animation: example infinite;
+}
