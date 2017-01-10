@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-webpack');
 	// build all files in ./react
-	grunt.registerTask('build', ['webpack:build', 'sass']);
+	grunt.registerTask('build', ['webpack:build']);
 
 	// 'watch' task (keep alive)
 	grunt.registerTask('watch', 'Build all files on change', function () {

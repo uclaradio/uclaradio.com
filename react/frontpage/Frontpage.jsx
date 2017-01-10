@@ -31,7 +31,7 @@ import theme from '../common/theme';
 require('./Frontpage.scss');
 
 // temp data
-const sampleFeaturedShow = {"title":"Pirate Radio","id":12,"day":"Mon","time":"10pm","djs":{"chris":"DJ Jamburglar"},"genre":"Psychedelic","blurb":"Life is a trip... Sail away to undiscovered psychic frontiers with underground psychedelic jams","public":true,"pages":[],"episodes":[]};
+// const sampleFeaturedShow = {"title":"Pirate Radio","id":12,"day":"Mon","time":"10pm","djs":{"chris":"DJ Jamburglar"},"genre":"Psychedelic","blurb":"Life is a trip... Sail away to undiscovered psychic frontiers with underground psychedelic jams","public":true,"pages":[],"episodes":[]};
 
 /**
 Frontpage UI, including radio stream, navbar, and triangle background.
@@ -68,7 +68,7 @@ const FrontpageContent = React.createClass({
                 { /* Show Spotlight */ }
                 <ShowInfo title="Current Show"
                   show={showPlaying ? this.props.nowPlaying : null} />
-                <ShowInfo title="Spotlight" show={sampleFeaturedShow} />
+                { /* <ShowInfo title="Spotlight" show={sampleFeaturedShow} /> */ }
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
