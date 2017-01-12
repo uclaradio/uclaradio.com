@@ -47,6 +47,27 @@ input:focus {
 	overflow-wrap: break-word;
 }
 
+.report_message {
+	/*visibility: hidden;*/
+	position: absolute;
+	background-color: yellow;
+}
+
+.report_message:hover {
+	visibility: visible;
+	background-color: yellow;
+}
+
+.their-message .message-body-tag:hover{
+	/*visibility: hidden;*/
+	background-color: red;
+	transition: background-color 0.2s;
+}
+
+.message:hover .report_message {
+	visibility: visible;
+}
+
 @media only screen and (min-width: 400px) {
 	/*ensure that chat images are full size on mobile */
 	.message {
@@ -54,7 +75,11 @@ input:focus {
 	}
 }
 
-#message-body-tag {
+.message-body-tag {
+
+}
+
+.message-body-tag {
 	padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -71,16 +96,18 @@ input:focus {
 -webkit-hyphens: auto;
    -moz-hyphens: auto;
         hyphens: auto;
+	transition: background-color 0.2s;
+
 }
 
 
 
-#message-body-tag img {
+.message-body-tag img {
 	width: 50%;
 }
 
 @media only screen and (max-width: 400px) {
-	#message-body-tag img {
+	.message-body-tag img {
 		width: 100%;
 	}
 }
@@ -102,7 +129,7 @@ input:focus {
 	color: white;	
 }
 
-.their-message #message-body-tag{
+.their-message .message-body-tag{
 	background-color: white;
 	color: black;
 	display: inline-block;
@@ -111,7 +138,7 @@ input:focus {
 }
 
 
-.my-message #message-body-tag{
+.my-message .message-body-tag{
 	background-color: #5775F7;
 	color: white;
 	display: inline-block;
