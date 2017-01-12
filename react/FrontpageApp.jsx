@@ -16,27 +16,30 @@ const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window
 
 import { connect } from 'react-redux';
 
-import { updateNowPlaying, addUpdateShow } from './frontpage/actions/shows';
+import { updateNowPlaying, addUpdateShow, updateSpotlightShow, fetchUpdatedShows } from './frontpage/actions/shows';
 import Frontpage from './frontpage/Frontpage.jsx';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const mapStateToProps = (state) => {
-	// get now playing show from shows store
-	if (state.shows.nowPlayingID) {
-		return {
-			nowPlaying: state.shows.shows.find((show) => {
-				return show.id === state.shows.nowPlayingID;
-			})
-		}
-	}
-	return {};
-}
+const mapStateToProps = (state) => ({
+	nowPlaying: state.shows.shows.find((show) => {
+		return show.id === state.shows.nowPlayingID;
+	}),
+	spotlight: state.shows.shows.find((show) => {
+		return show.id === state.shows.spotlightID;
+	})
+});
 
 const mapDispatchToProps = (dispatch) => ({
 	updateNowPlaying: () => {
 		fetchUpdatedNowPlaying(dispatch);
+	},
+	setSpotlightShowID: (showID) => {
+		dispatch(updateSpotlightShow(showID));
+	},
+	updateShows: () => {
+		fetchUpdatedShows(dispatch);
 	}
 });
 
