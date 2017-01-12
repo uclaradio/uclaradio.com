@@ -23,9 +23,10 @@ var Message = React.createClass({
       return (
         <div className="message"> 
         {
+
             <div className={(this.props.user != this.props.viewing_user) ? "their-message" : "my-message"}
             style={ (this.props.user == this.props.viewing_user) ? {float: "right"} : {float: "left"}}>
-          	  <div id="message-body-tag">
+          	  <div className="message-body-tag">
                 {
                   this.props.text.split(' ').map(function(word){
                     if(word.length > 4 && word.substring(0,4) == "http") {

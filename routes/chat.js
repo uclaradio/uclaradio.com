@@ -13,6 +13,9 @@ module.exports = function(io) {
     var number_of_RandomInt_calls = 2;
     var call_threshold = 2;
 
+    //var password
+    var passwords = require('../passwords.json');
+
 	router.get('/', function(req, res) {
 		var path = require('path');
 		res.sendFile(path.resolve('public/frontpage.html'));
@@ -25,6 +28,27 @@ module.exports = function(io) {
             res.send(data);
         })
     });
+
+    router.post('/report', function(req, res){
+        var text = req.body.text;
+        var user = req.body.user;
+        messages.report(user, text, function(){
+            res.send("successfully reported");
+        });
+    });
+
+    router.post('/delete', function(req, res){
+        var text = req.body.text;
+        var user = req.body.user;
+        var password = req.body.password;
+        if(password == passwords["secretpassword"]) {
+            messages.delete(user, text, function(){
+                res.send("succesfully deleted");
+            });            
+        } else {
+            res.send("Wrong password.");
+        }
+    })
 
     io.on('connection', function(socket) {
     	//new user joined

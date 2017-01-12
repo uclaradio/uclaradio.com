@@ -7,6 +7,7 @@ var messages = {};
 var MessageSchema = new mongoose.Schema({
 	text: String,
   	user: String,
+  	reported: {type: Boolean, default: false},
   	date: { type: Date, default: Date.now }
 });
 
@@ -20,6 +21,22 @@ messages.saveMessage = function(data) {
 	})
 	message.save();
 };
+
+messages.report = function(user, text, callback) {
+	var param = {text: text, user: user}
+	MessageModel.update(param, {
+		reported: true
+	}, function(){
+		callback();
+	});
+}
+
+messages.delete = function(user, text, callback) {
+	var param = {text: text, user: user};
+	MessageModel.remove(param, function(){
+		callback();
+	});
+}
 
 messages.next = function(id, volume, callback) {
 	var param = id != "" ? {_id:{"$lt": mongoose.Types.ObjectId(id)}} : null;
