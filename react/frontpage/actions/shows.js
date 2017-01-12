@@ -24,12 +24,13 @@ export const addUpdateShow = (show) => ({
 	show: show
 });
 
-/**
-Helpers
-**/
+export const updateSpotlightShow = (showID) => ({
+  type: 'UPDATE_SPOTLIGHT_SHOW',
+  showID: showID
+});
 
-// Fetch updated show schedule from server and update store via dispatch
 const scheduleURL = "/api/schedule";
+// Fetch updated show schedule from server and update store via dispatch
 export const fetchUpdatedShows = (dispatch) => {
   dispatch(startFetching());
   $.ajax({

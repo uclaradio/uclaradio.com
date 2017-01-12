@@ -33,6 +33,10 @@ const shows = (state = initialState, action) => {
 			return Object.assign({}, state, {
 				fetching: false
 			});
+		case 'UPDATE_SPOTLIGHT_SHOW':
+			return Object.assign({}, state, {
+				spotlightID: action.showID
+			});
 		default:
 			return state;
 	};

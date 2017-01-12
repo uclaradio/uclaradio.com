@@ -38,13 +38,23 @@ Frontpage UI, including radio stream, navbar, and triangle background.
 Expects children components for tab contents
 
 @prop nowPlaying: show to display as live
+@prop spotlight: show to display as spotlight 
 @prop children: components to display in content area
+
+@prop updateNowPlaying: () => refresh now playing by requesting new data from server
+@prop setSpotlightShowID: (showID) => update the spotlight to be a show with the provided showID
+@prop updateShows: () => should fetch updated list of shows and update store
 **/
 const FrontpageContent = React.createClass({
   componentWillMount: function() {
     // refresh live show info now and every 30 seconds
     this.props.updateNowPlaying();
     this.interval = setInterval(this.props.updateNowPlaying, 30*1000);
+
+    // update now playing and fetch initial shows data
+    // 1/11/17 - Black Twitter!
+    this.props.setSpotlightShowID(6);
+    this.props.updateShows();
   },
   componentWillUnmount: function() {
     clearInterval(this.interval);
@@ -65,16 +75,23 @@ const FrontpageContent = React.createClass({
                       src="/img/uclaradio-black.png" />
                   </div>
                 </IndexLink>
+                { /* Apply for Radio Promo */ }
+                <div className="promoBanner">
+                  <Link to="/shows/83">
+                    <RectImage src="/img/promo/apply_for_radio_W17.png" aspectRatio={4/3}>
+                      <div className="overlay" />
+                    </RectImage>
+                  </Link>
+                </div>
                 { /* Show Spotlight */ }
-                <ShowInfo title="Current Show"
-                  show={showPlaying ? this.props.nowPlaying : null} />
-                { /* <ShowInfo title="Spotlight" show={sampleFeaturedShow} /> */ }
+                <ShowInfo title="Current Show" show={this.props.nowPlaying} />
+                <ShowInfo title="Spotlight" show={this.props.spotlight} />
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
                 { /* Show of the Month */ }
                 <div className="promoBanner">
-                  <Link to="/shows">
+                  <Link to="/shows/83">
                     <RectImage src="/img/sotm_january_2017.png" aspectRatio={5}>
                       <div className="overlay" />
                     </RectImage>
