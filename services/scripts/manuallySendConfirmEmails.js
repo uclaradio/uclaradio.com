@@ -30,7 +30,7 @@ var confirmUsers = function(users) {
 		var username = user.username;
 		if (email && name && username) {
 			mail.confirmAccount(email, username);
-			console.log("emailed", email.trim(), username.trim());
+			console.log("emailing", email.trim(), username.trim());
 		}
 	}
 };
