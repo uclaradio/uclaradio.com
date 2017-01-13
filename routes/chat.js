@@ -21,12 +21,24 @@ module.exports = function(io) {
 		res.sendFile(path.resolve('public/frontpage.html'));
 	});
 
+    router.get('/manage', function(req, res) {
+
+    })
+
     router.post('/getNext', function(req, res) {
         var id = req.body.id;
         var volume = req.body.volume;
         messages.next(id, volume, function(data) {
             res.send(data);
         })
+    });
+
+    router.post('/report', function(req, res){
+        var text = req.body.text;
+        var user = req.body.user;
+        messages.report(user, text, function(){
+            res.send("successfully reported");
+        });
     });
 
     router.post('/report', function(req, res){

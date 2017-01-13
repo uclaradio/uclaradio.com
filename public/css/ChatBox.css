@@ -58,25 +58,12 @@ input:focus {
 	background-color: yellow;
 }
 
-.their-message .message-body-tag:hover{
-	/*visibility: hidden;*/
-	background-color: red;
-	transition: background-color 0.2s;
-}
-
-.message:hover .report_message {
-	visibility: visible;
-}
 
 @media only screen and (min-width: 400px) {
 	/*ensure that chat images are full size on mobile */
 	.message {
 		/*max-width: 50%;*/
 	}
-}
-
-.message-body-tag {
-
 }
 
 .message-body-tag {
@@ -154,6 +141,31 @@ input:focus {
 
 .message-username-tag-username {
 	color: yellow;
+}
+
+.report-message {
+	margin: 0.5em;
+	padding: 0;
+	background-color: red;
+	border: none;
+	line-height: 1em;
+	color: white;
+}
+.report-message:focus {
+	outline: none;
+}
+
+.report-message-clicked:focus {
+	outline: none;
+}
+
+.report-message-clicked {
+	margin: 0.5em;
+	padding: 0;
+	border: none;
+	line-height: 1em;
+	background-color: yellow;
+	color: black;
 }
 
 #load_more_wrapper {

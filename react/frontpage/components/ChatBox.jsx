@@ -9,12 +9,26 @@ var Row = Bootstrap.Row;
 var socket = io();
 
 var getPreviousMessagesURL = "/chat/getNext";
+var reportMessageURL = "/chat/report";
 
 var newMessage = false;
 
 var Message = React.createClass({
+  getInitialState: function() {
+      return {reported: false};
+  },
+  reportMessage: function(text, user) {
+    $.post(reportMessageURL, {
+        text: text,
+        user: user,
+      });
+    console.log(this.props.reported);
+    this.setState({reported: true});
+
+  },
   render: function() {
-    var date = new Date(this.props.date);
+    console.log("UGH");
+      var date = new Date(this.props.date);
       var Month = date.getMonth() + 1;
       var Day = date.getDay() + 1;
       var Hour = date.getHours();
@@ -53,6 +67,12 @@ var Message = React.createClass({
                   {this.props.user}
                 </span>
                 {" " /*+ Month + "/" + Day + " "*/ + Hour + ":" + Minute + ":" + Second}
+                {
+                  this.props.user != this.props.viewing_user &&
+                  <button className={this.state.reported ? "report-message-clicked" : "report-message"} onClick={() => {this.reportMessage(this.props.text, this.props.user)}}>
+                    {this.state.reported ? "REPORTED" : "REPORT" }
+                  </button>
+                }
               </span>  
           	</div>
         }

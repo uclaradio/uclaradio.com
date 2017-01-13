@@ -31,6 +31,15 @@ messages.report = function(user, text, callback) {
 	});
 }
 
+messages.free = function(user, text, callback) {
+	var param = {text: text, user: user}
+	MessageModel.update(param, {
+		reported: false
+	}, function(){
+		callback();
+	});
+}
+
 messages.delete = function(user, text, callback) {
 	var param = {text: text, user: user};
 	MessageModel.remove(param, function(){
