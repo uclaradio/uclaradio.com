@@ -30,19 +30,23 @@ const ShowPage = React.createClass({
 			this.props.updateShows();
 		}
 	},
-  // creates readable string from DJ dictionary returned from the server
-  djString: function(djMap) {
-    var djString = "";
-    var addComma = false;
-    for (var dj in djMap) {
-      if (addComma) {
-        djString += ", ";
-      }
-      djString += djMap[dj];
-      addComma = true;
-    }
-    return djString;
-  },
+	componentDidMount() {
+		// scroll to top of page
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
+	},
+	// creates readable string from DJ dictionary returned from the server
+	djString: function(djMap) {
+		var djString = "";
+		var addComma = false;
+		for (var dj in djMap) {
+			if (addComma) {
+				djString += ", ";
+			}
+			djString += djMap[dj];
+			addComma = true;
+		}
+		return djString;
+	},
 	render: function() {
 		var show = this.props.show;
 		if (!show) {

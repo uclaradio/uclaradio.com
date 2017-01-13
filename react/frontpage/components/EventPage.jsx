@@ -30,6 +30,10 @@ const EventPage = React.createClass({
 			this.props.updateEvents();
 		}
 	},
+	componentDidMount() {
+		// scroll to top of page
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
+	},
 	render: function() {
 		var event = this.props.event;
 		if (!event) {
