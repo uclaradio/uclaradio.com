@@ -47,17 +47,6 @@ input:focus {
 	overflow-wrap: break-word;
 }
 
-.report_message {
-	/*visibility: hidden;*/
-	position: absolute;
-	background-color: yellow;
-}
-
-.report_message:hover {
-	visibility: visible;
-	background-color: yellow;
-}
-
 
 @media only screen and (min-width: 400px) {
 	/*ensure that chat images are full size on mobile */
@@ -121,9 +110,27 @@ input:focus {
 	color: black;
 	display: inline-block;
 	float: left;
-
 }
 
+.their-message .message-body-tag .report-message {
+	width: 0;
+	border-radius: 10px;
+	overflow:hidden;
+	white-space:nowrap;
+	-webkit-transition: width .5s ease-in-out;
+    -moz-transition: width .5s ease-in-out;
+    -o-transition: width .5s ease-in-out;
+    transition: width .5s ease-in-out;
+}
+
+.their-message:hover .message-body-tag .report-message {
+	width: 5em;
+	border-radius: 
+	-webkit-transition: width .5s ease-in-out;
+    -moz-transition: width .5s ease-in-out;
+    -o-transition: width .5s ease-in-out;
+    transition: width .5s ease-in-out;
+}
 
 .my-message .message-body-tag{
 	background-color: #5775F7;
@@ -144,7 +151,7 @@ input:focus {
 }
 
 .report-message {
-	margin: 0.5em;
+	margin: 0;
 	padding: 0;
 	background-color: red;
 	border: none;
@@ -153,19 +160,6 @@ input:focus {
 }
 .report-message:focus {
 	outline: none;
-}
-
-.report-message-clicked:focus {
-	outline: none;
-}
-
-.report-message-clicked {
-	margin: 0.5em;
-	padding: 0;
-	border: none;
-	line-height: 1em;
-	background-color: yellow;
-	color: black;
 }
 
 #load_more_wrapper {

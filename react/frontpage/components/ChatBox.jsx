@@ -15,19 +15,18 @@ var newMessage = false;
 
 var Message = React.createClass({
   getInitialState: function() {
-      return {reported: false};
+      return {};
   },
   reportMessage: function(text, user) {
     $.post(reportMessageURL, {
         text: text,
         user: user,
       });
-    console.log(this.props.reported);
+
     this.setState({reported: true});
 
   },
   render: function() {
-    console.log("UGH");
       var date = new Date(this.props.date);
       var Month = date.getMonth() + 1;
       var Day = date.getDay() + 1;
@@ -42,6 +41,7 @@ var Message = React.createClass({
             style={ (this.props.user == this.props.viewing_user) ? {float: "right"} : {float: "left"}}>
           	  <div className="message-body-tag">
                 {
+                  //if it's an image, display the image
                   this.props.text.split(' ').map(function(word){
                     if(word.length > 4 && word.substring(0,4) == "http") {
                       return (
@@ -56,8 +56,16 @@ var Message = React.createClass({
                         </span>
                       )
                     }
+                    //otherwise just display the text
                     return word + " ";
                   })
+                } {
+                  this.props.user != this.props.viewing_user &&
+                  <button className="report-message" onClick={() => {this.reportMessage(this.props.text, this.props.user)}}>
+                    {
+                      this.state.reported ? "GOT IT" : "REPORT"
+                    }
+                  </button>
                 }
               </div>
               <br />
@@ -67,12 +75,6 @@ var Message = React.createClass({
                   {this.props.user}
                 </span>
                 {" " /*+ Month + "/" + Day + " "*/ + Hour + ":" + Minute + ":" + Second}
-                {
-                  this.props.user != this.props.viewing_user &&
-                  <button className={this.state.reported ? "report-message-clicked" : "report-message"} onClick={() => {this.reportMessage(this.props.text, this.props.user)}}>
-                    {this.state.reported ? "REPORTED" : "REPORT" }
-                  </button>
-                }
               </span>  
           	</div>
         }
