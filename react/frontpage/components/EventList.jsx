@@ -14,7 +14,7 @@ require('./EventList.scss');
 
 const defaultColor = "grey";
 const colors = {
-	"Giveaway": "#3c84cc",	//blue
+	"Ticket Giveaway": "#3c84cc",	//blue
 	"UCLA Radio Presents": "#098440",	//green
 	"Campus Event": "#842b78",	//magenta
 	"Local Event": "#cca437",	//orange

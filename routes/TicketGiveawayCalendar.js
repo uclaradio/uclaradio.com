@@ -68,22 +68,22 @@ router.get('/data', function(req, res, next) {
 // json verson for apps v2
 router.get('/data2', function(req, res, next) {
   fetchEvents(function(eventsByMonth) {
-    var summaryPattern = /([^@]*)@([^@]*)/g;
-    var descriptionImagePattern = /image: "([^"]*)"/g;
     var cleanedMonths = eventsByMonth.map(function(month) {
       return cleanedEvents = month.arr.map(function(event) {
         var e = event;
         // assume giveaway
-        e.type = "Giveaway";
+        e.type = "Ticket Giveaway";
 
         // get host, location from summary
+        var summaryPattern = /([^@]*)(?:@([^@]*))?/g;
         var match = summaryPattern.exec(e.summary);
         if (match != null) {
-          e.host = match[1].trim();
-          e.location = match[2].trim();
+          e.host = match[1] && match[1].trim();
+          e.location = match[2] && match[2].trim();
         }
 
         // get image from description
+        // var descriptionImagePattern = /image: "([^"]*)"/g;
         // match = descriptionImagePattern.exec(e.description);
         // if (match != null) {
         //   e.image = match[1].trim();
