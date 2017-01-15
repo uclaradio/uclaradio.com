@@ -8,12 +8,14 @@ import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
 // Open-Source Components
 import Slider from 'react-slick';
 
+// In house components
+import ChatBox from './ChatBox.jsx';
+
 // styling
 require('./StreamBar.scss');
 
 var trackURL = "https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json";
 var streamURL = "http://uclaradio.com:8000/;";
-
 var stream;
 
 /**
@@ -27,6 +29,7 @@ var StreamBar = React.createClass({
     return {
       playing: false,
       expanded: false,
+      chatForm: false,
       hasReset: false
     };
   },
@@ -57,6 +60,9 @@ var StreamBar = React.createClass({
   toggleExpanded: function() {
     this.setState({expanded: !this.state.expanded});
   },
+  togggleChatForm: function() {
+    this.setState({chatForm: !this.state.chatForm});
+  },
   onReset: function() {
     this.setState({hasReset: true});
   },
@@ -64,14 +70,25 @@ var StreamBar = React.createClass({
     return (
       <div className="streamBar">
         <Grid>
+          <div>
+            <Collapse in={this.state.chatForm} onEntering={scrollToBottom}>
+              <div>
+                <ChatBox scrollToBottom={scrollToBottom}/>
+              </div>
+            </Collapse>
+          </div>
           <div style={this.state.hasReset ? null : {opacity: "0", height: "0"}}>
             <RecentlyPlayed expanded={this.state.expanded}
               reset={!this.state.hasReset} onReset={this.onReset} />
           </div>
-
           <div className="streamContent">
+            <div onClick={this.togggleChatForm} className="expandAction">
+                <img className="chatIcon" src={this.state.chatForm ? "./img/icons/chat_clicked.svg" : "./img/icons/chat.svg"} />
+            </div>
             <div onClick={this.toggleExpanded}>
-              <span className="expandAction">{this.state.expanded ? "HIDE RECENT TRACKS" : "SHOW RECENT TRACKS"}</span>
+              <span className="expandAction">
+                <img className="musicIcon" src={this.state.expanded ? "./img/icons/music_clicked.svg" : "./img/icons/music.svg"} />
+              </span>
             </div>
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton"><Glyphicon glyph={this.state.playing ? "pause" : "play"} /></span>
@@ -138,7 +155,8 @@ var RecentlyPlayed = React.createClass({
             "artist": truncateName(rawTrack.artist["#text"], 22),
             "name": truncateName(rawTrack.name, 22),
             "url": rawTrack.url,
-            "image": rawTrack.image[1]["#text"] != "" ? rawTrack.image[1]["#text"] : "/img/no_album_artwork.jpg"
+            "image": rawTrack.image[1]["#text"] != "" ? rawTrack.image[1]["#text"] : "/img/no_album_artwork.jpg",
+            "nowPlaying": rawTrack["@attr"] != null
           };
         });
         if (!tracks) {
@@ -170,14 +188,14 @@ var RecentlyPlayed = React.createClass({
         <Slider {...slideSettings}>
           { this.state.recentTracks.map(function(track, i) {
               return (
-                <div id="focusAnchor" className="trackInfo" key={track.artist+track.name+i}>
-                  <img className="trackImage" src={track.image} />
-                  <div className="trackName">
-                    <a href={track.url} target="_blank">{track.name}</a>
-                  </div>
-                  <div className="trackArtist">
-                    <a href={track.url} target="_blank">{track.artist}</a>
-                  </div>
+                <div id={ track.nowPlaying ? "nowPlaying":""} className="trackInfo" key={track.artist+track.name+i}>
+                    <img className="trackImage" src={track.image} />
+                    <div className="trackName">
+                      <a href={track.url} target="_blank">{track.name}</a>
+                    </div>
+                    <div className="trackArtist">
+                      <a href={track.url} target="_blank">{track.artist}</a>
+                    </div>
                 </div>
               );
             })
@@ -191,7 +209,13 @@ var RecentlyPlayed = React.createClass({
   }
 })
 
+
 /** Helper functions **/
+
+function scrollToBottom() {
+  var objDiv = document.getElementById("chat-box");
+  objDiv.scrollTop = objDiv.scrollHeight;
+};
 
 var isMobile = {
   Android: function() {

@@ -18,6 +18,9 @@
     <!-- Font -->
     <link rel='stylesheet' type='text/css', href='css/font.css' />
 
+    <!-- ChatBox content -->
+    <link rel="stylesheet" href="/css/ChatBox.css" />
+
     <!-- React Slider Styles -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
@@ -25,6 +28,11 @@
   <body>
     <audio id="stream" src="http://uclaradio.com:8000/;" preload="none"></audio>
     <div id="content"></div>
+  </body>
+    <!-- socket.io.js must be referenced before compiled react files (builds) -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <!-- compiled react filed (builds) -->
     <script src="/build/vendors.js"></script>
     <script src="/build/frontpageapp.min.js"></script>
   </body>

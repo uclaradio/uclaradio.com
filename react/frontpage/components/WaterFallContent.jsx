@@ -102,7 +102,7 @@ function checkSlide(elem) {
 function nodeFromPost(post) {
   var link = post['link'] || post['post_url'];
   var picture = post['full_picture'];
-  var summary = post['summary'] || post['message'];
+  var summary = post['summary'] || post['message'] || "";
   var created = formatDate(post['created_time']);
   var platform = post['platform'] || "FB";
   return newNode(picture, summary, created, link, platform);
@@ -152,10 +152,6 @@ function newNode(full_picture, summary, created_time, link, platform) {
   a.appendChild(box_content);
   box.appendChild(a);
   return box;
-}
-
-function containsHttp(myString) {
-  return myString.split(" ").map(function(el) { return el.includes("http") ? "click" : el }).join(' ');
 }
 
 function formatDate(dateString) {

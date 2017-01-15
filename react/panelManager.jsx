@@ -12,7 +12,10 @@ var urls = {
   listAccounts: "/panel/manager/api/listAccounts",
   verifyAccount: "/panel/manager/api/verify",
   delete: "/panel/manager/api/delete",
-  deleteUnverified: "/panel/manager/api/deleteUnverified"
+  deleteUnverified: "/panel/manager/api/deleteUnverified",
+  getReportedMessages: "/chat/reportedMessages",
+  deleteMessages: "/chat/delete",
+  keepMessages: "/chat/free"
 };
 
 // Panel Elements
@@ -31,6 +34,9 @@ var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
 var Panel = require('react-bootstrap').Panel;
 
+//other
+var CheckBoxList = require('react-checkbox-list');
+
 var ManagerPage = React.createClass({
   render: function() {
     return (
@@ -42,6 +48,9 @@ var ManagerPage = React.createClass({
               <Well>
                 <Manager urls={this.props.urls} />
               </Well>
+              <Well>
+                <ReportedMessages />
+              </Well>
               <ManagerShowsList urls={this.props.urls} />
             </Col>
             <Col xs={12} md={6}>
@@ -51,6 +60,100 @@ var ManagerPage = React.createClass({
         </Grid>
       </div>
     );
+  }
+});
+
+
+var ActionButton = React.createClass({
+  handleDelete: function() {
+    var action = this.props.delete ? urls.deleteMessages : urls.keepMessages;
+    $.ajax({
+      url: urls.deleteMessages,
+      type: 'POST',
+      data: {
+        password: this.props.password,
+        text:this.props.selectedMessage,
+        user:""
+      },
+      success: function() {
+        this.props.fetchMessages();
+      }.bind(this)
+    })
+  },
+  render: function() {
+    return(<button className="actionButtons" onClick={this.handleDelete}>{this.props.delete ? "DELETE" : "KEEP"}</button>)
+  }
+})
+
+
+var ReportedMessages = React.createClass({
+  getInitialState: function() {
+    return {messages:[], text:""};
+  },
+  fetchMessages: function() {
+    $.ajax({
+      url: urls.getReportedMessages,
+      type: 'GET',
+      success: function(messages) {
+        console.log("SHITTY SUCCESS");
+        messages.map(function(message){
+          message.label = message.text;
+          message.value = {
+            "text":message.text,
+            "user":message.user
+          };
+          message.value = message.text;
+        })
+        this.setState({messages: messages});
+      }.bind(this)
+    });
+  },
+  componentDidMount: function() {
+    this.fetchMessages();
+  },
+  //fill in form field as user types with what is specified in value=
+  changeHandler: function(e) {
+      this.setState({ text : e.target.value });
+  },
+  render: function() {
+    var Reported_messages = this.state.messages;
+    var password = this.state.text;
+    var func = this.fetchMessages;
+    return (
+      <span>
+      <center>
+        <h2>Reported Messages</h2>
+        <div className='message_form'>
+            <form onSubmit={this.handleDelete}>
+                <input
+                    className="password_to_message"
+                    onChange={this.changeHandler}
+                    value={this.state.text}
+                    placeholder="Enter Password Before hitting Delete/Keep Buttons"
+                />
+            </form>
+        </div>
+      </center>
+      <br />
+        <table className="ReportedMessages">
+        {Reported_messages.map(function(message){
+          return (
+            <tr>
+              <td>
+                <ActionButton delete={true} fetchMessages={func} password={password} selectedMessage={message.text} /> 
+              </td>
+              <td>
+                <ActionButton delete={false} fetchMessages={func} password={password} selectedMessage={message.text} />
+              </td>
+              <td>
+                <q>{message.text}</q>
+              </td>
+            </tr>
+          )
+        })}
+        </table>
+      </span>
+    )
   }
 });
 

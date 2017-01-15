@@ -254,3 +254,21 @@ input[type="file"] {
   margin-right: auto;
 }
 
+.actionButtons {
+  margin: .5em;
+}
+
+.ReportedMessages  tr {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    width: 100%;
+}
+
+.password_to_message {
+  width: 90%;
+}
+
+table {
+  width: 100%;
+}
+

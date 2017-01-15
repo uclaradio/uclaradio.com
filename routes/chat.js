@@ -1,0 +1,113 @@
+// chat.js
+// chat test run
+module.exports = function(io) {
+	var express = require('express');
+	var router = express.Router();
+
+    //DB
+    var messages = require('../database/messages');
+    var chatUsernames = require('../database/chatUsernames');
+
+    //local vars
+    var nCalls = 1;
+    var number_of_RandomInt_calls = 2;
+    var call_threshold = 2;
+
+    //var password
+    var passwords = require('../passwords.json');
+
+	router.get('/', function(req, res) {
+		var path = require('path');
+		res.sendFile(path.resolve('public/frontpage.html'));
+	});
+
+
+    router.post('/getNext', function(req, res) {
+        var id = req.body.id;
+        var volume = req.body.volume;
+        messages.next(id, volume, function(data) {
+            res.send(data);
+        })
+    });
+
+    router.post('/report', function(req, res){
+        var text = req.body.text;
+        var user = req.body.user;
+        messages.report(user, text, function(){
+            res.send("successfully reported");
+        });
+    });
+
+    router.get('/reportedMessages', function(req, res){
+        messages.getReportedMessages(function(data) {
+            res.send(data);
+        });
+    });
+
+    router.post('/delete', function(req, res){
+        var text = req.body.text;
+        var user = req.body.user;
+        var password = req.body.password;
+        console.log(text + " " + user + " " + password);
+        if(password == passwords["secretpassword"]) {
+            messages.delete(user, text, function(){
+                res.send("succesfully deleted");
+            });            
+        } else {
+            res.send("Wrong password.");
+        }
+    })
+
+    router.post('/free', function(req, res){
+        var text = req.body.text;
+        var user = req.body.user;
+        var password = req.body.password;
+        if(password == passwords["secretpassword"]) {
+            messages.free(user, text, function(){
+                res.send("succesfully freed");
+            });            
+        } else {
+            res.send("Wrong password.");
+        }
+    })
+
+    io.on('connection', function(socket) {
+    	//new user joined
+    	socket.on('add user', function() {
+            chatUsernames.generateUniqueUsername(call_threshold, nCalls, number_of_RandomInt_calls, function(username){
+                chatUsernames.saveUsername(username);
+                socket.username = username;
+                socket.emit('assign username', username);
+            });
+    	});
+
+        //if the DB reset, this will be important
+        socket.on('check if username exists', function(username) {
+            chatUsernames.exists(username, function(username_exists){
+                if(username_exists) {
+                    socket.username = username;
+                } else {
+                    socket.emit('username not found');
+                }
+            })
+        });
+
+    	//automatically disconnects user
+    	socket.on('disconnect', function(){
+            console.log(socket.username + " disconnected.");
+    	});
+
+    	//new message sent
+		socket.on('new message', function (data) {
+		// we tell the client to execute 'new message'
+			socket.broadcast.emit('new message', {
+			  text: data.text,
+			  user: data.user,
+              date: new Date()
+			});
+            messages.saveMessage(data);
+		});
+    });
+
+    return router;
+};
