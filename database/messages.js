@@ -22,6 +22,14 @@ messages.saveMessage = function(data) {
 	message.save();
 };
 
+messages.getReportedMessages = function(callback) {
+	var param = {reported: true};
+	var promise = MessageModel.find(param);
+	promise.then(function(data){
+		callback(data);
+	})
+}
+
 messages.report = function(user, text, callback) {
 	var param = {text: text, user: user}
 	MessageModel.update(param, {
@@ -32,7 +40,7 @@ messages.report = function(user, text, callback) {
 }
 
 messages.free = function(user, text, callback) {
-	var param = {text: text, user: user}
+	var param = {text: text}; //, user: user}
 	MessageModel.update(param, {
 		reported: false
 	}, function(){
@@ -41,7 +49,8 @@ messages.free = function(user, text, callback) {
 }
 
 messages.delete = function(user, text, callback) {
-	var param = {text: text, user: user};
+	//all distasteful messages regardless of user should be deleted
+	var param = {text: text};//, user: user};
 	MessageModel.remove(param, function(){
 		callback();
 	});

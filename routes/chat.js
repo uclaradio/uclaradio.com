@@ -21,9 +21,6 @@ module.exports = function(io) {
 		res.sendFile(path.resolve('public/frontpage.html'));
 	});
 
-    router.get('/manage', function(req, res) {
-
-    })
 
     router.post('/getNext', function(req, res) {
         var id = req.body.id;
@@ -41,11 +38,9 @@ module.exports = function(io) {
         });
     });
 
-    router.post('/report', function(req, res){
-        var text = req.body.text;
-        var user = req.body.user;
-        messages.report(user, text, function(){
-            res.send("successfully reported");
+    router.get('/reportedMessages', function(req, res){
+        messages.getReportedMessages(function(data) {
+            res.send(data);
         });
     });
 
@@ -53,9 +48,23 @@ module.exports = function(io) {
         var text = req.body.text;
         var user = req.body.user;
         var password = req.body.password;
+        console.log(text + " " + user + " " + password);
         if(password == passwords["secretpassword"]) {
             messages.delete(user, text, function(){
                 res.send("succesfully deleted");
+            });            
+        } else {
+            res.send("Wrong password.");
+        }
+    })
+
+    router.post('/free', function(req, res){
+        var text = req.body.text;
+        var user = req.body.user;
+        var password = req.body.password;
+        if(password == passwords["secretpassword"]) {
+            messages.free(user, text, function(){
+                res.send("succesfully freed");
             });            
         } else {
             res.send("Wrong password.");
