@@ -28,8 +28,8 @@ var StreamBar = React.createClass({
   getInitialState: function() {
     return {
       playing: false,
-      expanded: false,
-      chatForm: false,
+      recentExpanded: false,
+      chatExpanded: false,
       hasReset: false
     };
   },
@@ -57,11 +57,17 @@ var StreamBar = React.createClass({
       this.setState({playing: true});
     }
   },
-  toggleExpanded: function() {
-    this.setState({expanded: !this.state.expanded});
+  toggleRecentExpanded: function() {
+    this.setState({
+      recentExpanded: !this.state.recentExpanded,
+      chatExpanded: false
+    });
   },
-  togggleChatForm: function() {
-    this.setState({chatForm: !this.state.chatForm});
+  togggleChatExpanded: function() {
+    this.setState({
+      chatExpanded: !this.state.chatExpanded,
+      recentExpanded: false
+    });
   },
   onReset: function() {
     this.setState({hasReset: true});
@@ -71,23 +77,23 @@ var StreamBar = React.createClass({
       <div className="streamBar">
         <Grid>
           <div>
-            <Collapse in={this.state.chatForm} onEntering={scrollToBottom}>
+            <Collapse in={this.state.chatExpanded} onEntering={scrollToBottom}>
               <div>
                 <ChatBox scrollToBottom={scrollToBottom}/>
               </div>
             </Collapse>
           </div>
           <div style={this.state.hasReset ? null : {opacity: "0", height: "0"}}>
-            <RecentlyPlayed expanded={this.state.expanded}
+            <RecentlyPlayed expanded={this.state.recentExpanded}
               reset={!this.state.hasReset} onReset={this.onReset} />
           </div>
           <div className="streamContent">
-            <div onClick={this.togggleChatForm} className="expandAction">
-                <img className="chatIcon" src={this.state.chatForm ? "./img/icons/chat_clicked.svg" : "./img/icons/chat.svg"} />
+            <div onClick={this.togggleChatExpanded} className="expandAction">
+                <img className="chatIcon" src={this.state.chatExpanded ? "./img/icons/chat_clicked.svg" : "./img/icons/chat.svg"} />
             </div>
-            <div onClick={this.toggleExpanded}>
+            <div onClick={this.toggleRecentExpanded}>
               <span className="expandAction">
-                <img className="musicIcon" src={this.state.expanded ? "./img/icons/music_clicked.svg" : "./img/icons/music.svg"} />
+                <img className="musicIcon" src={this.state.recentExpanded ? "./img/icons/music_clicked.svg" : "./img/icons/music.svg"} />
               </span>
             </div>
             <div onClick={this.togglePlay} className="playToggle">
