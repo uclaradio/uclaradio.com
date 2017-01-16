@@ -117,3 +117,7 @@ body {
 .demo-card-wide > .mdl-card__title.equipment {
 	background: url('/img/turntable.jpg') center / cover;
 }
+
+.demo-card-wide > .mdl-card__title.socials {
+	background: url('/img/social_media.png') center / cover;
+}
