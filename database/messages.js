@@ -2,6 +2,8 @@
 require('./db');
 
 var mongoose = require('mongoose');
+var Promise = require('bluebird');
+mongoose.Promise = Promise;
 var messages = {};
 
 var MessageSchema = new mongoose.Schema({
@@ -24,10 +26,10 @@ messages.saveMessage = function(data) {
 
 messages.getReportedMessages = function(callback) {
 	var param = {reported: true};
-	var promise = MessageModel.find(param);
-	promise.then(function(data){
+	MessageModel.find(param, function(err, data) {
+		console.log(data);
 		callback(data);
-	})
+	});
 }
 
 messages.report = function(user, text, callback) {
