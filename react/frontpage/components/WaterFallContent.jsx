@@ -3,6 +3,7 @@
 
 import React from 'react';
 import Waterfall from './misc/ResponsiveWaterfall.js';
+import isMobile from './misc/isMobile.js';
 import Loader from './Loader.jsx';
 
 // styling
@@ -66,7 +67,7 @@ var WaterFallContent = React.createClass({
     if (i > -1) {
       // get last box of the column
       var lastBox = Array.prototype.slice.call(waterfall.columns[i].children, -1)[0];
-      if (checkSlide(lastBox)) {
+      if (checkSlide(lastBox) && !isMobile.any()) {
         if (this.state.paginatedDataInProgress == false) {
           // locking mechanism so scrolling won't cause an infinite amt of requests
           this.setState({
@@ -78,12 +79,30 @@ var WaterFallContent = React.createClass({
       }
     }
   },
+  mobileLoadMore: function() {
+      this.setState({
+        paginatedDataInProgress: true
+      });
+      // request next set of Facebook posts
+      this.fetchMorePosts();
+  },
   render: function() {
     return (
       <div className="WaterFallContent">
         { this.state.fetching && <Loader /> }
         <div className='wf-container'>
         </div>
+        {
+          isMobile.any() &&   
+          <span>
+            <br />
+            <center>                    
+              <button id="load_more" onClick={this.mobileLoadMore}>
+                MORE
+             </button>
+            </center>
+          </span>
+        }
       </div>
     );
   }
