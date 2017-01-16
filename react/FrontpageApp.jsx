@@ -25,15 +25,19 @@ import ReactDOM from 'react-dom';
 const mapStateToProps = (state) => {
 	var props = {};
 
-	var nowPlaying = state.shows.shows.find((show) => {
-		return show.id === state.shows.nowPlayingID;
-	});
-	if (nowPlaying && nowPlaying !== -1) {
-		props.nowPlaying = nowPlaying;
+	// set nowPlaying & spotlight shows if found
+	for (var showIndex = 0; showIndex < state.shows.shows.length; showIndex++) {
+		var show = state.shows.shows[showIndex];
+		if (show.id === state.shows.nowPlayingID) {
+			props.nowPlaying = show;
+		}
+		if (show.id === state.shows.spotlightID) {
+			props.spotlight = show;
+		}
 	}
-	
+
 	var spotlight = state.shows.shows.find((show) => {
-		return show.id === state.shows.spotlightID;
+		return show.id == state.shows.spotlightID;
 	});
 	if (spotlight && spotlight !== -1) {
 		props.spotlight = spotlight;

@@ -12,11 +12,13 @@ const mapStateToProps = (state, ownProps) => {
 	};
 
 	var showID = Number(ownProps.params['showID']);
-	var show = state.shows.shows.find((show) => {
-		return show.id === showID;
-	});
-	if (show && show != -1) {
-		props.show = show;
+
+	// set show if found
+	for (var showIndex = 0; showIndex < state.shows.shows.length; showIndex++) {
+		var show = state.shows.shows[showIndex];
+		if (show.id === showID) {
+			props.show = show;
+		}
 	}
 
 	return props;
