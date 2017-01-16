@@ -60,7 +60,7 @@ messages.delete = function(user, text, callback) {
 
 messages.next = function(id, volume, callback) {
 	var param = id != "" ? {_id:{"$lt": mongoose.Types.ObjectId(id)}} : null;
-	var promise = MessageModel.find(param).limit(volume).sort({"_id":-1}); 
+	var promise = MessageModel.find(param).limit(parseInt(volume)).sort({"_id":-1}); 
 	promise.then(function(data){
 		callback(data);
 	})
