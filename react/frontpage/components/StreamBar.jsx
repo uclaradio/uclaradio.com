@@ -11,6 +11,9 @@ import Slider from 'react-slick';
 // In house components
 import ChatBox from './ChatBox.jsx';
 
+//mobile?
+import isMobile from './misc/isMobile.js';
+
 // styling
 require('./StreamBar.scss');
 
@@ -223,27 +226,6 @@ var RecentlyPlayed = React.createClass({
 function scrollToBottom() {
   var objDiv = document.getElementById("chat-box");
   objDiv.scrollTop = objDiv.scrollHeight;
-};
-
-var isMobile = {
-  Android: function() {
-      return navigator.userAgent.match(/Android/i);
-  },
-  BlackBerry: function() {
-      return navigator.userAgent.match(/BlackBerry/i);
-  },
-  iOS: function() {
-      return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-  },
-  Opera: function() {
-      return navigator.userAgent.match(/Opera Mini/i);
-  },
-  Windows: function() {
-      return navigator.userAgent.match(/IEMobile/i);
-  },
-  any: function() {
-      return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-  }
 };
 
 module.exports = StreamBar;
