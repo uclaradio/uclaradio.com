@@ -188,8 +188,10 @@ var RecentlyPlayed = React.createClass({
         <Slider {...slideSettings}>
           { this.state.recentTracks.map(function(track, i) {
               return (
-                <div id={ track.nowPlaying ? "nowPlaying":""} className="trackInfo" key={track.artist+track.name+i}>
-                    <img className="trackImage" src={track.image} />
+                <div id={ track.nowPlaying ? "nowPlaying focusAnchor":"focusAnchor"} className="trackInfo" key={track.artist+track.name+i}>
+                    <div className="albumArt">
+                      <img className="trackImage" src={track.image} />
+                    </div>
                     <div className="trackName">
                       <a href={track.url} target="_blank">{track.name}</a>
                     </div>

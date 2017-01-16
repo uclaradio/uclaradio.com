@@ -22,14 +22,25 @@ import Frontpage from './frontpage/Frontpage.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const mapStateToProps = (state) => ({
-	nowPlaying: state.shows.shows.find((show) => {
+const mapStateToProps = (state) => {
+	var props = {};
+
+	var nowPlaying = state.shows.shows.find((show) => {
 		return show.id === state.shows.nowPlayingID;
-	}),
-	spotlight: state.shows.shows.find((show) => {
+	});
+	if (nowPlaying && nowPlaying !== -1) {
+		props.nowPlaying = nowPlaying;
+	}
+	
+	var spotlight = state.shows.shows.find((show) => {
 		return show.id === state.shows.spotlightID;
-	})
-});
+	});
+	if (spotlight && spotlight !== -1) {
+		props.spotlight = spotlight;
+	}
+
+	return props;
+};
 
 const mapDispatchToProps = (dispatch) => ({
 	updateNowPlaying: () => {
