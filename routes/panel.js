@@ -193,6 +193,22 @@ var deleteUnverifiedAccount = function(req, res) {
 	});
 };
 
+var deleteChat = function(req, res) {
+    var text = req.body.text;
+    var user = req.body.user;
+    messages.delete(user, text, function(){
+        res.send("succesfully deleted");
+    });
+};
+
+var freeChat = function(req, res) {
+    var text = req.body.text;
+    var user = req.body.user;
+    messages.free(user, text, function(){
+        res.send("succesfully deleted");
+    });
+};
+
 router.post('/manager/api/:link', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
@@ -221,6 +237,12 @@ router.post('/manager/api/:link', function(req, res) {
 						break;
 					case 'deleteUnverified':
 						deleteUnverifiedAccount(req, res);
+						break;
+					case 'freechat':
+						freeChat(req, res);
+						break;
+					case 'deletechat':
+						deleteChat(req, res);
 						break;
 					default:
 						res.status(404).send();

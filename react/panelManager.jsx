@@ -14,8 +14,8 @@ var urls = {
   delete: "/panel/manager/api/delete",
   deleteUnverified: "/panel/manager/api/deleteUnverified",
   getReportedMessages: "/chat/reportedMessages",
-  deleteMessages: "/chat/delete",
-  keepMessages: "/chat/free"
+  deleteMessages: "/panel/manager/deletechat",
+  keepMessages: "/panel/manager/freechat"
 };
 
 // Panel Elements
@@ -28,11 +28,7 @@ var InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx'
 var InputCheckbox = require('./panel/inputs/InputCheckbox.jsx');
 
 // Bootstrap Elements
-var Grid = require('react-bootstrap').Grid;
-var Row = require('react-bootstrap').Row;
-var Col = require('react-bootstrap').Col;
-var Well = require('react-bootstrap').Well;
-var Panel = require('react-bootstrap').Panel;
+import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';
 
 //other
 var CheckBoxList = require('react-checkbox-list');
@@ -64,86 +60,68 @@ var ManagerPage = React.createClass({
 });
 
 
-var ActionButton = React.createClass({
-  handleDelete: function() {
-    var action = this.props.delete ? urls.deleteMessages : urls.keepMessages;
+var ReportedMessages = React.createClass({
+  getInitialState: function() {
+    return {
+      messages:[]
+    };
+  },
+  fetchReportedMessages: function() {
     $.ajax({
-      url: urls.deleteMessages,
+      url: urls.getReportedMessages,
+      type: 'GET',
+      success: function(messages) {
+        this.setState({messages: messages});
+      }.bind(this)
+    });
+  },
+  handleKeep: function(messageID) {
+    $.ajax({
+      url: urls.keepMessages,
       type: 'POST',
       data: {
-        password: this.props.password,
-        text:this.props.selectedMessage,
-        user:""
+        id: messageID
       },
       success: function() {
         this.props.fetchMessages();
       }.bind(this)
     })
   },
-  render: function() {
-    return(<button className="actionButtons" onClick={this.handleDelete}>{this.props.delete ? "DELETE" : "KEEP"}</button>)
-  }
-})
-
-
-var ReportedMessages = React.createClass({
-  getInitialState: function() {
-    return {messages:[], text:""};
-  },
-  fetchMessages: function() {
+  handleDelete: function(messageID) {
     $.ajax({
-      url: urls.getReportedMessages,
-      type: 'GET',
-      success: function(messages) {
-        console.log("SHITTY SUCCESS");
-        messages.map(function(message){
-          message.label = message.text;
-          message.value = {
-            "text":message.text,
-            "user":message.user
-          };
-          message.value = message.text;
-        })
-        this.setState({messages: messages});
+      url: urls.deleteMessages,
+      type: 'POST',
+      data: {
+        id: messageID
+      },
+      success: function() {
+        this.props.fetchMessages();
       }.bind(this)
-    });
+    })
   },
   componentDidMount: function() {
-    this.fetchMessages();
-  },
-  //fill in form field as user types with what is specified in value=
-  changeHandler: function(e) {
-      this.setState({ text : e.target.value });
+    this.fetchReportedMessages();
   },
   render: function() {
-    var Reported_messages = this.state.messages;
-    var password = this.state.text;
-    var func = this.fetchMessages;
     return (
       <span>
       <center>
         <h2>Reported Messages</h2>
-        <div className='message_form'>
-            <form onSubmit={this.handleDelete}>
-                <input
-                    className="password_to_message"
-                    onChange={this.changeHandler}
-                    value={this.state.text}
-                    placeholder="Enter Password Before hitting Delete/Keep Buttons"
-                />
-            </form>
-        </div>
       </center>
       <br />
         <table className="ReportedMessages">
-        {Reported_messages.map(function(message){
+        { this.state.messages.map(function(message) {
           return (
-            <tr>
+            <tr key={message.id}>
               <td>
-                <ActionButton delete={true} fetchMessages={func} password={password} selectedMessage={message.text} /> 
+              <Button onClick={()=>{this.props.handleKeep(message.id)}}>
+                Keep
+              </Button>
               </td>
               <td>
-                <ActionButton delete={false} fetchMessages={func} password={password} selectedMessage={message.text} />
+              <Button onClick={()=>{this.props.handleDelete(message.id)}}>
+                Delete
+              </Button>
               </td>
               <td>
                 <q>{message.text}</q>

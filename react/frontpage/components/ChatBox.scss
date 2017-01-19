@@ -4,7 +4,6 @@
 
 .chat-box-fade-top {
 	-webkit-mask-image: -webkit-gradient(linear, left 10%, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));	
-
 }
 
 input {
@@ -88,7 +87,7 @@ input:focus {
 	}
 }
 
-#chat-box {
+#chatbox {
     transition: opacity 500ms ease-in-out, height 500ms ease-in-out;
 	height: 20em;
 	display: fixed;
@@ -100,9 +99,11 @@ input:focus {
 
 .their-message a {
 	color: black;
+	float: left;
 }
 .my-message a {
-	color: white;	
+	color: white;
+	float: right;
 }
 
 .their-message .message-body-tag{
@@ -125,7 +126,6 @@ input:focus {
 
 .their-message:hover .message-body-tag .report-message {
 	width: 5em;
-	border-radius: 
 	-webkit-transition: width .5s ease-in-out;
     -moz-transition: width .5s ease-in-out;
     -o-transition: width .5s ease-in-out;
