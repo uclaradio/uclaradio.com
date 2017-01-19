@@ -42,19 +42,16 @@ messages.getReportedMessages = function(callback) {
 }
 
 messages.report = function(messageID, callback) {
+	console.log(messageID);
 	MessageModel.update({id: messageID}, {
 		reported: true
-	}, function() {
-		callback();
-	});
+	}, callback);
 }
 
 messages.free = function(messageID, callback) {
 	MessageModel.update({id: messageID}, {
 		reported: false
-	}, function(){
-		callback();
-	});
+	}, callback);
 }
 
 messages.delete = function(messageID, callback) {

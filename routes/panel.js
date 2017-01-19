@@ -7,6 +7,7 @@ var router = express.Router();
 var accounts = require('../database/accounts');
 var shows = require('../database/shows');
 var faqs = require('../database/faqs');
+var messages = require('../database/messages');
 
 /***** Main Log In Page *****/
 
@@ -194,17 +195,15 @@ var deleteUnverifiedAccount = function(req, res) {
 };
 
 var deleteChat = function(req, res) {
-    var text = req.body.text;
-    var user = req.body.user;
-    messages.delete(user, text, function(){
+    var messageID = req.body.id;
+    messages.delete(messageID, function(){
         res.send("succesfully deleted");
     });
 };
 
 var freeChat = function(req, res) {
-    var text = req.body.text;
-    var user = req.body.user;
-    messages.free(user, text, function(){
+    var messageID = req.body.id;
+    messages.free(messageID, function(){
         res.send("succesfully deleted");
     });
 };

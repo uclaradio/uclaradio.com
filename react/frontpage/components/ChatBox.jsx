@@ -113,6 +113,7 @@ var ChatBox = React.createClass({
 												user={message.user}
 												text={message.text}
 												date={message.date}
+												messageID={message.id}
 												viewing_user={viewing_user}
 											/> }
 										<br />
@@ -140,6 +141,7 @@ var ChatBox = React.createClass({
 /**
 Message component displaying a message object
 
+@prop messageID: id of message represented
 @prop text: text of message
 @prop user: username associated with message
 @prop viewing_user: username associated with viewing user
@@ -149,9 +151,9 @@ var Message = React.createClass({
 	getInitialState: function() {
 		return {};
 	},
-	reportMessage: function(text, user) {
+	reportMessage: function() {
 		$.post(ReportMessageURL, {
-			id: messageID
+			id: this.props.messageID
 		});
 	 this.setState({reported: true});
 	},
@@ -188,7 +190,7 @@ var Message = React.createClass({
 						})
 					} { /* Report Message */
 						this.props.user != this.props.viewing_user &&
-						<button className="report-message" onClick={() => {this.reportMessage(this.props.text, this.props.user)}}>
+						<button className="report-message" onClick={this.reportMessage}>
 							{this.state.reported ? "GOT IT" : "REPORT"}
 						</button>
 					}

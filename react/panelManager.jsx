@@ -14,8 +14,8 @@ var urls = {
   delete: "/panel/manager/api/delete",
   deleteUnverified: "/panel/manager/api/deleteUnverified",
   getReportedMessages: "/chat/reportedMessages",
-  deleteMessages: "/panel/manager/deletechat",
-  keepMessages: "/panel/manager/freechat"
+  deleteMessages: "/panel/manager/api/deletechat",
+  keepMessages: "/panel/manager/api/freechat"
 };
 
 // Panel Elements
@@ -44,9 +44,7 @@ var ManagerPage = React.createClass({
               <Well>
                 <Manager urls={this.props.urls} />
               </Well>
-              <Well>
-                <ReportedMessages />
-              </Well>
+              <ReportedMessages />
               <ManagerShowsList urls={this.props.urls} />
             </Col>
             <Col xs={12} md={6}>
@@ -83,7 +81,7 @@ var ReportedMessages = React.createClass({
         id: messageID
       },
       success: function() {
-        this.props.fetchMessages();
+        this.fetchReportedMessages();
       }.bind(this)
     })
   },
@@ -95,7 +93,7 @@ var ReportedMessages = React.createClass({
         id: messageID
       },
       success: function() {
-        this.props.fetchMessages();
+        this.fetchReportedMessages();
       }.bind(this)
     })
   },
@@ -103,34 +101,43 @@ var ReportedMessages = React.createClass({
     this.fetchReportedMessages();
   },
   render: function() {
+    if (this.state.messages.length == 0) {
+      return <div className="reportedMessages"></div>
+    }
+    var handleKeep = this.handleKeep;
+    var handleDelete = this.handleDelete;
     return (
-      <span>
+      <Well>
+      <div className="reportedMessages">
       <center>
         <h2>Reported Messages</h2>
       </center>
       <br />
-        <table className="ReportedMessages">
-        { this.state.messages.map(function(message) {
-          return (
-            <tr key={message.id}>
-              <td>
-              <Button onClick={()=>{this.props.handleKeep(message.id)}}>
-                Keep
-              </Button>
-              </td>
-              <td>
-              <Button onClick={()=>{this.props.handleDelete(message.id)}}>
-                Delete
-              </Button>
-              </td>
-              <td>
-                <q>{message.text}</q>
-              </td>
-            </tr>
-          )
-        })}
+        <table className="reportedTable">
+          <tbody>
+          { this.state.messages.map(function(message) {
+            return (
+              <tr key={message.id}>
+                <td>
+                <Button onClick={()=>{handleKeep(message.id)}}>
+                  Keep
+                </Button>
+                </td>
+                <td>
+                <Button onClick={()=>{handleDelete(message.id)}}>
+                  Delete
+                </Button>
+                </td>
+                <td>
+                  <q>{message.text}</q>
+                </td>
+              </tr>
+            )
+          })}
+          </tbody>
         </table>
-      </span>
+      </div>
+      </Well>
     )
   }
 });

@@ -254,10 +254,14 @@ input[type="file"] {
   margin-right: auto;
 }
 
-.ReportedMessages  tr {
+.reportedTable  tr {
     border-bottom: 1px solid black;
     border-top: 1px solid black;
     width: 100%;
+}
+
+.reportedTable button {
+  margin: 5px;
 }
 
 .password_to_message {
