@@ -25,6 +25,16 @@ import RectImage from '../common/RectImage.jsx';
 // Bootstrap elements
 import { Bootstrap, Grid, Col } from 'react-bootstrap';
 
+// Google analytics helper
+import passwords from '../../passwords.json';
+var ReactGA = require('react-ga');
+ReactGA.initialize(passwords.googleanalyticskey);
+
+function logPageView() {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+}
+
 // Misc
 import theme from '../common/theme';
 
@@ -119,7 +129,7 @@ Will pass own props down to FrontpageContent
 const Frontpage = React.createClass({
   render: function() {
     return (
-      <Router history={browserHistory}>
+      <Router history={browserHistory} onUpdate={logPageView}>
         <Route path="/" component={props => <FrontpageContent {...this.props} {...props} />}>
           <IndexRoute component={WaterFallContent} />
           <Route path="/djs" component={DJsTab} />
