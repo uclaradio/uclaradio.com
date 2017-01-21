@@ -37,10 +37,11 @@ module.exports = function(io) {
 	io.on('connection', function(socket) {
 		// new user joined
 		socket.on('add user', function() {
-            var username = messages.generateUsername();
-			socket.username = username;
-            socket.emit('assign username', username);
-			console.log(username, "joined chatroom.");
+            messages.generateUsername(function(username) {
+                socket.username = username;
+                socket.emit('assign username', username);
+                console.log(username, "joined chatroom.");
+            });
 		});
 
         socket.on('set user', function(data) {
