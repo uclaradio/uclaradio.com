@@ -1,3 +1,11 @@
+/**
+ChatBox.scss
+
+Sass styling for frontpage chat box
+**/
+
+@import '../common';
+
 .chat-box-fade-bottom {
 	-webkit-mask-image: -webkit-gradient(linear, left 90%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 }
@@ -125,7 +133,6 @@ input:focus {
 
 .their-message:hover .message-body-tag .report-message {
 	width: 5em;
-	border-radius: 
 	-webkit-transition: width .5s ease-in-out;
     -moz-transition: width .5s ease-in-out;
     -o-transition: width .5s ease-in-out;

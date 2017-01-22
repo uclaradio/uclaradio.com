@@ -13,6 +13,8 @@ var reportMessageURL = "/chat/report";
 
 var newMessage = false;
 
+require('./ChatBox.scss');
+
 var Message = React.createClass({
   getInitialState: function() {
       return {};
