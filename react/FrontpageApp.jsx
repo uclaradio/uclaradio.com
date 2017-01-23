@@ -31,7 +31,8 @@ const mapStateToProps = (state) => {
 		if (show.id === state.shows.nowPlayingID) {
 			props.nowPlaying = show;
 		}
-		if (show.id === state.shows.spotlightID) {
+		// note: only set spotlight show if different from current show
+		if (show.id === state.shows.spotlightID && show.id !== state.shows.nowPlayingID) {
 			props.spotlight = show;
 		}
 	}
