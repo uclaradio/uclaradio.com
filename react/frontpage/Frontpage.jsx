@@ -19,6 +19,7 @@ import StreamBar from './components/StreamBar.jsx';
 import ShowInfo from './components/ShowInfo.jsx';
 import WaterFallContent from './components/WaterFallContent.jsx';
 import Error404Page from './components/Error404Page.jsx';
+import StreamIssuesPage from './components/StreamIssuesPage.jsx';
 // Common Components
 import RectImage from '../common/RectImage.jsx';
 
@@ -128,6 +129,7 @@ const Frontpage = React.createClass({
           <Route path="/shows" components={ShowsTab} />
           <Route path="/shows/:showID" component={ShowContainer} />
           <Route path="/events/:eventID" component={EventContainer} />
+          <Route path="/streamIssues" component={StreamIssuesPage} />
           <Route path="*" component={Error404Page} />
         </Route>
       </Router>
