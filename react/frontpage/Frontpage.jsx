@@ -65,7 +65,7 @@ const FrontpageContent = React.createClass({
 
     // update now playing and fetch initial shows data
     // 1/11/17 - Black Twitter!
-    this.props.setSpotlightShowID(106);
+    this.props.setSpotlightShowID(89);
     this.props.updateShows();
   },
   componentWillUnmount: function() {
@@ -88,15 +88,6 @@ const FrontpageContent = React.createClass({
                   </div>
                 </IndexLink>
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
-                { /* Apply for Radio Promo */ }
-                <div className="infoHeader">Intern Applications are open!</div>
-                <div className="promoBanner">
-                  <a href="http://apply.dailybruin.com/applications/ucla-radio/" target="_blank">
-                    <RectImage src="/img/promo/apply_for_radio_W17.png" aspectRatio={4/3}>
-                      <div className="overlay" />
-                    </RectImage>
-                  </a>
-                </div>
                 { /* Show Spotlight */ }
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
               </Col>
