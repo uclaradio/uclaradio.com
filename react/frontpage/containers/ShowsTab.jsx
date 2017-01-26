@@ -4,7 +4,7 @@
 import { connect } from 'react-redux';
 
 import { fetchUpdatedShows } from '../actions/shows';
-import ShowList from '../components/ShowContent.jsx';
+import ShowsContent from '../components/ShowsContent.jsx';
 
 const mapStateToProps = (state) => ({
 	shows: state.shows.shows,
@@ -20,6 +20,6 @@ const mapDispatchToProps = (dispatch) => ({
 const ShowsTab = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(ShowList);
+)(ShowsContent);
 
 export default ShowsTab;
