@@ -54,17 +54,17 @@ var FrontPageNavbar = React.createClass({
               </span>
             </NavItem>
           </LinkContainer>
-          <LinkContainer to="/events">
-            <NavItem className="frontPageNavbarItem">
-              <span className="equalWidth">
-                Events
-              </span>
-            </NavItem>
-          </LinkContainer>
           <LinkContainer to="/shows">
             <NavItem className="frontPageNavbarItem">
               <span className="equalWidth">
                 Shows
+              </span>
+            </NavItem>
+          </LinkContainer>
+          <LinkContainer to="/events">
+            <NavItem className="frontPageNavbarItem">
+              <span className="equalWidth">
+                Events
               </span>
             </NavItem>
           </LinkContainer>
@@ -93,11 +93,11 @@ var FrontPageNavbar = React.createClass({
           <LinkContainer to="/djs">
             <NavItem className="frontPageNavbarItem fullWidth topMost">DJs</NavItem>
           </LinkContainer>
-          <LinkContainer to="/events">
-            <NavItem className="frontPageNavbarItem fullWidth">Events</NavItem>
-          </LinkContainer>
           <LinkContainer to="/shows">
             <NavItem className="frontPageNavbarItem fullWidth">Shows</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/events">
+            <NavItem className="frontPageNavbarItem fullWidth">Events</NavItem>
           </LinkContainer>
           <NavDropdown title="More" className="frontPageNavbarItem fullWidth bottomMost">
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(1)}}>Blog</MenuItem>

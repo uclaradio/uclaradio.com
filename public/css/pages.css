@@ -125,3 +125,7 @@ body {
 .demo-card-wide > .mdl-card__title.productions-room {
 	background: url('/img/productions_room.png') center / cover;
 }
+
+.demo-card-wide > .mdl-card__title.rivendell-library {
+	background: url('/img/musiclibrary.png') center / cover;
+}
