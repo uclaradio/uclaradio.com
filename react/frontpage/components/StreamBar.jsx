@@ -80,9 +80,12 @@ var StreamBar = React.createClass({
       <div className="streamBar">
         <Grid>
           <div>
-            <Collapse in={this.state.chatExpanded} onEntering={scrollToBottom}>
+            <Collapse in={this.state.chatExpanded} onEntering={() => {
+                  var objDiv = document.getElementById("chatbox");
+                  objDiv.scrollTop = objDiv.scrollHeight;
+                }}>
               <div>
-                <ChatBox scrollToBottom={scrollToBottom}/>
+                <ChatBox />
               </div>
             </Collapse>
           </div>
@@ -218,14 +221,6 @@ var RecentlyPlayed = React.createClass({
       </div>
     );
   }
-})
-
-
-/** Helper functions **/
-
-function scrollToBottom() {
-  var objDiv = document.getElementById("chat-box");
-  objDiv.scrollTop = objDiv.scrollHeight;
-};
+});
 
 module.exports = StreamBar;

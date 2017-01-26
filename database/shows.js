@@ -2,7 +2,7 @@
 // Data model for radio shows
 
 // connect to database
-require('./db');
+var db = require('./db');
 
 // user accounts
 var accounts = require('./accounts');
@@ -61,7 +61,7 @@ shows.webSafeShow = function(show) {
 
 // create a new show with the given data
 shows.addNewShow = function(title, day, time, djs, callback) {
-  accounts.getNextAvailableId(accounts.showIdKey, function(nextId) {
+  db.getNextAvailableId(db.showIdKey, function(nextId) {
     console.log("nextId: ", nextId);
     newData = {
       "title": title,
@@ -86,7 +86,7 @@ shows.addNewShow = function(title, day, time, djs, callback) {
             newShow.save(function(err, saved) {
               callback(err, saved);
               if (saved) {
-                accounts.setLastTakenId(accounts.showIdKey, nextId, function(err) {
+                db.setLastTakenId(db.showIdKey, nextId, function(err) {
                   if (err) { console.log("error setting next id for shows: ", err); }
                 });
               }
