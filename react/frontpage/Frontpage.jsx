@@ -6,7 +6,7 @@ import React from 'react';
 import { Router, Route, IndexRoute, browserHistory, Link, IndexLink } from 'react-router';
 
 // Frontpage Containers (View Controllers)
-import ShowsTab from './containers/ShowsTab.jsx';
+import ShowsTab from './components/ShowsContent.jsx';
 import EventsTab from './containers/EventsTab.jsx';
 import DJsTab from './containers/DJsTab.jsx';
 import ShowContainer from './containers/ShowContainer.jsx';
