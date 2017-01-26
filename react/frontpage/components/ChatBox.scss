@@ -52,6 +52,7 @@ input:focus {
 	position: relative;
 	width: 100%;
 	overflow-wrap: break-word;
+	padding: 0.5%
 }
 
 
@@ -63,7 +64,7 @@ input:focus {
 }
 
 .message-body-tag {
-	padding: 5px;
+	padding: 0.5%;
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 10px;
@@ -152,6 +153,7 @@ input:focus {
 	color: #CFD8FF;
     margin-left: 10px;
     margin-right: 10px;
+    position: inline-block;
 }
 
 .message-username-tag-username {

@@ -198,15 +198,15 @@ var Message = React.createClass({
 						</button>
 					}
 					</div>
-					<br />
-					<span id="message-username-tag" 
-						style={ (this.props.user == this.props.viewing_user) ? {float: "right"} : {float: "left"}}>
-						<span className="message-username-tag-username">
-							{this.props.user}
-						</span>
-						{" " /*+ Month + "/" + Day + " "*/ + Hour + ":" + Minute + ":" + Second}
-					</span>	
 				</div>
+				<br />
+				<div id="message-username-tag" 
+					style={ (this.props.user == this.props.viewing_user) ? {float: "right"} : {float: "left"}}>
+					<span className="message-username-tag-username">
+						{this.props.user}
+					</span>
+					{" " /*+ Month + "/" + Day + " "*/ + Hour + ":" + Minute + ":" + Second}
+				</div>	
 			</div>
 		);
 	}
