@@ -19,11 +19,22 @@ import StreamBar from './components/StreamBar.jsx';
 import ShowInfo from './components/ShowInfo.jsx';
 import WaterFallContent from './components/WaterFallContent.jsx';
 import Error404Page from './components/Error404Page.jsx';
+import StreamIssuesPage from './components/StreamIssuesPage.jsx';
 // Common Components
 import RectImage from '../common/RectImage.jsx';
 
 // Bootstrap elements
 import { Bootstrap, Grid, Col } from 'react-bootstrap';
+
+// Google analytics helper
+import passwords from '../../passwords.json';
+var ReactGA = require('react-ga');
+ReactGA.initialize(passwords.googleanalyticskey);
+
+function logPageView() {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+}
 
 // Misc
 import theme from '../common/theme';
@@ -54,7 +65,7 @@ const FrontpageContent = React.createClass({
 
     // update now playing and fetch initial shows data
     // 1/11/17 - Black Twitter!
-    this.props.setSpotlightShowID(106);
+    this.props.setSpotlightShowID(89);
     this.props.updateShows();
   },
   componentWillUnmount: function() {
@@ -77,15 +88,6 @@ const FrontpageContent = React.createClass({
                   </div>
                 </IndexLink>
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
-                { /* Apply for Radio Promo */ }
-                <div className="infoHeader">Intern Applications are open!</div>
-                <div className="promoBanner">
-                  <a href="http://apply.dailybruin.com/applications/ucla-radio/" target="_blank">
-                    <RectImage src="/img/promo/apply_for_radio_W17.png" aspectRatio={4/3}>
-                      <div className="overlay" />
-                    </RectImage>
-                  </a>
-                </div>
                 { /* Show Spotlight */ }
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
               </Col>
@@ -119,7 +121,7 @@ Will pass own props down to FrontpageContent
 const Frontpage = React.createClass({
   render: function() {
     return (
-      <Router history={browserHistory}>
+      <Router history={browserHistory} onUpdate={logPageView}>
         <Route path="/" component={props => <FrontpageContent {...this.props} {...props} />}>
           <IndexRoute component={WaterFallContent} />
           <Route path="/djs" component={DJsTab} />
@@ -127,6 +129,7 @@ const Frontpage = React.createClass({
           <Route path="/shows" components={ShowsTab} />
           <Route path="/shows/:showID" component={ShowContainer} />
           <Route path="/events/:eventID" component={EventContainer} />
+          <Route path="/streamIssues" component={StreamIssuesPage} />
           <Route path="*" component={Error404Page} />
         </Route>
       </Router>

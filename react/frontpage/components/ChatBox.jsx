@@ -154,8 +154,11 @@ var Message = React.createClass({
 	reportMessage: function() {
 		$.post(ReportMessageURL, {
 			id: this.props.messageID
-		});
-	 this.setState({reported: true});
+		}, function(result) {
+			if (result.success) {				
+				this.setState({reported: true});
+			}
+		}.bind(this));
 	},
 	render: function() {
 		var date = new Date(this.props.date);

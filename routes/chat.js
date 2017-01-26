@@ -20,9 +20,8 @@ module.exports = function(io) {
     // report a message for being innappropriate (can be kept or deleted in manager's panel)
 	router.post('/report', function(req, res) {
 		var messageID = req.body.id;
-        console.log(req.body);
 		messages.report(messageID, function() {
-            console.log("reported it")
+            res.json({success: true});
 		});
 	});
 
