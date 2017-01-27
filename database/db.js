@@ -9,13 +9,14 @@ var db = {};
 
 /***** Last Ids *****/
 
+db.showIdKey = "show"; // ids for Show table
+db.messageIdKey = "message"; // ids for messages table
+
 // Contains last distributed id for a table, in order to provide a unique id for each show, etc.
 var LastIdSchema = new mongoose.Schema({
   key: String, // name of table
   lastId: Number // greatest id of objects created (should increment when creating new ones)
 });
-var showIdKey = "show"; // ids for Show table
-var messageIdKey = "message"; // ids for messages table
 var LastIdModel = mongoose.model('lastIds', LastIdSchema);
 
 db.getNextAvailableId = function(key, callback) {
