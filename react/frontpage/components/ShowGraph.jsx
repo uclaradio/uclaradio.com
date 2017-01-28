@@ -1,5 +1,4 @@
 // ShowsGraph.jsx
-// graph selector with schedule of shows
 
 var React = require('react');
 
@@ -21,18 +20,10 @@ Full graph with schedule of shows
 		...
 		"saturday": {11: {show}, ...},
 	}
+@prop onShowClick(show): callback for when a show is made active
 */
 const ShowsGraph = React.createClass({
-	getInitialState: function() {
-		return {
-			activeShowID: -1
-		}
-	},
-	toggleActiveShow: function(showID) {
-		this.setState({activeShowID: showID});
-	},
 	render: function() {
-
 		var dayTitles = week.map((day) => {
 			return (
 				<p style={headsStyle}>
@@ -63,7 +54,7 @@ const ShowsGraph = React.createClass({
 								isCurrentShow={show && show.id === this.props.currentShowID}
 								isActiveShow={show && show.id === this.state.activeShowID}
 								isSpotlightShow={show && show.id === this.props.spotlightShowID}
-								handleClick={()=>{show && this.toggleActiveShow(show.id)}} />
+								handleClick={()=>{show && this.props.onShowClick(show)}} />
 						);
 					})}
 				</div>
@@ -74,7 +65,6 @@ const ShowsGraph = React.createClass({
 			<div className="showsGraph">
 				{dayTitles}
 				{showBlocks}
-				}
 			</div>
 		);
 	}
