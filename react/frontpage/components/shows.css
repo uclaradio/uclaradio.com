@@ -76,3 +76,13 @@
 	display: inline;
 	font-size: 15pt;
 }
+
+.showBlock {
+	opacity: 0.5;
+	width: 8%;
+	height: 20px;
+	margin-right: 5px;
+	margin-bottom: -15px;
+	display: inline-block;
+	position: relative;
+}
