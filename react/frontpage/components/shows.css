@@ -1,19 +1,14 @@
 
-.colorKey{
+/*.colorKey{
 	display: block;
 	margin-top: 15px;
 	margin-left: auto;
 	margin-right: auto;
-}
+}*/
 
 .header {
 	font-size: 15px;
 	font-weight: lighter;
-	/*font-style: italic;*/
-	margin-left: -100px;
-    margin-right: auto;
-	margin-top: 10px;
-	/*color: rgba(255,255,255,0);*/
 }
 
 .djs {
@@ -29,19 +24,19 @@
 	font-size: 12px;
 	font-weight: lighter;
 }
-
+/*
 .colorKeyLabel{
 	display: inline-block;
 	position: relative;
 	margin-right: 20px;
-}
+}*/
 
-.colorKeyLabel p{
+/*.colorKeyLabel p{
 	display: inline;
 	font-size: 12pt;
-}
+}*/
 
-.dot{
+.dot {
 	background-color: grey;
     width: 10px;
     height: 10px;

@@ -30,12 +30,7 @@ var ShowBlurb = React.createClass({
 		}
 
 		var blockStyle = {
-			//border: '1px solid black',
-    		//top: '50px',
     		width: '100%',
-    		//marginTop: '5px',
-    		marginLeft: '-100px',
-    		marginRight: 'auto',
     		background: 'rgba(255,255,255,0.45)',
     		height: '100%'
 		}

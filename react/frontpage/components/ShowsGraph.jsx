@@ -121,6 +121,7 @@ var ShowBlock = React.createClass({
 		} else {
 			var blockColor = (this.props.isCurrentShow && '#3c84cc')
 				|| (this.props.isSpotlightShow && 'purple')
+				|| (this.props.isActiveShow && 'black')
 				|| 'yellow';
 
 			var blockStyle = {
@@ -160,7 +161,7 @@ const sortedShows = (shows) => {
 
 	for (var s = 0; s < shows.length; s++) {
 		var show = shows[s];
-		var day = Dates.dayFromVar(show.day).lower();
+		var day = Dates.dayFromVar(show.day).toLowerCase();
 		var hour = Dates.availableTimes.indexOf(show.time);
 		if (day && hour) {
 			schedule[day][hour] = show;

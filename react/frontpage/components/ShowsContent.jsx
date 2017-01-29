@@ -31,11 +31,13 @@ var ShowsContent = React.createClass({
 	},
 	render: function() {
 		var graphStyle = {
-			width: "50%"
+			width: "50%",
+			float: "left"
 		};
 
 		var blurbStyle = {
-			width: "50%"
+			width: "50%",
+			float: "left"
 		};
 
 		return (
