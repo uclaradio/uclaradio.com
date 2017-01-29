@@ -8,6 +8,7 @@ import Dates from '../../common/Dates';
 require('./shows.css');
 
 const week = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+const dayWidth = `${100/7}%`;
 
 /*
 Full graph with schedule of shows
@@ -32,33 +33,41 @@ const ShowsGraph = React.createClass({
 		return {};
 	},
 	render: function() {
+		var headsStyle = {
+ 			paddingRight: '11px',
+ 			paddingRight: '1px',
+ 			marginBottom: '2px',
+ 			display: 'inline-block', 
+ 			position: 'relative',
+ 			width: dayWidth
+ 		};
+
 		var dayTitles = week.map((day) => {
 			return (
-				<p style={headsStyle}>
+				<span style={headsStyle}>
 					{Dates.abbreviatedDay(day)}
-				</p> 
+				</span> 
 			);
 		});
 
 		var timeStyle = {
 			fontSize: '11px',
-			marginRight: '3px',
+			paddingRight: '3px',
 			display: 'inline-block',
 			position: 'relative',
-			width: '8%',
+			width: dayWidth,
 			top: 7.5
 		};
 
-		var showBlocks = "";
+		var showBlocks = [];
 		for (var hour = 0; hour < 24; hour++) {
 			var hourString = Dates.availableTimes[hour];
-			showBlocks += (
-				<div style={{ width: '100%', margin: '0 auto' }}>
-					<p style={timeStyle}>{hourString}</p> 
+			showBlocks.push( 
+				<div style={{ width: '100%', margin: '5px auto' }}>
 					{ week.map((day) => {
-						var show = this.state.schedule[day][hour];
-						showBlocks += (
-							<ShowBlock isValidShow={(show !== null)}
+						var show = this.state.schedule && this.state.schedule[day][hour];
+						return (
+							<ShowBlock isValidShow={(show && show.title)}
 								isCurrentShow={show && show.id === this.props.currentShowID}
 								isActiveShow={show && show.id === this.props.activeShowID}
 								isSpotlightShow={show && show.id === this.props.spotlightShowID}
@@ -98,12 +107,16 @@ var ShowBlock = React.createClass({
 		this.props.handleClick()
 	},
 	render: function() {
+
 		if (!this.props.isValidShow) {
 			var boringBlockStyle = {
+				height: "100%",
 				backgroundColor: 'white'
 			}
 			return (
-				<div className='showBlock' style={boringBlockStyle} />
+				<div style={{width: dayWidth}} className="showBlock">
+					<div style={boringBlockStyle} />
+				</div>
 			);
 		} else {
 			var blockColor = (this.props.isCurrentShow && '#3c84cc')
@@ -111,14 +124,17 @@ var ShowBlock = React.createClass({
 				|| 'yellow';
 
 			var blockStyle = {
+				cursor: "pointer",
+				height: "100%",
 				backgroundColor: blockColor,
 			};
 			return (
-				<div className="showBlock" style={blockStyle}
-				onMouseOver={this.handleMouseOver}
-				onMouseOut={this.handleMouseOut}
-				onClick={this.handleClick}
-				/>
+				<div style={{width: dayWidth}} className="showBlock">
+					<div style={blockStyle}
+						onMouseOver={this.handleMouseOver}
+						onMouseOut={this.handleMouseOut}
+						onClick={this.handleClick} />
+				</div>
 			);
 		}
 	}

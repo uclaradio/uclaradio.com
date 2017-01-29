@@ -26,19 +26,19 @@ dates.dayFromVar = function(day) {
 
 dates.abbreviatedDay = function(day) {
   switch (day) {
-    case 'Monday':
+    case 'monday':
       return 'Mon';
-    case 'Tuesday':
+    case 'tuesday':
       return 'Tue';
-    case 'Wednesday':
+    case 'wednesday':
       return 'Wed';
-    case 'Thursday':
+    case 'thursday':
       return 'Thu';
-    case 'Friday':
+    case 'friday':
       return 'Fri';
-    case 'Saturday':
+    case 'saturday':
       return 'Sat';
-    case 'Sunday':
+    case 'sunday':
       return 'Sun';
     default:
       return '';

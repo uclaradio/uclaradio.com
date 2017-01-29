@@ -4,8 +4,10 @@ var React = require('react');
 
 var ShowsGraph = require('./ShowsGraph.jsx');
 var ShowBlurb = require('./ShowBlurb.jsx');
+import Loader from './Loader.jsx';
 
 // styling
+require('./ShowsContent.scss');
 require('./shows.css');
 
 /*
@@ -21,30 +23,39 @@ var ShowsContent = React.createClass({
 	componentWillMount: function() {
 		this.props.updateShows();
 	},
+	getInitialState: function() {
+		return {};
+	},
 	toggleActiveShow: function(show) {
 		this.setState({activeShow: show});
 	},
 	render: function() {
 		var graphStyle = {
-			width: "70%"
+			width: "50%"
 		};
 
 		var blurbStyle = {
-			width: "30%"
+			width: "50%"
 		};
 
 		return (
 			<div className="showsContent">
-				<div className="graph" style={graphStyle}>
-					<ShowsGraph shows={this.props.shows}
-						currentShowID={this.props.currentShowID}
-						spotlightShowID={this.props.spotlightShowID}
-						activeShowID={this.state.activeShow && this.state.activeShow.id}
-						onShowClick={this.toggleActiveShow} />
-				</div>
-				{ activeShow &&
-					<div className="blurb" style={blurbStyle}>
-						<ShowBlurb show={activeShow} />
+				{ this.props.fetching && this.props.shows.length == 0 ?
+					<Loader />
+				:
+					<div>
+						<div className="graph" style={graphStyle}>
+							<ShowsGraph shows={this.props.shows}
+								currentShowID={this.props.currentShowID}
+								spotlightShowID={this.props.spotlightShowID}
+								activeShowID={this.state.activeShow && this.state.activeShow.id}
+								onShowClick={this.toggleActiveShow} />
+						</div>
+						<div className="blurb" style={blurbStyle}>
+							{ this.state.activeShow &&
+								<ShowBlurb show={this.state.activeShow} />
+							}
+						</div>
 					</div>
 				}
 			</div>

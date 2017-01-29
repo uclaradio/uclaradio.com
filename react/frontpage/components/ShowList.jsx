@@ -5,8 +5,6 @@ import React from 'react';
 
 import { Link } from 'react-router';
 
-import Loader from './Loader.jsx';
-
 require('./ShowList.scss');
 
 // order in which days appear
