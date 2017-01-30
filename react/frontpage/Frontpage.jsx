@@ -65,7 +65,7 @@ const FrontpageContent = React.createClass({
 
     // update now playing and fetch initial shows data
     // 1/11/17 - Black Twitter!
-    this.props.setSpotlightShowID(89);
+    this.props.setSpotlightShowID(91);
     this.props.updateShows();
   },
   componentWillUnmount: function() {
