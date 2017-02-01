@@ -95,8 +95,8 @@ const FrontpageContent = React.createClass({
               <Col xs={12} md={9} className="frontpageCol">
                 { /* Show of the Month */ }
                 <div className="promoBanner">
-                  <Link to="/shows/83">
-                    <RectImage src="/img/sotm_january_2017.png" aspectRatio={5}>
+                  <Link to="/shows/75">
+                    <RectImage src="/img/sotm-feb2017.jpg" aspectRatio={5}>
                       <div className="overlay" />
                     </RectImage>
                   </Link>
