@@ -2,6 +2,9 @@
 
 var React = require('react');
 
+// Common Components
+import RectImage from '../../common/RectImage.jsx';
+
 // styling
 require('./shows.css');
 
@@ -19,7 +22,6 @@ Vertical blurb info for a show, including picture and description
 	genre: String,
 	blurb: String, // show description
 	picture: String, // relative url to image file
-  
 }
 */
 var ShowBlurb = React.createClass({
@@ -41,7 +43,7 @@ var ShowBlurb = React.createClass({
 				<div style={blockStyle}>
 					<div style={{ padding: '5px', marginLeft: '5px', marginRight: '5px' }}>
 						<h1 className="showTitle">{this.props.show.title}</h1>
-						<img src={this.props.show.picture || defaultShowPic}/>
+						<RectImage maxWidth="350px" src={this.props.show.picture || defaultShowPic} />
 						<p className="djs">{this.props.show.djs[0]}</p>
 						<p className="time">{this.props.show.day} @ {this.props.time} // {this.props.show.genre} </p>
 						<p className="blurb">{this.props.show.blurb}</p>
