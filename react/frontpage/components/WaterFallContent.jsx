@@ -175,8 +175,7 @@ function newNode(full_picture, summary, created_time, link, platform) {
 
 function formatDate(dateString) {
   var date = String(dateString);
-  date = new Date(date.split('T')[0]);
-  console.log("DATE:" + date);
+  date = new Date(date);
   return (date.getMonth()+1) + "/" + (date.getDate()) + "/" + (date.getYear() + 1900);
 }
 
