@@ -176,7 +176,8 @@ function newNode(full_picture, summary, created_time, link, platform) {
 function formatDate(dateString) {
   var date = String(dateString);
   date = new Date(date.split('T')[0]);
-  return (date.getMonth()+1) + "/" + (date.getDate()+1) + "/" + (date.getYear() + 1900);
+  console.log("DATE:" + date);
+  return (date.getMonth()+1) + "/" + (date.getDate()) + "/" + (date.getYear() + 1900);
 }
 
 export default WaterFallContent;
