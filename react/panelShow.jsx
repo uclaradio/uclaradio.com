@@ -52,8 +52,16 @@ var ShowPage = React.createClass({
 
 var Show = React.createClass({
   getInitialState: function() {
-    return {show: {}, titleVerified: false, dateVerified: false,
-      genreVerified: false, blurbVerified: false, publicVerified: false, artVerified: false};
+    return {
+      show: {},
+      titleVerified: false,
+      dateVerified: false,
+      genreVerified: false,
+      blurbVerified: false,
+      publicVerified: false,
+      artVerified: false,
+      facebookVerified: false
+    };
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -144,6 +152,11 @@ var Show = React.createClass({
     show.blurb = blurb;
     this.handleShowDataSubmit(show, 'blurbVerified');
   },
+  handleFacebookSubmit: function(url) {
+    var show = $.extend(true, {}, this.state.show);
+    show.blurb = blurb;
+    this.handleShowDataSubmit(show, 'facebookVerified');
+  },
   handlePublicSubmit: function(checked) {
     var show = $.extend(true, {}, this.state.show);
     show.public = checked;
@@ -207,9 +220,10 @@ var Show = React.createClass({
                   onSubmit={this.handleGenreSubmit} placeholder="Enter Show Genre" verified={this.state.genreVerified} />
                 <InputEditableTextField title="Blurb" multiline currentValue={this.state.show.blurb}
                   onSubmit={this.handleBlurbSubmit} placeholder="Enter Show Blurb" verified={this.state.blurbVerified} />
+                <InputEditableTextField title="Facebook" multiline currentValue={this.state.show.facebook}
+                    onSubmit={this.handleFacebookSubmit} placeholder="https://www.facebook.com/yourshow" verified={this.state.facebookVerified} />
                 <InputCheckbox title="Public" details="Make Show Public" checked={this.state.show.public}
                   onSelect={this.handlePublicSubmit} verified={this.state.publicVerified} />
-
                 <ConfirmationButton confirm={"Delete '" + this.state.show.title + "'"} submit={"Really delete '" + this.state.show.title + "'?"} onSubmit={this.handleDeleteShow} />
               </Col>
             </Row>
