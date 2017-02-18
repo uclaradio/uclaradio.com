@@ -1,0 +1,32 @@
+/**
+AboutPage.scss
+Sass syling for the About page
+**/
+
+
+.aboutPage{
+	margin: 10pt 0;
+	padding: 10pt 20pt;
+	text-align: center;
+}
+
+#about_text{
+	clear:left;
+}
+
+#wrapper {
+  width:100%;
+}
+
+#first {
+  width:33%;
+  float:left;
+}
+#second {
+  width:33%;
+  float:left;
+}
+#third {
+  width:33%;
+  float:left;
+}

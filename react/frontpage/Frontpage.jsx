@@ -20,6 +20,7 @@ import ShowInfo from './components/ShowInfo.jsx';
 import WaterFallContent from './components/WaterFallContent.jsx';
 import Error404Page from './components/Error404Page.jsx';
 import StreamIssuesPage from './components/StreamIssuesPage.jsx';
+import AboutPage from './components/AboutPage.jsx';
 // Common Components
 import RectImage from '../common/RectImage.jsx';
 
@@ -130,6 +131,7 @@ const Frontpage = React.createClass({
           <Route path="/shows/:showID" component={ShowContainer} />
           <Route path="/events/:eventID" component={EventContainer} />
           <Route path="/streamIssues" component={StreamIssuesPage} />
+          <Route path="/aboutPage" component={AboutPage} />
           <Route path="*" component={Error404Page} />
         </Route>
       </Router>

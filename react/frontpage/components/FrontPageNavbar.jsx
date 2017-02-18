@@ -30,7 +30,7 @@ var FrontPageNavbar = React.createClass({
         window.open("http://apply.dailybruin.com/applications/ucla-radio/", "_blank");
         break;
       case 4:
-        window.open("http://last.fm/user/uclaradio", "_blank");
+        browserHistory.push('/aboutPage');
         break;
       case 5:
         window.open("/panel", "_blank");
@@ -83,7 +83,7 @@ var FrontPageNavbar = React.createClass({
               </NavItem>
             </LinkContainer>
             <NavItem eventKey={3} className="frontPageNavbarItem collapsed">Apply</NavItem>
-            <NavItem eventKey={4} className="frontPageNavbarItem collapsed">Air Plays</NavItem>
+            <NavItem eventKey={4} className="frontPageNavbarItem collapsed">About</NavItem>
             <NavItem eventKey={5} className="frontPageNavbarItem rightMost collapsed">Staff Panel</NavItem>
           </Nav>
         </Collapse>
@@ -103,7 +103,7 @@ var FrontPageNavbar = React.createClass({
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(1)}}>Blog</MenuItem>
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(2)}}>Stream Issues</MenuItem>
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(3)}}>Apply</MenuItem>
-            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(4)}}>Air Plays</MenuItem>
+            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(4)}}>About</MenuItem>
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(5)}}>Staff Panel</MenuItem>
           </NavDropdown>
         </Nav>
