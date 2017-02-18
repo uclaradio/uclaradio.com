@@ -60,7 +60,10 @@ var Show = React.createClass({
       blurbVerified: false,
       publicVerified: false,
       artVerified: false,
-      facebookVerified: false
+      facebookVerified: false,
+      tumblrVerified: false,
+      soundcloudVerified: false,
+      mixcloudVerified: false
     };
   },
   loadDataFromServer: function() {
@@ -157,6 +160,22 @@ var Show = React.createClass({
     show.facebook = facebook;
     this.handleShowDataSubmit(show, 'facebookVerified');
   },
+  handleTumblrSubmit: function(tumblr) {
+    var show = $.extend(true, {}, this.state.show);
+    show.tumblr = tumblr;
+    this.handleShowDataSubmit(show, 'tumblrVerified');
+  },
+  handleSoundcloudSubmit: function(soundcloud) {
+    var show = $.extend(true, {}, this.state.show);
+    show.soundcloud = soundcloud;
+    this.handleShowDataSubmit(show, 'soundcloudVerified');
+  },
+  handleMixcloudSubmit: function(mixcloud) {
+    var show = $.extend(true, {}, this.state.show);
+    show.mixcloud = mixcloud;
+    this.handleShowDataSubmit(show, 'mixcloudVerified');
+  },
+
   handlePublicSubmit: function(checked) {
     var show = $.extend(true, {}, this.state.show);
     show.public = checked;
@@ -222,6 +241,12 @@ var Show = React.createClass({
                   onSubmit={this.handleBlurbSubmit} placeholder="Enter Show Blurb" verified={this.state.blurbVerified} />
                 <InputEditableTextField title="Facebook" multiline currentValue={this.state.show.facebook}
                     onSubmit={this.handleFacebookSubmit} placeholder="https://www.facebook.com/yourshow" verified={this.state.facebookVerified} />
+                <InputEditableTextField title="Tumblr" multiline currentValue={this.state.show.tumblr}
+                    onSubmit={this.handleTumblrSubmit} placeholder="http://yourshow.tumblr.com" verified={this.state.tumblrVerified} />
+                <InputEditableTextField title="Soundcloud" multiline currentValue={this.state.show.soundcloud}
+                    onSubmit={this.handleSoundcloudSubmit} placeholder="https://soundcloud.com/yourshow" verified={this.state.soundcloudVerified} />
+                <InputEditableTextField title="Mixcloud" multiline currentValue={this.state.show.mixcloud}
+                    onSubmit={this.handleMixcloudSubmit} placeholder="https://www.mixcloud.com/yourshow" verified={this.state.mixcloudVerified} />
                 <InputCheckbox title="Public" details="Make Show Public" checked={this.state.show.public}
                   onSelect={this.handlePublicSubmit} verified={this.state.publicVerified} />
                 <ConfirmationButton confirm={"Delete '" + this.state.show.title + "'"} submit={"Really delete '" + this.state.show.title + "'?"} onSubmit={this.handleDeleteShow} />

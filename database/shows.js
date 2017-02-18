@@ -24,8 +24,10 @@ var ShowSchema = new mongoose.Schema({
   picture: String, // relative url to image file
   thumbnail: String,
   public: Boolean,
-  // collection of page links (social media)
-  facebook: String
+  facebook: String,
+  tumblr: String,
+  soundcloud: String,
+  mixcloud: String
 });
 ShowSchema.index({ id: 1});
 var ShowModel = mongoose.model('shows', ShowSchema);
@@ -42,6 +44,9 @@ shows.webSafeShow = function(show) {
       thumbnail: show.thumbnail,
          public: show.public,
        facebook: show.facebook,
+         tumblr: show.tumblr,
+     soundcloud: show.soundcloud,
+       mixcloud: show.mixcloud
       };
 }
 
