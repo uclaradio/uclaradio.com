@@ -25,18 +25,7 @@ var ShowSchema = new mongoose.Schema({
   thumbnail: String,
   public: Boolean,
   // collection of page links (social media)
-  pages: [{
-    title: String,
-    link: String
-  }],
-  // collection of specific episodes (probably many)
-  episodes: [{
-    date: Date,
-    title: String,
-    picture: String,
-    link: String,
-    description: String
-  }]
+  facebook: String
 });
 ShowSchema.index({ id: 1});
 var ShowModel = mongoose.model('shows', ShowSchema);
@@ -52,8 +41,8 @@ shows.webSafeShow = function(show) {
         picture: show.picture,
       thumbnail: show.thumbnail,
          public: show.public,
-          pages: show.pages,
-       episodes: show.episodes};
+       facebook: show.facebook,
+      };
 }
 
 

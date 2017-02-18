@@ -152,9 +152,9 @@ var Show = React.createClass({
     show.blurb = blurb;
     this.handleShowDataSubmit(show, 'blurbVerified');
   },
-  handleFacebookSubmit: function(url) {
+  handleFacebookSubmit: function(facebook) {
     var show = $.extend(true, {}, this.state.show);
-    show.blurb = blurb;
+    show.facebook = facebook;
     this.handleShowDataSubmit(show, 'facebookVerified');
   },
   handlePublicSubmit: function(checked) {

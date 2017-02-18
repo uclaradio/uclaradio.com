@@ -68,6 +68,12 @@ const ShowPage = React.createClass({
 					<h3>{show.title}</h3>
 					<p>{this.djString(show.djs)}</p>
 					<p>{show.blurb}</p>
+					<div className="social-icons">
+						{show.facebook && <a href={show.facebook} target='_blank'><i className="fa fa-facebook-square fa-lg" aria-hidden="true"></i></a>}
+						{show.tumblr && <a href={show.tumblr} target='_blank'><i className="fa fa-tumblr-square fa-lg" aria-hidden="true"></i></a>}
+						{show.soundcloud && <a href={show.soundcloud} target='_blank'><i className="fa fa-soundcloud fa-lg" aria-hidden="true"></i></a>}
+						{show.mixcloud && <a href={show.mixcloud} target='_blank'><i className="fa fa-mixcloud fa-lg" aria-hidden="true"></i></a>}
+					</div>
 				</div>
 			</div>
 		);
