@@ -50,6 +50,13 @@ var ShowPage = React.createClass({
   }
 });
 
+function setHttp(link) {
+    if (link.search(/^http[s]?\:\/\//) == -1) {
+        link = 'http://' + link;
+    }
+    return link;
+}
+
 var Show = React.createClass({
   getInitialState: function() {
     return {
@@ -157,22 +164,22 @@ var Show = React.createClass({
   },
   handleFacebookSubmit: function(facebook) {
     var show = $.extend(true, {}, this.state.show);
-    show.facebook = facebook;
+    show.facebook = setHttp(facebook);
     this.handleShowDataSubmit(show, 'facebookVerified');
   },
   handleTumblrSubmit: function(tumblr) {
     var show = $.extend(true, {}, this.state.show);
-    show.tumblr = tumblr;
+    show.tumblr = setHttp(tumblr);;
     this.handleShowDataSubmit(show, 'tumblrVerified');
   },
   handleSoundcloudSubmit: function(soundcloud) {
     var show = $.extend(true, {}, this.state.show);
-    show.soundcloud = soundcloud;
+    show.soundcloud = setHttp(soundcloud);
     this.handleShowDataSubmit(show, 'soundcloudVerified');
   },
   handleMixcloudSubmit: function(mixcloud) {
     var show = $.extend(true, {}, this.state.show);
-    show.mixcloud = mixcloud;
+    show.mixcloud = setHttp(mixcloud);
     this.handleShowDataSubmit(show, 'mixcloudVerified');
   },
 
