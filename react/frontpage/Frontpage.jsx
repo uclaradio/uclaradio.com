@@ -131,7 +131,7 @@ const Frontpage = React.createClass({
           <Route path="/shows/:showID" component={ShowContainer} />
           <Route path="/events/:eventID" component={EventContainer} />
           <Route path="/streamIssues" component={StreamIssuesPage} />
-          <Route path="/aboutPage" component={AboutPage} />
+          <Route path="/about" component={AboutPage} />
           <Route path="*" component={Error404Page} />
         </Route>
       </Router>
