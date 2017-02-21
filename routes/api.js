@@ -49,7 +49,7 @@ router.get('/nowplaying', function(req, res) {
 	});
 });
 
-router.get('/dj/:djName', function(req, res) {
+router.get('/djs/:djName', function(req, res) {
 	accounts.getDJByDJName(req.params.djName, function(err, o) {
 		if (o) {
 			res.json(o);
