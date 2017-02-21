@@ -125,6 +125,7 @@ const Frontpage = React.createClass({
         <Route path="/" component={props => <FrontpageContent {...this.props} {...props} />}>
           <IndexRoute component={WaterFallContent} />
           <Route path="/djs" component={DJsTab} />
+          <Route path="/dj/:djName" component={DJContainer} />
           <Route path="/events" component={EventsTab} />
           <Route path="/shows" components={ShowsTab} />
           <Route path="/shows/:showID" component={ShowContainer} />
