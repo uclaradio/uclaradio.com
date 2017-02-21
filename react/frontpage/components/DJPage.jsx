@@ -10,6 +10,9 @@ import Loader from './Loader.jsx';
 import RectImage from '../../common/RectImage.jsx';
 
 import  { Link } from 'react-router';
+import {Grid, Col, Row} from 'react-bootstrap';
+
+var defaultDJPic = "/img/bear_transparent.png";
 
 // styling
 require('./DJPage.scss');
@@ -40,9 +43,17 @@ const DJPage = React.createClass({
     }
 
     return (
-      <div>
-        <p> This is a dj page for {dj.djName} </p>
-        <p> Their real name is {dj.fullName}, but they probably don't want you to know that </p>
+      <div class="djPage">
+        <Row>
+          <Col xs={12} md={4}>
+            <RectImage src={ dj.picture || defaultDJPic } circle maxWidth="380px" />
+          </Col>
+          <Col xs={12} md={8}>
+            <h2> {dj.djName} </h2>
+            <h4> About </h4>
+            <p> {dj.bio} </p>
+          </Col>
+        </Row>
       </div>
     );
   }
