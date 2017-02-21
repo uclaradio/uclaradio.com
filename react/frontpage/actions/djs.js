@@ -14,9 +14,7 @@ export const stopFetching = () => ({
 	type: 'STOPPED_FETCHING'
 });
 
-/**
-Helpers
-**/
+// Fetch updated DJ list from server and update store via dispatch
 const djsURL = '/api/djs';
 export const fetchUpdatedDJs = (dispatch) => {
   dispatch(startFetching());
