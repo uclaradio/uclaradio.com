@@ -24,10 +24,25 @@ Displays DJ information
 **/
 
 const DJPage = React.createClass({
+  componentWillMount() {
+    if (this.props.dj == null) {
+      this.props.updateDJs();
+    }
+  },
   render: function() {
+    var dj = this.props.dj;
+    if (!dj) {
+      return(
+        <div>
+          <p> DJ page doesn't exist! </p>
+        </div>
+      );
+    }
+
     return (
       <div>
-        <p> This is a dj page </p>
+        <p> This is a dj page for {dj.djName} </p>
+        <p> Their real name is {dj.fullName}, but they probably don't want you to know that </p>
       </div>
     );
   }

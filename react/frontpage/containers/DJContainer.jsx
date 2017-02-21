@@ -3,14 +3,23 @@
 
 import { connect } from 'react-redux';
 import DJPage from '../components/DJPage.jsx'
-import { updateDJs } from '../actions/djs';
+import { fetchUpdatedDJs } from '../actions/djs';
 
 const mapStateToProps = (state, ownProps) => {
   var props = {
     fetching: state.djs.fetching
-    // 'djs' prop to be set
+    // 'djs' prop set below
   }
 
+  var djName = ownProps.params['djName']; 
+
+  // set DJ if found
+  for (var djIndex = 0; djIndex < state.djs.djs.length; djIndex++) {
+    var dj = state.djs.djs[djIndex];
+    if (dj.djName === djName) {
+      props.dj = dj;
+    }
+  }
   return props; 
 };
 
