@@ -319,6 +319,17 @@ accounts.getAllUsers = function(callback) {
   });
 };
 
+accounts.getDJByDJName = function(djName, callback) {
+  UserModel.findOne({djName: djName}, function(err, o) {
+    if (err || o == null) {
+      callback(err);
+      return;
+    }
+    var dj = accounts.webSafeUser(o);
+    callback(err, dj);
+  });
+};
+
 // remove all users
 accounts.removeAllUsers = function(callback) {
   UserModel.remove({}, callback);
