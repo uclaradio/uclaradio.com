@@ -50,13 +50,6 @@ var ShowPage = React.createClass({
   }
 });
 
-function setHttp(link) {
-    if (link.search(/^http[s]?\:\/\//) == -1) {
-        link = 'http://' + link;
-    }
-    return link;
-}
-
 var Show = React.createClass({
   getInitialState: function() {
     return {
