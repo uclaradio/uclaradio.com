@@ -52,14 +52,30 @@ var ShowsContent = React.createClass({
 	},
 	render: function() {
 		var graphStyle = {
-			width: "50%",
+			width: "60%",
 			float: "left"
 		};
 
 		var blurbStyle = {
-			width: "50%",
+			width: "40%",
 			float: "left"
 		};
+
+		var switchSelStyle = {
+			
+			display: "inline-block",
+			position: "relative",
+			fontWeight: "800",
+			textDecoration: "underline",
+			padding: 5
+		};
+
+		var switchStyle = {
+			
+			display: "inline-block",
+			position: "relative",
+			padding: 5
+		}; 
 
 		// loading
 		if (this.props.fetching && this.props.shows.length == 0) {
@@ -72,14 +88,24 @@ var ShowsContent = React.createClass({
 
 		return (
 			<div className="showsContent">
+
+				<h1 style={{display: "inline", fontSize: "50px", fontWeight: 100, fontStyle: "italic", marginTop: "-15px"}}>
+					schedule
+				</h1>
+
 				{ !this.state.mobile && 
-					<div>
-						<p style={{textAlign: "center"}}>
-							<a onClick={()=>{this.updateViewType(ScheduleViewType.grid)}}>Grid</a>
-							&nbsp;&nbsp;&nbsp;
-							<a onClick={()=>{this.updateViewType(ScheduleViewType.list)}}>List</a>
-						</p>
-					</div>
+					
+						<div style={{display: "inline", position: "relative", borderRadius: "2px", border: "0.5px solid black", height: 50, left: 30, top: -8, padding: 2}}>
+							
+								<p style={this.state.viewType == ScheduleViewType.grid ? switchSelStyle : switchStyle}  onClick={()=>{this.updateViewType(ScheduleViewType.grid)}}>
+									GRID
+								</p>
+								<p style={this.state.viewType == ScheduleViewType.list ? switchSelStyle : switchStyle} onClick={()=>{this.updateViewType(ScheduleViewType.list)}}>
+									LIST
+								</p>
+							
+						</div>
+					
 				}
 
 				{ !this.state.mobile && this.state.viewType == ScheduleViewType.grid ?

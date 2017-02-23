@@ -8,7 +8,7 @@ import Dates from '../../common/Dates';
 require('./shows.css');
 
 const week = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-const dayWidth = `${100/7}%`;
+const dayWidth = `${100/8}%`;
 
 /*
 Full graph with schedule of shows
@@ -32,11 +32,71 @@ const ShowsGraph = React.createClass({
 	getInitialState: function() {
 		return {};
 	},
+
+	findStartEndTimes: function(start, end) {
+
+		for(start=0; start < 24; start ++){
+			for(var j = 0; j < this.props.shows.length; j++){
+				if(this.props.shows[j].time == Dates.availableTimes[start]){
+					break;
+				}
+			}
+		}
+
+		for(end = 23; end > 0; end--){
+			for(var j = 0; j < this.props.shows.length; j++){
+				if(this.props.shows[j].time == Dates.availableTimes[end]){
+					break;
+				}
+			}
+		}
+		start = 9;
+		end = 19;
+
+		return;
+	},
+
 	render: function() {
+		
+		var colorKey = {
+			display: "block",
+			position: "relative"
+		};
+
+		var colorKeyPara = {
+			fontSize: 13,
+			position: "relative",
+			display: "inline-block"
+		};
+
+
+		var dotCur = {
+			position: 'relative',
+		    width: 10,
+		    height: 10,
+		    borderRadius: '50%',
+		    display: 'inline-block',
+		    marginLeft: 10,
+		    marginRight: 20,
+		    backgroundColor: 'rgba(60,132,204, 0.45)'
+		};
+
+		var dotSpot = {
+			position: 'relative',
+		    width: 10,
+		    height: 10,
+		    borderRadius: '50%',
+		    display: 'inline-block',
+		    marginLeft: 10,
+		    marginRight: 15,
+		    backgroundColor: 'rgba(128,0,128,0.45)'
+		};		
+
 		var headsStyle = {
- 			paddingRight: '11px',
+ 			fontSize: '11px',
  			paddingRight: '1px',
  			marginBottom: '2px',
+ 			left: dayWidth,
  			display: 'inline-block', 
  			position: 'relative',
  			width: dayWidth
@@ -56,14 +116,41 @@ const ShowsGraph = React.createClass({
 			display: 'inline-block',
 			position: 'relative',
 			width: dayWidth,
-			top: 7.5
+			marginRight: -15,
+			top: -5
 		};
 
 		var showBlocks = [];
-		for (var hour = 0; hour < 24; hour++) {
+
+		var fl1, fl2 = 0;
+
+		var start, end; 
+		for(start=1; start < 24; start ++){
+			for(var j = 0; j < this.props.shows.length; j++){
+				if(this.props.shows[j].time == Dates.availableTimes[start]){
+					fl1 = 1;
+					break;
+				}
+			}
+			if(fl1) {break;}
+		}
+
+		for(end = 23; end > 0; end--){
+			for(var j = 0; j < this.props.shows.length; j++){
+				if(this.props.shows[j].time == Dates.availableTimes[end]){
+					fl2 = 1;
+					break;
+				}
+			}
+			if(fl2) {break;}
+		}
+		//this.findStartEndTimes(startTime, endTime);
+
+		for (var hour = start; hour < end+1; hour++) {
 			var hourString = Dates.availableTimes[hour];
 			showBlocks.push( 
-				<div style={{ width: '100%', margin: '5px auto' }}>
+				<div style={{ width: '100%', marginBottom: -10, display: 'inline-block', position: 'relative' }}>
+					<p style={timeStyle}>{hourString}</p>
 					{ week.map((day) => {
 						var show = this.state.schedule && this.state.schedule[day][hour];
 						return (
@@ -80,6 +167,15 @@ const ShowsGraph = React.createClass({
 
 		return (
 			<div className="showsGraph">
+				
+				<div style={colorKey}>
+					<p style={colorKeyPara}>current show</p>
+					<div style={dotCur}></div>
+					<p style={colorKeyPara}>spotlight show</p>
+					<div style={dotSpot}></div>
+					
+				</div>
+
 				{dayTitles}
 				{showBlocks}
 			</div>
@@ -111,7 +207,10 @@ var ShowBlock = React.createClass({
 		if (!this.props.isValidShow) {
 			var boringBlockStyle = {
 				height: "100%",
-				backgroundColor: 'white'
+				width: "100%",
+				backgroundColor: 'white',
+				display: 'inline-block', 
+				position: 'relative'
 			}
 			return (
 				<div style={{width: dayWidth}} className="showBlock">
@@ -119,15 +218,18 @@ var ShowBlock = React.createClass({
 				</div>
 			);
 		} else {
-			var blockColor = (this.props.isCurrentShow && '#3c84cc')
+			var blockColor = (this.props.isActiveShow && 'red')
 				|| (this.props.isSpotlightShow && 'purple')
-				|| (this.props.isActiveShow && 'black')
-				|| 'yellow';
+				|| (this.props.isCurrentShow && '#3c84cc')
+				|| 'black';
 
 			var blockStyle = {
 				cursor: "pointer",
 				height: "100%",
+				width: "100%",
 				backgroundColor: blockColor,
+				display: 'inline-block', 
+				position: 'relative'
 			};
 			return (
 				<div style={{width: dayWidth}} className="showBlock">
