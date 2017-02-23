@@ -50,7 +50,7 @@ Frontpage UI, including radio stream, navbar, and triangle background.
 Expects children components for tab contents
 
 @prop nowPlaying: show to display as live
-@prop spotlight: show to display as spotlight 
+@prop spotlight: show to display as spotlight
 @prop children: components to display in content area
 
 @prop updateNowPlaying: () => refresh now playing by requesting new data from server
@@ -77,7 +77,7 @@ const FrontpageContent = React.createClass({
       <div className="frontpageContent">
         { /* <TriangleCanvas xColors={theme.timezoneColorScheme()}> */ }
         <TriangleCanvas xColors="Spectral">
-          <div class="container" id="main">
+          <div className="container" id="main">
             <Grid>
 
               <Col xs={12} md={3} className="frontpageCol">
