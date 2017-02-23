@@ -6,7 +6,7 @@ var React = require('react');
 import Dates from '../../common/Dates';
 
 // styling
-require('./shows.css');
+require('./shows.scss');
 
 const week = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
@@ -41,21 +41,12 @@ const ShowsGraph = React.createClass({
 			);
 		});
 
-		var timeStyle = {
-			fontSize: '11px',
-			marginRight: '3px',
-			display: 'inline-block',
-			position: 'relative',
-			width: '8%',
-			top: 7.5
-		};
-
 		var showBlocks = "";
 		for (var hour = 0; hour < 24; hour++) {
 			var hourString = Dates.availableTimes[hour];
 			showBlocks += (
 				<div style={{ display: 'inline-block', position: 'relative', width: '100%', margin: '0 auto' }}>
-					<p style={timeStyle}>{hourString}</p> 
+					<p className="timeStyle">{hourString}</p> 
 					{ week.map((day) => {
 						var show = this.props.schedule[day][hour];
 						showBlocks += (

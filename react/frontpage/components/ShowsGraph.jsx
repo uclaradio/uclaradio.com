@@ -5,7 +5,7 @@ var React = require('react');
 import Dates from '../../common/Dates';
 
 // styling
-require('./shows.css');
+require('./shows.scss');
 
 const week = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 const dayWidth = `${100/8}%`;
@@ -57,68 +57,14 @@ const ShowsGraph = React.createClass({
 	},
 
 	render: function() {
-		
-		var colorKey = {
-			display: "block",
-			position: "relative"
-		};
-
-		var colorKeyPara = {
-			fontSize: 13,
-			position: "relative",
-			display: "inline-block"
-		};
-
-
-		var dotCur = {
-			position: 'relative',
-		    width: 10,
-		    height: 10,
-		    borderRadius: '50%',
-		    display: 'inline-block',
-		    marginLeft: 10,
-		    marginRight: 20,
-		    backgroundColor: 'rgba(60,132,204, 0.45)'
-		};
-
-		var dotSpot = {
-			position: 'relative',
-		    width: 10,
-		    height: 10,
-		    borderRadius: '50%',
-		    display: 'inline-block',
-		    marginLeft: 10,
-		    marginRight: 15,
-		    backgroundColor: 'rgba(128,0,128,0.45)'
-		};		
-
-		var headsStyle = {
- 			fontSize: '11px',
- 			paddingRight: '1px',
- 			marginBottom: '2px',
- 			left: dayWidth,
- 			display: 'inline-block', 
- 			position: 'relative',
- 			width: dayWidth
- 		};
 
 		var dayTitles = week.map((day) => {
 			return (
-				<span style={headsStyle}>
+				<span className="headsStyle" style={{left: dayWidth, width: dayWidth}}>
 					{Dates.abbreviatedDay(day)}
 				</span> 
 			);
 		});
-
-		var timeStyle = {
-			fontSize: '11px',
-			paddingRight: '3px',
-			display: 'inline-block',
-			position: 'relative',
-			width: dayWidth,
-			marginRight: -15,
-			top: -5
-		};
 
 		var showBlocks = [];
 
@@ -149,8 +95,8 @@ const ShowsGraph = React.createClass({
 		for (var hour = start; hour < end+1; hour++) {
 			var hourString = Dates.availableTimes[hour];
 			showBlocks.push( 
-				<div style={{ width: '100%', marginBottom: -10, display: 'inline-block', position: 'relative' }}>
-					<p style={timeStyle}>{hourString}</p>
+				<div className="hourBlocks">
+					<p className="timeStyle" style={{width: dayWidth}}>{hourString}</p>
 					{ week.map((day) => {
 						var show = this.state.schedule && this.state.schedule[day][hour];
 						return (
@@ -168,11 +114,11 @@ const ShowsGraph = React.createClass({
 		return (
 			<div className="showsGraph">
 				
-				<div style={colorKey}>
-					<p style={colorKeyPara}>current show</p>
-					<div style={dotCur}></div>
-					<p style={colorKeyPara}>spotlight show</p>
-					<div style={dotSpot}></div>
+				<div className="colorKey">
+					<p className="colorKeyPara">current show</p>
+					<div className="dotCur"></div>
+					<p className="colorKeyPara">spotlight show</p>
+					<div className="dotSpot"></div>
 					
 				</div>
 
@@ -205,16 +151,10 @@ var ShowBlock = React.createClass({
 	render: function() {
 
 		if (!this.props.isValidShow) {
-			var boringBlockStyle = {
-				height: "100%",
-				width: "100%",
-				backgroundColor: 'white',
-				display: 'inline-block', 
-				position: 'relative'
-			}
+
 			return (
 				<div style={{width: dayWidth}} className="showBlock">
-					<div style={boringBlockStyle} />
+					<div className="boringBlockStyle" />
 				</div>
 			);
 		} else {
@@ -223,17 +163,10 @@ var ShowBlock = React.createClass({
 				|| (this.props.isCurrentShow && '#3c84cc')
 				|| 'black';
 
-			var blockStyle = {
-				cursor: "pointer",
-				height: "100%",
-				width: "100%",
-				backgroundColor: blockColor,
-				display: 'inline-block', 
-				position: 'relative'
-			};
 			return (
-				<div style={{width: dayWidth}} className="showBlock">
-					<div style={blockStyle}
+				<div className="showBlock" style={{width: dayWidth}}>
+					<div className="blockStyle" 
+						style={{backgroundColor: blockColor}}
 						onMouseOver={this.handleMouseOver}
 						onMouseOut={this.handleMouseOut}
 						onClick={this.handleClick} />

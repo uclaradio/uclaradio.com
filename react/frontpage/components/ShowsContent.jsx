@@ -12,7 +12,7 @@ import isMobile from './misc/isMobile.js';
 
 // styling
 require('./ShowsContent.scss');
-require('./shows.css');
+require('./shows.scss');
 
 // possible values for this.state.viewType
 const ScheduleViewType = {
@@ -51,31 +51,6 @@ var ShowsContent = React.createClass({
 		this.setState({viewType: viewType});
 	},
 	render: function() {
-		var graphStyle = {
-			width: "60%",
-			float: "left"
-		};
-
-		var blurbStyle = {
-			width: "40%",
-			float: "left"
-		};
-
-		var switchSelStyle = {
-			
-			display: "inline-block",
-			position: "relative",
-			fontWeight: "800",
-			textDecoration: "underline",
-			padding: 5
-		};
-
-		var switchStyle = {
-			
-			display: "inline-block",
-			position: "relative",
-			padding: 5
-		}; 
 
 		// loading
 		if (this.props.fetching && this.props.shows.length == 0) {
@@ -89,18 +64,18 @@ var ShowsContent = React.createClass({
 		return (
 			<div className="showsContent">
 
-				<h1 style={{display: "inline", fontSize: "50px", fontWeight: 100, fontStyle: "italic", marginTop: "-15px"}}>
+				<h1 className="schedHeader">
 					schedule
 				</h1>
 
 				{ !this.state.mobile && 
 					
-						<div style={{display: "inline", position: "relative", borderRadius: "2px", border: "0.5px solid black", height: 50, left: 30, top: -8, padding: 2}}>
+						<div className="scheduleViewButton">
 							
-								<p style={this.state.viewType == ScheduleViewType.grid ? switchSelStyle : switchStyle}  onClick={()=>{this.updateViewType(ScheduleViewType.grid)}}>
+								<p className={this.state.viewType == ScheduleViewType.grid ? "switchSelStyle" : "switchStyle"}  onClick={()=>{this.updateViewType(ScheduleViewType.grid)}}>
 									GRID
 								</p>
-								<p style={this.state.viewType == ScheduleViewType.list ? switchSelStyle : switchStyle} onClick={()=>{this.updateViewType(ScheduleViewType.list)}}>
+								<p className={this.state.viewType == ScheduleViewType.list ? "switchSelStyle" : "switchStyle"} onClick={()=>{this.updateViewType(ScheduleViewType.list)}}>
 									LIST
 								</p>
 							
@@ -111,14 +86,14 @@ var ShowsContent = React.createClass({
 				{ !this.state.mobile && this.state.viewType == ScheduleViewType.grid ?
 					<div>
 						{ /* Grid View */ }
-						<div className="graph" style={graphStyle}>
+						<div className="graphStyle">
 							<ShowsGraph shows={this.props.shows}
 								currentShowID={this.props.currentShowID}
 								spotlightShowID={this.props.spotlightShowID}
 								activeShowID={this.state.activeShow && this.state.activeShow.id}
 								onShowClick={this.toggleActiveShow} />
 						</div>
-						<div className="blurb" style={blurbStyle}>
+						<div className="blurbStyle">
 							{ this.state.activeShow &&
 								<ShowBlurb show={this.state.activeShow} />
 							}
