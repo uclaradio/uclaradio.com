@@ -157,22 +157,22 @@ var Show = React.createClass({
   },
   handleFacebookSubmit: function(facebook) {
     var show = $.extend(true, {}, this.state.show);
-    show.facebook = setHttp(facebook);
+    show.facebook = facebook;
     this.handleShowDataSubmit(show, 'facebookVerified');
   },
   handleTumblrSubmit: function(tumblr) {
     var show = $.extend(true, {}, this.state.show);
-    show.tumblr = setHttp(tumblr);;
+    show.tumblr = tumblr;
     this.handleShowDataSubmit(show, 'tumblrVerified');
   },
   handleSoundcloudSubmit: function(soundcloud) {
     var show = $.extend(true, {}, this.state.show);
-    show.soundcloud = setHttp(soundcloud);
+    show.soundcloud = soundcloud;
     this.handleShowDataSubmit(show, 'soundcloudVerified');
   },
   handleMixcloudSubmit: function(mixcloud) {
     var show = $.extend(true, {}, this.state.show);
-    show.mixcloud = setHttp(mixcloud);
+    show.mixcloud = mixcloud;
     this.handleShowDataSubmit(show, 'mixcloudVerified');
   },
 
