@@ -11,7 +11,7 @@ var messages = require('../database/messages');
 
 // Image compression module
 const Jimp = require('jimp');
-const RESIZE_WIDTH = 512; 
+const RESIZE_WIDTH = 512;
 const IMAGE_QUALITY = 80;
 
 /***** Main Log In Page *****/
@@ -94,10 +94,12 @@ router.post('/signup', function(req, res) {
 
 /***** FAQ *****/
 
+/*
 router.get('/faq', function(req, res) {
   var path = require('path');
   res.sendFile(path.resolve('public/panel/faq.html'));
 });
+*/
 
 router.get('/api/faq', function(req, res) {
   faqs.getAllFAQs(function(err, o) {
@@ -233,7 +235,7 @@ router.post('/manager/api/:link', function(req, res) {
           case 'listAccounts':
             listAccounts(req, res);
             break;
-          case 'verify': 
+          case 'verify':
             verifyAccount(req, res);
             break;
           case 'delete':
@@ -260,6 +262,7 @@ router.post('/manager/api/:link', function(req, res) {
   }
 });
 
+/*
 router.get('/manager', function(req, res) {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
@@ -278,6 +281,7 @@ router.get('/manager', function(req, res) {
     });
   }
 });
+*/
 
 /***** Shows *****/
 
@@ -407,7 +411,7 @@ router.post('/api/userPic', function(req, res) {
     }
     else {
       console.log("Non-png/jpg file type");
-    }     
+    }
 
     var picture = imgPath.replace('public/', '/');
     var newData = {"picture": picture, "username": req.body.username};
@@ -464,7 +468,7 @@ router.get('/api/allshows', function(req, res) {
   }
 });
 
-// update details for one show 
+// update details for one show
 router.post('/api/updateShow', function(req, res) {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
@@ -511,7 +515,7 @@ router.post('/api/updateShow', function(req, res) {
   }
 });
 
-// delete show 
+// delete show
 router.post('/api/deleteShow', function(req, res) {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
@@ -542,7 +546,7 @@ router.post('/api/addShow', function(req, res) {
   else {
     shows.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], function(err, saved) {
       if (err) {
-        console.log("failed to add show for user: ", err); 
+        console.log("failed to add show for user: ", err);
         res.json({"success": false, "err": err});
       }
 
@@ -582,8 +586,8 @@ router.post('/api/showPic', function(req, res) {
         }
         else {
           console.log("Non-png/jpg file type");
-        }     
-        
+        }
+
         var picture = imgPath.replace('public/', '/');
         // update show data with new pictures
         var newData = {"picture": picture};
@@ -597,6 +601,12 @@ router.post('/api/showPic', function(req, res) {
       }
     });
   }
+});
+
+// catch all remaining and forward to panel
+router.get('/*', function(req, res, next) {
+  var path = require('path');
+  res.sendFile(path.resolve('public/panel/panel.html'));
 });
 
 
