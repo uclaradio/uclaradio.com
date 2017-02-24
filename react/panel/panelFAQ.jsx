@@ -9,7 +9,7 @@ var urls = {
 };
 
 // Panel Elements
-var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
+var PanelLinksNavbar = require('./PanelLinksNavbar.jsx');
 
 // Boostrap Components
 var Accordion = require('react-bootstrap').Accordion;
@@ -18,12 +18,11 @@ var Input = require('react-bootstrap').Input;
 var Button = require('react-bootstrap').Button;
 var Grid = require('react-bootstrap').Grid;
 
-var FAQPage = React.createClass({
+var PanelFAQPage = React.createClass({
   render: function() {
     return (
       <div className="panelPage">
         <Grid>
-          <PanelLinksNavbar />
           <FAQ urls={this.props.urls} />
         </Grid>
       </div>
@@ -191,7 +190,4 @@ var QuestionEdit = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <FAQPage urls={urls} />,
-  document.getElementById('content')
-);
+export default PanelFAQPage;

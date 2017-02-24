@@ -13,16 +13,16 @@ var urls = {
 };
 
 // Panel Elements
-var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-var ShowList = require('./panel/ShowList.jsx');
-var RectImage = require('./common/RectImage.jsx');
+var PanelLinksNavbar = require('./PanelLinksNavbar.jsx');
+var ShowList = require('./ShowList.jsx');
+var RectImage = require('../common/RectImage.jsx');
 
 // Inputs
-var InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-var InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
+var InputEditableTextField = require('./inputs/InputEditableTextField.jsx');
+var InputFileUpload = require('./inputs/InputFileUpload.jsx');
 
 // Misc
-var Dates = require('./common/Dates.js');
+var Dates = require('../common/Dates.js');
 
 // Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
@@ -36,12 +36,11 @@ var DropdownButton = require('react-bootstrap').DropdownButton;
 var MenuItem = require('react-bootstrap').MenuItem;
 var Image = require('react-bootstrap').Image;
 
-var PanelPage = React.createClass({
+var PanelDJPage = React.createClass({
   render: function() {
     return (
       <div className="panelPage">
         <Grid>
-          <PanelLinksNavbar />
           <Row>
             <Col xs={12} md={6}>
               <Well>
@@ -308,7 +307,4 @@ var NewShowForm = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <PanelPage urls={urls} />,
-  document.getElementById('content')
-);
+export default PanelDJPage;
