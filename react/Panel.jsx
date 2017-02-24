@@ -60,7 +60,7 @@ const Panel = React.createClass({
     return (
       <Router history={browserHistory}>
         <Route path="/panel" component={props => <PanelContent {...this.props} {...props} />}>
-          <IndexRoute component={PanelDJPage} />
+          <IndexRoute component={() => <PanelDJPage urls={DJurls}/>} />
           <Route path="/panel/home" component={() => <PanelDJPage urls={DJurls}/>} />
           <Route path="/panel/faq" component={() => <PanelFAQPage urls={FAQurls}/>} />
           <Route path="/panel/manager" components={() => <PanelManagerPage urls={managerUrls}/>} />

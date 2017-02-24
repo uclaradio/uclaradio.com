@@ -55,6 +55,7 @@ router.get('/home', function(req, res) {
 	}
 	else {
 		var path = require('path');
+		console.log("here");
 		res.sendFile(path.resolve('public/panel/panel.html'));
 	}
 });
@@ -89,10 +90,12 @@ router.post('/signup', function(req, res) {
 
 /***** FAQ *****/
 
+/*
 router.get('/faq', function(req, res) {
 	var path = require('path');
 	res.sendFile(path.resolve('public/panel/faq.html'));
 });
+*/
 
 router.get('/api/faq', function(req, res) {
 	faqs.getAllFAQs(function(err, o) {
@@ -255,6 +258,7 @@ router.post('/manager/api/:link', function(req, res) {
 	}
 });
 
+/*
 router.get('/manager', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
@@ -273,6 +277,7 @@ router.get('/manager', function(req, res) {
 		});
 	}
 });
+*/
 
 /***** Shows *****/
 
@@ -557,6 +562,12 @@ router.post('/api/showPic', function(req, res) {
 			}
 		});
 	}
+});
+
+// catch all remaining and forward to panel
+router.get('/*', function(req, res, next) {
+  var path = require('path');
+  res.sendFile(path.resolve('public/panel/panel.html'));
 });
 
 
