@@ -19,13 +19,13 @@ var urls = {
 };
 
 // Panel Elements
-var ActionTable = require('./panel/ActionTable.jsx');
-var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-var ShowList = require('./panel/ShowList.jsx');
+var ActionTable = require('./ActionTable.jsx');
+var PanelLinksNavbar = require('./PanelLinksNavbar.jsx');
+var ShowList = require('./ShowList.jsx');
 
 // Inputs
-var InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-var InputCheckbox = require('./panel/inputs/InputCheckbox.jsx');
+var InputEditableTextField = require('./inputs/InputEditableTextField.jsx');
+var InputCheckbox = require('./inputs/InputCheckbox.jsx');
 
 // Bootstrap Elements
 import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';
@@ -33,12 +33,11 @@ import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';
 //other
 var CheckBoxList = require('react-checkbox-list');
 
-var ManagerPage = React.createClass({
+var PanelManagerPage = React.createClass({
   render: function() {
     return (
       <div className="managerPage">
         <Grid>
-          <PanelLinksNavbar />
           <Row>
             <Col xs={12} md={6}>
               <Well>
@@ -416,8 +415,4 @@ var AccountsList = React.createClass({
   }
 });
 
-
-ReactDOM.render(
-  <ManagerPage urls={urls} />,
-  document.getElementById('content')
-);
+export default PanelManagerPage;

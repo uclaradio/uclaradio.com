@@ -8,6 +8,7 @@ var linksURL = "/panel/api/userlinks";
 var Navbar = require('react-bootstrap').Navbar;
 var Nav = require('react-bootstrap').Nav;
 var NavItem = require('react-bootstrap').NavItem;
+import { LinkContainer } from 'react-router-bootstrap';
 
 /**
 *  Navbar which loads links available to the current user logged
@@ -46,7 +47,9 @@ var PanelLinksNavbar = React.createClass({
     var styleLink = this.styleLink;
     var links = this.state.links.map(function(link, i) {
       return (
-        <NavItem eventKey={i} key={i} href={link.link}>{styleLink(link.title, link.link)}</NavItem>
+        <LinkContainer to={link.link} key={i}>
+          <NavItem>{styleLink(link.title, link.link)}</NavItem>
+        </LinkContainer>
       );
     });
     return (

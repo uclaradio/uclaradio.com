@@ -13,15 +13,15 @@ var urls = {
 };
 
 // Panel Elements
-var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-var RectImage = require('./common/RectImage.jsx');
+var PanelLinksNavbar = require('./PanelLinksNavbar.jsx');
+var RectImage = require('../common/RectImage.jsx');
 
 // Inputs
-var InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-var InputEditableDateTimeField = require('./panel/inputs/InputEditableDateTimeField.jsx');
-var InputCheckbox = require('./panel/inputs/InputCheckbox.jsx');
-var InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
-var ConfirmationButton = require('./panel/inputs/ConfirmationButton.jsx');
+var InputEditableTextField = require('./inputs/InputEditableTextField.jsx');
+var InputEditableDateTimeField = require('./inputs/InputEditableDateTimeField.jsx');
+var InputCheckbox = require('./inputs/InputCheckbox.jsx');
+var InputFileUpload = require('./inputs/InputFileUpload.jsx');
+var ConfirmationButton = require('./inputs/ConfirmationButton.jsx');
 
 // Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
@@ -30,7 +30,7 @@ var Col = require('react-bootstrap').Col;
 var Well = require('react-bootstrap').Well;
 var FormControls = require('react-bootstrap').FormControls;
 
-var ShowPage = React.createClass({
+var PanelShowPage = React.createClass({
   getShowIDFromURL: function() {
     return window.location.pathname.split('/').pop();
   },
@@ -270,7 +270,5 @@ var Show = React.createClass({
   }
 });
 
-ReactDOM.render(
-  <ShowPage urls={urls} />,
-  document.getElementById('content')
-);
+export default PanelShowPage;
+
