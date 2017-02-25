@@ -13,11 +13,11 @@ const djs = (state = initialState, action) => {
 			return Object.assign({}, state, {
 				djs: action.djs
 			});
-		case 'STARTED_FETCHING':
+		case 'STARTED_FETCHING_DJS':
 			return Object.assign({}, state, {
 				fetching: true
 			});
-		case 'STOPPED_FETCHING':
+		case 'STOPPED_FETCHING_DJS':
 			return Object.assign({}, state, {
 				fetching: false
 			});

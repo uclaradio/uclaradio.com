@@ -7,9 +7,9 @@ export const updateDJs = (djs) => ({
 });
 
 export const startFetching = () => ({
-	type: 'STARTED_FETCHING'
+	type: 'STARTED_FETCHING_DJS'
 });
 
 export const stopFetching = () => ({
-	type: 'STOPPED_FETCHING'
+	type: 'STOPPED_FETCHING_DJS'
 });

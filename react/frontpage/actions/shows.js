@@ -7,11 +7,11 @@ export const updateShows = (shows) => ({
 });
 
 export const startFetching = () => ({
-	type: 'STARTED_FETCHING'
+	type: 'STARTED_FETCHING_SHOWS'
 });
 
 export const stopFetching = () => ({
-	type: 'STOPPED_FETCHING'
+	type: 'STOPPED_FETCHING_SHOWS'
 });
 
 export const updateNowPlaying = (showID) => ({
