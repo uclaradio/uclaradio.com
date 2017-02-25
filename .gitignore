@@ -4,6 +4,7 @@ node_modules/
 passwords.json
 public/blurbImages/
 public/uploads/
+public/build/
 npm-debug.log
 package.json
 public/js/react/
