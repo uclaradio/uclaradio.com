@@ -21,18 +21,24 @@ Full graph with schedule of shows
 @prop onShowClick(show): callback for when a show is made active
 */
 const ShowsGraph = React.createClass({
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.shows) {
-			var sorted = sortedShows(nextProps.shows);
-			this.setState({
-				schedule: sorted
-			});
-		}
-	},
 	getInitialState: function() {
 		return {};
 	},
+	componentWillMount() {
+		this.updateSchedule(this.props.shows);
+	},
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.shows) {
+			this.updateSchedule(nextProps.shows);
+		}
+	},
 
+	updateSchedule: function(shows) {
+		var sorted = sortedShows(shows);
+		this.setState({
+			schedule: sorted
+		});
+	},
 	findStartEndTimes: function(start, end) {
 
 		for(start=0; start < 24; start ++){

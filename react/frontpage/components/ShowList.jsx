@@ -16,18 +16,24 @@ Implemented as a presentational component (view)
 @prop shows: show objects indexed by their ids
 **/
 var ShowList = React.createClass({
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.shows) {
-			var sorted = sortedShows(nextProps.shows);
-			this.setState({
-				schedule: sorted
-			});
-		}
-	},
 	getInitialState() {
 		return {
 			schedule: []
 		}
+	},
+	componentWillMount: function() {
+		this.updateSchedule(this.props.shows);
+	},
+	componentWillReceiveProps: function(nextProps) {
+		if (nextProps.shows) {
+			this.updateSchedule(nextProps.shows);
+		}
+	},
+	updateSchedule: function(shows) {
+		var sorted = sortedShows(shows);
+		this.setState({
+			schedule: sorted
+		});
 	},
 	urlFromShow(show) {
 		return "/shows/" + show.id;
