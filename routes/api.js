@@ -3,12 +3,17 @@
 
 var accounts = require('../database/accounts');
 var shows = require('../database/shows');
+var events = require('../database/events');
 
 var express = require('express');
 var router = express.Router();
 
-function checkPublic(show) {
+function checkPublicShow(show) {
 	return show.public;
+};
+
+function checkPublicEvent(event) {
+	return event.public;
 };
 
 router.get('/show/:id', function(req, res) {
@@ -25,7 +30,19 @@ router.get('/show/:id', function(req, res) {
 router.get('/schedule', function(req, res) {
 	shows.getAllShows(function(err, o) {
 		if (o) {
-			res.json({shows: o.filter(checkPublic)});
+			res.json({shows: o.filter(checkPublicShow)});
+		}
+		else {
+			res.status(400).send(err);
+		}
+	});
+});
+
+
+router.get('/events', function(req, res) {
+	events.getAllEvents(function(err, o) {
+		if (o) {
+			res.json({events: o.filter(checkPublicEvent)});
 		}
 		else {
 			res.status(400).send(err);
