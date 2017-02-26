@@ -37,14 +37,14 @@ const DJPage = React.createClass({
     var dj = this.props.dj;
     if (!dj) {
       return(
-        <div>
-          <p> DJ page doesn't exist! </p>
+        <div className="djPage">
+          <h3 className="center">No DJ Page Found!</h3>
         </div>
       );
     }
 
     return (
-      <div class="djPage">
+      <div className="djPage">
         <Row>
           <Col xs={12} md={4}>
             <RectImage src={ dj.picture || defaultDJPic } circle maxWidth="380px" />
