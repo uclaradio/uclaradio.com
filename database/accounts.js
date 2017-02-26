@@ -20,7 +20,8 @@ var UserSchema = new mongoose.Schema({
   email: String,
   djName: String,
   picture: String, // relative url to image file
-  phone: String
+  phone: String,
+  bio: String
 });
 UserSchema.index({username: 1});
 var UnverifiedUserModel = mongoose.model('unverifiedUsers', UserSchema);
@@ -60,7 +61,8 @@ accounts.webSafeUser = function(user) {
             "djName": user.djName,
            "picture": user.picture,
              "email": user.email,
-             "phone": user.phone};
+             "phone": user.phone,
+               "bio":  user.bio};
 };
 
 accounts.webSafeManager = function(manager) {
@@ -299,6 +301,19 @@ accounts.getDJNameMap = function(usernames, callback) {
         }
       });
       callback(null, nameMap);
+    }
+  });
+}
+
+accounts.getDJByUserName = function (username, callback) {
+  UserModel.findOne({username: username}, function(err, o){
+    if( err || o == null) {
+      console.log(err);
+      callback(err);
+    }
+    else {
+      var user = accounts.webSafeUser(o);
+      callback(err, user);
     }
   });
 }

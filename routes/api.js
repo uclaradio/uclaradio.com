@@ -49,16 +49,16 @@ router.get('/nowplaying', function(req, res) {
 	});
 });
 
-// router.get('/dj/:id', function(req, res) {
-// 	shows.getShowById(req.params.id, function(err, o) {
-// 		if (o) {
-// 			res.json(o);
-// 		}
-// 		else {
-// 			res.status(400).send(err);
-// 		}
-// 	});
-// });
+router.get('/djs/:djName', function(req, res) {
+	accounts.getDJByDJName(req.params.djName, function(err, o) {
+		if (o) {
+			res.json(o);
+		}
+		else {
+			res.status(400).send(err);
+		}
+	});
+});
 
 router.get('/djs', function(req, res) {
 	accounts.getAllUsers(function(err, o) {
