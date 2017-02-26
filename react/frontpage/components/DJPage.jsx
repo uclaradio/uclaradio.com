@@ -13,6 +13,7 @@ import  { Link } from 'react-router';
 import {Grid, Col, Row} from 'react-bootstrap';
 
 var defaultDJPic = "/img/bear_transparent.png";
+var defaultDJBio = " hasn't updated their bio yet, but they are pretty rad 😎"
 
 // styling
 require('./DJPage.scss');
@@ -51,7 +52,7 @@ const DJPage = React.createClass({
           <Col xs={12} md={8}>
             <h2> {dj.djName} </h2>
             <h4> About </h4>
-            <p> {dj.bio} </p>
+            <p> {dj.bio || dj.djName + defaultDJBio} </p>
           </Col>
         </Row>
       </div>
