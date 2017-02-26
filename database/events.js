@@ -1,5 +1,5 @@
-// shows.js
-// Data model for radio shows
+// events.js
+// Data model for radio events
 
 // connect to database
 var db = require('./db');
@@ -12,240 +12,96 @@ var fs = require('fs');
 
 var events = {};
 
-// Radio shows to show on the site
+// Radio events to show on the site
 var EventSchema = new mongoose.Schema({
+  id: Number,  //unique identifier
   date: Date,
   type: String, // Ticket Giveaway / UCLA Radio Presents / Campus Event / Local Event
   name: String,
   location: String,
-  image: String, // url to image file
-  id: Number,  //unique identifier
-  user_id: Number,
-  description: String
+  picture: String, // url to image file
+  submitter: String, // username of person who submitted event 
+  description: String,
+  public: Boolean
 });
 EventSchema.index({ id: 1});
-var ShowModel = mongoose.model('shows', ShowSchema);
+var EventModel = mongoose.model('events', EventSchema);
 
-shows.webSafeShow = function(show) {
-  return {title: show.title,
-             id: show.id,
-            day: show.day,
-           time: show.time,
-            djs: show.djs,
-          genre: show.genre,
-          blurb: show.blurb,
-        picture: show.picture,
-      thumbnail: show.thumbnail,
-         public: show.public,
-          pages: show.pages,
-       episodes: show.episodes};
+events.webSafeEvent = function(event) {
+  return {title:  event.title,
+             id:  event.id,
+           date:  event.date,
+           type:  event.type,
+           name:  event.name,
+       location:  event.location,
+        picture:  event.picture,
+      submitter:  event.submitter,
+         public:  event.public,
+    description:  event.description};
 }
 
+// Temporary script to populate events collection with events
+// run: 'node events.js' to populate 
+// !!! Assumes no events collection has been made !!!
 
-/***** Shows *****/
+var event1 = new EventModel({
+  id: 1, 
+  date: new Date, 
+  type: "Ticket Giveaway", 
+  name: "Chainsmoker's Ticket Giveaway", 
+  location: "The Novo DTLA",
+  submitter: "gm", 
+  description: "Baby pull me closer",
+  public: true
+});
 
-// create a new show with the given data
-shows.addNewShow = function(title, day, time, djs, callback) {
-  db.getNextAvailableId(db.showIdKey, function(nextId) {
-    console.log("nextId: ", nextId);
-    newData = {
-      "title": title,
-      "id": nextId,
-      "day": day,
-      "time": time,
-      "djs": djs
-    };
+var event2 = new EventModel({
+  id: 2, 
+  date: new Date, 
+  type: "UCLA Radio Presents", 
+  name: "Kidz Bop Live!", 
+  location: "Hollywood Bowl",
+  submitter: "gm", 
+  description: "UCLA Radio Presents the grammy nominated Kidz Bop!",
+  public: true
+});
 
-    //Searches for a show with the same title.
-    ShowModel.findOne({public: true, title: newData.title}, function(err, o) {
-      if (o) {
-        callback('title-taken');
-      }
-      else {
-        ShowModel.findOne({public: true, day: newData.day, time: newData.time}, function(err, o) {
-          if (o) {
-            callback('time-taken');
-          }
-          else {
-            var newShow = new ShowModel(newData);
-            newShow.save(function(err, saved) {
-              callback(err, saved);
-              if (saved) {
-                db.setLastTakenId(db.showIdKey, nextId, function(err) {
-                  if (err) { console.log("error setting next id for shows: ", err); }
-                });
-              }
-            });
-          }
-        });
-      }
-    });
-  });
-};
+var event3 = new EventModel({
+  id: 3, 
+  date: new Date, 
+  type: "Campus Event", 
+  name: "Jacob Sartorius Meet and Greet", 
+  location: "The Station",
+  submitter: "gm", 
+  description: "unfinished description",
+  public: false
+});
 
-shows.updateShow = function(id, newData, callback) {
-  var update = function() {
-    ShowModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
-          if (err) { callback(err); }
-          else { callback(null, shows.webSafeShow(o)); }
-      });
-  }
-  ShowModel.findOne({id: id}, function(err, o) {
-    if (o) {
-      if (o.picture !== newData.picture) {
-        var path = require('path');
-        fs.unlink(path.resolve('public'+o.picture), function() {
-          update();
-        });
-      }
-      else {
-        update();
-      }
-    }
-    else { callback(err); }
-  });
-};
+// Save to database:
+event1.save(function (err, e) {
+  if (err) return console.error(err);
+});
+event2.save(function (err, e) {
+  if (err) return console.error(err);
+});
+event3.save(function (err, e) {
+  if (err) return console.error(err);
+});
+/***** Events *****/
 
-shows.addUser = function(id, username, callback) {
-  ShowModel.findOneAndUpdate({'id': id}, {$push: {djs: username}}, {new: true}, function(err, o) {
-    if (err) {
-      callback(err);
-    } else {
-      callback(null, shows.webSafeShow(o));
-    }
-  });
-}
-
-shows.getShowsForUser = function(djUsername, callback) {
-  ShowModel.find({djs: djUsername}, function(err, res) {
-    if (err) {
-      callback(err);
-    }
-    else {
-      callback(null, res);
-    }
-  });
-};
-
-shows.userHasAccessToShow = function(username, id, callback) {
-  accounts.isManager(username, function(err, isManager) {
-    ShowModel.findOne({id: id, djs: username}, function(err, o) {
-      if (isManager || o) { callback(true); }
-      else { callback(false); }
-    });
-  });
-};
-
-// shows.getShow = function(id, callback) {
-//   ShowModel.findOne({id: id}, function(err, o) {
-//     callback(err, o);
-//   });
-// };
-
-shows.getShowByTitle = function(title, callback) {
-  ShowModel.findOne({title: title}, function(err, o) {
-    if (o) {
-      o._id = null;
-      callback(err, shows.webSafeShow(o));
-    }
-    else {
-      callback(err);
-    }
-  });
-};
-
-shows.getShowById = function(id, callback) {
-  ShowModel.findOne({id: id}, function(err, o) {
-    if (err || o == null) {
-      callback(err);
-      return;
-    }
-    var show = shows.webSafeShow(o);
-    callback(err, show);
-  });
-};
-
-shows.getDJMappedShow = function(id, callback) {
-  ShowModel.findOne({id: id}, function(err, o) {
-    if (err || o == null) {
-      callback(err);
-      return;
-    }
-
-    var usernames = [];
-    o.djs.map(function(dj) {
-      usernames.push(dj);
-    });
-    accounts.getDJNameMap(usernames, function(err, nameMap) {
-      var show = shows.webSafeShow(o);
-      show["djs"] = nameMap;
-      callback(err, show);
-    })
-  });
-}
-
-// get all public shows with user data too (name, picture, djs)
-shows.getAllShows = function(callback) {
-  ShowModel.find({public: true}, function(err, allShows) {
+// Get all events marked as public
+events.getAllEvents = function(callback) {
+  EventModel.find({public: true}, function(err, allEvents) {
     if (err) { callback(err); }
     else {
-      var usernames = [];
-      allShows.map(function(show) {
-        show.djs.map(function(dj) {
-          usernames.push(dj);
-        })
-      });
-      accounts.getDJNameMap(usernames, function(err, nameMap) {
-        for (var s = 0; s < allShows.length; s++) {
-          var show = shows.webSafeShow(allShows[s]);
-          var djList = {};
-          show.djs.map(function(dj) {
-            djList[dj] = nameMap[dj];
-          });
-          show["djs"] = djList;
-          allShows[s] = show;
-        }
-        callback(null, allShows);
-      });
+      var response = [];
+      for (var e = 0; e < allEvents.length; e++) {
+        response.push(events.webSafeEvent(allEvents[e]));
+      }
+      callback(null, response);
     }
   });
 }
 
-// get all shows marked as public
-shows.getAllPublicShows = function(callback) {
-  ShowModel.find({"public": true}, function(err, allShows) {
-    var response = [];
-    for (var s = 0; s < allShows.length; s++) {
-      response.push(shows.webSafeShow(allShows[s]));
-    }
-    callback(err, response);
-  });
-}
 
-shows.removeShow = function(id, callback) {
-  ShowModel.remove({id: id}, function (e) {
-    callback(e);
-  });
-};
-
-// show for timeslot: used for currently playing show
-shows.getShowByTimeslotAndDay = function(time, day, callback) {
-  ShowModel.findOne({time: time, day: day}, function(err, show) {
-    if (err || show == null) {
-      callback(err);
-    }
-    else {// usernames: show.djs
-      accounts.getDJNameMap(show.djs, function(err, nameMap) {
-        var safeShow = shows.webSafeShow(show);
-        var djList = {};
-        show.djs.map(function(dj) {
-          djList[dj] = nameMap[dj];
-        });
-        safeShow["djs"] = djList;
-        callback(null, safeShow);
-      });
-    }
-  });
-};
-
-module.exports = shows;
+module.exports = events;
