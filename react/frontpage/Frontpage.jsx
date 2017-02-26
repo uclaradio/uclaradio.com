@@ -21,6 +21,7 @@ import ShowInfo from './components/ShowInfo.jsx';
 import WaterFallContent from './components/WaterFallContent.jsx';
 import Error404Page from './components/Error404Page.jsx';
 import StreamIssuesPage from './components/StreamIssuesPage.jsx';
+import AboutPage from './components/AboutPage.jsx';
 // Common Components
 import RectImage from '../common/RectImage.jsx';
 
@@ -66,7 +67,7 @@ const FrontpageContent = React.createClass({
 
     // update now playing and fetch initial shows data
     // 1/11/17 - Black Twitter!
-    this.props.setSpotlightShowID(91);
+    this.props.setSpotlightShowID(71);
     this.props.updateShows();
   },
   componentWillUnmount: function() {
@@ -132,6 +133,7 @@ const Frontpage = React.createClass({
           <Route path="/shows/:showID" component={ShowContainer} />
           <Route path="/events/:eventID" component={EventContainer} />
           <Route path="/streamIssues" component={StreamIssuesPage} />
+          <Route path="/about" component={AboutPage} />
           <Route path="*" component={Error404Page} />
         </Route>
       </Router>
