@@ -111,6 +111,16 @@ var Show = React.createClass({
   unverifyShowArt: function() {
     this.setState({artVerified: false});
   },
+  validateLink: function(link) {
+    if (link === "") {
+      return link; 
+    }
+    if ( link.indexOf("http") == -1 ) {
+      var addHTTP = "http://" + link;
+      return addHTTP;
+    }
+    return link;
+  },
   handleShowArtSubmit: function(data) {
     if (!data) { return; }
 
@@ -157,22 +167,22 @@ var Show = React.createClass({
   },
   handleFacebookSubmit: function(facebook) {
     var show = $.extend(true, {}, this.state.show);
-    show.facebook = facebook;
+    show.facebook = this.validateLink(facebook);
     this.handleShowDataSubmit(show, 'facebookVerified');
   },
   handleTumblrSubmit: function(tumblr) {
     var show = $.extend(true, {}, this.state.show);
-    show.tumblr = tumblr;
+    show.tumblr = this.validateLink(tumblr);
     this.handleShowDataSubmit(show, 'tumblrVerified');
   },
   handleSoundcloudSubmit: function(soundcloud) {
     var show = $.extend(true, {}, this.state.show);
-    show.soundcloud = soundcloud;
+    show.soundcloud = this.validateLink(soundcloud);
     this.handleShowDataSubmit(show, 'soundcloudVerified');
   },
   handleMixcloudSubmit: function(mixcloud) {
     var show = $.extend(true, {}, this.state.show);
-    show.mixcloud = mixcloud;
+    show.mixcloud = this.validateLink(mixcloud);
     this.handleShowDataSubmit(show, 'mixcloudVerified');
   },
 
