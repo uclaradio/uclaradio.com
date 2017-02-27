@@ -11,6 +11,7 @@ import PanelFAQPage from './panel/panelFAQ.jsx';
 import PanelManagerPage from './panel/panelManager.jsx';
 import PanelShowPage from './panel/panelShow.jsx';
 import PanelDJPage from './panel/panelDJ.jsx';
+import PanelEventsPage from './panel/components/panelEvents.jsx';
 
 // Panel Elements
 var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
@@ -63,7 +64,8 @@ const Panel = React.createClass({
           <IndexRoute component={() => <PanelDJPage urls={DJurls}/>} />
           <Route path="/panel/home" component={() => <PanelDJPage urls={DJurls}/>} />
           <Route path="/panel/faq" component={() => <PanelFAQPage urls={FAQurls}/>} />
-          <Route path="/panel/manager" components={() => <PanelManagerPage urls={managerUrls}/>} />
+          <Route path="/panel/manager" component={() => <PanelManagerPage urls={managerUrls}/>} />
+          <Route path="/panel/events" component={PanelEventsPage} />
           <Route path="*" component={Error404Page} />
         </Route>
       </Router>
