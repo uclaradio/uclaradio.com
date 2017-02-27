@@ -5,6 +5,8 @@ var React = require('react');
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
 
+import { Link } from 'react-router';
+
 // styling
 require('./shows.scss');
 
@@ -39,30 +41,15 @@ var ShowBlurb = React.createClass({
 	    return djString;
   	},
 
+  	urlFromShow(show) {
+		return "/shows/" + show.id;
+	},
+
 	render: function() {
 
 		if (!this.props.show) {
 			return <div className="showBlurb" />;
 		}
-
-		// var blockStyle = {
-  //   		width: '100%',
-  //   		background: 'rgba(255,255,255,0.45)',
-  //   		height: '100%'
-		// }
-
-		// var blurbStyle = {
-		// 	marginTop: -50
-		// }
-
-		// var lineStyle = {
-		// 	borderTop: '0.5px solid black',
-		// 	height: 0,
-		// 	width: "100%",
-		// 	position: 'relative',
-		// 	marginBottom: 2,
-		// 	top: -5
-		// }
 
 		return (
 			<div className="showBlurb">
@@ -77,7 +64,8 @@ var ShowBlurb = React.createClass({
 						<div className="lineStyle"/>
 						<div className="lineStyle"/>
 						<p className="time">{this.props.show.day.toUpperCase()} @ {this.props.show.time.toUpperCase()}<span style={{float: "right"}}>{this.props.show.genre}</span></p>
-						<p className="blurb">{this.props.show.blurb}</p>
+						<p className="blurb">{this.props.show.blurb} <br /></p>
+						<Link to={this.urlFromShow(this.props.show)}> [ GO TO FULL SHOW PAGE ] </Link>
 					</div>
 				</div> 
 			</div>
