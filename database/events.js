@@ -40,53 +40,6 @@ events.webSafeEvent = function(event) {
     description:  event.description};
 }
 
-// Temporary script to populate events collection with events
-// run: 'node events.js' to populate 
-// !!! Assumes no events collection has been made !!!
-
-var event1 = new EventModel({
-  id: 1, 
-  date: new Date, 
-  type: "Ticket Giveaway", 
-  name: "Chainsmoker's Ticket Giveaway", 
-  location: "The Novo DTLA",
-  submitter: "gm", 
-  description: "Baby pull me closer",
-  public: true
-});
-
-var event2 = new EventModel({
-  id: 2, 
-  date: new Date, 
-  type: "UCLA Radio Presents", 
-  name: "Kidz Bop Live!", 
-  location: "Hollywood Bowl",
-  submitter: "gm", 
-  description: "UCLA Radio Presents the grammy nominated Kidz Bop!",
-  public: true
-});
-
-var event3 = new EventModel({
-  id: 3, 
-  date: new Date, 
-  type: "Campus Event", 
-  name: "Jacob Sartorius Meet and Greet", 
-  location: "The Station",
-  submitter: "gm", 
-  description: "unfinished description",
-  public: false
-});
-
-// Save to database:
-event1.save(function (err, e) {
-  if (err) return console.error(err);
-});
-event2.save(function (err, e) {
-  if (err) return console.error(err);
-});
-event3.save(function (err, e) {
-  if (err) return console.error(err);
-});
 /***** Events *****/
 
 // Get all events marked as public
@@ -102,6 +55,88 @@ events.getAllEvents = function(callback) {
     }
   });
 }
+
+// Get events by submitter
+events.getEventsForUser = function(djUsername, callback) {
+  EventModel.find({submitter: djUsername}, function(err, res) {
+    if (err) {
+      callback(err);
+    }
+    else {
+      callback(null, res);
+    }
+  });
+};
+
+// Add a new event
+events.addNewEvent = function(name, type, user, callback) {
+  db.getNextAvailableId(db.eventIdKey, function(nextId) {
+    console.log("nextId: ", nextId);
+    newData = {
+      "id": nextId,
+      "name": name, 
+      "type": type,
+      "submitter": user
+    };
+
+    var newEvent = new EventModel(newData); 
+    newEvent.save(function(err, saved) {
+      callback(err, saved); 
+      if (saved) {
+        db.setLastTakenId(db.eventIdKey, nextId, function(err) {
+          if (err) { console.log("error setting next id for event: ", err); }
+        });
+      }
+    });
+  });
+};
+
+// Check user access to event
+events.userHasAccessToEvent = function(username, id, callback) {
+  accounts.isManager(username, function(err, isManager) {
+    EventModel.findOne({id: id, submitter: username}, function(err, o) {
+      if (isManager || o) { callback(true); }
+      else { callback(false); }
+    });
+  });
+};
+
+// Get event by id
+events.getEventByID = function(id, callback) {
+  EventModel.findOne({id: id}, function(err, o) {
+    if (err || o == null) {
+      callback(err);
+      return;
+    }
+    var event = events.webSafeEvent(o);
+    callback(err, event);
+  });
+};
+
+// Update event info
+events.updateEvent = function(id, newData, callback) {
+  var update = function() {
+    EventModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
+          if (err) { callback(err); }
+          else { callback(null, events.webSafeShow(o)); }
+      });
+  }
+  EventModel.findOne({id: id}, function(err, o) {
+    if (o) {
+      if (o.picture !== newData.picture) {
+        var path = require('path');
+        fs.unlink(path.resolve('public'+o.picture), function() {
+          update();
+        });
+      }
+      else {
+        update();
+      }
+    }
+    else { callback(err); }
+  });
+};
+
 
 
 module.exports = events;

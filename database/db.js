@@ -11,6 +11,7 @@ var db = {};
 
 db.showIdKey = "show"; // ids for Show table
 db.messageIdKey = "message"; // ids for messages table
+db.eventIdKey = "event"; // ids for Events table
 
 // Contains last distributed id for a table, in order to provide a unique id for each show, etc.
 var LastIdSchema = new mongoose.Schema({
