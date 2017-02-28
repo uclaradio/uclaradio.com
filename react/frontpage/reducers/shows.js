@@ -24,12 +24,12 @@ const shows = (state = initialState, action) => {
 				shows: addOrReplaceObjectWithID(state.shows, action.show)
 			});
 		// should indicate in UI that shows fetching started
-		case 'STARTED_FETCHING':
+		case 'STARTED_FETCHING_SHOWS':
 			return Object.assign({}, state, {
 				fetching: true
 			});
 		// should indicate in UI that shows fetching finished
-		case 'STOPPED_FETCHING':
+		case 'STOPPED_FETCHING_SHOWS':
 			return Object.assign({}, state, {
 				fetching: false
 			});
