@@ -11,7 +11,8 @@ import PanelFAQPage from './panel/panelFAQ.jsx';
 import PanelManagerPage from './panel/panelManager.jsx';
 import PanelShowPage from './panel/panelShow.jsx';
 import PanelDJPage from './panel/panelDJ.jsx';
-import PanelEventsPage from './panel/components/panelEvents.jsx';
+import PanelUserEventsPage from './panel/components/panelEvents.jsx';
+import PanelEventPage from './panel/components/PanelEventPage.jsx';
 
 // Panel Elements
 var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
@@ -44,6 +45,15 @@ var DJurls = {
   addShowURL: "/panel/api/addShow"
 };
 
+var eventUrls = {
+  picURL: "/panel/api/userPic",
+  eventsURL: "/panel/api/userevents",
+  eventLink: "/panel/event",
+  addEventURL: "/panel/api/addEvent",
+  eventDataURL: "/panel/api/eventData/",
+  eventUpdateURL: "/panel/api/updateEvent"
+};
+
 var showUrls = {
   showURL: "/panel/api/showData/",
   showUpdateURL: "/panel/api/updateShow",
@@ -74,8 +84,9 @@ const Panel = React.createClass({
           <Route path="/panel/home" component={() => <PanelDJPage urls={DJurls}/>} />
           <Route path="/panel/faq" component={() => <PanelFAQPage urls={FAQurls}/>} />
           <Route path="/panel/manager" component={() => <PanelManagerPage urls={managerUrls}/>} />
-          <Route path="/panel/events" component={PanelEventsPage} />
+          <Route path="/panel/events" component={() => <PanelUserEventsPage urls={eventUrls}/>} />
           <Route path="/panel/show/:showID" component={() => <PanelShowPage urls={showUrls}/>} />
+          <Route path="/panel/event/:eventID" component={() => <PanelEventPage urls={eventUrls}/>} />
           <Route path="*" component={Error404Page} />
         </Route>
       </Router>
