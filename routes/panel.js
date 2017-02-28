@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 
 var accounts = require('../database/accounts');
+var events = require('../database/events');
 var shows = require('../database/shows');
 var faqs = require('../database/faqs');
 var messages = require('../database/messages');
@@ -590,6 +591,113 @@ router.post('/api/showPic', function(req, res) {
       }
     });
   }
+});
+
+/*** Events ***/
+
+// Get events for logged in user
+router.get('/api/userevents', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		// return list of events belonging to current user
+		events.getEventsForUser(req.session.user.username, function(err, userEvents) {
+			if (err) { console.log("failed to retrieve events for user: ", err); }
+			else {
+				res.json(userEvents);
+			}
+		});
+	}
+});
+
+// Add new event
+router.post('/api/addEvent', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		events.addNewEvent(req.body.name, req.body.type, [req.session.user.username], function(err, saved) {
+			if (err) {
+				console.log("failed to add event for user: ", err); 
+				res.json({"success": false, "err": err});
+			}
+
+			else {
+				// return full list of user's events
+				res.redirect('/panel/api/userevents');
+			}
+		});
+	}
+});
+
+router.get('/api/eventData/:id', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.status(400).send();
+	}
+	else {
+		events.userHasAccessToEvent(req.session.user.username, req.params.id, function(hasAccess) {
+			if (!hasAccess) {
+				// user doesn't have access to this show
+				console.log("user requested event they don't have access to");
+				res.status(400).send();
+				return;
+			}
+			else {
+				events.getEventByID(req.params.id, function(err, o) {
+					if (o) {
+						res.json(o);
+					}
+					else {
+						res.status(400).send(err);
+					}
+				});
+			}
+		});
+	}
+});
+
+// update details for one event 
+router.post('/api/updateEvent', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		var eventData = JSON.parse(req.body.event);
+		events.userHasAccessToEvent(req.session.user.username, eventData.id, function(hasAccess) {
+			// user doesn't have access to this show
+			if (!hasAccess) {
+				console.log("user requested invalid event");
+				res.status(400).send();
+				return;
+			}
+
+			// return show with id belonging to logged in user
+			var callback = function(err, event) {
+				if (err) {
+					console.log("error updating show: ", err);
+				}
+
+				if (event) {
+					events.getEventByID(event.id, function(err, o) {
+						if (o) {
+							res.json(o);
+						} else {
+							res.status(400).send();
+						}
+					});
+				} else {
+					res.status(400).send();
+				}
+			};
+
+			events.updateEvent(eventData.id, eventData, callback);
+		});
+	}
 });
 
 // catch all remaining and forward to panel
