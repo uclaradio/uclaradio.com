@@ -20,7 +20,8 @@ var UserSchema = new mongoose.Schema({
   email: String,
   djName: String,
   picture: String, // relative url to image file
-  phone: String
+  phone: String,
+  bio: String
 });
 UserSchema.index({username: 1});
 var UnverifiedUserModel = mongoose.model('unverifiedUsers', UserSchema);
@@ -52,15 +53,6 @@ accounts.managerPrivilegeName = "Manager";
 // accounts.developerPrivilegeName = "Developer";
 var PrivilegeModel = mongoose.model('privileges', PrivilegeSchema);
 
-// Contains last distributed id for a table, in order to provide a unique id for each show, etc.
-var LastIdSchema = new mongoose.Schema({
-  key: String, // name of table
-  lastId: Number // greatest id of objects created (should increment when creating new ones)
-});
-var showIdKey = "show"; // ids for Show table
-var faqIdKey = "faq"; // ids for FAQ table
-var LastIdModel = mongoose.model('lastIds', LastIdSchema);
-
 
 // only include properties that are safe to send to the client
 accounts.webSafeUser = function(user) {
@@ -69,7 +61,8 @@ accounts.webSafeUser = function(user) {
             "djName": user.djName,
            "picture": user.picture,
              "email": user.email,
-             "phone": user.phone};
+             "phone": user.phone,
+               "bio":  user.bio};
 };
 
 accounts.webSafeManager = function(manager) {
@@ -312,6 +305,19 @@ accounts.getDJNameMap = function(usernames, callback) {
   });
 }
 
+accounts.getDJByUserName = function (username, callback) {
+  UserModel.findOne({username: username}, function(err, o){
+    if( err || o == null) {
+      console.log(err);
+      callback(err);
+    }
+    else {
+      var user = accounts.webSafeUser(o);
+      callback(err, user);
+    }
+  });
+}
+
 // return array of all users
 accounts.getAllUsers = function(callback) {
   UserModel.find(function(err, res) {
@@ -477,27 +483,6 @@ accounts.getPrivilegeLinksForUser = function(username, callback) {
   });
 };
 
-/***** Last Ids *****/
-
-accounts.getNextAvailableId = function(key, callback) {
-  LastIdModel.findOne({key: key}, function(err, o) {
-    if (o) {
-      callback(o.lastId + 1);
-    }
-    else {
-      callback(1);
-    }
-  });
-};
-
-accounts.setLastTakenId = function(key, lastId, callback) {
-  newData = {key: key, lastId: lastId};
-  LastIdModel.findOneAndUpdate({key: key}, newData, {upsert: true, new:true}, function(err, o) {
-    if (err) { callback(err); }
-    else { callback(null); }
-  });
-};
-
 
 /***** Encryption *****/
 
@@ -515,7 +500,6 @@ var validatePassword = function(plainPass, hashedPass, callback) {
     callback(null, correct);
   });
 };
-
 
 /***** Helper Methods *****/
 

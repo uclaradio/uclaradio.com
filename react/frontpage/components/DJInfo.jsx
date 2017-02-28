@@ -4,6 +4,8 @@ import React from 'react';
 // Common Elements
 import RectImage from '../../common/RectImage.jsx';
 
+import { Link } from 'react-router';
+
 var defaultDJPic = "/img/bear_transparent.png";
 
 /*
@@ -15,16 +17,21 @@ var DJInfo = React.createClass({
     getDJImage: function(picURL) {
         return picURL || defaultDJPic;
     },
+    getDJLink: function(djName) {
+        return "/djs/" + djName; 
+    },
     render: function() {
         var className = this.props.picture == null ? "djTile empty" : "djTile full";
     	return (
     		<div className={className}>
-    			<RectImage maxWidth="200px" src={this.getDJImage(this.props.picture)} circle />
-                <div className="djTileOverlay">
-                    <p className="djName">
-                        {this.props.name}
-                    </p>
-                </div>
+                <Link to={this.getDJLink(this.props.name)}>    
+        			<RectImage maxWidth="200px" src={this.getDJImage(this.props.picture)} circle />
+                    <div className="djTileOverlay">
+                        <p className="djName">
+                            {this.props.name}
+                        </p>
+                    </div>
+                </Link>
     		</div>
     	);
     } 

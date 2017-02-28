@@ -60,8 +60,8 @@ var PanelPage = React.createClass({
 
 var User = React.createClass({
   getInitialState: function() {
-    return {user: {username: '', djName: '', email: '', phone: ''},
-      djNameVerified: false, emailVerified: false, phoneVerified: false, fullNameVerified: false};
+    return {user: {username: '', djName: '', email: '', phone: '', bio: ''},
+      djNameVerified: false, emailVerified: false, phoneVerified: false, fullNameVerified: false, bioVerified: false};
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -121,6 +121,11 @@ var User = React.createClass({
     user.phone = newPhone;
     this.handleUserDataSubmit(user, "phoneVerified");
   },
+  handleBioSubmit: function(newBio) {
+    var user = $.extend(true, {}, this.state.user);
+    user.bio = newBio;
+    this.handleUserDataSubmit(user, "bioVerified");
+  },
   verifyPic: function() {
     this.setState({picVerified: true});
   },
@@ -178,6 +183,9 @@ var User = React.createClass({
         <InputEditableTextField title="Phone" currentValue={this.state.user.phone}
           placeholder="Enter Phone Number" onSubmit={this.handlePhoneSubmit}
           verified={this.state.phoneVerified} />
+        <InputEditableTextField multiline title="Bio" currentValue={this.state.user.bio}
+          placeholder="Enter Bio" onSubmit={this.handleBioSubmit}
+          verified={this.state.bioVerified} />
       </div>
     );
   }

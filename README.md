@@ -8,9 +8,9 @@ How to run locally:
 * Ensure you have Mongo installed and a Mongo db instance is running
   * Mac: run `setup.sh` on your Mac with [homebrew](http://brew.sh/) installed to set up node and MongoDB automatically
 * In the project root directory, run `npm install` to install dependencies (may need sudo)
-* Run `node bin/www` to start the server for development
+* Run `npm start` to start the server for development
 * Point your browser to `http://localhost:3000/` :heart_eyes:
-  
+
 To run on the server:
 * Make sure all packages are installed with `npm install`
 * Run `node bin/www prod` to start the server for production (will require HTTPS and listen on port 80)

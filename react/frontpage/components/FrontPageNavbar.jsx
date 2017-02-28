@@ -6,6 +6,7 @@ var React = require('react');
 import { Nav, NavItem, Collapse, NavDropdown, MenuItem } from 'react-bootstrap';
 
 import { LinkContainer } from 'react-router-bootstrap';
+import { browserHistory } from 'react-router';
 
 // styling
 require('./FrontPageNavbar.scss');
@@ -23,13 +24,13 @@ var FrontPageNavbar = React.createClass({
         window.open("http://uclaradio.tumblr.com", "_blank");
         break;
       case 2:
-        window.open("/managers", "_blank");
+        browserHistory.push('/streamIssues');
         break;
       case 3:
         window.open("http://apply.dailybruin.com/applications/ucla-radio/", "_blank");
         break;
       case 4:
-        window.open("http://last.fm/user/uclaradio", "_blank");
+        browserHistory.push('/about');
         break;
       case 5:
         window.open("/panel", "_blank");
@@ -53,17 +54,17 @@ var FrontPageNavbar = React.createClass({
               </span>
             </NavItem>
           </LinkContainer>
-          <LinkContainer to="/events">
-            <NavItem className="frontPageNavbarItem">
-              <span className="equalWidth">
-                Events
-              </span>
-            </NavItem>
-          </LinkContainer>
           <LinkContainer to="/shows">
             <NavItem className="frontPageNavbarItem">
               <span className="equalWidth">
                 Shows
+              </span>
+            </NavItem>
+          </LinkContainer>
+          <LinkContainer to="/events">
+            <NavItem className="frontPageNavbarItem">
+              <span className="equalWidth">
+                Events
               </span>
             </NavItem>
           </LinkContainer>
@@ -75,10 +76,18 @@ var FrontPageNavbar = React.createClass({
         </Nav>
         <Collapse in={this.state.open} className="hidden-xs">
           <Nav justified bsStyle="pills" onSelect={this.handleClick}>
-            <NavItem eventKey={1} className="frontPageNavbarItem leftMost collapsed">Blog</NavItem>
-            <NavItem eventKey={2} className="frontPageNavbarItem collapsed">Managers</NavItem>
+            <LinkContainer to="/about">
+              <NavItem className="frontPageNavbarItem leftMost collapsed">
+                About
+              </NavItem>
+            </LinkContainer>
+            <LinkContainer to="/streamIssues">
+              <NavItem className="frontPageNavbarItem collapsed">
+                Stream Issues
+              </NavItem>
+            </LinkContainer>
+            <NavItem eventKey={1} className="frontPageNavbarItem collapsed">Blog</NavItem>
             <NavItem eventKey={3} className="frontPageNavbarItem collapsed">Apply</NavItem>
-            <NavItem eventKey={4} className="frontPageNavbarItem collapsed">Air Plays</NavItem>
             <NavItem eventKey={5} className="frontPageNavbarItem rightMost collapsed">Staff Panel</NavItem>
           </Nav>
         </Collapse>
@@ -88,17 +97,17 @@ var FrontPageNavbar = React.createClass({
           <LinkContainer to="/djs">
             <NavItem className="frontPageNavbarItem fullWidth topMost">DJs</NavItem>
           </LinkContainer>
-          <LinkContainer to="/events">
-            <NavItem className="frontPageNavbarItem fullWidth">Events</NavItem>
-          </LinkContainer>
           <LinkContainer to="/shows">
             <NavItem className="frontPageNavbarItem fullWidth">Shows</NavItem>
           </LinkContainer>
+          <LinkContainer to="/events">
+            <NavItem className="frontPageNavbarItem fullWidth">Events</NavItem>
+          </LinkContainer>
           <NavDropdown title="More" className="frontPageNavbarItem fullWidth bottomMost">
+            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(4)}}>About</MenuItem>
+            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(2)}}>Stream Issues</MenuItem>
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(1)}}>Blog</MenuItem>
-            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(2)}}>Managers</MenuItem>
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(3)}}>Apply</MenuItem>
-            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(4)}}>Air Plays</MenuItem>
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(5)}}>Staff Panel</MenuItem>
           </NavDropdown>
         </Nav>

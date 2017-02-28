@@ -1,10 +1,17 @@
+/**
+ChatBox.scss
+
+Sass styling for frontpage chat box
+**/
+
+@import '../common';
+
 .chat-box-fade-bottom {
 	-webkit-mask-image: -webkit-gradient(linear, left 90%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 }
 
 .chat-box-fade-top {
-	-webkit-mask-image: -webkit-gradient(linear, left 10%, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));	
-
+	-webkit-mask-image: -webkit-gradient(linear, left 10%, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 }
 
 input {
@@ -45,6 +52,7 @@ input:focus {
 	position: relative;
 	width: 100%;
 	overflow-wrap: break-word;
+	padding: 0.5%
 }
 
 
@@ -56,7 +64,7 @@ input:focus {
 }
 
 .message-body-tag {
-	padding: 5px;
+	padding: 0.5%;
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 10px;
@@ -88,7 +96,7 @@ input:focus {
 	}
 }
 
-#chat-box {
+#chatbox {
     transition: opacity 500ms ease-in-out, height 500ms ease-in-out;
 	height: 20em;
 	display: fixed;
@@ -100,9 +108,11 @@ input:focus {
 
 .their-message a {
 	color: black;
+	float: left;
 }
 .my-message a {
-	color: white;	
+	color: white;
+	float: right;
 }
 
 .their-message .message-body-tag{
@@ -125,7 +135,6 @@ input:focus {
 
 .their-message:hover .message-body-tag .report-message {
 	width: 5em;
-	border-radius: 
 	-webkit-transition: width .5s ease-in-out;
     -moz-transition: width .5s ease-in-out;
     -o-transition: width .5s ease-in-out;
@@ -144,6 +153,8 @@ input:focus {
 	color: #CFD8FF;
     margin-left: 10px;
     margin-right: 10px;
+    position: inline-block;
+    clear: both;
 }
 
 .message-username-tag-username {

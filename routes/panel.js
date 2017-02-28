@@ -7,6 +7,7 @@ var router = express.Router();
 var accounts = require('../database/accounts');
 var shows = require('../database/shows');
 var faqs = require('../database/faqs');
+var messages = require('../database/messages');
 
 /***** Main Log In Page *****/
 
@@ -193,6 +194,20 @@ var deleteUnverifiedAccount = function(req, res) {
 	});
 };
 
+var deleteChat = function(req, res) {
+    var messageID = req.body.id;
+    messages.delete(messageID, function(){
+        res.send("succesfully deleted");
+    });
+};
+
+var freeChat = function(req, res) {
+    var messageID = req.body.id;
+    messages.free(messageID, function(){
+        res.send("succesfully deleted");
+    });
+};
+
 router.post('/manager/api/:link', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
@@ -221,6 +236,12 @@ router.post('/manager/api/:link', function(req, res) {
 						break;
 					case 'deleteUnverified':
 						deleteUnverifiedAccount(req, res);
+						break;
+					case 'freechat':
+						freeChat(req, res);
+						break;
+					case 'deletechat':
+						deleteChat(req, res);
 						break;
 					default:
 						res.status(404).send();
@@ -304,8 +325,15 @@ router.get('/api/user', function(req, res) {
 	}
 	else {
 		var user = req.session.user;
-		var userData = accounts.webSafeUser(user);
-		res.json(userData);
+		accounts.getDJByUserName(user.username, function(err, dj){
+			if (err) {
+				res.status(400).send(err);
+			}
+			else {
+				var userData = accounts.webSafeUser(dj);
+				res.json(userData);
+			}
+		});
 	}
 });
 

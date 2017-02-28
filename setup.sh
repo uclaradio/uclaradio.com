@@ -4,7 +4,7 @@
 # needs to have homebrew installed already
 
 echo 'Setting up UCLARadio repository...'
-echo 'installing macOS packages'
+echo 'Installing macOS packages...'
 brew update
 brew install node
 brew install mongodb
@@ -14,16 +14,17 @@ sudo mkdir -p /data/db
 # privileges for mongodb
 sudo chown -R $USER /data/db
 
-echo 'installing npm packages'
+echo 'Installing npm packages...'
 ## note: might need to update if 'node-gyp rebuild' fails
 # npm explore npm -g -- npm install node-gyp@latest
 ## might have to install cairo for dependent npm packages
 # brew install cairo
 sudo npm install
+npm install -g nodemon
 
 cp defaultPasswords.json passwords.json
 
-echo 'seeding database'
+echo 'Seeding database...'
 node database/scripts/setupPanel.js
 
 echo 'Finished.'

@@ -11,6 +11,7 @@ import EventsTab from './containers/EventsTab.jsx';
 import DJsTab from './containers/DJsTab.jsx';
 import ShowContainer from './containers/ShowContainer.jsx';
 import EventContainer from './containers/EventContainer.jsx';
+import DJContainer from './containers/DJContainer.jsx';
 
 // Frontpage Components (Views)
 import TriangleCanvas from './components/TriangleCanvas.jsx';
@@ -19,11 +20,23 @@ import StreamBar from './components/StreamBar.jsx';
 import ShowInfo from './components/ShowInfo.jsx';
 import WaterFallContent from './components/WaterFallContent.jsx';
 import Error404Page from './components/Error404Page.jsx';
+import StreamIssuesPage from './components/StreamIssuesPage.jsx';
+import AboutPage from './components/AboutPage.jsx';
 // Common Components
 import RectImage from '../common/RectImage.jsx';
 
 // Bootstrap elements
 import { Bootstrap, Grid, Col } from 'react-bootstrap';
+
+// Google analytics helper
+import passwords from '../../passwords.json';
+var ReactGA = require('react-ga');
+ReactGA.initialize(passwords.googleanalyticskey);
+
+function logPageView() {
+  ReactGA.set({ page: window.location.pathname });
+  ReactGA.pageview(window.location.pathname);
+}
 
 // Misc
 import theme from '../common/theme';
@@ -53,8 +66,8 @@ const FrontpageContent = React.createClass({
     this.interval = setInterval(this.props.updateNowPlaying, 30*1000);
 
     // update now playing and fetch initial shows data
-    // 1/11/17 - Black Twitter!
-    this.props.setSpotlightShowID(106);
+    // 2/27/17 - Queers 4 Ur Ears!
+    this.props.setSpotlightShowID(76);
     this.props.updateShows();
   },
   componentWillUnmount: function() {
@@ -77,15 +90,6 @@ const FrontpageContent = React.createClass({
                   </div>
                 </IndexLink>
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
-                { /* Apply for Radio Promo */ }
-                <div className="infoHeader">Intern Applications are open!</div>
-                <div className="promoBanner">
-                  <a href="http://apply.dailybruin.com/applications/ucla-radio/" target="_blank">
-                    <RectImage src="/img/promo/apply_for_radio_W17.png" aspectRatio={4/3}>
-                      <div className="overlay" />
-                    </RectImage>
-                  </a>
-                </div>
                 { /* Show Spotlight */ }
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
               </Col>
@@ -93,8 +97,8 @@ const FrontpageContent = React.createClass({
               <Col xs={12} md={9} className="frontpageCol">
                 { /* Show of the Month */ }
                 <div className="promoBanner">
-                  <Link to="/shows/83">
-                    <RectImage src="/img/sotm_january_2017.png" aspectRatio={5}>
+                  <Link to="/shows/75">
+                    <RectImage src="/img/sotm-feb2017.jpg" aspectRatio={5}>
                       <div className="overlay" />
                     </RectImage>
                   </Link>
@@ -119,14 +123,17 @@ Will pass own props down to FrontpageContent
 const Frontpage = React.createClass({
   render: function() {
     return (
-      <Router history={browserHistory}>
+      <Router history={browserHistory} onUpdate={logPageView}>
         <Route path="/" component={props => <FrontpageContent {...this.props} {...props} />}>
           <IndexRoute component={WaterFallContent} />
           <Route path="/djs" component={DJsTab} />
+          <Route path="/djs/:djName" component={DJContainer} />
           <Route path="/events" component={EventsTab} />
           <Route path="/shows" components={ShowsTab} />
           <Route path="/shows/:showID" component={ShowContainer} />
           <Route path="/events/:eventID" component={EventContainer} />
+          <Route path="/streamIssues" component={StreamIssuesPage} />
+          <Route path="/about" component={AboutPage} />
           <Route path="*" component={Error404Page} />
         </Route>
       </Router>

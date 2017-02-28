@@ -46,7 +46,7 @@ points.updateStaffingPointStatus = function(id, newStatus, managerNotes, callbac
 };
 
 points.getStaffingPoints = function(callback) {
-  StaffingPointsModel.find({}, function(err, points) {
+  StaffingPointsModel.find({}, null, {sort: {'_id': 'desc'}}, function(err, points) {
     if (err) console.log(err);
     callback(err, points);
   });
