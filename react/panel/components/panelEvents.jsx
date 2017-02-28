@@ -1,5 +1,8 @@
 var React = require('react');
 
+// Panel Elements
+var PanelEventList = require('./PanelEventList.jsx');
+
 // Inputs
 var InputEditableTextField = require('../inputs/InputEditableTextField.jsx');
 var InputEditableDateTimeField = require('../inputs/InputEditableDateTimeField.jsx');
@@ -7,7 +10,13 @@ var InputCheckbox = require('../inputs/InputCheckbox.jsx');
 var InputFileUpload = require('../inputs/InputFileUpload.jsx');
 var ConfirmationButton = require('../inputs/ConfirmationButton.jsx');
 
-const PanelEventsPage = React.createClass({
+// Bootstrap Elements
+import { Grid, Col, Row, Well, ButtonGroup, Button, Input, DropdownButton, MenuItem } from 'react-bootstrap';
+
+// Misc
+var Dates = require('../../common/Dates.js');
+
+const PanelUserEventsPage = React.createClass({
 	getInitialState: function() {	//temporary until we figure out the back end
     	return {verified: false, checked: true};
   	},
@@ -16,24 +25,134 @@ const PanelEventsPage = React.createClass({
 	},
 	render: function(){
 		return (
-			<div>
-				<InputCheckbox title="Public" details="Make Event Public" checked={this.state.checked}
-                  onSelect={this.handleSubmit} verified={this.state.verified} />
-				<InputEditableTextField title="Name"
-                  onSubmit={this.handleSubmit} placeholder="Name of Event" verified={this.state.verified} />
-                <InputEditableTextField title="Type"
-                  onDateSubmit={this.handleSubmit} placeholder="Type of Event" verified={this.state.verified} />
-                <InputEditableDateTimeField title="Date" 
-                  onSubmit={this.handleSubmit} placeholder="Date" verified={this.state.verified} />
-                <InputEditableTextField title="Location" 
-                  onSubmit={this.handleSubmit} placeholder="Location" verified={this.state.verified} />
-                <InputEditableTextField title="Description" multiline 
-                  onSubmit={this.handleSubmit} placeholder="Description of event goes here" verified={this.state.verified} />
-                <InputFileUpload title="Event Picture" accept=".png,.gif,.jpg,.jpeg" 
-                onSubmit={this.handleSubmit} details="" verified={this.state.verified}/>
-            </div>
+      <div className="panelPage">
+        <Grid>
+          <Row>
+            <Col xs={12} md={12}>
+                <UserEventsList urls={this.props.urls} />
+            </Col>
+          </Row>
+        </Grid>
+      </div>
 		);
 	}
 });
 
-export default PanelEventsPage;
+// TODO: Components are currently sharing styles with their show counterparts
+// Update such that they have their own style
+
+var UserEventsList = React.createClass({
+  getInitialState: function() {
+    return {events: []};
+  },
+  loadDataFromServer: function() {
+    $.ajax({
+      url: this.props.urls.eventsURL,
+      dataType: 'json',
+      cache: false,
+      success: function(events) {
+        this.setState({events: events});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.urls.eventsURL, status, err.toString());
+      }.bind(this)
+    });
+  },
+  handleUserSubmitNewEvent: function(eventData) {
+    var oldEvents = this.state.events;
+    // optimistically add event data
+    var localEventData = eventData;
+    localEventData.id = oldEvents[oldEvents.length-1] + 1; // give new show a temporary id so React has a key for the show element
+    this.setState({events: this.state.events.concat([localEventData])});
+    $.ajax({
+      url: this.props.urls.addEventURL,
+      dataType: 'json',
+      type: 'POST',
+      data: eventData,
+      success: function(events) {
+        this.setState({events: events});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({events: oldEvents});
+        console.error(this.props.urls.addEventURL, status, err.toString());
+      }.bind(this)
+    });
+  },
+  componentDidMount: function() {
+    this.loadDataFromServer();
+  },
+  render: function() {
+    return (
+      <div className="userShowsList">
+        <NewEventForm onNewEventSubmit={this.handleUserSubmitNewEvent}/>
+        <PanelEventList url={this.props.urls.eventLink} events={this.state.events} placeholder="/img/radio.png" />
+      </div>
+    );
+  }
+});
+
+var NewEventForm = React.createClass({
+  getInitialState: function() {
+    return {name: '', type: 'Ticket Giveaway', editable: false};
+  },
+  handleNameChange: function(e) {
+    this.setState({name: e.target.value});
+  },
+  handleTypeChange: function(e, type) {
+    this.setState({type: type});
+  },
+  toggleEditableField: function(e) {
+    this.setState({text: '', editable: !this.state.editable})
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var name = this.state.name.trim();
+    var type = this.state.type.trim();
+    if (!name || !type) {
+      return;
+    }
+    
+    var eventData = {"name": name, "type": type};
+    this.props.onNewEventSubmit(eventData);
+    this.setState(this.getInitialState());
+
+  },
+  render: function() {
+    return (
+      <div className="newShowForm">
+        { this.state.editable ?
+          <form onSubmit={this.handleSubmit}>
+            <h4>New Event</h4>
+            <Input
+              type="text"
+              placeholder= "Event Name"
+              value={this.state.name}
+              className="noBottom"
+              onChange={this.handleNameChange}
+            />
+            <div className="centered">
+              <ButtonGroup className="lightPadding">
+                <DropdownButton id="type" title={this.state.type || <span className="placeholder">Type</span>}
+                onSelect={this.handleTypeChange} key={this.state.type}>
+                  <MenuItem key="Ticket Giveaway" eventKey="Ticket Giveaway">Ticket Giveaway</MenuItem>
+                  <MenuItem key="UCLA Radio Presents" eventKey="UCLA Radio Presents">UCLA Radio Presents</MenuItem>
+                  <MenuItem key="Campus Event" eventKey="Campus Event">Campus Event</MenuItem>
+                  <MenuItem key="Local Event" eventKey="Local Event">Local Event</MenuItem>
+                </DropdownButton>
+              </ButtonGroup>
+              <Button onClick={this.handleSubmit} className="lightPadding">Submit</Button>
+              <Button className="cancelLink lightPadding" onClick={this.toggleEditableField}>Cancel</Button>
+            </div>
+          </form>
+          :
+          // locked to user input
+          <p className="centered"><a onClick={this.toggleEditableField}>+ Add New Event</a></p>
+
+        }
+      </div>
+    );
+  }
+});
+
+
+export default PanelUserEventsPage;
