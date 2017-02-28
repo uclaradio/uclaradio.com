@@ -17,12 +17,6 @@ import { Grid, Col, Row, Well, ButtonGroup, Button, Input, DropdownButton, MenuI
 var Dates = require('../../common/Dates.js');
 
 const PanelUserEventsPage = React.createClass({
-	getInitialState: function() {	//temporary until we figure out the back end
-    	return {verified: false, checked: true};
-  	},
-	handleSubmit: function(){	//temporary until we figure out the back end
-		return;
-	},
 	render: function(){
 		return (
       <div className="panelPage">
@@ -62,7 +56,9 @@ var UserEventsList = React.createClass({
     var oldEvents = this.state.events;
     // optimistically add event data
     var localEventData = eventData;
-    localEventData.id = oldEvents[oldEvents.length-1] + 1; // give new show a temporary id so React has a key for the show element
+    eventData.id = oldEvents.length + 1;
+    localEventData.id = eventData.id; // give new show a temporary id so React has a key for the show element
+    console.log("new event id is " + localEventData.id);
     this.setState({events: this.state.events.concat([localEventData])});
     $.ajax({
       url: this.props.urls.addEventURL,
