@@ -12,11 +12,11 @@ export const updateGroups = (groups) => ({
 });
 
 export const startFetching = () => ({
-	type: 'STARTED_FETCHING'
+	type: 'STARTED_FETCHING_EVENTS'
 });
 
 export const stopFetching = () => ({
-	type: 'STOPPED_FETCHING'
+	type: 'STOPPED_FETCHING_EVENTS'
 });
 
 /**

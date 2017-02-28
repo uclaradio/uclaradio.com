@@ -18,11 +18,11 @@ const events = (state = initialState, action) => {
 			return Object.assign({}, state, {
 				groups: action.groups
 			});
-		case 'STARTED_FETCHING':
+		case 'STARTED_FETCHING_EVENTS':
 			return Object.assign({}, state, {
 				fetching: true
 			});
-		case 'STOPPED_FETCHING':
+		case 'STOPPED_FETCHING_EVENTS':
 			return Object.assign({}, state, {
 				fetching: false
 			});
