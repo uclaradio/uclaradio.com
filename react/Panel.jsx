@@ -44,6 +44,15 @@ var DJurls = {
   addShowURL: "/panel/api/addShow"
 };
 
+var showUrls = {
+  showURL: "/panel/api/showData/",
+  showUpdateURL: "/panel/api/updateShow",
+  showPicURL: "/panel/api/showPic",
+  deleteShowURL: "/panel/api/deleteShow",
+  deleteRedirectURL: "/panel"
+};
+
+
 const PanelContent = React.createClass({
   render: function() {
     var showPlaying = this.props.nowPlaying && this.props.nowPlaying.title != null;
@@ -66,6 +75,7 @@ const Panel = React.createClass({
           <Route path="/panel/faq" component={() => <PanelFAQPage urls={FAQurls}/>} />
           <Route path="/panel/manager" component={() => <PanelManagerPage urls={managerUrls}/>} />
           <Route path="/panel/events" component={PanelEventsPage} />
+          <Route path="/panel/show/:showID" component={() => <PanelShowPage urls={showUrls}/>} />
           <Route path="*" component={Error404Page} />
         </Route>
       </Router>

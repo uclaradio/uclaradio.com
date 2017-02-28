@@ -4,14 +4,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var urls = {
-  showURL: "/panel/api/showData/",
-  showUpdateURL: "/panel/api/updateShow",
-  showPicURL: "/panel/api/showPic",
-  deleteShowURL: "/panel/api/deleteShow",
-  deleteRedirectURL: "/panel"
-};
-
 // Panel Elements
 var PanelLinksNavbar = require('./PanelLinksNavbar.jsx');
 var RectImage = require('../common/RectImage.jsx');
@@ -41,9 +33,6 @@ var PanelShowPage = React.createClass({
   render: function() {
     return (
       <div className="showPage">
-        <Grid fluid>
-          <PanelLinksNavbar />
-        </Grid>
         <Show urls={this.props.urls} showID={this.state.showID} />
       </div>
     );

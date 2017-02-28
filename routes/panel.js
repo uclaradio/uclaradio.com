@@ -285,17 +285,6 @@ router.get('/manager', function(req, res) {
 
 /***** Shows *****/
 
-router.get('/show/:id', function(req, res) {
-  if (req.session.user == null) {
-    // not logged in, redirect to log in page
-    res.redirect('/panel');
-  }
-  else {
-    var path = require('path');
-    res.sendFile(path.resolve('public/panel/show.html'));
-  }
-});
-
 router.get('/api/showData/:id', function(req, res) {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
