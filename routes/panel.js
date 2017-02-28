@@ -325,8 +325,15 @@ router.get('/api/user', function(req, res) {
 	}
 	else {
 		var user = req.session.user;
-		var userData = accounts.webSafeUser(user);
-		res.json(userData);
+		accounts.getDJByUserName(user.username, function(err, dj){
+			if (err) {
+				res.status(400).send(err);
+			}
+			else {
+				var userData = accounts.webSafeUser(dj);
+				res.json(userData);
+			}
+		});
 	}
 });
 

@@ -11,6 +11,7 @@ import EventsTab from './containers/EventsTab.jsx';
 import DJsTab from './containers/DJsTab.jsx';
 import ShowContainer from './containers/ShowContainer.jsx';
 import EventContainer from './containers/EventContainer.jsx';
+import DJContainer from './containers/DJContainer.jsx';
 
 // Frontpage Components (Views)
 import TriangleCanvas from './components/TriangleCanvas.jsx';
@@ -138,6 +139,7 @@ const routes = (
   <Route path="/" component={FrontpageContentContainer}>
     <IndexRoute component={WaterFallContent} />
     <Route path="/djs" component={DJsTab} />
+    <Route path="/djs/:djName" component={DJContainer} />
     <Route path="/events" component={EventsTab} />
     <Route path="/shows" components={ShowsTab} />
     <Route path="/shows/:showID" component={ShowContainer} />
@@ -163,8 +165,8 @@ const Frontpage = React.createClass({
     this.interval = setInterval(this.props.updateNowPlaying, 30*1000);
 
     // update now playing and fetch initial shows data
-    // 1/11/17 - Black Twitter!
-    this.props.setSpotlightShowID(71);
+    // 2/27/17 - Queers 4 Ur Ears!
+    this.props.setSpotlightShowID(76);
     this.props.updateShows();
   },
   componentWillUnmount: function() {
