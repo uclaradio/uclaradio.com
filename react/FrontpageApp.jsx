@@ -22,31 +22,6 @@ import Frontpage from './frontpage/Frontpage.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const mapStateToProps = (state) => {
-	var props = {};
-
-	// set nowPlaying & spotlight shows if found
-	for (var showIndex = 0; showIndex < state.shows.shows.length; showIndex++) {
-		var show = state.shows.shows[showIndex];
-		if (show.id === state.shows.nowPlayingID) {
-			props.nowPlaying = show;
-		}
-		// note: only set spotlight show if different from current show
-		if (show.id === state.shows.spotlightID && show.id !== state.shows.nowPlayingID) {
-			props.spotlight = show;
-		}
-	}
-
-	var spotlight = state.shows.shows.find((show) => {
-		return show.id == state.shows.spotlightID;
-	});
-	if (spotlight && spotlight !== -1) {
-		props.spotlight = spotlight;
-	}
-
-	return props;
-};
-
 const mapDispatchToProps = (dispatch) => ({
 	updateNowPlaying: () => {
 		fetchUpdatedNowPlaying(dispatch);
@@ -81,7 +56,7 @@ const fetchUpdatedNowPlaying = (dispatch) => {
 
 // redux container for frontpage
 const FrontpageContainer = connect(
-	mapStateToProps,
+	null,
 	mapDispatchToProps
 )(Frontpage);
 
