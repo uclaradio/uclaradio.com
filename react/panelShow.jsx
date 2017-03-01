@@ -52,8 +52,19 @@ var ShowPage = React.createClass({
 
 var Show = React.createClass({
   getInitialState: function() {
-    return {show: {}, titleVerified: false, dateVerified: false,
-      genreVerified: false, blurbVerified: false, publicVerified: false, artVerified: false};
+    return {
+      show: {},
+      titleVerified: false,
+      dateVerified: false,
+      genreVerified: false,
+      blurbVerified: false,
+      publicVerified: false,
+      artVerified: false,
+      facebookVerified: false,
+      tumblrVerified: false,
+      soundcloudVerified: false,
+      mixcloudVerified: false
+    };
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -100,6 +111,16 @@ var Show = React.createClass({
   unverifyShowArt: function() {
     this.setState({artVerified: false});
   },
+  validateLink: function(link) {
+    if (link === "") {
+      return link; 
+    }
+    if ( link.indexOf("http") == -1 ) {
+      var addHTTP = "http://" + link;
+      return addHTTP;
+    }
+    return link;
+  },
   handleShowArtSubmit: function(data) {
     if (!data) { return; }
 
@@ -144,6 +165,27 @@ var Show = React.createClass({
     show.blurb = blurb;
     this.handleShowDataSubmit(show, 'blurbVerified');
   },
+  handleFacebookSubmit: function(facebook) {
+    var show = $.extend(true, {}, this.state.show);
+    show.facebook = this.validateLink(facebook);
+    this.handleShowDataSubmit(show, 'facebookVerified');
+  },
+  handleTumblrSubmit: function(tumblr) {
+    var show = $.extend(true, {}, this.state.show);
+    show.tumblr = this.validateLink(tumblr);
+    this.handleShowDataSubmit(show, 'tumblrVerified');
+  },
+  handleSoundcloudSubmit: function(soundcloud) {
+    var show = $.extend(true, {}, this.state.show);
+    show.soundcloud = this.validateLink(soundcloud);
+    this.handleShowDataSubmit(show, 'soundcloudVerified');
+  },
+  handleMixcloudSubmit: function(mixcloud) {
+    var show = $.extend(true, {}, this.state.show);
+    show.mixcloud = this.validateLink(mixcloud);
+    this.handleShowDataSubmit(show, 'mixcloudVerified');
+  },
+
   handlePublicSubmit: function(checked) {
     var show = $.extend(true, {}, this.state.show);
     show.public = checked;
@@ -207,9 +249,16 @@ var Show = React.createClass({
                   onSubmit={this.handleGenreSubmit} placeholder="Enter Show Genre" verified={this.state.genreVerified} />
                 <InputEditableTextField title="Blurb" multiline currentValue={this.state.show.blurb}
                   onSubmit={this.handleBlurbSubmit} placeholder="Enter Show Blurb" verified={this.state.blurbVerified} />
+                <InputEditableTextField title="Facebook" multiline currentValue={this.state.show.facebook}
+                    onSubmit={this.handleFacebookSubmit} placeholder="https://www.facebook.com/yourshow" verified={this.state.facebookVerified} />
+                <InputEditableTextField title="Tumblr" multiline currentValue={this.state.show.tumblr}
+                    onSubmit={this.handleTumblrSubmit} placeholder="http://yourshow.tumblr.com" verified={this.state.tumblrVerified} />
+                <InputEditableTextField title="Soundcloud" multiline currentValue={this.state.show.soundcloud}
+                    onSubmit={this.handleSoundcloudSubmit} placeholder="https://soundcloud.com/yourshow" verified={this.state.soundcloudVerified} />
+                <InputEditableTextField title="Mixcloud" multiline currentValue={this.state.show.mixcloud}
+                    onSubmit={this.handleMixcloudSubmit} placeholder="https://www.mixcloud.com/yourshow" verified={this.state.mixcloudVerified} />
                 <InputCheckbox title="Public" details="Make Show Public" checked={this.state.show.public}
                   onSelect={this.handlePublicSubmit} verified={this.state.publicVerified} />
-
                 <ConfirmationButton confirm={"Delete '" + this.state.show.title + "'"} submit={"Really delete '" + this.state.show.title + "'?"} onSubmit={this.handleDeleteShow} />
               </Col>
             </Row>
