@@ -58,7 +58,6 @@ var UserEventsList = React.createClass({
     var localEventData = eventData;
     eventData.id = oldEvents.length + 1;
     localEventData.id = eventData.id; // give new show a temporary id so React has a key for the show element
-    console.log("new event id is " + localEventData.id);
     this.setState({events: this.state.events.concat([localEventData])});
     $.ajax({
       url: this.props.urls.addEventURL,
@@ -107,7 +106,7 @@ var NewEventForm = React.createClass({
     if (!name || !type) {
       return;
     }
-    
+
     var eventData = {"name": name, "type": type};
     this.props.onNewEventSubmit(eventData);
     this.setState(this.getInitialState());
