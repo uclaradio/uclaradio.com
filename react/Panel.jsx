@@ -46,7 +46,7 @@ var DJurls = {
 };
 
 var eventUrls = {
-  picURL: "/panel/api/userPic",
+  eventPicURL: "/panel/api/eventPic",
   eventsURL: "/panel/api/userevents",
   eventLink: "/panel/event",
   addEventURL: "/panel/api/addEvent",

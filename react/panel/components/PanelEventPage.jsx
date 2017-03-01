@@ -56,49 +56,50 @@ var Event = React.createClass({
       }.bind(this)
     });
   },
-  handleShowDataSubmit: function(updatedShow, successVar) {
-    var oldShow = this.state.event;
+  handleEventDataSubmit: function(updatedEvent, successVar) {
+    var oldEvent = this.state.event;
     // Optimistically update local data, will be refreshed or reset after response from server
-    this.setState({show: updatedShow});
+    this.setState({event: updatedEvent});
     // Stringify arrays so they reach the server
-    var safeShow = JSON.stringify(updatedShow);
+    var safeEvent = JSON.stringify(updatedEvent);
     // don't mark as verified yet
     var unverifiedState = {};
     unverifiedState[successVar] = false;
     this.setState(unverifiedState);
     $.ajax({
-      url: this.props.urls.showUpdateURL,
+      url: this.props.urls.eventUpdateURL,
       dataType: 'json',
       type: 'POST',
-      data: {show: safeShow},
-      success: function(show) {
-        var successState = {show: show};
+      data: {show: safeEvent},
+      success: function(event) {
+        var successState = {event: event};
         successState[successVar] = true;
         this.setState(successState);
       }.bind(this),
       error: function(xhr, status, err) {
-        this.setState({show: oldShow});
-        console.error(this.props.urls.showUpdateURL, status, err.toString());
+        this.setState({event: oldEvent});
+        console.error(this.props.urls.eventUpdateURL, status, err.toString());
       }.bind(this)
     });
   },
-  verifyShowArt: function() {
+  verifyEventArt: function() {
     this.setState({artVerified: true});
   },
-  unverifyShowArt: function() {
+  unverifyEventArt: function() {
     this.setState({artVerified: false});
   },
-  handleShowArtSubmit: function(data) {
+  handleEventArtSubmit: function(data) {
     if (!data) { return; }
 
     var formData = new FormData();
     formData.append("img", data);
-    formData.append("id", this.state.show.id);
+    formData.append("id", this.state.event.id);
     var request = new XMLHttpRequest();
-    request.open("POST", this.props.urls.showPicURL);
+    console.log(this.props.urls.eventPicURL);
+    request.open("POST", this.props.urls.eventPicURL);
     var loadData = this.loadDataFromServer;
-    var verify = this.verifyShowArt;
-    var unverify = this.unverifyShowArt;
+    var verify = this.verifyEventArt;
+    var unverify = this.unverifyEventArt;
     unverify();
     request.onload = function(e) {
       if (request.status == 200) {
@@ -112,26 +113,26 @@ var Event = React.createClass({
     request.send(formData);
   },
   handleNameSubmit: function(title) {
-    var show = $.extend(true, {}, this.state.show);
-    show.title = title;
-    this.handleShowDataSubmit(show, 'titleVerified');
+    var event = $.extend(true, {}, this.state.event);
+    event.title = title;
+    this.handleEventDataSubmit(event, 'titleVerified');
   },
   handlePublicSubmit: function(checked) {
-    var show = $.extend(true, {}, this.state.show);
-    show.public = checked;
-    this.handleShowDataSubmit(show, 'publicVerified');
+    var event = $.extend(true, {}, this.state.event);
+    event.public = checked;
+    this.handleEventDataSubmit(event, 'publicVerified');
   },
-  handleDeleteShow: function() {
+  handleDeleteEvent: function() {
     $.ajax({
-      url: this.props.urls.deleteShowURL,
+      url: this.props.urls.deleteEventURL,
       dataType: 'json',
       type: 'POST',
-      data: {"id": this.state.show.id},
+      data: {"id": this.state.event.id},
       success: function() {
         location.href = this.props.urls.deleteRedirectURL;
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.urls.deleteShowURL, status, err.toString());
+        console.error(this.props.urls.deleteEventURL, status, err.toString());
       }.bind(this)
     });
   },
@@ -150,7 +151,7 @@ var Event = React.createClass({
               </Col>
               <Col xs={12} md={8}>
                 <h3>{this.state.event.name}</h3>
-                <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Art" onSubmit={this.handleShowArtSubmit} verified={this.state.artVerified} />
+                <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Art" onSubmit={this.handleEventArtSubmit} verified={this.state.artVerified} />
                 <InputEditableTextField title="Name" currentValue={this.state.event.name}
                   onSubmit={this.handleNameSubmit} placeholder="Enter Event Name" verified={this.state.nameVerified} />
                 <InputCheckbox title="Public" details="Make Event Public" checked={this.state.event.public}

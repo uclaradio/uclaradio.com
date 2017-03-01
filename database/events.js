@@ -118,7 +118,7 @@ events.updateEvent = function(id, newData, callback) {
   var update = function() {
     EventModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
           if (err) { callback(err); }
-          else { callback(null, events.webSafeShow(o)); }
+          else { callback(null, events.webSafeEvent(o)); }
       });
   }
   EventModel.findOne({id: id}, function(err, o) {

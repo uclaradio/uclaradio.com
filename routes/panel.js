@@ -621,7 +621,7 @@ router.post('/api/addEvent', function(req, res) {
 	else {
 		events.addNewEvent(req.body.name, req.body.type, [req.session.user.username], function(err, saved) {
 			if (err) {
-				console.log("failed to add event for user: ", err); 
+				console.log("failed to add event for user: ", err);
 				res.json({"success": false, "err": err});
 			}
 
@@ -641,7 +641,7 @@ router.get('/api/eventData/:id', function(req, res) {
 	else {
 		events.userHasAccessToEvent(req.session.user.username, req.params.id, function(hasAccess) {
 			if (!hasAccess) {
-				// user doesn't have access to this show
+				// user doesn't have access to this event
 				console.log("user requested event they don't have access to");
 				res.status(400).send();
 				return;
@@ -660,26 +660,30 @@ router.get('/api/eventData/:id', function(req, res) {
 	}
 });
 
-// update details for one event 
+// update details for one event
 router.post('/api/updateEvent', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page
 		res.redirect('/panel');
+		console.log("not logged in ");
 	}
 	else {
-		var eventData = JSON.parse(req.body.event);
+		console.log(req.body);
+		var eventData = JSON.parse(req.body.show);	//not sure why req.body.event doesn't work...
+		console.log("still alive");
 		events.userHasAccessToEvent(req.session.user.username, eventData.id, function(hasAccess) {
-			// user doesn't have access to this show
+			console.log("made it");
+			// user doesn't have access to this event
 			if (!hasAccess) {
 				console.log("user requested invalid event");
 				res.status(400).send();
 				return;
 			}
 
-			// return show with id belonging to logged in user
+			// return event with id belonging to logged in user
 			var callback = function(err, event) {
 				if (err) {
-					console.log("error updating show: ", err);
+					console.log("error updating event: ", err);
 				}
 
 				if (event) {
@@ -696,6 +700,38 @@ router.post('/api/updateEvent', function(req, res) {
 			};
 
 			events.updateEvent(eventData.id, eventData, callback);
+		});
+	}
+});
+
+router.post('/api/eventPic', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		events.userHasAccessToEvent(req.session.user.username, req.body.id, function(hasAccess) {
+			console.log("hi");
+			if (!hasAccess) { res.status(400).send(); }
+
+			else {
+				// user has access to update this event
+				var errorCallback = function(err) {
+					console.log("failed to add event picture: ", err);
+					res.status(400).send(err);
+				}
+
+				var picture = req.files.img.path.replace('public/', '/');
+				// update event data with new pictures
+				var newData = {"picture": picture};
+				events.updateEvent(req.body.id, newData, function(err, o) {
+					if (err) { errorCallback(err); }
+					else {
+						// updated successfully!
+						res.json("success");
+					}
+				});
+			}
 		});
 	}
 });
