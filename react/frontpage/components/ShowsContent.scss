@@ -1,10 +1,52 @@
 /**
 ShowsContent.scss
 
-Sass styling for individual event's page in new frontpage
+Sass styling for shows page
 **/
 
-.showsContent {
-	margin: 10pt 0;
-	padding: 10pt 20pt;
+.graphStyle {
+  width: 60%;
+  float: left;
+}
+
+.blurbStyle {
+  width: 40%;
+  float: left;
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+.switchSelStyle {
+  display: inline-block;
+  position: relative;
+  font-weight: 800;
+  text-decoration: underline;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.switchStyle {
+  display: inline-block;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.schedHeader {
+  display: inline;
+  font-size: 50px;
+  font-weight: 100;
+  font-style: italic;
+  margin-top: -15px;
+}
+
+.scheduleViewButton {
+  display: inline;
+  position: relative;
+  border-radius: 2px;
+  border: 0.5px solid black;
+  height: 50px;
+  left: 30px;
+  top: -8px;
+  padding: 2px;
 }

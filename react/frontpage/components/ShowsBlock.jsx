@@ -6,7 +6,7 @@ var React = require('react');
 import Dates from '../../common/Dates';
 
 // styling
-require('./shows.scss');
+require('./ShowsBlock.scss');
 
 const week = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
@@ -35,7 +35,7 @@ const ShowsGraph = React.createClass({
 
 		var dayTitles = week.map((day) => {
 			return (
-				<p style={headsStyle}>
+				<p>
 					{Dates.abbreviatedDay(day)}
 				</p> 
 			);
@@ -65,7 +65,7 @@ const ShowsGraph = React.createClass({
 			<div className="showsGraph">
 				{dayTitles}
 				{showBlocks}
-				}
+
 			</div>
 		);
 	}
