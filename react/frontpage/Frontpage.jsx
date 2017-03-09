@@ -170,7 +170,7 @@ const Frontpage = React.createClass({
 
     // update now playing and fetch initial shows data
     // 2/27/17 - Queers 4 Ur Ears!
-    this.props.setSpotlightShowID(102);
+    this.props.setSpotlightShowID(76);
     this.props.updateShows();
   },
   componentWillUnmount: function() {
