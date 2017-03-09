@@ -12,7 +12,6 @@ import isMobile from './misc/isMobile.js';
 
 // styling
 require('./ShowsContent.scss');
-require('./shows.scss');
 
 // possible values for this.state.viewType
 const ScheduleViewType = {

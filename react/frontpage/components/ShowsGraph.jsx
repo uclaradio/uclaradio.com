@@ -5,7 +5,7 @@ var React = require('react');
 import Dates from '../../common/Dates';
 
 // styling
-require('./shows.scss');
+require('./ShowsGraph.scss');
 
 const week = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 const dayWidth = `${100/8}%`;
@@ -39,34 +39,40 @@ const ShowsGraph = React.createClass({
 			schedule: sorted
 		});
 	},
-	findStartEndTimes: function(start, end) {
-
-		for(start=0; start < 24; start ++){
-			for(var j = 0; j < this.props.shows.length; j++){
-				if(this.props.shows[j].time == Dates.availableTimes[start]){
+	
+	findStartTime: function() { // find earliest show time
+		var found = 0;
+		for(var s = 1; s < Dates.availableTimes.length; s++){
+			for(var showIndex = 0; showIndex < this.props.shows.length; showIndex++){
+				if(this.props.shows[showIndex].time == Dates.availableTimes[s]){
+					found = 1;
 					break;
 				}
 			}
+			if(found) {break;}
 		}
+		return s;
+	},
 
-		for(end = 23; end > 0; end--){
-			for(var j = 0; j < this.props.shows.length; j++){
-				if(this.props.shows[j].time == Dates.availableTimes[end]){
+	findEndTime: function() {	// find latest show time
+		var found = 0;
+		for(var e = Dates.availableTimes.length-1; e > 0; e--){
+			for(var showIndex = 0; showIndex < this.props.shows.length; showIndex++){
+				if(this.props.shows[showIndex].time == Dates.availableTimes[e]){
+					found = 1;
 					break;
 				}
 			}
+			if(found) {break;}
 		}
-		start = 9;
-		end = 19;
-
-		return;
+		return e;
 	},
 
 	render: function() {
 
 		var dayTitles = week.map((day) => {
 			return (
-				<span className="headsStyle" style={{left: dayWidth, width: dayWidth}}>
+				<span className="dayStyle" style={{left: dayWidth, width: dayWidth}}>
 					{Dates.abbreviatedDay(day)}
 				</span> 
 			);
@@ -74,29 +80,9 @@ const ShowsGraph = React.createClass({
 
 		var showBlocks = [];
 
-		var fl1, fl2 = 0;
-
-		var start, end; 
-		for(start=1; start < 24; start ++){
-			for(var j = 0; j < this.props.shows.length; j++){
-				if(this.props.shows[j].time == Dates.availableTimes[start]){
-					fl1 = 1;
-					break;
-				}
-			}
-			if(fl1) {break;}
-		}
-
-		for(end = 23; end > 0; end--){
-			for(var j = 0; j < this.props.shows.length; j++){
-				if(this.props.shows[j].time == Dates.availableTimes[end]){
-					fl2 = 1;
-					break;
-				}
-			}
-			if(fl2) {break;}
-		}
-		//this.findStartEndTimes(startTime, endTime);
+		// limit vertical size of grid, bounded by earliest and latest show times
+		var start = this.findStartTime();
+		var end = this.findEndTime(); 
 
 		for (var hour = start; hour < end+1; hour++) {
 			var hourString = Dates.availableTimes[hour];
@@ -121,10 +107,10 @@ const ShowsGraph = React.createClass({
 			<div className="showsGraph">
 				
 				<div className="colorKey">
-					<p className="colorKeyPara">current show</p>
-					<div className="dotCur"></div>
-					<p className="colorKeyPara">spotlight show</p>
-					<div className="dotSpot"></div>
+					<p>current show</p>
+					<div className="dotCur"></div>  {/* Current Show Color Key */}
+					<p>spotlight show</p>
+					<div className="dotSpot"></div>	{/* Spotlight Show Color Key */}
 					
 				</div>
 
@@ -145,12 +131,6 @@ Individual show block with rollover action
 @prop isSpotlightShow: styling bool: show is a spotlight feature on website
 */
 var ShowBlock = React.createClass({
-	handleMouseOver: function() {
-		this.setState({active: true});
-	},
-	handleMouseOut: function() {
-		this.setState({active: false});
-	},
 	handleClick: function() {
 		this.props.handleClick()
 	},
@@ -173,8 +153,6 @@ var ShowBlock = React.createClass({
 				<div className="showBlock" style={{width: dayWidth}}>
 					<div className="blockStyle" 
 						style={{backgroundColor: blockColor}}
-						onMouseOver={this.handleMouseOver}
-						onMouseOut={this.handleMouseOut}
 						onClick={this.handleClick} />
 				</div>
 			);
