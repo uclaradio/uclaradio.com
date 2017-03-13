@@ -12,6 +12,7 @@ import DJsTab from './containers/DJsTab.jsx';
 import ShowContainer from './containers/ShowContainer.jsx';
 import EventContainer from './containers/EventContainer.jsx';
 import DJContainer from './containers/DJContainer.jsx';
+import TopAlbumsTab from './components/TopAlbumsTab.jsx';
 
 // Frontpage Components (Views)
 import TriangleCanvas from './components/TriangleCanvas.jsx';
@@ -53,11 +54,6 @@ Expects children components for tab contents
 
 @prop nowPlaying: show to display as live
 @prop spotlight: show to display as spotlight
-<<<<<<< HEAD
-@prop children: components to display in content area
-=======
->>>>>>> master
-
 @prop children: components to display in content area
 **/
 const FrontpageContent = React.createClass({
@@ -137,7 +133,7 @@ const FrontpageContentContainer = connect(
   mapStateToProps
 )(FrontpageContent);
 
-// react-router routes 
+// react-router routes
 // each path represents a page of our frontpage with a component
 const routes = (
   <Route path="/" component={FrontpageContentContainer}>
