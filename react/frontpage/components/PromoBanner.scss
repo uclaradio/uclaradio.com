@@ -3,7 +3,6 @@
 
 .promoBanner {
   margin-bottom: 20pt;
-  cursor: pointer;
 }
 
 .promoBanner .overlay {
@@ -12,8 +11,10 @@
   top: 0;
   left: 0;
   position: absolute;
-}
+  cursor: pointer;
+  z-index: 1; // So overlay is on top of all other promo banner divs (need this to trigger :hover) 
 
-.promoBanner:hover .overlay {
-  background-color: $link-image-active-color;
+  &:hover {
+    background-color: $link-image-active-color;
+  }
 }
