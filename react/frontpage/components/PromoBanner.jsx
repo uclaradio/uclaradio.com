@@ -14,6 +14,13 @@ import  { Link } from 'react-router';
 // styling
 require('./PromoBanner.scss');
 
+// Promo Banner Data 
+const bannerData = [
+  {"img": "/img/sotm-mar17-nuindigo.png", "link": "/shows/90"},
+  {"img": "/img/sotm-feb2017.jpg", "link": "/shows/75"},
+  {"img": "/img/sotm_january_2017.png", "link": "/shows/83"}
+];
+
 var PromoBanner = React.createClass({
   render: function() {
     var settings = {
@@ -24,27 +31,23 @@ var PromoBanner = React.createClass({
       autoplaySpeed: 5000
     };
 
+    var banners = bannerData.map(function(banner) {
+      return (
+        <div>
+          <Link to={banner.link}>
+            <RectImage src={banner.img} aspectRatio={5}>
+              <div className="overlay" />
+            </RectImage>
+          </Link>
+        </div>
+      ); 
+    });
+
+    console.log(banners);
     return (
       <div className="promoBanner">
         <Slider {...settings}>
-          <div>
-            <Link to="/shows/90">
-              <RectImage src="/img/sotm-mar17-nuindigo.png" aspectRatio={5}><div className="overlay" /></RectImage>
-            </Link>
-          </div>
-
-          <div>
-            <Link to="/shows/90">
-              <RectImage src="/img/sotm-feb2017.jpg" aspectRatio={5}><div className="overlay" /></RectImage>
-            </Link>
-          </div>
-
-          <div>
-            <Link to="/shows/90">
-              <RectImage src="/img/sotm_january_2017.png" aspectRatio={5}><div className="overlay" /></RectImage>
-            </Link>
-          </div>
-
+          {banners}
         </Slider>
       </div>
     );
