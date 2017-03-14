@@ -38,6 +38,8 @@ app.use(cookieParser());
 app.use(session({
   key: "mysite.sid.uid.whatever",
   secret: "faeb4453e5d14fe6f6d04637f78077c76c73d1b4",
+  resave: false,
+  saveUninitialized: true,
   cookie: {
     maxAge: 2678400000 // 31 days
   },
