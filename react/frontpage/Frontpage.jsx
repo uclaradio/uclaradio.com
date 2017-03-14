@@ -9,6 +9,7 @@ import { Router, Route, IndexRoute, browserHistory, Link, IndexLink } from 'reac
 import ShowsTab from './containers/ShowsTab.jsx';
 import EventsTab from './containers/EventsTab.jsx';
 import DJsTab from './containers/DJsTab.jsx';
+// TopAlbumsTab is a component as backend is not finished 
 import TopAlbumsTab from './components/TopAlbumsTab.jsx';
 
 import ShowContainer from './containers/ShowContainer.jsx';
@@ -151,6 +152,7 @@ const routes = (
     <Route path="/events/:eventID" component={EventContainer} />
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
+    <Route path="/topalbums" components={TopAlbumsTab} />
     <Route path="*" component={Error404Page} />
   </Route>
 );
@@ -181,17 +183,6 @@ const Frontpage = React.createClass({
     return (
       <Router history={browserHistory} onUpdate={logPageView}>
         {routes}
-        <Route path="/" component={props => <FrontpageContent {...this.props} {...props} />}>
-          <IndexRoute component={WaterFallContent} />
-          <Route path="/djs" component={DJsTab} />
-          <Route path="/events" component={EventsTab} />
-          <Route path="/shows" components={ShowsTab} />
-          <Route path="/shows/:showID" component={ShowContainer} />
-          <Route path="/events/:eventID" component={EventContainer} />
-          <Route path="/streamIssues" component={StreamIssuesPage} />
-          <Route path="/topalbums" components={TopAlbumsTab} />
-          <Route path="*" component={Error404Page} />
-        </Route>
       </Router>
     );
   }
