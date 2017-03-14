@@ -43,7 +43,6 @@ var PromoBanner = React.createClass({
       ); 
     });
 
-    console.log(banners);
     return (
       <div className="promoBanner">
         <Slider {...settings}>
