@@ -63,47 +63,48 @@ var ShowsContent = React.createClass({
 		return (
 			<div className="showsContent">
 
-				<h1 className="schedHeader">
-					schedule
-				</h1>
+				{ /* List View -- small screens */ }
+				<div className="hidden-sm hidden-md hidden-lg">
+					<ShowList shows={this.props.shows} />
+				</div>
 
-				{ !this.state.mobile && 
-					
-						<div className="scheduleViewButton">
-							
-								<p className={this.state.viewType == ScheduleViewType.grid ? "switchSelStyle" : "switchStyle"}  onClick={()=>{this.updateViewType(ScheduleViewType.grid)}}>
-									GRID
-								</p>
-								<p className={this.state.viewType == ScheduleViewType.list ? "switchSelStyle" : "switchStyle"} onClick={()=>{this.updateViewType(ScheduleViewType.list)}}>
-									LIST
-								</p>
-							
-						</div>
-					
-				}
+				{ /* Choice between List & Grid View -- larger screens */ }
+				<div className="hidden-xs">
+					<h1 className="schedHeader">
+						schedule
+					</h1>
+					<div className="scheduleViewButton">
+						<p className={this.state.viewType == ScheduleViewType.grid ? "switchSelStyle" : "switchStyle"}  onClick={()=>{this.updateViewType(ScheduleViewType.grid)}}>
+							GRID
+						</p>
+						<p className={this.state.viewType == ScheduleViewType.list ? "switchSelStyle" : "switchStyle"} onClick={()=>{this.updateViewType(ScheduleViewType.list)}}>
+							LIST
+						</p>
+					</div>
 
-				{ !this.state.mobile && this.state.viewType == ScheduleViewType.grid ?
-					<div>
-						{ /* Grid View */ }
-						<div className="graphStyle">
-							<ShowsGraph shows={this.props.shows}
-								currentShowID={this.props.currentShowID}
-								spotlightShowID={this.props.spotlightShowID}
-								activeShowID={this.state.activeShow && this.state.activeShow.id}
-								onShowClick={this.toggleActiveShow} />
+					{ this.state.viewType == ScheduleViewType.grid ?
+						<div>
+							{ /* Grid View */ }
+							<div className="graphStyle">
+								<ShowsGraph shows={this.props.shows}
+									currentShowID={this.props.currentShowID}
+									spotlightShowID={this.props.spotlightShowID}
+									activeShowID={this.state.activeShow && this.state.activeShow.id}
+									onShowClick={this.toggleActiveShow} />
+							</div>
+							<div className="blurbStyle">
+								{ this.state.activeShow &&
+									<ShowBlurb show={this.state.activeShow} />
+								}
+							</div>
 						</div>
-						<div className="blurbStyle">
-							{ this.state.activeShow &&
-								<ShowBlurb show={this.state.activeShow} />
-							}
+						:
+						<div>
+							{ /* List View */ }
+							<ShowList shows={this.props.shows} />
 						</div>
-					</div>
-					:
-					<div>
-						{ /* List View */ }
-						<ShowList shows={this.props.shows} />
-					</div>
-				}
+					}
+				</div>
 			</div>
 		);
 	}
