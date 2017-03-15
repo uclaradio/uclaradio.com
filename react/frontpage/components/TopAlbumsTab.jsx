@@ -75,43 +75,30 @@ var albumsMonth = [
 { album: 'Enchant', artist: 'Emilie Autumn', imgUrl: 'https://tytmb.files.wordpress.com/2011/10/enchant1.jpg', albumReview:'https://www.tumblr.com'}
 ];
 
-var albumsYear = [
-{ album: 'Almost Human', artist: 'Voltaire', imgUrl: 'http://www.aq.com/events/voltaire/images/voltaire-album-280.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Good Intent', artist: 'Kimbra', imgUrl: 'https://i.ytimg.com/vi/LdRx3TRLqWc/hqdefault.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Malibu', artist: 'Hello', imgUrl: 'http://static.vibe.com/files/2016/01/anderson-paak1.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Good Intent', artist: 'Kimbra', imgUrl: 'https://i.ytimg.com/vi/LdRx3TRLqWc/hqdefault.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Malibu', artist: 'Hello', imgUrl: 'http://static.vibe.com/files/2016/01/anderson-paak1.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Enchant', artist: 'Emilie Autumn', imgUrl: 'https://tytmb.files.wordpress.com/2011/10/enchant1.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Dark Passion Play', artist: 'Nightwish', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Dark_Passion_Play.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Black Devotion', artist: 'Drift', imgUrl: 'https://f4.bcbits.com/img/a1787666795_10.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Shepard Moons', artist: 'Enya', imgUrl: 'https://images-na.ssl-images-amazon.com/images/I/715Xj-ddozL._SL1069_.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Enchant', artist: 'Emilie Autumn', imgUrl: 'https://tytmb.files.wordpress.com/2011/10/enchant1.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Dark Passion Play', artist: 'Nightwish', imgUrl: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Dark_Passion_Play.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Black Devotion', artist: 'Drift', imgUrl: 'https://f4.bcbits.com/img/a1787666795_10.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Shepard Moons', artist: 'Enya', imgUrl: 'https://images-na.ssl-images-amazon.com/images/I/715Xj-ddozL._SL1069_.jpg', albumReview:'https://www.tumblr.com'},
-{ album: 'Almost Human', artist: 'Voltaire', imgUrl: 'http://www.aq.com/events/voltaire/images/voltaire-album-280.jpg', albumReview:'https://www.tumblr.com'}
-];
-
-
 //modular css
 
 var Album = React.createClass({
     render: function() {
-        console.log('within album', this.props);
         return (
 
-            <div className="albumItem">
-                <img className="albumImage" src={this.props.imgUrl} width="100%" height="250px"></img>
-				<span>
-						<div className="albumText">
-							<p className="albumName">{this.props.album}</p>
-		                	<p className="albumArtist">{this.props.artist}</p>
-                            <p className="albumSpace"> ... ... ... </p>
-                            <a className="albumReview" href={this.props.albumReview}>Click for review</a>
-                    </div>
-				</span>
-
+        <div className="albumItem">
+          <img className="albumImage" src={this.props.imgUrl} width="100%" height="250px"></img>
+          <span>
+            <div className="albumText">
+              <p className="albumName">{this.props.album}</p>
+              
+              <p className="albumArtist">{this.props.artist}</p>
+                
+                { this.props.albumReview  ? 
+                    // Wrapped in a array as adjacent elements must be wrapped in an enclosing tag
+                    [<p className="albumSpace">. . .&nbsp;&nbsp;&nbsp;. . .&nbsp;&nbsp;&nbsp;. . .</p>,
+                    <a className="albumReview" href={this.props.albumReview}>Click for review</a>]
+                  :
+                  ""
+                }
             </div>
+          </span>
+        </div>
 
         );
     }
@@ -120,36 +107,29 @@ var Album = React.createClass({
 
 
 var AlbumsList = React.createClass({
-	render: function() {
-	return (
-				<div>
-                    <div className="tracksHeader">
+  render: function() {
+  return (
+        <div>
+            <div className="tracksHeader">
 
-						<Tabs>
-							<Tabs.Panel title='WEEK'>
-								{albumsWeek.map(function(albumItem, index){
-									console.log(albumItem);
-									return <Album key={index} album={albumItem.album} artist={albumItem.artist} imgUrl={albumItem.imgUrl}/>;
-								})}
-				        	</Tabs.Panel>
-				        	<Tabs.Panel title='MONTH'>
-								{albumsMonth.map(function(albumItem, index){
-									console.log(albumItem);
-									return <Album key={index} album={albumItem.album} artist={albumItem.artist} imgUrl={albumItem.imgUrl}/>;
-								})}
-				        	</Tabs.Panel>
-				        	<Tabs.Panel title='YEAR'>
-								{albumsYear.map(function(albumItem, index){
-									console.log(albumItem);
-									return <Album key={index} album={albumItem.album} artist={albumItem.artist} imgUrl={albumItem.imgUrl}/>;
-								})}
-				        	</Tabs.Panel>
-						</Tabs>
-
-					</div>
-
-                </div>
-			);
+            <Tabs>
+              <Tabs.Panel title='WEEK'>
+                {albumsWeek.map(function(albumItem, index){
+                  // console.log(albumItem);
+                  return <Album key={index} album={albumItem.album} artist={albumItem.artist} imgUrl={albumItem.imgUrl} albumReview={albumItem.albumReview} />;
+                })}
+              </Tabs.Panel>
+              
+              <Tabs.Panel title='MONTH'>
+                {albumsMonth.map(function(albumItem, index){
+                  // console.log(albumItem);
+                  return <Album key={index} album={albumItem.album} artist={albumItem.artist} imgUrl={albumItem.imgUrl} albumReview={albumItem.albumReview} />;
+                })}
+              </Tabs.Panel>
+            </Tabs>
+          </div>
+        </div>
+      );
     }
 });
 
