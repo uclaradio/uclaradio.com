@@ -15,7 +15,6 @@ import TopAlbumsTab from './components/TopAlbumsTab.jsx';
 import ShowContainer from './containers/ShowContainer.jsx';
 import EventContainer from './containers/EventContainer.jsx';
 import DJContainer from './containers/DJContainer.jsx';
-import TopAlbumsTab from './components/TopAlbumsTab.jsx';
 
 
 // Frontpage Components (Views)
