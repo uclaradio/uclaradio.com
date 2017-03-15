@@ -56,18 +56,19 @@ var ShowBlurb = React.createClass({
 				
 				<div className="dot" style={{backgroundColor: 'rgba(255,0,0,0.45)', left: 1, marginRight: 10}}></div>
 				<h1 className="header" style={{position: "relative", display: "inline-block"}}>SELECTED SHOW: </h1>
-				<div className="blurb">
-					<div style={{ padding: '5px', marginLeft: '5px', marginRight: '5px' }}>
-						<h1 className="showTitle">{this.props.show.title}</h1>
-						<RectImage maxWidth="350px" src={this.props.show.picture || defaultShowPic} />
-						<p className="djs">{this.djString(this.props.show.djs || {})}</p>
-						<div className="lineStyle"/>
-						<div className="lineStyle"/>
-						<p className="time">{this.props.show.day.toUpperCase()} @ {this.props.show.time.toUpperCase()}<span style={{float: "right"}}>{this.props.show.genre}</span></p>
-						<p className="blurbText">{this.props.show.blurb} <br /></p>
-						<Link to={this.urlFromShow(this.props.show)}> [ GO TO FULL SHOW PAGE ] </Link>
-					</div>
-				</div> 
+				<Link to={this.urlFromShow(this.props.show)}>
+					<div className="blurb">
+						<div style={{ padding: '5px', marginLeft: '5px', marginRight: '5px' }}>
+							<h1 className="showTitle">{this.props.show.title}</h1>
+							<RectImage maxWidth="350px" src={this.props.show.picture || defaultShowPic} />
+							<p className="djs">{this.djString(this.props.show.djs || {})}</p>
+							<div className="lineStyle"/>
+							<div className="lineStyle"/>
+							<p className="time">{this.props.show.day.toUpperCase()} @ {this.props.show.time.toUpperCase()}<span style={{float: "right"}}>{this.props.show.genre}</span></p>
+							<p className="blurbText">{this.props.show.blurb}</p>
+						</div>
+					</div> 
+				</Link>
 			</div>
 		);
 	
