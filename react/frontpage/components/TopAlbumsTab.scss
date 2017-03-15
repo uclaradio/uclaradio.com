@@ -1,5 +1,9 @@
 // TABS STYLING
 
+.tracksHeader {
+    position: relative;
+    font-weight: 30px;
+}
 
 .tabs-navigation {
   // padding: 0 20px;
@@ -34,11 +38,6 @@
 
 .tab-panel {
     text-align: center;
-}
-
-.tracksHeader {
-    position: relative;
-    font-weight: 30px;
 }
 
 input, button, submit {
@@ -90,51 +89,15 @@ input, button, submit {
     opacity: 1;
 }
 
-p.albumName, p.albumArtist , a.albumReview{
+p.albumName, p.albumSpace, p.albumArtist , a.albumReview{
     margin: 0 auto;
 }
 
-@media (max-width: 960px) {
-    .albumImage {
-        min-height: 300px;
-    }
-
-    .albumItem{
-        width: 48%;
-    }
+.albumText {
+    // position: relative;
 }
 
-@media (max-width: 614px) {
-    .albumImage {
-        min-height: 300px;
-    }
-
-    .albumItem{
-        width: 80%;
-    }
-}
-
-// .albumItem:after {
-//     content: "";
-//     display: block;
-//     height: 100%;
-//     width: 100%;
-//     opacity: 0;
-//     background: rgba(0,0,0,.5);
-//     -moz-transition: all 1s;
-//     -webkit-transition: all 1s;
-//     transition: all 1s;
-//     top: 0;
-//     left: 0;
-//     position: absolute;
-// }
-//
-// .albumItem:hover:after {
-//     opacity: 1;
-// }
-
-
-.albumName, .albumArtist, .albumReview {
+.albumName, .albumSpace, .albumArtist, .albumReview {
     display: block;
     color: white;
     max-width: 145px;
@@ -150,46 +113,62 @@ p.albumName, p.albumArtist , a.albumReview{
     // left: 50%;
     // transform: translate(-50%, -50%);
 }
+
+a.albumReview {
+    color: white !important;
+    text-decoration: none;
+    // position: absolute;
+    bottom: 0;
+    right: 0;
+
+}
+
+
 @media (max-width: 1200px) {
     .albumImage {
         max-height: 200px;
+    }
+
+    .albumItem:nth-child(3n+2)
+    {
+        margin-left: 1%;
+        margin-right: 1%;
     }
 }
 
 @media (max-width: 991px) {
     .albumImage {
         min-height: 300px;
+        height: auto;
+        max-width: 100%;
     }
 
     .albumItem{
-        width: 48%;
+        width: 49%;
+    }
+
+    .albumItem:nth-child(n)
+    {
+        margin-left: 0%;
+        margin-right: 1%;
     }
 }
 
 @media (max-width: 767px) {
     .albumImage {
-        min-height: 300px;
+        max-height: 600px;
+        height: auto;
+        max-width: 100%
     }
 
     .albumItem{
-        width: 60%;
+        width: 100%;
+        // min-width: 300px;
+    }
+
+    .albumItem:nth-child(n)
+    {
+        margin-left: 0%;
+        margin-right: 0%;
     }
 }
-// .eventPage {
-// 	margin: 10pt 0;
-// 	padding: 10pt 20pt;
-// }
-//
-// $image-width: 30%;
-// .eventPage .rectImage {
-// 	margin: 0 !important;
-// 	display: inline-block;
-// 	vertical-align: top;
-// 	width: $image-width;
-// }
-//
-// .eventPage .eventInfo {
-// 	display: inline-block;
-// 	width: 100% - $image-width;
-// 	padding: 10pt 20pt;
-// }
