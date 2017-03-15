@@ -9,10 +9,14 @@ import { Router, Route, IndexRoute, browserHistory, Link, IndexLink } from 'reac
 import ShowsTab from './containers/ShowsTab.jsx';
 import EventsTab from './containers/EventsTab.jsx';
 import DJsTab from './containers/DJsTab.jsx';
+// TopAlbumsTab is a component as backend is not finished 
+import TopAlbumsTab from './components/TopAlbumsTab.jsx';
+
 import ShowContainer from './containers/ShowContainer.jsx';
 import EventContainer from './containers/EventContainer.jsx';
 import DJContainer from './containers/DJContainer.jsx';
 import TopAlbumsTab from './components/TopAlbumsTab.jsx';
+
 
 // Frontpage Components (Views)
 import TriangleCanvas from './components/TriangleCanvas.jsx';
@@ -23,6 +27,7 @@ import WaterFallContent from './components/WaterFallContent.jsx';
 import Error404Page from './components/Error404Page.jsx';
 import StreamIssuesPage from './components/StreamIssuesPage.jsx';
 import AboutPage from './components/AboutPage.jsx';
+
 // Common Components
 import RectImage from '../common/RectImage.jsx';
 
@@ -146,6 +151,7 @@ const routes = (
     <Route path="/events/:eventID" component={EventContainer} />
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
+    <Route path="/topalbums" components={TopAlbumsTab} />
     <Route path="*" component={Error404Page} />
   </Route>
 );
