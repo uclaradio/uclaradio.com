@@ -86,15 +86,15 @@ var Album = React.createClass({
           <span>
             <div className="albumText">
               <p className="albumName">{this.props.album}</p>
-              
+
               <p className="albumArtist">{this.props.artist}</p>
-                
-                { this.props.albumReview  ? 
+
+                { this.props.albumReview  ?
                     // Wrapped in a array as adjacent elements must be wrapped in an enclosing tag
-                    [<p className="albumSpace">. . .&nbsp;&nbsp;&nbsp;. . .&nbsp;&nbsp;&nbsp;. . .</p>,
+                    [<p className="albumSpace">&middot; &middot; &middot; &nbsp;&nbsp;&nbsp; &middot; &middot; &middot; &nbsp;&nbsp;&nbsp; &middot; &middot; &middot;</p>,
                     <a className="albumReview" href={this.props.albumReview}>Click for review</a>]
                   :
-                  ""
+                    <p className="albumSpace"></p>
                 }
             </div>
           </span>
@@ -115,14 +115,12 @@ var AlbumsList = React.createClass({
             <Tabs>
               <Tabs.Panel title='WEEK'>
                 {albumsWeek.map(function(albumItem, index){
-                  // console.log(albumItem);
                   return <Album key={index} album={albumItem.album} artist={albumItem.artist} imgUrl={albumItem.imgUrl} albumReview={albumItem.albumReview} />;
                 })}
               </Tabs.Panel>
-              
+
               <Tabs.Panel title='MONTH'>
                 {albumsMonth.map(function(albumItem, index){
-                  // console.log(albumItem);
                   return <Album key={index} album={albumItem.album} artist={albumItem.artist} imgUrl={albumItem.imgUrl} albumReview={albumItem.albumReview} />;
                 })}
               </Tabs.Panel>

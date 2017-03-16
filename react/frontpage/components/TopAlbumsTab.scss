@@ -6,8 +6,6 @@
 }
 
 .tabs-navigation {
-  // padding: 0 20px;
-  // max-height: 50px;
   margin: 1%;
 }
 
@@ -24,16 +22,8 @@
 
 .tabs-menu-item a {
   display: block;
-  // padding: 0 40px;
   padding-right: 40px;
-  // height: 50px;
-  // line-height: 50px;
   border-bottom: 0;
-}
-
-.tabs-menu-item.is-active a {
-  // border-bottom: 0;
-  // color: #333;
 }
 
 .tab-panel {
@@ -46,19 +36,12 @@ input, button, submit {
     font-size: 1em;
 }
 
-// ALBUM ITEM
+// ALBUM ITEM STYLING
 
 .albumItem{
     width: 32.666666666667%;
-    // height: 250px;
-    // padding-top: 24.66666666%;
-    // padding-bottom: 32.66666667%;
     display: inline-block;
-    // margin-left: 0;
-    // margin-right: 1%;
-    // margin-top: 1%;
     margin-bottom: 1%;
-    // margin: 1%;
     position: relative;
     background-color: gray;
     background-size: cover;
@@ -93,10 +76,6 @@ p.albumName, p.albumSpace, p.albumArtist , a.albumReview{
     margin: 0 auto;
 }
 
-.albumText {
-    // position: relative;
-}
-
 .albumName, .albumSpace, .albumArtist, .albumReview {
     display: block;
     color: white;
@@ -107,17 +86,11 @@ p.albumName, p.albumSpace, p.albumArtist , a.albumReview{
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-    // position: relative;
-    // float: left;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-50%, -50%);
 }
 
 a.albumReview {
     color: white !important;
     text-decoration: none;
-    // position: absolute;
     bottom: 0;
     right: 0;
 
@@ -163,7 +136,6 @@ a.albumReview {
 
     .albumItem{
         width: 100%;
-        // min-width: 300px;
     }
 
     .albumItem:nth-child(n)
