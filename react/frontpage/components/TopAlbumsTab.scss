@@ -1,0 +1,146 @@
+// TABS STYLING
+
+.tracksHeader {
+    position: relative;
+    font-weight: 30px;
+}
+
+.tabs-navigation {
+  margin: 1%;
+}
+
+.tabs-menu {
+  display: table;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabs-menu-item {
+  float: left;
+}
+
+.tabs-menu-item a {
+  display: block;
+  padding-right: 40px;
+  border-bottom: 0;
+}
+
+.tab-panel {
+    text-align: center;
+}
+
+input, button, submit {
+    border: none;
+    background: none;
+    font-size: 1em;
+}
+
+// ALBUM ITEM STYLING
+
+.albumItem{
+    width: 32.666666666667%;
+    display: inline-block;
+    margin-bottom: 1%;
+    position: relative;
+    background-color: gray;
+    background-size: cover;
+}
+
+.albumItem:nth-child(3n+2)
+{
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.albumItem span, .albumItem span div {
+    display: block;
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+
+    opacity: 0;
+    background: rgba(0,0,0,.5);
+    -moz-transition: all 1s;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+}
+
+.albumItem:hover span, .albumItem span div {
+    opacity: 1;
+}
+
+p.albumName, p.albumSpace, p.albumArtist , a.albumReview{
+    margin: 0 auto;
+}
+
+.albumName, .albumSpace, .albumArtist, .albumReview {
+    display: block;
+    color: white;
+    max-width: 145px;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+a.albumReview {
+    color: white !important;
+    text-decoration: none;
+    bottom: 0;
+    right: 0;
+
+}
+
+
+@media (max-width: 1200px) {
+    .albumImage {
+        max-height: 200px;
+    }
+
+    .albumItem:nth-child(3n+2)
+    {
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+}
+
+@media (max-width: 991px) {
+    .albumImage {
+        min-height: 300px;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .albumItem{
+        width: 49%;
+    }
+
+    .albumItem:nth-child(n)
+    {
+        margin-left: 0%;
+        margin-right: 1%;
+    }
+}
+
+@media (max-width: 767px) {
+    .albumImage {
+        max-height: 600px;
+        height: auto;
+        max-width: 100%
+    }
+
+    .albumItem{
+        width: 100%;
+    }
+
+    .albumItem:nth-child(n)
+    {
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+}

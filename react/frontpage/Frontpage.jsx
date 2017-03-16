@@ -9,9 +9,13 @@ import { Router, Route, IndexRoute, browserHistory, Link, IndexLink } from 'reac
 import ShowsTab from './containers/ShowsTab.jsx';
 import EventsTab from './containers/EventsTab.jsx';
 import DJsTab from './containers/DJsTab.jsx';
+// TopAlbumsTab is a component as backend is not finished 
+import TopAlbumsTab from './components/TopAlbumsTab.jsx';
+
 import ShowContainer from './containers/ShowContainer.jsx';
 import EventContainer from './containers/EventContainer.jsx';
 import DJContainer from './containers/DJContainer.jsx';
+
 
 // Frontpage Components (Views)
 import TriangleCanvas from './components/TriangleCanvas.jsx';
@@ -22,6 +26,7 @@ import WaterFallContent from './components/WaterFallContent.jsx';
 import Error404Page from './components/Error404Page.jsx';
 import StreamIssuesPage from './components/StreamIssuesPage.jsx';
 import AboutPage from './components/AboutPage.jsx';
+
 // Common Components
 import RectImage from '../common/RectImage.jsx';
 
@@ -53,11 +58,6 @@ Expects children components for tab contents
 
 @prop nowPlaying: show to display as live
 @prop spotlight: show to display as spotlight
-<<<<<<< HEAD
-@prop children: components to display in content area
-=======
->>>>>>> master
-
 @prop children: components to display in content area
 **/
 const FrontpageContent = React.createClass({
@@ -137,7 +137,7 @@ const FrontpageContentContainer = connect(
   mapStateToProps
 )(FrontpageContent);
 
-// react-router routes 
+// react-router routes
 // each path represents a page of our frontpage with a component
 const routes = (
   <Route path="/" component={FrontpageContentContainer}>
@@ -150,6 +150,7 @@ const routes = (
     <Route path="/events/:eventID" component={EventContainer} />
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
+    <Route path="/topalbums" components={TopAlbumsTab} />
     <Route path="*" component={Error404Page} />
   </Route>
 );
