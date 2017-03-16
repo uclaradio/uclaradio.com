@@ -1,10 +1,9 @@
 // ShowList.jsx
+// text list of shows
 
 import React from 'react';
 
 import { Link } from 'react-router';
-
-import Loader from './Loader.jsx';
 
 require('./ShowList.scss');
 
@@ -14,27 +13,27 @@ const scheduleDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 /**
 Implemented as a presentational component (view)
 
-@prop schedule: show IDs -> {'Mon': [1, 15, 2], 'Tue': [2, 3, 4], ...}
 @prop shows: show objects indexed by their ids
-@prop fetching: currently fetching objects
-@prop updateShows: callback to update all listed shows
 **/
 var ShowList = React.createClass({
-	componentWillMount() {
-		this.props.updateShows();
-	},
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.shows) {
-			var sorted = sortedShows(nextProps.shows);
-			this.setState({
-				schedule: sorted
-			});
-		}
-	},
 	getInitialState() {
 		return {
 			schedule: []
 		}
+	},
+	componentWillMount: function() {
+		this.updateSchedule(this.props.shows);
+	},
+	componentWillReceiveProps: function(nextProps) {
+		if (nextProps.shows) {
+			this.updateSchedule(nextProps.shows);
+		}
+	},
+	updateSchedule: function(shows) {
+		var sorted = sortedShows(shows);
+		this.setState({
+			schedule: sorted
+		});
 	},
 	urlFromShow(show) {
 		return "/shows/" + show.id;
@@ -42,19 +41,15 @@ var ShowList = React.createClass({
 	render() {
 		return (
 			<div className="showList">
-				{ this.props.fetching && this.props.shows.length == 0 ?
-					<Loader />
-				:
-				  this.state.schedule.map((show) => (
-						<div key={show.id}>
-							<Link to={this.urlFromShow(show)}>
-								<h3>{show.day + " " + show.time + ": "}{show.title}</h3>
-							</Link>
-							<p>{show.blurb}</p>
-							<br />
-						</div>
-					))
-				}
+				{ this.state.schedule.map((show) => (
+					<div key={show.id}>
+						<Link to={this.urlFromShow(show)}>
+							<h3>{show.day + " " + show.time + ": "}{show.title}</h3>
+						</Link>
+						<p>{show.blurb}</p>
+						<br />
+					</div>
+				))}
 			</div>
 		);
 	}
