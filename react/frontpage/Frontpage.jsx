@@ -22,6 +22,8 @@ import WaterFallContent from './components/WaterFallContent.jsx';
 import Error404Page from './components/Error404Page.jsx';
 import StreamIssuesPage from './components/StreamIssuesPage.jsx';
 import AboutPage from './components/AboutPage.jsx';
+import PromoBanner from './components/PromoBanner.jsx';
+
 // Common Components
 import RectImage from '../common/RectImage.jsx';
 
@@ -84,13 +86,7 @@ const FrontpageContent = React.createClass({
 
               <Col xs={12} md={9} className="frontpageCol">
                 { /* Show of the Month */ }
-                <div className="promoBanner">
-                  <Link to="/shows/90">
-                    <RectImage src="/img/sotm-mar17-nuindigo.png" aspectRatio={5}>
-                      <div className="overlay" />
-                    </RectImage>
-                  </Link>
-                </div>
+                <PromoBanner />
                 <FrontPageNavbar />
                 { this.props.children }
               </Col>
