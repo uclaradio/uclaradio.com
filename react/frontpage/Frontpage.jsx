@@ -31,9 +31,8 @@ import RectImage from '../common/RectImage.jsx';
 import { Bootstrap, Grid, Col } from 'react-bootstrap';
 
 // Google analytics helper
-import passwords from '../../passwords.json';
 var ReactGA = require('react-ga');
-ReactGA.initialize(passwords.googleanalyticskey);
+ReactGA.initialize("UA-21406547-20");
 
 function logPageView() {
   ReactGA.set({ page: window.location.pathname });
