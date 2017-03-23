@@ -2,7 +2,22 @@
 
 Below are our urls for our RESTful API, with objects being updated as they are passed back and forth. All parameters passed back and forth are json objects with stringified values.
 
-Confused about any of the documentation? You can read the code itself at [`routes/api.js`](https://github.com/uclaradio/uclaradio/blob/master/routes/api.js) and [`routes/panel.js`](https://github.com/uclaradio/uclaradio/blob/master/routes/panel.js).
+Confused about any of the documentation? You can read the code itself in the `routes/` folder. This segment from [`routes/api.js`](https://github.com/uclaradio/uclaradio/blob/master/routes/api.js is a good example of how routes and data models work:
+```javascript
+var shows = require('../database/shows');
+// ...
+// uclaradio.com/api/schedule -> JSON
+router.get('/schedule', function(req, res) {
+  shows.getAllShows(function(err, results) {
+    if (results) {
+      res.json({shows: results.filter(checkPublic)});
+    } else {
+      // something went wrong
+      res.status(400).send(err);
+    }
+  });
+});
+```
 
 ## Public Routes
 

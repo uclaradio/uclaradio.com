@@ -26,8 +26,6 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 
 ### Getting Started
 
-#### Overview
-
 #### Directories
 
 ##### [`./routes`](https://github.com/uclaradio/uclaradio/tree/master/routes)
@@ -55,26 +53,7 @@ React front-end pages. Reusable components like UI elements are in `/react/compo
 
 [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh): The setup script for macOS.
 
-##### Using Routes
-
-This segment from `./routes/api.js` is a good example of how routes and data models work:
-```javascript
-var shows = require('../database/shows');
-// ...
-// uclaradio.com/api/schedule -> JSON
-router.get('/schedule', function(req, res) {
-  shows.getAllShows(function(err, results) {
-    if (results) {
-      res.json({shows: results.filter(checkPublic)});
-    } else {
-      // something went wrong
-      res.status(400).send(err);
-    }
-  });
-});
-```
-
-##### React
+### React
 
 React files must be compiled to actual javascript before a browser can use them, because they do things like this:
 ```javascript
@@ -88,7 +67,7 @@ Do so with Grunt, which automates Webpack:
   * run `grunt watch` to automatically recompile whenever you hit save!
 * add `.../build/[x].min.js` as a script in your HTML files
 
-##### React + API
+#### React + API
 
 We prefer using a front-end web app and an API over static templates, because apps can be interactive. Our internal staff panel / content management system works this way:
 
