@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently --kill-others \"nodemon ./bin/www\" \"grunt watch\""
+    "start": "concurrently --kill-others \"nodemon ./bin/www\" \"grunt watch\""
   },
   "dependencies": {
     "async": "^2.1.2",
@@ -39,6 +39,7 @@
     "node-jsx": "^0.13.3",
     "node-sass": "^4.0.0",
     "nodemailer": "^2.4.2",
+    "nodemon": "^1.11.0",
     "public-google-calendar": "^0.1.0",
     "react": "^0.14.7",
     "react-bootstrap": "^0.28.3",
