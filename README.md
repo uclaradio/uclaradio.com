@@ -5,8 +5,9 @@ This is the complete code for UCLA Radio's website, Node.js server and API. We a
 UCLA Radio is a completely student-run organization offering cultural content created by 100+ DJs. [Let us know](mailto:radio.web@media.ucla.edu) if you have any suggestions! All of the software here is written by students.
 
 How to run locally:
-* Ensure you have Mongo installed and a Mongo db instance is running
+* Ensure you have Mongo and Node installed
   * Mac: run `setup.sh` on your Mac with [homebrew](http://brew.sh/) installed to set up node and MongoDB automatically
+* Run the MongoDB instance in a separate terminal instance with `mongod`
 * In the project root directory, run `npm install` to install dependencies (may need sudo)
 * Run `npm start` to start the server for development
 * Point your browser to `http://localhost:3000/` :heart_eyes:
@@ -104,7 +105,6 @@ router.get('/api/shows', function(req, res) {
 ### Requirements for new code
 
 As a student-run organization, UCLA Radio is especially liable to technical debt. We have some goals for cleaning up our codebase in the future, but most importantly new code should:
-* Have data models written with __SQL__ (PostgreSQL) instead of MongoDB because we've had problems with Mongo and it's not what students are taught at UCLA
 * Have new front-end pages in __React__. We prefer using a front-end framework with an API to complicated templates
 * Delete files that are not used anymore. It's okay, get rid of clutter
 * Follow an organized structure. Put things in the right directories
