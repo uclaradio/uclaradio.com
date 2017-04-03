@@ -10,7 +10,7 @@ var faqs = require('../database/faqs');
 var messages = require('../database/messages');
 
 // Image compression module
-var Jimp = require('jimp');
+const Jimp = require('jimp');
 const RESIZE_WIDTH = 512; 
 const IMAGE_QUALITY = 80;
 
