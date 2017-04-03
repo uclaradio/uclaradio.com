@@ -25,11 +25,11 @@ $link-image-active-color: rgba(white, 0.35);
 
 // use once at top of file
 @mixin fade-animation($animationName, $start-opacity, $end-opacity) {
-	@keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) }
-	@-moz-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Firefox < 16 */
-	@-webkit-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Safari, Chrome and Opera > 12.1 */
-	@-ms-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Internet Explorer */
-	@-o-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Opera < 12.1 */
+  @keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) }
+  @-moz-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Firefox < 16 */
+  @-webkit-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Safari, Chrome and Opera > 12.1 */
+  @-ms-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Internet Explorer */
+  @-o-keyframes #{$animationName} { @include fade($start-opacity, $end-opacity) } /* Opera < 12.1 */
 }
 
 // use wherever animation is active

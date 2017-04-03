@@ -8,18 +8,18 @@ import EventList from '../components/EventList.jsx';
 
 const mapStateToProps = (state) => ({
   eventGroups: eventGroupsFromState(state.events),
-	fetching: state.events.fetching
+  fetching: state.events.fetching
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	updateEvents: () => {
-		fetchUpdatedEvents(dispatch);
-	}
+  updateEvents: () => {
+    fetchUpdatedEvents(dispatch);
+  }
 });
 
 const EventsTab = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(EventList);
 
 /**

@@ -7,21 +7,21 @@ import { fetchUpdatedShows } from '../actions/shows';
 import ShowsContent from '../components/ShowsContent.jsx';
 
 const mapStateToProps = (state) => ({
-	shows: state.shows.shows,
-	fetching: state.shows.fetching,
-	currentShowID: state.shows.nowPlayingID,
-	spotlightShowID: state.shows.spotlightID
+  shows: state.shows.shows,
+  fetching: state.shows.fetching,
+  currentShowID: state.shows.nowPlayingID,
+  spotlightShowID: state.shows.spotlightID
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	updateShows: () => {
-		fetchUpdatedShows(dispatch);
-	}
+  updateShows: () => {
+    fetchUpdatedShows(dispatch);
+  }
 });
 
 const ShowsTab = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ShowsContent);
 
 export default ShowsTab;

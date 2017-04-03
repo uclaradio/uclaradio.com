@@ -17,9 +17,9 @@ props:
 import Loading from 'react-loading';
 
 const Loader = () => (
-	<div className="loader">
-		<center><img src="./img/icons/loading.gif" /></center>
-	</div>
+  <div className="loader">
+    <center><img src="./img/icons/loading.gif" /></center>
+  </div>
 );
 
 export default Loader;

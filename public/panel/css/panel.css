@@ -13,7 +13,7 @@ body {
 
 #main.container {
   max-width: 970px;
-	margin: 20px auto;
+  margin: 20px auto;
 }
 
 .container {
@@ -21,12 +21,12 @@ body {
 }
 
 .well {
-	background-color: white;
+  background-color: white;
 }
 
 .container h2, .container h3, .container h4 {
   text-align: center;
-	margin-top: 0px;
+  margin-top: 0px;
 }
 
 .panel-heading {

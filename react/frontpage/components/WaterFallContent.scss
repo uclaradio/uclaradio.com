@@ -34,7 +34,7 @@ $fadein-duration: 2s;
     clear: both;
 }
 .wf-box {
-	padding:  5pt;
+  padding:  5pt;
     /*margin: 2%;*/
     /*padding: 2%;*/
     @include animations("waterfallfadein", $fadein-duration);
@@ -56,18 +56,18 @@ $fadein-duration: 2s;
 }
 
 .wf-box-content {
-	position:relative;
-	display: block;
-	background-color: rgba(255, 255, 255, 0.75);
+  position:relative;
+  display: block;
+  background-color: rgba(255, 255, 255, 0.75);
     @include animations("waterfallfadein", $fadein-duration);
 }
 
 .wf-box-content:hover {
-	background-color: white;
+  background-color: white;
 }
 
 .wf-box-content img {
-	width: 100%;
+  width: 100%;
 }
 
 .wf-box-content .overlay {
@@ -83,8 +83,8 @@ $fadein-duration: 2s;
 }
 
 .wf-box-content-blog {
-	padding: 15pt;
-	font-size: 14pt;
+  padding: 15pt;
+  font-size: 14pt;
 }
 
 .wf-box-content-text {

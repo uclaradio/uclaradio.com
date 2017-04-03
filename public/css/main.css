@@ -15,7 +15,7 @@
 }
 
 #blurb-image {
-	width: 100%;
+  width: 100%;
 }
 
 .slick-prev{
@@ -82,14 +82,14 @@
 
 .form-control
 {
-	font-style: normal;
-	font-weight: normal;
+  font-style: normal;
+  font-weight: normal;
 }
 
 #new-blurb-submit
 {
-	font-style: normal;
-	font-weight: normal;
+  font-style: normal;
+  font-weight: normal;
 }
 
 body {
@@ -174,16 +174,16 @@ mark
 
 #pledge-drive
 {
-	background: linear-gradient(to top right, rgb(68, 144, 183), rgb(176, 70, 89));
-	color: white;
-	font-size: 100px;
+  background: linear-gradient(to top right, rgb(68, 144, 183), rgb(176, 70, 89));
+  color: white;
+  font-size: 100px;
 }
 
 @media (max-width: 1080px) {
-	#pledge-drive
-	{
-		font-size: 60px;
-	}
+  #pledge-drive
+  {
+    font-size: 60px;
+  }
 }
 
 #description

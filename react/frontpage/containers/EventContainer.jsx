@@ -7,22 +7,22 @@ import EventPage from '../components/EventPage.jsx';
 import { fetchUpdatedEvents } from '../actions/events';
 
 const mapStateToProps = (state, ownProps) => {
-	var eventID = ownProps.params['eventID'];
-	return {
-		event: state.events.events[eventID],
-		fetching: state.events.fetching
-	};
+  var eventID = ownProps.params['eventID'];
+  return {
+    event: state.events.events[eventID],
+    fetching: state.events.fetching
+  };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	updateEvents: () => {
-		fetchUpdatedEvents(dispatch);
-	}
+  updateEvents: () => {
+    fetchUpdatedEvents(dispatch);
+  }
 });
 
 const EventContainer = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(EventPage);
 
 export default EventContainer;

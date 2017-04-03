@@ -12,14 +12,14 @@ Sass styling for currently playing show info component in frontpage
 }
 
 .infoHeader {
-	font-family: Helvetica, sans-serif;
-	font-size: 16px;
-	font-style: italic;
-	margin: 5px 0;
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  margin: 5px 0;
 }
 
 .infoHeader .glyphicon {
-	margin: 0 5px;
+  margin: 0 5px;
 }
 
 .showBanner {
@@ -43,11 +43,11 @@ Sass styling for currently playing show info component in frontpage
 }
 
 .showBanner .rectImage {
-	margin: 0 !important;
-	width: 30%;
-	max-width: 100px;
-	display: inline-block;
-	vertical-align: top;
+  margin: 0 !important;
+  width: 30%;
+  max-width: 100px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .showInfo .showDetails {
@@ -58,7 +58,7 @@ Sass styling for currently playing show info component in frontpage
 }
 
 .showDetails .showTitle {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 .showDetails p {

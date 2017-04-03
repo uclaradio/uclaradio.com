@@ -66,13 +66,13 @@ accounts.webSafeUser = function(user) {
 };
 
 accounts.webSafeManager = function(manager) {
-	return {username: manager.username,
-					position: manager.position,
+  return {username: manager.username,
+          position: manager.position,
              email: manager.email,
-			 meetingTime: manager.meetingTime,
-			meetingPlace: manager.meetingPlace,
-		departmentInfo: manager.departmentInfo,
-					  public: manager.public};
+       meetingTime: manager.meetingTime,
+      meetingPlace: manager.meetingPlace,
+    departmentInfo: manager.departmentInfo,
+            public: manager.public};
 }
 
 /***** User Account Management *****/
@@ -168,7 +168,7 @@ accounts.listAccounts = function(callback) {
       unverifiedUsers.push(user);
     }
     UserModel.find({}, function(err, verifiedAccounts) {
-    	// also indicate if user is a manager
+      // also indicate if user is a manager
       PrivilegeModel.findOne({name: accounts.managerPrivilegeName}, function(err, privilegeUsers) {
         verifiedUsers = [];
         for (var i = 0; i < verifiedAccounts.length; i++) {
@@ -209,27 +209,27 @@ accounts.verifyAccount = function(username, callback) {
 
 // update email, djName, etc. on a user with the given username
 accounts.updateAccount = function(newData, callback) {
-	var update = function() {
-	  UserModel.findOneAndUpdate({'username': newData.username}, newData, {upsert:false, new:true}, function(err, o) {
-	      if (err) { callback(err); }
-	      else { callback(null, accounts.webSafeUser(o)); }
-	  });
-	};
+  var update = function() {
+    UserModel.findOneAndUpdate({'username': newData.username}, newData, {upsert:false, new:true}, function(err, o) {
+        if (err) { callback(err); }
+        else { callback(null, accounts.webSafeUser(o)); }
+    });
+  };
 
-	UserModel.findOne({'username': newData.username}, function(err, o) {
-		if (o) {
-			if (o.picture !== newData.picture) {
-				var path = require('path');
-				fs.unlink(path.resolve('public'+o.picture), function() {
-					update();
-				});
-			}
-			else {
-				update();
-			}
-		}
-		else { callback(err); }
-	});
+  UserModel.findOne({'username': newData.username}, function(err, o) {
+    if (o) {
+      if (o.picture !== newData.picture) {
+        var path = require('path');
+        fs.unlink(path.resolve('public'+o.picture), function() {
+          update();
+        });
+      }
+      else {
+        update();
+      }
+    }
+    else { callback(err); }
+  });
 };
 
 // update password for user with email
