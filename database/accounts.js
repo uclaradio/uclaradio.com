@@ -57,22 +57,22 @@ var PrivilegeModel = mongoose.model('privileges', PrivilegeSchema);
 // only include properties that are safe to send to the client
 accounts.webSafeUser = function(user) {
   return {"username": user.username,
-          "fullName": user.fullName,
-            "djName": user.djName,
-           "picture": user.picture,
-             "email": user.email,
-             "phone": user.phone,
-               "bio":  user.bio};
+    "fullName": user.fullName,
+    "djName": user.djName,
+    "picture": user.picture,
+    "email": user.email,
+    "phone": user.phone,
+    "bio":  user.bio};
 };
 
 accounts.webSafeManager = function(manager) {
   return {username: manager.username,
-          position: manager.position,
-             email: manager.email,
-       meetingTime: manager.meetingTime,
-      meetingPlace: manager.meetingPlace,
+    position: manager.position,
+    email: manager.email,
+    meetingTime: manager.meetingTime,
+    meetingPlace: manager.meetingPlace,
     departmentInfo: manager.departmentInfo,
-            public: manager.public};
+    public: manager.public};
 }
 
 /***** User Account Management *****/
@@ -211,8 +211,8 @@ accounts.verifyAccount = function(username, callback) {
 accounts.updateAccount = function(newData, callback) {
   var update = function() {
     UserModel.findOneAndUpdate({'username': newData.username}, newData, {upsert:false, new:true}, function(err, o) {
-        if (err) { callback(err); }
-        else { callback(null, accounts.webSafeUser(o)); }
+      if (err) { callback(err); }
+      else { callback(null, accounts.webSafeUser(o)); }
     });
   };
 

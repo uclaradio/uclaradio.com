@@ -34,20 +34,20 @@ var ShowModel = mongoose.model('shows', ShowSchema);
 
 shows.webSafeShow = function(show) {
   return {title: show.title,
-             id: show.id,
-            day: show.day,
-           time: show.time,
-            djs: show.djs,
-          genre: show.genre,
-          blurb: show.blurb,
-        picture: show.picture,
-      thumbnail: show.thumbnail,
-         public: show.public,
-       facebook: show.facebook,
-         tumblr: show.tumblr,
-     soundcloud: show.soundcloud,
-       mixcloud: show.mixcloud
-      };
+    id: show.id,
+    day: show.day,
+    time: show.time,
+    djs: show.djs,
+    genre: show.genre,
+    blurb: show.blurb,
+    picture: show.picture,
+    thumbnail: show.thumbnail,
+    public: show.public,
+    facebook: show.facebook,
+    tumblr: show.tumblr,
+    soundcloud: show.soundcloud,
+    mixcloud: show.mixcloud
+  };
 }
 
 
@@ -95,9 +95,9 @@ shows.addNewShow = function(title, day, time, djs, callback) {
 shows.updateShow = function(id, newData, callback) {
   var update = function() {
     ShowModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
-          if (err) { callback(err); }
-          else { callback(null, shows.webSafeShow(o)); }
-      });
+      if (err) { callback(err); }
+      else { callback(null, shows.webSafeShow(o)); }
+    });
   }
   ShowModel.findOne({id: id}, function(err, o) {
     if (o) {

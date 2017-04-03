@@ -49,7 +49,7 @@ var DateFilter = React.createClass({
 
     if (day.length === 1)
       day = "0" + day + "";
-    
+
     return year + "-" + month + "-" + day;
   },
 
@@ -58,7 +58,7 @@ var DateFilter = React.createClass({
       <div className="form-group">
         <h3>Date</h3>
         <input
-          type="date" 
+          type="date"
           name="beginDate"
           defaultValue={this.convertDateToHTMLFormat(this.props.beginDate)}
           className="form-control"
@@ -164,9 +164,9 @@ var StaffingPointsRow = React.createClass({
         ajaxUpdateStatus(data, status, userId);
       }
     );
-    
+
   },
-  
+
   render: function() {
     return (
       <tr>
@@ -208,12 +208,12 @@ var StaffingPointsRow = React.createClass({
 
 var StaffingPointsTable = React.createClass({
 
-  
+
   render: function() {
     var records = this.props.records
       .filter(function(record) {
         var nameMatch = record.fullName.toUpperCase().indexOf(this.props.nameFilter.toUpperCase()) !== -1;
-        var departmentMatch; 
+        var departmentMatch;
         if (this.props.departmentFilter === 'all')
           departmentMatch = true;
         else
@@ -222,7 +222,7 @@ var StaffingPointsTable = React.createClass({
         var statusMatch;
         if (this.props.statusFilter === 'all')
           statusMatch = true;
-        else 
+        else
           statusMatch = record.status.toUpperCase() === this.props.statusFilter.toUpperCase();
 
         var afterBeginDateMatch = record.dateCompleted > this.props.beginDateFilter;
@@ -372,7 +372,7 @@ var StaffingPointsView = React.createClass({
           <DepartmentFilter handleFilterChange={this.handleFilterChange} />
           </div>
         </div>
-        <StaffingPointsTable 
+        <StaffingPointsTable
           records={this.state.records}
           nameFilter={this.state.nameFilter}
           departmentFilter={this.state.departmentFilter}

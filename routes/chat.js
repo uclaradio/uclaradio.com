@@ -21,7 +21,7 @@ module.exports = function(io) {
   router.post('/report', function(req, res) {
     var messageID = req.body.id;
     messages.report(messageID, function() {
-            res.json({success: true});
+      res.json({success: true});
     });
   });
 
@@ -36,18 +36,18 @@ module.exports = function(io) {
   io.on('connection', function(socket) {
     // new user joined
     socket.on('add user', function() {
-            messages.generateUsername(function(username) {
-                socket.username = username;
-                socket.emit('assign username', username);
-                console.log(username, "joined chatroom.");
-            });
+      messages.generateUsername(function(username) {
+        socket.username = username;
+        socket.emit('assign username', username);
+        console.log(username, "joined chatroom.");
+      });
     });
 
-        socket.on('set user', function(data) {
-            socket.username = data.username;
-            socket.emit('assign username', data.username);
-            console.log(data.username, "joined chatroom.")
-        });
+    socket.on('set user', function(data) {
+      socket.username = data.username;
+      socket.emit('assign username', data.username);
+      console.log(data.username, "joined chatroom.")
+    });
 
     // user disconnected
     socket.on('disconnect', function(){
@@ -57,14 +57,14 @@ module.exports = function(io) {
     // new message sent
     socket.on('new message', function (data) {
       messages.saveMessage(data, function(message) {
-                io.sockets.emit('new message', {
-                    id: message.id,
-                    text: message.text,
-                    user: message.user,
-                    date: message.date
-                });
-                console.log("chat -", message.user + ":", message.text);
-            });
+        io.sockets.emit('new message', {
+          id: message.id,
+          text: message.text,
+          user: message.user,
+          date: message.date
+        });
+        console.log("chat -", message.user + ":", message.text);
+      });
     });
   });
 

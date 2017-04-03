@@ -113,7 +113,7 @@ var Show = React.createClass({
   },
   validateLink: function(link) {
     if (link === "") {
-      return link; 
+      return link;
     }
     if ( link.indexOf("http") == -1 ) {
       var addHTTP = "http://" + link;

@@ -3,7 +3,7 @@
 //
 // Usage: 'grunt' command will compile and minify all *.js
 //   and *.jsx files in ./react (not subdirectories) and put these in ./public/build
-// 
+//
 // 'grunt watch' can be used for development, this will wait
 //    and automatically recompile any changed files
 
@@ -18,13 +18,13 @@ module.exports = function(grunt) {
   // Directory where *.js and *.jsx files will be compiled from, to be placed in ./public/build
   var directory = 'react';
    // vendors to be compiled to a single file which can be shared between pages (vendors.min.js)
-   var entry = {vendors: ['react', 'react-bootstrap']};
+  var entry = {vendors: ['react', 'react-bootstrap']};
   // go through files in this directory and add them to target entry
-   var files = grunt.file.expand({cwd: directory}, '*.js', '*.jsx');
-   for (var i = 0; i < files.length; i++) {
-     var filename = files[i].replace(/.js[x]?/g, '.min.js').toLowerCase();
-     entry[filename] = './' + directory + '/' + files[i];
-   }
+  var files = grunt.file.expand({cwd: directory}, '*.js', '*.jsx');
+  for (var i = 0; i < files.length; i++) {
+    var filename = files[i].replace(/.js[x]?/g, '.min.js').toLowerCase();
+    entry[filename] = './' + directory + '/' + files[i];
+  }
 
   // Creates a special Commons bundle that our application can require from
   var commonPlugin = new webpack.optimize.CommonsChunkPlugin("vendors", "vendors.js");
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
   grunt.registerTask('watch', 'Build all files on change', function () {
     grunt.config.set('webpack.build.keepalive', true);
     grunt.config.set('webpack.build.watch', true);
-     grunt.task.run(['webpack:build']);
+    grunt.task.run(['webpack:build']);
   });
 
   // default ('grunt')

@@ -19,8 +19,8 @@ $link-image-active-color: rgba(white, 0.35);
 /** Animations **/
 
 @mixin fade($start-opacity, $end-opacity) {
-    from { opacity: $start-opacity; }
-    to   { opacity: $end-opacity; }
+  from { opacity: $start-opacity; }
+  to   { opacity: $end-opacity; }
 }
 
 // use once at top of file

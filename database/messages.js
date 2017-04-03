@@ -9,9 +9,9 @@ var messages = {};
 var MessageSchema = new mongoose.Schema({
   id: { type: Number, index: true },
   text: String,
-    user: { type: String, index: true },
-    reported: {type: Boolean, default: false, index: true},
-    date: { type: Date, default: Date.now }
+  user: { type: String, index: true },
+  reported: {type: Boolean, default: false, index: true},
+  date: { type: Date, default: Date.now }
 });
 
 var MessageModel = mongoose.model('messages', MessageSchema);
@@ -31,9 +31,9 @@ messages.saveMessage = function(data, callback) {
 
     db.setLastTakenId(db.messageIdKey, nextId, function(err) {
       if (err) { console.log("error setting next id for messages: ", err); }
-        });
+    });
 
-        callback(message);
+    callback(message);
   })
 };
 
@@ -82,7 +82,7 @@ messages.generateUsername = function(callback) {
 }
 
 function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // generate a random username with some max number of digits

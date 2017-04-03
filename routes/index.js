@@ -31,43 +31,43 @@ router.get('/blurbinfo', function(req, res, next) {
 router.get('/getSocialMedia', function(req, res) {
   var FB_pagination_until; //get the index of the last facebook post basically
   async.map(socialMediaURLs, function(url, callback) {
-      requestify.get(url, {
-        cache: {
-          cache: true,
+    requestify.get(url, {
+      cache: {
+        cache: true,
           //cache for 30*60*60*1000 milliseconds
-          expires: 108000000
-        }
-      }).then(function (response) {
-        var data = response.getBody();
-        switch(url) {
-          case FB:
-            FB_pagination_until = getFBPaginationTools(data['posts']['paging']['next']);
-            data['posts']['data'].forEach(function(post){
-              post['platform'] = 'FB';
-              post['created_time'] = new Date(post['created_time']);
-            });
-            callback(null, data['posts']['data']);
-            break;
-          case TUMBLR:
-            data['response']['posts'].forEach(function(post){
-              post['platform'] = 'TUMBLR';
-              post['created_time'] = new Date(post['date']);
-            });
-            callback(null, data['response']['posts']);
-            break;
-        }
-      }).fail(function(response){
-        callback(null, []);
-      });
-  }, function(err, allSocialMediaPosts) {
-        allSocialMediaPosts = [].concat.apply([], allSocialMediaPosts).sort(function(postA, postB) {
-          return postA['created_time'] < postB['created_time'];
+        expires: 108000000
+      }
+    }).then(function (response) {
+      var data = response.getBody();
+      switch(url) {
+      case FB:
+        FB_pagination_until = getFBPaginationTools(data['posts']['paging']['next']);
+        data['posts']['data'].forEach(function(post){
+          post['platform'] = 'FB';
+          post['created_time'] = new Date(post['created_time']);
         });
-        var result = {
-          social_media: allSocialMediaPosts,
-          fb_pagination_until: FB_pagination_until
-        };
-        res.send(result);
+        callback(null, data['posts']['data']);
+        break;
+      case TUMBLR:
+        data['response']['posts'].forEach(function(post){
+          post['platform'] = 'TUMBLR';
+          post['created_time'] = new Date(post['date']);
+        });
+        callback(null, data['response']['posts']);
+        break;
+      }
+    }).fail(function(response){
+      callback(null, []);
+    });
+  }, function(err, allSocialMediaPosts) {
+    allSocialMediaPosts = [].concat.apply([], allSocialMediaPosts).sort(function(postA, postB) {
+      return postA['created_time'] < postB['created_time'];
+    });
+    var result = {
+      social_media: allSocialMediaPosts,
+      fb_pagination_until: FB_pagination_until
+    };
+    res.send(result);
   });
 
 });
@@ -75,11 +75,11 @@ router.get('/getSocialMedia', function(req, res) {
 router.post('/getMoreFBPosts', function(req, res) {
   var url = getNextFBPosts(req.body.until);
   requestify.get(url, {
-      cache: {
-        cache: true,
+    cache: {
+      cache: true,
         //cache for 30*60*60*1000 milliseconds
-        expires: 108000000
-      }
+      expires: 108000000
+    }
   }).then(function(response){
     response = response.getBody();
     res.send({

@@ -12,21 +12,21 @@ var theme = {};
 theme.randColorScheme = function(timeOfDay) {
   var colors, choice;
   switch(timeOfDay) {
-    case 'night': // blacks, greys, pink
-        colors = ['Greys', 'RdPu'];
-        break;
-    case 'morning': // oranges, yellows, reds, greens
-        colors = ['Reds', 'Oranges', 'YlOrBr', 'YlOrRd', 'OrRd',
-                   'PuRd', 'RdPu'];
-        break;
-    case 'noon': // greens, purples, blues, yellows
-        colors = ['Greens', 'BrBG', 'PuOr',
-                   'Spectral', 'YlGn'];
-        break;
-    case 'evening': // blues, cool colors
-        colors = ['YlGnBu', 'GnBu', 'PuBuGn', 'PuBu', 'Purples', 'Blues',
-                   'RdPu', 'PuRd', 'Greens'];
-        break;
+  case 'night': // blacks, greys, pink
+    colors = ['Greys', 'RdPu'];
+    break;
+  case 'morning': // oranges, yellows, reds, greens
+    colors = ['Reds', 'Oranges', 'YlOrBr', 'YlOrRd', 'OrRd',
+      'PuRd', 'RdPu'];
+    break;
+  case 'noon': // greens, purples, blues, yellows
+    colors = ['Greens', 'BrBG', 'PuOr',
+      'Spectral', 'YlGn'];
+    break;
+  case 'evening': // blues, cool colors
+    colors = ['YlGnBu', 'GnBu', 'PuBuGn', 'PuBu', 'Purples', 'Blues',
+      'RdPu', 'PuRd', 'Greens'];
+    break;
   }
 
   choice = colors[Math.floor(Math.random()*colors.length)];
