@@ -16,9 +16,11 @@ require('./PromoBanner.scss');
 
 // Promo Banner Data 
 const bannerData = [
-  {"img": "/img/sotm-mar17-nuindigo.png", "link": "/shows/90"},
-  {"img": "/img/sotm-feb2017.jpg", "link": "/shows/75"},
-  {"img": "/img/sotm_january_2017.png", "link": "/shows/83"}
+  {"img": "/img/promo/sotm/sotm_april_2017.png", "link": "/shows/182"}
+  // Will update once their shows are updated
+  // {"img": "/img/sotm-mar17-nuindigo.png", "link": "/shows/90"},
+  // {"img": "/img/sotm-feb2017.jpg", "link": "/shows/75"},
+  // {"img": "/img/sotm_january_2017.png", "link": "/shows/83"}
 ];
 
 var PromoBanner = React.createClass({
