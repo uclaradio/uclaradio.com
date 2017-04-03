@@ -6,22 +6,21 @@ Sass styling for navbar on frontpage
 
 @import '../common';
 
-
 .frontPageNavbar {
   margin-bottom: $box-padding;
   margin-bottom: 6pt;
-      /*to handle very long words*/
-      word-wrap: break-word;
--ms-word-break: break-all;
-     word-break: break-all;
-     word-break: break-word;
--webkit-hyphens: auto;
-   -moz-hyphens: auto;
-        hyphens: auto;
+  /*to handle very long words*/
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
 }
 
 .frontPageNavbarItem.collapsed {
-  padding-top: 2*$box-padding;
+  padding-top: 2 * $box-padding;
 }
 
 .frontPageNavbarItem > a {
@@ -36,7 +35,9 @@ Sass styling for navbar on frontpage
   font-size: 12pt;
 }
 
-.active.frontPageNavbarItem > a, .frontPageNavbarItem > a:focus, .frontPageNavbarItem > a:hover {
+.active.frontPageNavbarItem > a,
+.frontPageNavbarItem > a:focus,
+.frontPageNavbarItem > a:hover {
   /*text-decoration: none;*/
   background-color: $link-hover-color !important;
 }
