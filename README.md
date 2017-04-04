@@ -4,7 +4,7 @@ All of the code that powers [uclaradio.com](https://uclaradio.com).
 
 UCLA Radio is a Javascript application, powered by [Node.js](https://nodejs.org/en/) and utilizing the [Express.js](http://expressjs.com) framework. We use [MongoDB](https://www.mongodb.com) for our database and [React](https://facebook.github.io/react/) on the front-end.
 
-In addition to the visible site, we also have a [RESTful API](https://github.com/uclaradio/uclaradio/blob/master/docs/api-endpoints.md), which powers an internal panel for managers and DJs as well as our [iOS](https://github.com/uclaradio/uclaradio-iOS) and [Android](https://github.com/uclaradio/uclaradio-Android) apps.
+In addition to the visible site, we also have a [RESTful API](/docs/api-endpoints.md), which powers an internal panel for managers and DJs as well as our [iOS](https://github.com/uclaradio/uclaradio-iOS) and [Android](https://github.com/uclaradio/uclaradio-Android) apps.
 
 UCLA Radio is a completely student-run organization offering cultural content created by 100+ DJs. [Let us know](mailto:radio.web@media.ucla.edu) if you have any suggestions! All of the software here is written by students.
 
@@ -112,3 +112,5 @@ As a student-run organization, UCLA Radio is especially liable to technical debt
 * Have new front-end pages in __React__. We prefer using a front-end framework with an API to complicated templates
 * Delete files that are not used anymore. It's okay, get rid of clutter
 * Follow an organized structure. Put things in the right directories
+
+We accept changes from both radio web members and from outside contributors. Note our [contributing guidelines](docs/contributing-guidelines.md)
