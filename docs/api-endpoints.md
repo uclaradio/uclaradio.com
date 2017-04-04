@@ -2,7 +2,7 @@
 
 Below are our urls for our RESTful API, with objects being updated as they are passed back and forth. All parameters passed back and forth are json objects with stringified values.
 
-Confused about any of the documentation? You can read the code itself in the `routes/` folder. This segment from [`routes/api.js`](https://github.com/uclaradio/uclaradio/blob/master/routes/api.js is a good example of how routes and data models work:
+Confused about any of the documentation? You can read the code itself in the `routes/` folder. This segment from [`routes/api.js`](https://github.com/uclaradio/uclaradio/blob/master/routes/api.js) is a good example of how routes and data models work:
 ```javascript
 var shows = require('../database/shows');
 // ...

@@ -113,4 +113,4 @@ As a student-run organization, UCLA Radio is especially liable to technical debt
 * Delete files that are not used anymore. It's okay, get rid of clutter
 * Follow an organized structure. Put things in the right directories
 
-We accept changes from both radio web members and from outside contributors. Note our [contributing guidelines](/docs/contributing-guidelines.md)
+We accept changes from both radio web members and from outside contributors. Please note our [contributing guidelines](/docs/contributing-guidelines.md).
