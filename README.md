@@ -28,30 +28,30 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 
 #### Directories
 
-##### [`./routes`](https://github.com/uclaradio/uclaradio/tree/master/routes)
+##### [`./routes`](/routes)
 Handles all routing logic, or logic that deals with URI endpoints and HTTP request methods (GET, POST, etc.). (e.g. what happens when you load [`uclaradio.com/shows`](https://uclaradio.com/shows))
 
-##### [`./database`](https://github.com/uclaradio/uclaradio/tree/master/database)
+##### [`./database`](/database)
 Contains all data models and functions we use in the routes to do things like create a new show
 
-##### [`./public`](https://github.com/uclaradio/uclaradio/tree/master/public)
+##### [`./public`](/public)
 Everything we have public on the site. For your images, JavaScript, CSS, HTML and what have you
 
-##### [`./views`](https://github.com/uclaradio/uclaradio/tree/master/views)
+##### [`./views`](/views)
 Jade templates. Right now many front-end pages are in Jade, hopefully we will redesign them in Javascript soon.
 
-##### [`./react`](https://github.com/uclaradio/uclaradio/tree/master/react)
+##### [`./react`](/react)
 React front-end pages. Reusable components like UI elements are in `/react/components`
 
 #### Files
 
-[`app.js`](https://github.com/uclaradio/uclaradio/blob/master/app.js): The main server!
+[`app.js`](/app.js): The main server!
 
-[`defaultPasswords.json`](https://github.com/uclaradio/uclaradio/blob/master/defaultPasswords.json): Where the passwords go. These are different on the production server.
+[`defaultPasswords.json`](/defaultPasswords.json): Where the passwords go. These are different on the production server.
 
-[`Gruntfile.js`](https://github.com/uclaradio/uclaradio/blob/master/Gruntfile.js): Our [grunt](https://gruntjs.com) file. It automatically compiles all of our `.jsx` and `.scss` files. Just run `grunt watch`!
+[`Gruntfile.js`](/Gruntfile.js): Our [grunt](https://gruntjs.com) file. It automatically compiles all of our `.jsx` and `.scss` files. Just run `grunt watch`!
 
-[`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh): The setup script for macOS.
+[`setup.sh`](/setup.sh): The setup script for macOS.
 
 ### React
 
@@ -113,4 +113,4 @@ As a student-run organization, UCLA Radio is especially liable to technical debt
 * Delete files that are not used anymore. It's okay, get rid of clutter
 * Follow an organized structure. Put things in the right directories
 
-We accept changes from both radio web members and from outside contributors. Note our [contributing guidelines](docs/contributing-guidelines.md)
+We accept changes from both radio web members and from outside contributors. Note our [contributing guidelines](/docs/contributing-guidelines.md)
