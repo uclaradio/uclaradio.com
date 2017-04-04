@@ -7,7 +7,6 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 How to run locally:
 * Ensure you have Mongo and Node installed
   * Mac: run `setup.sh` on your Mac with [homebrew](http://brew.sh/) installed to set up node and MongoDB automatically
-* Run the MongoDB instance in a separate terminal instance with `mongod`
 * In the project root directory, run `npm install` to install dependencies (may need sudo)
 * Run `npm start` to start the server for development
 * Point your browser to `http://localhost:3000/` :heart_eyes:
