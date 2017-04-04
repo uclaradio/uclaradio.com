@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" "
+    "dev": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" "
   },
   "dependencies": {
     "async": "^2.1.2",
