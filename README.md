@@ -107,11 +107,12 @@ router.get('/api/shows', function(req, res) {
 ### Requirements for new code
 
 As a student-run organization, UCLA Radio is especially liable to technical debt. We have some goals for cleaning up our codebase in the future, but most importantly new code should:
-* Have new front-end pages in **React. We prefer using a front-end framework with an API to complicated templates.
+* Have new front-end pages in **React**. We prefer using a front-end framework with an API to complicated templates.
 * Delete files that are not used anymore. It's okay, get rid of clutter.
 * Follow an organized structure. Put things in the right directories.
 
 We accept changes from both radio web members and outside contributors. Please note our [contributing guidelines](https://github.com/uclaradio/uclaradio/wiki/Contributing-Guidelines). Want to join radio? We [accept applications](http://apply.uclastudentmedia.com/applications/ucla-radio/web-staff/) every quarter.
+
 
 ### License
 

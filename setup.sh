@@ -20,7 +20,6 @@ echo 'Installing npm packages...'
 ## might have to install cairo for dependent npm packages
 # brew install cairo
 sudo npm install
-npm install -g nodemon
 
 cp defaultPasswords.json passwords.json
 
