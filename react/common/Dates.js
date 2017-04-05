@@ -24,8 +24,73 @@ mod.dayFromVar = function(day) {
   }
 };
 
+mod.numberOfDaysFromMonth = function(month){
+  switch (month){
+    case 'January':
+      return 31;
+    case 'February':
+      return 29;
+    case 'March':
+      return 31;
+    case 'April':
+      return 30;
+    case 'May':
+      return 31;
+    case 'June':
+      return 30;
+    case 'July':
+      return 31;
+    case 'August':
+      return 31;
+    case 'September':
+      return 30;
+    case 'October':
+      return 31;
+    case 'November':
+      return 30;
+    case 'December':
+      return 31;
+    default:
+      return -1;
+  }
+}
+
+mod.numberFromMonth = function(month){
+  switch (month){
+    case 'January':
+      return 0;
+    case 'February':
+      return 1;
+    case 'March':
+      return 2;
+    case 'April':
+      return 3;
+    case 'May':
+      return 4;
+    case 'June':
+      return 5;
+    case 'July':
+      return 6;
+    case 'August':
+      return 7;
+    case 'September':
+      return 8;
+    case 'October':
+      return 9;
+    case 'November':
+      return 10;
+    case 'December':
+      return 11;
+    default:
+      return -1;
+  }
+}
+
 mod.availableDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 mod.availableTimes = ['12am', '1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am',
                         '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm'];
+mod.availableMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+                        'October', 'November', 'December'];
+
 
 module.exports = mod;

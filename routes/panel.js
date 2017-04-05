@@ -629,7 +629,7 @@ router.post('/api/updateEvent', function(req, res) {
 	}
 	else {
 		console.log(req.body);
-		var eventData = JSON.parse(req.body.show);	//not sure why req.body.event doesn't work...
+		var eventData = JSON.parse(req.body.event);	//not sure why req.body.event doesn't work...
 		console.log("still alive");
 		events.userHasAccessToEvent(req.session.user.username, eventData.id, function(hasAccess) {
 			console.log("made it");
@@ -692,6 +692,29 @@ router.post('/api/eventPic', function(req, res) {
 					}
 				});
 			}
+		});
+	}
+});
+
+// delete event 
+router.post('/api/deleteEvent', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		events.userHasAccessToEvent(req.session.user.username, req.body.id, function(hasAccess) {
+			// user doesn't have access to this show
+			if (!hasAccess) {
+				console.log("user requested invalid event");
+				res.status(400).send();
+				return;
+			}
+
+			events.removeEvent(req.body.id, function (e) {
+				if (e) { console.log("error removing event: ", e); res.status(400).send(e); }
+				else { res.json("success"); }
+			});
 		});
 	}
 });

@@ -40,9 +40,10 @@ router.get('/schedule', function(req, res) {
 
 
 router.get('/events', function(req, res) {
+	console.log("hello");
 	events.getAllEvents(function(err, o) {
 		if (o) {
-			res.json({events: o.filter(checkPublicEvent)});
+			res.json({events: o});
 		}
 		else {
 			res.status(400).send(err);
