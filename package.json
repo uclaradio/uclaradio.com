@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "start": "node ./bin/www",
     "dev": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" "
   },
   "dependencies": {

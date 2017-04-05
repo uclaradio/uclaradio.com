@@ -8,7 +8,7 @@ How to run locally:
 * Ensure you have Mongo and Node installed
   * Mac: run `setup.sh` on your Mac with [homebrew](http://brew.sh/) installed to set up node and MongoDB automatically
 * In the project root directory, run `npm install` to install dependencies (may need sudo)
-* Run `npm start` to start the server for development
+* Run `npm run dev` to start the server for development
 * Point your browser to `http://localhost:3000/` :heart_eyes:
 
 To run on the server:
@@ -105,6 +105,7 @@ router.get('/api/shows', function(req, res) {
 
 As a student-run organization, UCLA Radio is especially liable to technical debt. We have some goals for cleaning up our codebase in the future, but most importantly new code should:
 * Have new front-end pages in __React__. We prefer using a front-end framework with an API to complicated templates
+* Have data models written with __SQL__ (PostgreSQL) instead of MongoDB because we've had problems with Mongo and it's not what students are taught at UCLA
 * Delete files that are not used anymore. It's okay, get rid of clutter
 * Follow an organized structure. Put things in the right directories
 
