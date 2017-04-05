@@ -4,7 +4,7 @@ All of the code that powers [uclaradio.com](https://uclaradio.com).
 
 UCLA Radio is a Javascript application, powered by [Node.js](https://nodejs.org/en/) and utilizing the [Express.js](http://expressjs.com) framework. We use [MongoDB](https://www.mongodb.com) for our database and [React](https://facebook.github.io/react/) on the front-end.
 
-In addition to the visible site, we also have a [RESTful API](/docs/api-endpoints.md), which powers an internal panel for managers and DJs as well as our [iOS](https://github.com/uclaradio/uclaradio-iOS) and [Android](https://github.com/uclaradio/uclaradio-Android) apps.
+In addition to the visible site, we also have a [RESTful API](https://github.com/uclaradio/uclaradio/wiki/The-API), which powers an internal panel for managers and DJs as well as our [iOS](https://github.com/uclaradio/uclaradio-iOS) and [Android](https://github.com/uclaradio/uclaradio-Android) apps.
 
 UCLA Radio is a completely student-run organization offering cultural content created by 100+ DJs. [Let us know](mailto:radio.web@media.ucla.edu) if you have any suggestions! All of the software here is written by students.
 
@@ -29,19 +29,19 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 #### Directories
 
 ##### [`./routes`](/routes)
-Handles all routing logic, or logic that deals with URI endpoints and HTTP request methods (GET, POST, etc.). (e.g. what happens when you load [`uclaradio.com/shows`](https://uclaradio.com/shows))
+Handles all routing logic, or logic that deals with URI endpoints and HTTP request methods (GET, POST, etc.). (e.g. what happens when you load [`uclaradio.com/shows`](https://uclaradio.com/shows).)
 
 ##### [`./database`](/database)
-Contains all data models and functions we use in the routes to do things like create a new show
+Contains all data models and functions we use in the routes to do things like create a new show.
 
 ##### [`./public`](/public)
-Everything we have public on the site. For your images, JavaScript, CSS, HTML and what have you
+Everything we have public on the site. For your images, JavaScript, CSS, HTML and what have you.
 
 ##### [`./views`](/views)
 Jade templates. Right now many front-end pages are in Jade, hopefully we will redesign them in Javascript soon.
 
 ##### [`./react`](/react)
-React front-end pages. Reusable components like UI elements are in `/react/components`
+React front-end pages. Reusable components like UI elements are in `/react/components`.
 
 #### Files
 
@@ -104,16 +104,14 @@ router.get('/api/shows', function(req, res) {
 });
 ```
 
-
 ### Requirements for new code
 
 As a student-run organization, UCLA Radio is especially liable to technical debt. We have some goals for cleaning up our codebase in the future, but most importantly new code should:
-* Have data models written with __SQL__ (PostgreSQL) instead of MongoDB because we've had problems with Mongo and it's not what students are taught at UCLA
-* Have new front-end pages in __React__. We prefer using a front-end framework with an API to complicated templates
-* Delete files that are not used anymore. It's okay, get rid of clutter
-* Follow an organized structure. Put things in the right directories
+* Have new front-end pages in **React. We prefer using a front-end framework with an API to complicated templates.
+* Delete files that are not used anymore. It's okay, get rid of clutter.
+* Follow an organized structure. Put things in the right directories.
 
-We accept changes from both radio web members and from outside contributors. Please note our [contributing guidelines](/docs/contributing-guidelines.md).
+We accept changes from both radio web members and outside contributors. Please note our [contributing guidelines](https://github.com/uclaradio/uclaradio/wiki/Contributing-Guidelines). Want to join radio? We [accept applications](http://apply.uclastudentmedia.com/applications/ucla-radio/web-staff/) every quarter.
 
 ### License
 
