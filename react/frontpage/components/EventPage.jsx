@@ -53,13 +53,17 @@ const EventPage = React.createClass({
 				<div className="eventInfo">
 					<h3>{event.host}</h3>
 					<h4>{event.location}</h4>
-					<p>{formatDate(event.start)}</p>
+					<p>{getDate(event)}</p>
 					<p>{event.type}</p>
 				</div>
 			</div>
 		);
 	}
 });
+
+var getDate = function(event){
+	return event.month + " " + event.date;
+}
 
 var formatDate = function(dateString) {
   var date = new Date(dateString);

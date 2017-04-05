@@ -59,7 +59,7 @@ var EventList = React.createClass({
 									<h1>{month.title}</h1>
 									<div className="allEvents">
 										{ month.events.map(function(event) {
-											var start = formatDate(event.start);
+											var start = event.date;
 											var eventColor = getBackgroundColor(event.type);
 											return (
 												<div className="event" key={event.id}>
@@ -69,7 +69,7 @@ var EventList = React.createClass({
 															<div className="overlay" style={{backgroundColor: eventColor}}>
 																<p className="eventDate">{start}</p>
 																<div className="eventOverlay">
-																	<p className="bandName">{event.host}</p>
+																	<p className="bandName">{event.name}</p>
 																	<p className="separator">. . .&nbsp;&nbsp;&nbsp;. . .&nbsp;&nbsp;&nbsp;. . .</p>
 																	<p className="venue">{event.location}</p>
 																</div>

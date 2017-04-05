@@ -12,10 +12,14 @@ var fs = require('fs');
 
 var events = {};
 
+var dates = require('../react/common/Dates.js')
+
 // Radio events to show on the site
 var EventSchema = new mongoose.Schema({
   id: Number,  //unique identifier
-  date: Date,
+  month: String,
+  date: Number,
+  year: Number,
   type: String, // Ticket Giveaway / UCLA Radio Presents / Campus Event / Local Event
   name: String,
   location: String,
@@ -29,18 +33,20 @@ var EventModel = mongoose.model('events', EventSchema);
 
 events.webSafeEvent = function(event) {
   return {title:  event.title,
-             id:  event.id,
-           date:  event.date,
-           type:  event.type,
-           name:  event.name,
-       location:  event.location,
-        picture:  event.picture,
-      submitter:  event.submitter,
-         public:  event.public,
-    description:  event.description};
-}
+   id:  event.id,
+   month:  event.month,
+   date:  event.date,
+   year: event.year,
+   type:  event.type,
+   name:  event.name,
+   location:  event.location,
+   picture:  event.picture,
+   submitter:  event.submitter,
+   public:  event.public,
+   description:  event.description};
+ }
 
-/***** Events *****/
+ /***** Events *****/
 
 // Get all events marked as public
 events.getAllEvents = function(callback) {
@@ -51,7 +57,69 @@ events.getAllEvents = function(callback) {
       for (var e = 0; e < allEvents.length; e++) {
         response.push(events.webSafeEvent(allEvents[e]));
       }
-      callback(null, response);
+
+      // response is now array of all db events
+      var currDate = new Date();
+      var Year = currDate.getFullYear();
+      var Month = currDate.getMonth();
+      var currDate = currDate.getDate();
+
+      //only return events that haven't happened yet
+      response = response.filter(function(el) {
+        return (dates.numberFromMonth(el["month"]) >= Month) 
+          && (el["year"] == Year) 
+          && !((dates.numberFromMonth(el["month"]) == Month) && (el["date"] < currDate))
+      })
+      response = response.reverse();
+      console.log("response is " + response);
+
+      var eventsByMonth = [{month:"January", arr:[]},
+      {month:"February", arr:[]},
+      {month:"March", arr:[]},
+      {month:"April", arr:[]},
+      {month:"May", arr:[]},
+      {month:"June", arr:[]},
+      {month:"July", arr:[]},
+      {month:"August", arr:[]},
+      {month:"September", arr:[]},
+      {month:"October", arr:[]},
+      {month:"November", arr:[]},
+      {month:"December", arr:[]}];
+
+      for(var i = 0; i < response.length; i++) {
+        eventsByMonth[dates.numberFromMonth(response[i]["month"])].arr.push(response[i]);
+      }
+      eventsByMonth = eventsByMonth.filter(function(el) {
+        return el.arr.length != 0;
+      })
+      console.log(eventsByMonth);
+
+      /*var cleanedMonths = eventsByMonth.map(function(month) {
+        return cleanedEvents = month.arr.map(function(event) {
+          var e = event;
+          // assume giveaway
+          e.type = "Ticket Giveaway";
+
+          // get host, location from summary
+          var summaryPattern = /([^@]*)(?:@([^@]*))?/g;
+          var match = summaryPattern.exec(e.summary);
+          if (match != null) {
+            e.host = match[1] && match[1].trim();
+            e.location = match[2] && match[2].trim();
+          }
+
+          // get image from description
+          // var descriptionImagePattern = /image: "([^"]*)"/g;
+          // match = descriptionImagePattern.exec(e.description);
+          // if (match != null) {
+          //   e.image = match[1].trim();
+          // }
+          e.image = e.description;
+          return e;
+        });
+      });*/
+
+      callback(null, eventsByMonth);
     }
   });
 }
@@ -117,9 +185,9 @@ events.getEventByID = function(id, callback) {
 events.updateEvent = function(id, newData, callback) {
   var update = function() {
     EventModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
-          if (err) { callback(err); }
-          else { callback(null, events.webSafeEvent(o)); }
-      });
+      if (err) { callback(err); }
+      else { callback(null, events.webSafeEvent(o)); }
+    });
   }
   EventModel.findOne({id: id}, function(err, o) {
     if (o) {
@@ -134,6 +202,12 @@ events.updateEvent = function(id, newData, callback) {
       }
     }
     else { callback(err); }
+  });
+};
+
+events.removeEvent = function(id, callback) {
+  EventModel.remove({id: id}, function (e) {
+    callback(e);
   });
 };
 

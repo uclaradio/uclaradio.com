@@ -24,7 +24,7 @@ Helpers
 **/
 
 // Fetch updated events list from server and update store via dispatch
-const eventsURL = '/giveawaycalendar/data2';
+const eventsURL = '/api/events';
 export const fetchUpdatedEvents = (dispatch) => {
 	dispatch(startFetching());
 	$.ajax({
@@ -32,6 +32,7 @@ export const fetchUpdatedEvents = (dispatch) => {
 		dataType: 'json',
 		cache: false,
 		success: function(data) {
+			console.log(data.events);
 			dispatch(stopFetching());
 			dispatch(updateGroups(monthGroups(data.events)));
 			dispatch(updateEvents(eventsFromGroups(data.events)));

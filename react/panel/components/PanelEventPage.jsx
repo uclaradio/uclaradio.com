@@ -8,10 +8,13 @@ var RectImage = require('../../common/RectImage.jsx');
 
 // Inputs
 var InputEditableTextField = require('../inputs/InputEditableTextField.jsx');
-var InputEditableDateTimeField = require('../inputs/InputEditableDateTimeField.jsx');
+var InputEditableMonthDateField = require('../inputs/InputEditableMonthDateField.jsx');
 var InputCheckbox = require('../inputs/InputCheckbox.jsx');
 var InputFileUpload = require('../inputs/InputFileUpload.jsx');
 var ConfirmationButton = require('../inputs/ConfirmationButton.jsx');
+
+//Helper files
+var Dates = require('../../common/Dates.js');
 
 // Bootstrap Elements
 var Grid = require('react-bootstrap').Grid;
@@ -41,20 +44,28 @@ var PanelEventPage = React.createClass({
 // Change from Show => Event 
 var Event = React.createClass({
   getInitialState: function() {
-    return {event: {}, nameVerified: false, publicVerified: false, artVerified: false};
+    return {event: {month: 'January', date: 1}, nameVerified: false, publicVerified: false, artVerified: false};
   },
   loadDataFromServer: function() {
     $.ajax({
       url: this.props.urls.eventDataURL+this.props.eventID,
       dataType: 'json',
-      cache: false,
+      cache: true,
       success: function(event) {
         this.setState({event: event});
+        this.forceUpdate(); //needed so that month/date input renders correctly
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.urls.eventDataURL, status, err.toString());
       }.bind(this)
     });
+  },
+  handleDateSubmit: function(month, date) {
+    var event = $.extend(true, {}, this.state.event);
+    event.month = month;
+    event.date = date;
+    event.year = new Date().getFullYear();
+    this.handleEventDataSubmit(event, 'dateVerified');
   },
   handleEventDataSubmit: function(updatedEvent, successVar) {
     var oldEvent = this.state.event;
@@ -62,6 +73,7 @@ var Event = React.createClass({
     this.setState({event: updatedEvent});
     // Stringify arrays so they reach the server
     var safeEvent = JSON.stringify(updatedEvent);
+    console.log(safeEvent);
     // don't mark as verified yet
     var unverifiedState = {};
     unverifiedState[successVar] = false;
@@ -70,7 +82,7 @@ var Event = React.createClass({
       url: this.props.urls.eventUpdateURL,
       dataType: 'json',
       type: 'POST',
-      data: {show: safeEvent},
+      data: {event: safeEvent},
       success: function(event) {
         var successState = {event: event};
         successState[successVar] = true;
@@ -117,6 +129,11 @@ var Event = React.createClass({
     event.title = title;
     this.handleEventDataSubmit(event, 'titleVerified');
   },
+  handleLocationSubmit: function(location){
+    var event = $.extend(true, {}, this.state.event);
+    event.location = location;
+    this.handleEventDataSubmit(event, 'locationVerified');
+  },
   handlePublicSubmit: function(checked) {
     var event = $.extend(true, {}, this.state.event);
     event.public = checked;
@@ -154,10 +171,14 @@ var Event = React.createClass({
                 <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Art" onSubmit={this.handleEventArtSubmit} verified={this.state.artVerified} />
                 <InputEditableTextField title="Name" currentValue={this.state.event.name}
                   onSubmit={this.handleNameSubmit} placeholder="Enter Event Name" verified={this.state.nameVerified} />
+                <InputEditableTextField title="Location" currentValue={this.state.event.location}
+                  onSubmit={this.handleLocationSubmit} placeholder="Enter Event Location" verified={this.state.locationVerified} />
+                <InputEditableMonthDateField key="monthDate" title="Date" month={this.state.event.month} date={this.state.event.date}
+                  onDateSubmit={this.handleDateSubmit} placeholder="Enter Show Time" verified={this.state.dateVerified} />
                 <InputCheckbox title="Public" details="Make Event Public" checked={this.state.event.public}
                   onSelect={this.handlePublicSubmit} verified={this.state.publicVerified} />
 
-                <ConfirmationButton confirm={"Delete '" + this.state.event.name + "'"} submit={"Really delete '" + this.state.event.name + "'?"} onSubmit={this.handleDeleteShow} />
+                <ConfirmationButton confirm={"Delete '" + this.state.event.name + "'"} submit={"Really delete '" + this.state.event.name + "'?"} onSubmit={this.handleDeleteEvent} />
               </Col>
             </Row>
           </Well>

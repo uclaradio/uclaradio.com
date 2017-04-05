@@ -51,7 +51,9 @@ var eventUrls = {
   eventLink: "/panel/event",
   addEventURL: "/panel/api/addEvent",
   eventDataURL: "/panel/api/eventData/",
-  eventUpdateURL: "/panel/api/updateEvent"
+  eventUpdateURL: "/panel/api/updateEvent",
+  deleteEventURL: "/panel/api/deleteEvent",
+  deleteRedirectURL: "/panel/events"
 };
 
 var showUrls = {
