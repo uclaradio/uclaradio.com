@@ -25,6 +25,13 @@ const bannerData = [
 ];
 
 var PromoBanner = React.createClass({
+  getImage: function(banner) {
+    return (
+      <RectImage src={banner.img} aspectRatio={5}>
+        <div className="overlay" />
+      </RectImage>
+    );
+  },
   render: function() {
     var settings = {
       dots: true,
@@ -34,14 +41,30 @@ var PromoBanner = React.createClass({
       autoplaySpeed: 5000
     };
 
+    // <Link> component is unable to link to external links
+    // Currently doing an inline conditional via a ternary 
+    // The self variable is be declared as 'this' is function scoped
+    // An alternative solution would be to use ES6 arrow functions
+    
+    var self = this; 
     var banners = bannerData.map(function(banner) {
       return (
         <div>
-          <Link to={banner.link}>
-            <RectImage src={banner.img} aspectRatio={5}>
-              <div className="overlay" />
-            </RectImage>
-          </Link>
+          {
+           (banner.link.indexOf("http") == -1) ? 
+            
+            (
+                <Link to={banner.link}>
+                  {self.getImage(banner)}
+                </Link>
+            ) :
+            (
+                <a href={banner.link}>
+                  {self.getImage(banner)}
+                </a>
+            )
+
+          }
         </div>
       ); 
     });
