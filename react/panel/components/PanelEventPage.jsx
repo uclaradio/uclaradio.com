@@ -73,7 +73,6 @@ var Event = React.createClass({
     this.setState({event: updatedEvent});
     // Stringify arrays so they reach the server
     var safeEvent = JSON.stringify(updatedEvent);
-    console.log(safeEvent);
     // don't mark as verified yet
     var unverifiedState = {};
     unverifiedState[successVar] = false;
@@ -107,7 +106,6 @@ var Event = React.createClass({
     formData.append("img", data);
     formData.append("id", this.state.event.id);
     var request = new XMLHttpRequest();
-    console.log(this.props.urls.eventPicURL);
     request.open("POST", this.props.urls.eventPicURL);
     var loadData = this.loadDataFromServer;
     var verify = this.verifyEventArt;

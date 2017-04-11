@@ -71,7 +71,6 @@ events.getAllEvents = function(callback) {
           && !((dates.numberFromMonth(el["month"]) == Month) && (el["date"] < currDate))
       })
       response = response.reverse();
-      console.log("response is " + response);
 
       var eventsByMonth = [{month:"January", arr:[]},
       {month:"February", arr:[]},
@@ -92,32 +91,6 @@ events.getAllEvents = function(callback) {
       eventsByMonth = eventsByMonth.filter(function(el) {
         return el.arr.length != 0;
       })
-      console.log(eventsByMonth);
-
-      /*var cleanedMonths = eventsByMonth.map(function(month) {
-        return cleanedEvents = month.arr.map(function(event) {
-          var e = event;
-          // assume giveaway
-          e.type = "Ticket Giveaway";
-
-          // get host, location from summary
-          var summaryPattern = /([^@]*)(?:@([^@]*))?/g;
-          var match = summaryPattern.exec(e.summary);
-          if (match != null) {
-            e.host = match[1] && match[1].trim();
-            e.location = match[2] && match[2].trim();
-          }
-
-          // get image from description
-          // var descriptionImagePattern = /image: "([^"]*)"/g;
-          // match = descriptionImagePattern.exec(e.description);
-          // if (match != null) {
-          //   e.image = match[1].trim();
-          // }
-          e.image = e.description;
-          return e;
-        });
-      });*/
 
       callback(null, eventsByMonth);
     }
@@ -139,7 +112,6 @@ events.getEventsForUser = function(djUsername, callback) {
 // Add a new event
 events.addNewEvent = function(name, type, user, callback) {
   db.getNextAvailableId(db.eventIdKey, function(nextId) {
-    console.log("nextId: ", nextId);
     newData = {
       "id": nextId,
       "name": name, 
