@@ -95,13 +95,6 @@ router.post('/signup', function(req, res) {
 
 /***** FAQ *****/
 
-/*
-router.get('/faq', function(req, res) {
-  var path = require('path');
-  res.sendFile(path.resolve('public/panel/faq.html'));
-});
-*/
-
 router.get('/api/faq', function(req, res) {
   faqs.getAllFAQs(function(err, o) {
     if (o) {
@@ -263,26 +256,6 @@ router.post('/manager/api/:link', function(req, res) {
   }
 });
 
-/*
-router.get('/manager', function(req, res) {
-  if (req.session.user == null) {
-    // not logged in, redirect to log in page
-    res.redirect('/panel');
-  }
-  else {
-    accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
-      if (hasAccess) {
-        var path = require('path');
-        res.sendFile(path.resolve('public/panel/manager.html'));
-      }
-      else {
-        // redirect to home page
-        res.redirect('/panel');
-      }
-    });
-  }
-});
-*/
 
 /***** Shows *****/
 
@@ -668,11 +641,8 @@ router.post('/api/updateEvent', function(req, res) {
 		console.log("not logged in ");
 	}
 	else {
-		console.log(req.body);
 		var eventData = JSON.parse(req.body.event);	//not sure why req.body.event doesn't work...
-		console.log("still alive");
 		events.userHasAccessToEvent(req.session.user.username, eventData.id, function(hasAccess) {
-			console.log("made it");
 			// user doesn't have access to this event
 			if (!hasAccess) {
 				console.log("user requested invalid event");
@@ -684,9 +654,7 @@ router.post('/api/updateEvent', function(req, res) {
 			var callback = function(err, event) {
 				if (err) {
 					console.log("error updating event: ", err);
-				}
-
-				if (event) {
+				} else if (event) {
 					events.getEventByID(event.id, function(err, o) {
 						if (o) {
 							res.json(o);
@@ -711,7 +679,6 @@ router.post('/api/eventPic', function(req, res) {
 	}
 	else {
 		events.userHasAccessToEvent(req.session.user.username, req.body.id, function(hasAccess) {
-			console.log("hi");
 			if (!hasAccess) { res.status(400).send(); }
 
 			else {
@@ -736,7 +703,7 @@ router.post('/api/eventPic', function(req, res) {
 	}
 });
 
-// delete event 
+// delete event
 router.post('/api/deleteEvent', function(req, res) {
 	if (req.session.user == null) {
 		// not logged in, redirect to log in page

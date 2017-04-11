@@ -32,9 +32,6 @@ const PanelUserEventsPage = React.createClass({
 	}
 });
 
-// TODO: Components are currently sharing styles with their show counterparts
-// Update such that they have their own style
-
 var UserEventsList = React.createClass({
   getInitialState: function() {
     return {events: []};

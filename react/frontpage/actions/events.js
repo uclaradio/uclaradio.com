@@ -32,7 +32,6 @@ export const fetchUpdatedEvents = (dispatch) => {
 		dataType: 'json',
 		cache: false,
 		success: function(data) {
-			console.log(data.events);
 			dispatch(stopFetching());
 			dispatch(updateGroups(monthGroups(data.events)));
 			dispatch(updateEvents(eventsFromGroups(data.events)));
