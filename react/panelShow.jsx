@@ -231,6 +231,7 @@ var Show = React.createClass({
             <Row>
               <Col xs={12} md={4}>
                 <RectImage src={this.state.show.picture || "/img/radio.png" } rounded maxWidth="380px" />
+                <div className="centered"><small><i>For best quality, upload an image with a width of 512px or greater </i></small></div>
               </Col>
               <Col xs={12} md={8}>
                 <h3>{this.state.show.title}</h3>

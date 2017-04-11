@@ -16,12 +16,22 @@ require('./PromoBanner.scss');
 
 // Promo Banner Data 
 const bannerData = [
-  {"img": "/img/sotm-mar17-nuindigo.png", "link": "/shows/90"},
-  {"img": "/img/sotm-feb2017.jpg", "link": "/shows/75"},
-  {"img": "/img/sotm_january_2017.png", "link": "/shows/83"}
+  {"img": "/img/promo/sotm/sotm_april_2017.png", "link": "/shows/182"}, 
+  {"img": "/img/promo/localchella_giveaways.jpg", "link": "https://www.facebook.com/UCLARadio/photos/a.220123767998373.66127.214439101900173/1543809082296495/?type=3&theater"}
+  // Will update once their shows are updated
+  // {"img": "/img/sotm-mar17-nuindigo.png", "link": "/shows/90"},
+  // {"img": "/img/sotm-feb2017.jpg", "link": "/shows/75"},
+  // {"img": "/img/sotm_january_2017.png", "link": "/shows/83"}
 ];
 
 var PromoBanner = React.createClass({
+  getImage: function(banner) {
+    return (
+      <RectImage src={banner.img} aspectRatio={5}>
+        <div className="overlay" />
+      </RectImage>
+    );
+  },
   render: function() {
     var settings = {
       dots: true,
@@ -31,14 +41,30 @@ var PromoBanner = React.createClass({
       autoplaySpeed: 5000
     };
 
+    // <Link> component is unable to link to external links
+    // Currently doing an inline conditional via a ternary 
+    // The self variable is be declared as 'this' is function scoped
+    // An alternative solution would be to use ES6 arrow functions
+    
+    var self = this; 
     var banners = bannerData.map(function(banner) {
       return (
         <div>
-          <Link to={banner.link}>
-            <RectImage src={banner.img} aspectRatio={5}>
-              <div className="overlay" />
-            </RectImage>
-          </Link>
+          {
+           (banner.link.indexOf("http") == -1) ? 
+            
+            (
+                <Link to={banner.link}>
+                  {self.getImage(banner)}
+                </Link>
+            ) :
+            (
+                <a href={banner.link}>
+                  {self.getImage(banner)}
+                </a>
+            )
+
+          }
         </div>
       ); 
     });
