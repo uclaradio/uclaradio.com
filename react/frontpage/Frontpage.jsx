@@ -23,6 +23,7 @@ import Error404Page from './components/Error404Page.jsx';
 import StreamIssuesPage from './components/StreamIssuesPage.jsx';
 import AboutPage from './components/AboutPage.jsx';
 import PromoBanner from './components/PromoBanner.jsx';
+import PledgeDriveModal from './components/PledgeDriveModal.jsx';
 
 // Common Components
 import RectImage from '../common/RectImage.jsx';
@@ -54,11 +55,6 @@ Expects children components for tab contents
 
 @prop nowPlaying: show to display as live
 @prop spotlight: show to display as spotlight
-<<<<<<< HEAD
-@prop children: components to display in content area
-=======
->>>>>>> master
-
 @prop children: components to display in content area
 **/
 const FrontpageContent = React.createClass({
@@ -87,6 +83,7 @@ const FrontpageContent = React.createClass({
                 { /* Show of the Month */ }
                 <PromoBanner />
                 <FrontPageNavbar />
+                <PledgeDriveModal />
                 { this.props.children }
               </Col>
 
@@ -132,7 +129,7 @@ const FrontpageContentContainer = connect(
   mapStateToProps
 )(FrontpageContent);
 
-// react-router routes 
+// react-router routes
 // each path represents a page of our frontpage with a component
 const routes = (
   <Route path="/" component={FrontpageContentContainer}>
