@@ -16,7 +16,7 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 - Ensure you have Mongo installed and a Mongo db instance is running
   - For macOS: If you have [homebrew](http://brew.sh/) installed, you can just run [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) to set up node and MongoDB automatically!
 - In the project root directory, run `npm install` to install dependencies (may need sudo)
-- Run `npm start` to start the server for development
+- Run `npm run dev` to start the server for development
 - Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
 
 #### Production
@@ -64,7 +64,7 @@ return <p>UCLA Radio is a student-run organization with {djs.length} student DJs
 Do so with Grunt, which automates Webpack:
 * install grunt-client with npm: `npm install -g grunt-cli`
 * run `grunt` to compile .jsx files in `./react` and put minified versions in `./public/build`
-  * run `grunt watch` to automatically recompile whenever you hit save!
+  * run `grunt watch` to automatically recompile whenever you hit save! (Note: this is done automatically for you when you run `npm run dev`!
 * add `.../build/[x].min.js` as a script in your HTML files
 
 #### React + API
