@@ -35,7 +35,7 @@ const rivendellDumpArray = [];
 const songs = [];
 
 rivendell.getSongs = function(callback) {
-  fs.readFile(__dirname + '/rivendel.xml', function(err, data) {
+  fs.readFile(__dirname + '/rivendell.xml', function(err, data) {
     if (err) {
       callback(err);
       return;
