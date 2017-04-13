@@ -8,6 +8,7 @@ var accounts = require('../database/accounts');
 var shows = require('../database/shows');
 var faqs = require('../database/faqs');
 var messages = require('../database/messages');
+var rivendell = require('../database/rivendell');
 
 // Image compression module
 const Jimp = require('jimp');
@@ -594,6 +595,25 @@ router.post('/api/showPic', function(req, res) {
             res.json("success");
           }
         });
+      }
+    });
+  }
+});
+
+/** RIVENDELL **/
+
+router.get('/api/songs', function(req, res) {
+  if (req.session.user == null) {
+    // not logged in, redirect to log in page
+    res.redirect('/panel');
+  }
+  else {
+    rivendell.getSongs(function(err, o) {
+      if (o) {
+        res.json({songs: o});
+      }
+      else {
+        res.status(400).send();
       }
     });
   }
