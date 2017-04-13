@@ -366,7 +366,7 @@ router.post('/api/user', function(req, res) {
   }
 });
 
-var defaultLinks = [{"title": "FAQ", "link": "/panel/faq"}];
+var defaultLinks = [{"title": "FAQ", "link": "/panel/faq"}, {"title": "Elrond", "link": "/panel/elrond"}];
 router.get('/api/userlinks', function(req, res) {
   if (req.session.user == null) {
     res.json({"loggedin": false, "links":defaultLinks});
@@ -600,7 +600,18 @@ router.post('/api/showPic', function(req, res) {
   }
 });
 
-/** RIVENDELL **/
+/** ELROND **/
+
+router.get('/elrond', function(req, res) {
+  if (req.session.user == null) {
+    // not logged in, redirect to log in page
+    res.redirect('/panel');
+  }
+  else {
+    var path = require('path');
+    res.sendFile(path.resolve('public/panel/elrond.html'));
+  }
+});
 
 router.get('/api/songs', function(req, res) {
   if (req.session.user == null) {
