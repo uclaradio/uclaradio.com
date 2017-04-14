@@ -173,7 +173,7 @@ var User = React.createClass({
         <div className="centered"><small><i>For best quality, upload an image with a width of 512px or greater </i></small></div>
         <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Profile" onSubmit={this.handlePicSubmit} verified={this.state.picVerified} />
         <InputEditableTextField title="DJ Name" currentValue={this.state.user.djName}
-          placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit} 
+          placeholder="Enter DJ Name" onSubmit={this.handleDJNameSubmit}
           verified={this.state.djNameVerified} />
         <InputEditableTextField title="Email" currentValue={this.state.user.email}
           placeholder="Enter Email" onSubmit={this.handleEmailSubmit}

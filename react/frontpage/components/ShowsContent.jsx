@@ -15,8 +15,8 @@ require('./ShowsContent.scss');
 
 // possible values for this.state.viewType
 const ScheduleViewType = {
-	grid: "gridView",
-	list: "listView"
+  grid: "gridView",
+  list: "listView"
 };
 
 /*
@@ -29,85 +29,85 @@ View component for shows tab of frontpage
 @prop spotlightShowID: id of spotlight show
 */
 var ShowsContent = React.createClass({
-	getInitialState: function() {
-		return {
-			mobile: false,
-			viewType: ScheduleViewType.grid
-		};
-	},
-	componentWillMount: function() {
-		this.props.updateShows();
-	},
-	componentDidMount: function() {
-		if (isMobile.any()) {
-			this.setState({mobile: true});
-		}
-	},
-	toggleActiveShow: function(show) {
-		this.setState({activeShow: show});
-	},
-	updateViewType: function(viewType) {
-		this.setState({viewType: viewType});
-	},
-	render: function() {
+  getInitialState: function() {
+    return {
+      mobile: false,
+      viewType: ScheduleViewType.grid
+    };
+  },
+  componentWillMount: function() {
+    this.props.updateShows();
+  },
+  componentDidMount: function() {
+    if (isMobile.any()) {
+      this.setState({mobile: true});
+    }
+  },
+  toggleActiveShow: function(show) {
+    this.setState({activeShow: show});
+  },
+  updateViewType: function(viewType) {
+    this.setState({viewType: viewType});
+  },
+  render: function() {
 
-		// loading
-		if (this.props.fetching && this.props.shows.length == 0) {
-			return (
-				<div className="showsContent">
-					<Loader />
-				</div>	
-			);
-		}
+    // loading
+    if (this.props.fetching && this.props.shows.length == 0) {
+      return (
+        <div className="showsContent">
+          <Loader />
+        </div>  
+      );
+    }
 
-		return (
-			<div className="showsContent">
+    return (
+      <div className="showsContent">
 
-				{ /* List View -- small screens */ }
-				<div className="hidden-sm hidden-md hidden-lg">
-					<ShowList shows={this.props.shows} />
-				</div>
+        { /* List View -- small screens */ }
+        <div className="hidden-sm hidden-md hidden-lg">
+          <ShowList shows={this.props.shows} />
+        </div>
 
-				{ /* Choice between List & Grid View -- larger screens */ }
-				<div className="hidden-xs">
-					<h1 className="schedHeader">
-						schedule
-					</h1>
-					<div className="scheduleViewButton">
-						<p className={this.state.viewType == ScheduleViewType.grid ? "switchSelStyle" : "switchStyle"}  onClick={()=>{this.updateViewType(ScheduleViewType.grid)}}>
-							GRID
-						</p>
-						<p className={this.state.viewType == ScheduleViewType.list ? "switchSelStyle" : "switchStyle"} onClick={()=>{this.updateViewType(ScheduleViewType.list)}}>
-							LIST
-						</p>
-					</div>
+        { /* Choice between List & Grid View -- larger screens */ }
+        <div className="hidden-xs">
+          <h1 className="schedHeader">
+            schedule
+          </h1>
+          <div className="scheduleViewButton">
+            <p className={this.state.viewType == ScheduleViewType.grid ? "switchSelStyle" : "switchStyle"}  onClick={()=>{this.updateViewType(ScheduleViewType.grid)}}>
+              GRID
+            </p>
+            <p className={this.state.viewType == ScheduleViewType.list ? "switchSelStyle" : "switchStyle"} onClick={()=>{this.updateViewType(ScheduleViewType.list)}}>
+              LIST
+            </p>
+          </div>
 
-					{ this.state.viewType == ScheduleViewType.grid ?
-						<div>
-							{ /* Grid View */ }
-							<div className="graphStyle">
-								<ShowsGraph shows={this.props.shows}
-									currentShowID={this.props.currentShowID}
-									spotlightShowID={this.props.spotlightShowID}
-									activeShowID={this.state.activeShow && this.state.activeShow.id}
-									onShowClick={this.toggleActiveShow} />
-							</div>
-							<div className="blurbStyle">
-								{ this.state.activeShow &&
-									<ShowBlurb show={this.state.activeShow} />
-								}
-							</div>
-						</div>
-						:
-						<div>
-							{ /* List View */ }
-							<ShowList shows={this.props.shows} />
-						</div>
-					}
-				</div>
-			</div>
-		);
-	}
+          { this.state.viewType == ScheduleViewType.grid ?
+            <div>
+              { /* Grid View */ }
+              <div className="graphStyle">
+                <ShowsGraph shows={this.props.shows}
+                  currentShowID={this.props.currentShowID}
+                  spotlightShowID={this.props.spotlightShowID}
+                  activeShowID={this.state.activeShow && this.state.activeShow.id}
+                  onShowClick={this.toggleActiveShow} />
+              </div>
+              <div className="blurbStyle">
+                { this.state.activeShow &&
+                  <ShowBlurb show={this.state.activeShow} />
+                }
+              </div>
+            </div>
+            :
+            <div>
+              { /* List View */ }
+              <ShowList shows={this.props.shows} />
+            </div>
+          }
+        </div>
+      </div>
+    );
+  }
 });
 
 module.exports = ShowsContent;

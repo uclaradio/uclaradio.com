@@ -23,15 +23,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const mapDispatchToProps = (dispatch) => ({
-	updateNowPlaying: () => {
-		fetchUpdatedNowPlaying(dispatch);
-	},
-	setSpotlightShowID: (showID) => {
-		dispatch(updateSpotlightShow(showID));
-	},
-	updateShows: () => {
-		fetchUpdatedShows(dispatch);
-	}
+  updateNowPlaying: () => {
+    fetchUpdatedNowPlaying(dispatch);
+  },
+  setSpotlightShowID: (showID) => {
+    dispatch(updateSpotlightShow(showID));
+  },
+  updateShows: () => {
+    fetchUpdatedShows(dispatch);
+  }
 });
 
 // fetch now playing show info from server and update store
@@ -42,11 +42,11 @@ const fetchUpdatedNowPlaying = (dispatch) => {
     dataType: 'json',
     cache: false,
     success: function(nowPlaying) {
-    	if (nowPlaying.title) {
-	    	var showID = nowPlaying.id;
-	      dispatch(updateNowPlaying(showID));
-	      dispatch(addUpdateShow(nowPlaying));
-    	}
+      if (nowPlaying.title) {
+        var showID = nowPlaying.id;
+        dispatch(updateNowPlaying(showID));
+        dispatch(addUpdateShow(nowPlaying));
+      }
     }.bind(this),
     error: function(xhr, status, err) {
       console.error(nowPlayingURL, status, err.toString());
@@ -56,20 +56,20 @@ const fetchUpdatedNowPlaying = (dispatch) => {
 
 // redux container for frontpage
 const FrontpageContainer = connect(
-	null,
-	mapDispatchToProps
+  null,
+  mapDispatchToProps
 )(Frontpage);
 
 // wrap container in redux provider to provide data store
 const FrontpageApp = () => {
-	return (
-	  <Provider store={store}>
-	    <FrontpageContainer />
-	  </Provider>
-	);
+  return (
+    <Provider store={store}>
+      <FrontpageContainer />
+    </Provider>
+  );
 }
 
 // display app
 ReactDOM.render((
-	<FrontpageApp />
+  <FrontpageApp />
 ), document.getElementById('content'));

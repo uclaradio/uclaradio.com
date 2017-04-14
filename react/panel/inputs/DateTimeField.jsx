@@ -17,7 +17,7 @@ var Input = require('react-bootstrap').Input;
 */
 var DateTimeField = React.createClass({
   render: function() {
-      return (
+    return (
         <div className="dateTimeField">
         <Grid>
           <Row>
@@ -63,7 +63,7 @@ var DateTimeField = React.createClass({
           </Row>
         </Grid>
       </div>
-      );
+    );
   }
 });
 

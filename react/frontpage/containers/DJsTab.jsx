@@ -7,19 +7,19 @@ import { updateDJs, startFetching, stopFetching, fetchUpdatedDJs } from '../acti
 import DJList from '../components/DJList.jsx';
 
 const mapStateToProps = (state) => ({
-	djs: state.djs.djs,
-	fetching: state.djs.fetching
+  djs: state.djs.djs,
+  fetching: state.djs.fetching
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	updateDJs: () => {
-		fetchUpdatedDJs(dispatch);
-	}
+  updateDJs: () => {
+    fetchUpdatedDJs(dispatch);
+  }
 });
 
 const DJsTab = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(DJList);
 
 

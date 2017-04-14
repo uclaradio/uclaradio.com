@@ -132,7 +132,7 @@ const FrontpageContentContainer = connect(
   mapStateToProps
 )(FrontpageContent);
 
-// react-router routes 
+// react-router routes
 // each path represents a page of our frontpage with a component
 const routes = (
   <Route path="/" component={FrontpageContentContainer}>

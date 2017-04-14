@@ -11,7 +11,7 @@ var messages = require('../database/messages');
 
 // Image compression module
 const Jimp = require('jimp');
-const RESIZE_WIDTH = 512; 
+const RESIZE_WIDTH = 512;
 const IMAGE_QUALITY = 80;
 
 /***** Main Log In Page *****/
@@ -200,17 +200,17 @@ var deleteUnverifiedAccount = function(req, res) {
 };
 
 var deleteChat = function(req, res) {
-    var messageID = req.body.id;
-    messages.delete(messageID, function(){
-        res.send("succesfully deleted");
-    });
+  var messageID = req.body.id;
+  messages.delete(messageID, function(){
+    res.send("succesfully deleted");
+  });
 };
 
 var freeChat = function(req, res) {
-    var messageID = req.body.id;
-    messages.free(messageID, function(){
-        res.send("succesfully deleted");
-    });
+  var messageID = req.body.id;
+  messages.free(messageID, function(){
+    res.send("succesfully deleted");
+  });
 };
 
 router.post('/manager/api/:link', function(req, res) {
@@ -224,33 +224,33 @@ router.post('/manager/api/:link', function(req, res) {
         var path = require('path');
         // perform action
         switch (req.params.link) {
-          case 'info':
-            managerInfo(req, res);
-            break;
-          case 'update':
-            updateManager(req, res);
-            break;
-          case 'listAccounts':
-            listAccounts(req, res);
-            break;
-          case 'verify': 
-            verifyAccount(req, res);
-            break;
-          case 'delete':
-            deleteAccount(req, res);
-            break;
-          case 'deleteUnverified':
-            deleteUnverifiedAccount(req, res);
-            break;
-          case 'freechat':
-            freeChat(req, res);
-            break;
-          case 'deletechat':
-            deleteChat(req, res);
-            break;
-          default:
-            res.status(404).send();
-            break;
+        case 'info':
+          managerInfo(req, res);
+          break;
+        case 'update':
+          updateManager(req, res);
+          break;
+        case 'listAccounts':
+          listAccounts(req, res);
+          break;
+        case 'verify':
+          verifyAccount(req, res);
+          break;
+        case 'delete':
+          deleteAccount(req, res);
+          break;
+        case 'deleteUnverified':
+          deleteUnverifiedAccount(req, res);
+          break;
+        case 'freechat':
+          freeChat(req, res);
+          break;
+        case 'deletechat':
+          deleteChat(req, res);
+          break;
+        default:
+          res.status(404).send();
+          break;
         }
       }
       else {
@@ -407,7 +407,7 @@ router.post('/api/userPic', function(req, res) {
     }
     else {
       console.log("Non-png/jpg file type");
-    }     
+    }
 
     var picture = imgPath.replace('public/', '/');
     var newData = {"picture": picture, "username": req.body.username};
@@ -464,7 +464,7 @@ router.get('/api/allshows', function(req, res) {
   }
 });
 
-// update details for one show 
+// update details for one show
 router.post('/api/updateShow', function(req, res) {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
@@ -511,7 +511,7 @@ router.post('/api/updateShow', function(req, res) {
   }
 });
 
-// delete show 
+// delete show
 router.post('/api/deleteShow', function(req, res) {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
@@ -542,7 +542,7 @@ router.post('/api/addShow', function(req, res) {
   else {
     shows.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], function(err, saved) {
       if (err) {
-        console.log("failed to add show for user: ", err); 
+        console.log("failed to add show for user: ", err);
         res.json({"success": false, "err": err});
       }
 
@@ -582,8 +582,8 @@ router.post('/api/showPic', function(req, res) {
         }
         else {
           console.log("Non-png/jpg file type");
-        }     
-        
+        }
+
         var picture = imgPath.replace('public/', '/');
         // update show data with new pictures
         var newData = {"picture": picture};

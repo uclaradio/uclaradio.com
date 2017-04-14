@@ -13,7 +13,7 @@ body {
 
 #main.container {
   max-width: 970px;
-	margin: 20px auto;
+  margin: 20px auto;
 }
 
 .container {
@@ -21,12 +21,14 @@ body {
 }
 
 .well {
-	background-color: white;
+  background-color: white;
 }
 
-.container h2, .container h3, .container h4 {
+.container h2,
+.container h3,
+.container h4 {
   text-align: center;
-	margin-top: 0px;
+  margin-top: 0px;
 }
 
 .panel-heading {
@@ -37,7 +39,9 @@ body {
   cursor: pointer;
 }
 
-a:hover, .btn-link:hover, .btn-link:focus {
+a:hover,
+.btn-link:hover,
+.btn-link:focus {
   text-decoration: none;
 }
 
@@ -115,11 +119,13 @@ a:hover, .btn-link:hover, .btn-link:focus {
 
 /** InputEditableTextField **/
 
-.cancelLink, .delete {
+.cancelLink,
+.delete {
   color: #f0657f;
 }
 
-.cancelLink:hover, .delete:hover {
+.cancelLink:hover,
+.delete:hover {
   color: #db405d;
 }
 
@@ -145,15 +151,18 @@ a:hover, .btn-link:hover, .btn-link:focus {
 /** Forms **/
 
 .dateTimeField .col-md-6 {
- padding-left: 5px;
- padding-right: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-.placeholder, a.disabled, a.disabled:hover {
+.placeholder,
+a.disabled,
+a.disabled:hover {
   color: #b2b2b2;
 }
 
-.control-label, .fieldLabel {
+.control-label,
+.fieldLabel {
   color: #777;
 }
 
@@ -224,7 +233,8 @@ input[type="file"] {
   margin-top: 15px;
 }
 
-.showListTitle, .showListSubtitle {
+.showListTitle,
+.showListSubtitle {
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -255,9 +265,9 @@ input[type="file"] {
 }
 
 .reportedTable  tr {
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    width: 100%;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  width: 100%;
 }
 
 .reportedTable button {
@@ -271,4 +281,3 @@ input[type="file"] {
 table {
   width: 100%;
 }
-

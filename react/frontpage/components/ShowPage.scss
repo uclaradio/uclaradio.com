@@ -10,44 +10,44 @@ $tumblr: #35465c;
 $facebook: #3b5998;
 
 .showPage {
-	margin: 10pt 0;
-	padding: 10pt 20pt;
+  margin: 10pt 0;
+  padding: 10pt 20pt;
 }
 
 $image-width: 30%;
 .showPage .rectImage {
-	margin: 0 !important;
-	display: inline-block;
-	vertical-align: top;
-	width: $image-width;
+  margin: 0 !important;
+  display: inline-block;
+  vertical-align: top;
+  width: $image-width;
 }
 
 .showPage .showInfo {
-	display: inline-block;
-	width: 100% - $image-width;
-	padding: 10pt 20pt;
+  display: inline-block;
+  width: 100% - $image-width;
+  padding: 10pt 20pt;
 }
 
 .fa {
-	margin-right: 7pt;
+  margin-right: 7pt;
 }
 
 .facebookLogo:hover {
-	color: $facebook !important;
-	opacity: 0.95;
+  color: $facebook !important;
+  opacity: 0.95;
 }
 
 .tumblrLogo:hover {
-	color: $tumblr !important;
-	opacity: 0.95;
+  color: $tumblr !important;
+  opacity: 0.95;
 }
 
 .soundcloudLogo:hover {
-	color: $soundcloud !important;
-	opacity: 0.95;
+  color: $soundcloud !important;
+  opacity: 0.95;
 }
 
 .mixcloudLogo:hover {
-	color: $mixcloud !important;
-	opacity: 0.95;
+  color: $mixcloud !important;
+  opacity: 0.95;
 }
