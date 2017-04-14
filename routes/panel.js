@@ -5,13 +5,14 @@ var express = require('express');
 var router = express.Router();
 
 var accounts = require('../database/accounts');
+var events = require('../database/events');
 var shows = require('../database/shows');
 var faqs = require('../database/faqs');
 var messages = require('../database/messages');
 
 // Image compression module
 const Jimp = require('jimp');
-const RESIZE_WIDTH = 512; 
+const RESIZE_WIDTH = 512;
 const IMAGE_QUALITY = 80;
 
 /***** Main Log In Page *****/
@@ -93,11 +94,6 @@ router.post('/signup', function(req, res) {
 
 
 /***** FAQ *****/
-
-router.get('/faq', function(req, res) {
-  var path = require('path');
-  res.sendFile(path.resolve('public/panel/faq.html'));
-});
 
 router.get('/api/faq', function(req, res) {
   faqs.getAllFAQs(function(err, o) {
@@ -233,7 +229,7 @@ router.post('/manager/api/:link', function(req, res) {
           case 'listAccounts':
             listAccounts(req, res);
             break;
-          case 'verify': 
+          case 'verify':
             verifyAccount(req, res);
             break;
           case 'delete':
@@ -260,37 +256,8 @@ router.post('/manager/api/:link', function(req, res) {
   }
 });
 
-router.get('/manager', function(req, res) {
-  if (req.session.user == null) {
-    // not logged in, redirect to log in page
-    res.redirect('/panel');
-  }
-  else {
-    accounts.checkPrivilege(req.session.user.username, accounts.managerPrivilegeName, function(err, hasAccess) {
-      if (hasAccess) {
-        var path = require('path');
-        res.sendFile(path.resolve('public/panel/manager.html'));
-      }
-      else {
-        // redirect to home page
-        res.redirect('/panel');
-      }
-    });
-  }
-});
 
 /***** Shows *****/
-
-router.get('/show/:id', function(req, res) {
-  if (req.session.user == null) {
-    // not logged in, redirect to log in page
-    res.redirect('/panel');
-  }
-  else {
-    var path = require('path');
-    res.sendFile(path.resolve('public/panel/show.html'));
-  }
-});
 
 router.get('/api/showData/:id', function(req, res) {
   if (req.session.user == null) {
@@ -407,7 +374,7 @@ router.post('/api/userPic', function(req, res) {
     }
     else {
       console.log("Non-png/jpg file type");
-    }     
+    }
 
     var picture = imgPath.replace('public/', '/');
     var newData = {"picture": picture, "username": req.body.username};
@@ -464,7 +431,7 @@ router.get('/api/allshows', function(req, res) {
   }
 });
 
-// update details for one show 
+// update details for one show
 router.post('/api/updateShow', function(req, res) {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
@@ -511,7 +478,7 @@ router.post('/api/updateShow', function(req, res) {
   }
 });
 
-// delete show 
+// delete show
 router.post('/api/deleteShow', function(req, res) {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
@@ -542,7 +509,7 @@ router.post('/api/addShow', function(req, res) {
   else {
     shows.addNewShow(req.body.title, req.body.day, req.body.time, [req.session.user.username], function(err, saved) {
       if (err) {
-        console.log("failed to add show for user: ", err); 
+        console.log("failed to add show for user: ", err);
         res.json({"success": false, "err": err});
       }
 
@@ -582,8 +549,8 @@ router.post('/api/showPic', function(req, res) {
         }
         else {
           console.log("Non-png/jpg file type");
-        }     
-        
+        }
+
         var picture = imgPath.replace('public/', '/');
         // update show data with new pictures
         var newData = {"picture": picture};
@@ -597,6 +564,172 @@ router.post('/api/showPic', function(req, res) {
       }
     });
   }
+});
+
+/*** Events ***/
+
+// Get events for logged in user
+router.get('/api/userevents', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		// return list of events belonging to current user
+		events.getEventsForUser(req.session.user.username, function(err, userEvents) {
+			if (err) { console.log("failed to retrieve events for user: ", err); }
+			else {
+				res.json(userEvents);
+			}
+		});
+	}
+});
+
+// Add new event
+router.post('/api/addEvent', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		events.addNewEvent(req.body.name, req.body.type, [req.session.user.username], function(err, saved) {
+			if (err) {
+				console.log("failed to add event for user: ", err);
+				res.json({"success": false, "err": err});
+			}
+
+			else {
+				// return full list of user's events
+				res.redirect('/panel/api/userevents');
+			}
+		});
+	}
+});
+
+router.get('/api/eventData/:id', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.status(400).send();
+	}
+	else {
+		events.userHasAccessToEvent(req.session.user.username, req.params.id, function(hasAccess) {
+			if (!hasAccess) {
+				// user doesn't have access to this event
+				console.log("user requested event they don't have access to");
+				res.status(400).send();
+				return;
+			}
+			else {
+				events.getEventByID(req.params.id, function(err, o) {
+					if (o) {
+						res.json(o);
+					}
+					else {
+						res.status(400).send(err);
+					}
+				});
+			}
+		});
+	}
+});
+
+// update details for one event
+router.post('/api/updateEvent', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+		console.log("not logged in ");
+	}
+	else {
+		var eventData = JSON.parse(req.body.event);	//not sure why req.body.event doesn't work...
+		events.userHasAccessToEvent(req.session.user.username, eventData.id, function(hasAccess) {
+			// user doesn't have access to this event
+			if (!hasAccess) {
+				console.log("user requested invalid event");
+				res.status(400).send();
+				return;
+			}
+
+			// return event with id belonging to logged in user
+			var callback = function(err, event) {
+				if (err) {
+					console.log("error updating event: ", err);
+				} else if (event) {
+					events.getEventByID(event.id, function(err, o) {
+						if (o) {
+							res.json(o);
+						} else {
+							res.status(400).send();
+						}
+					});
+				} else {
+					res.status(400).send();
+				}
+			};
+
+			events.updateEvent(eventData.id, eventData, callback);
+		});
+	}
+});
+
+router.post('/api/eventPic', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		events.userHasAccessToEvent(req.session.user.username, req.body.id, function(hasAccess) {
+			if (!hasAccess) { res.status(400).send(); }
+
+			else {
+				// user has access to update this event
+				var errorCallback = function(err) {
+					console.log("failed to add event picture: ", err);
+					res.status(400).send(err);
+				}
+
+				var picture = req.files.img.path.replace('public/', '/');
+				// update event data with new pictures
+				var newData = {"picture": picture};
+				events.updateEvent(req.body.id, newData, function(err, o) {
+					if (err) { errorCallback(err); }
+					else {
+						// updated successfully!
+						res.json("success");
+					}
+				});
+			}
+		});
+	}
+});
+
+// delete event
+router.post('/api/deleteEvent', function(req, res) {
+	if (req.session.user == null) {
+		// not logged in, redirect to log in page
+		res.redirect('/panel');
+	}
+	else {
+		events.userHasAccessToEvent(req.session.user.username, req.body.id, function(hasAccess) {
+			// user doesn't have access to this show
+			if (!hasAccess) {
+				console.log("user requested invalid event");
+				res.status(400).send();
+				return;
+			}
+
+			events.removeEvent(req.body.id, function (e) {
+				if (e) { console.log("error removing event: ", e); res.status(400).send(e); }
+				else { res.json("success"); }
+			});
+		});
+	}
+});
+
+// catch all remaining and forward to panel
+router.get('/*', function(req, res, next) {
+  var path = require('path');
+  res.sendFile(path.resolve('public/panel/panel.html'));
 });
 
 

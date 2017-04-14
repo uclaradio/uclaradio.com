@@ -14,7 +14,9 @@ console.log("Setting up Secret DJ Panel...");
 // links to make available to managers
 var links = [];
 var managerPanel = {title: "Manager Panel", link: "/panel/manager"};
+var eventsPanel = {title: "Events Panel", link: "/panel/events"};
 links.push(managerPanel);
+links.push(eventsPanel);
 
 /***** Create Manager Privilege *****/
 
