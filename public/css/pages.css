@@ -129,3 +129,7 @@ body {
 .demo-card-wide > .mdl-card__title.rivendell-library {
 	background: url('/img/musiclibrary.png') center / cover;
 }
+
+.demo-card-wide > .mdl-card__title.show-nominations {
+	background: url('/img/clapping.jpg') center / cover;
+}

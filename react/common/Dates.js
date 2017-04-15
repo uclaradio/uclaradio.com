@@ -1,9 +1,9 @@
 // Dates.js
 // helper functions for date/time elements
 
-var mod = {};
+var dates = {};
 
-mod.dayFromVar = function(day) {
+dates.dayFromVar = function(day) {
   switch (day) {
     case 'Mon':
       return 'Monday';
@@ -24,6 +24,30 @@ mod.dayFromVar = function(day) {
   }
 };
 
+<<<<<<< HEAD
+=======
+dates.abbreviatedDay = function(day) {
+  switch (day) {
+    case 'monday':
+      return 'Mon';
+    case 'tuesday':
+      return 'Tue';
+    case 'wednesday':
+      return 'Wed';
+    case 'thursday':
+      return 'Thu';
+    case 'friday':
+      return 'Fri';
+    case 'saturday':
+      return 'Sat';
+    case 'sunday':
+      return 'Sun';
+    default:
+      return '';
+  }
+};
+
+>>>>>>> 6621c3f38b662ec4038e5698c4b4f9a5c1f03733
 mod.numberOfDaysFromMonth = function(month){
   switch (month){
     case 'January':
@@ -87,10 +111,15 @@ mod.numberFromMonth = function(month){
 }
 
 mod.availableDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+<<<<<<< HEAD
 mod.availableTimes = ['12am', '1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am',
                         '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm'];
 mod.availableMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
                         'October', 'November', 'December'];
+=======
+mod.availableTimes = ['12am', '1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm'];
+mod.availableMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+>>>>>>> 6621c3f38b662ec4038e5698c4b4f9a5c1f03733
 
 
-module.exports = mod;
+module.exports = dates;
