@@ -32,6 +32,7 @@ const parser = new xml2js.Parser();
 const rivendell = {}; 
 
 const rivendellDumpArray = [];
+const songList = {};
 const songs = [];
 
 rivendell.getSongs = function(callback) {
@@ -70,9 +71,17 @@ rivendell.getSongs = function(callback) {
         } 
         songs.push(song);
       } // end of rivendellDump loop
-      callback(null, songs);
+
+      // Get modified date of rivendell.xml
+      songList.songs = songs;
+      const stats =  fs.statSync(__dirname + '/rivendell.xml');
+      const mtime = new Date(stats.mtime).toString();
+      
+      songList.time = mtime; 
+      callback(null, songList);
     }); // end of parser
   }); // end of readFile
 };
+
 
 module.exports = rivendell; 

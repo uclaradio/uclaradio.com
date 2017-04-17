@@ -14,6 +14,8 @@ const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
 
 // Boostrap Components
 const Grid = require('react-bootstrap').Grid;
+const Well = require('react-bootstrap').Well;
+const Alert = require('react-bootstrap').Alert;
 
 // Table Components
 const Reactable = require('reactable');
@@ -26,7 +28,9 @@ const ElrondPage = React.createClass({
       <div className="panelPage">
         <Grid>
           <PanelLinksNavbar />
-          <RivendellTable />
+          <Well>
+            <RivendellTable />
+          </Well>
         </Grid>
       </div>
     );
@@ -44,7 +48,7 @@ const RivendellTable = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(o) {
-        this.setState({songs: o.songs, fetching: false});
+        this.setState({songs: o.songs, fetching: false, lastUpdated: o.time});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.urls.url, status, err.toString());
@@ -63,7 +67,12 @@ const RivendellTable = React.createClass({
             <Spinner spinnerName='three-bounce' noFadeIn />
           </div>
           :
-          <Table className="table" id="table" data={this.state.songs} filterable={['title', 'artist', 'album', 'group']} itemsPerPage={100} />
+          <div>
+            <div className="centered">
+              <Alert bsStyle="warning"><strong>Last Updated:</strong> {this.state.lastUpdated}</Alert>
+            </div>
+            <Table className="table" id="table" data={this.state.songs} filterable={['title', 'artist', 'album', 'group']} itemsPerPage={100} />
+          </div>
         }
       </div>
     );

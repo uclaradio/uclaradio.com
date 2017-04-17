@@ -621,7 +621,7 @@ router.get('/api/songs', function(req, res) {
   else {
     rivendell.getSongs(function(err, o) {
       if (o) {
-        res.json({songs: o});
+        res.json({songs: o.songs, time: o.time});
       }
       else {
         res.status(400).send();
