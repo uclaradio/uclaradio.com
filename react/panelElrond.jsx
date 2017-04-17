@@ -8,15 +8,17 @@ const urls = {
   url: "/panel/api/songs"
 };
 
+
 // Panel Elements
 const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
 
 // Boostrap Components
 const Grid = require('react-bootstrap').Grid;
 
-// Reactable
+// Table Components
 const Reactable = require('reactable');
 const Table = Reactable.Table;
+var Spinner = require('react-spinkit');
 
 const ElrondPage = React.createClass({
   render: function() {
@@ -33,7 +35,7 @@ const ElrondPage = React.createClass({
 
 const RivendellTable = React.createClass({
   getInitialState: function() {
-    return {songs: []};
+    return {songs: [], fetching: true};
   },
 
   loadDataFromServer: function() {
@@ -42,7 +44,7 @@ const RivendellTable = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(o) {
-        this.setState({songs: o.songs});
+        this.setState({songs: o.songs, fetching: false});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.urls.url, status, err.toString());
@@ -55,7 +57,15 @@ const RivendellTable = React.createClass({
   },
   render: function() {
     return (
-      <Table className="table" id="table" data={this.state.songs} filterable={['Title', 'Artist', 'Album', 'Group']} itemsPerPage={100} />
+      <div>
+        { this.state.fetching ? 
+          <div className="centered">
+            <Spinner spinnerName='three-bounce' noFadeIn />
+          </div>
+          :
+          <Table className="table" id="table" data={this.state.songs} filterable={['title', 'artist', 'album', 'group']} itemsPerPage={100} />
+        }
+      </div>
     );
   }
 });

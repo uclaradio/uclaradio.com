@@ -52,19 +52,19 @@ rivendell.getSongs = function(callback) {
         const song = {}; 
         for (let field of songInfo) {
           if (field.$.name === "TITLE") {
-            song.Title = field._; 
+            song.title = field._; 
           }
 
           if (field.$.name === "ARTIST") {
-            song.Artist = field._; 
+            song.artist = field._; 
           }
 
           if (field.$.name === "ALBUM") {
-            song.Album = field._; 
+            song.album = field._; 
           }
 
           if (field.$.name === "GROUP_NAME") {
-            song.Group = field._; 
+            song.group = field._; 
           }
 
         } 

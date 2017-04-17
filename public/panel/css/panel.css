@@ -281,3 +281,51 @@ input[type="file"] {
 table {
   width: 100%;
 }
+
+/*** Elrond Styling ***/
+.table {
+  border: 1px solid #AAA;
+  backgournd-color: blue;
+}
+
+.reactable-data {
+  background-color: #FFF;
+}
+
+.reactable-column-header {
+  background-color: #4caf50;
+  color: #FFF;
+  text-transform: uppercase;
+}
+
+.reactable-pagination {
+  text-align: center;
+}
+.reactable-page-button, .reactable-next-page, .reactable-previous-page {
+  margin-left: 5px;
+  margin-right: 2px;
+  margin-bottom: 6px;
+  padding: 5px;
+  width: 30px;
+  cursor: pointer;
+  color: #000;
+  border: 1px solid #AAA;
+  background-color: #EEE;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.reactable-page-button:hover {
+  text-decoration: none;
+  color: #333;
+  background-color: #DDD;
+}
+
+.reactable-filter-input {
+  width: 95%;
+  margin-left: 10px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-right: 20px;
+  padding: 5px;
+}
