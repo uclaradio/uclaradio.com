@@ -13,6 +13,8 @@ $facebook: #3b5998;
 .header {
   font-size: 15px;
   font-weight: lighter;
+  position: relative; 
+  display: inline-block;
 }
 
 .blurbStyle {
@@ -40,6 +42,12 @@ $facebook: #3b5998;
   position: relative;
 }
 
+.blurb-body {
+  padding: 5px; 
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .showTitle {
   font-size: 20px;
   font-weight: lighter;
@@ -57,13 +65,15 @@ $facebook: #3b5998;
 }
 
 .dot {
-  background-color: grey;
+  background-color: rgba(255,0,0,0.45);
   width: 10px;
   height: 10px;
   border-radius: 50%;
   display: inline-block;
   margin-left: 5px;
+  margin-right: 10px;
   position: relative;
+  left: 1;
 }
 
 .fa {

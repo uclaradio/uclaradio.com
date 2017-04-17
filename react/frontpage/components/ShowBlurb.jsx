@@ -54,12 +54,14 @@ var ShowBlurb = React.createClass({
     return (
       <div className="showBlurb">
         
-        <div className="dot" style={{backgroundColor: 'rgba(255,0,0,0.45)', left: 1, marginRight: 10}}></div>
-        <h1 className="header" style={{position: "relative", display: "inline-block"}}>SELECTED SHOW: </h1>
+        <div className="dot"></div>
+        <h1 className="header">SELECTED SHOW: </h1>
         <div className="blurb">
-          <div style={{ padding: '5px', marginLeft: '5px', marginRight: '5px' }}>
+          <div className="blurb-body">
             <h1 className="showTitle">{this.props.show.title}</h1>
-            <RectImage maxWidth="350px" src={this.props.show.picture || defaultShowPic} />
+            <Link to={this.urlFromShow(this.props.show)}>
+              <RectImage maxWidth="350px" src={this.props.show.picture || defaultShowPic} />
+            </Link>
             <p className="djs">{this.djString(this.props.show.djs || {})}</p>
             <div className="lineStyle"/>
             <div className="lineStyle"/>
