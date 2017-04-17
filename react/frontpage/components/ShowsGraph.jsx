@@ -82,6 +82,35 @@ const ShowsGraph = React.createClass({
     return e;
   },
 
+  lateNightDay: function(day) {
+    var displayDay;
+
+    switch (day) {
+      case "sunday":
+        displayDay = "monday";
+        break;
+      case "monday":
+        displayDay = "tuesday";
+        break;
+      case "tuesday":
+        displayDay = "wednesday";
+        break;
+      case "wednesday":
+        displayDay = "thursday";
+        break;
+      case "thursday":
+        displayDay = "friday";
+        break;
+      case "friday":
+        displayDay = "saturday";
+        break;
+      case "saturday":
+        displayDay = "sunday";
+        break;
+    }
+    return displayDay;
+  },
+
   render: function() {
 
     var dayTitles = week.map((day) => {
@@ -121,39 +150,14 @@ const ShowsGraph = React.createClass({
       );
     }
 
-    if (end < 5) {
+    if (end < 5) { // if we have late-night shows to display
       for (hour = 0; hour < end+1; hour++) {
         var hourString = Dates.availableTimes[hour];
         showBlocks.push( 
           <div className="hourBlocks">
             <p className="timeStyle" style={{width: dayWidth}}>{hourString}</p>
             { week.map((day) => {
-              var displayDay;
-
-              switch (day) {
-                case "sunday":
-                  displayDay = "monday";
-                  break;
-                case "monday":
-                  displayDay = "tuesday";
-                  break;
-                case "tuesday":
-                  displayDay = "wednesday";
-                  break;
-                case "wednesday":
-                  displayDay = "thursday";
-                  break;
-                case "thursday":
-                  displayDay = "friday";
-                  break;
-                case "friday":
-                  displayDay = "saturday";
-                  break;
-                case "saturday":
-                  displayDay = "sunday";
-                  break;
-              }
-
+              var displayDay = this.lateNightDay(day);
               var show = this.state.schedule && this.state.schedule[displayDay][hour];
               return (
                 <ShowBlock isValidShow={(show && show.title)}
