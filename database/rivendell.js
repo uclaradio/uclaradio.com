@@ -46,29 +46,28 @@ rivendell.getSongs = function(callback) {
         callback(err);
         return;
       }
-      console.log(data);
       rivendellDump = result.resultset.row;
       for (let entry of rivendellDump) {
         const songInfo = entry.field;
         const song = {}; 
         for (let field of songInfo) {
           if (field.$.name === "TITLE") {
-            song.title = field._; 
+            song.Title = field._; 
           }
 
           if (field.$.name === "ARTIST") {
-            song.artist = field._; 
+            song.Artist = field._; 
           }
 
           if (field.$.name === "ALBUM") {
-            song.album = field._; 
+            song.Album = field._; 
           }
 
           if (field.$.name === "GROUP_NAME") {
-            song.groupName = field._; 
+            song.Group = field._; 
           }
 
-        }
+        } 
         songs.push(song);
       } // end of rivendellDump loop
       callback(null, songs);

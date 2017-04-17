@@ -1,24 +1,24 @@
 // elrond.html
 // View what is currently on Rivendell
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
-var urls = {
+const urls = {
   url: "/panel/api/songs"
 };
 
 // Panel Elements
-var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
+const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
 
 // Boostrap Components
-var Grid = require('react-bootstrap').Grid;
+const Grid = require('react-bootstrap').Grid;
 
-// Fixed Data Table
-import {Table, Column, Cell} from 'fixed-data-table';
+// Reactable
+const Reactable = require('reactable');
+const Table = Reactable.Table;
 
-// TODO: Convert to ES6
-var ElrondPage = React.createClass({
+const ElrondPage = React.createClass({
   render: function() {
     return (
       <div className="panelPage">
@@ -31,44 +31,37 @@ var ElrondPage = React.createClass({
   }
 });
 
-class RivendellTable extends React.Component {
- 
-  constructor(props) {
-    super(props);
-    this.state = {
-      rows : []
-    };
-  }
-  
-  componentDidMount() {
-    // TODO: Obtain song data via: 
-    /*
-    axios.get('http://…').then(data => {
-      this.setState( { name: data.blah } );
+const RivendellTable = React.createClass({
+  getInitialState: function() {
+    return {songs: []};
+  },
+
+  loadDataFromServer: function() {
+    $.ajax({
+      url: urls.url,
+      dataType: 'json',
+      cache: false,
+      success: function(o) {
+        this.setState({songs: o.songs});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.urls.url, status, err.toString());
+      }.bind(this)
     });
-    */
-  }
+  },
 
-  render() {
-      return (
-        <Table
-          height={40+((this.state.rows.length+1) * 30)}
-          width={1150}
-          rowsCount={this.state.rows.length}
-          rowHeight={30}
-          headerHeight={30}
-          rowGetter={function(rowIndex) {return this.state.rows[rowIndex]; }.bind(this)}>
-          <Column dataKey="title" width={200} label="First Name" />
-          <Column  dataKey="artist" width={200} label="Last Name" />
-          <Column  dataKey="album" width={400} label="e-mail" />
-          <Column  dataKey="groupName" width={300} label="Country" />
-        </Table>
-      );
+  componentDidMount: function() {
+    this.loadDataFromServer();
+  },
+  render: function() {
+    return (
+      <Table className="table" id="table" data={this.state.songs} filterable={['Title', 'Artist', 'Album', 'Group']} itemsPerPage={100} />
+    );
   }
-}
-
+});
 
 ReactDOM.render(
-  <ElrondPage urls={urls} />,
+  <ElrondPage />,
   document.getElementById('content')
 );
+
