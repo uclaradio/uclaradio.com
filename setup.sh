@@ -8,6 +8,7 @@ echo 'Installing macOS packages...'
 brew update
 brew install node
 brew install mongodb
+brew install grunt
 
 # storage for mongodb
 sudo mkdir -p /data/db
