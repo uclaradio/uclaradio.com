@@ -8,7 +8,6 @@ var accounts = require('../database/accounts');
 var shows = require('../database/shows');
 var faqs = require('../database/faqs');
 var messages = require('../database/messages');
-var rivendell = require('../database/rivendell');
 
 // Image compression module
 const Jimp = require('jimp');
@@ -366,7 +365,7 @@ router.post('/api/user', function(req, res) {
   }
 });
 
-var defaultLinks = [{"title": "FAQ", "link": "/panel/faq"}, {"title": "Elrond", "link": "/panel/elrond"}];
+var defaultLinks = [{"title": "FAQ", "link": "/panel/faq"}];
 router.get('/api/userlinks', function(req, res) {
   if (req.session.user == null) {
     res.json({"loggedin": false, "links":defaultLinks});
@@ -595,36 +594,6 @@ router.post('/api/showPic', function(req, res) {
             res.json("success");
           }
         });
-      }
-    });
-  }
-});
-
-/** ELROND **/
-
-router.get('/elrond', function(req, res) {
-  if (req.session.user == null) {
-    // not logged in, redirect to log in page
-    res.redirect('/panel');
-  }
-  else {
-    var path = require('path');
-    res.sendFile(path.resolve('public/panel/elrond.html'));
-  }
-});
-
-router.get('/api/songs', function(req, res) {
-  if (req.session.user == null) {
-    // not logged in, redirect to log in page
-    res.redirect('/panel');
-  }
-  else {
-    rivendell.getSongs(function(err, o) {
-      if (o) {
-        res.json({songs: o.songs, time: o.time});
-      }
-      else {
-        res.status(400).send();
       }
     });
   }

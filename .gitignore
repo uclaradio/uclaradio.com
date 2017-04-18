@@ -10,5 +10,3 @@ npm-debug.log
 package.json
 public/js/react/
 data/*
-database/rivendell.xml
-
