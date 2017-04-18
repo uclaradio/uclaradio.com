@@ -15,6 +15,11 @@ $link-hover-color: rgba(white, 0.9);
 $link-image-hover-color: rgba(white, 0.6);
 $link-image-active-color: rgba(white, 0.35);
 
+$mixcloud: #273a4b;
+$soundcloud: #ff8800;
+$tumblr: #35465c;
+$facebook: #3b5998;
+
 /** Animations **/
 
 @mixin fade($start-opacity, $end-opacity) {
@@ -55,3 +60,30 @@ $link-image-active-color: rgba(white, 0.35);
   -o-animation: $animationName $duration; /* Opera < 12.1 */
   animation: $animationName $duration;
 }
+
+// social media link styling
+
+.fa {
+  margin-right: 7pt;
+}
+
+.facebookLogo:hover {
+  color: $facebook !important;
+  opacity: 0.95;
+}
+
+.tumblrLogo:hover {
+  color: $tumblr !important;
+  opacity: 0.95;
+}
+
+.soundcloudLogo:hover {
+  color: $soundcloud !important;
+  opacity: 0.95;
+}
+
+.mixcloudLogo:hover {
+  color: $mixcloud !important;
+  opacity: 0.95;
+}
+

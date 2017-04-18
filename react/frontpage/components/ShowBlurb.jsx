@@ -9,6 +9,7 @@ import { Link } from 'react-router';
 
 // styling
 require('./ShowBlurb.scss');
+require('../_common.scss');
 
 const defaultShowPic = "/img/radio.png";
 

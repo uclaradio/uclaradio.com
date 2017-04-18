@@ -4,12 +4,6 @@ ShowsBlurb.scss
 Sass styling for show blurb on shows page (with grid)
 **/
 
-$mixcloud: #273a4b;
-$soundcloud: #ff8800;
-$tumblr: #35465c;
-$facebook: #3b5998;
-
-
 .header {
   font-size: 15px;
   font-weight: lighter;
@@ -74,28 +68,4 @@ $facebook: #3b5998;
   margin-right: 10px;
   position: relative;
   left: 1;
-}
-
-.fa {
-  margin-right: 7pt;
-}
-
-.facebookLogo:hover {
-  color: $facebook !important;
-  opacity: 0.95;
-}
-
-.tumblrLogo:hover {
-  color: $tumblr !important;
-  opacity: 0.95;
-}
-
-.soundcloudLogo:hover {
-  color: $soundcloud !important;
-  opacity: 0.95;
-}
-
-.mixcloudLogo:hover {
-  color: $mixcloud !important;
-  opacity: 0.95;
 }
