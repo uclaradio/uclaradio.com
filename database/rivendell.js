@@ -31,9 +31,6 @@ const xml2js = require('xml2js');
 const parser = new xml2js.Parser();
 const rivendell = {}; 
 
-const rivendellDumpArray = [];
-const songList = {};
-const songs = [];
 
 rivendell.getSongs = function(callback) {
   fs.readFile(__dirname + '/rivendell.xml', function(err, data) {
@@ -41,6 +38,10 @@ rivendell.getSongs = function(callback) {
       callback(err);
       return;
     }
+
+    const rivendellDumpArray = [];
+    const songList = {};
+    const songs = [];
 
     parser.parseString(data, function (err, result) {
       if (err) {
