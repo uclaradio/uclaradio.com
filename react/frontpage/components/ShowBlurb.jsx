@@ -9,6 +9,7 @@ import { Link } from 'react-router';
 
 // styling
 require('./ShowBlurb.scss');
+require('../_common.scss');
 
 const defaultShowPic = "/img/radio.png";
 
@@ -54,21 +55,28 @@ var ShowBlurb = React.createClass({
     return (
       <div className="showBlurb">
         
-        <div className="dot" style={{backgroundColor: 'rgba(255,0,0,0.45)', left: 1, marginRight: 10}}></div>
-        <h1 className="header" style={{position: "relative", display: "inline-block"}}>SELECTED SHOW: </h1>
-        <Link to={this.urlFromShow(this.props.show)}>
-          <div className="blurb">
-            <div style={{ padding: '5px', marginLeft: '5px', marginRight: '5px' }}>
-              <h1 className="showTitle">{this.props.show.title}</h1>
+        <div className="dot"></div>
+        <h1 className="header">SELECTED SHOW: </h1>
+        <div className="blurb">
+          <div className="blurb-body">
+            <h1 className="showTitle">{this.props.show.title}</h1>
+            <Link to={this.urlFromShow(this.props.show)}>
               <RectImage maxWidth="350px" src={this.props.show.picture || defaultShowPic} />
-              <p className="djs">{this.djString(this.props.show.djs || {})}</p>
-              <div className="lineStyle"/>
-              <div className="lineStyle"/>
-              <p className="time">{this.props.show.day.toUpperCase()} @ {this.props.show.time.toUpperCase()}<span style={{float: "right"}}>{this.props.show.genre}</span></p>
-              <p className="blurbText">{this.props.show.blurb}</p>
+            </Link>
+            <p className="djs">{this.djString(this.props.show.djs || {})}</p>
+            <div className="lineStyle"/>
+            <div className="lineStyle"/>
+            <p className="time">{this.props.show.day.toUpperCase()} @ {this.props.show.time.toUpperCase()}<span style={{float: "right"}}>{this.props.show.genre}</span></p>
+            <div className='social-icons'>
+              {this.props.show.facebook && <a className='facebookLogo' href={this.props.show.facebook} target='_blank'><i className='fa fa-facebook-square fa-lg' aria-hidden='true'></i></a>}
+              {this.props.show.tumblr && <a className='tumblrLogo' href={this.props.show.tumblr} target='_blank'><i className='fa fa-tumblr-square fa-lg' aria-hidden='true'></i></a>}
+              {this.props.show.soundcloud && <a className='soundcloudLogo' href={this.props.show.soundcloud} target='_blank'><i className='fa fa-soundcloud fa-lg' aria-hidden='true'></i></a>}
+              {this.props.show.mixcloud && <a className='mixcloudLogo' href={this.props.show.mixcloud} target='_blank'><i className='fa fa-mixcloud fa-lg' aria-hidden='true'></i></a>}
             </div>
-          </div> 
-        </Link>
+            <p className="blurbText">{this.props.show.blurb}</p>
+            <Link to={this.urlFromShow(this.props.show)}>[CLICK FOR FULL SHOW PAGE]</Link>
+          </div>
+        </div> 
       </div>
     );
   
