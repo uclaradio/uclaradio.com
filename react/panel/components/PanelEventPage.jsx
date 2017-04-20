@@ -39,9 +39,7 @@ var PanelEventPage = React.createClass({
     );
   }
 });
-
-// TODO: Finish front end for updating and deleting event
-// Change from Show => Event 
+ 
 var Event = React.createClass({
   getInitialState: function() {
     return {event: {month: 'January', date: 1}, nameVerified: false, publicVerified: false, artVerified: false};
