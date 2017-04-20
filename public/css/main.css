@@ -3,67 +3,59 @@
   bottom: 0px;
 }
 
-.album_artwork
-{
+.album_artwork {
   width: 100px;
 }
 
-.dj_blurb
-{
-   font-family: 'apercuregular', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-   font-style: normal;
+.dj_blurb {
+  font-family: 'apercuregular', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-style: normal;
 }
 
 #blurb-image {
-	width: 100%;
+  width: 100%;
 }
 
-.slick-prev{
+.slick-prev {
 }
 
-.slick-slide
-{
+.slick-slide {
   height: 231px;
 }
 
-#dj_image
-{
+#dj_image {
   float: left;
   padding-left: 1%;
   padding-top: 1%;
   padding-bottom: 1%;
 }
 
-#carousel-container
-{
-  height:221px;
+#carousel-container {
+  height: 221px;
 }
 
-.twitter, .instagram, .facebook
-{
-  margin:5px;
+.twitter,
+.instagram,
+.facebook {
+  margin: 5px;
 }
 
-#c_data
-{
+#c_data {
   width: 80%;
   font-size: 18px;
   margin-left: auto;
   margin-right: auto;
   font-family: 'apercu_lightregular';
-
 }
 
-#current_track
-{
+#current_track {
   width: 100px;
 }
 
-#current_info
-{
-  display:none;
+#current_info {
+  display: none;
   font: black !important;
-/*  background-color:rgba(0,0,0,0.5);
+  /*  background-color:rgba(0,0,0,0.5);
 *//*  -webkit-box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.75);
   box-shadow: 0px 0px 15px 15px rgba(0,0,0,0.75);*/
@@ -72,24 +64,21 @@
   margin-right: auto;
 }
 
-#blurb
-{
+#blurb {
   color: black;
   float: right;
   height: 100%;
   /*font-family: Lato, sans-serif;*/
 }
 
-.form-control
-{
-	font-style: normal;
-	font-weight: normal;
+.form-control {
+  font-style: normal;
+  font-weight: normal;
 }
 
-#new-blurb-submit
-{
-	font-style: normal;
-	font-weight: normal;
+#new-blurb-submit {
+  font-style: normal;
+  font-weight: normal;
 }
 
 body {
@@ -100,30 +89,25 @@ body {
   background-size: cover;
 }
 
-
-
-mark
-{
+mark {
   color: white;
 }
 
-#dj_image img
-{
+#dj_image img {
   width: 100%;
   height: 100%;
   margin-left: -25px;
 }
 
-
 .container {
-  background: rgba(245,245,245,0.5);
+  background: rgba(245, 245, 245, 0.5);
   padding: 50px;
   border-radius: 3px;
   margin: 20px auto;
 }
 
 .form-container {
-  background: rgba(245,245,245,0.5);
+  background: rgba(245, 245, 245, 0.5);
   padding: 25px;
   border-radius: 3px;
   margin: 20px auto;
@@ -131,7 +115,7 @@ mark
 }
 
 .container #logo {
-  background: rgba(0,0,0,0.0); /* transparent */
+  background: rgba(0, 0, 0, 0.0); /* transparent */
 }
 
 #logo {
@@ -156,7 +140,7 @@ mark
 
 @media only screen and (max-width: 760px) {
   #sotmWide {
-    width: 100%
+    width: 100%;
   }
 }
 
@@ -172,27 +156,23 @@ mark
   cursor: pointer;
 }
 
-#pledge-drive
-{
-	background: linear-gradient(to top right, rgb(68, 144, 183), rgb(176, 70, 89));
-	color: white;
-	font-size: 100px;
+#pledge-drive {
+  background: linear-gradient(to top right, rgb(68, 144, 183), rgb(176, 70, 89));
+  color: white;
+  font-size: 100px;
 }
 
 @media (max-width: 1080px) {
-	#pledge-drive
-	{
-		font-size: 60px;
-	}
+  #pledge-drive {
+    font-size: 60px;
+  }
 }
 
-#description
-{
+#description {
   font-size: 16px;
 }
 
-#genre h3
-{
+#genre h3 {
   font-size: 20px;
 }
 
@@ -253,11 +233,11 @@ mark
   margin: auto;
 }
 
-#blog-link{
+#blog-link {
   text-align: left;
   text-decoration: none;
   font-size: 34px;
-    margin-left: -15px;
+  margin-left: -15px;
 }
 
 .bott-button {
@@ -285,16 +265,17 @@ a:hover {
 
 /* small */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  #on_air
-  {
+  #on_air {
     font-size: 30px;
   }
 
-  #SHOW_TITLE, #DJ_NAME, #BLURB {font-size: 20px !important;}
+  #SHOW_TITLE,
+  #DJ_NAME,
+  #BLURB {
+    font-size: 20px !important;
+  }
 
-
-  #dj_image img
-  {
+  #dj_image img {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
@@ -310,8 +291,8 @@ a:hover {
   #playlist-link {
     margin-left: 0px;
   }
-  #on_air
-  {
+
+  #on_air {
     font-size: 40px;
   }
 }
@@ -321,7 +302,6 @@ a:hover {
     margin-left: -30px;
   }
 }
-
 
 #social {
   text-align: right;
@@ -351,51 +331,47 @@ a:hover {
 
 .pop-button:active {
   -webkit-transform: translate(+4px, +4px);
-      -ms-transform: translate(+4px, +4px);
-          transform: translate(+4px, +4px);
+  -ms-transform: translate(+4px, +4px);
+  transform: translate(+4px, +4px);
 }
 
 @media only screen and (max-width: 500px) {
+  #on_air {
+    font-size: 20px;
+  }
 
-    #on_air
-    {
-      font-size: 20px;
-    }
-    #SHOW_TITLE, #DJ_NAME, #BLURB {font-size: 15px !important;}
+  #SHOW_TITLE,
+  #DJ_NAME,
+  #BLURB {
+    font-size: 15px !important;
+  }
 
+  #c_data {
+    width: 50%;
+  }
 
-    #c_data
-    {
-      width: 50%;
-    }
+  .album_artwork {
+    width: 100px;
+  }
 
-    .album_artwork
-    {
-      width: 100px;
-    }
-
-    .slick-prev:before, .slick-next:before { font-size: 80px !important;}
-
-
-
-
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 80px !important;
+  }
 }
 
 /* center social and other links for ipad view */
-@media only screen and (max-width: 767px){
+@media only screen and (max-width: 767px) {
 
   /* helper class, use to tag things that should be desktop-only */
-  .desktop-only{
+  .desktop-only {
     display: none !important;
   }
-
-
 }
 
 /* Mobile only stuff */
-@media only screen and (max-width: 1200px){
-
-  #social{
+@media only screen and (max-width: 1200px) {
+  #social {
     padding-bottom: 10px;
     text-align: center;
   }
@@ -405,25 +381,21 @@ a:hover {
     margin-bottom: 20px;
   }
 
-  .slick-dots
-  {
+  .slick-dots {
     display: none !important;
   }
 
-  #dj_image img
-  {
+  #dj_image img {
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
   }
 
-  #blurb
-  {
+  #blurb {
     width: 100%;
     margin-left: 0px;
     text-align: center;
   }
-
 
   #billboard {
     font-size: 50px;
@@ -434,6 +406,7 @@ a:hover {
     padding-bottom: 10px;
     margin-left: 0px;
   }
+
   #playlist-link {
     text-align: center;
     padding-bottom: 10px;

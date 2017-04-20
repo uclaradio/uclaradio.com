@@ -110,7 +110,7 @@ var FAQ = React.createClass({
       var faqs = this.state.tempFAQs.map(function(question, i) {
         return (<QuestionEdit key={i} qid={i} question={question.question} answer={question.answer}
                   handleUpdateQuestion={updateQuestion} handleUpdateAnswer={updateAnswer} handleDelete={deleteQuestion} />
-              );
+        );
       });
     }
     else {
@@ -118,7 +118,7 @@ var FAQ = React.createClass({
         return (<Panel header={faq.question} eventKey={i} key={i}>
                   {faq.answer}
                 </Panel>
-              );
+        );
       });
     }
     return (

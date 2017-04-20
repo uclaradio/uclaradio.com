@@ -24,36 +24,30 @@ var ShowSchema = new mongoose.Schema({
   picture: String, // relative url to image file
   thumbnail: String,
   public: Boolean,
-  // collection of page links (social media)
-  pages: [{
-    title: String,
-    link: String
-  }],
-  // collection of specific episodes (probably many)
-  episodes: [{
-    date: Date,
-    title: String,
-    picture: String,
-    link: String,
-    description: String
-  }]
+  facebook: String,
+  tumblr: String,
+  soundcloud: String,
+  mixcloud: String
 });
 ShowSchema.index({ id: 1});
 var ShowModel = mongoose.model('shows', ShowSchema);
 
 shows.webSafeShow = function(show) {
   return {title: show.title,
-             id: show.id,
-            day: show.day,
-           time: show.time,
-            djs: show.djs,
-          genre: show.genre,
-          blurb: show.blurb,
-        picture: show.picture,
-      thumbnail: show.thumbnail,
-         public: show.public,
-          pages: show.pages,
-       episodes: show.episodes};
+    id: show.id,
+    day: show.day,
+    time: show.time,
+    djs: show.djs,
+    genre: show.genre,
+    blurb: show.blurb,
+    picture: show.picture,
+    thumbnail: show.thumbnail,
+    public: show.public,
+    facebook: show.facebook,
+    tumblr: show.tumblr,
+    soundcloud: show.soundcloud,
+    mixcloud: show.mixcloud
+  };
 }
 
 
@@ -101,9 +95,9 @@ shows.addNewShow = function(title, day, time, djs, callback) {
 shows.updateShow = function(id, newData, callback) {
   var update = function() {
     ShowModel.findOneAndUpdate({'id': id}, newData, {upsert:false, new:true}, function(err, o) {
-          if (err) { callback(err); }
-          else { callback(null, shows.webSafeShow(o)); }
-      });
+      if (err) { callback(err); }
+      else { callback(null, shows.webSafeShow(o)); }
+    });
   }
   ShowModel.findOne({id: id}, function(err, o) {
     if (o) {

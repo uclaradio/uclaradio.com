@@ -40,7 +40,7 @@ const ShowInfo = React.createClass({
   },
   render: function() {
     if (!this.props.show) {
-      return <div classname="showInfoEmpty"></div>;
+      return <div className="showInfoEmpty"></div>;
     } else {
       return (
         <div className="showInfo">
@@ -57,7 +57,7 @@ const ShowInfo = React.createClass({
                 <p className="showTitle">{this.props.show.title || ""}</p>
                 <p className="djs">{this.djString(this.props.show.djs || {})}</p>
               </div>
-              
+
               { /*<span className="genre">{this.truncateName(this.props.show.genre || "", 18)}</span> */ }
             </div>
           </Link>

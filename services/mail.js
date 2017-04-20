@@ -6,13 +6,13 @@ var mail = {};
 
 // create reusable transporter object using the default SMTP transport
 var smtpConfig = {
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true, // use SSL
-    auth: {
-        user: passwords.emailuser,
-        pass: passwords.emailpass
-    }
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // use SSL
+  auth: {
+    user: passwords.emailuser,
+    pass: passwords.emailpass
+  }
 };
 var transporter = nodemailer.createTransport(smtpConfig);
 
@@ -38,15 +38,15 @@ mail.send = function(to, subject, body) {
 
   // setup e-mail data with unicode symbols
   var mailOptions = {
-      from: '"UCLA Radio Web Dept." <radio.web@media.ucla.edu>',
-      to: to,
-      subject: subject,
-      text: body,
+    from: '"UCLA Radio Web Dept." <radio.web@media.ucla.edu>',
+    to: to,
+    subject: subject,
+    text: body,
   };
 
   transporter.sendMail(mailOptions, function(error, info) {
-    if(error){
-        return console.log(error);
+    if (error) {
+      return console.log(error);
     }
     console.log('Message sent: ' + info.response);
   });

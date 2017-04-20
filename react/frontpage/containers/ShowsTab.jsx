@@ -4,22 +4,24 @@
 import { connect } from 'react-redux';
 
 import { fetchUpdatedShows } from '../actions/shows';
-import ShowList from '../components/ShowList.jsx';
+import ShowsContent from '../components/ShowsContent.jsx';
 
 const mapStateToProps = (state) => ({
-	shows: state.shows.shows,
-  fetching: state.shows.fetching
+  shows: state.shows.shows,
+  fetching: state.shows.fetching,
+  currentShowID: state.shows.nowPlayingID,
+  spotlightShowID: state.shows.spotlightID
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	updateShows: () => {
-		fetchUpdatedShows(dispatch);
-	}
+  updateShows: () => {
+    fetchUpdatedShows(dispatch);
+  }
 });
 
 const ShowsTab = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(ShowList);
+  mapStateToProps,
+  mapDispatchToProps
+)(ShowsContent);
 
 export default ShowsTab;

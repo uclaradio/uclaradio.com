@@ -13,6 +13,9 @@ module.exports = {
   "plugins": ["react"],
   "rules": {
     "indent": ["error", 2],
+<<<<<<< HEAD
     "eol-last": ["error", "always"],
+=======
+>>>>>>> 962ff9cb7b6869348db34a8304acab079d693e6d
   }
 };

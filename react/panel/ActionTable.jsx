@@ -77,7 +77,7 @@ var ActionButtons = React.createClass({
 *  @prop rows -> [{value: x, string1: x, string2: x, actionsDisabled: bool}]
 */
 var ActionTable = React.createClass({
-	render: function() {
+  render: function() {
     var act1 = this.props.onAccept;
     var glyph = this.props.glyph;
     var act2 = this.props.onReject;
@@ -108,9 +108,9 @@ var ActionTable = React.createClass({
       );
     });
 
-		return (
-			<div className="actionTable">
-				<Table condensed hover>
+    return (
+      <div className="actionTable">
+        <Table condensed hover>
           <thead>
             <tr>
               <th>{this.props.string1}</th>
@@ -121,9 +121,9 @@ var ActionTable = React.createClass({
             {tableBody}
           </tbody>
         </Table>
-			</div>
-		);
-	}
+      </div>
+    );
+  }
 });
 
 module.exports = ActionTable;

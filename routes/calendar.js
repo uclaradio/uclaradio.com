@@ -3,7 +3,7 @@ var router = express.Router();
 var db = require('../database/db');
 
 router.get('/', function(req, res) {
-	res.render('calendar');
+  res.render('calendar');
 });
 
 module.exports = router;

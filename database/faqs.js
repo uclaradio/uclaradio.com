@@ -16,7 +16,7 @@ var FAQModel = mongoose.model('faqs', FAQSchema);
 faqs.webSafeFAQ = function(faq) {
   return {id: faq.id,
     question: faq.question,
-      answer: faq.answer};
+    answer: faq.answer};
 }
 
 

@@ -2,26 +2,26 @@
 // action creators for actions related to frontpage shows
 
 export const updateShows = (shows) => ({
-	type: 'UPDATE_SHOWS',
-	shows: shows
+  type: 'UPDATE_SHOWS',
+  shows: shows
 });
 
 export const startFetching = () => ({
-	type: 'STARTED_FETCHING'
+  type: 'STARTED_FETCHING_SHOWS'
 });
 
 export const stopFetching = () => ({
-	type: 'STOPPED_FETCHING'
+  type: 'STOPPED_FETCHING_SHOWS'
 });
 
 export const updateNowPlaying = (showID) => ({
-	type: 'UPDATE_NOW_PLAYING',
-	showID: showID
+  type: 'UPDATE_NOW_PLAYING',
+  showID: showID
 });
 
 export const addUpdateShow = (show) => ({
-	type: 'ADD_UPDATE_SHOW',
-	show: show
+  type: 'ADD_UPDATE_SHOW',
+  show: show
 });
 
 export const updateSpotlightShow = (showID) => ({

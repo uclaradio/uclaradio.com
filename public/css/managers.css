@@ -1,13 +1,13 @@
 label {
-	width: 100%;
+  width: 100%;
 }
 
 #logo {
-	margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 body {
-	font-style: normal;
+  font-style: normal;
 }
 
 .container {
@@ -48,7 +48,7 @@ body {
 }
 
 .main {
-	height: 85%;
+  height: 85%;
 }
 
 #name {
@@ -66,10 +66,10 @@ body {
 }
 
 .pic img {
-	flex-shrink:0;
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
+  flex-shrink:0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .info {
