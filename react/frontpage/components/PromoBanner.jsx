@@ -9,6 +9,9 @@ import Slider from 'react-slick';
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
 
+
+import CountdownTimer from './CountdownTimer.jsx';
+
 import  { Link } from 'react-router';
 
 // styling
@@ -64,12 +67,14 @@ var PromoBanner = React.createClass({
       ); 
     });
 
+    const dateInFuture = new Date('2017-5-1');
     return (
-      <div className="promoBanner">
-        <Slider {...settings}>
-          {banners}
-        </Slider>
-      </div>
+      //<div className="promoBanner">
+        // <Slider {...settings}>
+          // {banners}
+          <CountdownTimer deadline={dateInFuture}/>
+        // </Slider>
+      // </div>
     );
   }
 });
