@@ -15,18 +15,45 @@ CountdownTimer:
 */
 var CountdownTimer = React.createClass({
   getInitialState: function() {
-    console.log(this.props.deadline);
+    var currentDate = new Date();
+    var timeDiff = Math.abs(this.props.deadline.getTime() - currentDate.getTime());
+    var daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
+    var hoursLeft = Math.floor(timeDiff / (1000 * 3600)) - (24 * daysLeft);
+    var minutesLeft = Math.floor(timeDiff / (1000 * 60)) - (60 * hoursLeft) - (24 * 60 * daysLeft);
+    var secondsLeft = Math.floor(timeDiff / (1000)) - (60 * minutesLeft) - (3600 * hoursLeft) - (24 * 3600 * daysLeft);
     return {
-      hours: 0
+      days: daysLeft,
+      hours: hoursLeft,
+      minutes: minutesLeft,
+      seconds: secondsLeft
     };
-
+  },
+  componentDidMount: function(){
+    this.timer = setInterval(this.tick, 1000);
+  },
+  componentWillUnmount: function(){
+    clearInterval(this.timer);
+  },
+  tick: function(){
+    var currentDate = new Date();
+    var timeDiff = Math.abs(this.props.deadline.getTime() - currentDate.getTime());
+    var daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
+    var hoursLeft = Math.floor(timeDiff / (1000 * 3600)) - (24 * daysLeft);
+    var minutesLeft = Math.floor(timeDiff / (1000 * 60)) - (60 * hoursLeft) - (24 * 60 * daysLeft);
+    var secondsLeft = Math.floor(timeDiff / (1000)) - (60 * minutesLeft) - (3600 * hoursLeft) - (24 * 3600 * daysLeft);
+    this.setState({
+      days: daysLeft,
+      hours: hoursLeft,
+      minutes: minutesLeft,
+      seconds: secondsLeft
+    });
   },
   render: function() {
-    return (
+      return (
       <div className="countdown">
         <div className="timeBlock">
           <div className="timeValue">
-            15
+            {this.state.days}
           </div>
           <div className="timeLabel">
             Days
@@ -34,7 +61,7 @@ var CountdownTimer = React.createClass({
         </div>
         <div className="timeBlock">
           <div className="timeValue">
-            2
+            {this.state.hours}
           </div>
           <div className="timeLabel">
             Hours
@@ -42,7 +69,7 @@ var CountdownTimer = React.createClass({
         </div>
         <div className="timeBlock">
           <div className="timeValue">
-            36
+            {this.state.minutes}
           </div>
           <div className="timeLabel">
             Minutes
@@ -50,7 +77,7 @@ var CountdownTimer = React.createClass({
         </div>
         <div className="timeBlock">
           <div className="timeValue">
-            3
+            {this.state.seconds}
           </div>
           <div className="timeLabel">
             Seconds

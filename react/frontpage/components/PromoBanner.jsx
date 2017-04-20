@@ -72,7 +72,7 @@ var PromoBanner = React.createClass({
       ); 
     });
 
-    const dateInFuture = new Date('2017-12-31');
+    const dateInFuture = new Date('2017-5-1');
     return (
       //<div className="promoBanner">
         // <Slider {...settings}>
