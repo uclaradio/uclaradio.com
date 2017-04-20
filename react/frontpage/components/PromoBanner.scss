@@ -1,0 +1,20 @@
+// Banner
+@import '../common';
+
+.promoBanner {
+  margin-bottom: 20pt;
+}
+
+.promoBanner .overlay {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  cursor: pointer;
+  z-index: 1; // So overlay is on top of all other promo banner divs (need this to trigger :hover) 
+
+  &:hover {
+    background-color: $link-image-active-color;
+  }
+}

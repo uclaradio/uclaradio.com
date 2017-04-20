@@ -1,0 +1,71 @@
+/**
+ShowsBlurb.scss
+
+Sass styling for show blurb on shows page (with grid)
+**/
+
+.header {
+  font-size: 15px;
+  font-weight: lighter;
+  position: relative; 
+  display: inline-block;
+}
+
+.blurbStyle {
+  width: 40%;
+  float: left;
+  font-size: 12px;
+  font-weight: lighter;
+  margin-top: -50px;
+}
+
+.lineStyle {
+  border-top: 0.5px solid black;
+  height: 0px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 2px;
+  top: -5px;
+}
+
+.blurb {
+  background: rgba(255, 255, 255, 0.45);
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+.blurb-body {
+  padding: 5px; 
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.showTitle {
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.djs {
+  font-size: 15px;
+  font-style: italic;
+}
+
+.blurbText {
+  font-size: 12px;
+  font-weight: lighter;
+  margin-top: 10px;
+}
+
+.dot {
+  background-color: rgba(255,0,0,0.45);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 10px;
+  position: relative;
+  left: 1;
+}

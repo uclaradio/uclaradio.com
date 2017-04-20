@@ -1,0 +1,26 @@
+/**
+AboutPage.scss
+Sass syling for the About page
+**/
+
+.aboutPage{
+  margin: 10pt 0;
+  padding: 10pt 20pt;
+  text-align: center;
+}
+
+#about_text{
+  clear: left;
+}
+
+#wrapper {
+  width: 100%;
+}
+
+.threesplit {
+  width: 33%;
+  min-width: 200px;
+  padding: 5px;
+  display: inline-block;
+  vertical-align: top;
+}
