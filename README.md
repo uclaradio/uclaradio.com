@@ -13,7 +13,7 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 ### Running
 
 #### Development
-- Ensure you have Mongo installed and a Mongo db instance is running
+- Ensure you have Mongo and Node installed.
   - For macOS: If you have [homebrew](http://brew.sh/) installed, you can just run [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) to set up node and MongoDB automatically!
 - In the project root directory, run `npm install` to install dependencies (may need sudo)
 - Run `npm run dev` to start the server for development
