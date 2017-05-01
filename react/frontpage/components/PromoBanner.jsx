@@ -67,14 +67,16 @@ var PromoBanner = React.createClass({
       ); 
     });
 
-    const dateInFuture = new Date('2017-5-1');
+    const dateInFuture = new Date('2017-5-31');
     return (
-      //<div className="promoBanner">
-        // <Slider {...settings}>
-          // {banners}
-          <CountdownTimer deadline={dateInFuture}/>
-        // </Slider>
-      // </div>
+      <div className="promoBanner">
+         <Slider {...settings}>
+           {banners}
+          <div>
+            <CountdownTimer deadline={dateInFuture}/>
+          </div>
+         </Slider>
+       </div>
     );
   }
 });
