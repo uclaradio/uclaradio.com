@@ -16,8 +16,7 @@ require('./PromoBanner.scss');
 
 // Promo Banner Data 
 const bannerData = [
-  {"img": "/img/promo/sotm/sotm_april_2017.png", "link": "/shows/182"}, 
-  {"img": "/img/promo/localchella_giveaways.jpg", "link": "https://www.facebook.com/UCLARadio/photos/a.220123767998373.66127.214439101900173/1543809082296495/?type=3&theater"}
+  {"img": "/img/promo/sotm/sotm_april_2017.png", "link": "/shows/182"}
   // Will update once their shows are updated
   // {"img": "/img/sotm-mar17-nuindigo.png", "link": "/shows/90"},
   // {"img": "/img/sotm-feb2017.jpg", "link": "/shows/75"},
