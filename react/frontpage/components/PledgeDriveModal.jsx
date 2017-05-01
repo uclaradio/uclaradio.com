@@ -21,9 +21,9 @@ const PledgeDriveModal = React.createClass({
     return (
       <Modal show={this.state.showModal} onHide={this.close}>
         <Modal.Body>
-          <Link to={PledgeDrivePhoto.link}>
+          <a href={PledgeDrivePhoto.link}>
             <img src={PledgeDrivePhoto.img} style={{width: '100%'}}> </img>
-          </Link>  
+          </a>  
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.close}>Donate Later</Button>
