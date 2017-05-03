@@ -36,7 +36,8 @@ var PromoBanner = React.createClass({
       autoplay: true,
       infinite: true, 
       fade: true, 
-      autoplaySpeed: 5000
+      autoplaySpeed: 5000,
+      draggable: false
     };
 
     // <Link> component is unable to link to external links
