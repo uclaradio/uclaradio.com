@@ -28,7 +28,7 @@ Vertical blurb info for a show, including picture and description
 }
 */
 var ShowBlurb = React.createClass({
-  
+
   djString: function(djMap) {
       var djString = "";
       var addComma = false;
@@ -46,6 +46,10 @@ var ShowBlurb = React.createClass({
     return "/shows/" + show.id;
   },
 
+  getDJLink: function(djName) {
+      return "/djs/" + djName;
+  },
+
   render: function() {
 
     if (!this.props.show) {
@@ -54,7 +58,7 @@ var ShowBlurb = React.createClass({
 
     return (
       <div className="showBlurb">
-        
+
         <div className="dot"></div>
         <h1 className="header">SELECTED SHOW: </h1>
         <div className="blurb">
@@ -63,7 +67,9 @@ var ShowBlurb = React.createClass({
             <Link to={this.urlFromShow(this.props.show)}>
               <RectImage maxWidth="350px" src={this.props.show.picture || defaultShowPic} />
             </Link>
-            <p className="djs">{this.djString(this.props.show.djs || {})}</p>
+            <Link to={this.getDJLink(this.djString(this.props.show.djs))}>
+              <p className="djs">{this.djString(this.props.show.djs || {})}</p>
+            </Link>
             <div className="lineStyle"/>
             <div className="lineStyle"/>
             <p className="time">{this.props.show.day.toUpperCase()} @ {this.props.show.time.toUpperCase()}<span style={{float: "right"}}>{this.props.show.genre}</span></p>
@@ -76,10 +82,10 @@ var ShowBlurb = React.createClass({
             <p className="blurbText">{this.props.show.blurb}</p>
             <Link to={this.urlFromShow(this.props.show)}>[CLICK FOR FULL SHOW PAGE]</Link>
           </div>
-        </div> 
+        </div>
       </div>
     );
-  
+
   }
 });
 
