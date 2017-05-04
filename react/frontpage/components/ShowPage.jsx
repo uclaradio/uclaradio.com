@@ -47,8 +47,12 @@ const ShowPage = React.createClass({
     }
     return djString;
   },
+  getDJLink: function(djName) {
+      return "/djs/" + djName;
+  },
   render: function() {
     var show = this.props.show;
+    var djName = this.djString(show.djs);
     if (!show) {
       return (
         <div className='showPage'>
@@ -66,7 +70,7 @@ const ShowPage = React.createClass({
         <RectImage maxWidth='350px' src={show.picture || defaultShowPic} />
         <div className='showInfo'>
           <h3>{show.title}</h3>
-          <p>{this.djString(show.djs)}</p>
+          <Link to={this.getDJLink(djName)}><p>{djName}</p></Link>
           <p>{show.blurb}</p>
           <div className='social-icons'>
             {show.facebook && <a className='facebookLogo' href={show.facebook} target='_blank'><i className='fa fa-facebook-square fa-lg' aria-hidden='true'></i></a>}
