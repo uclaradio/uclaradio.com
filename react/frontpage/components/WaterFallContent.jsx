@@ -93,10 +93,10 @@ var WaterFallContent = React.createClass({
         <div className='wf-container'>
         </div>
         {
-          isMobile.any() &&   
+          isMobile.any() &&
           <span>
             <br />
-            <center>                    
+            <center>
               <button id="load_more" onClick={this.mobileLoadMore}>
                 MORE
              </button>
@@ -128,11 +128,10 @@ function nodeFromPost(post) {
 }
 
 // create new DOM element representing post with provided content
-function newNode(full_picture, summary, created_time, link, platform) {  
+function newNode(full_picture, summary, created_time, link, platform) {
   if (!full_picture && (!summary || summary.includes("http"))) {
     return null;
   }
-
   var box = document.createElement('div');
   box.className = 'wf-box';
   var a = document.createElement('a');
@@ -175,7 +174,7 @@ function newNode(full_picture, summary, created_time, link, platform) {
 
 function formatDate(dateString) {
   var date = String(dateString);
-  date = new Date(date);
+  date = new Date(date.substring(0, 10));
   return (date.getMonth()+1) + "/" + (date.getDate()) + "/" + (date.getYear() + 1900);
 }
 
