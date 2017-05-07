@@ -62,7 +62,8 @@ shows.addNewShow = function(title, day, time, djs, callback) {
       "id": nextId,
       "day": day,
       "time": time,
-      "djs": djs
+      "djs": djs,
+      "public": true
     };
 
     //Searches for a show with the same title.
