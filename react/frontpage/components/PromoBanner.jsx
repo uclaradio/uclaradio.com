@@ -16,8 +16,7 @@ require('./PromoBanner.scss');
 
 // Promo Banner Data 
 const bannerData = [
-  {"img": "/img/promo/sotm/sotm-may2017.jpg", "link": "/shows/266"},
-  {"img": "/img/promo/sotm/sotm_april_2017.png", "link": "/shows/182"}
+  {"img": "/img/promo/sotm/sotm-may2017.jpg", "link": "/shows/266"}
 ];
 
 var PromoBanner = React.createClass({
