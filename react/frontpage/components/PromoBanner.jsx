@@ -9,6 +9,9 @@ import Slider from 'react-slick';
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
 
+
+import CountdownTimer from './CountdownTimer.jsx';
+
 import  { Link } from 'react-router';
 
 // styling
@@ -33,7 +36,8 @@ var PromoBanner = React.createClass({
       autoplay: true,
       infinite: true, 
       fade: true, 
-      autoplaySpeed: 5000
+      autoplaySpeed: 5000,
+      draggable: false
     };
 
     // <Link> component is unable to link to external links
@@ -64,12 +68,18 @@ var PromoBanner = React.createClass({
       ); 
     });
 
+    // Date constructor: Year, Month (0 - 11), Day
+    // 4 => May 
+    const dateInFuture = new Date(2017, 4, 31);
     return (
       <div className="promoBanner">
-        <Slider {...settings}>
-          {banners}
-        </Slider>
-      </div>
+         <Slider {...settings}>
+           {banners}
+          <div>
+            <CountdownTimer deadline={dateInFuture}/>
+          </div>
+         </Slider>
+       </div>
     );
   }
 });
