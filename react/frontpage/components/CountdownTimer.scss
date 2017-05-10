@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:700');
 @import url('https://fonts.googleapis.com/css?family=Rammetto+One');
 
+.countdownWrapper a:link, .countdownWrapper a:hover, .countdownWrapper a:active {
+  text-decoration: none;
+}
+
 .countdownBanner {
   background: url("/img/pledge-drive-2017-pattern.png");
 }

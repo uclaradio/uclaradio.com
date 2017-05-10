@@ -50,44 +50,48 @@ var CountdownTimer = React.createClass({
   },
   render: function() {
       return (
-      <div className="countdownBanner">
-        <div className="countdown">
-          <div className="timeBlock">
-            <div className="timeValue">
-              {this.state.days}
-            </div>
-            <div className="timeLabel">
-              Days
+      <div className="countdownWrapper">
+        <a href="https://spark.ucla.edu/uclaradio">
+          <div className="countdownBanner">
+            <div className="countdown">
+              <div className="timeBlock">
+                <div className="timeValue">
+                  {this.state.days}
+                </div>
+                <div className="timeLabel">
+                  Days
+                </div>
+              </div>
+              <div className="timeBlock">
+                <div className="timeValue">
+                  {this.state.hours}
+                </div>
+                <div className="timeLabel">
+                  Hours
+                </div>
+              </div>
+              <div className="timeBlock">
+                <div className="timeValue">
+                  {this.state.minutes}
+                </div>
+                <div className="timeLabel">
+                  Minutes
+                </div>
+              </div>
+              <div className="timeBlock">
+                <div className="timeValue">
+                  {this.state.seconds}
+                </div>
+                <div className="timeLabel">
+                  Seconds
+                </div>
+              </div>
+              <div className="countdownText">
+                Left to Donate to Pledge Drive!
+              </div>
             </div>
           </div>
-          <div className="timeBlock">
-            <div className="timeValue">
-              {this.state.hours}
-            </div>
-            <div className="timeLabel">
-              Hours
-            </div>
-          </div>
-          <div className="timeBlock">
-            <div className="timeValue">
-              {this.state.minutes}
-            </div>
-            <div className="timeLabel">
-              Minutes
-            </div>
-          </div>
-          <div className="timeBlock">
-            <div className="timeValue">
-              {this.state.seconds}
-            </div>
-            <div className="timeLabel">
-              Seconds
-            </div>
-          </div>
-          <div className="countdownText">
-            Left to Donate to Pledge Drive!
-          </div>
-        </div>
+        </a>
       </div>
     );
   }
