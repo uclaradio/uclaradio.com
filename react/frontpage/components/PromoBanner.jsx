@@ -68,7 +68,9 @@ var PromoBanner = React.createClass({
       ); 
     });
 
-    const dateInFuture = new Date('2017-5-31');
+    // Date constructor: Year, Month (0 - 11), Day
+    // 4 => May 
+    const dateInFuture = new Date(2017, 4, 31);
     return (
       <div className="promoBanner">
          <Slider {...settings}>
