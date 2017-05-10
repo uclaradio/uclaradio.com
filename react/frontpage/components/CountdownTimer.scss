@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather:700');
+@import url('https://fonts.googleapis.com/css?family=Rammetto+One');
+
+.countdownBanner {
+  background: url("/img/pledge-drive-2017-pattern.png");
+}
 .countdown {
-  font-family: sans-serif;
-  color: #fff;
-  display: inline-block;
-  font-weight: 100;
+  font-family: 'Merriweather', serif;
+  color: #391201;
+  display: block;
   text-align: center;
   font-size: 30px;
 }
@@ -11,18 +16,31 @@
   padding: 10px;
   margin: 5px;
   border-radius: 3px;
-  background: #00BF96;
+  background: #ffab27;
   display: inline-block;
 }
 
 .timeValue {
   padding: 15px;
   border-radius: 3px;
-  background: #00816A;
+  background: #ffe3a1;
   display: inline-block;
 }
 
 .timeLabel {
   padding-top: 5px;
   font-size: 16px;
+}
+
+// Text Outline from: https://wpshout.com/quick-guides/create-text-outline-css/
+.countdownText {
+  display: block;
+  font-family: 'Rammetto One', cursive;
+  color: #ffcdb2;
+  text-shadow: 3-1px -1px 0 #391201, // Outline
+               1px -1px 0 #391201,   // Outline
+               -1px -1px 0 #391201,  // Outline
+               1px 1px 0 #391201,    // Outline
+               4px 4px 0 #391201,    // Brown shadow
+               4px 7px 0 #ffffff;    // White shadow
 }
