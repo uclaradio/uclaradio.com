@@ -16,7 +16,7 @@ var urls = {
   getReportedMessages: "/chat/reportedMessages",
   deleteMessages: "/panel/manager/api/deletechat",
   keepMessages: "/panel/manager/api/freechat",
-  spotlightShow: "sticky situation" //replace with relevant url
+  spotlightShow: 12 //replace with relevant url
 };
 
 // Panel Elements
@@ -92,7 +92,7 @@ var Shows = React.createClass({
 
 var Spotlight = React.createClass({
   handleSpotlightSubmit: function(showId) {
-    // console.log(showId);
+    console.log(showId);
     // Push to server (this.props.urls.spotlightShow)
   },
   render: function () {

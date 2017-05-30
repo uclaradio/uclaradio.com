@@ -1,6 +1,8 @@
 // InputSpotlightDropdown.jsx
+import 'react-select/dist/react-select.css'; //not sure where to put this!
 
 var React = require('react');
+var Select = require('react-select');
 
 // Bootstrap elements
 var DropdownButton = require('react-bootstrap').DropdownButton;
@@ -12,25 +14,21 @@ var Dropdown = React.createClass({
   getInitialState: function () {
     return {spotlightShow: this.props.spotlightShow};
   },
-  handleSpotlightChange: function (e, show) {
-    this.setState({spotlightShow: show});
-    this.props.onSpotlightSubmit(show.id);
+  handleSpotlightChange: function (e) {
+    this.setState({spotlightShow: e.value});
+    this.props.onSpotlightSubmit(e.value);
   },
   render: function () {
-    var shows = this.props.shows.map(function(show) {
-      return <MenuItem key={show.id} eventKey={show}>{show.title}</MenuItem>;
+    var options = [];
+    this.props.shows.forEach(function (show) {
+      options = [...options, {
+        value: show.id,
+        label: show.title
+      }];
     });
+    var clearable = false;
 
-    return (
-      <form className="form-horizontal">
-        <ButtonGroup justified>
-        <DropdownButton id="spotlightShow" title={this.state.spotlightShow.title || <span className="placeholder">Spotlight Show</span>}
-        onSelect={this.handleSpotlightChange} key={this.state.spotlightShow.id}>
-          {shows}
-        </DropdownButton>
-        </ButtonGroup>
-      </form>
-    );
+    return <Select options={options} value={this.state.spotlightShow} onChange={this.handleSpotlightChange} clearable={clearable} />;
   }
 });
 
