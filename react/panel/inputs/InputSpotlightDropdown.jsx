@@ -10,7 +10,7 @@ var MenuItem = require('react-bootstrap').MenuItem;
 var Input = require('react-bootstrap').Input;
 var ButtonGroup = require('react-bootstrap').ButtonGroup;
 
-var Dropdown = React.createClass({
+var InputSpotlightDropdown = React.createClass({
   getInitialState: function () {
     return {spotlightShow: this.props.spotlightShow};
   },
@@ -32,4 +32,4 @@ var Dropdown = React.createClass({
   }
 });
 
-module.exports = Dropdown;
+module.exports = InputSpotlightDropdown;

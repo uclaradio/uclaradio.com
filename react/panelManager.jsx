@@ -98,7 +98,7 @@ var Spotlight = React.createClass({
   render: function () {
     return (
       <div>
-        <h4>Spotlight show of the Week</h4>
+        <h4>Spotlight Show of the Week</h4>
         <Well>
           <InputSpotlightDropdown spotlightShow={this.props.urls.spotlightShow}
             shows={this.props.shows} onSpotlightSubmit={this.handleSpotlightSubmit}/>
