@@ -15,25 +15,26 @@
   line-height: 35pt;
   font-size: 10pt;
   position: absolute;
+  text-align: center;
 
   white-space: nowrap;
   box-sizing: border-box;
-  animation: marquee 10s linear infinite;
-  -moz-animation: marquee 10s linear infinite;
-  -webkit-animation: marquee 10s linear infinite;
+  animation: marquee 20s linear infinite;
+  -moz-animation: marquee 20s linear infinite;
+  -webkit-animation: marquee 20s linear infinite;
 }
 
 @keyframes marquee {
-  0% { transform: translate(0, 0); }
+  0% { transform: translate(-100%, 0); }
   100% { transform: translate(100%, 0); }
 }
 
 @-moz-keyframes marquee {
-  0% { -moz-transform: translate(0, 0); }
+  0% { -moz-transform: translate(-100%, 0); }
   100% { -moz-transform: translate(100%, 0); }
 }
 
 @-webkit-keyframes marquee {
-  0% { -webkit-transform: translate(0, 0); }
+  0% { -webkit-transform: translate(-100%, 0); }
   100% { -webkit-transform: translate(100%, 0); }
 }
