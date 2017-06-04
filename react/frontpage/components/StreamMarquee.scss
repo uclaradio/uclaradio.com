@@ -1,6 +1,6 @@
 .marquee {
   color: white !important;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   height: 50px;
   width: 60vw;
@@ -8,4 +8,16 @@
   line-height: 30pt;
   font-size: 10pt;
   margin-left: 20%;
+
+  transition: all 10s linear;
+  -webkit-transition: all 10s linear; /** Chrome & Safari **/
+  -moz-transition: all 10s linear; /** Firefox **/
+  -o-transition: all 10s linear; /** Opera **/
+}
+
+.marquee:hover {
+  transform: translate(650px,0);
+  -webkit-transform: translate(650px,0); /** Chrome & Safari **/
+  -o-transform: translate(650px,0); /** Opera **/
+  -moz-transform: translate(650px,0); /** Firefox **/
 }
