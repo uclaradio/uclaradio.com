@@ -1,20 +1,27 @@
 .marquee {
-  color: white !important;
   position: fixed;
   bottom: 0;
   height: 50px;
-  width: 60vw;
-  z-index: 10;
+  width: 65%;
+  z-index: 5;
+  margin-left: 20%;
+  overflow: hidden;
+}
+
+.marquee p {
+  width: 100%;
+  height: 100%;
+  color: white !important;
   line-height: 35pt;
   font-size: 10pt;
-  margin-left: 20%;
+  position: absolute;
 
-  animation: marquee 10s linear infinite;
-  overflow: hidden !important;
   white-space: nowrap;
+  box-sizing: border-box;
+  animation: marquee 8s linear infinite;
 }
 
 @keyframes marquee {
   0% { transform: translate(0, 0); }
-  100% { transform: translate(90%, 0); }
+  100% { transform: translate(100%, 0); }
 }
