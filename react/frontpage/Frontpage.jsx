@@ -23,7 +23,6 @@ import Error404Page from './components/Error404Page.jsx';
 import StreamIssuesPage from './components/StreamIssuesPage.jsx';
 import AboutPage from './components/AboutPage.jsx';
 import PromoBanner from './components/PromoBanner.jsx';
-import PledgeDriveModal from './components/PledgeDriveModal.jsx';
 
 // Common Components
 import RectImage from '../common/RectImage.jsx';
@@ -83,7 +82,6 @@ const FrontpageContent = React.createClass({
                 { /* Show of the Month */ }
                 <PromoBanner />
                 <FrontPageNavbar />
-                <PledgeDriveModal />
                 { this.props.children }
               </Col>
 
