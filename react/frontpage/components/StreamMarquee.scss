@@ -1,23 +1,20 @@
 .marquee {
   color: white !important;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   height: 50px;
   width: 60vw;
   z-index: 10;
-  line-height: 30pt;
+  line-height: 35pt;
   font-size: 10pt;
   margin-left: 20%;
 
-  transition: all 10s linear;
-  -webkit-transition: all 10s linear; /** Chrome & Safari **/
-  -moz-transition: all 10s linear; /** Firefox **/
-  -o-transition: all 10s linear; /** Opera **/
+  animation: marquee 10s linear infinite;
+  overflow: hidden !important;
+  white-space: nowrap;
 }
 
-.marquee:hover {
-  transform: translate(650px,0);
-  -webkit-transform: translate(650px,0); /** Chrome & Safari **/
-  -o-transform: translate(650px,0); /** Opera **/
-  -moz-transform: translate(650px,0); /** Firefox **/
+@keyframes marquee {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(90%, 0); }
 }
