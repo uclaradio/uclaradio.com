@@ -18,10 +18,22 @@
 
   white-space: nowrap;
   box-sizing: border-box;
-  animation: marquee 8s linear infinite;
+  animation: marquee 10s linear infinite;
+  -moz-animation: marquee 10s linear infinite;
+  -webkit-animation: marquee 10s linear infinite;
 }
 
 @keyframes marquee {
   0% { transform: translate(0, 0); }
   100% { transform: translate(100%, 0); }
+}
+
+@-moz-keyframes marquee {
+  0% { -moz-transform: translate(0, 0); }
+  100% { -moz-transform: translate(100%, 0); }
+}
+
+@-webkit-keyframes marquee {
+  0% { -webkit-transform: translate(0, 0); }
+  100% { -webkit-transform: translate(100%, 0); }
 }
