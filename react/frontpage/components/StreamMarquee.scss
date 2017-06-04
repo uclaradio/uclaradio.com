@@ -1,10 +1,26 @@
-.marquee {
+/**
+StreamMarquee.scss
+
+Sass styling for frong page marquee component
+**/
+
+.marquee-container {
   position: fixed;
   bottom: 0;
   height: 50px;
-  width: 65%;
+  width: 100%;
   z-index: 5;
-  margin-left: 20%;
+}
+
+.marquee {
+  position: relative;
+  z-index: 6;
+  margin-left: 200px;
+  margin-right: 150px;
+  height: 100%;
+  width: calc(100% - 200px - 150px);
+  width: -moz-calc(100% - 200px - 150px); /* firefox */
+  width: -webkit-calc(100% - 200px - 150px); /* safari */
   overflow: hidden;
 }
 
@@ -20,8 +36,8 @@
   white-space: nowrap;
   box-sizing: border-box;
   animation: marquee 20s linear infinite;
-  -moz-animation: marquee 20s linear infinite;
-  -webkit-animation: marquee 20s linear infinite;
+  -moz-animation: marquee 20s linear infinite; /* firefox */
+  -webkit-animation: marquee 20s linear infinite; /* safari */
 }
 
 @keyframes marquee {
@@ -29,12 +45,59 @@
   100% { transform: translate(100%, 0); }
 }
 
+/* firefox */
 @-moz-keyframes marquee {
   0% { -moz-transform: translate(-100%, 0); }
   100% { -moz-transform: translate(100%, 0); }
 }
 
+/* safari */
 @-webkit-keyframes marquee {
   0% { -webkit-transform: translate(-100%, 0); }
   100% { -webkit-transform: translate(100%, 0); }
+}
+
+/* larger tablets */
+@media (min-width: 780px) and (max-width: 1024px) {
+  .marquee {
+    margin-left: 180px;
+    margin-right: 130px;
+    width: calc(100% - 180px - 130px);
+    width: -moz-calc(100% - 180px - 130px);
+    width: -webkit-calc(100% - 180px - 130px);
+  }
+}
+
+/* tablets */
+@media (min-width: 430px) and (max-width: 768px) {
+  .marquee {
+    margin-left: 165px;
+    margin-right: 115px;
+    width: calc(100% - 165px - 115px);
+    width: -moz-calc(100% - 165px - 115px);
+    width: -webkit-calc(100% - 165px - 115px);
+  }
+
+  .marquee p {
+    animation: marquee 15s linear infinite;
+    -moz-animation: marquee 15s linear infinite;
+    -webkit-animation: marquee 15s linear infinite;
+  }
+}
+
+/* mobile */
+@media (max-width: 425px) {
+  .marquee {
+    margin-left: 160px;
+    margin-right: 100px;
+    width: calc(100% - 160px - 100px);
+    width: -moz-calc(100% - 160px - 100px);
+    width: -webkit-calc(100% - 160px - 100px);
+  }
+
+  .marquee p {
+    animation: marquee 5s linear infinite;
+    -moz-animation: marquee 5s linear infinite;
+    -webkit-animation: marquee 5s linear infinite;
+  }
 }
