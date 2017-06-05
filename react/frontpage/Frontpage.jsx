@@ -23,7 +23,6 @@ import Error404Page from './components/Error404Page.jsx';
 import StreamIssuesPage from './components/StreamIssuesPage.jsx';
 import AboutPage from './components/AboutPage.jsx';
 import PromoBanner from './components/PromoBanner.jsx';
-import PledgeDriveModal from './components/PledgeDriveModal.jsx';
 
 // Common Components
 import RectImage from '../common/RectImage.jsx';
@@ -83,7 +82,6 @@ const FrontpageContent = React.createClass({
                 { /* Show of the Month */ }
                 <PromoBanner />
                 <FrontPageNavbar />
-                <PledgeDriveModal />
                 { this.props.children }
               </Col>
 
@@ -161,8 +159,8 @@ const Frontpage = React.createClass({
     this.interval = setInterval(this.props.updateNowPlaying, 30*1000);
 
     // update now playing and fetch initial shows data
-    // 05/8/17 - Fine Dining
-    this.props.setSpotlightShowID(224);
+    // 05/22/17 - Cabronx
+    this.props.setSpotlightShowID(172);
     this.props.updateShows();
   },
   componentWillUnmount: function() {
