@@ -88,7 +88,6 @@ const FrontpageContent = React.createClass({
             </Grid>
           </div>
         <StreamBar currentShowTitle={showPlaying ? this.props.nowPlaying.title : null} />
-        <StreamMarquee message="This is a test marquee."/>
         </TriangleCanvas>
       </div>
     );
