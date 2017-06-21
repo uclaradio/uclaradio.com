@@ -19,7 +19,7 @@ require('./PromoBanner.scss');
 
 // Promo Banner Data
 const bannerData = [
-  {"img": "/img/promo/tops-web.jpg", "link": "http://www.troubadour.com/event/1495624-tops-los-angeles/"}
+  {"img": "/img/promo/tops-web.png", "link": "http://www.troubadour.com/event/1495624-tops-los-angeles/"}
 ];
 
 var PromoBanner = React.createClass({
