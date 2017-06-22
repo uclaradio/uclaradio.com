@@ -17,9 +17,9 @@ import  { Link } from 'react-router';
 // styling
 require('./PromoBanner.scss');
 
-// Promo Banner Data 
+// Promo Banner Data
 const bannerData = [
-  {"img": "/img/promo/sotm/sotm-may2017.jpg", "link": "/shows/266"}
+  {"img": "/img/promo/tops-web.png", "link": "http://www.troubadour.com/event/1495624-tops-los-angeles/"}
 ];
 
 var PromoBanner = React.createClass({
@@ -34,24 +34,24 @@ var PromoBanner = React.createClass({
     var settings = {
       dots: true,
       autoplay: true,
-      infinite: true, 
-      fade: true, 
+      infinite: true,
+      fade: true,
       autoplaySpeed: 5000,
       draggable: false
     };
 
     // <Link> component is unable to link to external links
-    // Currently doing an inline conditional via a ternary 
+    // Currently doing an inline conditional via a ternary
     // The self variable is be declared as 'this' is function scoped
     // An alternative solution would be to use ES6 arrow functions
-    
-    var self = this; 
+
+    var self = this;
     var banners = bannerData.map(function(banner) {
       return (
         <div>
           {
-           (banner.link.indexOf("http") == -1) ? 
-            
+           (banner.link.indexOf("http") == -1) ?
+
             (
                 <Link to={banner.link}>
                   {self.getImage(banner)}
@@ -65,7 +65,7 @@ var PromoBanner = React.createClass({
 
           }
         </div>
-      ); 
+      );
     });
 
     return (
