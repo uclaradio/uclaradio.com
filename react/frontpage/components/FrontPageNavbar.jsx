@@ -27,7 +27,7 @@ var FrontPageNavbar = React.createClass({
         browserHistory.push('/streamIssues');
         break;
       case 3:
-        window.open("http://apply.dailybruin.com/applications/ucla-radio/", "_blank");
+        window.open("http://apply.uclastudentmedia.com/applications/ucla-radio/", "_blank");
         break;
       case 4:
         browserHistory.push('/about');
