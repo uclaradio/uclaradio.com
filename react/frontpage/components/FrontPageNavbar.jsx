@@ -75,16 +75,28 @@ var FrontPageNavbar = React.createClass({
           <Nav justified bsStyle="pills" onSelect={this.handleClick}>
             <LinkContainer to="/about">
               <NavItem className="frontPageNavbarItem leftMost collapsed">
-                About
+                <span className="equalWidth">
+                  About
+                </span>
               </NavItem>
             </LinkContainer>
             <LinkContainer to="/streamIssues">
               <NavItem className="frontPageNavbarItem collapsed">
-                Stream Issues
+                <span className="equalWidth">
+                  Stream
+                </span>
               </NavItem>
             </LinkContainer>
-            <NavItem eventKey={1} className="frontPageNavbarItem collapsed">Blog</NavItem>
-            <NavItem eventKey={3} className="frontPageNavbarItem rightMost collapsed">Apply</NavItem>
+            <NavItem eventKey={1} className="frontPageNavbarItem collapsed">
+              <span className="equalWidth">
+                Blog
+              </span>
+            </NavItem>
+            <NavItem eventKey={3} className="frontPageNavbarItem rightMost collapsed">
+              <span className="equalWidth">
+                Apply
+              </span>
+            </NavItem>
           </Nav>
         </Collapse>
 
