@@ -27,13 +27,10 @@ var FrontPageNavbar = React.createClass({
         browserHistory.push('/streamIssues');
         break;
       case 3:
-        window.open("http://apply.dailybruin.com/applications/ucla-radio/", "_blank");
+        window.open("http://apply.uclastudentmedia.com/applications/ucla-radio/", "_blank");
         break;
       case 4:
         browserHistory.push('/about');
-        break;
-      case 5:
-        window.open("/panel", "_blank");
         break;
       case 10:
         this.setState({open: !this.state.open});
@@ -78,17 +75,28 @@ var FrontPageNavbar = React.createClass({
           <Nav justified bsStyle="pills" onSelect={this.handleClick}>
             <LinkContainer to="/about">
               <NavItem className="frontPageNavbarItem leftMost collapsed">
-                About
+                <span className="equalWidth">
+                  About
+                </span>
               </NavItem>
             </LinkContainer>
             <LinkContainer to="/streamIssues">
               <NavItem className="frontPageNavbarItem collapsed">
-                Stream Issues
+                <span className="equalWidth">
+                  Stream
+                </span>
               </NavItem>
             </LinkContainer>
-            <NavItem eventKey={1} className="frontPageNavbarItem collapsed">Blog</NavItem>
-            <NavItem eventKey={3} className="frontPageNavbarItem collapsed">Apply</NavItem>
-            <NavItem eventKey={5} className="frontPageNavbarItem rightMost collapsed">Staff Panel</NavItem>
+            <NavItem eventKey={1} className="frontPageNavbarItem collapsed">
+              <span className="equalWidth">
+                Blog
+              </span>
+            </NavItem>
+            <NavItem eventKey={3} className="frontPageNavbarItem rightMost collapsed">
+              <span className="equalWidth">
+                Apply
+              </span>
+            </NavItem>
           </Nav>
         </Collapse>
 
@@ -108,7 +116,6 @@ var FrontPageNavbar = React.createClass({
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(2)}}>Stream Issues</MenuItem>
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(1)}}>Blog</MenuItem>
             <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(3)}}>Apply</MenuItem>
-            <MenuItem className="dropdownNavbarItem" onClick={()=>{this.handleClick(5)}}>Staff Panel</MenuItem>
           </NavDropdown>
         </Nav>
       </div>
