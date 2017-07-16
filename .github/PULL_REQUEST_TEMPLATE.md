@@ -18,7 +18,7 @@
 ## Learning
 <!--- Describe the research stage. Link to any blog posts, video, patterns, libraries, addons, or other resources that helped you to solve this problem. -->
 
-## Screenshots (if appropriate):
+## Screenshot(s) <!--- (if applicable--you can delete otherwise) -->
 <!--- Include a screenshot here if the change you made changes the look of the site in any way! -->
 
 ## Checklist
