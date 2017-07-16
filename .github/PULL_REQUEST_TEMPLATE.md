@@ -1,6 +1,7 @@
+<!--- Be sure to add a descriptive title above! -->
+
 ## Types of changes
-What types of changes does your code introduce to UCLA Radio?
-_Put an `x` in the boxes that apply_
+<!--- What types of changes does your code introduce to UCLA Radio? Put an `x` in the boxes that apply. -->
 
 - [ ] Bugfix (change which fixes an issue)
 - [ ] New feature (change which adds functionality)
@@ -9,19 +10,19 @@ _Put an `x` in the boxes that apply_
 - [ ] Breaking change (fix or feature that would cause existing functionality to __not__ work as expected)
 
 ## Purpose
-_Describe the problem or feature. Link to the issue(s) fixed by this pull request if applicable._
+<!--- Describe the problem or feature. Link to the issue(s) fixed by this pull request if applicable. -->
 
 ## Approach
-_How does your change address the problem?_
+<!--- How does your change address the problem? -->
 
 ## Learning
-_Describe the research stage. Link to any blog posts, video, patterns, libraries, addons, or other resources that helped you to solve this problem._
+<!--- Describe the research stage. Link to any blog posts, video, patterns, libraries, addons, or other resources that helped you to solve this problem. -->
 
 ## Screenshots (if appropriate):
-_Include a screenshot here if the change you made changes the look of the site in any way!_
+<!--- Include a screenshot here if the change you made changes the look of the site in any way! -->
 
 ## Checklist
-_Put an `x` in the boxes that apply. You can also fill these out after creating the PR. If you're unsure about any of them, don't hesitate to ask. We're here to help! This is simply a reminder of what we are going to look for before merging your code._
+<!--- Put an `x` in the boxes that apply. You can also fill these out after creating the PR. If you're unsure about any of them, don't hesitate to ask. We're here to help! This is simply a reminder of what we are going to look for before merging your code. -->
 
 - [ ] My code follows the code style of this project, and I have linted it to confirm this.
 - [ ] I have added tests that prove my fix is effective or that my feature works.
@@ -29,9 +30,9 @@ _Put an `x` in the boxes that apply. You can also fill these out after creating 
 - [ ] I have updated the documentation accordingly.
 - [ ] All new and existing tests passed.
 
-## Further Comments
-_Please add anything that you'd like to say that you didn't already get a chance to._
-
 ## Platform
-__Operating System:__ _Your OS Here._  
-  __Node Version:__ _Output of `node --version` here._
+__Operating System:__ <!--- e.g., macOS Sierra, 12.10.5 -->  
+__Node Version:__ <!--- e.g., v6.11.0 -->
+
+## Further Comments
+<!--- Please add anything that you'd like to say that you didn't already get a chance to. -->
