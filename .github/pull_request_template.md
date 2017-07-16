@@ -24,6 +24,7 @@
 ## Checklist
 <!--- Put an `x` in the boxes that apply. You can also fill these out after creating the PR. If you're unsure about any of them, don't hesitate to ask. We're here to help! This is simply a reminder of what we are going to look for before merging your code. -->
 
+- [ ] My branch follows the branch naming scheme of UCLA, and can merge into `master` without error.
 - [ ] My code follows the code style of this project, and I have linted it to confirm this.
 - [ ] I have added tests that prove my fix is effective or that my feature works.
 - [ ] My change requires a change to the documentation.
