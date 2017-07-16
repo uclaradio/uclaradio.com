@@ -215,6 +215,10 @@ arrify@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
+asap@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/asap/-/asap-1.0.0.tgz#b2a45da5fdfa20b0496fc3768cc27c12fa916a7d"
+
 asap@~2.0.3:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
@@ -858,9 +862,9 @@ base64id@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/base64id/-/base64id-1.0.0.tgz#47688cb99bb6804f0e06d3e763b1c32e57d8e6b6"
 
-basic-auth@~1.0.1:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-1.0.4.tgz#030935b01de7c9b94a824b29f3fccb750d3a5290"
+basic-auth@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-1.1.0.tgz#45221ee429f7ee1e5035be3f51533f1cdfd29884"
 
 batch@0.6.1:
   version "0.6.1"
@@ -1191,6 +1195,13 @@ classnames@^2.1.5, classnames@^2.2.3, classnames@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
+clean-css@^3.1.9:
+  version "3.4.28"
+  resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-3.4.28.tgz#bf1945e82fc808f55695e6ddeaec01400efd03ff"
+  dependencies:
+    commander "2.8.x"
+    source-map "0.4.x"
+
 cli-cursor@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-1.0.2.tgz#64da3f7d56a54412e59794bd62dc35295e8f2987"
@@ -1345,6 +1356,12 @@ combined-stream@~0.0.4:
 commander@2.6.0, commander@~2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.6.0.tgz#9df7e52fb2a0cb0fb89058ee80c3104225f37e1d"
+
+commander@2.8.x:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.8.1.tgz#06be367febfda0c330aa1e2a072d3dc9762425d4"
+  dependencies:
+    graceful-readlink ">= 1.0.0"
 
 commander@^2.5.0, commander@^2.8.1:
   version "2.11.0"
@@ -1849,10 +1866,6 @@ depd@1.1.0, depd@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.0.tgz#e1bd82c6aab6ced965b97b88b17ed3e528ca18c3"
 
-depd@~1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/depd/-/depd-1.0.1.tgz#80aec64c9d6d97e65cc2a9caa93c0aa6abf73aaa"
-
 deprecated@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/deprecated/-/deprecated-0.0.1.tgz#f9c9af5464afa1e7a971458a8bdef2aa94d5bb19"
@@ -1990,10 +2003,6 @@ ecc-jsbn@~0.1.1:
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
   dependencies:
     jsbn "~0.1.0"
-
-ee-first@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.0.tgz#6a0d7c6221e490feefd92ec3f441c9ce8cd097f4"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -2970,6 +2979,10 @@ graceful-fs@~1.2.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-1.2.3.tgz#15a4806a57547cb2d2dbf27f42e89a8c3451b364"
 
+"graceful-readlink@>= 1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
+
 grunt-legacy-log-utils@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/grunt-legacy-log-utils/-/grunt-legacy-log-utils-0.1.1.tgz#c0706b9dd9064e116f36f23fe4e6b048672c0f7e"
@@ -3610,6 +3623,10 @@ is-primitive@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/is-primitive/-/is-primitive-2.0.0.tgz#207bab91638499c07b2adf240a41a87210034575"
 
+is-promise@^2.0.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
+
 is-promise@~1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-1.0.1.tgz#31573761c057e33c2e91aab9e96da08cefbe76e5"
@@ -3721,19 +3738,22 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-jade@~1.9.2:
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/jade/-/jade-1.9.2.tgz#0b89f9c60d4ead2738e826ba7b2ccac9a5702abe"
+jade@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/jade/-/jade-1.11.0.tgz#9c80e538c12d3fb95c8d9bb9559fa0cc040405fd"
   dependencies:
     character-parser "1.2.1"
+    clean-css "^3.1.9"
     commander "~2.6.0"
     constantinople "~3.0.1"
+    jstransformer "0.0.2"
     mkdirp "~0.5.0"
     transformers "2.1.0"
+    uglify-js "^2.4.19"
     void-elements "~2.0.1"
     with "~4.0.0"
 
-jimp@^0.2.27:
+jimp@^0.2.28:
   version "0.2.28"
   resolved "https://registry.yarnpkg.com/jimp/-/jimp-0.2.28.tgz#dd529a937190f42957a7937d1acc3a7762996ea2"
   dependencies:
@@ -3908,6 +3928,13 @@ jstransform@11, jstransform@^11.0.3:
     object-assign "^2.0.0"
     source-map "^0.4.2"
 
+jstransformer@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/jstransformer/-/jstransformer-0.0.2.tgz#7aae29a903d196cfa0973d885d3e47947ecd76ab"
+  dependencies:
+    is-promise "^2.0.0"
+    promise "^6.0.1"
+
 jsx-ast-utils@^1.3.4:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.4.1.tgz#3867213e8dd79bf1e8f2300c0cfc1efb182c0df1"
@@ -4007,7 +4034,7 @@ le-tls-sni@^0.1.0:
     node-forge "^0.6.43"
     rsa-compat "^1.2.7"
 
-letsencrypt-express@^2.0.3:
+letsencrypt-express@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/letsencrypt-express/-/letsencrypt-express-2.0.6.tgz#86dfdea3434d7f2eb561e0f94c6c18d55b845b83"
   dependencies:
@@ -4594,7 +4621,7 @@ mongodb@2.2.27:
     mongodb-core "2.1.14"
     readable-stream "2.2.7"
 
-mongoose@^4.0.1:
+mongoose@^4.11.3:
   version "4.11.3"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-4.11.3.tgz#f93d427b282c2e798b0fe1532fb41a7dde6e98d3"
   dependencies:
@@ -4611,14 +4638,15 @@ mongoose@^4.0.1:
     regexp-clone "0.0.1"
     sliced "1.0.1"
 
-morgan@~1.5.1:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.5.3.tgz#8adb4e72f9e5c5436e5d93f42910835f79da9fdf"
+morgan@^1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.8.2.tgz#784ac7734e4a453a9c6e6e8680a9329275c8b687"
   dependencies:
-    basic-auth "~1.0.1"
-    debug "~2.2.0"
-    depd "~1.0.1"
-    on-finished "~2.2.1"
+    basic-auth "~1.1.0"
+    debug "2.6.8"
+    depd "~1.1.0"
+    on-finished "~2.3.0"
+    on-headers "~1.0.1"
 
 mpath@0.3.0:
   version "0.3.0"
@@ -5032,12 +5060,6 @@ object.pick@^1.2.0:
 obuf@^1.0.0, obuf@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.1.tgz#104124b6c602c6796881a042541d36db43a5264e"
-
-on-finished@~2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.2.1.tgz#5c85c1cc36299f78029653f667f27b6b99ebc029"
-  dependencies:
-    ee-first "1.1.0"
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -5684,6 +5706,12 @@ process@~0.5.1:
 progress@^1.1.8:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/progress/-/progress-1.1.8.tgz#e260c78f6161cdd9b0e56cc3e0a85de17c7a57be"
+
+promise@^6.0.1:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/promise/-/promise-6.1.0.tgz#2ce729f6b94b45c26891ad0602c5c90e04c6eef6"
+  dependencies:
+    asap "~1.0.0"
 
 promise@^7.0.3, promise@^7.1.1:
   version "7.3.1"
@@ -6678,7 +6706,7 @@ source-map-support@^0.4.2:
   dependencies:
     source-map "^0.5.6"
 
-source-map@^0.4.2, source-map@~0.4.1:
+source-map@0.4.x, source-map@^0.4.2, source-map@~0.4.1:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.4.4.tgz#eba4f5da9c0dc999de68032d8b4f76173652036b"
   dependencies:
@@ -7287,6 +7315,15 @@ typedarray@^0.0.6:
 ua-parser-js@^0.7.9:
   version "0.7.13"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.13.tgz#cd9dd2f86493b3f44dbeeef3780fda74c5ee14be"
+
+uglify-js@^2.4.19:
+  version "2.8.29"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.29.tgz#29c5733148057bb4e1f75df35b7a9cb72e6a59dd"
+  dependencies:
+    source-map "~0.5.1"
+    yargs "~3.10.0"
+  optionalDependencies:
+    uglify-to-browserify "~1.0.0"
 
 uglify-js@~2.2.5:
   version "2.2.5"
