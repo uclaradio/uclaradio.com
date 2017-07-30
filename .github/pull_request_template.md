@@ -18,7 +18,8 @@
 ## Learning
 <!--- Describe the research stage. Link to any blog posts, video, patterns, libraries, addons, or other resources that helped you to solve this problem. -->
 
-## Screenshot(s) <!--- (if applicable--you can delete otherwise) -->
+## Screenshot(s) 
+<!--- (if applicable--you can delete otherwise) -->
 <!--- Include a screenshot here if the change you made changes the look of the site in any way! -->
 
 ## Checklist
@@ -27,13 +28,13 @@
 - [ ] My branch follows the branch naming scheme of UCLA Radio, and can merge into `master` without error.
 - [ ] My code follows the code style of this project, and I have linted it to confirm this.
 - [ ] I have added tests that prove my fix is effective or that my feature works.
-- [ ] My change requires a change to the documentation.
-- [ ] I have updated the documentation accordingly.
+- [ ] My change requires a change to the documentation and I have updated the documentation accordingly.
 - [ ] All new and existing tests passed.
 
 ## Platform
+<!--- (if applicable--you can delete otherwise) -->
 __Operating System:__ <!--- e.g., macOS Sierra, 12.10.5 -->  
 __Node Version:__ <!--- e.g., v6.11.0 -->
 
 ## Further Comments
-<!--- Please add anything that you'd like to say that you didn't already get a chance to. -->
+<!--- Please add anything that you'd like to say that you didn't already get a chance to. You can delete this if you don't have anything to add. -->
