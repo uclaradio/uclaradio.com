@@ -32,8 +32,9 @@
 - [ ] All new and existing tests passed.
 
 ## Platform
+<!--- (if applicable--you can delete otherwise) -->
 __Operating System:__ <!--- e.g., macOS Sierra, 12.10.5 -->  
 __Node Version:__ <!--- e.g., v6.11.0 -->
 
 ## Further Comments
-<!--- Please add anything that you'd like to say that you didn't already get a chance to. -->
+<!--- Please add anything that you'd like to say that you didn't already get a chance to. You can delete this if you don't have anything to add. -->
