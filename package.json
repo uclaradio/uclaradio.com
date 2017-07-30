@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" "
+    "dev": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" ",
+    "test": "jest"
   },
   "dependencies": {
     "async": "^2.5.0",
@@ -65,6 +66,7 @@
     "grunt-webpack": "^1.0.11",
     "htmlhint": "^0.9.13",
     "inline-environment-variables-webpack-plugin": "^1.1.0",
+    "jest": "^20.0.4",
     "json-loader": "^0.5.4",
     "jsx-loader": "^0.13.2",
     "sass-loader": "^4.1.0",
