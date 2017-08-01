@@ -954,9 +954,13 @@ binary-extensions@^1.0.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.8.0.tgz#48ec8d16df4377eae5fa5884682480af4d95c774"
 
-bindings@1.2.1, bindings@^1.2.1:
+bindings@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
+
+bindings@^1.2.1:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.3.0.tgz#b346f6ecf6a95f5a815c5839fc7cdb22502f1ed7"
 
 blob@0.0.4:
   version "0.0.4"
@@ -1072,8 +1076,8 @@ buffer-shims@^1.0.0, buffer-shims@~1.0.0:
   resolved "https://registry.yarnpkg.com/buffer-shims/-/buffer-shims-1.0.0.tgz#9978ce317388c649ad8793028c3477ef044a8b51"
 
 buffer-v6-polyfill@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/buffer-v6-polyfill/-/buffer-v6-polyfill-1.0.3.tgz#bc695c6f19d00a63e83338c36cd68f3f5dcba3e8"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/buffer-v6-polyfill/-/buffer-v6-polyfill-1.0.5.tgz#d1cdafeb5600bef6c28d6144964256bd12e01677"
 
 buffer@^4.9.0:
   version "4.9.1"
@@ -3087,6 +3091,35 @@ graceful-fs@~1.2.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
+greenlock-express@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/greenlock-express/-/greenlock-express-2.0.11.tgz#156f47a50e5e07f059516a3e07c81947e46d3709"
+  dependencies:
+    greenlock "^2.1.9"
+    le-challenge-fs "^2.0.4"
+    le-sni-auto "^2.0.1"
+    le-store-certbot "^2.0.3"
+    localhost.daplie.me-certificates "^1.2.3"
+    redirect-https "^1.1.0"
+
+greenlock@^2.1.9:
+  version "2.1.15"
+  resolved "https://registry.yarnpkg.com/greenlock/-/greenlock-2.1.15.tgz#d920672c290cd917fe23eda707102e8ce5c71022"
+  dependencies:
+    asn1js "^1.2.12"
+    bluebird "^3.0.6"
+    certpem "^1.0.0"
+    homedir "^0.6.0"
+    le-acme-core "^2.0.5"
+    le-challenge-fs "^2.0.2"
+    le-challenge-sni "^2.0.0"
+    le-sni-auto "^2.1.0"
+    le-store-certbot "^2.0.3"
+    localhost.daplie.me-certificates "^1.3.0"
+    node.extend "^1.1.5"
+    pkijs "^1.3.27"
+    rsa-compat "^1.2.1"
+
 growly@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
@@ -4462,35 +4495,6 @@ le-tls-sni@^0.1.0:
     node-forge "^0.6.43"
     rsa-compat "^1.2.7"
 
-letsencrypt-express@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/letsencrypt-express/-/letsencrypt-express-2.0.6.tgz#86dfdea3434d7f2eb561e0f94c6c18d55b845b83"
-  dependencies:
-    le-challenge-fs "^2.0.4"
-    le-sni-auto "^2.0.1"
-    le-store-certbot "^2.0.3"
-    letsencrypt "^2.1.0"
-    localhost.daplie.com-certificates "^1.2.3"
-    redirect-https "^1.1.0"
-
-letsencrypt@^2.1.0:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/letsencrypt/-/letsencrypt-2.1.8.tgz#981ae1415b9fb372ae15f1156d5d32b7dcc78bdd"
-  dependencies:
-    asn1js "^1.2.12"
-    bluebird "^3.0.6"
-    certpem "^1.0.0"
-    homedir "^0.6.0"
-    le-acme-core "^2.0.5"
-    le-challenge-fs "^2.0.2"
-    le-challenge-sni "^2.0.0"
-    le-sni-auto "^2.1.0"
-    le-store-certbot "^2.0.3"
-    localhost.daplie.com-certificates "^1.2.3"
-    node.extend "^1.1.5"
-    pkijs "^1.3.27"
-    rsa-compat "^1.2.1"
-
 leven@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-2.1.0.tgz#c2e7a9f772094dee9d34202ae8acce4687875580"
@@ -4555,9 +4559,9 @@ loader-utils@^1.0.2:
     emojis-list "^2.0.0"
     json5 "^0.5.0"
 
-localhost.daplie.com-certificates@^1.2.3:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/localhost.daplie.com-certificates/-/localhost.daplie.com-certificates-1.2.5.tgz#ce191b256c2b332b7464da4d81c78911b0e05407"
+localhost.daplie.me-certificates@^1.2.3, localhost.daplie.me-certificates@^1.3.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/localhost.daplie.me-certificates/-/localhost.daplie.me-certificates-1.4.0.tgz#feabf6f84a793adf08aea5123779402910139f11"
 
 locate-path@^2.0.0:
   version "2.0.0"
