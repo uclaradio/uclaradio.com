@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" ",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
     "test": "jest"
   },
   "lint-staged": {
