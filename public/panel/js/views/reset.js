@@ -1,27 +1,28 @@
-
-$(document).ready(function(){
-  
+$(document).ready(function() {
   var rv = new ResetValidator();
-  
+
   $('#set-password-form').ajaxForm({
-    beforeSubmit : function(formData, jqForm, options){;
+    beforeSubmit: function(formData, jqForm, options) {
       rv.hideAlert();
-      if (rv.validatePassword($('#pass-tf').val()) == false){
+      if (rv.validatePassword($('#pass-tf').val()) == false) {
         return false;
-      }   else{
+      } else {
         return true;
       }
     },
-    success  : function(responseText, status, xhr, $form){
-      rv.showSuccess("Your password has been reset.");
-      setTimeout(function(){ window.location.href = '/'; }, 3000);
+    success: function(responseText, status, xhr, $form) {
+      rv.showSuccess('Your password has been reset.');
+      setTimeout(function() {
+        window.location.href = '/';
+      }, 3000);
     },
-    error : function(){
+    error: function() {
       rv.showAlert("I'm sorry something went wrong, please try again.");
-    }
+    },
   });
 
   $('#set-password').modal('show');
-  $('#set-password').on('shown', function(){ $('#pass-tf').focus(); })
-
+  $('#set-password').on('shown', function() {
+    $('#pass-tf').focus();
+  });
 });
