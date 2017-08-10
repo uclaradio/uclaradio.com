@@ -9,7 +9,7 @@
     "test": "jest"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,jsx}": [
       "prettier --single-quote --trailing-comma es5 --jsx-bracket-same-line --write",
       "git add"
     ]
