@@ -1,19 +1,51 @@
 // panel.js
 // Staff user panel pages and API
 
-var express = require('express');
-var router = express.Router();
-
-var accounts = require('../database/accounts');
-var shows = require('../database/shows');
-var faqs = require('../database/faqs');
-var messages = require('../database/messages');
-var rivendell = require('../database/rivendell');
-
-// Image compression module
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+const mime = require('mime');
+const multer = require('multer');
 const Jimp = require('jimp');
+
+const accounts = require('../database/accounts');
+const shows = require('../database/shows');
+const faqs = require('../database/faqs');
+const messages = require('../database/messages');
+const rivendell = require('../database/rivendell');
+
+// Image handling
 const RESIZE_WIDTH = 512;
 const IMAGE_QUALITY = 80;
+
+const storage = multer.diskStorage({
+  destination: path.join(__dirname, '/../public/uploads'),
+  filename: function(req, file, cb) {
+    cb(null, file.fieldname + Date.now() + '.' + mime.extension(file.mimetype));
+  },
+});
+
+const upload = multer({ storage: storage });
+
+const handleUpload = function(file) {
+  var imgPath = file.path;
+  var mimeType = file.mimetype;
+
+  // Perform image compression on JPG/PNG only
+  if (mimeType == 'image/jpeg' || mimeType == 'image/png') {
+    console.log('compressing');
+    Jimp.read(imgPath, function(err, img) {
+      if (err) {
+        errorCallback(err);
+      }
+      img.resize(RESIZE_WIDTH, Jimp.AUTO).quality(IMAGE_QUALITY).write(imgPath);
+    });
+  } else {
+    console.log('Non-png/jpg file type');
+  }
+
+  return imgPath.replace(/.+public\//g, '/');
+};
 
 /***** Main Log In Page *****/
 
@@ -405,7 +437,7 @@ router.get('/api/userlinks', function(req, res) {
   }
 });
 
-router.post('/api/userPic', function(req, res) {
+router.post('/api/userPic', upload.single('img'), function(req, res) {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
@@ -416,25 +448,8 @@ router.post('/api/userPic', function(req, res) {
       res.status(400).send(err);
     };
 
-    var imgPath = req.files.img.path;
-    var mimeType = req.files.img.mimetype;
+    const picture = handleUpload(req.file);
 
-    // Perform image compression on JPG/PNG only
-    if (mimeType == 'image/jpeg' || mimeType == 'image/png') {
-      Jimp.read(imgPath, function(err, img) {
-        if (err) {
-          errorCallback(err);
-        }
-        img
-          .resize(RESIZE_WIDTH, Jimp.AUTO)
-          .quality(IMAGE_QUALITY)
-          .write(imgPath);
-      });
-    } else {
-      console.log('Non-png/jpg file type');
-    }
-
-    var picture = imgPath.replace('public/', '/');
     var newData = { picture: picture, username: req.body.username };
     accounts.updateAccount(newData, function(err, user) {
       if (err) {
@@ -585,7 +600,7 @@ router.post('/api/addShow', function(req, res) {
   }
 });
 
-router.post('/api/showPic', function(req, res) {
+router.post('/api/showPic', upload.single('img'), function(req, res) {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
@@ -602,25 +617,8 @@ router.post('/api/showPic', function(req, res) {
           res.status(400).send(err);
         };
 
-        var imgPath = req.files.img.path;
-        var mimeType = req.files.img.mimetype;
+        const picture = handleUpload(req.file);
 
-        // Perform image compression on JPG/PNG only
-        if (mimeType == 'image/jpeg' || mimeType == 'image/png') {
-          Jimp.read(imgPath, function(err, img) {
-            if (err) {
-              errorCallback(err);
-            }
-            img
-              .resize(RESIZE_WIDTH, Jimp.AUTO)
-              .quality(IMAGE_QUALITY)
-              .write(imgPath);
-          });
-        } else {
-          console.log('Non-png/jpg file type');
-        }
-
-        var picture = imgPath.replace('public/', '/');
         // update show data with new pictures
         var newData = { picture: picture };
         shows.updateShow(req.body.id, newData, function(err, o) {

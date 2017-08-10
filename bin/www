@@ -37,7 +37,7 @@ if (useSSL) {
    * Create HTTP(S) server.
    */
   var https = require('spdy');
-  var LEX = require('letsencrypt-express');
+  var LEX = require('greenlock-express');
   var lex = LEX.create({
     server: 'https://acme-v01.api.letsencrypt.org/directory',
     challenges: { 'http-01': require('le-challenge-fs').create({ webrootPath: '/tmp/acme-challenges' }) },

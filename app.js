@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var multer = require('multer');
 var socket_io = require('socket.io');
 var app = express();
 var io = socket_io();
@@ -48,7 +47,6 @@ app.use(
 );
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(multer({ dest: './public/uploads/' }));
 
 app.use('/', routes);
 app.use('/staffingPoints', staffingPoints);
