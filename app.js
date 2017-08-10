@@ -35,18 +35,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(session({
-  key: "mysite.sid.uid.whatever",
-  secret: "faeb4453e5d14fe6f6d04637f78077c76c73d1b4",
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 2678400000 // 31 days
-  },
-}));
+app.use(
+  session({
+    key: 'mysite.sid.uid.whatever',
+    secret: 'faeb4453e5d14fe6f6d04637f78077c76c73d1b4',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 2678400000, // 31 days
+    },
+  })
+);
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(multer({ dest: './public/uploads/'}));
+app.use(multer({ dest: './public/uploads/' }));
 
 app.use('/', routes);
 app.use('/staffingPoints', staffingPoints);
@@ -84,7 +86,7 @@ if (app.get('env') === 'development') {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
-      error: err
+      error: err,
     });
   });
 }
@@ -95,7 +97,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
-    error: {}
+    error: {},
   });
 });
 
