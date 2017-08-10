@@ -73,8 +73,10 @@
     "babel-preset-react": "^6.16.0",
     "concurrently": "^3.4.0",
     "eslint": "^3.19.0",
+    "eslint-plugin-prettier": "^2.1.2",
     "eslint-plugin-react": "^6.10.3",
     "htmlhint": "^0.9.13",
+    "prettier": "^1.5.3",
     "stylelint": "^7.10.1"
   }
 }

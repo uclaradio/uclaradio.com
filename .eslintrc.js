@@ -10,9 +10,15 @@ module.exports = {
       "jsx": true
     },
   },
-  "plugins": ["react"],
+  "plugins": ["react", "prettier"],
   "rules": {
     "indent": ["error", 2],
     "eol-last": ["error", "always"],
+    "prettier/prettier": ["error", {
+      "singleQuote": true,
+      "trailingComma": "es5",
+      "jsxBracketSameLine": true,
+    }],
+}]
   }
 };
