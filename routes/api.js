@@ -9,14 +9,13 @@ var router = express.Router();
 
 function checkPublic(show) {
   return show.public;
-};
+}
 
 router.get('/show/:id', function(req, res) {
   shows.getShowById(req.params.id, function(err, o) {
     if (o && o.public) {
       res.json(o);
-    }
-    else {
+    } else {
       res.status(400).send(err);
     }
   });
@@ -25,15 +24,12 @@ router.get('/show/:id', function(req, res) {
 router.get('/schedule', function(req, res) {
   shows.getAllShows(function(err, o) {
     if (o) {
-      res.json({shows: o.filter(checkPublic)});
-    }
-    else {
+      res.json({ shows: o.filter(checkPublic) });
+    } else {
       res.status(400).send(err);
     }
   });
 });
-
-
 
 router.get('/nowplaying', function(req, res) {
   var info = getTimeAndDay();
@@ -42,9 +38,8 @@ router.get('/nowplaying', function(req, res) {
     if (blurb && blurb.public) {
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify(blurb));
-    }
-    else {
-      res.send(JSON.stringify({status: "no show playing"}));
+    } else {
+      res.send(JSON.stringify({ status: 'no show playing' }));
     }
   });
 });
@@ -53,8 +48,7 @@ router.get('/djs/:djName', function(req, res) {
   accounts.getDJByDJName(req.params.djName, function(err, o) {
     if (o) {
       res.json(o);
-    }
-    else {
+    } else {
       res.status(400).send(err);
     }
   });
@@ -63,9 +57,8 @@ router.get('/djs/:djName', function(req, res) {
 router.get('/djs', function(req, res) {
   accounts.getAllUsers(function(err, o) {
     if (o) {
-      res.json({djs: o});
-    }
-    else {
+      res.json({ djs: o });
+    } else {
       res.status(400).send(err);
     }
   });
@@ -79,12 +72,15 @@ router.get('/djs', function(req, res) {
 
 // static data
 router.get('/giveawayDescription', function(req, res) {
-  res.json({info: "We give a lot of tickets away to our listeners.. Tune in and follow us on Facebook and Instagram for your chance to see these shows!"});
+  res.json({
+    info:
+      'We give a lot of tickets away to our listeners.. Tune in and follow us on Facebook and Instagram for your chance to see these shows!',
+  });
 });
 
 // static data
 router.get('/streamURL', function(req, res) {
-  res.json({url: "http://uclaradio.com:8000/;"});
+  res.json({ url: 'http://uclaradio.com:8000/;' });
 });
 
 /* Helper Functions */
@@ -111,7 +107,7 @@ function getTimeAndDay() {
 
   return {
     day: day,
-    time: time
+    time: time,
   };
 }
 

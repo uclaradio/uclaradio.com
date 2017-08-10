@@ -1,13 +1,20 @@
 module.exports = {
-
   AppendValueSoSort: function(blurbs) {
-    for(var i = 0; i < blurbs.length; i++ ){
-      if(blurbs[i].time.substr(blurbs[i].time.length-2, blurbs[i].time.length -1) == "am") {
-        blurbs[i].order = blurbs[i].time.substr(0, blurbs[i].time.length-2) - "12";
-      } else if(blurbs[i].time == "12pm") {
-        blurbs[i].order = blurbs[i].time.substr(0, blurbs[i].time.length-2) - "12";
+    for (var i = 0; i < blurbs.length; i++) {
+      if (
+        blurbs[i].time.substr(
+          blurbs[i].time.length - 2,
+          blurbs[i].time.length - 1
+        ) == 'am'
+      ) {
+        blurbs[i].order =
+          blurbs[i].time.substr(0, blurbs[i].time.length - 2) - '12';
+      } else if (blurbs[i].time == '12pm') {
+        blurbs[i].order =
+          blurbs[i].time.substr(0, blurbs[i].time.length - 2) - '12';
       } else {
-        blurbs[i].order = blurbs[i].time.substr(0, blurbs[i].time.length-2) - "0";
+        blurbs[i].order =
+          blurbs[i].time.substr(0, blurbs[i].time.length - 2) - '0';
       }
     }
     return blurbs;
@@ -16,33 +23,30 @@ module.exports = {
   getUniqueBlurbs: function(blurbs) {
     var unique = [];
 
-    for(var i = 0; i < blurbs.length; i++){
-      var showName = blurbs[i].title
+    for (var i = 0; i < blurbs.length; i++) {
+      var showName = blurbs[i].title;
 
-      if(unique.indexOf(showName) > -1){
-          //check if saved slot is after
-        var saved_blurb = blurbs[unique.indexOf(showName)]
-        if(saved_blurb.time.length > blurbs[i].time.length) {
-            //12
-          console.log("saved_blurb: " + saved_blurb.time);
-          if(blurbs[i].time == "1PM") {
+      if (unique.indexOf(showName) > -1) {
+        //check if saved slot is after
+        var saved_blurb = blurbs[unique.indexOf(showName)];
+        if (saved_blurb.time.length > blurbs[i].time.length) {
+          //12
+          console.log('saved_blurb: ' + saved_blurb.time);
+          if (blurbs[i].time == '1PM') {
             saved_blurb.time = blurbs[i].time;
           }
-        } else if(saved_blurb.time.length < blurbs[i].time.length){
-          if(blurbs[i].time == "12PM") {
+        } else if (saved_blurb.time.length < blurbs[i].time.length) {
+          if (blurbs[i].time == '12PM') {
             saved_blurb.time = blurbs[i].time;
           }
-        }
-        else if(saved_blurb.time[2] < blurbs[i].time[2]) {
+        } else if (saved_blurb.time[2] < blurbs[i].time[2]) {
           saved_blurb.time = blurbs[i].time;
-        };
+        }
         blurbs[unique.indexOf(showName)] = saved_blurb;
         blurbs.splice(i, 1);
-        i = i -1;
-
-
+        i = i - 1;
       } else {
-          //push the names into the array
+        //push the names into the array
         unique.push(showName);
       }
     }
@@ -50,23 +54,26 @@ module.exports = {
   },
 
   truncateName: function(name, l) {
-    return name.length > l ? name.substr(0,l-2) + "\u2026" : name;
+    return name.length > l ? name.substr(0, l - 2) + '\u2026' : name;
   },
 
-  sort_by: function(field, reverse, primer){
-
-    var key = primer ?
-           function(x) {return primer(x[field])} :
-           function(x) {return x[field]};
+  sort_by: function(field, reverse, primer) {
+    var key = primer
+      ? function(x) {
+          return primer(x[field]);
+        }
+      : function(x) {
+          return x[field];
+        };
 
     reverse = !reverse ? 1 : -1;
 
-    return function (a, b) {
-      return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-    }
+    return function(a, b) {
+      return (a = key(a)), (b = key(b)), reverse * ((a > b) - (b > a));
+    };
   },
 
-  encode_safe_url: function (showName){
+  encode_safe_url: function(showName) {
     var safe_url;
     safe_url = showName.split('?').join('(question_mark)');
     safe_url = safe_url.split('$').join('(dollar)');
@@ -95,7 +102,7 @@ module.exports = {
     return safe_url;
   },
 
-  decode_safe_url: function (url){
+  decode_safe_url: function(url) {
     var showName;
     showName = url.split('(question_mark)').join('?');
     showName = showName.split('(dollar)').join('$');
@@ -122,5 +129,5 @@ module.exports = {
     showName = showName.split('_').join(' ');
 
     return showName;
-  }
-}
+  },
+};

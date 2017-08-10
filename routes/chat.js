@@ -7,9 +7,9 @@ module.exports = function(io) {
 
   var messages = require('../database/messages');
 
-    // deliver more message history after a given message
+  // deliver more message history after a given message
   router.post('/getNext', function(req, res) {
-        // id might be null if no message history available yet
+    // id might be null if no message history available yet
     var id = req.body.id;
     var volume = req.body.volume;
     messages.next(id, volume, function(data) {
@@ -17,53 +17,53 @@ module.exports = function(io) {
     });
   });
 
-    // report a message for being innappropriate (can be kept or deleted in manager's panel)
+  // report a message for being innappropriate (can be kept or deleted in manager's panel)
   router.post('/report', function(req, res) {
     var messageID = req.body.id;
     messages.report(messageID, function() {
-      res.json({success: true});
+      res.json({ success: true });
     });
   });
 
-    // deliver list of reported messages
-  router.get('/reportedMessages', function(req, res){
+  // deliver list of reported messages
+  router.get('/reportedMessages', function(req, res) {
     messages.getReportedMessages(function(data) {
       res.send(data);
     });
   });
 
-    // handle socket event
+  // handle socket event
   io.on('connection', function(socket) {
     // new user joined
     socket.on('add user', function() {
       messages.generateUsername(function(username) {
         socket.username = username;
         socket.emit('assign username', username);
-        console.log(username, "joined chatroom.");
+        console.log(username, 'joined chatroom.');
       });
     });
 
     socket.on('set user', function(data) {
       socket.username = data.username;
       socket.emit('assign username', data.username);
-      console.log(data.username, "joined chatroom.")
+      console.log(data.username, 'joined chatroom.');
     });
 
     // user disconnected
-    socket.on('disconnect', function(){
-      console.log(socket.username, "left chatroom.");
+    socket.on('disconnect', function() {
+      console.log(socket.username, 'left chatroom.');
     });
 
     // new message sent
-    socket.on('new message', function (data) {
+    socket.on('new message', function(data) {
       messages.saveMessage(data, function(message) {
         io.sockets.emit('new message', {
           id: message.id,
           text: message.text,
           user: message.user,
-          date: message.date
+          date: message.date,
         });
-        console.log("chat -", message.user + ":", message.text);
+        console.log('chat -', message.user + ':', message.text);
       });
     });
   });
