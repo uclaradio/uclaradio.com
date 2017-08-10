@@ -23,28 +23,26 @@ router.get('/show/:id', function(req, res) {
 });
 
 router.get('/schedule', function(req, res) {
+  var result = {};
+
   shows.getAllShows(function(err, o) {
     if (o) {
-      res.json({shows: o.filter(checkPublic)});
+      result.shows = o.filter(checkPublic);
+
+      var info = getTimeAndDay();
+      shows.getShowByTimeslotAndDay(info.time, info.day, function(err, blurb) {
+        if (blurb && blurb.public) {
+          result.nowplaying = blurb;
+        }
+        else {
+          result.nowplaying = {status: "no show playing"};
+        }
+        
+        res.json(result);
+      });
     }
     else {
       res.status(400).send(err);
-    }
-  });
-});
-
-
-
-router.get('/nowplaying', function(req, res) {
-  var info = getTimeAndDay();
-
-  shows.getShowByTimeslotAndDay(info.time, info.day, function(err, blurb) {
-    if (blurb && blurb.public) {
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(blurb));
-    }
-    else {
-      res.send(JSON.stringify({status: "no show playing"}));
     }
   });
 });

@@ -15,7 +15,8 @@ var urls = {
   deleteUnverified: "/panel/manager/api/deleteUnverified",
   getReportedMessages: "/chat/reportedMessages",
   deleteMessages: "/panel/manager/api/deletechat",
-  keepMessages: "/panel/manager/api/freechat"
+  keepMessages: "/panel/manager/api/freechat",
+  spotlightShow: 12 //replace with relevant url
 };
 
 // Panel Elements
@@ -26,6 +27,7 @@ var ShowList = require('./panel/ShowList.jsx');
 // Inputs
 var InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
 var InputCheckbox = require('./panel/inputs/InputCheckbox.jsx');
+var InputSpotlightDropdown = require('./panel/inputs/InputSpotlightDropdown.jsx');
 
 // Bootstrap Elements
 import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';
@@ -45,7 +47,7 @@ var ManagerPage = React.createClass({
                 <Manager urls={this.props.urls} />
               </Well>
               <ReportedMessages />
-              <ManagerShowsList urls={this.props.urls} />
+              <Shows urls={this.props.urls} />
             </Col>
             <Col xs={12} md={6}>
               <AccountsList urls={this.props.urls} />
@@ -57,6 +59,66 @@ var ManagerPage = React.createClass({
   }
 });
 
+var Shows = React.createClass({
+  getInitialState: function() {
+    // shows: {title, day, time}
+    return {shows: [], loaded: false};
+  },
+  loadDataFromServer: function() {
+    $.ajax({
+      url: this.props.urls.allShows,
+      dataType: 'json',
+      cache: false,
+      success: function(shows) {
+        this.setState({shows: shows, loaded: true});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.urls.allShows, status, err.toString());
+      }.bind(this)
+    });
+  },
+  componentDidMount: function() {
+    this.loadDataFromServer();
+  },
+  render: function() {
+    return (
+      <div>
+        <Spotlight urls={this.props.urls} shows={this.state.shows} />
+        <ManagerShowsList urls={this.props.urls} shows={this.state.shows} />
+      </div>
+    );
+  }
+});
+
+var Spotlight = React.createClass({
+  handleSpotlightSubmit: function(showId) {
+    console.log(showId);
+    // Push to server (this.props.urls.spotlightShow)
+  },
+  render: function () {
+    return (
+      <div>
+        <h4>Spotlight Show of the Week</h4>
+        <Well>
+          <InputSpotlightDropdown spotlightShow={this.props.urls.spotlightShow}
+            shows={this.props.shows} onSpotlightSubmit={this.handleSpotlightSubmit}/>
+        </Well>
+      </div>
+    );
+  }
+});
+
+var ManagerShowsList = React.createClass({
+  render: function() {
+    return (
+      <div className="userShowsList">
+        <h4>Shows</h4>
+        <ShowList url={this.props.urls.showLink} shows={this.props.shows}
+          placeholder="/img/radio.png" short />
+      </div>
+    );
+  }
+});
 
 var ReportedMessages = React.createClass({
   getInitialState: function() {
@@ -245,39 +307,6 @@ var Manager = React.createClass({
   }
 });
 
-
-var ManagerShowsList = React.createClass({
-  getInitialState: function() {
-    // shows: {title, day, time}
-    return {shows: []};
-  },
-  loadDataFromServer: function() {
-    $.ajax({
-      url: this.props.urls.allShows,
-      dataType: 'json',
-      cache: false,
-      success: function(shows) {
-        this.setState({shows: shows});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.urls.allShows, status, err.toString());
-      }.bind(this)
-    });
-  },
-  componentDidMount: function() {
-    this.loadDataFromServer();
-  },
-  render: function() {
-    return (
-      <div className="userShowsList">
-        <h4>Shows</h4>
-        <ShowList url={this.props.urls.showLink} shows={this.state.shows}
-          placeholder="/img/radio.png" short />
-      </div>
-    );
-  }
-});
-
 // user account strings
 const atManagerGlyph = "fire";
 // verify user strings
@@ -415,7 +444,6 @@ var AccountsList = React.createClass({
     );
   }
 });
-
 
 ReactDOM.render(
   <ManagerPage urls={urls} />,
