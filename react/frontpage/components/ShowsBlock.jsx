@@ -8,7 +8,15 @@ import Dates from '../../common/Dates';
 // styling
 require('./ShowsBlock.scss');
 
-const week = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+const week = [
+  'sunday',
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+];
 
 /*
 Full graph with schedule of shows
@@ -25,36 +33,47 @@ Full graph with schedule of shows
 const ShowsGraph = React.createClass({
   getInitialState: function() {
     return {
-      activeShowID: -1
-    }
+      activeShowID: -1,
+    };
   },
   toggleActiveShow: function(showID) {
-    this.setState({activeShowID: showID});
+    this.setState({ activeShowID: showID });
   },
   render: function() {
-
-    var dayTitles = week.map((day) => {
+    var dayTitles = week.map(day => {
       return (
         <p>
           {Dates.abbreviatedDay(day)}
-        </p> 
+        </p>
       );
     });
 
-    var showBlocks = "";
+    var showBlocks = '';
     for (var hour = 0; hour < 24; hour++) {
       var hourString = Dates.availableTimes[hour];
       showBlocks += (
-        <div style={{ display: 'inline-block', position: 'relative', width: '100%', margin: '0 auto' }}>
-          <p className="timeStyle">{hourString}</p> 
-          { week.map((day) => {
+        <div
+          style={{
+            display: 'inline-block',
+            position: 'relative',
+            width: '100%',
+            margin: '0 auto',
+          }}>
+          <p className="timeStyle">
+            {hourString}
+          </p>
+          {week.map(day => {
             var show = this.props.schedule[day][hour];
             showBlocks += (
-              <ShowBlock isValidShow={(show !== null)}
+              <ShowBlock
+                isValidShow={show !== null}
                 isCurrentShow={show && show.id === this.props.currentShowID}
                 isActiveShow={show && show.id === this.state.activeShowID}
                 isSpotlightShow={show && show.id === this.props.spotlightShowID}
-                handleClick={()=>{show && this.toggleActiveShow(show.id)}} />
+                handleClick={() => {
+                  show && this.toggleActiveShow(show.id);
+                }}
+              />
             );
           })}
         </div>
@@ -65,10 +84,9 @@ const ShowsGraph = React.createClass({
       <div className="showsGraph">
         {dayTitles}
         {showBlocks}
-
       </div>
     );
-  }
+  },
 });
 
 /*
@@ -82,39 +100,40 @@ Individual show block with rollover action
 */
 var ShowBlock = React.createClass({
   handleMouseOver: function() {
-    this.setState({active: true});
+    this.setState({ active: true });
   },
   handleMouseOut: function() {
-    this.setState({active: false});
+    this.setState({ active: false });
   },
   handleClick: function() {
-    this.props.handleClick()
+    this.props.handleClick();
   },
   render: function() {
     if (!this.props.isValidShow) {
       var boringBlockStyle = {
-        backgroundColor: 'white'
-      }
-      return (
-        <div className='showBlock' style={boringBlockStyle} />
-      );
+        backgroundColor: 'white',
+      };
+      return <div className="showBlock" style={boringBlockStyle} />;
     } else {
-      var blockColor = (this.props.isCurrentShow && '#3c84cc')
-        || (this.props.isSpotlightShow && 'purple')
-        || 'yellow';
+      var blockColor =
+        (this.props.isCurrentShow && '#3c84cc') ||
+        (this.props.isSpotlightShow && 'purple') ||
+        'yellow';
 
       var blockStyle = {
         backgroundColor: blockColor,
       };
       return (
-        <div className="showBlock" style={blockStyle}
-        onMouseOver={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
-        onClick={this.handleClick}
+        <div
+          className="showBlock"
+          style={blockStyle}
+          onMouseOver={this.handleMouseOver}
+          onMouseOut={this.handleMouseOut}
+          onClick={this.handleClick}
         />
       );
     }
-  }
+  },
 });
 
 module.exports = ShowsGraph;

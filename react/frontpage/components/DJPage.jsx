@@ -9,11 +9,11 @@ import Loader from './Loader.jsx';
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
 
-import  { Link } from 'react-router';
-import {Grid, Col, Row} from 'react-bootstrap';
+import { Link } from 'react-router';
+import { Grid, Col, Row } from 'react-bootstrap';
 
-var defaultDJPic = "/img/bear_transparent.png";
-var defaultDJBio = " hasn't updated their bio yet, but they are pretty rad 😎"
+var defaultDJPic = '/img/bear_transparent.png';
+var defaultDJBio = " hasn't updated their bio yet, but they are pretty rad 😎";
 
 // styling
 require('./DJPage.scss');
@@ -36,7 +36,7 @@ const DJPage = React.createClass({
   render: function() {
     var dj = this.props.dj;
     if (!dj) {
-      return(
+      return (
         <div className="djPage">
           <h3 className="center">No DJ Page Found!</h3>
         </div>
@@ -47,17 +47,25 @@ const DJPage = React.createClass({
       <div className="djPage">
         <Row>
           <Col xs={12} md={4}>
-            <RectImage src={ dj.picture || defaultDJPic } circle maxWidth="380px" />
+            <RectImage
+              src={dj.picture || defaultDJPic}
+              circle
+              maxWidth="380px"
+            />
           </Col>
           <Col xs={12} md={8}>
-            <h2> {dj.djName} </h2>
+            <h2>
+              {' '}{dj.djName}{' '}
+            </h2>
             <h4> About </h4>
-            <p> {dj.bio || dj.djName + defaultDJBio} </p>
+            <p>
+              {' '}{dj.bio || dj.djName + defaultDJBio}{' '}
+            </p>
           </Col>
         </Row>
       </div>
     );
-  }
+  },
 });
 
 export default DJPage;

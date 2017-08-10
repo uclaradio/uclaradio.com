@@ -6,22 +6,19 @@ import { connect } from 'react-redux';
 import { fetchUpdatedShows } from '../actions/shows';
 import ShowsContent from '../components/ShowsContent.jsx';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   shows: state.shows.shows,
   fetching: state.shows.fetching,
   currentShowID: state.shows.nowPlayingID,
-  spotlightShowID: state.shows.spotlightID
+  spotlightShowID: state.shows.spotlightID,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   updateShows: () => {
     fetchUpdatedShows(dispatch);
-  }
+  },
 });
 
-const ShowsTab = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ShowsContent);
+const ShowsTab = connect(mapStateToProps, mapDispatchToProps)(ShowsContent);
 
 export default ShowsTab;

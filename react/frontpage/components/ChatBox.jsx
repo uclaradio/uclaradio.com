@@ -1,7 +1,7 @@
 // ChatBox.jsx
 
 var React = require('react');
-var List = require("collections/list");
+var List = require('collections/list');
 var cookie = require('react-cookie');
 
 import { Grid, Col, Row } from 'react-bootstrap';
@@ -10,17 +10,17 @@ var socket = io();
 
 require('./ChatBox.scss');
 
-const GetPreviousMessagesURL = "/chat/getNext";
-const ReportMessageURL = "/chat/report";
+const GetPreviousMessagesURL = '/chat/getNext';
+const ReportMessageURL = '/chat/report';
 
 /** Helper functions **/
 
-const imageURL = (url) => {
-  return(url.match(/\.(jpeg|jpg|gif|png)$/) != null);
-}
+const imageURL = url => {
+  return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
+};
 
 const scrollToBottom = () => {
-  var objDiv = document.getElementById("chatbox");
+  var objDiv = document.getElementById('chatbox');
   objDiv.scrollTop = objDiv.scrollHeight;
 };
 
@@ -30,9 +30,9 @@ Chatroom component allowing users to post messages to our server socket
 var ChatBox = React.createClass({
   getInitialState: function() {
     return {
-      user: "",
+      user: '',
       messages: [],
-      text: ''
+      text: '',
     };
   },
   componentWillMount: function() {
@@ -42,7 +42,7 @@ var ChatBox = React.createClass({
     var username = cookie.load('username');
     if (username) {
       // join as existing user
-      socket.emit('set user', {username: username});
+      socket.emit('set user', { username: username });
     } else {
       // join as new user
       socket.emit('add user');
@@ -53,34 +53,38 @@ var ChatBox = React.createClass({
     scrollToBottom();
   },
   getNext: function(id, volume) {
-    $.post(GetPreviousMessagesURL, {
-      id: id,
-      volume: volume,
-    }, function(previousMessages) {
-      var messages = this.state.messages;
-      previousMessages.map(function(message) {
-        messages.unshift(message);
-      });
-      this.setState({messages: messages});
+    $.post(
+      GetPreviousMessagesURL,
+      {
+        id: id,
+        volume: volume,
+      },
+      function(previousMessages) {
+        var messages = this.state.messages;
+        previousMessages.map(function(message) {
+          messages.unshift(message);
+        });
+        this.setState({ messages: messages });
 
-      var first = messages.peek();
-      if (first) {
-        this.setState({message_db_cursor: first.id});
-      }
-    }.bind(this));
+        var first = messages.peek();
+        if (first) {
+          this.setState({ message_db_cursor: first.id });
+        }
+      }.bind(this)
+    );
   },
   messageReceived: function(message) {
     var messages = this.state.messages;
     messages.push(message);
-    this.setState({messages: messages});
+    this.setState({ messages: messages });
     scrollToBottom();
   },
   setUsername: function(username) {
     // save username in cookie
     var d = new Date();
-    d.setDate(d.getDate()+(2*365));
-    cookie.save('username', username, {path: '/', expires:d});
-    this.setState({user:username});
+    d.setDate(d.getDate() + 2 * 365);
+    cookie.save('username', username, { path: '/', expires: d });
+    this.setState({ user: username });
   },
   handleMessageSubmit: function(message) {
     socket.emit('new message', message);
@@ -92,50 +96,51 @@ var ChatBox = React.createClass({
     var viewing_user = this.state.user;
     return (
       <span>
-      <Grid>
-      <Col xs={12} md={8}>
-        <div className='chat-box-fade-top'>
-          <div className='chat-box-fade-bottom'>
-            <div id='chatbox'>
-              <div id="load_more_wrapper">
-              <center>
-                <button id="load_more" onClick={this.retrieveOlderMessages}>
-                  MORE
-                </button>
-              </center>
-              </div>
-              <div id='messages' className='messages'>
-              { this.state.messages.map(function(message) {
-                  return (
-                    <span key={message.id}> {
-                      !message.event && 
-                      <Message
-                        user={message.user}
-                        text={message.text}
-                        date={message.date}
-                        messageID={message.id}
-                        viewing_user={viewing_user}
-                      /> }
-                    <br />
-                    </span>
-                  );
-                })
-              }
+        <Grid>
+          <Col xs={12} md={8}>
+            <div className="chat-box-fade-top">
+              <div className="chat-box-fade-bottom">
+                <div id="chatbox">
+                  <div id="load_more_wrapper">
+                    <center>
+                      <button
+                        id="load_more"
+                        onClick={this.retrieveOlderMessages}>
+                        MORE
+                      </button>
+                    </center>
+                  </div>
+                  <div id="messages" className="messages">
+                    {this.state.messages.map(function(message) {
+                      return (
+                        <span key={message.id}>
+                          {' '}{!message.event &&
+                            <Message
+                              user={message.user}
+                              text={message.text}
+                              date={message.date}
+                              messageID={message.id}
+                              viewing_user={viewing_user}
+                            />}
+                          <br />
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </Col>
-      <Col xs={12} md={4}>
-        <MessageForm
-          onMessageSubmit={this.handleMessageSubmit}
-          user={this.state.user}
-        />
-      </Col>
-      </Grid>
+          </Col>
+          <Col xs={12} md={4}>
+            <MessageForm
+              onMessageSubmit={this.handleMessageSubmit}
+              user={this.state.user}
+            />
+          </Col>
+        </Grid>
       </span>
     );
-  }
+  },
 });
 
 /**
@@ -152,13 +157,17 @@ var Message = React.createClass({
     return {};
   },
   reportMessage: function() {
-    $.post(ReportMessageURL, {
-      id: this.props.messageID
-    }, function(result) {
-      if (result.success) {        
-        this.setState({reported: true});
-      }
-    }.bind(this));
+    $.post(
+      ReportMessageURL,
+      {
+        id: this.props.messageID,
+      },
+      function(result) {
+        if (result.success) {
+          this.setState({ reported: true });
+        }
+      }.bind(this)
+    );
   },
   render: function() {
     var date = new Date(this.props.date);
@@ -168,19 +177,23 @@ var Message = React.createClass({
     var Minute = date.getMinutes();
     var Second = date.getSeconds();
     return (
-      <div className="message"> 
-        <div className={(this.props.user != this.props.viewing_user) ? "their-message" : "my-message"}>
-          { /* Message Body */ }
+      <div className="message">
+        <div
+          className={
+            this.props.user != this.props.viewing_user
+              ? 'their-message'
+              : 'my-message'
+          }>
+          {/* Message Body */}
           <div className="message-body-tag">
-          {
-            //if it's an image, display the image
+            {//if it's an image, display the image
             this.props.text.split(' ').map(function(word) {
-              if (word.length > 4 && word.substring(0,4) == "http") {
+              if (word.length > 4 && word.substring(0, 4) == 'http') {
                 return (
                   <span>
                     <br />
                     <a href={word} target="_blank">
-                      { imageURL(word) ? <img src={word} /> : ""}
+                      {imageURL(word) ? <img src={word} /> : ''}
                       <br />
                       {word}
                     </a>
@@ -189,27 +202,36 @@ var Message = React.createClass({
                 );
               }
               //otherwise just display the text
-              return word + " ";
-            })
-          } { /* Report Message */
+              return word + ' ';
+            })}{' '}
+            {/* Report Message */
             this.props.user != this.props.viewing_user &&
-            <button className="report-message" onClick={this.reportMessage}>
-              {this.state.reported ? "GOT IT" : "REPORT"}
-            </button>
-          }
+              <button className="report-message" onClick={this.reportMessage}>
+                {this.state.reported ? 'GOT IT' : 'REPORT'}
+              </button>}
           </div>
         </div>
         <br />
-        <div id="message-username-tag" 
-          style={ (this.props.user == this.props.viewing_user) ? {float: "right"} : {float: "left"}}>
+        <div
+          id="message-username-tag"
+          style={
+            this.props.user == this.props.viewing_user
+              ? { float: 'right' }
+              : { float: 'left' }
+          }>
           <span className="message-username-tag-username">
             {this.props.user}
           </span>
-          {" " /*+ Month + "/" + Day + " "*/ + Hour + ":" + Minute + ":" + Second}
-        </div>  
+          {' ' /*+ Month + "/" + Day + " "*/ +
+            Hour +
+            ':' +
+            Minute +
+            ':' +
+            Second}
+        </div>
       </div>
     );
-  }
+  },
 });
 
 /**
@@ -220,45 +242,45 @@ Form to submit new message
 **/
 var MessageForm = React.createClass({
   getInitialState: function() {
-    return {text: ''};
+    return { text: '' };
   },
   handleSubmit: function(e) {
     e.preventDefault();
     if (this.state.text.trim() != '') {
       var message = {
-        user : this.props.user,
-        text : this.state.text,
-        date : new Date()
-      }
-      this.props.onMessageSubmit(message); 
+        user: this.props.user,
+        text: this.state.text,
+        date: new Date(),
+      };
+      this.props.onMessageSubmit(message);
       this.setState({ text: '' });
     }
   },
   changeHandler: function(e) {
-    this.setState({ text : e.target.value });
+    this.setState({ text: e.target.value });
   },
   render: function() {
     return (
       <span>
-        <div className='message_form'>
+        <div className="message_form">
           <form onSubmit={this.handleSubmit}>
             <input
               onChange={this.changeHandler}
               value={this.state.text}
               placeholder="Write a Message"
             />
-            <br /><br />
+            <br />
+            <br />
             <div id="load_more_wrapper">
-            <center>
-              <input type="submit" value="SEND" id="load_more">
-              </input>
-            </center>
+              <center>
+                <input type="submit" value="SEND" id="load_more" />
+              </center>
             </div>
           </form>
         </div>
       </span>
     );
-  }
+  },
 });
 
 module.exports = ChatBox;

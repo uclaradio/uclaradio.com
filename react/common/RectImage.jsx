@@ -23,34 +23,37 @@ require('./RectImage.scss');
 var RectImage = React.createClass({
   getDefaultProps: function() {
     return {
-      aspectRatio: 1.0
+      aspectRatio: 1.0,
     };
   },
   handleResize: function(e) {
-    this.setState({windowWidth: window.innerWidth});
+    this.setState({ windowWidth: window.innerWidth });
   },
   render: function() {
     var pictureStyle = {
-      backgroundImage: "url(" + this.props.src + ")",
-      width: "100%",
-      height: "100%",
-      backgroundSize: "cover"
+      backgroundImage: 'url(' + this.props.src + ')',
+      width: '100%',
+      height: '100%',
+      backgroundSize: 'cover',
     };
     if (this.props.circle) {
-      pictureStyle.borderRadius = "50%";
+      pictureStyle.borderRadius = '50%';
     }
     var rectangleStyle = {
       maxWidth: this.props.maxWidth,
-      margin: "0 auto"
+      margin: '0 auto',
     };
     return (
-      <Rectangle className="rectImage" aspectRatio={this.props.aspectRatio} style={rectangleStyle}>
+      <Rectangle
+        className="rectImage"
+        aspectRatio={this.props.aspectRatio}
+        style={rectangleStyle}>
         <div style={pictureStyle} className="rectImagePic">
           {this.props.children}
         </div>
       </Rectangle>
     );
-  }
+  },
 });
 
 module.exports = RectImage;

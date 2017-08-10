@@ -10,19 +10,16 @@ const mapStateToProps = (state, ownProps) => {
   var eventID = ownProps.params['eventID'];
   return {
     event: state.events.events[eventID],
-    fetching: state.events.fetching
+    fetching: state.events.fetching,
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   updateEvents: () => {
     fetchUpdatedEvents(dispatch);
-  }
+  },
 });
 
-const EventContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EventPage);
+const EventContainer = connect(mapStateToProps, mapDispatchToProps)(EventPage);
 
 export default EventContainer;

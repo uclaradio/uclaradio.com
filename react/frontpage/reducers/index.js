@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 import events from './events';
 import shows from './shows';
@@ -7,7 +7,7 @@ import djs from './djs';
 const frontpage = combineReducers({
   events,
   shows,
-  djs
+  djs,
 });
 
 export default frontpage;

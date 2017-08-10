@@ -3,24 +3,25 @@
 
 import { connect } from 'react-redux';
 
-import { updateDJs, startFetching, stopFetching, fetchUpdatedDJs } from '../actions/djs';
+import {
+  updateDJs,
+  startFetching,
+  stopFetching,
+  fetchUpdatedDJs,
+} from '../actions/djs';
 import DJList from '../components/DJList.jsx';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   djs: state.djs.djs,
-  fetching: state.djs.fetching
+  fetching: state.djs.fetching,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   updateDJs: () => {
     fetchUpdatedDJs(dispatch);
-  }
+  },
 });
 
-const DJsTab = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DJList);
-
+const DJsTab = connect(mapStateToProps, mapDispatchToProps)(DJList);
 
 export default DJsTab;

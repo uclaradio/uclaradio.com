@@ -3,7 +3,7 @@
 
 const initialState = {
   events: [],
-  fetching: false
+  fetching: false,
 };
 
 const events = (state = initialState, action) => {
@@ -11,24 +11,24 @@ const events = (state = initialState, action) => {
     case 'UPDATE_EVENTS':
       // simply replace events with new data
       return Object.assign({}, state, {
-        events: action.events
+        events: action.events,
       });
     case 'UPDATE_GROUPS':
       // use for groups (months) of events
       return Object.assign({}, state, {
-        groups: action.groups
+        groups: action.groups,
       });
     case 'STARTED_FETCHING_EVENTS':
       return Object.assign({}, state, {
-        fetching: true
+        fetching: true,
       });
     case 'STOPPED_FETCHING_EVENTS':
       return Object.assign({}, state, {
-        fetching: false
+        fetching: false,
       });
     default:
       return state;
   }
-}
+};
 
 export default events;

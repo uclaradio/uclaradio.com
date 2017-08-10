@@ -6,27 +6,24 @@ import { connect } from 'react-redux';
 import { updateEvents, fetchUpdatedEvents } from '../actions/events';
 import EventList from '../components/EventList.jsx';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   eventGroups: eventGroupsFromState(state.events),
-  fetching: state.events.fetching
+  fetching: state.events.fetching,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   updateEvents: () => {
     fetchUpdatedEvents(dispatch);
-  }
+  },
 });
 
-const EventsTab = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EventList);
+const EventsTab = connect(mapStateToProps, mapDispatchToProps)(EventList);
 
 /**
 Helpers
 **/
 
-const eventGroupsFromState = (state) => {
+const eventGroupsFromState = state => {
   if (!state.events || !state.groups) {
     return [];
   }
@@ -37,9 +34,13 @@ const eventGroupsFromState = (state) => {
     var stateGroup = state.groups[groupIndex];
     var newGroup = {
       title: stateGroup.title,
-      events: []
+      events: [],
     };
-    for (var eventIndex = 0; eventIndex < stateGroup.eventIDs.length; eventIndex++) {
+    for (
+      var eventIndex = 0;
+      eventIndex < stateGroup.eventIDs.length;
+      eventIndex++
+    ) {
       var event = state.events[stateGroup.eventIDs[eventIndex]];
       if (event) {
         newGroup.events.push(event);

@@ -8,7 +8,7 @@ import { fetchUpdatedShows } from '../actions/shows';
 
 const mapStateToProps = (state, ownProps) => {
   var props = {
-    fetching: state.shows.fetching
+    fetching: state.shows.fetching,
   };
 
   var showID = Number(ownProps.params['showID']);
@@ -24,15 +24,12 @@ const mapStateToProps = (state, ownProps) => {
   return props;
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   updateShows: () => {
     fetchUpdatedShows(dispatch);
-  }
+  },
 });
 
-const ShowContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ShowPage);
+const ShowContainer = connect(mapStateToProps, mapDispatchToProps)(ShowPage);
 
 export default ShowContainer;

@@ -29,16 +29,20 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 */
 var InputEditableDateTimeField = React.createClass({
   getInitialState: function() {
-    return {day: 'Mon', time: '10am', editable: false};
+    return { day: 'Mon', time: '10am', editable: false };
   },
   handleDayChange: function(e, day) {
-    this.setState({day: day});
+    this.setState({ day: day });
   },
   handleTimeChange: function(e, time) {
-    this.setState({time: time});
+    this.setState({ time: time });
   },
   toggleEditableField: function(e) {
-    this.setState({day: this.props.day, time: this.props.time, editable: !this.state.editable})
+    this.setState({
+      day: this.props.day,
+      time: this.props.time,
+      editable: !this.state.editable,
+    });
   },
   handleSubmit: function(e) {
     e.preventDefault();
@@ -46,55 +50,91 @@ var InputEditableDateTimeField = React.createClass({
     var time = this.state.time.trim();
     if (day && time) {
       this.props.onDateSubmit(day, time);
-      this.setState({day: 'Mon', time: '10am', editable: false});
+      this.setState({ day: 'Mon', time: '10am', editable: false });
     }
   },
   render: function() {
-    var editButton = <a className="customInput" onClick={this.toggleEditableField}>Edit</a>;
+    var editButton = (
+      <a className="customInput" onClick={this.toggleEditableField}>
+        Edit
+      </a>
+    );
     // var cancelButton = <Button className="cancelLink" onClick={this.toggleEditableField}>Cancel</Button>;
-    var actionButton = <span>
-                        <a onClick={this.handleSubmit}>{this.props.buttonTitle || "Update"}</a>
-                        &emsp;&emsp;&emsp;<a className="cancelLink" onClick={this.toggleEditableField}>Cancel</a>
-                       </span>
+    var actionButton = (
+      <span>
+        <a onClick={this.handleSubmit}>{this.props.buttonTitle || 'Update'}</a>
+        &emsp;&emsp;&emsp;<a
+          className="cancelLink"
+          onClick={this.toggleEditableField}>
+          Cancel
+        </a>
+      </span>
+    );
     var days = Dates.availableDays.map(function(day) {
-      return <MenuItem key={day} eventKey={day}>{Dates.dayFromVar(day)}</MenuItem>;
+      return (
+        <MenuItem key={day} eventKey={day}>
+          {Dates.dayFromVar(day)}
+        </MenuItem>
+      );
     });
 
     var times = Dates.availableTimes.map(function(time) {
-      return <MenuItem key={time} eventKey={time}>{time}</MenuItem>;
+      return (
+        <MenuItem key={time} eventKey={time}>
+          {time}
+        </MenuItem>
+      );
     });
     return (
       <div className="inputEditableDateTimeField">
         <form className="form-horizontal">
-          <Input label={this.props.title} labelClassName="col-xs-3" wrapperClassName="inputEditWrapper col-xs-9"
+          <Input
+            label={this.props.title}
+            labelClassName="col-xs-3"
+            wrapperClassName="inputEditWrapper col-xs-9"
             addonAfter={this.state.editable ? actionButton : editButton}>
-            { this.state.editable ?
-              // field edit/submittable
+            {this.state.editable
+              ? // field edit/submittable
                 <ButtonGroup>
-                  <DropdownButton id="day" title={Dates.dayFromVar(this.state.day) || <span className="placeholder">Day</span>}
-                  onSelect={this.handleDayChange} key={this.state.day}>
+                  <DropdownButton
+                    id="day"
+                    title={
+                      Dates.dayFromVar(this.state.day) ||
+                      <span className="placeholder">Day</span>
+                    }
+                    onSelect={this.handleDayChange}
+                    key={this.state.day}>
                     {days}
                   </DropdownButton>
-                  <DropdownButton id="time" title={this.state.time || <span className="placeholder">Time</span>}
-                  onSelect={this.handleTimeChange} key={this.state.time}>
+                  <DropdownButton
+                    id="time"
+                    title={
+                      this.state.time ||
+                      <span className="placeholder">Time</span>
+                    }
+                    onSelect={this.handleTimeChange}
+                    key={this.state.time}>
                     {times}
                   </DropdownButton>
                 </ButtonGroup>
-              :
-              // locked to user input
-              <span className="customInput">
-                { (this.props.day && this.props.time) ?
-                  <span>{Dates.dayFromVar(this.props.day)} {this.props.time} {this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>
-                  :
-                  <span className="placeholder">{this.props.placeholder}</span>
-                }
-              </span>
-            }
+              : // locked to user input
+                <span className="customInput">
+                  {this.props.day && this.props.time
+                    ? <span>
+                        {Dates.dayFromVar(this.props.day)} {this.props.time}{' '}
+                        {this.props.verified
+                          ? <Glyphicon className="verifiedGlyph" glyph="ok" />
+                          : ''}
+                      </span>
+                    : <span className="placeholder">
+                        {this.props.placeholder}
+                      </span>}
+                </span>}
           </Input>
         </form>
       </div>
     );
-  }
+  },
 });
 
 module.exports = InputEditableDateTimeField;

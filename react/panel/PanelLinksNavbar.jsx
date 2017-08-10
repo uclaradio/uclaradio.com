@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-var linksURL = "/panel/api/userlinks";
+var linksURL = '/panel/api/userlinks';
 
 // Bootstrap elements
 var Navbar = require('react-bootstrap').Navbar;
@@ -15,7 +15,7 @@ var NavItem = require('react-bootstrap').NavItem;
 */
 var PanelLinksNavbar = React.createClass({
   getInitialState: function() {
-    return {links: []};
+    return { links: [] };
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -23,11 +23,11 @@ var PanelLinksNavbar = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(o) {
-        this.setState({links: o.links, loggedin: o.loggedin});
+        this.setState({ links: o.links, loggedin: o.loggedin });
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(linksURL, status, err.toString());
-      }.bind(this)
+      }.bind(this),
     });
   },
   // provided a node element and a link, this function will wrap
@@ -35,7 +35,11 @@ var PanelLinksNavbar = React.createClass({
   // if the provided link is the same as the current path ('/panel/...')
   styleLink: function(element, link) {
     if (link == window.location.pathname) {
-      return <span className="navbarSelected">{element}</span>;
+      return (
+        <span className="navbarSelected">
+          {element}
+        </span>
+      );
     }
     return element;
   },
@@ -46,7 +50,9 @@ var PanelLinksNavbar = React.createClass({
     var styleLink = this.styleLink;
     var links = this.state.links.map(function(link, i) {
       return (
-        <NavItem eventKey={i} key={i} href={link.link}>{styleLink(link.title, link.link)}</NavItem>
+        <NavItem eventKey={i} key={i} href={link.link}>
+          {styleLink(link.title, link.link)}
+        </NavItem>
       );
     });
     return (
@@ -54,7 +60,9 @@ var PanelLinksNavbar = React.createClass({
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/panel/home">{styleLink("Secret DJ Panel", "/panel/home")}</a>
+              <a href="/panel/home">
+                {styleLink('Secret DJ Panel', '/panel/home')}
+              </a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -63,18 +71,17 @@ var PanelLinksNavbar = React.createClass({
               {links}
             </Nav>
             {this.state.loggedin
-              ?
-            <Nav pullRight>
-              <NavItem id="navbarLogout" eventKey={1} href="/panel/logout">Log Out</NavItem>
-            </Nav>
-            :
-            ''
-            }
+              ? <Nav pullRight>
+                  <NavItem id="navbarLogout" eventKey={1} href="/panel/logout">
+                    Log Out
+                  </NavItem>
+                </Nav>
+              : ''}
           </Navbar.Collapse>
         </Navbar>
       </div>
     );
-  }
+  },
 });
 
 module.exports = PanelLinksNavbar;

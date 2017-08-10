@@ -30,36 +30,53 @@ var ActionButtons = React.createClass({
     this.props.onReject(this.props.value);
   },
   render: function() {
-    var showAccept = this.props.acceptTitle && this.props.acceptTooltip && this.props.onAccept;
+    var showAccept =
+      this.props.acceptTitle && this.props.acceptTooltip && this.props.onAccept;
     if (showAccept) {
-      var tooltip1 = (<Tooltip id={this.props.acceptTooltip}>{this.props.acceptTooltip}</Tooltip>);
+      var tooltip1 = (
+        <Tooltip id={this.props.acceptTooltip}>
+          {this.props.acceptTooltip}
+        </Tooltip>
+      );
     }
-    var tooltip2 = (<Tooltip id={this.props.rejectTooltip}>{this.props.rejectTooltip}</Tooltip>);
+    var tooltip2 = (
+      <Tooltip id={this.props.rejectTooltip}>
+        {this.props.rejectTooltip}
+      </Tooltip>
+    );
     return (
       <div className="actionButton">
         <ButtonGroup>
-
-          { showAccept
-          ?
-          <OverlayTrigger placement="top" overlay={tooltip1} delayShow={500}>
-            <Button className="table-action1" bsStyle="link" onClick={this.handleAccept} disabled={this.props.actionsDisabled}>
-              <Glyphicon glyph="ok" />{this.props.acceptTitle}
-            </Button>
-          </OverlayTrigger>
-          :
-          <div />
-          }
+          {showAccept
+            ? <OverlayTrigger
+                placement="top"
+                overlay={tooltip1}
+                delayShow={500}>
+                <Button
+                  className="table-action1"
+                  bsStyle="link"
+                  onClick={this.handleAccept}
+                  disabled={this.props.actionsDisabled}>
+                  <Glyphicon glyph="ok" />
+                  {this.props.acceptTitle}
+                </Button>
+              </OverlayTrigger>
+            : <div />}
           {this.props.children}
           <OverlayTrigger placement="top" overlay={tooltip2} delayShow={500}>
-            <Button className="table-action2" bsStyle="link" onClick={this.handleReject} disabled={this.props.actionsDisabled}>
-              <Glyphicon glyph="remove" />{this.props.rejectTitle}
+            <Button
+              className="table-action2"
+              bsStyle="link"
+              onClick={this.handleReject}
+              disabled={this.props.actionsDisabled}>
+              <Glyphicon glyph="remove" />
+              {this.props.rejectTitle}
             </Button>
           </OverlayTrigger>
-
         </ButtonGroup>
       </div>
     );
-  }
+  },
 });
 
 /**
@@ -90,19 +107,34 @@ var ActionTable = React.createClass({
       return (
         <tr key={row.value}>
           <td>
-          {row.string1 || <span className="placeholder">{placeholders1[Math.floor(Math.random()*placeholders1.length)]}</span>}
-          { row.actionsDisabled
-            ?
-            <span className="actionGlyph">&ensp;<Glyphicon glyph={glyph} /></span>
-            :
-            <div />
-          }
+            {row.string1 ||
+              <span className="placeholder">
+                {
+                  placeholders1[
+                    Math.floor(Math.random() * placeholders1.length)
+                  ]
+                }
+              </span>}
+            {row.actionsDisabled
+              ? <span className="actionGlyph">
+                  &ensp;<Glyphicon glyph={glyph} />
+                </span>
+              : <div />}
           </td>
-          <td>{row.string2}</td>
+          <td>
+            {row.string2}
+          </td>
           <td className="action-td">
-            <ActionButtons value={row.value} acceptTitle={acceptTitle} rejectTitle={rejectTitle}
-              acceptTooltip={acceptTooltip} rejectTooltip={rejectTooltip}
-              onAccept={act1} onReject={act2} actionsDisabled={row.actionsDisabled} />
+            <ActionButtons
+              value={row.value}
+              acceptTitle={acceptTitle}
+              rejectTitle={rejectTitle}
+              acceptTooltip={acceptTooltip}
+              rejectTooltip={rejectTooltip}
+              onAccept={act1}
+              onReject={act2}
+              actionsDisabled={row.actionsDisabled}
+            />
           </td>
         </tr>
       );
@@ -113,8 +145,12 @@ var ActionTable = React.createClass({
         <Table condensed hover>
           <thead>
             <tr>
-              <th>{this.props.string1}</th>
-              <th colSpan="2">{this.props.string2}</th>
+              <th>
+                {this.props.string1}
+              </th>
+              <th colSpan="2">
+                {this.props.string2}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -123,7 +159,7 @@ var ActionTable = React.createClass({
         </Table>
       </div>
     );
-  }
+  },
 });
 
 module.exports = ActionTable;

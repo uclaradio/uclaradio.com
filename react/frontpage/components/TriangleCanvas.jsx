@@ -20,7 +20,7 @@ var TriangleCanvas = React.createClass({
     return {
       cellSize: Trianglify.defaults.cell_size,
       xColors: Trianglify.defaults.x_colors,
-      yColors: Trianglify.defaults.cell_size
+      yColors: Trianglify.defaults.cell_size,
     };
   },
   componentDidMount: function() {
@@ -32,7 +32,7 @@ var TriangleCanvas = React.createClass({
       width: window.innerWidth,
       height: window.innerHeight,
       cell_size: this.props.cellSize,
-      x_colors: this.props.xColors
+      x_colors: this.props.xColors,
     });
     pattern.canvas(canvas);
   },
@@ -41,11 +41,11 @@ var TriangleCanvas = React.createClass({
       <div className="triangleCanvas">
         <canvas className="canvasCanvas" id="daCanvas" />
         <div className="canvasContent">
-            {this.props.children}
+          {this.props.children}
         </div>
       </div>
     );
-  }
+  },
 });
 
 module.exports = TriangleCanvas;

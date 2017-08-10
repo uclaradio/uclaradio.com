@@ -22,13 +22,32 @@ var InputCheckbox = React.createClass({
   render: function() {
     return (
       <form className="inputCheckbox form-horizontal">
-        <Input label={this.props.title} labelClassName="col-xs-3" wrapperClassName="col-xs-9 inputCheckbox">
-          <Input type="checkbox" checked={this.props.checked} onChange={this.handleChange}
-            label={<span className={this.props.checked ? 'checkboxInner' : 'placeholder checkboxInner'}>{this.props.details}{this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>} />
+        <Input
+          label={this.props.title}
+          labelClassName="col-xs-3"
+          wrapperClassName="col-xs-9 inputCheckbox">
+          <Input
+            type="checkbox"
+            checked={this.props.checked}
+            onChange={this.handleChange}
+            label={
+              <span
+                className={
+                  this.props.checked
+                    ? 'checkboxInner'
+                    : 'placeholder checkboxInner'
+                }>
+                {this.props.details}
+                {this.props.verified
+                  ? <Glyphicon className="verifiedGlyph" glyph="ok" />
+                  : ''}
+              </span>
+            }
+          />
         </Input>
       </form>
     );
-  }
+  },
 });
 
 module.exports = InputCheckbox;

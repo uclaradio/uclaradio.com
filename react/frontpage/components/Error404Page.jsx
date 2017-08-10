@@ -5,11 +5,10 @@ import React from 'react';
 
 require('./Error404Page.scss');
 
-const Error404Page = () => (
+const Error404Page = () =>
   <div className="error404Page">
     <h3>404: Page Not Found</h3>
     <p>Dude what?</p>
-  </div>
-);
+  </div>;
 
 export default Error404Page;

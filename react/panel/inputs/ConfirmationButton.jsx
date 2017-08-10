@@ -15,25 +15,27 @@ var ButtonGroup = require('react-bootstrap').ButtonGroup;
 */
 var ConfirmationButton = React.createClass({
   getInitialState: function() {
-    return {unlock: false};
+    return { unlock: false };
   },
   toggleUnlock: function() {
-    this.setState({unlock: !this.state.unlock});
+    this.setState({ unlock: !this.state.unlock });
   },
   render: function() {
     return (
       <div className="confirmationButton centered">
-      { this.state.unlock ? 
-        <ButtonGroup>
-          <Button className="delete" onClick={this.props.onSubmit}>{this.props.submit}</Button>
-          <Button onClick={this.toggleUnlock}>Cancel</Button>
-        </ButtonGroup>
-        :
-        <Button className="delete" onClick={this.toggleUnlock}>{this.props.confirm}</Button>
-      }
+        {this.state.unlock
+          ? <ButtonGroup>
+              <Button className="delete" onClick={this.props.onSubmit}>
+                {this.props.submit}
+              </Button>
+              <Button onClick={this.toggleUnlock}>Cancel</Button>
+            </ButtonGroup>
+          : <Button className="delete" onClick={this.toggleUnlock}>
+              {this.props.confirm}
+            </Button>}
       </div>
     );
-  }
+  },
 });
 
 module.exports = ConfirmationButton;
