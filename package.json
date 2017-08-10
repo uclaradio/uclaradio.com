@@ -4,7 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" "
+    "dev": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" ",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --single-quote --trailing-comma es5 --jsx-bracket-same-line --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "async": "^2.1.2",
@@ -76,6 +83,8 @@
     "eslint-plugin-prettier": "^2.1.2",
     "eslint-plugin-react": "^6.10.3",
     "htmlhint": "^0.9.13",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.3",
     "prettier": "^1.5.3",
     "stylelint": "^7.10.1"
   }
