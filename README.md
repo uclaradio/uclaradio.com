@@ -15,8 +15,21 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 ### Running
 
 #### Development
+
+
 - Ensure you have Mongo and Node installed.
-  - For macOS: If you have [homebrew](http://brew.sh/) installed, you can just run [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) to set up node and MongoDB automatically!
+  - macOS: We reccomend installing [homebrew](http://brew.sh/) to manage your packages. Once you install homebrew, you can just run [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) to set up Node and MongoDB automatically!
+  - Windows: We recommend installing [Chocolatey](https://chocolatey.org), which is basically homebrew for Windows, and [CMDer](http://cmder.net), a much nicer terminal than CMD.exe or Powershell. Install Chocolatey first, then install CMDer with the command `choco install cmder`. Once you've installed those, run the commands:
+
+  ```
+  choco install nodejs
+  choco install mongodb
+  npm install --global --production windows-build-tools
+  md \data\db
+  ```
+
+  You can now start mongo with: `"C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe"`.
+
 - In the project root directory, run `npm install` to install dependencies (may need sudo)
 - Run `npm run dev` to start the server for development
 - Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
