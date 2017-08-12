@@ -9,6 +9,8 @@ brew update
 brew install node
 brew install mongodb
 brew install yarn
+# Cairo is a dependency: https://github.com/uclaradio/uclaradio/issues/131
+brew install cairo
 
 # storage for mongodb
 sudo mkdir -p /data/db
