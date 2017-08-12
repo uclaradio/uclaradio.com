@@ -4,61 +4,71 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('uclaradio.github.io:server');
-var http = require('http');
-
+const app = require('../app');
+const debug = require('debug')('uclaradio.github.io:server');
+const http = require('http');
 
 // Get command-line argument (node bin/www dev)
 // Possible values:
 //   * dev: development environment, run on port 3000 with http
 //   * prod: production, run on port 80 with https
 //
-var env = process.argv[2] || 'dev';
+const env = process.argv[2] || 'dev';
 switch (env) {
-    case 'dev':
-        var port = normalizePort(process.env.PORT || '3000');
-        var useSSL = false;
-        break;
-    case 'prod':
-        var port = normalizePort(process.env.PORT || '80');
-        var useSSL = true;
-        break;
+  case 'dev':
+    var port = normalizePort(process.env.PORT || '3000');
+    var useSSL = false;
+    break;
+  case 'prod':
+    var port = normalizePort(process.env.PORT || '80');
+    var useSSL = true;
+    break;
 }
-
 
 app.set('port', port);
 
 if (useSSL) {
-  var uclaradioHostname = "uclaradio.com";
-  var wwwHostname = "www.uclaradio.com";
-  var webEmail = "radio.web@media.ucla.edu";
+  const uclaradioHostname = 'uclaradio.com';
+  const wwwHostname = 'www.uclaradio.com';
+  const webEmail = 'radio.web@media.ucla.edu';
   /**
    * Create HTTP(S) server.
    */
-  var https = require('spdy');
-  var LEX = require('greenlock-express');
-  var lex = LEX.create({
+  const https = require('spdy');
+  const LEX = require('greenlock-express');
+  const lex = LEX.create({
     server: 'https://acme-v01.api.letsencrypt.org/directory',
-    challenges: { 'http-01': require('le-challenge-fs').create({ webrootPath: '/tmp/acme-challenges' }) },
-    store: require('le-store-certbot').create({ webrootPath: '/tmp/acme-challenges' }),
+    challenges: {
+      'http-01': require('le-challenge-fs').create({
+        webrootPath: '/tmp/acme-challenges',
+      }),
+    },
+    store: require('le-store-certbot').create({
+      webrootPath: '/tmp/acme-challenges',
+    }),
     approveDomains: [uclaradioHostname, wwwHostname],
     email: webEmail,
-    agreeTos: true
+    agreeTos: true,
   });
 
-  http.createServer(lex.middleware(require('redirect-https')())).listen(80, function () {
-    console.log("Listening for ACME http-01 challenges on", this.address());
-  });
+  http
+    .createServer(lex.middleware(require('redirect-https')()))
+    .listen(80, function() {
+      console.log('Listening for ACME http-01 challenges on', this.address());
+    });
 
-  var server = https.createServer(lex.httpsOptions, lex.middleware(app)).listen(443, function () {
-    console.log("Listening for ACME tls-sni-01 challenges and serve app on", this.address());
-  });
+  var server = https
+    .createServer(lex.httpsOptions, lex.middleware(app))
+    .listen(443, function() {
+      console.log(
+        'Listening for ACME tls-sni-01 challenges and serve app on',
+        this.address()
+      );
+    });
 
   var io = app.io;
   io.listen(server);
-}
-else {
+} else {
   var server = http.createServer(app);
   server.listen(port);
   server.on('error', onError);
@@ -71,13 +81,12 @@ else {
  * Listen on provided port, on all network interfaces.
  */
 
-
 /**
  * Normalize a port into a number, string, or false.
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -101,18 +110,16 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      console.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+      console.error(`${bind} is already in use`);
       process.exit(1);
       break;
     default:
@@ -125,9 +132,7 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+  debug(`Listening on ${bind}`);
 }
