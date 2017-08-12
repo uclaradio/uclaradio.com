@@ -12,8 +12,9 @@ import RectImage from '../../common/RectImage.jsx';
 import { Link } from 'react-router';
 import { Grid, Col, Row } from 'react-bootstrap';
 
-var defaultDJPic = '/img/bear_transparent.png';
-var defaultDJBio = " hasn't updated their bio yet, but they are pretty rad 😎";
+const defaultDJPic = '/img/bear_transparent.png';
+const defaultDJBio =
+  " hasn't updated their bio yet, but they are pretty rad 😎";
 
 // styling
 require('./DJPage.scss');
@@ -25,7 +26,7 @@ Displays DJ information
 @prop dj: dj object
 @prop fetching: currently fetching djs
 @prop updateDJs: callback to update all listed djs
-**/
+* */
 
 const DJPage = React.createClass({
   componentWillMount() {
@@ -33,8 +34,8 @@ const DJPage = React.createClass({
       this.props.updateDJs();
     }
   },
-  render: function() {
-    var dj = this.props.dj;
+  render() {
+    const dj = this.props.dj;
     if (!dj) {
       return (
         <div className="djPage">

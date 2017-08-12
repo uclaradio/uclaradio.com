@@ -1,19 +1,19 @@
 // ShowList.jsx
 
-var React = require('react');
+const React = require('react');
 
 // Misc
-var Dates = require('../common/Dates.js');
+const Dates = require('../common/Dates.js');
 
 // Panel elements
-var RectImage = require('../common/RectImage.jsx');
+const RectImage = require('../common/RectImage.jsx');
 
 // Boostrap elements
-var Grid = require('react-bootstrap').Grid;
-var Row = require('react-bootstrap').Row;
-var Col = require('react-bootstrap').Col;
-var ListGroup = require('react-bootstrap').ListGroup;
-var ListGroupItem = require('react-bootstrap').ListGroupItem;
+const Grid = require('react-bootstrap').Grid;
+const Row = require('react-bootstrap').Row;
+const Col = require('react-bootstrap').Col;
+const ListGroup = require('react-bootstrap').ListGroup;
+const ListGroupItem = require('react-bootstrap').ListGroupItem;
 
 /**
 *  Presents a list of show objects with a standard format
@@ -23,13 +23,13 @@ var ListGroupItem = require('react-bootstrap').ListGroupItem;
 *  @prop shows -> [{show...}]: shows to list
 *  @prop short: should hide description
 */
-var ShowList = React.createClass({
-  render: function() {
-    var url = this.props.url;
-    var placeholder = this.props.placeholder;
-    var short = this.props.short;
-    var shows = this.props.shows.map(function(show) {
-      var title = (
+const ShowList = React.createClass({
+  render() {
+    const url = this.props.url;
+    const placeholder = this.props.placeholder;
+    const short = this.props.short;
+    const shows = this.props.shows.map(show => {
+      const title = (
         <h4 className="showListTitle">
           {show.title}{' '}
           <small>
@@ -39,7 +39,7 @@ var ShowList = React.createClass({
       );
       return (
         <ListGroupItem
-          href={url + '/' + show.id}
+          href={`${url}/${show.id}`}
           key={show.id}
           className="listShow">
           {short

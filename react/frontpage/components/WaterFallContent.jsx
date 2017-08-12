@@ -10,76 +10,73 @@ import Loader from './Loader.jsx';
 require('./WaterFallContent.scss');
 
 // API urls
-var SocialMediaURL = '/getSocialMedia';
-var getMoreFBPostsURL = '/getMoreFBPosts';
+const SocialMediaURL = '/getSocialMedia';
+const getMoreFBPostsURL = '/getMoreFBPosts';
 
 // local vars
-var waterfall;
+let waterfall;
 
-var WaterFallContent = React.createClass({
-  getInitialState: function() {
+const WaterFallContent = React.createClass({
+  getInitialState() {
     return {
       socialMediaPosts: [],
       fetching: true,
     };
   },
-  componentDidMount: function() {
+  componentDidMount() {
     // Get initial data
-    $.get(
-      SocialMediaURL,
-      function(result) {
-        this.setState(
-          {
-            fetching: false,
-            paginatedDataInProgress: false,
-            fb_pagination_until: result['fb_pagination_until'],
-          },
-          function() {
-            waterfall = new Waterfall({ minBoxWidth: 250 });
-            this.appendPosts(result['social_media']);
-            window.addEventListener('scroll', this.handleScroll);
-          }
-        );
-      }.bind(this)
-    );
+    $.get(SocialMediaURL, result => {
+      this.setState(
+        {
+          fetching: false,
+          paginatedDataInProgress: false,
+          fb_pagination_until: result.fb_pagination_until,
+        },
+        function() {
+          waterfall = new Waterfall({ minBoxWidth: 250 });
+          this.appendPosts(result.social_media);
+          window.addEventListener('scroll', this.handleScroll);
+        }
+      );
+    });
   },
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   },
   // fetch another page of posts, display in waterfall
-  fetchMorePosts: function() {
+  fetchMorePosts() {
     $.post(
       getMoreFBPostsURL,
       {
         until: this.state.fb_pagination_until,
       },
-      function(result) {
+      result => {
         this.setState(
           {
-            fb_pagination_until: result['fb_pagination_until'],
+            fb_pagination_until: result.fb_pagination_until,
             paginatedDataInProgress: false,
           },
           function() {
-            this.appendPosts(result['social_media']);
+            this.appendPosts(result.social_media);
           }
         );
-      }.bind(this)
+      }
     );
   },
   // Add post objects from API to waterfall content as DOM elements
-  appendPosts: function(newPosts) {
-    newPosts.map(function(el) {
-      var boxHandle = nodeFromPost(el);
+  appendPosts(newPosts) {
+    newPosts.map(el => {
+      const boxHandle = nodeFromPost(el);
       if (boxHandle) {
         waterfall.addBox(boxHandle);
       }
     });
   },
-  handleScroll: function(event) {
-    var i = waterfall.getHighestIndex();
+  handleScroll(event) {
+    const i = waterfall.getHighestIndex();
     if (i > -1) {
       // get last box of the column
-      var lastBox = Array.prototype.slice.call(
+      const lastBox = Array.prototype.slice.call(
         waterfall.columns[i].children,
         -1
       )[0];
@@ -95,14 +92,14 @@ var WaterFallContent = React.createClass({
       }
     }
   },
-  mobileLoadMore: function() {
+  mobileLoadMore() {
     this.setState({
       paginatedDataInProgress: true,
     });
     // request next set of Facebook posts
     this.fetchMorePosts();
   },
-  render: function() {
+  render() {
     return (
       <div className="WaterFallContent">
         {this.state.fetching && <Loader />}
@@ -123,21 +120,21 @@ var WaterFallContent = React.createClass({
 
 function checkSlide(elem) {
   if (elem) {
-    var screenHeight =
+    const screenHeight =
       (document.documentElement.scrollTop || document.body.scrollTop) +
       (document.documentElement.clientHeight || document.body.clientHeight);
-    var elemCenter = elem.offsetTop + elem.offsetHeight / 2;
+    const elemCenter = elem.offsetTop + elem.offsetHeight / 2;
     return elemCenter < 1.5 * screenHeight;
   }
 }
 
 // create new DOM element from a tumblr or facebook post json object
 function nodeFromPost(post) {
-  var link = post['link'] || post['post_url'];
-  var picture = post['full_picture'];
-  var summary = post['summary'] || post['message'] || '';
-  var created = formatDate(post['created_time']);
-  var platform = post['platform'] || 'FB';
+  const link = post.link || post.post_url;
+  const picture = post.full_picture;
+  const summary = post.summary || post.message || '';
+  const created = formatDate(post.created_time);
+  const platform = post.platform || 'FB';
   return newNode(picture, summary, created, link, platform);
 }
 
@@ -146,23 +143,23 @@ function newNode(full_picture, summary, created_time, link, platform) {
   if (!full_picture && (!summary || summary.includes('http'))) {
     return null;
   }
-  var box = document.createElement('div');
+  const box = document.createElement('div');
   box.className = 'wf-box';
-  var a = document.createElement('a');
+  const a = document.createElement('a');
   a.href = link;
   a.target = '_blank';
-  var box_content = document.createElement('div');
+  const box_content = document.createElement('div');
   box_content.className = 'wf-box-content';
   if (full_picture) {
-    var image = document.createElement('img');
+    const image = document.createElement('img');
     image.src = full_picture;
     box_content.appendChild(image);
 
-    var overlay = document.createElement('div');
+    const overlay = document.createElement('div');
     overlay.className = 'overlay';
     box_content.appendChild(overlay);
   }
-  var box_content_text = document.createElement('div');
+  const box_content_text = document.createElement('div');
   switch (platform) {
     case 'FB':
       box_content_text.className = 'wf-box-content-text';
@@ -187,11 +184,9 @@ function newNode(full_picture, summary, created_time, link, platform) {
 }
 
 function formatDate(dateString) {
-  var date = String(dateString);
+  let date = String(dateString);
   date = new Date(date.substring(0, 10));
-  return (
-    date.getMonth() + 1 + '/' + date.getDate() + '/' + (date.getYear() + 1900)
-  );
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getYear() + 1900}`;
 }
 
 export default WaterFallContent;

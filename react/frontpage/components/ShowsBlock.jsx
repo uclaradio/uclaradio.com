@@ -1,7 +1,7 @@
 // ShowsGraph.jsx
 // graph selector with schedule of shows
 
-var React = require('react');
+const React = require('react');
 
 import Dates from '../../common/Dates';
 
@@ -31,26 +31,24 @@ Full graph with schedule of shows
   }
 */
 const ShowsGraph = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {
       activeShowID: -1,
     };
   },
-  toggleActiveShow: function(showID) {
+  toggleActiveShow(showID) {
     this.setState({ activeShowID: showID });
   },
-  render: function() {
-    var dayTitles = week.map(day => {
-      return (
-        <p>
-          {Dates.abbreviatedDay(day)}
-        </p>
-      );
-    });
+  render() {
+    const dayTitles = week.map(day =>
+      <p>
+        {Dates.abbreviatedDay(day)}
+      </p>
+    );
 
-    var showBlocks = '';
+    let showBlocks = '';
     for (var hour = 0; hour < 24; hour++) {
-      var hourString = Dates.availableTimes[hour];
+      const hourString = Dates.availableTimes[hour];
       showBlocks += (
         <div
           style={{
@@ -63,7 +61,7 @@ const ShowsGraph = React.createClass({
             {hourString}
           </p>
           {week.map(day => {
-            var show = this.props.schedule[day][hour];
+            const show = this.props.schedule[day][hour];
             showBlocks += (
               <ShowBlock
                 isValidShow={show !== null}
@@ -98,41 +96,40 @@ Individual show block with rollover action
 @prop isActiveShow: styling bool: user clicked on this show
 @prop isSpotlightShow: styling bool: show is a spotlight feature on website
 */
-var ShowBlock = React.createClass({
-  handleMouseOver: function() {
+const ShowBlock = React.createClass({
+  handleMouseOver() {
     this.setState({ active: true });
   },
-  handleMouseOut: function() {
+  handleMouseOut() {
     this.setState({ active: false });
   },
-  handleClick: function() {
+  handleClick() {
     this.props.handleClick();
   },
-  render: function() {
+  render() {
     if (!this.props.isValidShow) {
-      var boringBlockStyle = {
+      const boringBlockStyle = {
         backgroundColor: 'white',
       };
       return <div className="showBlock" style={boringBlockStyle} />;
-    } else {
-      var blockColor =
-        (this.props.isCurrentShow && '#3c84cc') ||
-        (this.props.isSpotlightShow && 'purple') ||
-        'yellow';
-
-      var blockStyle = {
-        backgroundColor: blockColor,
-      };
-      return (
-        <div
-          className="showBlock"
-          style={blockStyle}
-          onMouseOver={this.handleMouseOver}
-          onMouseOut={this.handleMouseOut}
-          onClick={this.handleClick}
-        />
-      );
     }
+    const blockColor =
+      (this.props.isCurrentShow && '#3c84cc') ||
+      (this.props.isSpotlightShow && 'purple') ||
+      'yellow';
+
+    const blockStyle = {
+      backgroundColor: blockColor,
+    };
+    return (
+      <div
+        className="showBlock"
+        style={blockStyle}
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
+        onClick={this.handleClick}
+      />
+    );
   },
 });
 

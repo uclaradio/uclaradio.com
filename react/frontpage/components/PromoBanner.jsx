@@ -24,16 +24,16 @@ const bannerData = [
   },
 ];
 
-var PromoBanner = React.createClass({
-  getImage: function(banner) {
+const PromoBanner = React.createClass({
+  getImage(banner) {
     return (
       <RectImage src={banner.img} aspectRatio={5}>
         <div className="overlay" />
       </RectImage>
     );
   },
-  render: function() {
-    var settings = {
+  render() {
+    const settings = {
       dots: true,
       autoplay: true,
       infinite: true,
@@ -47,20 +47,18 @@ var PromoBanner = React.createClass({
     // The self variable is be declared as 'this' is function scoped
     // An alternative solution would be to use ES6 arrow functions
 
-    var self = this;
-    var banners = bannerData.map(function(banner) {
-      return (
-        <div>
-          {banner.link.indexOf('http') == -1
-            ? <Link to={banner.link}>
-                {self.getImage(banner)}
-              </Link>
-            : <a href={banner.link}>
-                {self.getImage(banner)}
-              </a>}
-        </div>
-      );
-    });
+    const self = this;
+    const banners = bannerData.map(banner =>
+      <div>
+        {banner.link.indexOf('http') == -1
+          ? <Link to={banner.link}>
+              {self.getImage(banner)}
+            </Link>
+          : <a href={banner.link}>
+              {self.getImage(banner)}
+            </a>}
+      </div>
+    );
 
     return (
       <div className="promoBanner">

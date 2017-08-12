@@ -7,7 +7,7 @@ require('./AboutPage.scss');
 /**
 Full page About content detailing UCLA Radio history and offering links to contact managers.
 Used as a tab's full content in frontpage.
-**/
+* */
 const AboutPage = () =>
   <div className="aboutPage">
     <div id="wrapper">

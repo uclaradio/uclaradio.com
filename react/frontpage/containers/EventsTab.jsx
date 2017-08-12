@@ -21,7 +21,7 @@ const EventsTab = connect(mapStateToProps, mapDispatchToProps)(EventList);
 
 /**
 Helpers
-**/
+* */
 
 const eventGroupsFromState = state => {
   if (!state.events || !state.groups) {
@@ -29,19 +29,19 @@ const eventGroupsFromState = state => {
   }
 
   // convert groups' event ids to event objects
-  var eventGroups = [];
-  for (var groupIndex = 0; groupIndex < state.groups.length; groupIndex++) {
-    var stateGroup = state.groups[groupIndex];
-    var newGroup = {
+  const eventGroups = [];
+  for (let groupIndex = 0; groupIndex < state.groups.length; groupIndex++) {
+    const stateGroup = state.groups[groupIndex];
+    const newGroup = {
       title: stateGroup.title,
       events: [],
     };
     for (
-      var eventIndex = 0;
+      let eventIndex = 0;
       eventIndex < stateGroup.eventIDs.length;
       eventIndex++
     ) {
-      var event = state.events[stateGroup.eventIDs[eventIndex]];
+      const event = state.events[stateGroup.eventIDs[eventIndex]];
       if (event) {
         newGroup.events.push(event);
       }

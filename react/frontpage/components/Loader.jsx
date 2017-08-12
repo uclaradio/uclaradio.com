@@ -13,7 +13,7 @@ props:
  - height (default 64)
  - type (default 'balls')
  - width (default 64)
-**/
+* */
 import Loading from 'react-loading';
 
 const Loader = () =>

@@ -1,16 +1,16 @@
 // InputEditableDateTimeField.js
 
-var React = require('react');
+const React = require('react');
 
 // Helper files
-var Dates = require('../../common/Dates.js');
+const Dates = require('../../common/Dates.js');
 
 // Bootstrap elements
-var ButtonGroup = require('react-bootstrap').ButtonGroup;
-var DropdownButton = require('react-bootstrap').DropdownButton;
-var MenuItem = require('react-bootstrap').MenuItem;
-var Input = require('react-bootstrap').Input;
-var Glyphicon = require('react-bootstrap').Glyphicon;
+const ButtonGroup = require('react-bootstrap').ButtonGroup;
+const DropdownButton = require('react-bootstrap').DropdownButton;
+const MenuItem = require('react-bootstrap').MenuItem;
+const Input = require('react-bootstrap').Input;
+const Glyphicon = require('react-bootstrap').Glyphicon;
 
 /**
 *  Show current saved value for day/time and let user update data and submit changes
@@ -27,40 +27,40 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 *  @state time: current time value being entered
 *  @state editable: should let the user edit the field
 */
-var InputEditableDateTimeField = React.createClass({
-  getInitialState: function() {
+const InputEditableDateTimeField = React.createClass({
+  getInitialState() {
     return { day: 'Mon', time: '10am', editable: false };
   },
-  handleDayChange: function(e, day) {
-    this.setState({ day: day });
+  handleDayChange(e, day) {
+    this.setState({ day });
   },
-  handleTimeChange: function(e, time) {
-    this.setState({ time: time });
+  handleTimeChange(e, time) {
+    this.setState({ time });
   },
-  toggleEditableField: function(e) {
+  toggleEditableField(e) {
     this.setState({
       day: this.props.day,
       time: this.props.time,
       editable: !this.state.editable,
     });
   },
-  handleSubmit: function(e) {
+  handleSubmit(e) {
     e.preventDefault();
-    var day = this.state.day.trim();
-    var time = this.state.time.trim();
+    const day = this.state.day.trim();
+    const time = this.state.time.trim();
     if (day && time) {
       this.props.onDateSubmit(day, time);
       this.setState({ day: 'Mon', time: '10am', editable: false });
     }
   },
-  render: function() {
-    var editButton = (
+  render() {
+    const editButton = (
       <a className="customInput" onClick={this.toggleEditableField}>
         Edit
       </a>
     );
     // var cancelButton = <Button className="cancelLink" onClick={this.toggleEditableField}>Cancel</Button>;
-    var actionButton = (
+    const actionButton = (
       <span>
         <a onClick={this.handleSubmit}>{this.props.buttonTitle || 'Update'}</a>
         &emsp;&emsp;&emsp;<a
@@ -70,21 +70,17 @@ var InputEditableDateTimeField = React.createClass({
         </a>
       </span>
     );
-    var days = Dates.availableDays.map(function(day) {
-      return (
-        <MenuItem key={day} eventKey={day}>
-          {Dates.dayFromVar(day)}
-        </MenuItem>
-      );
-    });
+    const days = Dates.availableDays.map(day =>
+      <MenuItem key={day} eventKey={day}>
+        {Dates.dayFromVar(day)}
+      </MenuItem>
+    );
 
-    var times = Dates.availableTimes.map(function(time) {
-      return (
-        <MenuItem key={time} eventKey={time}>
-          {time}
-        </MenuItem>
-      );
-    });
+    const times = Dates.availableTimes.map(time =>
+      <MenuItem key={time} eventKey={time}>
+        {time}
+      </MenuItem>
+    );
     return (
       <div className="inputEditableDateTimeField">
         <form className="form-horizontal">

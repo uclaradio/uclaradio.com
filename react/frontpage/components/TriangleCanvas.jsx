@@ -15,20 +15,20 @@ Will automatically size to window's width and height.
 @prop yColors: y_colors option for Trianglify
 note: more Trianglify options available https://github.com/qrohlf/trianglify
 */
-var TriangleCanvas = React.createClass({
-  getDefaultProps: function() {
+const TriangleCanvas = React.createClass({
+  getDefaultProps() {
     return {
       cellSize: Trianglify.defaults.cell_size,
       xColors: Trianglify.defaults.x_colors,
       yColors: Trianglify.defaults.cell_size,
     };
   },
-  componentDidMount: function() {
+  componentDidMount() {
     this.renderCanvas();
   },
-  renderCanvas: function() {
-    var canvas = document.getElementById('daCanvas');
-    var pattern = Trianglify({
+  renderCanvas() {
+    const canvas = document.getElementById('daCanvas');
+    const pattern = Trianglify({
       width: window.innerWidth,
       height: window.innerHeight,
       cell_size: this.props.cellSize,
@@ -36,7 +36,7 @@ var TriangleCanvas = React.createClass({
     });
     pattern.canvas(canvas);
   },
-  render: function() {
+  render() {
     return (
       <div className="triangleCanvas">
         <canvas className="canvasCanvas" id="daCanvas" />

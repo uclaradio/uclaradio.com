@@ -7,7 +7,7 @@ import EventPage from '../components/EventPage.jsx';
 import { fetchUpdatedEvents } from '../actions/events';
 
 const mapStateToProps = (state, ownProps) => {
-  var eventID = ownProps.params['eventID'];
+  const eventID = ownProps.params.eventID;
   return {
     event: state.events.events[eventID],
     fetching: state.events.fetching,

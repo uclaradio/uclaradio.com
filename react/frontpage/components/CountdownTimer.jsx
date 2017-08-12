@@ -13,17 +13,17 @@ CountdownTimer:
 
 @prop deadline: deadline the countdown is for
 */
-var CountdownTimer = React.createClass({
-  getInitialState: function() {
-    var currentDate = new Date();
-    var timeDiff = Math.abs(
+const CountdownTimer = React.createClass({
+  getInitialState() {
+    const currentDate = new Date();
+    const timeDiff = Math.abs(
       this.props.deadline.getTime() - currentDate.getTime()
     );
-    var daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
-    var hoursLeft = Math.floor(timeDiff / (1000 * 3600)) - 24 * daysLeft;
-    var minutesLeft =
+    const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
+    const hoursLeft = Math.floor(timeDiff / (1000 * 3600)) - 24 * daysLeft;
+    const minutesLeft =
       Math.floor(timeDiff / (1000 * 60)) - 60 * hoursLeft - 24 * 60 * daysLeft;
-    var secondsLeft =
+    const secondsLeft =
       Math.floor(timeDiff / 1000) -
       60 * minutesLeft -
       3600 * hoursLeft -
@@ -35,22 +35,22 @@ var CountdownTimer = React.createClass({
       seconds: secondsLeft,
     };
   },
-  componentDidMount: function() {
+  componentDidMount() {
     this.timer = setInterval(this.tick, 1000);
   },
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     clearInterval(this.timer);
   },
-  tick: function() {
-    var currentDate = new Date();
-    var timeDiff = Math.abs(
+  tick() {
+    const currentDate = new Date();
+    const timeDiff = Math.abs(
       this.props.deadline.getTime() - currentDate.getTime()
     );
-    var daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
-    var hoursLeft = Math.floor(timeDiff / (1000 * 3600)) - 24 * daysLeft;
-    var minutesLeft =
+    const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
+    const hoursLeft = Math.floor(timeDiff / (1000 * 3600)) - 24 * daysLeft;
+    const minutesLeft =
       Math.floor(timeDiff / (1000 * 60)) - 60 * hoursLeft - 24 * 60 * daysLeft;
-    var secondsLeft =
+    const secondsLeft =
       Math.floor(timeDiff / 1000) -
       60 * minutesLeft -
       3600 * hoursLeft -
@@ -62,7 +62,7 @@ var CountdownTimer = React.createClass({
       seconds: secondsLeft,
     });
   },
-  render: function() {
+  render() {
     return (
       <div className="countdownWrapper">
         <a href="https://spark.ucla.edu/uclaradio">

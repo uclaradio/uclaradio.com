@@ -1,12 +1,12 @@
 // DateTimeField.js
 
-var React = require('react');
+const React = require('react');
 
 // Bootstrap elements
-var Grid = require('react-bootstrap').Grid;
-var Row = require('react-bootstrap').Row;
-var Col = require('react-bootstrap').Col;
-var Input = require('react-bootstrap').Input;
+const Grid = require('react-bootstrap').Grid;
+const Row = require('react-bootstrap').Row;
+const Col = require('react-bootstrap').Col;
+const Input = require('react-bootstrap').Input;
 
 /**
 *  Allow user to select date and time as format ddd/hh (Mon / 10am)
@@ -15,8 +15,8 @@ var Input = require('react-bootstrap').Input;
 *  @prop onDayChange: function to call when day changes
 *  @prop onTimeChange: function to call when time changes
 */
-var DateTimeField = React.createClass({
-  render: function() {
+const DateTimeField = React.createClass({
+  render() {
     return (
       <div className="dateTimeField">
         <Grid>

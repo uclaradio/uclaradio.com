@@ -1,12 +1,12 @@
 // InputEditableTextField.jsx
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
 // Bootstrap elements
-var Input = require('react-bootstrap').Input;
-var FormControls = require('react-bootstrap').FormControls;
-var Glyphicon = require('react-bootstrap').Glyphicon;
+const Input = require('react-bootstrap').Input;
+const FormControls = require('react-bootstrap').FormControls;
+const Glyphicon = require('react-bootstrap').Glyphicon;
 
 /**
 *  Show current saved value for a text field and let user update the field and submit changes
@@ -26,27 +26,27 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 *  @state editable: should let the user edit the field
 *  @state currentlyEditing: user has begun editing the text field by typing at least 1 character (used to select text on first edit)
 */
-var InputEditableTextField = React.createClass({
-  getInitialState: function() {
+const InputEditableTextField = React.createClass({
+  getInitialState() {
     return { value: '', editable: false, currentlyEditing: false };
   },
-  handleChange: function(e) {
+  handleChange(e) {
     this.setState({ value: e.target.value, currentlyEditing: false });
   },
-  toggleEditableField: function(e) {
+  toggleEditableField(e) {
     this.setState({
       value: this.props.currentValue,
       editable: !this.state.editable,
       currentlyEditing: true,
     });
   },
-  handleSubmit: function(e) {
+  handleSubmit(e) {
     e.preventDefault();
-    var value = this.state.value.trim();
+    const value = this.state.value.trim();
     this.props.onSubmit(value);
     this.setState({ value: '', editable: false });
   },
-  componentDidUpdate: function(e) {
+  componentDidUpdate(e) {
     if (
       this.state.editable &&
       this.state.currentlyEditing &&
@@ -55,10 +55,10 @@ var InputEditableTextField = React.createClass({
       ReactDOM.findDOMNode(this.refs.input.getInputDOMNode()).select();
     }
   },
-  render: function() {
-    var editButton = <a onClick={this.toggleEditableField}>Edit</a>;
+  render() {
+    const editButton = <a onClick={this.toggleEditableField}>Edit</a>;
     // var cancelButton = <Button className="cancelLink" onClick={this.toggleEditableField}>Cancel</Button>;
-    var actionButton = (
+    const actionButton = (
       <span>
         <a onClick={this.handleSubmit}>{this.props.buttonTitle || 'Update'}</a>
         &emsp;|&emsp;<a

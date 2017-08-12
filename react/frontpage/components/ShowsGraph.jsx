@@ -1,6 +1,6 @@
 // ShowsGraph.jsx
 
-var React = require('react');
+const React = require('react');
 
 import Dates from '../../common/Dates';
 
@@ -29,7 +29,7 @@ Full graph with schedule of shows
 @prop onShowClick(show): callback for when a show is made active
 */
 const ShowsGraph = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {};
   },
   componentWillMount() {
@@ -41,19 +41,19 @@ const ShowsGraph = React.createClass({
     }
   },
 
-  updateSchedule: function(shows) {
-    var sorted = sortedShows(shows);
+  updateSchedule(shows) {
+    const sorted = sortedShows(shows);
     this.setState({
       schedule: sorted,
     });
   },
 
-  findStartTime: function() {
+  findStartTime() {
     // find earliest show time (after 5am)
-    var found = 0;
+    let found = 0;
     for (var s = 5; s < Dates.availableTimes.length; s++) {
       for (
-        var showIndex = 0;
+        let showIndex = 0;
         showIndex < this.props.shows.length;
         showIndex++
       ) {
@@ -69,9 +69,9 @@ const ShowsGraph = React.createClass({
     return s;
   },
 
-  findEndTime: function() {
+  findEndTime() {
     // find latest show time
-    var found = 0;
+    let found = 0;
 
     // check late night (after midnight and before 5am) shows first
     for (var e = 4; e >= 0; e--) {
@@ -112,8 +112,8 @@ const ShowsGraph = React.createClass({
     return e;
   },
 
-  lateNightDay: function(day) {
-    var displayDay;
+  lateNightDay(day) {
+    let displayDay;
 
     switch (day) {
       case 'sunday':
@@ -141,24 +141,22 @@ const ShowsGraph = React.createClass({
     return displayDay;
   },
 
-  render: function() {
-    var dayTitles = week.map(day => {
-      return (
-        <span className="dayStyle" style={{ left: dayWidth, width: dayWidth }}>
-          {Dates.abbreviatedDay(day)}
-        </span>
-      );
-    });
+  render() {
+    const dayTitles = week.map(day =>
+      <span className="dayStyle" style={{ left: dayWidth, width: dayWidth }}>
+        {Dates.abbreviatedDay(day)}
+      </span>
+    );
 
-    var showBlocks = [];
+    const showBlocks = [];
 
     // limit vertical size of grid, bounded by earliest and latest show times
-    var start = this.findStartTime();
-    var end = this.findEndTime();
+    const start = this.findStartTime();
+    const end = this.findEndTime();
 
-    var hour = start;
+    let hour = start;
 
-    var endMargin = end < 5 ? Dates.availableTimes.length - 1 : end;
+    const endMargin = end < 5 ? Dates.availableTimes.length - 1 : end;
 
     for (; hour < endMargin + 1; hour++) {
       var hourString = Dates.availableTimes[hour];
@@ -168,7 +166,7 @@ const ShowsGraph = React.createClass({
             {hourString}
           </p>
           {week.map(day => {
-            var show = this.state.schedule && this.state.schedule[day][hour];
+            const show = this.state.schedule && this.state.schedule[day][hour];
             return (
               <ShowBlock
                 isValidShow={show && show.title}
@@ -195,8 +193,8 @@ const ShowsGraph = React.createClass({
               {hourString}
             </p>
             {week.map(day => {
-              var displayDay = this.lateNightDay(day);
-              var show =
+              const displayDay = this.lateNightDay(day);
+              const show =
                 this.state.schedule && this.state.schedule[displayDay][hour];
               return (
                 <ShowBlock
@@ -242,34 +240,33 @@ Individual show block with rollover action
 @prop isActiveShow: styling bool: user clicked on this show
 @prop isSpotlightShow: styling bool: show is a spotlight feature on website
 */
-var ShowBlock = React.createClass({
-  handleClick: function() {
+const ShowBlock = React.createClass({
+  handleClick() {
     this.props.handleClick();
   },
-  render: function() {
+  render() {
     if (!this.props.isValidShow) {
       return (
         <div style={{ width: dayWidth }} className="showBlock">
           <div className="boringBlockStyle" />
         </div>
       );
-    } else {
-      var blockColor =
-        (this.props.isActiveShow && 'red') ||
-        (this.props.isSpotlightShow && 'purple') ||
-        (this.props.isCurrentShow && '#3c84cc') ||
-        'black';
-
-      return (
-        <div className="showBlock" style={{ width: dayWidth }}>
-          <div
-            className="blockStyle"
-            style={{ backgroundColor: blockColor }}
-            onClick={this.handleClick}
-          />
-        </div>
-      );
     }
+    const blockColor =
+      (this.props.isActiveShow && 'red') ||
+      (this.props.isSpotlightShow && 'purple') ||
+      (this.props.isCurrentShow && '#3c84cc') ||
+      'black';
+
+    return (
+      <div className="showBlock" style={{ width: dayWidth }}>
+        <div
+          className="blockStyle"
+          style={{ backgroundColor: blockColor }}
+          onClick={this.handleClick}
+        />
+      </div>
+    );
   },
 });
 
@@ -280,7 +277,7 @@ var ShowBlock = React.createClass({
 //   "saturday": {11: {show}, ...},
 // }
 const sortedShows = shows => {
-  var schedule = {
+  const schedule = {
     sunday: {},
     monday: {},
     tuesday: {},
@@ -290,10 +287,10 @@ const sortedShows = shows => {
     saturday: {},
   };
 
-  for (var s = 0; s < shows.length; s++) {
-    var show = shows[s];
-    var day = Dates.dayFromVar(show.day).toLowerCase();
-    var hour = Dates.availableTimes.indexOf(show.time);
+  for (let s = 0; s < shows.length; s++) {
+    const show = shows[s];
+    const day = Dates.dayFromVar(show.day).toLowerCase();
+    const hour = Dates.availableTimes.indexOf(show.time);
     if (day) {
       schedule[day][hour] = show;
     }

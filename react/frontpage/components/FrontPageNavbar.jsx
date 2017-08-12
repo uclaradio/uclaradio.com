@@ -1,6 +1,6 @@
 // FrontPageNavbar.jsx
 
-var React = require('react');
+const React = require('react');
 
 // Bootstrap Elements
 import { Nav, NavItem, Collapse, NavDropdown, MenuItem } from 'react-bootstrap';
@@ -14,11 +14,11 @@ require('./FrontPageNavbar.scss');
 /**
 Navigation bar for the stream frontpage, which has collapsing rows and selectable tabs
 */
-var FrontPageNavbar = React.createClass({
-  getInitialState: function() {
+const FrontPageNavbar = React.createClass({
+  getInitialState() {
     return { open: false };
   },
-  handleClick: function(selectedKey) {
+  handleClick(selectedKey) {
     switch (selectedKey) {
       case 1:
         window.open('http://uclaradio.tumblr.com', '_blank');
@@ -42,10 +42,10 @@ var FrontPageNavbar = React.createClass({
         break;
     }
   },
-  render: function() {
+  render() {
     return (
       <div className="frontPageNavbar">
-        {/** Large devices, hidden on xs **/}
+        {/** Large devices, hidden on xs * */}
         <Nav
           justified
           bsStyle="pills"
@@ -95,7 +95,7 @@ var FrontPageNavbar = React.createClass({
           </Nav>
         </Collapse>
 
-        {/** Extra Small devices, hidden on sm, md, lg **/}
+        {/** Extra Small devices, hidden on sm, md, lg * */}
         <Nav
           justified
           bsStyle="pills"

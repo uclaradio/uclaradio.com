@@ -1,10 +1,10 @@
 // home.html
 // let DJ edit personal info
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
-var urls = {
+const urls = {
   url: '/panel/api/user',
   picURL: '/panel/api/userPic',
   showsURL: '/panel/api/usershows',
@@ -13,31 +13,31 @@ var urls = {
 };
 
 // Panel Elements
-var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-var ShowList = require('./panel/ShowList.jsx');
-var RectImage = require('./common/RectImage.jsx');
+const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
+const ShowList = require('./panel/ShowList.jsx');
+const RectImage = require('./common/RectImage.jsx');
 
 // Inputs
-var InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-var InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
+const InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
+const InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
 
 // Misc
-var Dates = require('./common/Dates.js');
+const Dates = require('./common/Dates.js');
 
 // Bootstrap Elements
-var Grid = require('react-bootstrap').Grid;
-var Row = require('react-bootstrap').Row;
-var Col = require('react-bootstrap').Col;
-var Well = require('react-bootstrap').Well;
-var ButtonGroup = require('react-bootstrap').ButtonGroup;
-var Button = require('react-bootstrap').Button;
-var Input = require('react-bootstrap').Input;
-var DropdownButton = require('react-bootstrap').DropdownButton;
-var MenuItem = require('react-bootstrap').MenuItem;
-var Image = require('react-bootstrap').Image;
+const Grid = require('react-bootstrap').Grid;
+const Row = require('react-bootstrap').Row;
+const Col = require('react-bootstrap').Col;
+const Well = require('react-bootstrap').Well;
+const ButtonGroup = require('react-bootstrap').ButtonGroup;
+const Button = require('react-bootstrap').Button;
+const Input = require('react-bootstrap').Input;
+const DropdownButton = require('react-bootstrap').DropdownButton;
+const MenuItem = require('react-bootstrap').MenuItem;
+const Image = require('react-bootstrap').Image;
 
-var PanelPage = React.createClass({
-  render: function() {
+const PanelPage = React.createClass({
+  render() {
     return (
       <div className="panelPage">
         <Grid>
@@ -58,8 +58,8 @@ var PanelPage = React.createClass({
   },
 });
 
-var User = React.createClass({
-  getInitialState: function() {
+const User = React.createClass({
+  getInitialState() {
     return {
       user: { username: '', djName: '', email: '', phone: '', bio: '' },
       djNameVerified: false,
@@ -69,26 +69,26 @@ var User = React.createClass({
       bioVerified: false,
     };
   },
-  loadDataFromServer: function() {
+  loadDataFromServer() {
     $.ajax({
       url: this.props.urls.url,
       dataType: 'json',
       cache: false,
       success: function(user) {
-        this.setState({ user: user });
+        this.setState({ user });
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.urls.url, status, err.toString());
       }.bind(this),
     });
   },
-  handleUserDataSubmit: function(updatedUser, successVar) {
-    var oldUser = this.state.user;
+  handleUserDataSubmit(updatedUser, successVar) {
+    const oldUser = this.state.user;
     // Optimistically update local data, will be refreshed or reset after response from server
     updatedUser.username = oldUser.username;
     this.setState({ user: updatedUser });
     // don't mark as verified yet
-    var unverifiedState = {};
+    const unverifiedState = {};
     unverifiedState[successVar] = false;
     this.setState(unverifiedState);
     $.ajax({
@@ -97,7 +97,7 @@ var User = React.createClass({
       type: 'POST',
       data: { user: JSON.stringify(updatedUser) },
       success: function(user) {
-        var successState = { user: user };
+        const successState = { user };
         successState[successVar] = true;
         this.setState(successState);
       }.bind(this),
@@ -107,53 +107,53 @@ var User = React.createClass({
       }.bind(this),
     });
   },
-  handleDJNameSubmit: function(newDJName) {
-    var user = $.extend(true, {}, this.state.user);
+  handleDJNameSubmit(newDJName) {
+    const user = $.extend(true, {}, this.state.user);
     user.djName = newDJName;
     this.handleUserDataSubmit(user, 'djNameVerified');
   },
-  handleFullNameSubmit: function(fullName) {
-    var user = $.extend(true, {}, this.state.user);
+  handleFullNameSubmit(fullName) {
+    const user = $.extend(true, {}, this.state.user);
     user.fullName = fullName;
     this.handleUserDataSubmit(user, 'fullNameVerified');
   },
-  handleEmailSubmit: function(newEmail) {
-    var user = $.extend(true, {}, this.state.user);
+  handleEmailSubmit(newEmail) {
+    const user = $.extend(true, {}, this.state.user);
     user.email = newEmail;
     this.handleUserDataSubmit(user, 'emailVerified');
   },
-  handlePhoneSubmit: function(newPhone) {
-    var user = $.extend(true, {}, this.state.user);
+  handlePhoneSubmit(newPhone) {
+    const user = $.extend(true, {}, this.state.user);
     user.phone = newPhone;
     this.handleUserDataSubmit(user, 'phoneVerified');
   },
-  handleBioSubmit: function(newBio) {
-    var user = $.extend(true, {}, this.state.user);
+  handleBioSubmit(newBio) {
+    const user = $.extend(true, {}, this.state.user);
     user.bio = newBio;
     this.handleUserDataSubmit(user, 'bioVerified');
   },
-  verifyPic: function() {
+  verifyPic() {
     this.setState({ picVerified: true });
   },
-  unverifyPic: function() {
+  unverifyPic() {
     this.setState({ picVerified: false });
   },
-  updateUserState: function(user) {
-    this.setState({ user: user });
+  updateUserState(user) {
+    this.setState({ user });
   },
-  handlePicSubmit: function(data) {
+  handlePicSubmit(data) {
     if (!data) {
       return;
     }
 
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('img', data);
     formData.append('username', this.state.user.username);
-    var request = new XMLHttpRequest();
+    const request = new XMLHttpRequest();
     request.open('POST', this.props.urls.picURL);
-    var verify = this.verifyPic;
-    var unverify = this.unverifyPic;
-    var updateUser = this.updateUserState;
+    const verify = this.verifyPic;
+    const unverify = this.unverifyPic;
+    const updateUser = this.updateUserState;
     unverify();
     request.onload = function(e) {
       if (request.status == 200) {
@@ -165,14 +165,14 @@ var User = React.createClass({
     };
     request.send(formData);
   },
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadDataFromServer();
 
     // make profile image square
-    var imageWidth = $('.pic.profile').width();
-    $('.pic.profile').css({ height: imageWidth + 'px' });
+    const imageWidth = $('.pic.profile').width();
+    $('.pic.profile').css({ height: `${imageWidth}px` });
   },
-  render: function() {
+  render() {
     return (
       <div className="user">
         <h2>DJ Info</h2>
@@ -231,28 +231,28 @@ var User = React.createClass({
   },
 });
 
-var UserShowsList = React.createClass({
-  getInitialState: function() {
+const UserShowsList = React.createClass({
+  getInitialState() {
     // shows: {title, day, time}
     return { shows: [] };
   },
-  loadDataFromServer: function() {
+  loadDataFromServer() {
     $.ajax({
       url: this.props.urls.showsURL,
       dataType: 'json',
       cache: false,
       success: function(shows) {
-        this.setState({ shows: shows });
+        this.setState({ shows });
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.urls.showsURL, status, err.toString());
       }.bind(this),
     });
   },
-  handleUserSubmitNewShow: function(showData) {
-    var oldShows = this.state.shows;
+  handleUserSubmitNewShow(showData) {
+    const oldShows = this.state.shows;
     // optimistically add show data
-    var localShowData = showData;
+    const localShowData = showData;
     localShowData.id = oldShows[oldShows.length - 1] + 1; // give new show a temporary id so React has a key for the show element
     this.setState({ shows: this.state.shows.concat([localShowData]) });
     $.ajax({
@@ -261,7 +261,7 @@ var UserShowsList = React.createClass({
       type: 'POST',
       data: showData,
       success: function(shows) {
-        this.setState({ shows: shows });
+        this.setState({ shows });
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({ shows: oldShows });
@@ -269,10 +269,10 @@ var UserShowsList = React.createClass({
       }.bind(this),
     });
   },
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadDataFromServer();
   },
-  render: function() {
+  render() {
     return (
       <div className="userShowsList">
         <ShowList
@@ -286,50 +286,46 @@ var UserShowsList = React.createClass({
   },
 });
 
-var NewShowForm = React.createClass({
-  getInitialState: function() {
+const NewShowForm = React.createClass({
+  getInitialState() {
     return { title: '', day: 'Mon', time: '11am', editable: false };
   },
-  handleTitleChange: function(e) {
+  handleTitleChange(e) {
     this.setState({ title: e.target.value });
   },
-  handleDayChange: function(e, day) {
-    this.setState({ day: day });
+  handleDayChange(e, day) {
+    this.setState({ day });
   },
-  handleTimeChange: function(e, time) {
-    this.setState({ time: time });
+  handleTimeChange(e, time) {
+    this.setState({ time });
   },
-  toggleEditableField: function(e) {
+  toggleEditableField(e) {
     this.setState({ text: '', editable: !this.state.editable });
   },
-  handleSubmit: function(e) {
+  handleSubmit(e) {
     e.preventDefault();
-    var title = this.state.title.trim();
-    var day = this.state.day.trim();
-    var time = this.state.time.trim();
+    const title = this.state.title.trim();
+    const day = this.state.day.trim();
+    const time = this.state.time.trim();
     if (!title || !day || !time) {
       return;
     }
-    var showData = { title: title, day: day, time: time };
+    const showData = { title, day, time };
     this.props.onNewShowSubmit(showData);
     this.setState(this.getInitialState());
   },
-  render: function() {
-    var days = Dates.availableDays.map(function(day) {
-      return (
-        <MenuItem key={day} eventKey={day}>
-          {Dates.dayFromVar(day)}
-        </MenuItem>
-      );
-    });
+  render() {
+    const days = Dates.availableDays.map(day =>
+      <MenuItem key={day} eventKey={day}>
+        {Dates.dayFromVar(day)}
+      </MenuItem>
+    );
 
-    var times = Dates.availableTimes.map(function(time) {
-      return (
-        <MenuItem key={time} eventKey={time}>
-          {time}
-        </MenuItem>
-      );
-    });
+    const times = Dates.availableTimes.map(time =>
+      <MenuItem key={time} eventKey={time}>
+        {time}
+      </MenuItem>
+    );
     return (
       <div className="newShowForm">
         {this.state.editable

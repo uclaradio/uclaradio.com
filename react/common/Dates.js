@@ -1,7 +1,7 @@
 // Dates.js
 // helper functions for date/time elements
 
-var dates = {};
+const dates = {};
 
 dates.dayFromVar = function(day) {
   switch (day) {

@@ -23,7 +23,7 @@ Displays full description of a event, with description, picture, location...
 @prop event: event object
 @prop fetching: currently fetching events
 @prop updateEvents: callback to update all listed events
-**/
+* */
 const EventPage = React.createClass({
   componentWillMount() {
     if (this.props.event == null) {
@@ -34,8 +34,8 @@ const EventPage = React.createClass({
     // scroll to top of page
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
-  render: function() {
-    var event = this.props.event;
+  render() {
+    const event = this.props.event;
     if (!event) {
       return (
         <div className="eventPage">
@@ -66,7 +66,7 @@ const EventPage = React.createClass({
 });
 
 var formatDate = function(dateString) {
-  var date = new Date(dateString);
+  const date = new Date(dateString);
   return date.toDateString();
 };
 
