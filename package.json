@@ -10,7 +10,6 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "eslint --fix",
       "prettier --single-quote --trailing-comma es5 --jsx-bracket-same-line --write",
       "git add"
     ]
