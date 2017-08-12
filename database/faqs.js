@@ -1,17 +1,17 @@
 // connect to database
 require('./db');
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var faqs = {};
+const faqs = {};
 
 // Frequently Asked Questions
-var FAQSchema = new mongoose.Schema({
+const FAQSchema = new mongoose.Schema({
   id: Number,
   question: String,
   answer: String,
 });
-var FAQModel = mongoose.model('faqs', FAQSchema);
+const FAQModel = mongoose.model('faqs', FAQSchema);
 
 faqs.webSafeFAQ = function(faq) {
   return {
@@ -21,16 +21,16 @@ faqs.webSafeFAQ = function(faq) {
   };
 };
 
-/***** FAQ *****/
+/** *** FAQ **** */
 
 faqs.updateFAQs = function(newFAQs, callback) {
   // remove all old faqs
-  FAQModel.remove({}, function(e) {
+  FAQModel.remove({}, e => {
     if (e) {
       console.log('error removing faqs:', e);
       callback(e);
     } else {
-      FAQModel.collection.insert(newFAQs, {}, function(err, allFAQs) {
+      FAQModel.collection.insert(newFAQs, {}, (err, allFAQs) => {
         if (err) {
           console.log('error updating faqs:', err);
         } else {
@@ -43,12 +43,12 @@ faqs.updateFAQs = function(newFAQs, callback) {
 
 // return array of all faq questions
 faqs.getAllFAQs = function(callback) {
-  FAQModel.find(function(err, res) {
+  FAQModel.find((err, res) => {
     if (err) {
       callback(err);
     } else {
-      var allFAQs = [];
-      for (var i = 0; i < res.length; i++) {
+      const allFAQs = [];
+      for (let i = 0; i < res.length; i++) {
         allFAQs.push(faqs.webSafeFAQ(res[i]));
       }
       callback(null, allFAQs);
@@ -58,7 +58,7 @@ faqs.getAllFAQs = function(callback) {
 
 // delete a faq question with the given id
 faqs.deleteFAQ = function(id, callback) {
-  FAQModel.remove({ id: id }, function(e) {
+  FAQModel.remove({ id }, e => {
     callback(e);
   });
 };

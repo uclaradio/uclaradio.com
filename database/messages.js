@@ -1,12 +1,13 @@
 // connect to database
-var db = require('./db');
+const db = require('./db');
 
-var mongoose = require('mongoose');
-var Promise = require('bluebird');
+const mongoose = require('mongoose');
+const Promise = require('bluebird');
+
 mongoose.Promise = Promise;
-var messages = {};
+const messages = {};
 
-var MessageSchema = new mongoose.Schema({
+const MessageSchema = new mongoose.Schema({
   id: { type: Number, index: true },
   text: String,
   user: { type: String, index: true },
@@ -14,22 +15,22 @@ var MessageSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
 });
 
-var MessageModel = mongoose.model('messages', MessageSchema);
+const MessageModel = mongoose.model('messages', MessageSchema);
 
 // number of times script should attempt and check to confirm a unique username, per round
-var uniqueCheckIterations = 10;
+const uniqueCheckIterations = 10;
 
 // create a new message object with given text, username, and a unique id
 messages.saveMessage = function(data, callback) {
-  db.getNextAvailableId(db.messageIdKey, function(nextId) {
-    var message = new MessageModel({
+  db.getNextAvailableId(db.messageIdKey, nextId => {
+    const message = new MessageModel({
       id: nextId,
       text: data.text,
       user: data.user,
     });
     message.save();
 
-    db.setLastTakenId(db.messageIdKey, nextId, function(err) {
+    db.setLastTakenId(db.messageIdKey, nextId, err => {
       if (err) {
         console.log('error setting next id for messages: ', err);
       }
@@ -41,7 +42,7 @@ messages.saveMessage = function(data, callback) {
 
 // list messages flagged by users as offensive
 messages.getReportedMessages = function(callback) {
-  MessageModel.find({ reported: true }, function(err, data) {
+  MessageModel.find({ reported: true }, (err, data) => {
     callback(data);
   });
 };
@@ -71,18 +72,18 @@ messages.free = function(messageID, callback) {
 
 // delete message
 messages.delete = function(messageID, callback) {
-  MessageModel.remove({ id: messageID }, function() {
+  MessageModel.remove({ id: messageID }, () => {
     callback();
   });
 };
 
 // list [volume] messages after message with ID
 messages.next = function(messageID, volume, callback) {
-  var param = messageID ? { id: { $lt: messageID } } : null;
-  var promise = MessageModel.find(param)
+  const param = messageID ? { id: { $lt: messageID } } : null;
+  const promise = MessageModel.find(param)
     .limit(parseInt(volume))
     .sort({ _id: -1 });
-  promise.then(function(data) {
+  promise.then(data => {
     callback(data);
   });
 };
@@ -100,19 +101,19 @@ function getRandomInt(min, max) {
 // generate a random username with some max number of digits
 // example: digits <= 5: "Guest430" or "Guest47988" could be generated
 function randomUsername(digits) {
-  var maxInt = Math.pow(10, digits) - 1;
-  return 'Guest' + getRandomInt(0, maxInt);
+  const maxInt = Math.pow(10, digits) - 1;
+  return `Guest${getRandomInt(0, maxInt)}`;
 }
 
 // try and get a random username by checking that no identical user exists in database.
 // after some number of attempts, give up and reuse a username
 function attemptUniqueUsername(iterations, digits, callback) {
-  var random = randomUsername(digits);
+  const random = randomUsername(digits);
   if (iterations < 1) {
     attemptUniqueUsername(uniqueCheckIterations, digits + 1, callback);
     return;
   }
-  MessageModel.findOne({ user: random }, function(err, data) {
+  MessageModel.findOne({ user: random }, (err, data) => {
     if (data) {
       // username taken, try again
       attemptUniqueUsername(iterations - 1, digits, callback);
