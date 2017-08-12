@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../database/db');
+const express = require('express');
 
-router.get('/', function(req, res) {
+const router = express.Router();
+const db = require('../database/db');
+
+router.get('/', (req, res) => {
   res.render('ios');
 });
 

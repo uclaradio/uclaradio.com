@@ -1,10 +1,11 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
 
-var router = express.Router();
+const app = express();
 
-router.get('/', function(req, res) {
+const router = express.Router();
+
+router.get('/', (req, res) => {
   res.render('notFound');
 });
 

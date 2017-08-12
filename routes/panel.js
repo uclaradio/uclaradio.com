@@ -2,6 +2,7 @@
 // Staff user panel pages and API
 
 const express = require('express');
+
 const router = express.Router();
 const path = require('path');
 const mime = require('mime');
@@ -20,21 +21,21 @@ const IMAGE_QUALITY = 80;
 
 const storage = multer.diskStorage({
   destination: path.join(__dirname, '/../public/uploads'),
-  filename: function(req, file, cb) {
-    cb(null, file.fieldname + Date.now() + '.' + mime.extension(file.mimetype));
+  filename(req, file, cb) {
+    cb(null, `${file.fieldname + Date.now()}.${mime.extension(file.mimetype)}`);
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 const handleUpload = function(file) {
-  var imgPath = file.path;
-  var mimeType = file.mimetype;
+  const imgPath = file.path;
+  const mimeType = file.mimetype;
 
   // Perform image compression on JPG/PNG only
   if (mimeType == 'image/jpeg' || mimeType == 'image/png') {
     console.log('compressing');
-    Jimp.read(imgPath, function(err, img) {
+    Jimp.read(imgPath, (err, img) => {
       if (err) {
         errorCallback(err);
       }
@@ -47,14 +48,14 @@ const handleUpload = function(file) {
   return imgPath.replace(/.+public\//g, '/');
 };
 
-/***** Main Log In Page *****/
+/** *** Main Log In Page **** */
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   // check credentials
   if (req.cookies.username == undefined || req.cookies.pass == undefined) {
     res.render('panel/login', { title: 'Log In' });
   } else {
-    accounts.autoLogin(req.cookies.username, req.cookies.pass, function(o) {
+    accounts.autoLogin(req.cookies.username, req.cookies.pass, o => {
       if (o != null) {
         req.session.user = o;
         res.redirect('/panel/home');
@@ -65,11 +66,8 @@ router.get('/', function(req, res) {
   }
 });
 
-router.post('/', function(req, res) {
-  accounts.manualLogin(req.body['username'], req.body['pass'], function(
-    err,
-    o
-  ) {
+router.post('/', (req, res) => {
+  accounts.manualLogin(req.body.username, req.body.pass, (err, o) => {
     if (!o) {
       res.status(400).send(err);
     } else {
@@ -83,19 +81,19 @@ router.post('/', function(req, res) {
   });
 });
 
-/***** User Home Page *****/
+/** *** User Home Page **** */
 
-router.get('/home', function(req, res) {
+router.get('/home', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    var path = require('path');
+    const path = require('path');
     res.sendFile(path.resolve('public/panel/panel.html'));
   }
 });
 
-router.get('/logout', function(req, res) {
+router.get('/logout', (req, res) => {
   if (req.session.user) {
     res.clearCookie('user');
     res.clearCookie('pass');
@@ -104,19 +102,19 @@ router.get('/logout', function(req, res) {
   res.redirect('/panel');
 });
 
-/***** New Accounts *****/
+/** *** New Accounts **** */
 
-router.get('/signup', function(req, res) {
+router.get('/signup', (req, res) => {
   res.render('panel/signup', { title: 'Signup' });
 });
 
-router.post('/signup', function(req, res) {
+router.post('/signup', (req, res) => {
   accounts.requestNewAccount(
-    req.body['username'],
-    req.body['pass'],
-    req.body['email'],
-    req.body['fullName'],
-    function(e) {
+    req.body.username,
+    req.body.pass,
+    req.body.email,
+    req.body.fullName,
+    e => {
       if (e) {
         res.status(400).send(e);
       } else {
@@ -126,24 +124,24 @@ router.post('/signup', function(req, res) {
   );
 });
 
-/***** FAQ *****/
+/** *** FAQ **** */
 
-router.get('/faq', function(req, res) {
-  var path = require('path');
+router.get('/faq', (req, res) => {
+  const path = require('path');
   res.sendFile(path.resolve('public/panel/faq.html'));
 });
 
-router.get('/api/faq', function(req, res) {
-  faqs.getAllFAQs(function(err, o) {
+router.get('/api/faq', (req, res) => {
+  faqs.getAllFAQs((err, o) => {
     if (o) {
-      var response = { faqs: o };
+      const response = { faqs: o };
       if (req.session.user == null) {
         res.json(response);
       } else {
         accounts.checkPrivilege(
           req.session.user.username,
           accounts.managerPrivilegeName,
-          function(err, hasAccess) {
+          (err, hasAccess) => {
             // let managers edit
             response.editable = hasAccess;
             res.json(response);
@@ -157,7 +155,7 @@ router.get('/api/faq', function(req, res) {
   // res.json({editable: true, faqs: [{"id": 1, "question": "How do I get staff points?", "answer": "[staffing points information]"}]});
 });
 
-router.post('/api/faq', function(req, res) {
+router.post('/api/faq', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.status(400).send(err);
@@ -165,9 +163,9 @@ router.post('/api/faq', function(req, res) {
     accounts.checkPrivilege(
       req.session.user.username,
       accounts.managerPrivilegeName,
-      function(err, hasAccess) {
+      (err, hasAccess) => {
         if (hasAccess && req.body.faqs) {
-          faqs.updateFAQs(JSON.parse(req.body.faqs), function(err, o) {
+          faqs.updateFAQs(JSON.parse(req.body.faqs), (err, o) => {
             if (o) {
               res.json(o);
             } else {
@@ -182,10 +180,10 @@ router.post('/api/faq', function(req, res) {
   }
 });
 
-/***** Managers *****/
+/** *** Managers **** */
 
-var managerInfo = function(req, res) {
-  accounts.managerInfo(req.session.user.username, function(err, o) {
+const managerInfo = function(req, res) {
+  accounts.managerInfo(req.session.user.username, (err, o) => {
     if (o) {
       res.json(o);
     } else {
@@ -194,12 +192,12 @@ var managerInfo = function(req, res) {
   });
 };
 
-var updateManager = function(req, res) {
+const updateManager = function(req, res) {
   // destringify
-  var manager = JSON.parse(req.body.manager);
+  const manager = JSON.parse(req.body.manager);
   if (manager.username === req.session.user.username) {
     // only let users update their own manager info
-    accounts.updateManager(manager, function(err, o) {
+    accounts.updateManager(manager, (err, o) => {
       if (o) {
         res.json(o);
       } else {
@@ -209,14 +207,14 @@ var updateManager = function(req, res) {
   }
 };
 
-var listAccounts = function(req, res) {
-  accounts.listAccounts(function(err, usernames) {
+const listAccounts = function(req, res) {
+  accounts.listAccounts((err, usernames) => {
     res.json(usernames);
   });
 };
 
-var verifyAccount = function(req, res) {
-  accounts.verifyAccount(req.body.username, function(err, o) {
+const verifyAccount = function(req, res) {
+  accounts.verifyAccount(req.body.username, (err, o) => {
     if (o) {
       // successfully updated
       res.json('success');
@@ -227,8 +225,8 @@ var verifyAccount = function(req, res) {
   });
 };
 
-var deleteAccount = function(req, res) {
-  accounts.deleteUser(req.body.username, function(e) {
+const deleteAccount = function(req, res) {
+  accounts.deleteUser(req.body.username, e => {
     if (e) {
       console.log('error removing show: ', e);
       res.status(400).send(e);
@@ -238,8 +236,8 @@ var deleteAccount = function(req, res) {
   });
 };
 
-var deleteUnverifiedAccount = function(req, res) {
-  accounts.deleteUnverifiedUser(req.body.username, function(e) {
+const deleteUnverifiedAccount = function(req, res) {
+  accounts.deleteUnverifiedUser(req.body.username, e => {
     if (e) {
       console.log('error removing show: ', e);
       res.status(400).send(e);
@@ -249,21 +247,21 @@ var deleteUnverifiedAccount = function(req, res) {
   });
 };
 
-var deleteChat = function(req, res) {
-  var messageID = req.body.id;
-  messages.delete(messageID, function() {
+const deleteChat = function(req, res) {
+  const messageID = req.body.id;
+  messages.delete(messageID, () => {
     res.send('succesfully deleted');
   });
 };
 
-var freeChat = function(req, res) {
-  var messageID = req.body.id;
-  messages.free(messageID, function() {
+const freeChat = function(req, res) {
+  const messageID = req.body.id;
+  messages.free(messageID, () => {
     res.send('succesfully deleted');
   });
 };
 
-router.post('/manager/api/:link', function(req, res) {
+router.post('/manager/api/:link', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
@@ -271,9 +269,9 @@ router.post('/manager/api/:link', function(req, res) {
     accounts.checkPrivilege(
       req.session.user.username,
       accounts.managerPrivilegeName,
-      function(err, hasAccess) {
+      (err, hasAccess) => {
         if (hasAccess) {
-          var path = require('path');
+          const path = require('path');
           // perform action
           switch (req.params.link) {
             case 'info':
@@ -312,7 +310,7 @@ router.post('/manager/api/:link', function(req, res) {
   }
 });
 
-router.get('/manager', function(req, res) {
+router.get('/manager', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
@@ -320,9 +318,9 @@ router.get('/manager', function(req, res) {
     accounts.checkPrivilege(
       req.session.user.username,
       accounts.managerPrivilegeName,
-      function(err, hasAccess) {
+      (err, hasAccess) => {
         if (hasAccess) {
-          var path = require('path');
+          const path = require('path');
           res.sendFile(path.resolve('public/panel/manager.html'));
         } else {
           // redirect to home page
@@ -333,19 +331,19 @@ router.get('/manager', function(req, res) {
   }
 });
 
-/***** Shows *****/
+/** *** Shows **** */
 
-router.get('/show/:id', function(req, res) {
+router.get('/show/:id', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    var path = require('path');
+    const path = require('path');
     res.sendFile(path.resolve('public/panel/show.html'));
   }
 });
 
-router.get('/api/showData/:id', function(req, res) {
+router.get('/api/showData/:id', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.status(400).send();
@@ -353,14 +351,13 @@ router.get('/api/showData/:id', function(req, res) {
     shows.userHasAccessToShow(
       req.session.user.username,
       req.params.id,
-      function(hasAccess) {
+      hasAccess => {
         if (!hasAccess) {
           // user doesn't have access to this show
           console.log("user requested show they don't have access to");
           res.status(400).send();
-          return;
         } else {
-          shows.getDJMappedShow(req.params.id, function(err, o) {
+          shows.getDJMappedShow(req.params.id, (err, o) => {
             if (o) {
               res.json(o);
             } else {
@@ -373,42 +370,42 @@ router.get('/api/showData/:id', function(req, res) {
   }
 });
 
-/***** API *****/
+/** *** API **** */
 
-/***** Account Info *****/
+/** *** Account Info **** */
 
-router.get('/api/user', function(req, res) {
+router.get('/api/user', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.status(400).send();
   } else {
-    var user = req.session.user;
-    accounts.getDJByUserName(user.username, function(err, dj) {
+    const user = req.session.user;
+    accounts.getDJByUserName(user.username, (err, dj) => {
       if (err) {
         res.status(400).send(err);
       } else {
-        var userData = accounts.webSafeUser(dj);
+        const userData = accounts.webSafeUser(dj);
         res.json(userData);
       }
     });
   }
 });
 
-router.post('/api/user', function(req, res) {
+router.post('/api/user', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.status(400).send();
   } else {
-    var user = JSON.parse(req.body.user);
+    const user = JSON.parse(req.body.user);
     if (req.session.user.username !== user.username) {
       res.status(400).send();
     } else {
       // update user info
-      accounts.updateAccount(user, function(err, user) {
+      accounts.updateAccount(user, (err, user) => {
         if (err) {
           res.status(400).send(err);
         } else {
-          var userData = accounts.webSafeUser(user);
+          const userData = accounts.webSafeUser(user);
           res.json(userData);
         }
       });
@@ -416,20 +413,20 @@ router.post('/api/user', function(req, res) {
   }
 });
 
-var defaultLinks = [
+const defaultLinks = [
   { title: 'FAQ', link: '/panel/faq' },
   { title: 'Elrond', link: '/panel/elrond' },
 ];
-router.get('/api/userlinks', function(req, res) {
+router.get('/api/userlinks', (req, res) => {
   if (req.session.user == null) {
     res.json({ loggedin: false, links: defaultLinks });
   } else {
-    var user = req.session.user;
+    const user = req.session.user;
     // retrieve links relevent to user's privileges (like Manager pages)
-    accounts.getPrivilegeLinksForUser(user.username, function(err, links) {
+    accounts.getPrivilegeLinksForUser(user.username, (err, links) => {
       links = links.concat(defaultLinks);
       if (links) {
-        res.json({ loggedin: true, links: links });
+        res.json({ loggedin: true, links });
       } else {
         res.status(400).send();
       }
@@ -437,21 +434,21 @@ router.get('/api/userlinks', function(req, res) {
   }
 });
 
-router.post('/api/userPic', upload.single('img'), function(req, res) {
+router.post('/api/userPic', upload.single('img'), (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
     // user has access to update this show
-    var errorCallback = function(err) {
+    const errorCallback = function(err) {
       console.log('failed to add show picture: ', err);
       res.status(400).send(err);
     };
 
     const picture = handleUpload(req.file);
 
-    var newData = { picture: picture, username: req.body.username };
-    accounts.updateAccount(newData, function(err, user) {
+    const newData = { picture, username: req.body.username };
+    accounts.updateAccount(newData, (err, user) => {
       if (err) {
         errorCallback(err);
       } else {
@@ -462,15 +459,15 @@ router.post('/api/userPic', upload.single('img'), function(req, res) {
   }
 });
 
-/***** Show Info *****/
+/** *** Show Info **** */
 
-router.get('/api/usershows', function(req, res) {
+router.get('/api/usershows', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
     // return list of shows belonging to current user
-    shows.getShowsForUser(req.session.user.username, function(err, shows) {
+    shows.getShowsForUser(req.session.user.username, (err, shows) => {
       if (err) {
         console.log('failed to retrieve shows for user: ', err);
       } else {
@@ -480,14 +477,14 @@ router.get('/api/usershows', function(req, res) {
   }
 });
 
-router.get('/api/allshows', function(req, res) {
+router.get('/api/allshows', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    accounts.isManager(req.session.user.username, function(err, isManager) {
+    accounts.isManager(req.session.user.username, (err, isManager) => {
       if (isManager) {
-        shows.getAllPublicShows(function(err, allShows) {
+        shows.getAllPublicShows((err, allShows) => {
           if (err) {
             res.status(400).send();
           } else {
@@ -502,82 +499,86 @@ router.get('/api/allshows', function(req, res) {
 });
 
 // update details for one show
-router.post('/api/updateShow', function(req, res) {
+router.post('/api/updateShow', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    var showData = JSON.parse(req.body.show);
-    shows.userHasAccessToShow(req.session.user.username, showData.id, function(
-      hasAccess
-    ) {
-      // user doesn't have access to this show
-      if (!hasAccess) {
-        console.log('user requested invalid show');
-        res.status(400).send();
-        return;
-      }
-
-      // map djs back to usernames
-      var djUsernames = [];
-      Object.keys(showData.djs).forEach(function(username) {
-        djUsernames += username;
-      });
-      showData.djs = djUsernames;
-
-      // return show with id belonging to logged in user
-      var callback = function(err, show) {
-        if (err) {
-          console.log('error updating show: ', err);
-        }
-
-        if (show) {
-          shows.getDJMappedShow(show.id, function(err, o) {
-            if (o) {
-              res.json(o);
-            } else {
-              res.status(400).send();
-            }
-          });
-        } else {
+    const showData = JSON.parse(req.body.show);
+    shows.userHasAccessToShow(
+      req.session.user.username,
+      showData.id,
+      hasAccess => {
+        // user doesn't have access to this show
+        if (!hasAccess) {
+          console.log('user requested invalid show');
           res.status(400).send();
+          return;
         }
-      };
 
-      shows.updateShow(showData.id, showData, callback);
-    });
+        // map djs back to usernames
+        let djUsernames = [];
+        Object.keys(showData.djs).forEach(username => {
+          djUsernames += username;
+        });
+        showData.djs = djUsernames;
+
+        // return show with id belonging to logged in user
+        const callback = function(err, show) {
+          if (err) {
+            console.log('error updating show: ', err);
+          }
+
+          if (show) {
+            shows.getDJMappedShow(show.id, (err, o) => {
+              if (o) {
+                res.json(o);
+              } else {
+                res.status(400).send();
+              }
+            });
+          } else {
+            res.status(400).send();
+          }
+        };
+
+        shows.updateShow(showData.id, showData, callback);
+      }
+    );
   }
 });
 
 // delete show
-router.post('/api/deleteShow', function(req, res) {
+router.post('/api/deleteShow', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    shows.userHasAccessToShow(req.session.user.username, req.body.id, function(
-      hasAccess
-    ) {
-      // user doesn't have access to this show
-      if (!hasAccess) {
-        console.log('user requested invalid show');
-        res.status(400).send();
-        return;
-      }
-
-      shows.removeShow(req.body.id, function(e) {
-        if (e) {
-          console.log('error removing show: ', e);
-          res.status(400).send(e);
-        } else {
-          res.json('success');
+    shows.userHasAccessToShow(
+      req.session.user.username,
+      req.body.id,
+      hasAccess => {
+        // user doesn't have access to this show
+        if (!hasAccess) {
+          console.log('user requested invalid show');
+          res.status(400).send();
+          return;
         }
-      });
-    });
+
+        shows.removeShow(req.body.id, e => {
+          if (e) {
+            console.log('error removing show: ', e);
+            res.status(400).send(e);
+          } else {
+            res.json('success');
+          }
+        });
+      }
+    );
   }
 });
 
-router.post('/api/addShow', function(req, res) {
+router.post('/api/addShow', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
@@ -587,10 +588,10 @@ router.post('/api/addShow', function(req, res) {
       req.body.day,
       req.body.time,
       [req.session.user.username],
-      function(err, saved) {
+      (err, saved) => {
         if (err) {
           console.log('failed to add show for user: ', err);
-          res.json({ success: false, err: err });
+          res.json({ success: false, err });
         } else {
           // return full list of shows
           res.redirect('/panel/api/usershows');
@@ -600,58 +601,60 @@ router.post('/api/addShow', function(req, res) {
   }
 });
 
-router.post('/api/showPic', upload.single('img'), function(req, res) {
+router.post('/api/showPic', upload.single('img'), (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    shows.userHasAccessToShow(req.session.user.username, req.body.id, function(
-      hasAccess
-    ) {
-      if (!hasAccess) {
-        res.status(400).send();
-      } else {
-        // user has access to update this show
-        var errorCallback = function(err) {
-          console.log('failed to add show picture: ', err);
-          res.status(400).send(err);
-        };
+    shows.userHasAccessToShow(
+      req.session.user.username,
+      req.body.id,
+      hasAccess => {
+        if (!hasAccess) {
+          res.status(400).send();
+        } else {
+          // user has access to update this show
+          const errorCallback = function(err) {
+            console.log('failed to add show picture: ', err);
+            res.status(400).send(err);
+          };
 
-        const picture = handleUpload(req.file);
+          const picture = handleUpload(req.file);
 
-        // update show data with new pictures
-        var newData = { picture: picture };
-        shows.updateShow(req.body.id, newData, function(err, o) {
-          if (err) {
-            errorCallback(err);
-          } else {
-            // updated successfully!
-            res.json('success');
-          }
-        });
+          // update show data with new pictures
+          const newData = { picture };
+          shows.updateShow(req.body.id, newData, (err, o) => {
+            if (err) {
+              errorCallback(err);
+            } else {
+              // updated successfully!
+              res.json('success');
+            }
+          });
+        }
       }
-    });
+    );
   }
 });
 
-/** ELROND **/
+/** ELROND * */
 
-router.get('/elrond', function(req, res) {
+router.get('/elrond', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    var path = require('path');
+    const path = require('path');
     res.sendFile(path.resolve('public/panel/elrond.html'));
   }
 });
 
-router.get('/api/songs', function(req, res) {
+router.get('/api/songs', (req, res) => {
   if (req.session.user == null) {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    rivendell.getSongs(function(err, o) {
+    rivendell.getSongs((err, o) => {
       if (o) {
         res.json({ songs: o.songs, time: o.time });
       } else {

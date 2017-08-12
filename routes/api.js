@@ -1,18 +1,19 @@
 // api.js
 // User-Facing API for public data
 
-var accounts = require('../database/accounts');
-var shows = require('../database/shows');
+const accounts = require('../database/accounts');
+const shows = require('../database/shows');
 
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+
+const router = express.Router();
 
 function checkPublic(show) {
   return show.public;
 }
 
-router.get('/show/:id', function(req, res) {
-  shows.getShowById(req.params.id, function(err, o) {
+router.get('/show/:id', (req, res) => {
+  shows.getShowById(req.params.id, (err, o) => {
     if (o && o.public) {
       res.json(o);
     } else {
@@ -21,8 +22,8 @@ router.get('/show/:id', function(req, res) {
   });
 });
 
-router.get('/schedule', function(req, res) {
-  shows.getAllShows(function(err, o) {
+router.get('/schedule', (req, res) => {
+  shows.getAllShows((err, o) => {
     if (o) {
       res.json({ shows: o.filter(checkPublic) });
     } else {
@@ -31,10 +32,10 @@ router.get('/schedule', function(req, res) {
   });
 });
 
-router.get('/nowplaying', function(req, res) {
-  var info = getTimeAndDay();
+router.get('/nowplaying', (req, res) => {
+  const info = getTimeAndDay();
 
-  shows.getShowByTimeslotAndDay(info.time, info.day, function(err, blurb) {
+  shows.getShowByTimeslotAndDay(info.time, info.day, (err, blurb) => {
     if (blurb && blurb.public) {
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify(blurb));
@@ -44,8 +45,8 @@ router.get('/nowplaying', function(req, res) {
   });
 });
 
-router.get('/djs/:djName', function(req, res) {
-  accounts.getDJByDJName(req.params.djName, function(err, o) {
+router.get('/djs/:djName', (req, res) => {
+  accounts.getDJByDJName(req.params.djName, (err, o) => {
     if (o) {
       res.json(o);
     } else {
@@ -54,8 +55,8 @@ router.get('/djs/:djName', function(req, res) {
   });
 });
 
-router.get('/djs', function(req, res) {
-  accounts.getAllUsers(function(err, o) {
+router.get('/djs', (req, res) => {
+  accounts.getAllUsers((err, o) => {
     if (o) {
       res.json({ djs: o });
     } else {
@@ -71,7 +72,7 @@ router.get('/djs', function(req, res) {
 // });
 
 // static data
-router.get('/giveawayDescription', function(req, res) {
+router.get('/giveawayDescription', (req, res) => {
   res.json({
     info:
       'We give a lot of tickets away to our listeners.. Tune in and follow us on Facebook and Instagram for your chance to see these shows!',
@@ -79,21 +80,21 @@ router.get('/giveawayDescription', function(req, res) {
 });
 
 // static data
-router.get('/streamURL', function(req, res) {
+router.get('/streamURL', (req, res) => {
   res.json({ url: 'http://uclaradio.com:8000/;' });
 });
 
 /* Helper Functions */
 
 function getTimeAndDay() {
-  var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  var date = new Date();
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const date = new Date();
 
-  var day = days[date.getDay()];
-  var time = date.getHours();
+  const day = days[date.getDay()];
+  let time = date.getHours();
 
-  //Change the time into the format our db is expecting
-  //AKA 12pm, 10am, 1pm: hour followed by am or pm
+  // Change the time into the format our db is expecting
+  // AKA 12pm, 10am, 1pm: hour followed by am or pm
   if (time === 0) {
     time = '12am';
   } else if (time < 12) {
@@ -106,8 +107,8 @@ function getTimeAndDay() {
   }
 
   return {
-    day: day,
-    time: time,
+    day,
+    time,
   };
 }
 
