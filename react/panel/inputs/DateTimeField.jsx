@@ -18,11 +18,14 @@ var Input = require('react-bootstrap').Input;
 var DateTimeField = React.createClass({
   render: function() {
     return (
-        <div className="dateTimeField">
+      <div className="dateTimeField">
         <Grid>
           <Row>
             <Col md={6}>
-              <Input value={this.props.day} type="select" onChange={this.props.onDayChange}>
+              <Input
+                value={this.props.day}
+                type="select"
+                onChange={this.props.onDayChange}>
                 <option value="Mon">Monday</option>
                 <option value="Tue">Tuesday</option>
                 <option value="Wed">Wednesday</option>
@@ -33,7 +36,10 @@ var DateTimeField = React.createClass({
               </Input>
             </Col>
             <Col md={6}>
-              <Input value={this.props.time} type="select" onChange={this.props.onTimeChange}>
+              <Input
+                value={this.props.time}
+                type="select"
+                onChange={this.props.onTimeChange}>
                 <option value="12am">12AM</option>
                 <option value="1am">1AM</option>
                 <option value="2am">2AM</option>
@@ -64,7 +70,7 @@ var DateTimeField = React.createClass({
         </Grid>
       </div>
     );
-  }
+  },
 });
 
 module.exports = DateTimeField;

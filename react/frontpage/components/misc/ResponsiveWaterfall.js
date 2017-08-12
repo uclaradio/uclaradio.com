@@ -5,13 +5,15 @@ var Waterfall = function(opts) {
   // define property
   var minBoxWidth;
   Object.defineProperty(this, 'minBoxWidth', {
-    get: function() { return minBoxWidth; },
+    get: function() {
+      return minBoxWidth;
+    },
     set: function(value) {
-      if(value < 100) value = 100;
-      if(value > 1000) value = 1000;
+      if (value < 100) value = 100;
+      if (value > 1000) value = 1000;
 
       minBoxWidth = value;
-    }
+    },
   });
 
   opts = opts || {};
@@ -22,24 +24,26 @@ var Waterfall = function(opts) {
   this.minBoxWidth = opts.minBoxWidth || 250;
   this.columns = [];
   this.container = document.querySelector(containerSelector);
-  this.boxes = this.container ?
-      Array.prototype.slice.call(this.container.querySelectorAll(boxSelector)) : [];
+  this.boxes = this.container
+    ? Array.prototype.slice.call(this.container.querySelectorAll(boxSelector))
+    : [];
 
   // compose once in constructor
   this.compose();
 
   // handle the image or something which might change size after loaded
-  var images = this.container.querySelectorAll('img'), that = this;
+  var images = this.container.querySelectorAll('img'),
+    that = this;
   var clr;
   for (var i = 0; i < images.length; i++) {
     var img = images[i];
     img.onload = function() {
-      if(clr) clearTimeout(clr);
+      if (clr) clearTimeout(clr);
 
       clr = setTimeout(function() {
         that.compose(true);
       }, 500);
-    }
+    };
   }
 
   window.addEventListener('resize', function() {
@@ -59,7 +63,7 @@ Waterfall.prototype.initColumns = function(num) {
   if (num > 0) {
     // create column div
     this.columns = [];
-    var width = (100 / num) + '%';
+    var width = 100 / num + '%';
     while (num--) {
       var column = document.createElement('div');
       column.className = 'wf-column';
@@ -73,33 +77,33 @@ Waterfall.prototype.initColumns = function(num) {
 // get the index of shortest column
 Waterfall.prototype.getMinHeightIndex = function() {
   if (this.columns && this.columns.length > 0) {
-    var min = this.columns[0].clientHeight, index = 0;
+    var min = this.columns[0].clientHeight,
+      index = 0;
     for (var i = 1; i < this.columns.length; i++) {
       var columnElem = this.columns[i];
-      if(columnElem.clientHeight < min) {
+      if (columnElem.clientHeight < min) {
         min = columnElem.clientHeight;
         index = i;
       }
     }
     return index;
-  }
-  else return -1;
+  } else return -1;
 };
 
 // get the index of highset column
 Waterfall.prototype.getHighestIndex = function() {
   if (this.columns && this.columns.length > 0) {
-    var max = this.columns[0].clientHeight, index = 0;
+    var max = this.columns[0].clientHeight,
+      index = 0;
     for (var i = 1; i < this.columns.length; i++) {
       var columnElem = this.columns[i];
       if (columnElem.clientHeight > max) {
-          max = columnElem.clientHeight;
-          index = i;
+        max = columnElem.clientHeight;
+        index = i;
       }
     }
     return index;
-  }
-  else {
+  } else {
     return -1;
   }
 };

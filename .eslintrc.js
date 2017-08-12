@@ -1,18 +1,26 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "node": true,
-    "es6": true,
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
   },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true
+  parserOptions: {
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+      jsx: true,
     },
   },
-  "plugins": ["react"],
-  "rules": {
-    "indent": ["error", 2],
-    "eol-last": ["error", "always"],
-  }
+  plugins: ['react', 'prettier'],
+  rules: {
+    indent: ['error', 2],
+    'eol-last': ['error', 'always'],
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        trailingComma: 'es5',
+        jsxBracketSameLine: true,
+      },
+    ],
+  },
 };

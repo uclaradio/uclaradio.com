@@ -12,31 +12,39 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './frontpage/reducers/';
 // creates store and enables redux dev tools
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 import { connect } from 'react-redux';
 
-import { updateNowPlaying, addUpdateShow, updateSpotlightShow, fetchUpdatedShows } from './frontpage/actions/shows';
+import {
+  updateNowPlaying,
+  addUpdateShow,
+  updateSpotlightShow,
+  fetchUpdatedShows,
+} from './frontpage/actions/shows';
 import Frontpage from './frontpage/Frontpage.jsx';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   updateNowPlaying: () => {
     fetchUpdatedNowPlaying(dispatch);
   },
-  setSpotlightShowID: (showID) => {
+  setSpotlightShowID: showID => {
     dispatch(updateSpotlightShow(showID));
   },
   updateShows: () => {
     fetchUpdatedShows(dispatch);
-  }
+  },
 });
 
 // fetch now playing show info from server and update store
-const nowPlayingURL = "/api/nowplaying";
-const fetchUpdatedNowPlaying = (dispatch) => {
+const nowPlayingURL = '/api/nowplaying';
+const fetchUpdatedNowPlaying = dispatch => {
   $.ajax({
     url: nowPlayingURL,
     dataType: 'json',
@@ -50,15 +58,12 @@ const fetchUpdatedNowPlaying = (dispatch) => {
     }.bind(this),
     error: function(xhr, status, err) {
       console.error(nowPlayingURL, status, err.toString());
-    }.bind(this)
+    }.bind(this),
   });
-}
+};
 
 // redux container for frontpage
-const FrontpageContainer = connect(
-  null,
-  mapDispatchToProps
-)(Frontpage);
+const FrontpageContainer = connect(null, mapDispatchToProps)(Frontpage);
 
 // wrap container in redux provider to provide data store
 const FrontpageApp = () => {
@@ -67,9 +72,7 @@ const FrontpageApp = () => {
       <FrontpageContainer />
     </Provider>
   );
-}
+};
 
 // display app
-ReactDOM.render((
-  <FrontpageApp />
-), document.getElementById('content'));
+ReactDOM.render(<FrontpageApp />, document.getElementById('content'));

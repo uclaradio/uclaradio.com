@@ -7,7 +7,7 @@ var ReactDOM = require('react-dom');
 var NameFilter = React.createClass({
   updateFilterName: function() {
     this.props.handleFilterChange({
-      nameFilter: this.refs.nameFilterInput.value
+      nameFilter: this.refs.nameFilterInput.value,
     });
   },
 
@@ -25,14 +25,15 @@ var NameFilter = React.createClass({
         />
       </div>
     );
-  }
+  },
 });
 
 var DateFilter = React.createClass({
-
   updateFilterDate: function() {
     this.props.handleFilterChange({
-      beginDateFilter: new Date(this.refs.beginDateInput.value.replace(/-/g, '/')),
+      beginDateFilter: new Date(
+        this.refs.beginDateInput.value.replace(/-/g, '/')
+      ),
       endDateFilter: new Date(this.refs.endDateInput.value.replace(/-/g, '/')),
     });
   },
@@ -40,17 +41,15 @@ var DateFilter = React.createClass({
   convertDateToHTMLFormat: function(date) {
     const year = date.getFullYear();
     var month = date.getMonth() + 1;
-    month = month + "";
+    month = month + '';
 
-    if (month.length === 1)
-      month = "0" + month;
+    if (month.length === 1) month = '0' + month;
 
-    var day = date.getDate() + "";
+    var day = date.getDate() + '';
 
-    if (day.length === 1)
-      day = "0" + day + "";
+    if (day.length === 1) day = '0' + day + '';
 
-    return year + "-" + month + "-" + day;
+    return year + '-' + month + '-' + day;
   },
 
   render: function() {
@@ -75,13 +74,13 @@ var DateFilter = React.createClass({
         />
       </div>
     );
-  }
+  },
 });
 
 var StatusFilter = React.createClass({
   updateFilterStatus: function() {
     this.props.handleFilterChange({
-      statusFilter: this.refs.statusInput.value
+      statusFilter: this.refs.statusInput.value,
     });
   },
 
@@ -94,8 +93,7 @@ var StatusFilter = React.createClass({
           className="form-control"
           defaultValue="all"
           onChange={this.updateFilterStatus}
-          ref="statusInput"
-        >
+          ref="statusInput">
           <option value="all">Any</option>
           <option value="pending">Pending</option>
           <option value="approved">Approved</option>
@@ -104,13 +102,13 @@ var StatusFilter = React.createClass({
         </select>
       </div>
     );
-  }
+  },
 });
 
 var DepartmentFilter = React.createClass({
   updateFilterDepartment: function() {
     this.props.handleFilterChange({
-      departmentFilter: this.refs.departmentInput.value
+      departmentFilter: this.refs.departmentInput.value,
     });
   },
 
@@ -123,8 +121,7 @@ var DepartmentFilter = React.createClass({
           className="form-control"
           defaultValue="all"
           onChange={this.updateFilterDepartment}
-          ref="departmentInput"
-        >
+          ref="departmentInput">
           <option value="all">All</option>
           <option value="artanddesign">Art & Design</option>
           <option value="digitalpress">Digital Press </option>
@@ -144,7 +141,7 @@ var DepartmentFilter = React.createClass({
         </select>
       </div>
     );
-  }
+  },
 });
 
 var StaffingPointsRow = React.createClass({
@@ -153,18 +150,18 @@ var StaffingPointsRow = React.createClass({
     var password = this.props.password;
     var managerNotes = this.refs.managerNotes.value;
     var ajaxUpdateStatus = this.props.ajaxUpdateStatus;
-    $.post('view/update',
+    $.post(
+      'view/update',
       {
         userId: userId,
         status: status,
         managerNotes: managerNotes,
-        password: password
+        password: password,
       },
       function(data) {
         ajaxUpdateStatus(data, status, userId);
       }
     );
-
   },
 
   render: function() {
@@ -198,42 +195,57 @@ var StaffingPointsRow = React.createClass({
           <button>Deny</button>
         </td>
         <td>
-          <textarea ref="managerNotes" defaultValue={this.props.record.managerNotes}>
-          </textarea>
+          <textarea
+            ref="managerNotes"
+            defaultValue={this.props.record.managerNotes}
+          />
         </td>
       </tr>
     );
-  }
+  },
 });
 
 var StaffingPointsTable = React.createClass({
-
-
   render: function() {
-    var records = this.props.records
-      .filter(function(record) {
-        var nameMatch = record.fullName.toUpperCase().indexOf(this.props.nameFilter.toUpperCase()) !== -1;
-        var departmentMatch;
-        if (this.props.departmentFilter === 'all')
-          departmentMatch = true;
-        else
-          departmentMatch = record.department.toUpperCase() === this.props.departmentFilter.toUpperCase();
+    var records = this.props.records.filter(function(record) {
+      var nameMatch =
+        record.fullName
+          .toUpperCase()
+          .indexOf(this.props.nameFilter.toUpperCase()) !== -1;
+      var departmentMatch;
+      if (this.props.departmentFilter === 'all') departmentMatch = true;
+      else
+        departmentMatch =
+          record.department.toUpperCase() ===
+          this.props.departmentFilter.toUpperCase();
 
-        var statusMatch;
-        if (this.props.statusFilter === 'all')
-          statusMatch = true;
-        else
-          statusMatch = record.status.toUpperCase() === this.props.statusFilter.toUpperCase();
+      var statusMatch;
+      if (this.props.statusFilter === 'all') statusMatch = true;
+      else
+        statusMatch =
+          record.status.toUpperCase() === this.props.statusFilter.toUpperCase();
 
-        var afterBeginDateMatch = record.dateCompleted > this.props.beginDateFilter;
-        var beforeEndDateMatch = record.dateCompleted < this.props.endDateFilter;
+      var afterBeginDateMatch =
+        record.dateCompleted > this.props.beginDateFilter;
+      var beforeEndDateMatch = record.dateCompleted < this.props.endDateFilter;
 
-        return statusMatch && departmentMatch && nameMatch && afterBeginDateMatch && beforeEndDateMatch;
-      }, this);
-
-    var rows = records.map( function(record) {
       return (
-        <StaffingPointsRow key={record._id} record={record} password={this.props.password} ajaxUpdateStatus={this.props.updateStatus}/>
+        statusMatch &&
+        departmentMatch &&
+        nameMatch &&
+        afterBeginDateMatch &&
+        beforeEndDateMatch
+      );
+    }, this);
+
+    var rows = records.map(function(record) {
+      return (
+        <StaffingPointsRow
+          key={record._id}
+          record={record}
+          password={this.props.password}
+          ajaxUpdateStatus={this.props.updateStatus}
+        />
       );
     }, this);
 
@@ -241,36 +253,16 @@ var StaffingPointsTable = React.createClass({
       <table>
         <thead>
           <tr>
-            <th>
-              Full Name
-            </th>
-            <th>
-              Points
-            </th>
-            <th>
-              Description
-            </th>
-            <th>
-              Department
-            </th>
-            <th>
-              Completion Date
-            </th>
-            <th>
-              Notes
-            </th>
-            <th>
-              Status
-            </th>
-            <th>
-              Approve
-            </th>
-            <th>
-              Deny
-            </th>
-            <th>
-              Manager Notes
-            </th>
+            <th>Full Name</th>
+            <th>Points</th>
+            <th>Description</th>
+            <th>Department</th>
+            <th>Completion Date</th>
+            <th>Notes</th>
+            <th>Status</th>
+            <th>Approve</th>
+            <th>Deny</th>
+            <th>Manager Notes</th>
           </tr>
         </thead>
         <tbody>
@@ -278,39 +270,38 @@ var StaffingPointsTable = React.createClass({
         </tbody>
       </table>
     );
-  }
+  },
 });
 
 var StaffingPointsView = React.createClass({
-
   getInitialState: function() {
     return {
-      nameFilter: "",
-      departmentFilter: "all",
-      statusFilter: "all",
+      nameFilter: '',
+      departmentFilter: 'all',
+      statusFilter: 'all',
       beginDateFilter: new Date('January 1, 2016'),
       endDateFilter: new Date(),
       password: '',
       statusMessage: '',
-      records: []
+      records: [],
     };
   },
 
   componentDidMount: function() {
     var component = this;
-    $.get('points', function( data ) {
-      data.forEach( function(val) {
+    $.get('points', function(data) {
+      data.forEach(function(val) {
         val.dateCompleted = new Date(val.dateCompleted);
       });
       component.setState({
-        records: data
+        records: data,
       });
     });
   },
 
   updatePassword: function() {
     this.setState({
-      password: this.refs.passwordInput.value
+      password: this.refs.passwordInput.value,
     });
   },
 
@@ -319,8 +310,7 @@ var StaffingPointsView = React.createClass({
       var recordToUpdateIndex = -1;
 
       for (var x = 0; x < this.state.records.length; x++) {
-        if (this.state.records[x]._id === id)
-          recordToUpdateIndex = x;
+        if (this.state.records[x]._id === id) recordToUpdateIndex = x;
       }
 
       const recordToUpdate = this.state.records[recordToUpdateIndex];
@@ -331,17 +321,23 @@ var StaffingPointsView = React.createClass({
 
       newRecord.status = newStatus;
 
-      var records = [this.state.records.slice(0, recordToUpdateIndex), newRecord, this.state.records.slice(recordToUpdateIndex + 1, this.state.records.length)];
-    } else
-      var records = this.state.records;
+      var records = [
+        this.state.records.slice(0, recordToUpdateIndex),
+        newRecord,
+        this.state.records.slice(
+          recordToUpdateIndex + 1,
+          this.state.records.length
+        ),
+      ];
+    } else var records = this.state.records;
 
     this.setState({
       records: records,
-      statusMessage: statusMessage
+      statusMessage: statusMessage,
     });
   },
 
-  handleFilterChange: function( newFilterObj ) {
+  handleFilterChange: function(newFilterObj) {
     this.setState(newFilterObj);
   },
 
@@ -349,27 +345,42 @@ var StaffingPointsView = React.createClass({
     return (
       <div>
         <h1 id="header">Staffing Points</h1>
-        <h4>{this.state.statusMessage}</h4>
+        <h4>
+          {this.state.statusMessage}
+        </h4>
         <div className="row">
           <div className="col-md-4 col-md-offset-8 ">
             <div className="form-group">
               <h3>Super Secret Password</h3>
-              <input type="password" name="password" className="form-control" onChange={this.updatePassword} ref="passwordInput"/>
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                onChange={this.updatePassword}
+                ref="passwordInput"
+              />
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-md-3">
-            <NameFilter filterName={this.state.nameFilter} handleFilterChange={this.handleFilterChange} />
+            <NameFilter
+              filterName={this.state.nameFilter}
+              handleFilterChange={this.handleFilterChange}
+            />
           </div>
           <div className="col-md-3">
-            <DateFilter beginDate={this.state.beginDateFilter} endDate={this.state.endDateFilter} handleFilterChange={this.handleFilterChange} />
+            <DateFilter
+              beginDate={this.state.beginDateFilter}
+              endDate={this.state.endDateFilter}
+              handleFilterChange={this.handleFilterChange}
+            />
           </div>
           <div className="col-md-3">
-          <StatusFilter handleFilterChange={this.handleFilterChange} />
+            <StatusFilter handleFilterChange={this.handleFilterChange} />
           </div>
           <div className="col-md-3">
-          <DepartmentFilter handleFilterChange={this.handleFilterChange} />
+            <DepartmentFilter handleFilterChange={this.handleFilterChange} />
           </div>
         </div>
         <StaffingPointsTable
@@ -384,10 +395,7 @@ var StaffingPointsView = React.createClass({
         />
       </div>
     );
-  }
+  },
 });
 
-ReactDOM.render(
-  <StaffingPointsView/>,
-  document.getElementById('container')
-);
+ReactDOM.render(<StaffingPointsView />, document.getElementById('container'));

@@ -11,25 +11,32 @@ var theme = {};
 */
 theme.randColorScheme = function(timeOfDay) {
   var colors, choice;
-  switch(timeOfDay) {
-  case 'night': // blacks, greys, pink
-    colors = ['Greys', 'RdPu'];
-    break;
-  case 'morning': // oranges, yellows, reds, greens
-    colors = ['Reds', 'Oranges', 'YlOrBr', 'YlOrRd', 'OrRd',
-      'PuRd', 'RdPu'];
-    break;
-  case 'noon': // greens, purples, blues, yellows
-    colors = ['Greens', 'BrBG', 'PuOr',
-      'Spectral', 'YlGn'];
-    break;
-  case 'evening': // blues, cool colors
-    colors = ['YlGnBu', 'GnBu', 'PuBuGn', 'PuBu', 'Purples', 'Blues',
-      'RdPu', 'PuRd', 'Greens'];
-    break;
+  switch (timeOfDay) {
+    case 'night': // blacks, greys, pink
+      colors = ['Greys', 'RdPu'];
+      break;
+    case 'morning': // oranges, yellows, reds, greens
+      colors = ['Reds', 'Oranges', 'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu'];
+      break;
+    case 'noon': // greens, purples, blues, yellows
+      colors = ['Greens', 'BrBG', 'PuOr', 'Spectral', 'YlGn'];
+      break;
+    case 'evening': // blues, cool colors
+      colors = [
+        'YlGnBu',
+        'GnBu',
+        'PuBuGn',
+        'PuBu',
+        'Purples',
+        'Blues',
+        'RdPu',
+        'PuRd',
+        'Greens',
+      ];
+      break;
   }
 
-  choice = colors[Math.floor(Math.random()*colors.length)];
+  choice = colors[Math.floor(Math.random() * colors.length)];
   return choice;
 };
 
@@ -46,20 +53,17 @@ theme.timezoneColorScheme = function() {
   // Nighttime: 9pm - 6am == 21 - 6 PDT == 4 - 13 UTC
   if (hour >= 4 && hour < 13) {
     return theme.randColorScheme('night');
-  }
-  // Morning: 6am - 9am == 6-9 PDT == 13-16 UTC
-  else if (hour >= 13 && hour < 16) {
+  } else if (hour >= 13 && hour < 16) {
+    // Morning: 6am - 9am == 6-9 PDT == 13-16 UTC
     return theme.randColorScheme('morning');
-  }
-  // Noon: 9am - 5pm == 9-17 PDT == 16-00 UTC
-  else if (hour >= 16) {
+  } else if (hour >= 16) {
+    // Noon: 9am - 5pm == 9-17 PDT == 16-00 UTC
     return theme.randColorScheme('noon');
-  }
-  // Evening: 5pm-9pm == 17-21 PDT == 00-04 UTC
-  else {
+  } else {
+    // Evening: 5pm-9pm == 17-21 PDT == 00-04 UTC
     return theme.randColorScheme('evening');
   }
-}
+};
 
 // theme.setButtons = function(darkColor, mediumColor, lightColor, midnight) {
 

@@ -18,35 +18,53 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 */
 var InputFileUpload = React.createClass({
   getInitialState: function() {
-    return {disabled: true};
+    return { disabled: true };
   },
   handleChange: function(e) {
     if (e.target.files.length > 0) {
-      this.setState({file: e.target.files[0], disabled: false})
-    }
-    else {
-      this.setState({disabled: true});
+      this.setState({ file: e.target.files[0], disabled: false });
+    } else {
+      this.setState({ disabled: true });
     }
   },
   handleSubmit: function() {
     if (this.state.file && !this.state.disabled) {
       this.props.onSubmit(this.state.file);
       ReactDOM.findDOMNode(this.refs.input.getInputDOMNode()).value = '';
-      this.setState({disabled: true});
+      this.setState({ disabled: true });
     }
   },
   render: function() {
-    var submitButton = <a onClick={this.handleSubmit} className={this.state.disabled ? 'disabled' : ''}>Submit</a>;
+    var submitButton = (
+      <a
+        onClick={this.handleSubmit}
+        className={this.state.disabled ? 'disabled' : ''}>
+        Submit
+      </a>
+    );
     return (
       <form className="inputFileUpload form-horizontal">
-        <Input label={this.props.title} labelClassName="col-xs-3" wrapperClassName="col-xs-9">
-          <span>{this.props.verified ? <Glyphicon className="verifiedGlyph fileUpload" glyph="ok" /> : ''}
-            <Input type="file" ref="input" accept={this.props.accept} onChange={this.handleChange} addonAfter={submitButton} wrapperClassName="fileUpload" />
+        <Input
+          label={this.props.title}
+          labelClassName="col-xs-3"
+          wrapperClassName="col-xs-9">
+          <span>
+            {this.props.verified
+              ? <Glyphicon className="verifiedGlyph fileUpload" glyph="ok" />
+              : ''}
+            <Input
+              type="file"
+              ref="input"
+              accept={this.props.accept}
+              onChange={this.handleChange}
+              addonAfter={submitButton}
+              wrapperClassName="fileUpload"
+            />
           </span>
         </Input>
       </form>
     );
-  }
+  },
 });
 
 module.exports = InputFileUpload;

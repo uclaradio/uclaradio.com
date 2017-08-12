@@ -2,16 +2,16 @@
 // redux container for single dj page component
 
 import { connect } from 'react-redux';
-import DJPage from '../components/DJPage.jsx'
+import DJPage from '../components/DJPage.jsx';
 import { fetchUpdatedDJs } from '../actions/djs';
 
 const mapStateToProps = (state, ownProps) => {
   var props = {
-    fetching: state.djs.fetching
+    fetching: state.djs.fetching,
     // 'djs' prop set below
-  }
+  };
 
-  var djName = ownProps.params['djName']; 
+  var djName = ownProps.params['djName'];
 
   // set DJ if found
   for (var djIndex = 0; djIndex < state.djs.djs.length; djIndex++) {
@@ -20,18 +20,15 @@ const mapStateToProps = (state, ownProps) => {
       props.dj = dj;
     }
   }
-  return props; 
+  return props;
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   updateDJs: () => {
     fetchUpdatedDJs(dispatch);
-  }
+  },
 });
 
-const DJContainer = connect (
-  mapStateToProps,
-  mapDispatchToProps
-)(DJPage);
+const DJContainer = connect(mapStateToProps, mapDispatchToProps)(DJPage);
 
 export default DJContainer;

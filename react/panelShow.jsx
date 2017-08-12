@@ -5,11 +5,11 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var urls = {
-  showURL: "/panel/api/showData/",
-  showUpdateURL: "/panel/api/updateShow",
-  showPicURL: "/panel/api/showPic",
-  deleteShowURL: "/panel/api/deleteShow",
-  deleteRedirectURL: "/panel"
+  showURL: '/panel/api/showData/',
+  showUpdateURL: '/panel/api/updateShow',
+  showPicURL: '/panel/api/showPic',
+  deleteShowURL: '/panel/api/deleteShow',
+  deleteRedirectURL: '/panel',
 };
 
 // Panel Elements
@@ -36,7 +36,7 @@ var ShowPage = React.createClass({
   },
 
   getInitialState: function() {
-    return {showID: this.getShowIDFromURL()};
+    return { showID: this.getShowIDFromURL() };
   },
   render: function() {
     return (
@@ -47,7 +47,7 @@ var ShowPage = React.createClass({
         <Show urls={this.props.urls} showID={this.state.showID} />
       </div>
     );
-  }
+  },
 });
 
 var Show = React.createClass({
@@ -63,26 +63,26 @@ var Show = React.createClass({
       facebookVerified: false,
       tumblrVerified: false,
       soundcloudVerified: false,
-      mixcloudVerified: false
+      mixcloudVerified: false,
     };
   },
   loadDataFromServer: function() {
     $.ajax({
-      url: this.props.urls.showURL+this.props.showID,
+      url: this.props.urls.showURL + this.props.showID,
       dataType: 'json',
       cache: false,
       success: function(show) {
-        this.setState({show: show});
+        this.setState({ show: show });
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.urls.showURL, status, err.toString());
-      }.bind(this)
+      }.bind(this),
     });
   },
   handleShowDataSubmit: function(updatedShow, successVar) {
     var oldShow = this.state.show;
     // Optimistically update local data, will be refreshed or reset after response from server
-    this.setState({show: updatedShow});
+    this.setState({ show: updatedShow });
     // Stringify arrays so they reach the server
     var safeShow = JSON.stringify(updatedShow);
     // don't mark as verified yet
@@ -93,42 +93,44 @@ var Show = React.createClass({
       url: this.props.urls.showUpdateURL,
       dataType: 'json',
       type: 'POST',
-      data: {show: safeShow},
+      data: { show: safeShow },
       success: function(show) {
-        var successState = {show: show};
+        var successState = { show: show };
         successState[successVar] = true;
         this.setState(successState);
       }.bind(this),
       error: function(xhr, status, err) {
-        this.setState({show: oldShow});
+        this.setState({ show: oldShow });
         console.error(this.props.urls.showUpdateURL, status, err.toString());
-      }.bind(this)
+      }.bind(this),
     });
   },
   verifyShowArt: function() {
-    this.setState({artVerified: true});
+    this.setState({ artVerified: true });
   },
   unverifyShowArt: function() {
-    this.setState({artVerified: false});
+    this.setState({ artVerified: false });
   },
   validateLink: function(link) {
-    if (link === "") {
+    if (link === '') {
       return link;
     }
-    if ( link.indexOf("http") == -1 ) {
-      var addHTTP = "http://" + link;
+    if (link.indexOf('http') == -1) {
+      var addHTTP = 'http://' + link;
       return addHTTP;
     }
     return link;
   },
   handleShowArtSubmit: function(data) {
-    if (!data) { return; }
+    if (!data) {
+      return;
+    }
 
     var formData = new FormData();
-    formData.append("img", data);
-    formData.append("id", this.state.show.id);
+    formData.append('img', data);
+    formData.append('id', this.state.show.id);
     var request = new XMLHttpRequest();
-    request.open("POST", this.props.urls.showPicURL);
+    request.open('POST', this.props.urls.showPicURL);
     var loadData = this.loadDataFromServer;
     var verify = this.verifyShowArt;
     var unverify = this.unverifyShowArt;
@@ -137,8 +139,7 @@ var Show = React.createClass({
       if (request.status == 200) {
         loadData();
         verify();
-      }
-      else {
+      } else {
         unverify();
       }
     };
@@ -196,13 +197,13 @@ var Show = React.createClass({
       url: this.props.urls.deleteShowURL,
       dataType: 'json',
       type: 'POST',
-      data: {"id": this.state.show.id},
+      data: { id: this.state.show.id },
       success: function() {
         location.href = this.props.urls.deleteRedirectURL;
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.urls.deleteShowURL, status, err.toString());
-      }.bind(this)
+      }.bind(this),
     });
   },
 
@@ -210,15 +211,14 @@ var Show = React.createClass({
     this.loadDataFromServer();
   },
   render: function() {
-    var djs = "";
+    var djs = '';
     if (this.state.show.djs != null) {
       var useComma = false;
       var djMap = this.state.show.djs;
-      Object.keys(djMap).forEach(function (username) {
+      Object.keys(djMap).forEach(function(username) {
         if (useComma) {
-          djs += ", ";
-        }
-        else {
+          djs += ', ';
+        } else {
           useComma = true;
         }
         djs += djMap[username];
@@ -230,47 +230,119 @@ var Show = React.createClass({
           <Well>
             <Row>
               <Col xs={12} md={4}>
-                <RectImage src={this.state.show.picture || "/img/radio.png" } rounded maxWidth="380px" />
-                <div className="centered"><small><i>For best quality, upload an image with a width of 512px or greater </i></small></div>
+                <RectImage
+                  src={this.state.show.picture || '/img/radio.png'}
+                  rounded
+                  maxWidth="380px"
+                />
+                <div className="centered">
+                  <small>
+                    <i>
+                      For best quality, upload an image with a width of 512px or
+                      greater{' '}
+                    </i>
+                  </small>
+                </div>
               </Col>
               <Col xs={12} md={8}>
-                <h3>{this.state.show.title}</h3>
-                <InputFileUpload accept=".png,.gif,.jpg,.jpeg" title="Art" onSubmit={this.handleShowArtSubmit} verified={this.state.artVerified} />
+                <h3>
+                  {this.state.show.title}
+                </h3>
+                <InputFileUpload
+                  accept=".png,.gif,.jpg,.jpeg"
+                  title="Art"
+                  onSubmit={this.handleShowArtSubmit}
+                  verified={this.state.artVerified}
+                />
                 <form className="form-horizontal">
-                  <FormControls.Static label="DJs" labelClassName="col-xs-3"
+                  <FormControls.Static
+                    label="DJs"
+                    labelClassName="col-xs-3"
                     wrapperClassName="inputEditWrapper col-xs-9">
                     {djs}
                   </FormControls.Static>
                 </form>
-                <InputEditableTextField title="Title" currentValue={this.state.show.title}
-                  onSubmit={this.handleTitleSubmit} placeholder="Enter Show Title" verified={this.state.titleVerified} />
-                <InputEditableDateTimeField title="Time" day={this.state.show.day} time={this.state.show.time}
-                  onDateSubmit={this.handleDateSubmit} placeholder="Enter Show Time" verified={this.state.dateVerified} />
-                <InputEditableTextField title="Genre" currentValue={this.state.show.genre}
-                  onSubmit={this.handleGenreSubmit} placeholder="Enter Show Genre" verified={this.state.genreVerified} />
-                <InputEditableTextField title="Blurb" multiline currentValue={this.state.show.blurb}
-                  onSubmit={this.handleBlurbSubmit} placeholder="Enter Show Blurb" verified={this.state.blurbVerified} />
-                <InputEditableTextField title="Facebook" multiline currentValue={this.state.show.facebook}
-                    onSubmit={this.handleFacebookSubmit} placeholder="https://www.facebook.com/yourshow" verified={this.state.facebookVerified} />
-                <InputEditableTextField title="Tumblr" multiline currentValue={this.state.show.tumblr}
-                    onSubmit={this.handleTumblrSubmit} placeholder="http://yourshow.tumblr.com" verified={this.state.tumblrVerified} />
-                <InputEditableTextField title="Soundcloud" multiline currentValue={this.state.show.soundcloud}
-                    onSubmit={this.handleSoundcloudSubmit} placeholder="https://soundcloud.com/yourshow" verified={this.state.soundcloudVerified} />
-                <InputEditableTextField title="Mixcloud" multiline currentValue={this.state.show.mixcloud}
-                    onSubmit={this.handleMixcloudSubmit} placeholder="https://www.mixcloud.com/yourshow" verified={this.state.mixcloudVerified} />
-                <InputCheckbox title="Public" details="Make Show Public" checked={this.state.show.public}
-                  onSelect={this.handlePublicSubmit} verified={this.state.publicVerified} />
-                <ConfirmationButton confirm={"Delete '" + this.state.show.title + "'"} submit={"Really delete '" + this.state.show.title + "'?"} onSubmit={this.handleDeleteShow} />
+                <InputEditableTextField
+                  title="Title"
+                  currentValue={this.state.show.title}
+                  onSubmit={this.handleTitleSubmit}
+                  placeholder="Enter Show Title"
+                  verified={this.state.titleVerified}
+                />
+                <InputEditableDateTimeField
+                  title="Time"
+                  day={this.state.show.day}
+                  time={this.state.show.time}
+                  onDateSubmit={this.handleDateSubmit}
+                  placeholder="Enter Show Time"
+                  verified={this.state.dateVerified}
+                />
+                <InputEditableTextField
+                  title="Genre"
+                  currentValue={this.state.show.genre}
+                  onSubmit={this.handleGenreSubmit}
+                  placeholder="Enter Show Genre"
+                  verified={this.state.genreVerified}
+                />
+                <InputEditableTextField
+                  title="Blurb"
+                  multiline
+                  currentValue={this.state.show.blurb}
+                  onSubmit={this.handleBlurbSubmit}
+                  placeholder="Enter Show Blurb"
+                  verified={this.state.blurbVerified}
+                />
+                <InputEditableTextField
+                  title="Facebook"
+                  multiline
+                  currentValue={this.state.show.facebook}
+                  onSubmit={this.handleFacebookSubmit}
+                  placeholder="https://www.facebook.com/yourshow"
+                  verified={this.state.facebookVerified}
+                />
+                <InputEditableTextField
+                  title="Tumblr"
+                  multiline
+                  currentValue={this.state.show.tumblr}
+                  onSubmit={this.handleTumblrSubmit}
+                  placeholder="http://yourshow.tumblr.com"
+                  verified={this.state.tumblrVerified}
+                />
+                <InputEditableTextField
+                  title="Soundcloud"
+                  multiline
+                  currentValue={this.state.show.soundcloud}
+                  onSubmit={this.handleSoundcloudSubmit}
+                  placeholder="https://soundcloud.com/yourshow"
+                  verified={this.state.soundcloudVerified}
+                />
+                <InputEditableTextField
+                  title="Mixcloud"
+                  multiline
+                  currentValue={this.state.show.mixcloud}
+                  onSubmit={this.handleMixcloudSubmit}
+                  placeholder="https://www.mixcloud.com/yourshow"
+                  verified={this.state.mixcloudVerified}
+                />
+                <InputCheckbox
+                  title="Public"
+                  details="Make Show Public"
+                  checked={this.state.show.public}
+                  onSelect={this.handlePublicSubmit}
+                  verified={this.state.publicVerified}
+                />
+                <ConfirmationButton
+                  confirm={"Delete '" + this.state.show.title + "'"}
+                  submit={"Really delete '" + this.state.show.title + "'?"}
+                  onSubmit={this.handleDeleteShow}
+                />
               </Col>
             </Row>
           </Well>
         </Grid>
       </div>
     );
-  }
+  },
 });
 
-ReactDOM.render(
-  <ShowPage urls={urls} />,
-  document.getElementById('content')
-);
+ReactDOM.render(<ShowPage urls={urls} />, document.getElementById('content'));

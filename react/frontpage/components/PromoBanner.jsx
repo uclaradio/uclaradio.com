@@ -9,17 +9,19 @@ import Slider from 'react-slick';
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
 
-
 import CountdownTimer from './CountdownTimer.jsx';
 
-import  { Link } from 'react-router';
+import { Link } from 'react-router';
 
 // styling
 require('./PromoBanner.scss');
 
 // Promo Banner Data
 const bannerData = [
-  {"img": "/img/promo/tops-web.png", "link": "http://www.troubadour.com/event/1495624-tops-los-angeles/"}
+  {
+    img: '/img/promo/tops-web.png',
+    link: 'http://www.troubadour.com/event/1495624-tops-los-angeles/',
+  },
 ];
 
 var PromoBanner = React.createClass({
@@ -37,7 +39,7 @@ var PromoBanner = React.createClass({
       infinite: true,
       fade: true,
       autoplaySpeed: 5000,
-      draggable: false
+      draggable: false,
     };
 
     // <Link> component is unable to link to external links
@@ -49,33 +51,25 @@ var PromoBanner = React.createClass({
     var banners = bannerData.map(function(banner) {
       return (
         <div>
-          {
-           (banner.link.indexOf("http") == -1) ?
-
-            (
-                <Link to={banner.link}>
-                  {self.getImage(banner)}
-                </Link>
-            ) :
-            (
-                <a href={banner.link}>
-                  {self.getImage(banner)}
-                </a>
-            )
-
-          }
+          {banner.link.indexOf('http') == -1
+            ? <Link to={banner.link}>
+                {self.getImage(banner)}
+              </Link>
+            : <a href={banner.link}>
+                {self.getImage(banner)}
+              </a>}
         </div>
       );
     });
 
     return (
       <div className="promoBanner">
-         <Slider {...settings}>
-           {banners}
-         </Slider>
-       </div>
+        <Slider {...settings}>
+          {banners}
+        </Slider>
+      </div>
     );
-  }
+  },
 });
 
 export default PromoBanner;

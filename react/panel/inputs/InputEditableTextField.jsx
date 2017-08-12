@@ -28,63 +28,83 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 */
 var InputEditableTextField = React.createClass({
   getInitialState: function() {
-    return {value: '', editable: false, currentlyEditing: false};
+    return { value: '', editable: false, currentlyEditing: false };
   },
   handleChange: function(e) {
-    this.setState({value: e.target.value, currentlyEditing: false});
+    this.setState({ value: e.target.value, currentlyEditing: false });
   },
   toggleEditableField: function(e) {
-    this.setState({value: this.props.currentValue, editable: !this.state.editable, currentlyEditing: true});
+    this.setState({
+      value: this.props.currentValue,
+      editable: !this.state.editable,
+      currentlyEditing: true,
+    });
   },
   handleSubmit: function(e) {
     e.preventDefault();
     var value = this.state.value.trim();
     this.props.onSubmit(value);
-    this.setState({value: '', editable: false});
+    this.setState({ value: '', editable: false });
   },
   componentDidUpdate: function(e) {
-    if (this.state.editable && this.state.currentlyEditing && !this.props.multiline) {
+    if (
+      this.state.editable &&
+      this.state.currentlyEditing &&
+      !this.props.multiline
+    ) {
       ReactDOM.findDOMNode(this.refs.input.getInputDOMNode()).select();
     }
   },
   render: function() {
     var editButton = <a onClick={this.toggleEditableField}>Edit</a>;
     // var cancelButton = <Button className="cancelLink" onClick={this.toggleEditableField}>Cancel</Button>;
-    var actionButton = <span>
-                        <a onClick={this.handleSubmit}>{this.props.buttonTitle || "Update"}</a>
-                        &emsp;|&emsp;<a className="cancelLink" onClick={this.toggleEditableField}>Cancel</a>
-                       </span>;
+    var actionButton = (
+      <span>
+        <a onClick={this.handleSubmit}>{this.props.buttonTitle || 'Update'}</a>
+        &emsp;|&emsp;<a
+          className="cancelLink"
+          onClick={this.toggleEditableField}>
+          Cancel
+        </a>
+      </span>
+    );
     return (
       <div className="inputEditableTextField">
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
-          { this.state.editable ?
-            <Input
-              type={this.props.multiline ? "textarea" :"text"}
-              value={this.state.value}
-              placeholder={this.props.placeholder}
-              label={this.props.title}
-              ref="input"
-              groupClassName="group-class"
-              addonAfter={actionButton}
-              labelClassName="col-xs-12 col-sm-3"
-              wrapperClassName="col-xs-12 col-sm-9"
-              onChange={this.handleChange} />
-          :
-          // locked to user input
-          <FormControls.Static label={this.props.title} labelClassName="col-xs-3"
-          wrapperClassName="inputEditWrapper col-xs-9" addonAfter={editButton}>
-            { this.props.currentValue ?
-              <span>{this.props.currentValue} {this.props.verified ? <Glyphicon className="verifiedGlyph" glyph="ok" /> : ''}</span>
-              :
-              <span className="placeholder">{this.props.placeholder}</span>
-            }
-          </FormControls.Static>
-          }
+          {this.state.editable
+            ? <Input
+                type={this.props.multiline ? 'textarea' : 'text'}
+                value={this.state.value}
+                placeholder={this.props.placeholder}
+                label={this.props.title}
+                ref="input"
+                groupClassName="group-class"
+                addonAfter={actionButton}
+                labelClassName="col-xs-12 col-sm-3"
+                wrapperClassName="col-xs-12 col-sm-9"
+                onChange={this.handleChange}
+              />
+            : // locked to user input
+              <FormControls.Static
+                label={this.props.title}
+                labelClassName="col-xs-3"
+                wrapperClassName="inputEditWrapper col-xs-9"
+                addonAfter={editButton}>
+                {this.props.currentValue
+                  ? <span>
+                      {this.props.currentValue}{' '}
+                      {this.props.verified
+                        ? <Glyphicon className="verifiedGlyph" glyph="ok" />
+                        : ''}
+                    </span>
+                  : <span className="placeholder">
+                      {this.props.placeholder}
+                    </span>}
+              </FormControls.Static>}
         </form>
       </div>
     );
-  }
+  },
 });
-
 
 module.exports = InputEditableTextField;

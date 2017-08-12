@@ -6,7 +6,6 @@ So an alternative is pulling out data from the server into a json file
 and sending out emails with this on my macbook.
 **/
 
-
 var mail = require('../mail.js');
 
 // expects input here
@@ -30,14 +29,14 @@ var confirmUsers = function(users) {
     var username = user.username;
     if (email && name && username) {
       mail.confirmAccount(email, username);
-      console.log("emailing", email.trim(), username.trim());
+      console.log('emailing', email.trim(), username.trim());
     }
   }
 };
 
 var extractUsersFromString = function(raw) {
   var users = [];
-  var pattern = /([^\/]*)\/([^:\/]*)\/([^:\/]*)(:[^:@]*)?/mg;
+  var pattern = /([^\/]*)\/([^:\/]*)\/([^:\/]*)(:[^:@]*)?/gm;
   for (var userIndex = 0; userIndex < raw.length; userIndex++) {
     var u = raw[userIndex];
     var match = pattern.exec(u);
@@ -45,7 +44,7 @@ var extractUsersFromString = function(raw) {
       var u = {
         fullName: match[1],
         username: match[2],
-        email: match[3]
+        email: match[3],
       };
       users.push(u);
       match = pattern.exec(u);

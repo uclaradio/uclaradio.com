@@ -9,16 +9,17 @@ var faqs = {};
 var FAQSchema = new mongoose.Schema({
   id: Number,
   question: String,
-  answer: String
+  answer: String,
 });
 var FAQModel = mongoose.model('faqs', FAQSchema);
 
 faqs.webSafeFAQ = function(faq) {
-  return {id: faq.id,
+  return {
+    id: faq.id,
     question: faq.question,
-    answer: faq.answer};
-}
-
+    answer: faq.answer,
+  };
+};
 
 /***** FAQ *****/
 
@@ -26,14 +27,14 @@ faqs.updateFAQs = function(newFAQs, callback) {
   // remove all old faqs
   FAQModel.remove({}, function(e) {
     if (e) {
-      console.log("error removing faqs:", e);
+      console.log('error removing faqs:', e);
       callback(e);
-    }
-    else {
+    } else {
       FAQModel.collection.insert(newFAQs, {}, function(err, allFAQs) {
-        if (err) { console.log("error updating faqs:", err); }
-        else {
-          callback(null, allFAQs);        
+        if (err) {
+          console.log('error updating faqs:', err);
+        } else {
+          callback(null, allFAQs);
         }
       });
     }
@@ -45,8 +46,7 @@ faqs.getAllFAQs = function(callback) {
   FAQModel.find(function(err, res) {
     if (err) {
       callback(err);
-    }
-    else {
+    } else {
       var allFAQs = [];
       for (var i = 0; i < res.length; i++) {
         allFAQs.push(faqs.webSafeFAQ(res[i]));
@@ -58,10 +58,9 @@ faqs.getAllFAQs = function(callback) {
 
 // delete a faq question with the given id
 faqs.deleteFAQ = function(id, callback) {
-  FAQModel.remove({id: id}, function (e) {
+  FAQModel.remove({ id: id }, function(e) {
     callback(e);
   });
 };
-
 
 module.exports = faqs;

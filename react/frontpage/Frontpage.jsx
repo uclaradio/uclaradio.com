@@ -3,7 +3,14 @@
 
 import React from 'react';
 // React-Router
-import { Router, Route, IndexRoute, browserHistory, Link, IndexLink } from 'react-router';
+import {
+  Router,
+  Route,
+  IndexRoute,
+  browserHistory,
+  Link,
+  IndexLink,
+} from 'react-router';
 
 // Frontpage Containers (View Controllers)
 import ShowsTab from './containers/ShowsTab.jsx';
@@ -32,7 +39,7 @@ import { Bootstrap, Grid, Col } from 'react-bootstrap';
 
 // Google analytics helper
 var ReactGA = require('react-ga');
-ReactGA.initialize("UA-21406547-20");
+ReactGA.initialize('UA-21406547-20');
 
 function logPageView() {
   ReactGA.set({ page: window.location.pathname });
@@ -58,40 +65,43 @@ Expects children components for tab contents
 **/
 const FrontpageContent = React.createClass({
   render: function() {
-    var showPlaying = this.props.nowPlaying && this.props.nowPlaying.title != null;
+    var showPlaying =
+      this.props.nowPlaying && this.props.nowPlaying.title != null;
     return (
       <div className="frontpageContent">
-        { /* <TriangleCanvas xColors={theme.timezoneColorScheme()}> */ }
+        {/* <TriangleCanvas xColors={theme.timezoneColorScheme()}> */}
         <TriangleCanvas xColors="Spectral">
           <div className="container" id="main">
             <Grid>
-
               <Col xs={12} md={3} className="frontpageCol">
                 <IndexLink to="/" activeClassName="active">
                   <div className="radioBanner">
-                    <RectImage maxWidth="350px"
-                      src="/img/uclaradio-black.png" />
+                    <RectImage
+                      maxWidth="350px"
+                      src="/img/uclaradio-black.png"
+                    />
                   </div>
                 </IndexLink>
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
-                { /* Show Spotlight */ }
+                {/* Show Spotlight */}
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
-                { /* Show of the Month */ }
+                {/* Show of the Month */}
                 <PromoBanner />
                 <FrontPageNavbar />
-                { this.props.children }
+                {this.props.children}
               </Col>
-
             </Grid>
           </div>
-        <StreamBar currentShowTitle={showPlaying ? this.props.nowPlaying.title : null} />
+          <StreamBar
+            currentShowTitle={showPlaying ? this.props.nowPlaying.title : null}
+          />
         </TriangleCanvas>
       </div>
-    )
-  }
+    );
+  },
 });
 
 /**
@@ -99,7 +109,7 @@ Redux container (wrapper) for FrontpageContent to provide props:
   nowPlaying, spotlight
 **/
 import { connect } from 'react-redux';
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   var props = {};
 
   // set nowPlaying & spotlight shows if found
@@ -109,12 +119,15 @@ const mapStateToProps = (state) => {
       props.nowPlaying = show;
     }
     // note: only set spotlight show if different from current show
-    if (show.id === state.shows.spotlightID && show.id !== state.shows.nowPlayingID) {
+    if (
+      show.id === state.shows.spotlightID &&
+      show.id !== state.shows.nowPlayingID
+    ) {
       props.spotlight = show;
     }
   }
 
-  var spotlight = state.shows.shows.find((show) => {
+  var spotlight = state.shows.shows.find(show => {
     return show.id == state.shows.spotlightID;
   });
   if (spotlight && spotlight !== -1) {
@@ -123,9 +136,7 @@ const mapStateToProps = (state) => {
 
   return props;
 };
-const FrontpageContentContainer = connect(
-  mapStateToProps
-)(FrontpageContent);
+const FrontpageContentContainer = connect(mapStateToProps)(FrontpageContent);
 
 // react-router routes
 // each path represents a page of our frontpage with a component
@@ -156,7 +167,7 @@ const Frontpage = React.createClass({
   componentWillMount: function() {
     // refresh live show info now and every 30 seconds
     this.props.updateNowPlaying();
-    this.interval = setInterval(this.props.updateNowPlaying, 30*1000);
+    this.interval = setInterval(this.props.updateNowPlaying, 30 * 1000);
 
     // update now playing and fetch initial shows data
     // 05/22/17 - Cabronx
@@ -172,7 +183,7 @@ const Frontpage = React.createClass({
         {routes}
       </Router>
     );
-  }
+  },
 });
 
 export default Frontpage;

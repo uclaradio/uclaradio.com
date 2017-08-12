@@ -16,10 +16,11 @@ props:
 **/
 import Loading from 'react-loading';
 
-const Loader = () => (
+const Loader = () =>
   <div className="loader">
-    <center><img src="./img/icons/loading.gif" /></center>
-  </div>
-);
+    <center>
+      <img src="./img/icons/loading.gif" />
+    </center>
+  </div>;
 
 export default Loader;

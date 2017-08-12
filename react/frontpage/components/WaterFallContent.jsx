@@ -10,8 +10,8 @@ import Loader from './Loader.jsx';
 require('./WaterFallContent.scss');
 
 // API urls
-var SocialMediaURL = "/getSocialMedia";
-var getMoreFBPostsURL = "/getMoreFBPosts";
+var SocialMediaURL = '/getSocialMedia';
+var getMoreFBPostsURL = '/getMoreFBPosts';
 
 // local vars
 var waterfall;
@@ -20,38 +20,51 @@ var WaterFallContent = React.createClass({
   getInitialState: function() {
     return {
       socialMediaPosts: [],
-      fetching: true
+      fetching: true,
     };
   },
   componentDidMount: function() {
     // Get initial data
-    $.get(SocialMediaURL, function (result) {
-      this.setState({
-        fetching: false,
-        paginatedDataInProgress: false,
-        fb_pagination_until:result['fb_pagination_until']
-      }, function () {
-        waterfall = new Waterfall({ minBoxWidth: 250 });
-        this.appendPosts(result['social_media']);
-        window.addEventListener('scroll', this.handleScroll);
-      });
-    }.bind(this));
+    $.get(
+      SocialMediaURL,
+      function(result) {
+        this.setState(
+          {
+            fetching: false,
+            paginatedDataInProgress: false,
+            fb_pagination_until: result['fb_pagination_until'],
+          },
+          function() {
+            waterfall = new Waterfall({ minBoxWidth: 250 });
+            this.appendPosts(result['social_media']);
+            window.addEventListener('scroll', this.handleScroll);
+          }
+        );
+      }.bind(this)
+    );
   },
   componentWillUnmount: function() {
     window.removeEventListener('scroll', this.handleScroll);
   },
   // fetch another page of posts, display in waterfall
   fetchMorePosts: function() {
-    $.post(getMoreFBPostsURL, {
-      until: this.state.fb_pagination_until
-    },function (result) {
-      this.setState({
-        fb_pagination_until: result['fb_pagination_until'],
-        paginatedDataInProgress: false
-      }, function() {
-        this.appendPosts(result['social_media'])
-      });
-    }.bind(this));
+    $.post(
+      getMoreFBPostsURL,
+      {
+        until: this.state.fb_pagination_until,
+      },
+      function(result) {
+        this.setState(
+          {
+            fb_pagination_until: result['fb_pagination_until'],
+            paginatedDataInProgress: false,
+          },
+          function() {
+            this.appendPosts(result['social_media']);
+          }
+        );
+      }.bind(this)
+    );
   },
   // Add post objects from API to waterfall content as DOM elements
   appendPosts: function(newPosts) {
@@ -66,12 +79,15 @@ var WaterFallContent = React.createClass({
     var i = waterfall.getHighestIndex();
     if (i > -1) {
       // get last box of the column
-      var lastBox = Array.prototype.slice.call(waterfall.columns[i].children, -1)[0];
+      var lastBox = Array.prototype.slice.call(
+        waterfall.columns[i].children,
+        -1
+      )[0];
       if (checkSlide(lastBox) && !isMobile.any()) {
         if (this.state.paginatedDataInProgress == false) {
           // locking mechanism so scrolling won't cause an infinite amt of requests
           this.setState({
-            paginatedDataInProgress: true
+            paginatedDataInProgress: true,
           });
           // request next set of Facebook posts
           this.fetchMorePosts();
@@ -80,40 +96,38 @@ var WaterFallContent = React.createClass({
     }
   },
   mobileLoadMore: function() {
-      this.setState({
-        paginatedDataInProgress: true
-      });
-      // request next set of Facebook posts
-      this.fetchMorePosts();
+    this.setState({
+      paginatedDataInProgress: true,
+    });
+    // request next set of Facebook posts
+    this.fetchMorePosts();
   },
   render: function() {
     return (
       <div className="WaterFallContent">
-        { this.state.fetching && <Loader /> }
-        <div className='wf-container'>
-        </div>
-        {
-          isMobile.any() &&
+        {this.state.fetching && <Loader />}
+        <div className="wf-container" />
+        {isMobile.any() &&
           <span>
             <br />
             <center>
               <button id="load_more" onClick={this.mobileLoadMore}>
                 MORE
-             </button>
+              </button>
             </center>
-          </span>
-        }
+          </span>}
       </div>
     );
-  }
+  },
 });
 
 function checkSlide(elem) {
   if (elem) {
-    var screenHeight = (document.documentElement.scrollTop || document.body.scrollTop)
-      + (document.documentElement.clientHeight || document.body.clientHeight);
+    var screenHeight =
+      (document.documentElement.scrollTop || document.body.scrollTop) +
+      (document.documentElement.clientHeight || document.body.clientHeight);
     var elemCenter = elem.offsetTop + elem.offsetHeight / 2;
-    return elemCenter < 1.5*screenHeight;
+    return elemCenter < 1.5 * screenHeight;
   }
 }
 
@@ -121,22 +135,22 @@ function checkSlide(elem) {
 function nodeFromPost(post) {
   var link = post['link'] || post['post_url'];
   var picture = post['full_picture'];
-  var summary = post['summary'] || post['message'] || "";
+  var summary = post['summary'] || post['message'] || '';
   var created = formatDate(post['created_time']);
-  var platform = post['platform'] || "FB";
+  var platform = post['platform'] || 'FB';
   return newNode(picture, summary, created, link, platform);
 }
 
 // create new DOM element representing post with provided content
 function newNode(full_picture, summary, created_time, link, platform) {
-  if (!full_picture && (!summary || summary.includes("http"))) {
+  if (!full_picture && (!summary || summary.includes('http'))) {
     return null;
   }
   var box = document.createElement('div');
   box.className = 'wf-box';
   var a = document.createElement('a');
   a.href = link;
-  a.target = "_blank";
+  a.target = '_blank';
   var box_content = document.createElement('div');
   box_content.className = 'wf-box-content';
   if (full_picture) {
@@ -149,8 +163,8 @@ function newNode(full_picture, summary, created_time, link, platform) {
     box_content.appendChild(overlay);
   }
   var box_content_text = document.createElement('div');
-  switch(platform) {
-    case "FB":
+  switch (platform) {
+    case 'FB':
       box_content_text.className = 'wf-box-content-text';
       var box_content_date = document.createElement('div');
       box_content_date.className = 'wf-box-content-text-date';
@@ -158,13 +172,13 @@ function newNode(full_picture, summary, created_time, link, platform) {
       box_content_date.appendChild(document.createTextNode(created_time));
       box_content_text.appendChild(box_content_date);
       break;
-    case "TUMBLR":
+    case 'TUMBLR':
       box_content_text.className = 'wf-box-content-blog';
       break;
   }
   box_content_text.appendChild(document.createTextNode(summary));
   summary = String(summary);
-  if (!summary.includes("http") && !summary.includes("undefined")) {
+  if (!summary.includes('http') && !summary.includes('undefined')) {
     box_content.appendChild(box_content_text);
   }
   a.appendChild(box_content);
@@ -175,7 +189,9 @@ function newNode(full_picture, summary, created_time, link, platform) {
 function formatDate(dateString) {
   var date = String(dateString);
   date = new Date(date.substring(0, 10));
-  return (date.getMonth()+1) + "/" + (date.getDate()) + "/" + (date.getYear() + 1900);
+  return (
+    date.getMonth() + 1 + '/' + date.getDate() + '/' + (date.getYear() + 1900)
+  );
 }
 
 export default WaterFallContent;

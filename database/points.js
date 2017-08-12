@@ -5,18 +5,24 @@ var mongoose = require('mongoose');
 
 var points = {};
 
-var StaffingPointsSchema = new mongoose.Schema({
-  fullName: String,
-  dateCompleted: Date,
-  description: String,
-  department: String,
-  number: Number,
-  notes: String,
-  managerNotes: String,
-  status: String
-}, {collection: 'StaffingPoints'});
+var StaffingPointsSchema = new mongoose.Schema(
+  {
+    fullName: String,
+    dateCompleted: Date,
+    description: String,
+    department: String,
+    number: Number,
+    notes: String,
+    managerNotes: String,
+    status: String,
+  },
+  { collection: 'StaffingPoints' }
+);
 
-var StaffingPointsModel = mongoose.model('StaffingPoints', StaffingPointsSchema);
+var StaffingPointsModel = mongoose.model(
+  'StaffingPoints',
+  StaffingPointsSchema
+);
 
 points.addStaffingPoints = function(data, callback) {
   staffingPointsData = {
@@ -26,8 +32,8 @@ points.addStaffingPoints = function(data, callback) {
     department: data.department,
     number: data.numberOfPoints,
     notes: data.other,
-    managerNotes: "",
-    status: "pending"
+    managerNotes: '',
+    status: 'pending',
   };
 
   var staffingPoints = new StaffingPointsModel(staffingPointsData);
@@ -38,15 +44,28 @@ points.addStaffingPoints = function(data, callback) {
   });
 };
 
-points.updateStaffingPointStatus = function(id, newStatus, managerNotes, callback) {
-  StaffingPointsModel.update({_id: id}, {$set: {'status': newStatus, 'managerNotes': managerNotes}}, { multi: false }, function(err, update) {
-    if (err) console.log(err);
-    callback(err, update);
-  });
+points.updateStaffingPointStatus = function(
+  id,
+  newStatus,
+  managerNotes,
+  callback
+) {
+  StaffingPointsModel.update(
+    { _id: id },
+    { $set: { status: newStatus, managerNotes: managerNotes } },
+    { multi: false },
+    function(err, update) {
+      if (err) console.log(err);
+      callback(err, update);
+    }
+  );
 };
 
 points.getStaffingPoints = function(callback) {
-  StaffingPointsModel.find({}, null, {sort: {'_id': 'desc'}}, function(err, points) {
+  StaffingPointsModel.find({}, null, { sort: { _id: 'desc' } }, function(
+    err,
+    points
+  ) {
     if (err) console.log(err);
     callback(err, points);
   });

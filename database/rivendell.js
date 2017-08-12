@@ -26,11 +26,10 @@ The XML dump is converted into an array objects, where each object is as follows
 Each song has a field array. The field array contains the song's properites
 */
 
-const fs     = require('fs');
+const fs = require('fs');
 const xml2js = require('xml2js');
 const parser = new xml2js.Parser();
-const rivendell = {}; 
-
+const rivendell = {};
 
 rivendell.getSongs = function(callback) {
   fs.readFile(__dirname + '/rivendell.xml', function(err, data) {
@@ -43,7 +42,7 @@ rivendell.getSongs = function(callback) {
     const songList = {};
     const songs = [];
 
-    parser.parseString(data, function (err, result) {
+    parser.parseString(data, function(err, result) {
       if (err) {
         callback(err);
         return;
@@ -51,39 +50,36 @@ rivendell.getSongs = function(callback) {
       rivendellDump = result.resultset.row;
       for (let entry of rivendellDump) {
         const songInfo = entry.field;
-        const song = {}; 
+        const song = {};
         for (let field of songInfo) {
-          if (field.$.name === "TITLE") {
-            song.title = field._; 
+          if (field.$.name === 'TITLE') {
+            song.title = field._;
           }
 
-          if (field.$.name === "ARTIST") {
-            song.artist = field._; 
+          if (field.$.name === 'ARTIST') {
+            song.artist = field._;
           }
 
-          if (field.$.name === "ALBUM") {
-            song.album = field._; 
+          if (field.$.name === 'ALBUM') {
+            song.album = field._;
           }
 
-          if (field.$.name === "GROUP_NAME") {
-            song.group = field._; 
+          if (field.$.name === 'GROUP_NAME') {
+            song.group = field._;
           }
-
-        } 
+        }
         songs.push(song);
       } // end of rivendellDump loop
 
       // Get modified date of rivendell.xml
       songList.songs = songs;
-      const stats =  fs.statSync(__dirname + '/rivendell.xml');
+      const stats = fs.statSync(__dirname + '/rivendell.xml');
       const mtime = new Date(stats.mtime).toString();
-      
-      songList.time = mtime; 
+
+      songList.time = mtime;
       callback(null, songList);
     }); // end of parser
   }); // end of readFile
 };
 
-
-module.exports = rivendell; 
-
+module.exports = rivendell;

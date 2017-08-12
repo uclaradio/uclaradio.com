@@ -9,12 +9,12 @@ import Loader from './Loader.jsx';
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
 
-import  { Link } from 'react-router';
+import { Link } from 'react-router';
 
 // styling
 require('./EventPage.scss');
 
-const defaultEventPic = "/img/radio.png";
+const defaultEventPic = '/img/radio.png';
 
 /**
 Page content for individual event
@@ -39,11 +39,7 @@ const EventPage = React.createClass({
     if (!event) {
       return (
         <div className="eventPage">
-          { this.props.fetching ?
-            <Loader />
-          :
-            "This event doesn't exist!"
-          }
+          {this.props.fetching ? <Loader /> : "This event doesn't exist!"}
         </div>
       );
     }
@@ -51,14 +47,22 @@ const EventPage = React.createClass({
       <div className="eventPage">
         <RectImage maxWidth="350px" src={event.image || defaultEventPic} />
         <div className="eventInfo">
-          <h3>{event.host}</h3>
-          <h4>{event.location}</h4>
-          <p>{formatDate(event.start)}</p>
-          <p>{event.type}</p>
+          <h3>
+            {event.host}
+          </h3>
+          <h4>
+            {event.location}
+          </h4>
+          <p>
+            {formatDate(event.start)}
+          </p>
+          <p>
+            {event.type}
+          </p>
         </div>
       </div>
     );
-  }
+  },
 });
 
 var formatDate = function(dateString) {

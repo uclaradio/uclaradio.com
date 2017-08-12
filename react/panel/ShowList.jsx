@@ -29,25 +29,40 @@ var ShowList = React.createClass({
     var placeholder = this.props.placeholder;
     var short = this.props.short;
     var shows = this.props.shows.map(function(show) {
-      var title = <h4 className="showListTitle">{show.title} <small>({Dates.dayFromVar(show.day)} {show.time})</small></h4>
-      return <ListGroupItem href={url+'/'+show.id} key={show.id} className="listShow">
-              {short
-              ?
-                title
-              :
-                <Grid>
-                  <Row>
-                    <Col xs={2} className="noPads centered">
-                      <RectImage src={show.picture || placeholder} className="showListImg rectPic" thumbnail />
-                    </Col>
-                    <Col xs={10}>
-                        {title}
-                        <p className="showListSubtitle">{show.blurb}</p>
-                    </Col>
-                  </Row>
-                </Grid>
-              }
-             </ListGroupItem>
+      var title = (
+        <h4 className="showListTitle">
+          {show.title}{' '}
+          <small>
+            ({Dates.dayFromVar(show.day)} {show.time})
+          </small>
+        </h4>
+      );
+      return (
+        <ListGroupItem
+          href={url + '/' + show.id}
+          key={show.id}
+          className="listShow">
+          {short
+            ? title
+            : <Grid>
+                <Row>
+                  <Col xs={2} className="noPads centered">
+                    <RectImage
+                      src={show.picture || placeholder}
+                      className="showListImg rectPic"
+                      thumbnail
+                    />
+                  </Col>
+                  <Col xs={10}>
+                    {title}
+                    <p className="showListSubtitle">
+                      {show.blurb}
+                    </p>
+                  </Col>
+                </Row>
+              </Grid>}
+        </ListGroupItem>
+      );
     });
     return (
       <div className="showList">
@@ -56,7 +71,7 @@ var ShowList = React.createClass({
         </ListGroup>
       </div>
     );
-  }
+  },
 });
 
 module.exports = ShowList;

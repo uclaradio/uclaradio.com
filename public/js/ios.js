@@ -2,32 +2,47 @@
 // matching it.
 function getRandColorScheme(timeOfDay) {
   var possColors, choice;
-  switch(timeOfDay) {
-    case 'night': // blacks, greys
-      {
-        possColors = ['Greys'];
-        break;
-      }
-    case 'morning': // oranges, yellows, reds, greens
-      {
-        possColors = ['Reds', 'Oranges', 'YlOrBr', 'YlOrRd', 'OrRd',
-                   'PuRd', 'RdPu'];
-        break;
-      }
-    case 'noon': // greens, purples, blues, yellows
-      {
-        possColors = ['Greens', 'BrBG', 'PuOr',
-                   'Spectral', 'YlGn'];
-        break;
-      }
-    case 'evening': // blues, cool colors
-      {
-        possColors = ['YlGnBu', 'GnBu', 'PuBuGn', 'PuBu', 'Purples', 'Blues',
-                   'RdPu', 'PuRd', 'Greens'];
-        break;
-      }
+  switch (timeOfDay) {
+    case 'night': {
+      // blacks, greys
+      possColors = ['Greys'];
+      break;
+    }
+    case 'morning': {
+      // oranges, yellows, reds, greens
+      possColors = [
+        'Reds',
+        'Oranges',
+        'YlOrBr',
+        'YlOrRd',
+        'OrRd',
+        'PuRd',
+        'RdPu',
+      ];
+      break;
+    }
+    case 'noon': {
+      // greens, purples, blues, yellows
+      possColors = ['Greens', 'BrBG', 'PuOr', 'Spectral', 'YlGn'];
+      break;
+    }
+    case 'evening': {
+      // blues, cool colors
+      possColors = [
+        'YlGnBu',
+        'GnBu',
+        'PuBuGn',
+        'PuBu',
+        'Purples',
+        'Blues',
+        'RdPu',
+        'PuRd',
+        'Greens',
+      ];
+      break;
+    }
   }
-  choice = possColors[Math.floor(Math.random()*possColors.length)];
+  choice = possColors[Math.floor(Math.random() * possColors.length)];
   return choice;
 }
 
@@ -36,55 +51,64 @@ function getColorSchemeFromTime() {
 }
 
 function setButtons(darkColor, mediumColor, lightColor, midnight) {
-  $(".pop-button").css('background-color', lightColor);
+  $('.pop-button').css('background-color', lightColor);
 
-  var boxShadowHoverCss = "1px 0px " + mediumColor +
-    ", 0px 1px " + darkColor +
-    ", 2px 1px " + mediumColor +
-    ", 1px 2px " + darkColor +
-    ", 3px 2px " + mediumColor +
-    ", 2px 3px " + darkColor +
-    ", 4px 3px " + mediumColor +
-    ", 3px 4px " + darkColor;
+  var boxShadowHoverCss =
+    '1px 0px ' +
+    mediumColor +
+    ', 0px 1px ' +
+    darkColor +
+    ', 2px 1px ' +
+    mediumColor +
+    ', 1px 2px ' +
+    darkColor +
+    ', 3px 2px ' +
+    mediumColor +
+    ', 2px 3px ' +
+    darkColor +
+    ', 4px 3px ' +
+    mediumColor +
+    ', 3px 4px ' +
+    darkColor;
   //console.log(boxShadowHoverCss);
 
-  var boxShadowActiveCss = "1px 0px " + mediumColor +
-    ", 0px 1px " + darkColor +
-    ", 2px 1px " + mediumColor +
-    ", 1px 2px " + darkColor;
+  var boxShadowActiveCss =
+    '1px 0px ' +
+    mediumColor +
+    ', 0px 1px ' +
+    darkColor +
+    ', 2px 1px ' +
+    mediumColor +
+    ', 1px 2px ' +
+    darkColor;
   //console.log(boxShadowActiveCss);
 
-
-  $(".pop-button").hover(
-      function() {
-        $(this).css('box-shadow', boxShadowHoverCss);
-      },
-      function() {
-        $(this).css('box-shadow', '');
-      }
-      );
-  $(".pop-button").focus(
-      function() {
-        $(this).css('box-shadow', boxShadowHoverCss);
-      },
-      function() {
-        $(this).css('box-shadow', '');
-      }
-      );
+  $('.pop-button').hover(
+    function() {
+      $(this).css('box-shadow', boxShadowHoverCss);
+    },
+    function() {
+      $(this).css('box-shadow', '');
+    }
+  );
+  $('.pop-button').focus(
+    function() {
+      $(this).css('box-shadow', boxShadowHoverCss);
+    },
+    function() {
+      $(this).css('box-shadow', '');
+    }
+  );
 
   // activated by mousedown
-  $(".pop-button").mousedown(
-      function() {
-        $(this).css('box-shadow', boxShadowActiveCss);
-      }
-      );
+  $('.pop-button').mousedown(function() {
+    $(this).css('box-shadow', boxShadowActiveCss);
+  });
 
   // on mouse up, want to transition to the "hover" state
-  $(".pop-button").mouseup(
-      function() {
-        $(this).css('box-shadow', boxShadowHoverCss);
-      }
-      );
+  $('.pop-button').mouseup(function() {
+    $(this).css('box-shadow', boxShadowHoverCss);
+  });
 }
 
 function setPageTheme(colorScheme) {
@@ -93,22 +117,28 @@ function setPageTheme(colorScheme) {
   var medium = null;
   var light = null;
 
-  if (colorScheme === "Greys") { // midnight space theme
+  if (colorScheme === 'Greys') {
+    // midnight space theme
     midnight = true;
-    var filename = 'img/nebula' + Math.floor(Math.random()*3) + '.jpg';
-    var backgroundAttribute = "background: url(" + filename +
-      ") no-repeat center center fixed";
+    var filename = 'img/nebula' + Math.floor(Math.random() * 3) + '.jpg';
+    var backgroundAttribute =
+      'background: url(' + filename + ') no-repeat center center fixed';
     document.body.setAttribute('style', backgroundAttribute);
     dark = '#292e49';
     medium = '#2d4b56';
     light = '#30716d';
-  }
-  else {
+  } else {
     var colors = Trianglify.colorbrewer[colorScheme][9];
-    var t = new Trianglify({noiseIntensity: 0.0, cellsize: 175, x_gradient: colors});
+    var t = new Trianglify({
+      noiseIntensity: 0.0,
+      cellsize: 175,
+      x_gradient: colors,
+    });
     var pattern = t.generate(4000, 3000);
-    document.body.setAttribute('style', 'background: ' +
-        pattern.dataUrl + ' no-repeat center center fixed');
+    document.body.setAttribute(
+      'style',
+      'background: ' + pattern.dataUrl + ' no-repeat center center fixed'
+    );
 
     dark = colors[8];
     medium = colors[7];
@@ -123,7 +153,6 @@ function setPageTheme(colorScheme) {
 }
 
 $(document).ready(function() {
-
   var stream = document.getElementById('stream');
   var playing = false;
 
@@ -131,32 +160,29 @@ $(document).ready(function() {
   //function in that file is taken from detectmobilebrowsers.com
   var mobile = mobileBrowserCheck();
 
-
   //add preloading to non-mobile browsers
-  if (!mobile)
-    stream.setAttribute('preload', 'auto');
+  if (!mobile) stream.setAttribute('preload', 'auto');
 
   // activate the play button
-  $("#play-button").click(function() {
-
+  $('#play-button').click(function() {
     if (playing) {
       // pause
       stream.pause();
       if (mobile) {
-        stream.src = "";
+        stream.src = '';
       }
       playing = false;
     } else {
       // play
       if (mobile) {
-        stream.src = "http://uclaradio.com:8000/;";
+        stream.src = 'http://uclaradio.com:8000/;';
         stream.load();
       }
       stream.play();
       playing = true;
     }
 
-    $("#play-icon").toggleClass("fa fa-play fa fa-pause");
+    $('#play-icon').toggleClass('fa fa-play fa fa-pause');
   });
 
   // Generate that background image!
@@ -169,9 +195,9 @@ $(document).ready(function() {
 
 function checkCarouselData() {
   setTimeout(function() {
-    jQuery.getScript('https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks');
+    jQuery.getScript(
+      'https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=1&format=json&callback=updateRecentTracks'
+    );
     checkCarouselData();
   }, 30000);
 }
-
-

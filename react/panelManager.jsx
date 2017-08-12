@@ -5,17 +5,17 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var urls = {
-  managerInfo: "/panel/manager/api/info",
-  managerUpdate: "/panel/manager/api/update",
-  allShows: "/panel/api/allshows",
-  showLink: "/panel/show",
-  listAccounts: "/panel/manager/api/listAccounts",
-  verifyAccount: "/panel/manager/api/verify",
-  delete: "/panel/manager/api/delete",
-  deleteUnverified: "/panel/manager/api/deleteUnverified",
-  getReportedMessages: "/chat/reportedMessages",
-  deleteMessages: "/panel/manager/api/deletechat",
-  keepMessages: "/panel/manager/api/freechat"
+  managerInfo: '/panel/manager/api/info',
+  managerUpdate: '/panel/manager/api/update',
+  allShows: '/panel/api/allshows',
+  showLink: '/panel/show',
+  listAccounts: '/panel/manager/api/listAccounts',
+  verifyAccount: '/panel/manager/api/verify',
+  delete: '/panel/manager/api/delete',
+  deleteUnverified: '/panel/manager/api/deleteUnverified',
+  getReportedMessages: '/chat/reportedMessages',
+  deleteMessages: '/panel/manager/api/deletechat',
+  keepMessages: '/panel/manager/api/freechat',
 };
 
 // Panel Elements
@@ -54,14 +54,13 @@ var ManagerPage = React.createClass({
         </Grid>
       </div>
     );
-  }
+  },
 });
-
 
 var ReportedMessages = React.createClass({
   getInitialState: function() {
     return {
-      messages:[]
+      messages: [],
     };
   },
   fetchReportedMessages: function() {
@@ -69,8 +68,8 @@ var ReportedMessages = React.createClass({
       url: urls.getReportedMessages,
       type: 'GET',
       success: function(messages) {
-        this.setState({messages: messages});
-      }.bind(this)
+        this.setState({ messages: messages });
+      }.bind(this),
     });
   },
   handleKeep: function(messageID) {
@@ -78,75 +77,89 @@ var ReportedMessages = React.createClass({
       url: urls.keepMessages,
       type: 'POST',
       data: {
-        id: messageID
+        id: messageID,
       },
       success: function() {
         this.fetchReportedMessages();
-      }.bind(this)
-    })
+      }.bind(this),
+    });
   },
   handleDelete: function(messageID) {
     $.ajax({
       url: urls.deleteMessages,
       type: 'POST',
       data: {
-        id: messageID
+        id: messageID,
       },
       success: function() {
         this.fetchReportedMessages();
-      }.bind(this)
-    })
+      }.bind(this),
+    });
   },
   componentDidMount: function() {
     this.fetchReportedMessages();
   },
   render: function() {
     if (this.state.messages.length == 0) {
-      return <div className="reportedMessages"></div>
+      return <div className="reportedMessages" />;
     }
     var handleKeep = this.handleKeep;
     var handleDelete = this.handleDelete;
     return (
       <Well>
-      <div className="reportedMessages">
-      <center>
-        <h2>Reported Messages</h2>
-      </center>
-      <br />
-        <table className="reportedTable">
-          <tbody>
-          { this.state.messages.map(function(message) {
-            return (
-              <tr key={message.id}>
-                <td>
-                <Button onClick={()=>{handleKeep(message.id)}}>
-                  Keep
-                </Button>
-                </td>
-                <td>
-                <Button onClick={()=>{handleDelete(message.id)}}>
-                  Delete
-                </Button>
-                </td>
-                <td>
-                  <q>{message.text}</q>
-                </td>
-              </tr>
-            )
-          })}
-          </tbody>
-        </table>
-      </div>
+        <div className="reportedMessages">
+          <center>
+            <h2>Reported Messages</h2>
+          </center>
+          <br />
+          <table className="reportedTable">
+            <tbody>
+              {this.state.messages.map(function(message) {
+                return (
+                  <tr key={message.id}>
+                    <td>
+                      <Button
+                        onClick={() => {
+                          handleKeep(message.id);
+                        }}>
+                        Keep
+                      </Button>
+                    </td>
+                    <td>
+                      <Button
+                        onClick={() => {
+                          handleDelete(message.id);
+                        }}>
+                        Delete
+                      </Button>
+                    </td>
+                    <td>
+                      <q>
+                        {message.text}
+                      </q>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </Well>
-    )
-  }
+    );
+  },
 });
 
 var Manager = React.createClass({
   getInitialState: function() {
-    return {manager: {}, positionVerified: false, publicVerified: false,
-      meetingTimeVerified: false, meetingLocationVerified: false,
-      emailVerified: false, departmentInfoVerified: false};
+    return {
+      manager: {},
+      positionVerified: false,
+      publicVerified: false,
+      meetingTimeVerified: false,
+      meetingLocationVerified: false,
+      emailVerified: false,
+      departmentInfoVerified: false,
+    };
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -154,18 +167,18 @@ var Manager = React.createClass({
       dataType: 'json',
       type: 'POST',
       success: function(manager) {
-        this.setState({manager: manager});
+        this.setState({ manager: manager });
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.urls.managerInfo, status, err.toString());
-      }.bind(this)
+      }.bind(this),
     });
   },
   handleManagerInfoSubmit: function(updatedManager, successVar) {
     var oldManager = this.state.manager;
     // Optimistically update local data, will be refreshed or reset after response from server
-    this.setState({manager: updatedManager});
-    var updateData = {manager: JSON.stringify(updatedManager)};
+    this.setState({ manager: updatedManager });
+    var updateData = { manager: JSON.stringify(updatedManager) };
     // don't mark as verified yet
     var unverifiedState = {};
     unverifiedState[successVar] = false;
@@ -176,45 +189,45 @@ var Manager = React.createClass({
       type: 'POST',
       data: updateData,
       success: function(manager) {
-        var successState = {manager: manager};
+        var successState = { manager: manager };
         successState[successVar] = true;
         this.setState(successState);
       }.bind(this),
       error: function(xhr, status, err) {
-        this.setState({manager: oldManager});
+        this.setState({ manager: oldManager });
         console.error(this.props.urls.managerUpdate, status, err.toString());
-      }.bind(this)
+      }.bind(this),
     });
   },
   handlePositionSubmit: function(position) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.position = position;
-    this.handleManagerInfoSubmit(manager, "positionVerified");
+    this.handleManagerInfoSubmit(manager, 'positionVerified');
   },
   handleMeetingTimeSubmit: function(meetingTime) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.meetingTime = meetingTime;
-    this.handleManagerInfoSubmit(manager, "meetingTimeVerified");
+    this.handleManagerInfoSubmit(manager, 'meetingTimeVerified');
   },
   handleMeetingPlaceSubmit: function(meetingPlace) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.meetingPlace = meetingPlace;
-    this.handleManagerInfoSubmit(manager, "meetingLocationVerified");
+    this.handleManagerInfoSubmit(manager, 'meetingLocationVerified');
   },
   handleEmailSubmit: function(email) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.email = email;
-    this.handleManagerInfoSubmit(manager, "emailVerified");
+    this.handleManagerInfoSubmit(manager, 'emailVerified');
   },
   handleDepartmentInfoSubmit: function(departmentInfo) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.departmentInfo = departmentInfo;
-    this.handleManagerInfoSubmit(manager, "departmentInfoVerified");
+    this.handleManagerInfoSubmit(manager, 'departmentInfoVerified');
   },
   handlePublicSubmit: function(checked) {
     var manager = $.extend(true, {}, this.state.manager);
     manager.public = checked;
-    this.handleManagerInfoSubmit(manager, "publicVerified");
+    this.handleManagerInfoSubmit(manager, 'publicVerified');
   },
   componentDidMount: function() {
     this.loadDataFromServer();
@@ -223,33 +236,58 @@ var Manager = React.createClass({
     return (
       <div className="manager">
         <h2>Manager Info</h2>
-        <InputEditableTextField title="Position" placeholder="Enter Manager Position"
-          currentValue={this.state.manager.position} onSubmit={this.handlePositionSubmit}
-          verified={this.state.positionVerified} />
-        <InputEditableTextField title="Meeting Time" placeholder="Enter Department Meeting Times"
-          currentValue={this.state.manager.meetingTime} onSubmit={this.handleMeetingTimeSubmit}
-          verified={this.state.meetingTimeVerified} />
-        <InputEditableTextField title="Meeting Location" placeholder="Enter Department Meeting Location"
-          currentValue={this.state.manager.meetingPlace} onSubmit={this.handleMeetingPlaceSubmit}
-          verified={this.state.meetingLocationVerified} />
-        <InputEditableTextField title="Email" placeholder="Enter Department Email"
-        currentValue={this.state.manager.email} onSubmit={this.handleEmailSubmit}
-        verified={this.state.emailVerified} />
-        <InputEditableTextField title="Department Info" placeholder="Enter Department Info"
-        currentValue={this.state.manager.departmentInfo} onSubmit={this.handleDepartmentInfoSubmit}
-        verified={this.state.departmentInfoVerified} multiline />
-        <InputCheckbox title="Public" details="Show my info on Manager's Board" checked={this.state.manager.public}
-          onSelect={this.handlePublicSubmit} verified={this.state.publicVerified} />
+        <InputEditableTextField
+          title="Position"
+          placeholder="Enter Manager Position"
+          currentValue={this.state.manager.position}
+          onSubmit={this.handlePositionSubmit}
+          verified={this.state.positionVerified}
+        />
+        <InputEditableTextField
+          title="Meeting Time"
+          placeholder="Enter Department Meeting Times"
+          currentValue={this.state.manager.meetingTime}
+          onSubmit={this.handleMeetingTimeSubmit}
+          verified={this.state.meetingTimeVerified}
+        />
+        <InputEditableTextField
+          title="Meeting Location"
+          placeholder="Enter Department Meeting Location"
+          currentValue={this.state.manager.meetingPlace}
+          onSubmit={this.handleMeetingPlaceSubmit}
+          verified={this.state.meetingLocationVerified}
+        />
+        <InputEditableTextField
+          title="Email"
+          placeholder="Enter Department Email"
+          currentValue={this.state.manager.email}
+          onSubmit={this.handleEmailSubmit}
+          verified={this.state.emailVerified}
+        />
+        <InputEditableTextField
+          title="Department Info"
+          placeholder="Enter Department Info"
+          currentValue={this.state.manager.departmentInfo}
+          onSubmit={this.handleDepartmentInfoSubmit}
+          verified={this.state.departmentInfoVerified}
+          multiline
+        />
+        <InputCheckbox
+          title="Public"
+          details="Show my info on Manager's Board"
+          checked={this.state.manager.public}
+          onSelect={this.handlePublicSubmit}
+          verified={this.state.publicVerified}
+        />
       </div>
     );
-  }
+  },
 });
-
 
 var ManagerShowsList = React.createClass({
   getInitialState: function() {
     // shows: {title, day, time}
-    return {shows: []};
+    return { shows: [] };
   },
   loadDataFromServer: function() {
     $.ajax({
@@ -257,11 +295,11 @@ var ManagerShowsList = React.createClass({
       dataType: 'json',
       cache: false,
       success: function(shows) {
-        this.setState({shows: shows});
+        this.setState({ shows: shows });
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.urls.allShows, status, err.toString());
-      }.bind(this)
+      }.bind(this),
     });
   },
   componentDidMount: function() {
@@ -271,20 +309,24 @@ var ManagerShowsList = React.createClass({
     return (
       <div className="userShowsList">
         <h4>Shows</h4>
-        <ShowList url={this.props.urls.showLink} shows={this.state.shows}
-          placeholder="/img/radio.png" short />
+        <ShowList
+          url={this.props.urls.showLink}
+          shows={this.state.shows}
+          placeholder="/img/radio.png"
+          short
+        />
       </div>
     );
-  }
+  },
 });
 
 // user account strings
-const atManagerGlyph = "fire";
+const atManagerGlyph = 'fire';
 // verify user strings
-const atAcceptTitle = "Verify";
-const atAcceptTooltip = "Verify user is a Radio DJ";;
+const atAcceptTitle = 'Verify';
+const atAcceptTooltip = 'Verify user is a Radio DJ';
 // delete verified user strings
-const atRejectTooltipVerified = "Delete DJ account";
+const atRejectTooltipVerified = 'Delete DJ account';
 
 var AccountsList = React.createClass({
   loadDataFromServer: function() {
@@ -294,30 +336,30 @@ var AccountsList = React.createClass({
       type: 'POST',
       cache: false,
       success: function(accounts) {
-        this.setState({accounts: accounts});
+        this.setState({ accounts: accounts });
         this.updateTableRows();
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
-      }.bind(this)
+      }.bind(this),
     });
   },
   updateUser: function(url, username, oldAccounts) {
-    var updateData = {"username": username};
-      $.ajax({
-        url: url,
-        dataType: 'json',
-        type: 'POST',
-        data: updateData,
-        success: function() {
-          this.loadDataFromServer();
-        }.bind(this),
-        error: function(xhr, status, err) {
-          this.setState({accounts: oldAccounts});
-          this.updateTableRows();
-          console.error(this.props.showURL, status, err.toString());
-        }.bind(this)
-      });
+    var updateData = { username: username };
+    $.ajax({
+      url: url,
+      dataType: 'json',
+      type: 'POST',
+      data: updateData,
+      success: function() {
+        this.loadDataFromServer();
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({ accounts: oldAccounts });
+        this.updateTableRows();
+        console.error(this.props.showURL, status, err.toString());
+      }.bind(this),
+    });
   },
   handleVerifyUser: function(username) {
     var oldAccounts = this.state.accounts;
@@ -331,7 +373,7 @@ var AccountsList = React.createClass({
       }
     }
     // optimistically add show data to present
-    this.setState({accounts: newAccounts});
+    this.setState({ accounts: newAccounts });
     this.updateUser(this.props.urls.verifyAccount, username, oldAccounts);
   },
   handleDeleteUser: function(username) {
@@ -345,7 +387,7 @@ var AccountsList = React.createClass({
       }
     }
     // optimistically add show data to present
-    this.setState({accounts: newAccounts});
+    this.setState({ accounts: newAccounts });
     this.updateUser(this.props.urls.delete, username, oldAccounts);
   },
   handleDeleteUnverifiedUser: function(username) {
@@ -359,16 +401,17 @@ var AccountsList = React.createClass({
       }
     }
     // optimistically add show data to present
-    this.setState({accounts: newAccounts});
+    this.setState({ accounts: newAccounts });
     this.updateUser(this.props.urls.deleteUnverified, username, oldAccounts);
   },
   updateTableRows: function() {
     var makeRows = function(accounts, verified) {
       var rows = [];
       for (var i = 0; i < accounts.length; i++) {
-        var row = {value: accounts[i].username,
-                  actionsDisabled: accounts[i].manager
-                };
+        var row = {
+          value: accounts[i].username,
+          actionsDisabled: accounts[i].manager,
+        };
         row['string1'] = verified ? accounts[i].djName : accounts[i].fullName;
         row['string2'] = verified ? accounts[i].fullName : accounts[i].email;
         rows.push(row);
@@ -376,12 +419,20 @@ var AccountsList = React.createClass({
       return rows;
     };
 
-    this.setState({unverifiedRows: makeRows(this.state.accounts.unverified, false)});
-    this.setState({verifiedRows: makeRows(this.state.accounts.verified, true)});
+    this.setState({
+      unverifiedRows: makeRows(this.state.accounts.unverified, false),
+    });
+    this.setState({
+      verifiedRows: makeRows(this.state.accounts.verified, true),
+    });
   },
 
   getInitialState: function() {
-    return {accounts: {unverified: [], verified: []}, unverifiedRows:[], verifiedRows: []};
+    return {
+      accounts: { unverified: [], verified: [] },
+      unverifiedRows: [],
+      verifiedRows: [],
+    };
   },
   componentDidMount: function() {
     this.loadDataFromServer();
@@ -389,33 +440,39 @@ var AccountsList = React.createClass({
   render: function() {
     return (
       <div className="accountsList">
-        {(this.state.unverifiedRows.length > 0)
-          ?
-          <Panel header="Requested Accounts" bsStyle="warning">
-            <ActionTable rows={this.state.unverifiedRows} string1={"Full Name"} string2={"Email"}
-              acceptTitle={atAcceptTitle} rejectTitle={''}
-              acceptTooltip={atAcceptTooltip} rejectTooltip={atRejectTooltipVerified}
-              onAccept={this.handleVerifyUser} onReject={this.handleDeleteUnverifiedUser}
-            />
-          </Panel>
-          : <div />
-        }
-        {(this.state.verifiedRows.length > 0)
-          ?
-          <Panel header="DJs" bsStyle="info">
-            <ActionTable rows={this.state.verifiedRows} string1={"DJ Name"} string2={"Full Name"}
-            placeholders1={['DJ Hagfish', 'DJ Bed Bugs', 'DJ Nickelback']}
-              rejectTitle={''} rejectTooltip={atRejectTooltipVerified}
-              onReject={this.handleDeleteUser} glyph={atManagerGlyph}
-            />
-          </Panel>
-          : <div />
-        }
+        {this.state.unverifiedRows.length > 0
+          ? <Panel header="Requested Accounts" bsStyle="warning">
+              <ActionTable
+                rows={this.state.unverifiedRows}
+                string1={'Full Name'}
+                string2={'Email'}
+                acceptTitle={atAcceptTitle}
+                rejectTitle={''}
+                acceptTooltip={atAcceptTooltip}
+                rejectTooltip={atRejectTooltipVerified}
+                onAccept={this.handleVerifyUser}
+                onReject={this.handleDeleteUnverifiedUser}
+              />
+            </Panel>
+          : <div />}
+        {this.state.verifiedRows.length > 0
+          ? <Panel header="DJs" bsStyle="info">
+              <ActionTable
+                rows={this.state.verifiedRows}
+                string1={'DJ Name'}
+                string2={'Full Name'}
+                placeholders1={['DJ Hagfish', 'DJ Bed Bugs', 'DJ Nickelback']}
+                rejectTitle={''}
+                rejectTooltip={atRejectTooltipVerified}
+                onReject={this.handleDeleteUser}
+                glyph={atManagerGlyph}
+              />
+            </Panel>
+          : <div />}
       </div>
     );
-  }
+  },
 });
-
 
 ReactDOM.render(
   <ManagerPage urls={urls} />,
