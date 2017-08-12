@@ -15,16 +15,20 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 ### Running
 
 #### Development
-- Ensure you have Mongo and Node installed.
-  - For macOS: If you have [homebrew](http://brew.sh/) installed, you can just run [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) to set up node and MongoDB automatically!
-- In the project root directory, run `npm install` to install dependencies (may need sudo)
-- Run `npm run dev` to start the server for development
+##### Windows
+We're [working on that](https://github.com/uclaradio/uclaradio/pull/121)!
+
+##### MacOS
+1. Install [Homebrew](https://brew.sh).
+2. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
+3. Run our [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) script.
+    - Wondering what this does? Basically it installs the latest versions of [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and [Yarn](https://yarnpkg.com), then uses these programs to install the packages we use and set up a local database.
+- Run `yarn dev` to start the server for development.
 - Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
 
 #### Production
-- Make sure all packages are installed with `npm install`
-- Run `node bin/www prod` to start the server for production (will require HTTPS and listen on port 80)
-
+- Make sure all packages are installed with `yarn`.
+- Run `node bin/www prod` to start the server for production (will require HTTPS and listen on port 80).
 
 ### Getting Started
 
