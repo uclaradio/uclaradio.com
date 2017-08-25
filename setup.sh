@@ -23,6 +23,8 @@ yarn
 cp defaultPasswords.json passwords.json
 
 echo 'Seeding database...'
-node database/scripts/setupPanel.js
+# mongod &
+# node database/scripts/setupPanel.js
+# kill %%
 
 echo 'Finished.'
