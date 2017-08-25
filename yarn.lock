@@ -2318,16 +2318,16 @@ eslint-config-prettier@^2.3.0:
   dependencies:
     get-stdin "^5.0.1"
 
-eslint-config-uclaradio@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-uclaradio/-/eslint-config-uclaradio-1.0.2.tgz#c891b5592842713eedd2eb4618167d326704f927"
+eslint-config-uclaradio@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/eslint-config-uclaradio/-/eslint-config-uclaradio-1.0.8.tgz#b7490c5b451640fe904722de5dda18eeb37ef72d"
   dependencies:
     eslint-config-airbnb "^15.1.0"
     eslint-config-prettier "^2.3.0"
     eslint-plugin-import "^2.7.0"
-    eslint-plugin-jsx-a11y "^6.0.2"
+    eslint-plugin-jsx-a11y "^5.1.1"
     eslint-plugin-prettier "^2.1.2"
-    eslint-plugin-react "^7.2.0"
+    eslint-plugin-react "^7.1.0"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.1"
@@ -2358,9 +2358,9 @@ eslint-plugin-import@^2.7.0:
     minimatch "^3.0.3"
     read-pkg-up "^2.0.0"
 
-eslint-plugin-jsx-a11y@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-6.0.2.tgz#659277a758b036c305a7e4a13057c301cd3be73f"
+eslint-plugin-jsx-a11y@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-5.1.1.tgz#5c96bb5186ca14e94db1095ff59b3e2bd94069b1"
   dependencies:
     aria-query "^0.7.0"
     array-includes "^3.0.3"
@@ -2377,13 +2377,14 @@ eslint-plugin-prettier@^2.1.2:
     fast-diff "^1.1.1"
     jest-docblock "^20.0.1"
 
-eslint-plugin-react@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.2.0.tgz#25c77a4ec307e3eebb248ea3350960e372ab6406"
+eslint-plugin-react@^7.1.0:
+  version "7.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.3.0.tgz#ca9368da36f733fbdc05718ae4e91f778f38e344"
   dependencies:
     doctrine "^2.0.0"
     has "^1.0.1"
     jsx-ast-utils "^2.0.0"
+    prop-types "^15.5.10"
 
 eslint-restricted-globals@^0.1.1:
   version "0.1.1"
