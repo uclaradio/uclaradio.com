@@ -29,6 +29,6 @@ node database/scripts/setupPanel.js &
 NODE_PID=$!
 
 wait $NODE_PID
-# kill $MONGO_PID
+kill $MONGO_PID
 
 echo 'Finished.'
