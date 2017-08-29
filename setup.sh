@@ -8,7 +8,9 @@ echo 'Installing macOS packages...'
 brew update
 brew install node
 brew install mongodb
-brew install grunt
+brew install yarn
+# Cairo is a dependency: https://github.com/uclaradio/uclaradio/issues/131
+brew install cairo
 
 # storage for mongodb
 sudo mkdir -p /data/db
@@ -16,15 +18,17 @@ sudo mkdir -p /data/db
 sudo chown -R $USER /data/db
 
 echo 'Installing npm packages...'
-## note: might need to update if 'node-gyp rebuild' fails
-# npm explore npm -g -- npm install node-gyp@latest
-## might have to install cairo for dependent npm packages
-# brew install cairo
-sudo npm install
+yarn
 
 cp defaultPasswords.json passwords.json
 
 echo 'Seeding database...'
-node database/scripts/setupPanel.js
+mongod &
+MONGO_PID=$!
+node database/scripts/setupPanel.js &
+NODE_PID=$!
+
+wait $NODE_PID
+kill $MONGO_PID
 
 echo 'Finished.'

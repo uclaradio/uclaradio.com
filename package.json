@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "postcheckout": "yarn",
     "start": "node ./bin/www",
     "dev": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" ",
     "precommit": "lint-staged",
@@ -69,7 +70,7 @@
     "css-loader": "^0.23.1",
     "eslint": "^4.4.1",
     "eslint-config-uclaradio": "^1.0.8",
-    "grunt": "^0.4.5",
+    "grunt": "^1.0.1",
     "grunt-webpack": "^1.0.11",
     "htmlhint": "^0.9.13",
     "husky": "^0.14.3",
