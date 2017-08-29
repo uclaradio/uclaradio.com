@@ -3,7 +3,7 @@
 
 export const updateShows = shows => ({
   type: 'UPDATE_SHOWS',
-  shows: shows,
+  shows,
 });
 
 export const startFetching = () => ({
@@ -16,17 +16,17 @@ export const stopFetching = () => ({
 
 export const updateNowPlaying = showID => ({
   type: 'UPDATE_NOW_PLAYING',
-  showID: showID,
+  showID,
 });
 
 export const addUpdateShow = show => ({
   type: 'ADD_UPDATE_SHOW',
-  show: show,
+  show,
 });
 
 export const updateSpotlightShow = showID => ({
   type: 'UPDATE_SPOTLIGHT_SHOW',
-  showID: showID,
+  showID,
 });
 
 const scheduleURL = '/api/schedule';
@@ -37,13 +37,13 @@ export const fetchUpdatedShows = dispatch => {
     url: scheduleURL,
     dataType: 'json',
     cache: false,
-    success: function(data) {
+    success(data) {
       dispatch(stopFetching());
       dispatch(updateShows(data.shows));
-    }.bind(this),
-    error: function(xhr, status, err) {
+    },
+    error(xhr, status, err) {
       dispatch(stopFetching());
       console.error(scheduleURL, status, err.toString());
-    }.bind(this),
+    },
   });
 };

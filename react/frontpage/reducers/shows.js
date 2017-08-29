@@ -44,14 +44,12 @@ const shows = (state = initialState, action) => {
 
 /**
 Helpers
-**/
+* */
 
 // returns copy of array with obj added, replacing existing object
 //   if one exists in arr with the same id
 const addOrReplaceObjectWithID = (arr, obj) => {
-  arr = arr.filter(a => {
-    return a.id !== obj.id;
-  });
+  arr = arr.filter(a => a.id !== obj.id);
   return [...arr, obj];
 };
 

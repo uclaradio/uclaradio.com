@@ -28,11 +28,12 @@ Each song has a field array. The field array contains the song's properites
 
 const fs = require('fs');
 const xml2js = require('xml2js');
+
 const parser = new xml2js.Parser();
 const rivendell = {};
 
 rivendell.getSongs = function(callback) {
-  fs.readFile(__dirname + '/rivendell.xml', function(err, data) {
+  fs.readFile(`${__dirname}/rivendell.xml`, (err, data) => {
     if (err) {
       callback(err);
       return;
@@ -42,16 +43,16 @@ rivendell.getSongs = function(callback) {
     const songList = {};
     const songs = [];
 
-    parser.parseString(data, function(err, result) {
+    parser.parseString(data, (err, result) => {
       if (err) {
         callback(err);
         return;
       }
       rivendellDump = result.resultset.row;
-      for (let entry of rivendellDump) {
+      for (const entry of rivendellDump) {
         const songInfo = entry.field;
         const song = {};
-        for (let field of songInfo) {
+        for (const field of songInfo) {
           if (field.$.name === 'TITLE') {
             song.title = field._;
           }
@@ -73,7 +74,7 @@ rivendell.getSongs = function(callback) {
 
       // Get modified date of rivendell.xml
       songList.songs = songs;
-      const stats = fs.statSync(__dirname + '/rivendell.xml');
+      const stats = fs.statSync(`${__dirname}/rivendell.xml`);
       const mtime = new Date(stats.mtime).toString();
 
       songList.time = mtime;

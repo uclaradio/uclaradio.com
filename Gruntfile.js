@@ -9,36 +9,36 @@
 
 module.exports = function(grunt) {
   // use webpack to compile & minify
-  var webpack = require('webpack');
+  const webpack = require('webpack');
 
   // use plugin to set env variables
-  var InlineEnviromentVariablesPlugin = require('inline-environment-variables-webpack-plugin');
+  const InlineEnviromentVariablesPlugin = require('inline-environment-variables-webpack-plugin');
 
   // Directory where *.js and *.jsx files will be compiled from, to be placed in ./public/build
-  var directory = 'react';
+  const directory = 'react';
   // vendors to be compiled to a single file which can be shared between pages (vendors.min.js)
-  var entry = { vendors: ['react', 'react-bootstrap'] };
+  const entry = { vendors: ['react', 'react-bootstrap'] };
   // go through files in this directory and add them to target entry
-  var files = grunt.file.expand({ cwd: directory }, '*.js', '*.jsx');
-  for (var i = 0; i < files.length; i++) {
-    var filename = files[i].replace(/.js[x]?/g, '.min.js').toLowerCase();
-    entry[filename] = './' + directory + '/' + files[i];
+  const files = grunt.file.expand({ cwd: directory }, '*.js', '*.jsx');
+  for (let i = 0; i < files.length; i++) {
+    const filename = files[i].replace(/.js[x]?/g, '.min.js').toLowerCase();
+    entry[filename] = `./${directory}/${files[i]}`;
   }
 
   // Creates a special Commons bundle that our application can require from
-  var commonPlugin = new webpack.optimize.CommonsChunkPlugin(
+  const commonPlugin = new webpack.optimize.CommonsChunkPlugin(
     'vendors',
     'vendors.js'
   );
   // We need to uglify that code on deploy
-  var uglifyPlugin = new webpack.optimize.UglifyJsPlugin();
+  const uglifyPlugin = new webpack.optimize.UglifyJsPlugin();
   // Use plugin to set process.env variables
-  var envVariablesPlugin = new InlineEnviromentVariablesPlugin({
+  const envVariablesPlugin = new InlineEnviromentVariablesPlugin({
     NODE_ENV: process.env.NODE_ENV,
   });
 
   // The module options takes loaders, in this case transforming JSX to normal javascript
-  var module = {
+  const module = {
     loaders: [
       {
         test: /\.js[x]?$/,
@@ -66,7 +66,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     webpack: {
       build: {
-        entry: entry,
+        entry,
         plugins: [commonPlugin, uglifyPlugin, envVariablesPlugin],
         stats: {
           timings: true,
@@ -75,19 +75,19 @@ module.exports = function(grunt) {
           filename: '[name]',
           path: './public/build',
         },
-        module: module,
+        module,
       },
     },
   });
 
-  /***** Set up Grunt tasks (for the command line interface 'grunt-cli') *****/
+  /** *** Set up Grunt tasks (for the command line interface 'grunt-cli') **** */
 
   grunt.loadNpmTasks('grunt-webpack');
   // build all files in ./react
   grunt.registerTask('build', ['webpack:build']);
 
   // 'watch' task (keep alive)
-  grunt.registerTask('watch', 'Build all files on change', function() {
+  grunt.registerTask('watch', 'Build all files on change', () => {
     grunt.config.set('webpack.build.keepalive', true);
     grunt.config.set('webpack.build.watch', true);
     grunt.task.run(['webpack:build']);

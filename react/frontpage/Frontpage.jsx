@@ -38,7 +38,8 @@ import RectImage from '../common/RectImage.jsx';
 import { Bootstrap, Grid, Col } from 'react-bootstrap';
 
 // Google analytics helper
-var ReactGA = require('react-ga');
+const ReactGA = require('react-ga');
+
 ReactGA.initialize('UA-21406547-20');
 
 function logPageView() {
@@ -62,10 +63,10 @@ Expects children components for tab contents
 @prop nowPlaying: show to display as live
 @prop spotlight: show to display as spotlight
 @prop children: components to display in content area
-**/
+* */
 const FrontpageContent = React.createClass({
-  render: function() {
-    var showPlaying =
+  render() {
+    const showPlaying =
       this.props.nowPlaying && this.props.nowPlaying.title != null;
     return (
       <div className="frontpageContent">
@@ -107,14 +108,15 @@ const FrontpageContent = React.createClass({
 /**
 Redux container (wrapper) for FrontpageContent to provide props:
   nowPlaying, spotlight
-**/
+* */
 import { connect } from 'react-redux';
+
 const mapStateToProps = state => {
-  var props = {};
+  const props = {};
 
   // set nowPlaying & spotlight shows if found
-  for (var showIndex = 0; showIndex < state.shows.shows.length; showIndex++) {
-    var show = state.shows.shows[showIndex];
+  for (let showIndex = 0; showIndex < state.shows.shows.length; showIndex++) {
+    const show = state.shows.shows[showIndex];
     if (show.id === state.shows.nowPlayingID) {
       props.nowPlaying = show;
     }
@@ -127,9 +129,9 @@ const mapStateToProps = state => {
     }
   }
 
-  var spotlight = state.shows.shows.find(show => {
-    return show.id == state.shows.spotlightID;
-  });
+  const spotlight = state.shows.shows.find(
+    show => show.id == state.shows.spotlightID
+  );
   if (spotlight && spotlight !== -1) {
     props.spotlight = spotlight;
   }
@@ -162,9 +164,9 @@ also sets some data in store
 @prop updateNowPlaying: () => refresh now playing by requesting new data from server
 @prop setSpotlightShowID: (showID) => update the spotlight to be a show with the provided showID
 @prop updateShows: () => should fetch updated list of shows and update store
-**/
+* */
 const Frontpage = React.createClass({
-  componentWillMount: function() {
+  componentWillMount() {
     // refresh live show info now and every 30 seconds
     this.props.updateNowPlaying();
     this.interval = setInterval(this.props.updateNowPlaying, 30 * 1000);
@@ -174,10 +176,10 @@ const Frontpage = React.createClass({
     this.props.setSpotlightShowID(172);
     this.props.updateShows();
   },
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     clearInterval(this.interval);
   },
-  render: function() {
+  render() {
     return (
       <Router history={browserHistory} onUpdate={logPageView}>
         {routes}

@@ -6,7 +6,7 @@ Note: this is not the UI, but simply a redux container providing
   a store and relevant actions. See './frontpage/Frontpage.jsx' for UI.
 
 Renders application with ReactDOM, rendering on #content element
-**/
+* */
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -49,16 +49,16 @@ const fetchUpdatedNowPlaying = dispatch => {
     url: nowPlayingURL,
     dataType: 'json',
     cache: false,
-    success: function(nowPlaying) {
+    success(nowPlaying) {
       if (nowPlaying.title) {
-        var showID = nowPlaying.id;
+        const showID = nowPlaying.id;
         dispatch(updateNowPlaying(showID));
         dispatch(addUpdateShow(nowPlaying));
       }
-    }.bind(this),
-    error: function(xhr, status, err) {
+    },
+    error(xhr, status, err) {
       console.error(nowPlayingURL, status, err.toString());
-    }.bind(this),
+    },
   });
 };
 
@@ -66,13 +66,10 @@ const fetchUpdatedNowPlaying = dispatch => {
 const FrontpageContainer = connect(null, mapDispatchToProps)(Frontpage);
 
 // wrap container in redux provider to provide data store
-const FrontpageApp = () => {
-  return (
-    <Provider store={store}>
-      <FrontpageContainer />
-    </Provider>
-  );
-};
+const FrontpageApp = () =>
+  <Provider store={store}>
+    <FrontpageContainer />
+  </Provider>;
 
 // display app
 ReactDOM.render(<FrontpageApp />, document.getElementById('content'));

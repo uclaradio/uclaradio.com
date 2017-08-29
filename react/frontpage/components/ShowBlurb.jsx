@@ -1,6 +1,6 @@
 // ShowBlurb.jsx
 
-var React = require('react');
+const React = require('react');
 
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
@@ -27,11 +27,11 @@ Vertical blurb info for a show, including picture and description
   picture: String, // relative url to image file
 }
 */
-var ShowBlurb = React.createClass({
-  djString: function(djMap) {
-    var djString = '';
-    var addComma = false;
-    for (var dj in djMap) {
+const ShowBlurb = React.createClass({
+  djString(djMap) {
+    let djString = '';
+    let addComma = false;
+    for (const dj in djMap) {
       if (addComma) {
         djString += ', ';
       }
@@ -42,14 +42,14 @@ var ShowBlurb = React.createClass({
   },
 
   urlFromShow(show) {
-    return '/shows/' + show.id;
+    return `/shows/${show.id}`;
   },
 
-  getDJLink: function(djName) {
-    return '/djs/' + djName;
+  getDJLink(djName) {
+    return `/djs/${djName}`;
   },
 
-  render: function() {
+  render() {
     if (!this.props.show) {
       return <div className="showBlurb" />;
     }

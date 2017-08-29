@@ -1,25 +1,25 @@
 // home.html
 // let DJ edit personal info
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
-var urls = {
+const urls = {
   url: '/panel/api/faq',
 };
 
 // Panel Elements
-var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
+const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
 
 // Boostrap Components
-var Accordion = require('react-bootstrap').Accordion;
-var Panel = require('react-bootstrap').Panel;
-var Input = require('react-bootstrap').Input;
-var Button = require('react-bootstrap').Button;
-var Grid = require('react-bootstrap').Grid;
+const Accordion = require('react-bootstrap').Accordion;
+const Panel = require('react-bootstrap').Panel;
+const Input = require('react-bootstrap').Input;
+const Button = require('react-bootstrap').Button;
+const Grid = require('react-bootstrap').Grid;
 
-var FAQPage = React.createClass({
-  render: function() {
+const FAQPage = React.createClass({
+  render() {
     return (
       <div className="panelPage">
         <Grid>
@@ -31,11 +31,11 @@ var FAQPage = React.createClass({
   },
 });
 
-var FAQ = React.createClass({
-  getInitialState: function() {
+const FAQ = React.createClass({
+  getInitialState() {
     return { faqs: [], tempFAQs: [], editable: false, editing: false };
   },
-  loadDataFromServer: function() {
+  loadDataFromServer() {
     $.ajax({
       url: this.props.urls.url,
       dataType: 'json',
@@ -51,36 +51,36 @@ var FAQ = React.createClass({
       }.bind(this),
     });
   },
-  updateFAQ: function(faqs) {
+  updateFAQ(faqs) {
     this.setState({ tempFAQs: faqs });
   },
-  updateQuestion: function(qid, value) {
-    var faqs = this.state.tempFAQs;
-    var faq = faqs[qid];
+  updateQuestion(qid, value) {
+    const faqs = this.state.tempFAQs;
+    const faq = faqs[qid];
     faq.question = value;
     faqs[qid] = faq;
     this.setState({ tempFAQs: faqs });
   },
-  updateAnswer: function(qid, value) {
-    var faqs = this.state.tempFAQs;
-    var faq = faqs[qid];
+  updateAnswer(qid, value) {
+    const faqs = this.state.tempFAQs;
+    const faq = faqs[qid];
     faq.answer = value;
     faqs[qid] = faq;
     this.setState({ tempFAQs: faqs });
   },
-  addQuestion: function() {
-    var faqs = this.state.tempFAQs;
-    var lastID = faqs.length > 0 ? faqs[faqs.length - 1].id + 1 : 1;
+  addQuestion() {
+    const faqs = this.state.tempFAQs;
+    const lastID = faqs.length > 0 ? faqs[faqs.length - 1].id + 1 : 1;
     faqs.push({ id: lastID, question: '', answer: '' });
     this.setState({ tempFAQs: faqs });
   },
-  deleteQuestion: function(qid) {
-    var faqs = this.state.tempFAQs;
+  deleteQuestion(qid) {
+    const faqs = this.state.tempFAQs;
     faqs.splice(qid, 1);
     this.setState({ tempFAQs: faqs });
   },
-  submitData: function() {
-    var oldFAQs = this.state.faqs;
+  submitData() {
+    const oldFAQs = this.state.faqs;
     // optimistically update local info
     this.setState({ faqs: this.state.tempFAQs });
     $.ajax({
@@ -97,41 +97,37 @@ var FAQ = React.createClass({
       }.bind(this),
     });
   },
-  toggleEditing: function() {
+  toggleEditing() {
     this.setState({
       tempFAQs: this.state.faqs.slice(0),
       editing: !this.state.editing,
     });
   },
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadDataFromServer();
   },
-  render: function() {
+  render() {
     if (this.state.editing) {
-      var updateQuestion = this.updateQuestion;
-      var updateAnswer = this.updateAnswer;
-      var deleteQuestion = this.deleteQuestion;
-      var faqs = this.state.tempFAQs.map(function(question, i) {
-        return (
-          <QuestionEdit
-            key={i}
-            qid={i}
-            question={question.question}
-            answer={question.answer}
-            handleUpdateQuestion={updateQuestion}
-            handleUpdateAnswer={updateAnswer}
-            handleDelete={deleteQuestion}
-          />
-        );
-      });
+      const updateQuestion = this.updateQuestion;
+      const updateAnswer = this.updateAnswer;
+      const deleteQuestion = this.deleteQuestion;
+      var faqs = this.state.tempFAQs.map((question, i) =>
+        <QuestionEdit
+          key={i}
+          qid={i}
+          question={question.question}
+          answer={question.answer}
+          handleUpdateQuestion={updateQuestion}
+          handleUpdateAnswer={updateAnswer}
+          handleDelete={deleteQuestion}
+        />
+      );
     } else {
-      var questions = this.state.faqs.map(function(faq, i) {
-        return (
-          <Panel header={faq.question} eventKey={i} key={i}>
-            {faq.answer}
-          </Panel>
-        );
-      });
+      var questions = this.state.faqs.map((faq, i) =>
+        <Panel header={faq.question} eventKey={i} key={i}>
+          {faq.answer}
+        </Panel>
+      );
     }
     return (
       <div className="faq">
@@ -169,17 +165,17 @@ var FAQ = React.createClass({
   },
 });
 
-var QuestionEdit = React.createClass({
-  updateQuestion: function(e) {
+const QuestionEdit = React.createClass({
+  updateQuestion(e) {
     this.props.handleUpdateQuestion(this.props.qid, e.target.value);
   },
-  updateAnswer: function(e) {
+  updateAnswer(e) {
     this.props.handleUpdateAnswer(this.props.qid, e.target.value);
   },
-  deleteQuestion: function() {
+  deleteQuestion() {
     this.props.handleDelete(this.props.qid);
   },
-  render: function() {
+  render() {
     return (
       <div className="questionEdit">
         <p className="actions">

@@ -3,7 +3,7 @@
 
 export const updateDJs = djs => ({
   type: 'UPDATE_DJS',
-  djs: djs,
+  djs,
 });
 
 export const startFetching = () => ({
@@ -22,13 +22,13 @@ export const fetchUpdatedDJs = dispatch => {
     url: djsURL,
     dataType: 'json',
     cache: false,
-    success: function(data) {
+    success(data) {
       dispatch(stopFetching());
       dispatch(updateDJs(data.djs));
-    }.bind(this),
-    error: function(xhr, status, err) {
+    },
+    error(xhr, status, err) {
       dispatch(stopFetching());
       console.error(djsURL, status, err.toString());
-    }.bind(this),
+    },
   });
 };

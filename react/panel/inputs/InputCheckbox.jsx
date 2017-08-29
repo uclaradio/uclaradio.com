@@ -1,10 +1,10 @@
 // InputCheckbox.jsx
 
-var React = require('react');
+const React = require('react');
 
 // Bootstrap elements
-var Input = require('react-bootstrap').Input;
-var Glyphicon = require('react-bootstrap').Glyphicon;
+const Input = require('react-bootstrap').Input;
+const Glyphicon = require('react-bootstrap').Glyphicon;
 
 /**
 *  Input checkbox element which can be checked or unchecked
@@ -15,11 +15,11 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 *  @prop details: help details
 *  @prop verified: should indicate input data was... whatever
 */
-var InputCheckbox = React.createClass({
-  handleChange: function(e) {
+const InputCheckbox = React.createClass({
+  handleChange(e) {
     this.props.onSelect(e.target.checked);
   },
-  render: function() {
+  render() {
     return (
       <form className="inputCheckbox form-horizontal">
         <Input

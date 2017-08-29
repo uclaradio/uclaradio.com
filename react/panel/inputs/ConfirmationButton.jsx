@@ -1,10 +1,10 @@
 // UserEditableDateTimeField.jsx
 
-var React = require('react');
+const React = require('react');
 
 // Bootstrap Elements
-var Button = require('react-bootstrap').Button;
-var ButtonGroup = require('react-bootstrap').ButtonGroup;
+const Button = require('react-bootstrap').Button;
+const ButtonGroup = require('react-bootstrap').ButtonGroup;
 
 /**
 *  Allows user to confirm a button submission
@@ -13,14 +13,14 @@ var ButtonGroup = require('react-bootstrap').ButtonGroup;
 *  @prop submit: text to display on button when submitting
 *  @prop onSubmit -> function(): parent's function to call when submitting
 */
-var ConfirmationButton = React.createClass({
-  getInitialState: function() {
+const ConfirmationButton = React.createClass({
+  getInitialState() {
     return { unlock: false };
   },
-  toggleUnlock: function() {
+  toggleUnlock() {
     this.setState({ unlock: !this.state.unlock });
   },
-  render: function() {
+  render() {
     return (
       <div className="confirmationButton centered">
         {this.state.unlock

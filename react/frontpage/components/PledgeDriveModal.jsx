@@ -1,4 +1,5 @@
 const React = require('react');
+
 import { Modal, Button } from 'react-bootstrap';
 
 import { Link } from 'react-router';

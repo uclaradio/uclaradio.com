@@ -3,10 +3,10 @@
 //
 // usage: node .../addUserToShow.js [showID] [username]
 
-var shows = require('../shows.js');
+const shows = require('../shows.js');
 
-var showID = process.argv[2];
-var username = process.argv[3];
+const showID = process.argv[2];
+const username = process.argv[3];
 
 if (showID == null) {
   console.log('no show id provided');
@@ -14,15 +14,13 @@ if (showID == null) {
 } else if (username == null) {
   console.log('no user provided');
   process.exit(1);
-}
-else {
-  shows.addUser(showID, username, function(err, saved) {
+} else {
+  shows.addUser(showID, username, (err, saved) => {
     if (saved) {
-      console.log("successfully added", username, "to show:", saved.title);
+      console.log('successfully added', username, 'to show:', saved.title);
       process.exit();
-    }
-    else {
-      console.log("error:", err);
+    } else {
+      console.log('error:', err);
       process.exit();
     }
   });

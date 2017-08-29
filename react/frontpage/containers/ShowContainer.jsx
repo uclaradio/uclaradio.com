@@ -7,15 +7,15 @@ import ShowPage from '../components/ShowPage.jsx';
 import { fetchUpdatedShows } from '../actions/shows';
 
 const mapStateToProps = (state, ownProps) => {
-  var props = {
+  const props = {
     fetching: state.shows.fetching,
   };
 
-  var showID = Number(ownProps.params['showID']);
+  const showID = Number(ownProps.params.showID);
 
   // set show if found
-  for (var showIndex = 0; showIndex < state.shows.shows.length; showIndex++) {
-    var show = state.shows.shows[showIndex];
+  for (let showIndex = 0; showIndex < state.shows.shows.length; showIndex++) {
+    const show = state.shows.shows[showIndex];
     if (show.id === showID) {
       props.show = show;
     }

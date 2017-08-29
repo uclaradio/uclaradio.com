@@ -1,14 +1,14 @@
 // ActionTable.js
 
-var React = require('react');
+const React = require('react');
 
 // Bootstrap elements
-var Table = require('react-bootstrap').Table;
-var Button = require('react-bootstrap').Button;
-var ButtonGroup = require('react-bootstrap').ButtonGroup;
-var Glyphicon = require('react-bootstrap').Glyphicon;
-var OverlayTrigger = require('react-bootstrap').OverlayTrigger;
-var Tooltip = require('react-bootstrap').Tooltip;
+const Table = require('react-bootstrap').Table;
+const Button = require('react-bootstrap').Button;
+const ButtonGroup = require('react-bootstrap').ButtonGroup;
+const Glyphicon = require('react-bootstrap').Glyphicon;
+const OverlayTrigger = require('react-bootstrap').OverlayTrigger;
+const Tooltip = require('react-bootstrap').Tooltip;
 
 /**
 *  ButtonGroup with one or two actions (reject, accept/reject)
@@ -22,15 +22,15 @@ var Tooltip = require('react-bootstrap').Tooltip;
 *  @prop onAccept -> function(value): function to call if accept button hit (or nothing)
 *  @prop onReject -> function(value): function to call if reject button hit
 */
-var ActionButtons = React.createClass({
-  handleAccept: function() {
+const ActionButtons = React.createClass({
+  handleAccept() {
     this.props.onAccept(this.props.value);
   },
-  handleReject: function() {
+  handleReject() {
     this.props.onReject(this.props.value);
   },
-  render: function() {
-    var showAccept =
+  render() {
+    const showAccept =
       this.props.acceptTitle && this.props.acceptTooltip && this.props.onAccept;
     if (showAccept) {
       var tooltip1 = (
@@ -39,7 +39,7 @@ var ActionButtons = React.createClass({
         </Tooltip>
       );
     }
-    var tooltip2 = (
+    const tooltip2 = (
       <Tooltip id={this.props.rejectTooltip}>
         {this.props.rejectTooltip}
       </Tooltip>
@@ -93,52 +93,46 @@ var ActionButtons = React.createClass({
 *  @prop onReject -> function(row.value): function to call if reject button hit on row
 *  @prop rows -> [{value: x, string1: x, string2: x, actionsDisabled: bool}]
 */
-var ActionTable = React.createClass({
-  render: function() {
-    var act1 = this.props.onAccept;
-    var glyph = this.props.glyph;
-    var act2 = this.props.onReject;
-    var acceptTitle = this.props.acceptTitle;
-    var rejectTitle = this.props.rejectTitle;
-    var acceptTooltip = this.props.acceptTooltip;
-    var rejectTooltip = this.props.rejectTooltip;
-    var placeholders1 = this.props.placeholders1;
-    var tableBody = this.props.rows.map(function(row) {
-      return (
-        <tr key={row.value}>
-          <td>
-            {row.string1 ||
-              <span className="placeholder">
-                {
-                  placeholders1[
-                    Math.floor(Math.random() * placeholders1.length)
-                  ]
-                }
-              </span>}
-            {row.actionsDisabled
-              ? <span className="actionGlyph">
-                  &ensp;<Glyphicon glyph={glyph} />
-                </span>
-              : <div />}
-          </td>
-          <td>
-            {row.string2}
-          </td>
-          <td className="action-td">
-            <ActionButtons
-              value={row.value}
-              acceptTitle={acceptTitle}
-              rejectTitle={rejectTitle}
-              acceptTooltip={acceptTooltip}
-              rejectTooltip={rejectTooltip}
-              onAccept={act1}
-              onReject={act2}
-              actionsDisabled={row.actionsDisabled}
-            />
-          </td>
-        </tr>
-      );
-    });
+const ActionTable = React.createClass({
+  render() {
+    const act1 = this.props.onAccept;
+    const glyph = this.props.glyph;
+    const act2 = this.props.onReject;
+    const acceptTitle = this.props.acceptTitle;
+    const rejectTitle = this.props.rejectTitle;
+    const acceptTooltip = this.props.acceptTooltip;
+    const rejectTooltip = this.props.rejectTooltip;
+    const placeholders1 = this.props.placeholders1;
+    const tableBody = this.props.rows.map(row =>
+      <tr key={row.value}>
+        <td>
+          {row.string1 ||
+            <span className="placeholder">
+              {placeholders1[Math.floor(Math.random() * placeholders1.length)]}
+            </span>}
+          {row.actionsDisabled
+            ? <span className="actionGlyph">
+                <Glyphicon glyph={glyph} />
+              </span>
+            : <div />}
+        </td>
+        <td>
+          {row.string2}
+        </td>
+        <td className="action-td">
+          <ActionButtons
+            value={row.value}
+            acceptTitle={acceptTitle}
+            rejectTitle={rejectTitle}
+            acceptTooltip={acceptTooltip}
+            rejectTooltip={rejectTooltip}
+            onAccept={act1}
+            onReject={act2}
+            actionsDisabled={row.actionsDisabled}
+          />
+        </td>
+      </tr>
+    );
 
     return (
       <div className="actionTable">

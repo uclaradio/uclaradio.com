@@ -1,11 +1,11 @@
 // InputFileUpload.jsx
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
 // Bootstrap elements
-var Input = require('react-bootstrap').Input;
-var Glyphicon = require('react-bootstrap').Glyphicon;
+const Input = require('react-bootstrap').Input;
+const Glyphicon = require('react-bootstrap').Glyphicon;
 
 /**
 *  Input file upload element
@@ -16,26 +16,26 @@ var Glyphicon = require('react-bootstrap').Glyphicon;
 *  @prop details: help details
 *  @prop verified: should indicate input data was... whatever
 */
-var InputFileUpload = React.createClass({
-  getInitialState: function() {
+const InputFileUpload = React.createClass({
+  getInitialState() {
     return { disabled: true };
   },
-  handleChange: function(e) {
+  handleChange(e) {
     if (e.target.files.length > 0) {
       this.setState({ file: e.target.files[0], disabled: false });
     } else {
       this.setState({ disabled: true });
     }
   },
-  handleSubmit: function() {
+  handleSubmit() {
     if (this.state.file && !this.state.disabled) {
       this.props.onSubmit(this.state.file);
       ReactDOM.findDOMNode(this.refs.input.getInputDOMNode()).value = '';
       this.setState({ disabled: true });
     }
   },
-  render: function() {
-    var submitButton = (
+  render() {
+    const submitButton = (
       <a
         onClick={this.handleSubmit}
         className={this.state.disabled ? 'disabled' : ''}>

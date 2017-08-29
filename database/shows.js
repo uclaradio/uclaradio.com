@@ -2,18 +2,18 @@
 // Data model for radio shows
 
 // connect to database
-var db = require('./db');
+const db = require('./db');
 
 // user accounts
-var accounts = require('./accounts');
+const accounts = require('./accounts');
 
-var mongoose = require('mongoose');
-var fs = require('fs');
+const mongoose = require('mongoose');
+const fs = require('fs');
 
-var shows = {};
+const shows = {};
 
 // Radio shows to show on the site
-var ShowSchema = new mongoose.Schema({
+const ShowSchema = new mongoose.Schema({
   title: String,
   id: Number, // unique identifier
   day: String, // Mon / Tue / Wed / Thu / Fri / Sat / Sun
@@ -30,7 +30,7 @@ var ShowSchema = new mongoose.Schema({
   mixcloud: String,
 });
 ShowSchema.index({ id: 1 });
-var ShowModel = mongoose.model('shows', ShowSchema);
+const ShowModel = mongoose.model('shows', ShowSchema);
 
 shows.webSafeShow = function(show) {
   return {
@@ -51,37 +51,37 @@ shows.webSafeShow = function(show) {
   };
 };
 
-/***** Shows *****/
+/** *** Shows **** */
 
 // create a new show with the given data
 shows.addNewShow = function(title, day, time, djs, callback) {
-  db.getNextAvailableId(db.showIdKey, function(nextId) {
+  db.getNextAvailableId(db.showIdKey, nextId => {
     console.log('nextId: ', nextId);
     newData = {
-      title: title,
+      title,
       id: nextId,
-      day: day,
-      time: time,
-      djs: djs,
+      day,
+      time,
+      djs,
       public: true,
     };
 
-    //Searches for a show with the same title.
-    ShowModel.findOne({ public: true, title: newData.title }, function(err, o) {
+    // Searches for a show with the same title.
+    ShowModel.findOne({ public: true, title: newData.title }, (err, o) => {
       if (o) {
         callback('title-taken');
       } else {
         ShowModel.findOne(
           { public: true, day: newData.day, time: newData.time },
-          function(err, o) {
+          (err, o) => {
             if (o) {
               callback('time-taken');
             } else {
-              var newShow = new ShowModel(newData);
-              newShow.save(function(err, saved) {
+              const newShow = new ShowModel(newData);
+              newShow.save((err, saved) => {
                 callback(err, saved);
                 if (saved) {
-                  db.setLastTakenId(db.showIdKey, nextId, function(err) {
+                  db.setLastTakenId(db.showIdKey, nextId, err => {
                     if (err) {
                       console.log('error setting next id for shows: ', err);
                     }
@@ -97,12 +97,12 @@ shows.addNewShow = function(title, day, time, djs, callback) {
 };
 
 shows.updateShow = function(id, newData, callback) {
-  var update = function() {
+  const update = function() {
     ShowModel.findOneAndUpdate(
-      { id: id },
+      { id },
       newData,
       { upsert: false, new: true },
-      function(err, o) {
+      (err, o) => {
         if (err) {
           callback(err);
         } else {
@@ -111,11 +111,11 @@ shows.updateShow = function(id, newData, callback) {
       }
     );
   };
-  ShowModel.findOne({ id: id }, function(err, o) {
+  ShowModel.findOne({ id }, (err, o) => {
     if (o) {
       if (o.picture !== newData.picture) {
-        var path = require('path');
-        fs.unlink(path.resolve('public' + o.picture), function() {
+        const path = require('path');
+        fs.unlink(path.resolve(`public${o.picture}`), () => {
           update();
         });
       } else {
@@ -129,10 +129,10 @@ shows.updateShow = function(id, newData, callback) {
 
 shows.addUser = function(id, username, callback) {
   ShowModel.findOneAndUpdate(
-    { id: id },
+    { id },
     { $push: { djs: username } },
     { new: true },
-    function(err, o) {
+    (err, o) => {
       if (err) {
         callback(err);
       } else {
@@ -143,7 +143,7 @@ shows.addUser = function(id, username, callback) {
 };
 
 shows.getShowsForUser = function(djUsername, callback) {
-  ShowModel.find({ djs: djUsername }, function(err, res) {
+  ShowModel.find({ djs: djUsername }, (err, res) => {
     if (err) {
       callback(err);
     } else {
@@ -153,8 +153,8 @@ shows.getShowsForUser = function(djUsername, callback) {
 };
 
 shows.userHasAccessToShow = function(username, id, callback) {
-  accounts.isManager(username, function(err, isManager) {
-    ShowModel.findOne({ id: id, djs: username }, function(err, o) {
+  accounts.isManager(username, (err, isManager) => {
+    ShowModel.findOne({ id, djs: username }, (err, o) => {
       if (isManager || o) {
         callback(true);
       } else {
@@ -171,7 +171,7 @@ shows.userHasAccessToShow = function(username, id, callback) {
 // };
 
 shows.getShowByTitle = function(title, callback) {
-  ShowModel.findOne({ title: title }, function(err, o) {
+  ShowModel.findOne({ title }, (err, o) => {
     if (o) {
       o._id = null;
       callback(err, shows.webSafeShow(o));
@@ -182,30 +182,30 @@ shows.getShowByTitle = function(title, callback) {
 };
 
 shows.getShowById = function(id, callback) {
-  ShowModel.findOne({ id: id }, function(err, o) {
+  ShowModel.findOne({ id }, (err, o) => {
     if (err || o == null) {
       callback(err);
       return;
     }
-    var show = shows.webSafeShow(o);
+    const show = shows.webSafeShow(o);
     callback(err, show);
   });
 };
 
 shows.getDJMappedShow = function(id, callback) {
-  ShowModel.findOne({ id: id }, function(err, o) {
+  ShowModel.findOne({ id }, (err, o) => {
     if (err || o == null) {
       callback(err);
       return;
     }
 
-    var usernames = [];
-    o.djs.map(function(dj) {
+    const usernames = [];
+    o.djs.map(dj => {
       usernames.push(dj);
     });
-    accounts.getDJNameMap(usernames, function(err, nameMap) {
-      var show = shows.webSafeShow(o);
-      show['djs'] = nameMap;
+    accounts.getDJNameMap(usernames, (err, nameMap) => {
+      const show = shows.webSafeShow(o);
+      show.djs = nameMap;
       callback(err, show);
     });
   });
@@ -213,24 +213,24 @@ shows.getDJMappedShow = function(id, callback) {
 
 // get all public shows with user data too (name, picture, djs)
 shows.getAllShows = function(callback) {
-  ShowModel.find({ public: true }, function(err, allShows) {
+  ShowModel.find({ public: true }, (err, allShows) => {
     if (err) {
       callback(err);
     } else {
-      var usernames = [];
-      allShows.map(function(show) {
-        show.djs.map(function(dj) {
+      const usernames = [];
+      allShows.map(show => {
+        show.djs.map(dj => {
           usernames.push(dj);
         });
       });
-      accounts.getDJNameMap(usernames, function(err, nameMap) {
-        for (var s = 0; s < allShows.length; s++) {
-          var show = shows.webSafeShow(allShows[s]);
+      accounts.getDJNameMap(usernames, (err, nameMap) => {
+        for (let s = 0; s < allShows.length; s++) {
+          const show = shows.webSafeShow(allShows[s]);
           var djList = {};
-          show.djs.map(function(dj) {
+          show.djs.map(dj => {
             djList[dj] = nameMap[dj];
           });
-          show['djs'] = djList;
+          show.djs = djList;
           allShows[s] = show;
         }
         callback(null, allShows);
@@ -241,9 +241,9 @@ shows.getAllShows = function(callback) {
 
 // get all shows marked as public
 shows.getAllPublicShows = function(callback) {
-  ShowModel.find({ public: true }, function(err, allShows) {
-    var response = [];
-    for (var s = 0; s < allShows.length; s++) {
+  ShowModel.find({ public: true }, (err, allShows) => {
+    const response = [];
+    for (let s = 0; s < allShows.length; s++) {
       response.push(shows.webSafeShow(allShows[s]));
     }
     callback(err, response);
@@ -251,25 +251,25 @@ shows.getAllPublicShows = function(callback) {
 };
 
 shows.removeShow = function(id, callback) {
-  ShowModel.remove({ id: id }, function(e) {
+  ShowModel.remove({ id }, e => {
     callback(e);
   });
 };
 
 // show for timeslot: used for currently playing show
 shows.getShowByTimeslotAndDay = function(time, day, callback) {
-  ShowModel.findOne({ time: time, day: day }, function(err, show) {
+  ShowModel.findOne({ time, day }, (err, show) => {
     if (err || show == null) {
       callback(err);
     } else {
       // usernames: show.djs
-      accounts.getDJNameMap(show.djs, function(err, nameMap) {
-        var safeShow = shows.webSafeShow(show);
-        var djList = {};
-        show.djs.map(function(dj) {
+      accounts.getDJNameMap(show.djs, (err, nameMap) => {
+        const safeShow = shows.webSafeShow(show);
+        const djList = {};
+        show.djs.map(dj => {
           djList[dj] = nameMap[dj];
         });
-        safeShow['djs'] = djList;
+        safeShow.djs = djList;
         callback(null, safeShow);
       });
     }

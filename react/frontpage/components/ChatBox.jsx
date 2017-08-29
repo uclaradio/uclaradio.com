@@ -1,99 +1,97 @@
 // ChatBox.jsx
 
-var React = require('react');
-var List = require('collections/list');
-var cookie = require('react-cookie');
+const React = require('react');
+const List = require('collections/list');
+const cookie = require('react-cookie');
 
 import { Grid, Col, Row } from 'react-bootstrap';
 
-var socket = io();
+const socket = io();
 
 require('./ChatBox.scss');
 
 const GetPreviousMessagesURL = '/chat/getNext';
 const ReportMessageURL = '/chat/report';
 
-/** Helper functions **/
+/** Helper functions * */
 
-const imageURL = url => {
-  return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
-};
+const imageURL = url => url.match(/\.(jpeg|jpg|gif|png)$/) != null;
 
 const scrollToBottom = () => {
-  var objDiv = document.getElementById('chatbox');
+  const objDiv = document.getElementById('chatbox');
   objDiv.scrollTop = objDiv.scrollHeight;
 };
 
 /**
 Chatroom component allowing users to post messages to our server socket
-**/
-var ChatBox = React.createClass({
-  getInitialState: function() {
+* */
+const ChatBox = React.createClass({
+  getInitialState() {
     return {
       user: '',
       messages: [],
       text: '',
     };
   },
-  componentWillMount: function() {
+  componentWillMount() {
     socket.on('new message', this.messageReceived);
     socket.on('assign username', this.setUsername);
 
-    var username = cookie.load('username');
+    const username = cookie.load('username');
     if (username) {
       // join as existing user
-      socket.emit('set user', { username: username });
+      socket.emit('set user', { username });
     } else {
       // join as new user
       socket.emit('add user');
     }
   },
-  componentDidMount: function() {
+  componentDidMount() {
     this.getNext(null, 10);
     scrollToBottom();
   },
-  getNext: function(id, volume) {
+  getNext(id, volume) {
     $.post(
       GetPreviousMessagesURL,
       {
-        id: id,
-        volume: volume,
+        id,
+        volume,
       },
-      function(previousMessages) {
-        var messages = this.state.messages;
-        previousMessages.map(function(message) {
+      previousMessages => {
+        const messages = this.state.messages;
+        previousMessages.map(message => {
           messages.unshift(message);
         });
-        this.setState({ messages: messages });
+        this.setState({ messages });
 
-        var first = messages.peek();
+        const first = messages.peek();
         if (first) {
           this.setState({ message_db_cursor: first.id });
         }
-      }.bind(this)
+      }
     );
   },
-  messageReceived: function(message) {
-    var messages = this.state.messages;
+  messageReceived(message) {
+    const messages = this.state.messages;
     messages.push(message);
-    this.setState({ messages: messages });
+    this.setState({ messages });
     scrollToBottom();
   },
-  setUsername: function(username) {
+  setUsername(username) {
     // save username in cookie
-    var d = new Date();
+    const d = new Date();
     d.setDate(d.getDate() + 2 * 365);
     cookie.save('username', username, { path: '/', expires: d });
     this.setState({ user: username });
   },
-  handleMessageSubmit: function(message) {
+  handleMessageSubmit(message) {
     socket.emit('new message', message);
   },
-  retrieveOlderMessages: function() {
+  retrieveOlderMessages() {
     this.getNext(this.state.message_db_cursor, 10);
   },
-  render: function() {
-    var viewing_user = this.state.user;
+  render() {
+    const viewing_user = this.state.user;
     return (
       <span>
         <Grid>
@@ -111,21 +109,19 @@ var ChatBox = React.createClass({
                     </center>
                   </div>
                   <div id="messages" className="messages">
-                    {this.state.messages.map(function(message) {
-                      return (
-                        <span key={message.id}>
-                          {' '}{!message.event &&
-                            <Message
-                              user={message.user}
-                              text={message.text}
-                              date={message.date}
-                              messageID={message.id}
-                              viewing_user={viewing_user}
-                            />}
-                          <br />
-                        </span>
-                      );
-                    })}
+                    {this.state.messages.map(message =>
+                      <span key={message.id}>
+                        {' '}{!message.event &&
+                          <Message
+                            user={message.user}
+                            text={message.text}
+                            date={message.date}
+                            messageID={message.id}
+                            viewing_user={viewing_user}
+                          />}
+                        <br />
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -151,31 +147,31 @@ Message component displaying a message object
 @prop user: username associated with message
 @prop viewing_user: username associated with viewing user
 @prop date: timestamp of message
-**/
-var Message = React.createClass({
-  getInitialState: function() {
+* */
+const Message = React.createClass({
+  getInitialState() {
     return {};
   },
-  reportMessage: function() {
+  reportMessage() {
     $.post(
       ReportMessageURL,
       {
         id: this.props.messageID,
       },
-      function(result) {
+      result => {
         if (result.success) {
           this.setState({ reported: true });
         }
-      }.bind(this)
+      }
     );
   },
-  render: function() {
-    var date = new Date(this.props.date);
-    var Month = date.getMonth() + 1;
-    var Day = date.getDay() + 1;
-    var Hour = date.getHours();
-    var Minute = date.getMinutes();
-    var Second = date.getSeconds();
+  render() {
+    const date = new Date(this.props.date);
+    const Month = date.getMonth() + 1;
+    const Day = date.getDay() + 1;
+    const Hour = date.getHours();
+    const Minute = date.getMinutes();
+    const Second = date.getSeconds();
     return (
       <div className="message">
         <div
@@ -186,8 +182,8 @@ var Message = React.createClass({
           }>
           {/* Message Body */}
           <div className="message-body-tag">
-            {//if it's an image, display the image
-            this.props.text.split(' ').map(function(word) {
+            {// if it's an image, display the image
+            this.props.text.split(' ').map(word => {
               if (word.length > 4 && word.substring(0, 4) == 'http') {
                 return (
                   <span>
@@ -201,8 +197,8 @@ var Message = React.createClass({
                   </span>
                 );
               }
-              //otherwise just display the text
-              return word + ' ';
+              // otherwise just display the text
+              return `${word} `;
             })}{' '}
             {/* Report Message */
             this.props.user != this.props.viewing_user &&
@@ -222,12 +218,9 @@ var Message = React.createClass({
           <span className="message-username-tag-username">
             {this.props.user}
           </span>
-          {' ' /*+ Month + "/" + Day + " "*/ +
-            Hour +
-            ':' +
-            Minute +
-            ':' +
-            Second}
+          {` ${/* + Month + "/" + Day + " " */
+
+          Hour}:${Minute}:${Second}`}
         </div>
       </div>
     );
@@ -239,15 +232,15 @@ Form to submit new message
 
 @prop user: username associated with viewing user
 @prop onMessageSubmit: callback to execute with new message data
-**/
-var MessageForm = React.createClass({
-  getInitialState: function() {
+* */
+const MessageForm = React.createClass({
+  getInitialState() {
     return { text: '' };
   },
-  handleSubmit: function(e) {
+  handleSubmit(e) {
     e.preventDefault();
     if (this.state.text.trim() != '') {
-      var message = {
+      const message = {
         user: this.props.user,
         text: this.state.text,
         date: new Date(),
@@ -256,10 +249,10 @@ var MessageForm = React.createClass({
       this.setState({ text: '' });
     }
   },
-  changeHandler: function(e) {
+  changeHandler(e) {
     this.setState({ text: e.target.value });
   },
-  render: function() {
+  render() {
     return (
       <span>
         <div className="message_form">

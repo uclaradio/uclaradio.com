@@ -1,11 +1,11 @@
 // connect to database
 require('./db');
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var points = {};
+const points = {};
 
-var StaffingPointsSchema = new mongoose.Schema(
+const StaffingPointsSchema = new mongoose.Schema(
   {
     fullName: String,
     dateCompleted: Date,
@@ -19,7 +19,7 @@ var StaffingPointsSchema = new mongoose.Schema(
   { collection: 'StaffingPoints' }
 );
 
-var StaffingPointsModel = mongoose.model(
+const StaffingPointsModel = mongoose.model(
   'StaffingPoints',
   StaffingPointsSchema
 );
@@ -36,9 +36,9 @@ points.addStaffingPoints = function(data, callback) {
     status: 'pending',
   };
 
-  var staffingPoints = new StaffingPointsModel(staffingPointsData);
+  const staffingPoints = new StaffingPointsModel(staffingPointsData);
 
-  staffingPoints.save(function(err, staffingPointsSaved) {
+  staffingPoints.save((err, staffingPointsSaved) => {
     if (err) console.log(err);
     callback(err, staffingPointsSaved);
   });
@@ -52,9 +52,9 @@ points.updateStaffingPointStatus = function(
 ) {
   StaffingPointsModel.update(
     { _id: id },
-    { $set: { status: newStatus, managerNotes: managerNotes } },
+    { $set: { status: newStatus, managerNotes } },
     { multi: false },
-    function(err, update) {
+    (err, update) => {
       if (err) console.log(err);
       callback(err, update);
     }
@@ -62,13 +62,15 @@ points.updateStaffingPointStatus = function(
 };
 
 points.getStaffingPoints = function(callback) {
-  StaffingPointsModel.find({}, null, { sort: { _id: 'desc' } }, function(
-    err,
-    points
-  ) {
-    if (err) console.log(err);
-    callback(err, points);
-  });
+  StaffingPointsModel.find(
+    {},
+    null,
+    { sort: { _id: 'desc' } },
+    (err, points) => {
+      if (err) console.log(err);
+      callback(err, points);
+    }
+  );
 };
 
 // function getIndexOffOfDayAndTime(day, time) {

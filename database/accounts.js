@@ -4,16 +4,16 @@
 // connect to database
 require('./db');
 
-var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
-var fs = require('fs');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const fs = require('fs');
 
-var mail = require('../services/mail');
+const mail = require('../services/mail');
 
-var accounts = {};
+const accounts = {};
 
 // Users (DJs)
-var UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   username: String,
   fullName: String,
   pass: String,
@@ -24,11 +24,11 @@ var UserSchema = new mongoose.Schema({
   bio: String,
 });
 UserSchema.index({ username: 1 });
-var UnverifiedUserModel = mongoose.model('unverifiedUsers', UserSchema);
-var UserModel = mongoose.model('users', UserSchema);
+const UnverifiedUserModel = mongoose.model('unverifiedUsers', UserSchema);
+const UserModel = mongoose.model('users', UserSchema);
 
 // Manager info for Manager Board
-var ManagerSchema = new mongoose.Schema({
+const ManagerSchema = new mongoose.Schema({
   username: String,
   position: String,
   email: String,
@@ -38,10 +38,10 @@ var ManagerSchema = new mongoose.Schema({
   public: Boolean,
 });
 ManagerSchema.index({ id: 1 });
-var ManagerModel = mongoose.model('managers', ManagerSchema);
+const ManagerModel = mongoose.model('managers', ManagerSchema);
 
 // User privileges (checked for access to manager pages, etc.)
-var PrivilegeSchema = new mongoose.Schema({
+const PrivilegeSchema = new mongoose.Schema({
   name: String, // name of privilege
   users: [String], // users who have this privilege
   links: [
@@ -54,7 +54,7 @@ var PrivilegeSchema = new mongoose.Schema({
 });
 accounts.managerPrivilegeName = 'Manager';
 // accounts.developerPrivilegeName = "Developer";
-var PrivilegeModel = mongoose.model('privileges', PrivilegeSchema);
+const PrivilegeModel = mongoose.model('privileges', PrivilegeSchema);
 
 // only include properties that are safe to send to the client
 accounts.webSafeUser = function(user) {
@@ -81,11 +81,11 @@ accounts.webSafeManager = function(manager) {
   };
 };
 
-/***** User Account Management *****/
+/** *** User Account Management **** */
 
 // log in a user with given username and password hash, with unspecific error msg
 accounts.autoLogin = function(username, pass, callback) {
-  UserModel.findOne({ username: username }, function(err, o) {
+  UserModel.findOne({ username }, (err, o) => {
     if (o && o.pass == pass) {
       // user logged in
       callback(o);
@@ -98,12 +98,12 @@ accounts.autoLogin = function(username, pass, callback) {
 
 // log in a user with given username and password, with 'invalid-pass' or 'user-not-found' error msg
 accounts.manualLogin = function(username, pass, callback) {
-  UserModel.findOne({ username: username }, function(err, o) {
+  UserModel.findOne({ username }, (err, o) => {
     if (o == null) {
       callback('user-not-found');
       console.log('user not found: ', username);
     } else {
-      validatePassword(pass, o.pass, function(err, res) {
+      validatePassword(pass, o.pass, (err, res) => {
         if (res) {
           // successfully logged in
           callback(null, o);
@@ -118,27 +118,25 @@ accounts.manualLogin = function(username, pass, callback) {
 
 // create a new verified or unverified user with the given user data
 accounts.addNewAccount = function(accountType, userData, callback) {
-  UserModel.findOne({ username: userData.username }, function(err, o) {
+  UserModel.findOne({ username: userData.username }, (err, o) => {
     if (o) {
       callback('username-taken');
     } else {
-      UserModel.findOne({ email: userData.email }, function(err, o) {
+      UserModel.findOne({ email: userData.email }, (err, o) => {
         if (o) {
           callback('email-taken');
-        } else {
-          if (accountType === 'verified') {
-            // new verified user (will have access to dj panel)
-            var newUser = new UserModel(userData);
-            newUser.save(function(err, userSaved) {
-              callback(err, userSaved);
-            });
-          } else if (accountType === 'unverified') {
-            // unverified user (will need to be verified before logging in)
-            var newUnverifiedUser = new UnverifiedUserModel(userData);
-            newUnverifiedUser.save(function(err, userSaved) {
-              callback(err, userSaved);
-            });
-          }
+        } else if (accountType === 'verified') {
+          // new verified user (will have access to dj panel)
+          const newUser = new UserModel(userData);
+          newUser.save((err, userSaved) => {
+            callback(err, userSaved);
+          });
+        } else if (accountType === 'unverified') {
+          // unverified user (will need to be verified before logging in)
+          const newUnverifiedUser = new UnverifiedUserModel(userData);
+          newUnverifiedUser.save((err, userSaved) => {
+            callback(err, userSaved);
+          });
         }
       });
     }
@@ -154,11 +152,11 @@ accounts.requestNewAccount = function(
   callback
 ) {
   newData = {
-    username: username,
-    email: email,
-    fullName: fullName,
+    username,
+    email,
+    fullName,
   };
-  saltAndHash(pass, function(hash) {
+  saltAndHash(pass, hash => {
     newData.pass = hash;
     accounts.addNewAccount('unverified', newData, callback);
   });
@@ -167,55 +165,58 @@ accounts.requestNewAccount = function(
 // list all accounts, verified and unverified
 accounts.listAccounts = function(callback) {
   // get verified
-  UnverifiedUserModel.find({}, function(err, unverifiedAccounts) {
+  UnverifiedUserModel.find({}, (err, unverifiedAccounts) => {
     unverifiedUsers = [];
-    for (var i = 0; i < unverifiedAccounts.length; i++) {
-      var user = {
+    for (let i = 0; i < unverifiedAccounts.length; i++) {
+      const user = {
         username: unverifiedAccounts[i].username,
         fullName: unverifiedAccounts[i].fullName,
         email: unverifiedAccounts[i].email,
       };
       unverifiedUsers.push(user);
     }
-    UserModel.find({}, function(err, verifiedAccounts) {
+    UserModel.find({}, (err, verifiedAccounts) => {
       // also indicate if user is a manager
-      PrivilegeModel.findOne({ name: accounts.managerPrivilegeName }, function(
-        err,
-        privilegeUsers
-      ) {
-        verifiedUsers = [];
-        for (var i = 0; i < verifiedAccounts.length; i++) {
-          var user = accounts.webSafeUser(verifiedAccounts[i]);
-          if (
-            privilegeUsers != null &&
-            privilegeUsers.users.indexOf(user.username) >= 0
-          ) {
-            // user is a manager
-            user.manager = true;
+      PrivilegeModel.findOne(
+        { name: accounts.managerPrivilegeName },
+        (err, privilegeUsers) => {
+          verifiedUsers = [];
+          for (let i = 0; i < verifiedAccounts.length; i++) {
+            const user = accounts.webSafeUser(verifiedAccounts[i]);
+            if (
+              privilegeUsers != null &&
+              privilegeUsers.users.indexOf(user.username) >= 0
+            ) {
+              // user is a manager
+              user.manager = true;
+            }
+            verifiedUsers.push(user);
           }
-          verifiedUsers.push(user);
+          callback(err, {
+            verified: verifiedUsers,
+            unverified: unverifiedUsers,
+          });
         }
-        callback(err, { verified: verifiedUsers, unverified: unverifiedUsers });
-      });
+      );
     });
   });
 };
 
 // move account from unverified to verified
 accounts.verifyAccount = function(username, callback) {
-  UnverifiedUserModel.findOne({ username: username }, function(err, o) {
+  UnverifiedUserModel.findOne({ username }, (err, o) => {
     if (o) {
-      UnverifiedUserModel.remove({ username: username }, function(e) {
+      UnverifiedUserModel.remove({ username }, e => {
         if (e) {
           console.log('error removing unverified user after verification:', e);
         }
-        var verifiedUser = {
+        const verifiedUser = {
           username: o.username,
           email: o.email,
           fullName: o.fullName,
           pass: o.pass,
         };
-        accounts.addNewAccount('verified', verifiedUser, function(err, saved) {
+        accounts.addNewAccount('verified', verifiedUser, (err, saved) => {
           if (saved) {
             // account verified! let them know with an email
             mail.confirmAccount(o.email, o.username);
@@ -231,12 +232,12 @@ accounts.verifyAccount = function(username, callback) {
 
 // update email, djName, etc. on a user with the given username
 accounts.updateAccount = function(newData, callback) {
-  var update = function() {
+  const update = function() {
     UserModel.findOneAndUpdate(
       { username: newData.username },
       newData,
       { upsert: false, new: true },
-      function(err, o) {
+      (err, o) => {
         if (err) {
           callback(err);
         } else {
@@ -246,11 +247,11 @@ accounts.updateAccount = function(newData, callback) {
     );
   };
 
-  UserModel.findOne({ username: newData.username }, function(err, o) {
+  UserModel.findOne({ username: newData.username }, (err, o) => {
     if (o) {
       if (o.picture !== newData.picture) {
-        var path = require('path');
-        fs.unlink(path.resolve('public' + o.picture), function() {
+        const path = require('path');
+        fs.unlink(path.resolve(`public${o.picture}`), () => {
           update();
         });
       } else {
@@ -279,7 +280,7 @@ accounts.updateAccount = function(newData, callback) {
 
 // delete a user with the given username
 accounts.deleteUser = function(username, callback) {
-  UserModel.remove({ username: username }, function(e) {
+  UserModel.remove({ username }, e => {
     callback(e);
   });
 };
@@ -287,7 +288,7 @@ accounts.deleteUser = function(username, callback) {
 // delete an unverified user with the given id
 accounts.deleteUnverifiedUser = function(username, callback) {
   console.log('attempting to delete user:', username);
-  UnverifiedUserModel.remove({ username: username }, function(e) {
+  UnverifiedUserModel.remove({ username }, e => {
     callback(e);
   });
 };
@@ -301,10 +302,10 @@ accounts.deleteUnverifiedUser = function(username, callback) {
 
 // perform callback on user with provided id
 accounts.getDJNamesFromUsernames = function(usernames, callback) {
-  UserModel.find({ username: { $in: usernames } }, function(err, users) {
-    var djNames = [];
+  UserModel.find({ username: { $in: usernames } }, (err, users) => {
+    const djNames = [];
     if (users != null) {
-      for (var i = 0; i < users.length; i++) {
+      for (let i = 0; i < users.length; i++) {
         if (users[i].djName) {
           djNames.push(users[i].djName);
         }
@@ -315,14 +316,14 @@ accounts.getDJNamesFromUsernames = function(usernames, callback) {
 };
 
 accounts.getDJNameMap = function(usernames, callback) {
-  UserModel.find({ username: { $in: usernames } }, function(err, users) {
+  UserModel.find({ username: { $in: usernames } }, (err, users) => {
     if (err) {
       console.log(err);
       callback(err);
     } else {
       // create a dictionary of all users username->djName
-      var nameMap = {};
-      users.map(function(u) {
+      const nameMap = {};
+      users.map(u => {
         if (u.djName != null && u.djName.trim()) {
           nameMap[u.username] = u.djName;
         } else {
@@ -335,12 +336,12 @@ accounts.getDJNameMap = function(usernames, callback) {
 };
 
 accounts.getDJByUserName = function(username, callback) {
-  UserModel.findOne({ username: username }, function(err, o) {
+  UserModel.findOne({ username }, (err, o) => {
     if (err || o == null) {
       console.log(err);
       callback(err);
     } else {
-      var user = accounts.webSafeUser(o);
+      const user = accounts.webSafeUser(o);
       callback(err, user);
     }
   });
@@ -348,12 +349,12 @@ accounts.getDJByUserName = function(username, callback) {
 
 // return array of all users
 accounts.getAllUsers = function(callback) {
-  UserModel.find(function(err, res) {
+  UserModel.find((err, res) => {
     if (err) {
       callback(err);
     } else {
-      var users = [];
-      for (var i = 0; i < res.length; i++) {
+      const users = [];
+      for (let i = 0; i < res.length; i++) {
         users.push(accounts.webSafeUser(res[i]));
       }
       callback(null, users);
@@ -366,16 +367,16 @@ accounts.removeAllUsers = function(callback) {
   UserModel.remove({}, callback);
 };
 
-/***** Manager Info *****/
+/** *** Manager Info **** */
 
 accounts.promoteToManager = function(username, callback) {
   accounts.updatePrivilege(
     username,
     accounts.managerPrivilegeName,
     true,
-    function(err, saved) {
+    (err, saved) => {
       if (saved) {
-        UserModel.findOne({ username: username }, function(err, o) {
+        UserModel.findOne({ username }, (err, o) => {
           if (saved && o) {
             // user was successfully promoted. Let them know with an email!
             console.log('emailing', username);
@@ -395,12 +396,12 @@ accounts.isManager = function(username, callback) {
 };
 
 accounts.managerInfo = function(username, callback) {
-  ManagerModel.findOne({ username: username }, function(err, o) {
+  ManagerModel.findOne({ username }, (err, o) => {
     if (!o && !err) {
       // need to create manager info for user
-      var newData = { username: username };
-      var newManager = new ManagerModel(newData);
-      newManager.save(function(err, saved) {
+      const newData = { username };
+      const newManager = new ManagerModel(newData);
+      newManager.save((err, saved) => {
         callback(err, accounts.webSafeManager(saved));
       });
     } else {
@@ -414,7 +415,7 @@ accounts.updateManager = function(manager, callback) {
     { username: manager.username },
     manager,
     { upsert: true, new: true },
-    function(err, o) {
+    (err, o) => {
       callback(err, accounts.webSafeManager(o));
     }
   );
@@ -422,25 +423,25 @@ accounts.updateManager = function(manager, callback) {
 
 // get all managers with user data too (name, pictures, show)
 accounts.allManagers = function(callback) {
-  ManagerModel.find({}, function(err, managers) {
+  ManagerModel.find({}, (err, managers) => {
     if (err) {
       callback(err);
     } else {
-      var usernames = [];
-      managers.map(function(m) {
+      const usernames = [];
+      managers.map(m => {
         usernames.push(m.username);
       });
-      UserModel.find({ username: { $in: usernames } }, function(err, users) {
+      UserModel.find({ username: { $in: usernames } }, (err, users) => {
         if (err) {
           callback(err, null);
         } else {
-          var nameMap = {};
-          var pictureMap = {};
-          users.map(function(u) {
+          const nameMap = {};
+          const pictureMap = {};
+          users.map(u => {
             nameMap[u.username] = u.fullName;
             pictureMap[u.username] = u.picture;
           });
-          managers.map(function(m) {
+          managers.map(m => {
             m.name = nameMap[m.username];
             m.picture = pictureMap[m.username];
           });
@@ -451,14 +452,14 @@ accounts.allManagers = function(callback) {
   });
 };
 
-/***** Privileges *****/
+/** *** Privileges **** */
 
 accounts.addPrivilege = function(privilege, links, callback) {
   PrivilegeModel.findOneAndUpdate(
     { name: privilege },
-    { links: links, users: [] },
+    { links, users: [] },
     { upsert: true, new: true },
-    function(err, o) {
+    (err, o) => {
       if (err) {
         callback(err, false);
       } else {
@@ -475,7 +476,7 @@ accounts.addPrivilege = function(privilege, links, callback) {
 *  @param callback -> function(err, updated: bool)
 */
 accounts.updatePrivilege = function(username, privilege, shouldHave, callback) {
-  var update = shouldHave
+  const update = shouldHave
     ? { $push: { users: username } }
     : { $pull: { users: username } };
 
@@ -483,7 +484,7 @@ accounts.updatePrivilege = function(username, privilege, shouldHave, callback) {
     { name: privilege },
     update,
     { upsert: false },
-    function(err, o) {
+    (err, o) => {
       if (err) {
         console.log('error updating privilege: ', err);
         callback(err, false);
@@ -500,39 +501,37 @@ accounts.updatePrivilege = function(username, privilege, shouldHave, callback) {
 *  @param callback -> function(err, hasAccess: bool)
 */
 accounts.checkPrivilege = function(username, privilege, callback) {
-  PrivilegeModel.findOne({ name: privilege }, function(err, o) {
+  PrivilegeModel.findOne({ name: privilege }, (err, o) => {
     if (err) {
       console.log('error checking privilege:', err);
       callback(err, false);
+    } else if (o && o.users.indexOf(username) > -1) {
+      // user has access
+      callback(null, true);
     } else {
-      if (o && o.users.indexOf(username) > -1) {
-        // user has access
-        callback(null, true);
-      } else {
-        callback(null, false);
-      }
+      callback(null, false);
     }
   });
 };
 
 accounts.getPrivilegeLinksForUser = function(username, callback) {
-  PrivilegeModel.find({ users: username }, function(err, privileges) {
+  PrivilegeModel.find({ users: username }, (err, privileges) => {
     if (err) {
       console.log('error getting privileges: ', err);
     }
-    var links = [];
-    for (var i = 0; i < privileges.length; i++) {
+    let links = [];
+    for (let i = 0; i < privileges.length; i++) {
       links = links.concat(privileges[i].links);
     }
     callback(err, links);
   });
 };
 
-/***** Encryption *****/
+/** *** Encryption **** */
 
-var saltRounds = 10;
+const saltRounds = 10;
 var saltAndHash = function(pass, callback) {
-  bcrypt.hash(pass, saltRounds, function(err, hash) {
+  bcrypt.hash(pass, saltRounds, (err, hash) => {
     if (err) {
       console.log('error hashing', err);
     }
@@ -541,7 +540,7 @@ var saltAndHash = function(pass, callback) {
 };
 
 var validatePassword = function(plainPass, hashedPass, callback) {
-  bcrypt.compare(plainPass, hashedPass, function(err, correct) {
+  bcrypt.compare(plainPass, hashedPass, (err, correct) => {
     if (err) {
       console.log('error validating hash:', err);
     }
@@ -549,10 +548,10 @@ var validatePassword = function(plainPass, hashedPass, callback) {
   });
 };
 
-/***** Helper Methods *****/
+/** *** Helper Methods **** */
 
 var getObjectId = function(id) {
-  UserModel.findOne({ _id: getObjectId(id) }, function(err, res) {
+  UserModel.findOne({ _id: getObjectId(id) }, (err, res) => {
     if (err) {
       callback(err);
     } else {

@@ -1,23 +1,24 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
-var router = express.Router();
-var passwords = require('../passwords.json');
+const router = express.Router();
+const passwords = require('../passwords.json');
 
-var points = require('../database/points');
+const points = require('../database/points');
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   res.render('staffingPointsForm', { status: '' });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', (req, res, next) => {
   if (req.body.password != passwords.secretpassword)
     return res.end('Incorrect Password.');
 
   // Adds the proposed show to the database.
-  points.addStaffingPoints(req.body, function(err, staffingPointsSaved) {
+  points.addStaffingPoints(req.body, (err, staffingPointsSaved) => {
     console.log('adding staffing points');
 
     if (err) {
@@ -30,11 +31,11 @@ router.post('/', function(req, res, next) {
   });
 });
 
-router.get('/view', function(req, res) {
+router.get('/view', (req, res) => {
   res.render('staffingPointsView');
 });
 
-router.post('/view/update', function(req, res, next) {
+router.post('/view/update', (req, res, next) => {
   if (req.body.password !== passwords.managerapprovalpassword) {
     res.end('incorrect password');
   } else {
@@ -42,7 +43,7 @@ router.post('/view/update', function(req, res, next) {
       req.body.userId,
       req.body.status,
       req.body.managerNotes,
-      function(err, success) {
+      (err, success) => {
         if (err) {
           res.end(err);
           console.log(err);
@@ -52,8 +53,8 @@ router.post('/view/update', function(req, res, next) {
   }
 });
 
-router.get('/points', function(req, res, next) {
-  points.getStaffingPoints(function(err, points) {
+router.get('/points', (req, res, next) => {
+  points.getStaffingPoints((err, points) => {
     res.send(points);
   });
 });

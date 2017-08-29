@@ -1,26 +1,26 @@
 // db.js
 // Set up Mongo database connection
 
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/uclaradio');
 
-var db = {};
+const db = {};
 
-/***** Last Ids *****/
+/** *** Last Ids **** */
 
 db.showIdKey = 'show'; // ids for Show table
 db.messageIdKey = 'message'; // ids for messages table
 
 // Contains last distributed id for a table, in order to provide a unique id for each show, etc.
-var LastIdSchema = new mongoose.Schema({
+const LastIdSchema = new mongoose.Schema({
   key: String, // name of table
   lastId: Number, // greatest id of objects created (should increment when creating new ones)
 });
-var LastIdModel = mongoose.model('lastIds', LastIdSchema);
+const LastIdModel = mongoose.model('lastIds', LastIdSchema);
 
 db.getNextAvailableId = function(key, callback) {
-  LastIdModel.findOne({ key: key }, function(err, o) {
+  LastIdModel.findOne({ key }, (err, o) => {
     if (o) {
       callback(o.lastId + 1);
     } else {
@@ -30,12 +30,12 @@ db.getNextAvailableId = function(key, callback) {
 };
 
 db.setLastTakenId = function(key, lastId, callback) {
-  newData = { key: key, lastId: lastId };
+  newData = { key, lastId };
   LastIdModel.findOneAndUpdate(
-    { key: key },
+    { key },
     newData,
     { upsert: true, new: true },
-    function(err, o) {
+    (err, o) => {
       if (err) {
         callback(err);
       } else {

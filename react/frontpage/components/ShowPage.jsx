@@ -23,7 +23,7 @@ Displays full description of a show, with blurb, picture, djs.. everything
 @prop show: show object
 @prop fetching: currently fetching shows
 @prop updateShows: callback to update all listed shows
-**/
+* */
 const ShowPage = React.createClass({
   componentWillMount() {
     if (this.props.show == null) {
@@ -35,10 +35,10 @@ const ShowPage = React.createClass({
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   },
   // creates readable string from DJ dictionary returned from the server
-  djString: function(djMap) {
-    var djString = '';
-    var addComma = false;
-    for (var dj in djMap) {
+  djString(djMap) {
+    let djString = '';
+    let addComma = false;
+    for (const dj in djMap) {
       if (addComma) {
         djString += ', ';
       }
@@ -47,12 +47,12 @@ const ShowPage = React.createClass({
     }
     return djString;
   },
-  getDJLink: function(djName) {
-    return '/djs/' + djName;
+  getDJLink(djName) {
+    return `/djs/${djName}`;
   },
-  render: function() {
-    var show = this.props.show;
-    var djName = this.djString(show.djs);
+  render() {
+    const show = this.props.show;
+    const djName = this.djString(show.djs);
     if (!show) {
       return (
         <div className="showPage">
@@ -64,9 +64,9 @@ const ShowPage = React.createClass({
       <div className="showPage">
         <p>
           <Link to="/shows">
-            {show.day + ' ' + show.time}
+            {`${show.day} ${show.time}`}
           </Link>
-          {show.genre && ' / ' + show.genre}
+          {show.genre && ` / ${show.genre}`}
         </p>
         <RectImage maxWidth="350px" src={show.picture || defaultShowPic} />
         <div className="showInfo">

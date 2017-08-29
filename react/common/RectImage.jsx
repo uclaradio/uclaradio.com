@@ -20,18 +20,18 @@ require('./RectImage.scss');
 *  @prop circle: Image should be circle
 *  @prop aspectRatio: float ratio for image
 */
-var RectImage = React.createClass({
-  getDefaultProps: function() {
+const RectImage = React.createClass({
+  getDefaultProps() {
     return {
       aspectRatio: 1.0,
     };
   },
-  handleResize: function(e) {
+  handleResize(e) {
     this.setState({ windowWidth: window.innerWidth });
   },
-  render: function() {
-    var pictureStyle = {
-      backgroundImage: 'url(' + this.props.src + ')',
+  render() {
+    const pictureStyle = {
+      backgroundImage: `url(${this.props.src})`,
       width: '100%',
       height: '100%',
       backgroundSize: 'cover',
@@ -39,7 +39,7 @@ var RectImage = React.createClass({
     if (this.props.circle) {
       pictureStyle.borderRadius = '50%';
     }
-    var rectangleStyle = {
+    const rectangleStyle = {
       maxWidth: this.props.maxWidth,
       margin: '0 auto',
     };

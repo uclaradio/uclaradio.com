@@ -1,10 +1,10 @@
 // show.html
 // let DJ edit show info
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
-var urls = {
+const urls = {
   showURL: '/panel/api/showData/',
   showUpdateURL: '/panel/api/updateShow',
   showPicURL: '/panel/api/showPic',
@@ -13,32 +13,32 @@ var urls = {
 };
 
 // Panel Elements
-var PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-var RectImage = require('./common/RectImage.jsx');
+const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
+const RectImage = require('./common/RectImage.jsx');
 
 // Inputs
-var InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-var InputEditableDateTimeField = require('./panel/inputs/InputEditableDateTimeField.jsx');
-var InputCheckbox = require('./panel/inputs/InputCheckbox.jsx');
-var InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
-var ConfirmationButton = require('./panel/inputs/ConfirmationButton.jsx');
+const InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
+const InputEditableDateTimeField = require('./panel/inputs/InputEditableDateTimeField.jsx');
+const InputCheckbox = require('./panel/inputs/InputCheckbox.jsx');
+const InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
+const ConfirmationButton = require('./panel/inputs/ConfirmationButton.jsx');
 
 // Bootstrap Elements
-var Grid = require('react-bootstrap').Grid;
-var Row = require('react-bootstrap').Row;
-var Col = require('react-bootstrap').Col;
-var Well = require('react-bootstrap').Well;
-var FormControls = require('react-bootstrap').FormControls;
+const Grid = require('react-bootstrap').Grid;
+const Row = require('react-bootstrap').Row;
+const Col = require('react-bootstrap').Col;
+const Well = require('react-bootstrap').Well;
+const FormControls = require('react-bootstrap').FormControls;
 
-var ShowPage = React.createClass({
-  getShowIDFromURL: function() {
+const ShowPage = React.createClass({
+  getShowIDFromURL() {
     return window.location.pathname.split('/').pop();
   },
 
-  getInitialState: function() {
+  getInitialState() {
     return { showID: this.getShowIDFromURL() };
   },
-  render: function() {
+  render() {
     return (
       <div className="showPage">
         <Grid fluid>
@@ -50,8 +50,8 @@ var ShowPage = React.createClass({
   },
 });
 
-var Show = React.createClass({
-  getInitialState: function() {
+const Show = React.createClass({
+  getInitialState() {
     return {
       show: {},
       titleVerified: false,
@@ -66,27 +66,27 @@ var Show = React.createClass({
       mixcloudVerified: false,
     };
   },
-  loadDataFromServer: function() {
+  loadDataFromServer() {
     $.ajax({
       url: this.props.urls.showURL + this.props.showID,
       dataType: 'json',
       cache: false,
       success: function(show) {
-        this.setState({ show: show });
+        this.setState({ show });
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.urls.showURL, status, err.toString());
       }.bind(this),
     });
   },
-  handleShowDataSubmit: function(updatedShow, successVar) {
-    var oldShow = this.state.show;
+  handleShowDataSubmit(updatedShow, successVar) {
+    const oldShow = this.state.show;
     // Optimistically update local data, will be refreshed or reset after response from server
     this.setState({ show: updatedShow });
     // Stringify arrays so they reach the server
-    var safeShow = JSON.stringify(updatedShow);
+    const safeShow = JSON.stringify(updatedShow);
     // don't mark as verified yet
-    var unverifiedState = {};
+    const unverifiedState = {};
     unverifiedState[successVar] = false;
     this.setState(unverifiedState);
     $.ajax({
@@ -95,7 +95,7 @@ var Show = React.createClass({
       type: 'POST',
       data: { show: safeShow },
       success: function(show) {
-        var successState = { show: show };
+        const successState = { show };
         successState[successVar] = true;
         this.setState(successState);
       }.bind(this),
@@ -105,35 +105,35 @@ var Show = React.createClass({
       }.bind(this),
     });
   },
-  verifyShowArt: function() {
+  verifyShowArt() {
     this.setState({ artVerified: true });
   },
-  unverifyShowArt: function() {
+  unverifyShowArt() {
     this.setState({ artVerified: false });
   },
-  validateLink: function(link) {
+  validateLink(link) {
     if (link === '') {
       return link;
     }
     if (link.indexOf('http') == -1) {
-      var addHTTP = 'http://' + link;
+      const addHTTP = `http://${link}`;
       return addHTTP;
     }
     return link;
   },
-  handleShowArtSubmit: function(data) {
+  handleShowArtSubmit(data) {
     if (!data) {
       return;
     }
 
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('img', data);
     formData.append('id', this.state.show.id);
-    var request = new XMLHttpRequest();
+    const request = new XMLHttpRequest();
     request.open('POST', this.props.urls.showPicURL);
-    var loadData = this.loadDataFromServer;
-    var verify = this.verifyShowArt;
-    var unverify = this.unverifyShowArt;
+    const loadData = this.loadDataFromServer;
+    const verify = this.verifyShowArt;
+    const unverify = this.unverifyShowArt;
     unverify();
     request.onload = function(e) {
       if (request.status == 200) {
@@ -145,54 +145,54 @@ var Show = React.createClass({
     };
     request.send(formData);
   },
-  handleTitleSubmit: function(title) {
-    var show = $.extend(true, {}, this.state.show);
+  handleTitleSubmit(title) {
+    const show = $.extend(true, {}, this.state.show);
     show.title = title;
     this.handleShowDataSubmit(show, 'titleVerified');
   },
-  handleDateSubmit: function(day, time) {
-    var show = $.extend(true, {}, this.state.show);
+  handleDateSubmit(day, time) {
+    const show = $.extend(true, {}, this.state.show);
     show.day = day;
     show.time = time;
     this.handleShowDataSubmit(show, 'dateVerified');
   },
-  handleGenreSubmit: function(genre) {
-    var show = $.extend(true, {}, this.state.show);
+  handleGenreSubmit(genre) {
+    const show = $.extend(true, {}, this.state.show);
     show.genre = genre;
     this.handleShowDataSubmit(show, 'genreVerified');
   },
-  handleBlurbSubmit: function(blurb) {
-    var show = $.extend(true, {}, this.state.show);
+  handleBlurbSubmit(blurb) {
+    const show = $.extend(true, {}, this.state.show);
     show.blurb = blurb;
     this.handleShowDataSubmit(show, 'blurbVerified');
   },
-  handleFacebookSubmit: function(facebook) {
-    var show = $.extend(true, {}, this.state.show);
+  handleFacebookSubmit(facebook) {
+    const show = $.extend(true, {}, this.state.show);
     show.facebook = this.validateLink(facebook);
     this.handleShowDataSubmit(show, 'facebookVerified');
   },
-  handleTumblrSubmit: function(tumblr) {
-    var show = $.extend(true, {}, this.state.show);
+  handleTumblrSubmit(tumblr) {
+    const show = $.extend(true, {}, this.state.show);
     show.tumblr = this.validateLink(tumblr);
     this.handleShowDataSubmit(show, 'tumblrVerified');
   },
-  handleSoundcloudSubmit: function(soundcloud) {
-    var show = $.extend(true, {}, this.state.show);
+  handleSoundcloudSubmit(soundcloud) {
+    const show = $.extend(true, {}, this.state.show);
     show.soundcloud = this.validateLink(soundcloud);
     this.handleShowDataSubmit(show, 'soundcloudVerified');
   },
-  handleMixcloudSubmit: function(mixcloud) {
-    var show = $.extend(true, {}, this.state.show);
+  handleMixcloudSubmit(mixcloud) {
+    const show = $.extend(true, {}, this.state.show);
     show.mixcloud = this.validateLink(mixcloud);
     this.handleShowDataSubmit(show, 'mixcloudVerified');
   },
 
-  handlePublicSubmit: function(checked) {
-    var show = $.extend(true, {}, this.state.show);
+  handlePublicSubmit(checked) {
+    const show = $.extend(true, {}, this.state.show);
     show.public = checked;
     this.handleShowDataSubmit(show, 'publicVerified');
   },
-  handleDeleteShow: function() {
+  handleDeleteShow() {
     $.ajax({
       url: this.props.urls.deleteShowURL,
       dataType: 'json',
@@ -207,15 +207,15 @@ var Show = React.createClass({
     });
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadDataFromServer();
   },
-  render: function() {
-    var djs = '';
+  render() {
+    let djs = '';
     if (this.state.show.djs != null) {
-      var useComma = false;
-      var djMap = this.state.show.djs;
-      Object.keys(djMap).forEach(function(username) {
+      let useComma = false;
+      const djMap = this.state.show.djs;
+      Object.keys(djMap).forEach(username => {
         if (useComma) {
           djs += ', ';
         } else {
@@ -332,8 +332,8 @@ var Show = React.createClass({
                   verified={this.state.publicVerified}
                 />
                 <ConfirmationButton
-                  confirm={"Delete '" + this.state.show.title + "'"}
-                  submit={"Really delete '" + this.state.show.title + "'?"}
+                  confirm={`Delete '${this.state.show.title}'`}
+                  submit={`Really delete '${this.state.show.title}'?`}
                   onSubmit={this.handleDeleteShow}
                 />
               </Col>

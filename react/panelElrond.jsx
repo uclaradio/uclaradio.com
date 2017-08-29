@@ -18,11 +18,12 @@ const Alert = require('react-bootstrap').Alert;
 
 // Table Components
 const Reactable = require('reactable');
+
 const Table = Reactable.Table;
-var Spinner = require('react-spinkit');
+const Spinner = require('react-spinkit');
 
 const ElrondPage = React.createClass({
-  render: function() {
+  render() {
     return (
       <div className="panelPage">
         <Grid>
@@ -37,11 +38,11 @@ const ElrondPage = React.createClass({
 });
 
 const RivendellTable = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return { songs: [], fetching: true };
   },
 
-  loadDataFromServer: function() {
+  loadDataFromServer() {
     $.ajax({
       url: urls.url,
       dataType: 'json',
@@ -55,10 +56,10 @@ const RivendellTable = React.createClass({
     });
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadDataFromServer();
   },
-  render: function() {
+  render() {
     return (
       <div>
         {this.state.fetching

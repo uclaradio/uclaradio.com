@@ -1,14 +1,14 @@
 // ResponsiveWaterfall.js
 // Provides 'pinterest'-style layout of boxes with varying heights
 
-var Waterfall = function(opts) {
+const Waterfall = function(opts) {
   // define property
-  var minBoxWidth;
+  let minBoxWidth;
   Object.defineProperty(this, 'minBoxWidth', {
-    get: function() {
+    get() {
       return minBoxWidth;
     },
-    set: function(value) {
+    set(value) {
       if (value < 100) value = 100;
       if (value > 1000) value = 1000;
 
@@ -17,8 +17,8 @@ var Waterfall = function(opts) {
   });
 
   opts = opts || {};
-  var containerSelector = opts.containerSelector || '.wf-container';
-  var boxSelector = opts.boxSelector || '.wf-box';
+  const containerSelector = opts.containerSelector || '.wf-container';
+  const boxSelector = opts.boxSelector || '.wf-box';
 
   // init properties
   this.minBoxWidth = opts.minBoxWidth || 250;
@@ -32,28 +32,28 @@ var Waterfall = function(opts) {
   this.compose();
 
   // handle the image or something which might change size after loaded
-  var images = this.container.querySelectorAll('img'),
+  let images = this.container.querySelectorAll('img'),
     that = this;
-  var clr;
-  for (var i = 0; i < images.length; i++) {
-    var img = images[i];
+  let clr;
+  for (let i = 0; i < images.length; i++) {
+    const img = images[i];
     img.onload = function() {
       if (clr) clearTimeout(clr);
 
-      clr = setTimeout(function() {
+      clr = setTimeout(() => {
         that.compose(true);
       }, 500);
     };
   }
 
-  window.addEventListener('resize', function() {
+  window.addEventListener('resize', () => {
     that.compose();
   });
 };
 
 // compute the number of columns under current setting
 Waterfall.prototype.computeNumberOfColumns = function() {
-  var num = Math.floor(this.container.clientWidth / this.minBoxWidth);
+  let num = Math.floor(this.container.clientWidth / this.minBoxWidth);
   num = num || 1; // at least one column
   return num;
 };
@@ -63,9 +63,9 @@ Waterfall.prototype.initColumns = function(num) {
   if (num > 0) {
     // create column div
     this.columns = [];
-    var width = 100 / num + '%';
+    const width = `${100 / num}%`;
     while (num--) {
-      var column = document.createElement('div');
+      const column = document.createElement('div');
       column.className = 'wf-column';
       column.style.width = width;
       this.columns.push(column);
@@ -77,46 +77,46 @@ Waterfall.prototype.initColumns = function(num) {
 // get the index of shortest column
 Waterfall.prototype.getMinHeightIndex = function() {
   if (this.columns && this.columns.length > 0) {
-    var min = this.columns[0].clientHeight,
+    let min = this.columns[0].clientHeight,
       index = 0;
-    for (var i = 1; i < this.columns.length; i++) {
-      var columnElem = this.columns[i];
+    for (let i = 1; i < this.columns.length; i++) {
+      const columnElem = this.columns[i];
       if (columnElem.clientHeight < min) {
         min = columnElem.clientHeight;
         index = i;
       }
     }
     return index;
-  } else return -1;
+  }
+  return -1;
 };
 
 // get the index of highset column
 Waterfall.prototype.getHighestIndex = function() {
   if (this.columns && this.columns.length > 0) {
-    var max = this.columns[0].clientHeight,
+    let max = this.columns[0].clientHeight,
       index = 0;
-    for (var i = 1; i < this.columns.length; i++) {
-      var columnElem = this.columns[i];
+    for (let i = 1; i < this.columns.length; i++) {
+      const columnElem = this.columns[i];
       if (columnElem.clientHeight > max) {
         max = columnElem.clientHeight;
         index = i;
       }
     }
     return index;
-  } else {
-    return -1;
   }
+  return -1;
 };
 
 // compose core
 Waterfall.prototype.compose = function(force) {
-  var num = this.computeNumberOfColumns();
-  var cols = this.columns.length;
+  const num = this.computeNumberOfColumns();
+  const cols = this.columns.length;
 
   if (force || num != cols) {
     // remove old column
     for (var i = 0; i < this.columns.length; i++) {
-      var columnElem = this.columns[i];
+      const columnElem = this.columns[i];
       columnElem.remove();
     }
 
@@ -125,7 +125,7 @@ Waterfall.prototype.compose = function(force) {
 
     // compose
     for (var i = 0, l = this.boxes.length; i < l; i++) {
-      var box = this.boxes[i];
+      const box = this.boxes[i];
       this.addBox(box);
     }
   }
@@ -138,9 +138,9 @@ Waterfall.prototype.addBox = function(elem) {
     this.boxes.push(elem);
   }
 
-  var columnIndex = this.getMinHeightIndex();
+  const columnIndex = this.getMinHeightIndex();
   if (columnIndex > -1) {
-    var column = this.columns[columnIndex];
+    const column = this.columns[columnIndex];
     $(column).append(elem);
   }
 };

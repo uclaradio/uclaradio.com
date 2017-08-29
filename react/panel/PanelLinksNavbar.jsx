@@ -1,23 +1,23 @@
 // PanelLinksNavbar.jsx
 
-var React = require('react');
+const React = require('react');
 
-var linksURL = '/panel/api/userlinks';
+const linksURL = '/panel/api/userlinks';
 
 // Bootstrap elements
-var Navbar = require('react-bootstrap').Navbar;
-var Nav = require('react-bootstrap').Nav;
-var NavItem = require('react-bootstrap').NavItem;
+const Navbar = require('react-bootstrap').Navbar;
+const Nav = require('react-bootstrap').Nav;
+const NavItem = require('react-bootstrap').NavItem;
 
 /**
 *  Navbar which loads links available to the current user logged
 *  into the DJ panel
 */
-var PanelLinksNavbar = React.createClass({
-  getInitialState: function() {
+const PanelLinksNavbar = React.createClass({
+  getInitialState() {
     return { links: [] };
   },
-  loadDataFromServer: function() {
+  loadDataFromServer() {
     $.ajax({
       url: linksURL,
       dataType: 'json',
@@ -25,15 +25,15 @@ var PanelLinksNavbar = React.createClass({
       success: function(o) {
         this.setState({ links: o.links, loggedin: o.loggedin });
       }.bind(this),
-      error: function(xhr, status, err) {
+      error(xhr, status, err) {
         console.error(linksURL, status, err.toString());
-      }.bind(this),
+      },
     });
   },
   // provided a node element and a link, this function will wrap
   // a span with class 'navbarSelected' around the element
   // if the provided link is the same as the current path ('/panel/...')
-  styleLink: function(element, link) {
+  styleLink(element, link) {
     if (link == window.location.pathname) {
       return (
         <span className="navbarSelected">
@@ -43,18 +43,16 @@ var PanelLinksNavbar = React.createClass({
     }
     return element;
   },
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadDataFromServer();
   },
-  render: function() {
-    var styleLink = this.styleLink;
-    var links = this.state.links.map(function(link, i) {
-      return (
-        <NavItem eventKey={i} key={i} href={link.link}>
-          {styleLink(link.title, link.link)}
-        </NavItem>
-      );
-    });
+  render() {
+    const styleLink = this.styleLink;
+    const links = this.state.links.map((link, i) =>
+      <NavItem eventKey={i} key={i} href={link.link}>
+        {styleLink(link.title, link.link)}
+      </NavItem>
+    );
     return (
       <div className="panelLinksNavbar">
         <Navbar>

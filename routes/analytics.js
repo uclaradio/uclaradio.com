@@ -1,24 +1,25 @@
-var express = require('express');
-var router = express.Router();
-var currentListeners = 0;
+const express = require('express');
 
-router.get('/', function(req, res) {
-  res.render('analytics', { currentListeners: currentListeners });
+const router = express.Router();
+let currentListeners = 0;
+
+router.get('/', (req, res) => {
+  res.render('analytics', { currentListeners });
 });
 
-router.get('/getCount', function(req, res) {
+router.get('/getCount', (req, res) => {
   res.json(currentListeners);
 });
 
-router.get('/increment', function(req, res) {
-  currentListeners = currentListeners + 1;
-  console.log('increment: ' + currentListeners);
+router.get('/increment', (req, res) => {
+  currentListeners += 1;
+  console.log(`increment: ${currentListeners}`);
   res.json(currentListeners);
 });
 
-router.get('/decrement', function(req, res) {
-  currentListeners = currentListeners - 1;
-  console.log('decrement: ' + currentListeners);
+router.get('/decrement', (req, res) => {
+  currentListeners -= 1;
+  console.log(`decrement: ${currentListeners}`);
   if (currentListeners < 0) {
     currentListeners = 0;
   }

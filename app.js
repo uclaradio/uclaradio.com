@@ -1,34 +1,35 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var socket_io = require('socket.io');
-var app = express();
-var io = socket_io();
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const socketIO = require('socket.io');
+
+const app = express();
+const io = socketIO();
 app.io = io;
 
-var routes = require('./routes/index');
-var staffingPoints = require('./routes/staffingPoints');
-var ios = require('./routes/ios');
-var pages = require('./routes/pages');
-var calendar = require('./routes/calendar');
-var managers = require('./routes/managers');
-var TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
-var panel = require('./routes/panel.js');
-var notFound = require('./routes/notFound');
-var analytics = require('./routes/analytics');
-var api = require('./routes/api');
-var chat = require('./routes/chat')(io);
+const routes = require('./routes/index');
+const staffingPoints = require('./routes/staffingPoints');
+const ios = require('./routes/ios');
+const pages = require('./routes/pages');
+const calendar = require('./routes/calendar');
+const managers = require('./routes/managers');
+const TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
+const panel = require('./routes/panel.js');
+const notFound = require('./routes/notFound');
+const analytics = require('./routes/analytics');
+const api = require('./routes/api');
+const chat = require('./routes/chat')(io);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(`${__dirname}/public/favicon.ico`));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -62,16 +63,15 @@ app.use('/chat', chat);
 // all links to panel/* handled in panel.js
 app.use('/panel', panel);
 
-app.use('/faq', function(req, res, next) {
+app.use('/faq', (req, res) => {
   res.redirect('/panel/faq');
 });
 
 // catch 404 and forward to frontpage
-app.use(function(req, res, next) {
+app.use((req, res) => {
   // var err = new Error('Not Found');
   // err.status = 404;
   // res.render('notFound');
-  var path = require('path');
   res.sendFile(path.resolve('public/frontpage.html'));
 });
 
@@ -80,7 +80,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use((err, req, res) => {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -91,7 +91,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,

@@ -1,13 +1,13 @@
 // ShowsContent.jsx
 
-var React = require('react');
+const React = require('react');
 
 import ShowsGraph from './ShowsGraph.jsx';
 import ShowBlurb from './ShowBlurb.jsx';
 import ShowList from './ShowList.jsx';
 import Loader from './Loader.jsx';
 
-//mobile?
+// mobile?
 import isMobile from './misc/isMobile.js';
 
 // styling
@@ -28,28 +28,28 @@ View component for shows tab of frontpage
 @prop currentShowID: id of current show
 @prop spotlightShowID: id of spotlight show
 */
-var ShowsContent = React.createClass({
-  getInitialState: function() {
+const ShowsContent = React.createClass({
+  getInitialState() {
     return {
       mobile: false,
       viewType: ScheduleViewType.grid,
     };
   },
-  componentWillMount: function() {
+  componentWillMount() {
     this.props.updateShows();
   },
-  componentDidMount: function() {
+  componentDidMount() {
     if (isMobile.any()) {
       this.setState({ mobile: true });
     }
   },
-  toggleActiveShow: function(show) {
+  toggleActiveShow(show) {
     this.setState({ activeShow: show });
   },
-  updateViewType: function(viewType) {
-    this.setState({ viewType: viewType });
+  updateViewType(viewType) {
+    this.setState({ viewType });
   },
-  render: function() {
+  render() {
     // loading
     if (this.props.fetching && this.props.shows.length == 0) {
       return (

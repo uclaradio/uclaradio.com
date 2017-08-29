@@ -1,6 +1,6 @@
 module.exports = {
-  AppendValueSoSort: function(blurbs) {
-    for (var i = 0; i < blurbs.length; i++) {
+  AppendValueSoSort(blurbs) {
+    for (let i = 0; i < blurbs.length; i++) {
       if (
         blurbs[i].time.substr(
           blurbs[i].time.length - 2,
@@ -20,18 +20,18 @@ module.exports = {
     return blurbs;
   },
 
-  getUniqueBlurbs: function(blurbs) {
-    var unique = [];
+  getUniqueBlurbs(blurbs) {
+    const unique = [];
 
-    for (var i = 0; i < blurbs.length; i++) {
-      var showName = blurbs[i].title;
+    for (let i = 0; i < blurbs.length; i++) {
+      const showName = blurbs[i].title;
 
       if (unique.indexOf(showName) > -1) {
-        //check if saved slot is after
-        var saved_blurb = blurbs[unique.indexOf(showName)];
+        // check if saved slot is after
+        const saved_blurb = blurbs[unique.indexOf(showName)];
         if (saved_blurb.time.length > blurbs[i].time.length) {
-          //12
-          console.log('saved_blurb: ' + saved_blurb.time);
+          // 12
+          console.log(`saved_blurb: ${saved_blurb.time}`);
           if (blurbs[i].time == '1PM') {
             saved_blurb.time = blurbs[i].time;
           }
@@ -44,21 +44,21 @@ module.exports = {
         }
         blurbs[unique.indexOf(showName)] = saved_blurb;
         blurbs.splice(i, 1);
-        i = i - 1;
+        i -= 1;
       } else {
-        //push the names into the array
+        // push the names into the array
         unique.push(showName);
       }
     }
     return blurbs;
   },
 
-  truncateName: function(name, l) {
-    return name.length > l ? name.substr(0, l - 2) + '\u2026' : name;
+  truncateName(name, l) {
+    return name.length > l ? `${name.substr(0, l - 2)}\u2026` : name;
   },
 
-  sort_by: function(field, reverse, primer) {
-    var key = primer
+  sort_by(field, reverse, primer) {
+    const key = primer
       ? function(x) {
           return primer(x[field]);
         }
@@ -73,8 +73,8 @@ module.exports = {
     };
   },
 
-  encode_safe_url: function(showName) {
-    var safe_url;
+  encode_safe_url(showName) {
+    let safe_url;
     safe_url = showName.split('?').join('(question_mark)');
     safe_url = safe_url.split('$').join('(dollar)');
     safe_url = safe_url.split('&').join('(amperstamp)');
@@ -102,8 +102,8 @@ module.exports = {
     return safe_url;
   },
 
-  decode_safe_url: function(url) {
-    var showName;
+  decode_safe_url(url) {
+    let showName;
     showName = url.split('(question_mark)').join('?');
     showName = showName.split('(dollar)').join('$');
     showName = showName.split('(amperstamp)').join('&');
