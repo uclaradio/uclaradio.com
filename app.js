@@ -20,7 +20,6 @@ const managers = require('./routes/managers');
 const TicketGiveawayCalendar = require('./routes/TicketGiveawayCalendar');
 const panel = require('./routes/panel.js');
 const notFound = require('./routes/notFound');
-const analytics = require('./routes/analytics');
 const api = require('./routes/api');
 const chat = require('./routes/chat')(io);
 
@@ -57,7 +56,6 @@ app.use('/calendar', calendar);
 app.use('/managers', managers);
 app.use('/GiveawayCalendar', TicketGiveawayCalendar);
 app.use('/notFound', notFound);
-app.use('/analytics', analytics);
 app.use('/api', api);
 app.use('/chat', chat);
 // all links to panel/* handled in panel.js
