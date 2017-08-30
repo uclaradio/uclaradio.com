@@ -13,7 +13,6 @@ app.io = io;
 
 const routes = require('./routes/index');
 const staffingPoints = require('./routes/staffingPoints');
-const ios = require('./routes/ios');
 const pages = require('./routes/pages');
 const calendar = require('./routes/calendar');
 const managers = require('./routes/managers');
@@ -51,7 +50,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/staffingPoints', staffingPoints);
-app.use('/ios', ios);
 app.use('/pages', pages);
 app.use('/calendar', calendar);
 app.use('/managers', managers);
