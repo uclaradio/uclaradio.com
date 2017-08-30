@@ -1,0 +1,112 @@
+{
+  "_class": "artboard",
+  "backgroundColor": {
+    "_class": "color",
+    "alpha": 1,
+    "blue": 1,
+    "green": 1,
+    "red": 1
+  },
+  "do_objectID": "37C2ECF0-CD9B-4436-9183-2D8531A7808B",
+  "exportOptions": {
+    "_class": "exportOptions",
+    "exportFormats": [
+    ],
+    "includedLayerIds": [
+    ],
+    "layerOptions": 0,
+    "shouldTrim": false
+  },
+  "frame": {
+    "_class": "rect",
+    "constrainProportions": false,
+    "height": 1024,
+    "width": 1440,
+    "x": -367,
+    "y": -234
+  },
+  "hasBackgroundColor": false,
+  "hasClickThrough": true,
+  "horizontalRulerData": {
+    "_class": "rulerData",
+    "base": 0,
+    "guides": [
+    ]
+  },
+  "includeBackgroundColorInExport": true,
+  "includeInCloudUpload": true,
+  "isFlippedHorizontal": false,
+  "isFlippedVertical": false,
+  "isLocked": false,
+  "isVisible": true,
+  "layerListExpandedType": 2,
+  "layers": [
+    {
+      "class": "bitmap",
+      "id": "197B9DC7-D4C0-4ACD-8224-FFA80547F612"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "F8E9AF16-DB36-4F0E-8AC1-7D3FDAD7E725"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "6228678D-94EF-4654-B14D-EC822FFEC379"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "067FC641-630A-49B7-AAAE-5FD2976A8289"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "0B8422B1-CEE4-4EC7-B94D-0555D0B19876"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "9C78A433-E801-49D8-ACDA-103CAA75C96A"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "E3ED57DD-A591-4DD7-82B0-A61F7896065C"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "1AC60456-08BB-4418-AAC0-38844A8BAF73"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "8C722344-3C43-4F9A-97C0-FEC78C27494E"
+    },
+    {
+      "class": "bitmap",
+      "id": "73716C4C-9622-4FF3-A699-F70E52FCC5BF"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "6E450D87-B913-4EC5-8FA8-C78ED9016335"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "75F04C5F-6079-4FE8-946B-121B886B11BB"
+    }
+  ],
+  "name": "Desktop HD",
+  "nameIsFixed": false,
+  "resizesContent": false,
+  "resizingConstraint": 63,
+  "resizingType": 0,
+  "rotation": 0,
+  "shouldBreakMaskChain": false,
+  "style": {
+    "_class": "style",
+    "endDecorationType": 0,
+    "miterLimit": 10,
+    "startDecorationType": 0
+  },
+  "verticalRulerData": {
+    "_class": "rulerData",
+    "base": 0,
+    "guides": [
+    ]
+  }
+}
