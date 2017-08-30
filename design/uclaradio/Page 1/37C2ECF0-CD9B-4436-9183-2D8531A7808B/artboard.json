@@ -55,6 +55,18 @@
     },
     {
       "class": "shapeGroup",
+      "id": "BE01ADB4-507E-44C4-AFB8-A0489C50D3D1"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "32483199-FC38-4718-82A0-F945F55566DE"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "4E3FDA73-CA62-4D0E-A42C-1610205EC233"
+    },
+    {
+      "class": "shapeGroup",
       "id": "067FC641-630A-49B7-AAAE-5FD2976A8289"
     },
     {
@@ -88,6 +100,14 @@
     {
       "class": "shapeGroup",
       "id": "75F04C5F-6079-4FE8-946B-121B886B11BB"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "E5AC02E7-87D8-4B87-B079-61AF0B769D18"
+    },
+    {
+      "class": "shapeGroup",
+      "id": "EB495B55-9AD9-4142-8CFE-D617A3C34059"
     }
   ],
   "name": "Desktop HD",
