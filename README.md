@@ -17,15 +17,22 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 
 #### Development
 ##### Windows
-We're [working on that](https://github.com/uclaradio/uclaradio/pull/121)!
+1. Install [Chocolatey](https://chocolatey.org).
+2. Install git by running `choco install git --params="'/GitAndUnixToolsOnPath /NoAutoCrlf'" -y`.
+3. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
+4. Run our [`setup.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup.ps1) script.
+    - Wondering what this does? Basically it installs the latest versions of [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and [Yarn](https://yarnpkg.com), then uses these programs to install the packages we use and set up a local database.
+5. Run `yarn dev` to start the server for development.
+6. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
 
 ##### MacOS
 1. Install [Homebrew](https://brew.sh).
-2. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
-3. Run our [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) script.
+2. Install git by running `brew install git`.
+3. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
+4. Run our [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) script.
     - Wondering what this does? Basically it installs the latest versions of [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and [Yarn](https://yarnpkg.com), then uses these programs to install the packages we use and set up a local database.
-4. Run `yarn dev` to start the server for development.
-5. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
+5. Run `yarn dev` to start the server for development.
+6. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
 
 #### Production
 - Make sure all packages are installed with `yarn`.
