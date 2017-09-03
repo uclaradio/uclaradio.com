@@ -19,11 +19,13 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 ##### Windows
 1. Install [Chocolatey](https://chocolatey.org).
 2. Install git by running `choco install git --params="'/GitAndUnixToolsOnPath /NoAutoCrlf'" -y`.
-3. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
-4. Run our [`setup.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup.ps1) script.
+3. Install [CMDer](http://cmder.net). You want the full version. It's website doesn't have much in the way of documentation, so refer to [this video](https://www.youtube.com/watch?v=Xm790AkFeK4) for installation instructions. Since Windows doesn't have a terminal like macOS or Linux, this is the next best thing.
+4. Install [cairo](https://www.cairographics.org). You can do this by downloading Glade (which is a program that installs cairo as a dependency) [here](http://gladewin32.sourceforge.net).
+5. Open CMDer and clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
+6. Open Powershell as an administrator and cd to the `uclaradio` repo you just cloned. Run our [`setup.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup.ps1) script.
     - Wondering what this does? Basically it installs the latest versions of [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and [Yarn](https://yarnpkg.com), then uses these programs to install the packages we use and set up a local database.
-5. Run `yarn dev` to start the server for development.
-6. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
+7. Run `yarn dev` to start the server for development.
+8. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
 
 ##### MacOS
 1. Install [Homebrew](https://brew.sh).
