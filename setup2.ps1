@@ -1,13 +1,12 @@
 Write-Host "Installing npm packages..."
 # Install Windows Build Tools, dependency for node-gyp
-npm install --global --production windows-build-tools
+npm install -g --production windows-build-tools
+npm install -g node-gyp
 yarn
 
 Write-Host "Seeding database..."
-refreshenv
-
 # Path isn't updated until the Powershell window is closed so we gotta do it the long way.
-mongod
+start /B mongod
 node database/scripts/setupPanel.js
 
 Write-Host "Finished."
