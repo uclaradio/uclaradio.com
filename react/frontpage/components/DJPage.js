@@ -1,13 +1,13 @@
-// DJPage.jsx
+// DJPage.js
 // shows full DJ information
 
 import React from 'react';
 
 // Frontpage Components
-import Loader from './Loader.jsx';
+import Loader from './Loader.js';
 
 // Common Components
-import RectImage from '../../common/RectImage.jsx';
+import RectImage from '../../common/RectImage.js';
 
 import { Link } from 'react-router';
 import { Grid, Col, Row } from 'react-bootstrap';

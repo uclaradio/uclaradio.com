@@ -1,4 +1,4 @@
-// ShowList.jsx
+// ShowList.js
 // text list of shows
 
 import React from 'react';

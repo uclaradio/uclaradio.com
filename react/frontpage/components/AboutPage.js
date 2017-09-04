@@ -1,4 +1,4 @@
-// AboutPage.jsx
+// AboutPage.js
 
 import React from 'react';
 

@@ -1,4 +1,4 @@
-// ShowsGraph.jsx
+// ShowsGraph.js
 // graph selector with schedule of shows
 
 const React = require('react');

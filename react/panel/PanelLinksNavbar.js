@@ -1,4 +1,4 @@
-// PanelLinksNavbar.jsx
+// PanelLinksNavbar.js
 
 const React = require('react');
 

@@ -1,4 +1,4 @@
-// TriangleCanvas.jsx
+// TriangleCanvas.js
 
 import React from 'react';
 import Trianglify from 'trianglify';

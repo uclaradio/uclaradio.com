@@ -1,8 +1,8 @@
-// EventContainer.jsx
+// EventContainer.js
 // redux container for single event page component
 
 import { connect } from 'react-redux';
-import EventPage from '../components/EventPage.jsx';
+import EventPage from '../components/EventPage.js';
 
 import { fetchUpdatedEvents } from '../actions/events';
 

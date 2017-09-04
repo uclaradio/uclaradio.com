@@ -1,10 +1,10 @@
-// WaterFallContent.jsx
+// WaterFallContent.js
 // Displays social media content in a ResponsiveWaterfall
 
 import React from 'react';
 import Waterfall from './misc/ResponsiveWaterfall.js';
 import isMobile from './misc/isMobile.js';
-import Loader from './Loader.jsx';
+import Loader from './Loader.js';
 
 // styling
 require('./WaterFallContent.scss');

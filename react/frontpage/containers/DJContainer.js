@@ -1,8 +1,8 @@
-// DJContainer.jsx
+// DJContainer
 // redux container for single dj page component
 
 import { connect } from 'react-redux';
-import DJPage from '../components/DJPage.jsx';
+import DJPage from '../components/DJPage';
 import { fetchUpdatedDJs } from '../actions/djs';
 
 const mapStateToProps = (state, ownProps) => {

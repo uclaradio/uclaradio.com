@@ -1,4 +1,4 @@
-// CountdownTimer.jsx
+// CountdownTimer.js
 // A countdown timer to a specific date
 // Based on SitePoint's javascript timer guide:
 // http://codepen.io/SitePoint/pen/MwNPVq

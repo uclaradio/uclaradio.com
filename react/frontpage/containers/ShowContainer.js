@@ -1,8 +1,8 @@
-// ShowContainer.jsx
+// ShowContainer.js
 // redux container for single show page component
 
 import { connect } from 'react-redux';
-import ShowPage from '../components/ShowPage.jsx';
+import ShowPage from '../components/ShowPage.js';
 
 import { fetchUpdatedShows } from '../actions/shows';
 

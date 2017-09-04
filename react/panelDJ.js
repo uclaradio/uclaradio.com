@@ -13,13 +13,13 @@ const urls = {
 };
 
 // Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-const ShowList = require('./panel/ShowList.jsx');
-const RectImage = require('./common/RectImage.jsx');
+const PanelLinksNavbar = require('./panel/PanelLinksNavbar.js');
+const ShowList = require('./panel/ShowList.js');
+const RectImage = require('./common/RectImage.js');
 
 // Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-const InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
+const InputEditableTextField = require('./panel/inputs/InputEditableTextField.js');
+const InputFileUpload = require('./panel/inputs/InputFileUpload.js');
 
 // Misc
 const Dates = require('./common/Dates.js');

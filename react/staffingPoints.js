@@ -1,4 +1,4 @@
-// staffingPoints.jsx
+// staffingPoints.js
 // let managers approve staffing points
 
 const React = require('react');

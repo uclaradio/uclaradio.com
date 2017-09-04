@@ -1,4 +1,4 @@
-// StreamBar.jsx
+// StreamBar.js
 
 import React from 'react';
 
@@ -9,7 +9,7 @@ import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
 import Slider from 'react-slick';
 
 // In house components
-import ChatBox from './ChatBox.jsx';
+import ChatBox from './ChatBox.js';
 
 // mobile?
 import isMobile from './misc/isMobile.js';

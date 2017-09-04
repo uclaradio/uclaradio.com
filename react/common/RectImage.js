@@ -1,4 +1,4 @@
-// RectImage.jsx
+// RectImage
 
 import React from 'react';
 

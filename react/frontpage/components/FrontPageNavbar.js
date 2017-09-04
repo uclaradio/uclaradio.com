@@ -1,4 +1,4 @@
-// FrontPageNavbar.jsx
+// FrontPageNavbar.js
 
 const React = require('react');
 

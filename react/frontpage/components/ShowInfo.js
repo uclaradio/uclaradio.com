@@ -1,9 +1,9 @@
-// ShowInfo.jsx
+// ShowInfo.js
 
 import React from 'react';
 
 // Common Components
-import RectImage from '../../common/RectImage.jsx';
+import RectImage from '../../common/RectImage.js';
 
 import { Link } from 'react-router';
 

@@ -1,4 +1,4 @@
-// Error404Page.jsx
+// Error404Page.js
 // displayed error when an unknown page is requested
 
 import React from 'react';

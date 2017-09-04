@@ -1,4 +1,4 @@
-// frontpage.jsx
+// frontpagejs
 // Radio Front Page
 
 import React from 'react';
@@ -13,26 +13,26 @@ import {
 } from 'react-router';
 
 // Frontpage Containers (View Controllers)
-import ShowsTab from './containers/ShowsTab.jsx';
-import EventsTab from './containers/EventsTab.jsx';
-import DJsTab from './containers/DJsTab.jsx';
-import ShowContainer from './containers/ShowContainer.jsx';
-import EventContainer from './containers/EventContainer.jsx';
-import DJContainer from './containers/DJContainer.jsx';
+import ShowsTab from './containers/ShowsTab';
+import EventsTab from './containers/EventsTab';
+import DJsTab from './containers/DJsTab';
+import ShowContainer from './containers/ShowContainer';
+import EventContainer from './containers/EventContainer';
+import DJContainer from './containers/DJContainer';
 
 // Frontpage Components (Views)
-import TriangleCanvas from './components/TriangleCanvas.jsx';
-import FrontPageNavbar from './components/FrontPageNavbar.jsx';
-import StreamBar from './components/StreamBar.jsx';
-import ShowInfo from './components/ShowInfo.jsx';
-import WaterFallContent from './components/WaterFallContent.jsx';
-import Error404Page from './components/Error404Page.jsx';
-import StreamIssuesPage from './components/StreamIssuesPage.jsx';
-import AboutPage from './components/AboutPage.jsx';
-import PromoBanner from './components/PromoBanner.jsx';
+import TriangleCanvas from './components/TriangleCanvas';
+import FrontPageNavbar from './components/FrontPageNavbar';
+import StreamBar from './components/StreamBar';
+import ShowInfo from './components/ShowInfo';
+import WaterFallContent from './components/WaterFallContent';
+import Error404Page from './components/Error404Page';
+import StreamIssuesPage from './components/StreamIssuesPage';
+import AboutPage from './components/AboutPage';
+import PromoBanner from './components/PromoBanner';
 
 // Common Components
-import RectImage from '../common/RectImage.jsx';
+import RectImage from '../common/RectImage';
 
 // Bootstrap elements
 import { Bootstrap, Grid, Col } from 'react-bootstrap';
@@ -51,7 +51,7 @@ function logPageView() {
 import theme from '../common/theme';
 
 // styling
-require('./Frontpage.scss');
+require('./frontpage.scss');
 
 // temp data
 // const sampleFeaturedShow = {"title":"Pirate Radio","id":12,"day":"Mon","time":"10pm","djs":{"chris":"DJ Jamburglar"},"genre":"Psychedelic","blurb":"Life is a trip... Sail away to undiscovered psychic frontiers with underground psychedelic jams","public":true,"pages":[],"episodes":[]};

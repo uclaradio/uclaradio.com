@@ -1,4 +1,4 @@
-// DJsTab.jsx
+// DJsTab.js
 // container for frontpage list of djs
 
 import { connect } from 'react-redux';
@@ -9,7 +9,7 @@ import {
   stopFetching,
   fetchUpdatedDJs,
 } from '../actions/djs';
-import DJList from '../components/DJList.jsx';
+import DJList from '../components/DJList.js';
 
 const mapStateToProps = state => ({
   djs: state.djs.djs,

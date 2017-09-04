@@ -1,4 +1,4 @@
-// PromoBanner.jsx
+// PromoBanner.js
 // A carousel of various promotion related material (ie Show of the Month, Ticket Giveaways, ect)
 
 import React from 'react';
@@ -7,9 +7,9 @@ import React from 'react';
 import Slider from 'react-slick';
 
 // Common Components
-import RectImage from '../../common/RectImage.jsx';
+import RectImage from '../../common/RectImage.js';
 
-import CountdownTimer from './CountdownTimer.jsx';
+import CountdownTimer from './CountdownTimer.js';
 
 import { Link } from 'react-router';
 

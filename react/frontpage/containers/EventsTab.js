@@ -1,10 +1,10 @@
-// EventsTab.jsx
+// EventsTab.js
 // container for frontpage list of events
 
 import { connect } from 'react-redux';
 
 import { updateEvents, fetchUpdatedEvents } from '../actions/events';
-import EventList from '../components/EventList.jsx';
+import EventList from '../components/EventList.js';
 
 const mapStateToProps = state => ({
   eventGroups: eventGroupsFromState(state.events),

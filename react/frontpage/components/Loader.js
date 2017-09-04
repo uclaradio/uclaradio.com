@@ -1,4 +1,4 @@
-// Loader.jsx
+// Loader.js
 // common reusable view component showing a loading animation
 
 import React from 'react';

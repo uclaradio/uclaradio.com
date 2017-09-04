@@ -1,4 +1,4 @@
-// InputCheckbox.jsx
+// InputCheckbox.js
 
 const React = require('react');
 

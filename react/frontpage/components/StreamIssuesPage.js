@@ -1,4 +1,4 @@
-// StreamIssuesPage.jsx
+// StreamIssuesPage.js
 
 import React from 'react';
 

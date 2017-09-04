@@ -19,13 +19,13 @@ const urls = {
 };
 
 // Panel Elements
-const ActionTable = require('./panel/ActionTable.jsx');
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-const ShowList = require('./panel/ShowList.jsx');
+const ActionTable = require('./panel/ActionTable.js');
+const PanelLinksNavbar = require('./panel/PanelLinksNavbar.js');
+const ShowList = require('./panel/ShowList.js');
 
 // Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-const InputCheckbox = require('./panel/inputs/InputCheckbox.jsx');
+const InputEditableTextField = require('./panel/inputs/InputEditableTextField.js');
+const InputCheckbox = require('./panel/inputs/InputCheckbox.js');
 
 // Bootstrap Elements
 import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';

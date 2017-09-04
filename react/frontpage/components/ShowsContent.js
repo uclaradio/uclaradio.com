@@ -1,11 +1,11 @@
-// ShowsContent.jsx
+// ShowsContent.js
 
 const React = require('react');
 
-import ShowsGraph from './ShowsGraph.jsx';
-import ShowBlurb from './ShowBlurb.jsx';
-import ShowList from './ShowList.jsx';
-import Loader from './Loader.jsx';
+import ShowsGraph from './ShowsGraph.js';
+import ShowBlurb from './ShowBlurb.js';
+import ShowList from './ShowList.js';
+import Loader from './Loader.js';
 
 // mobile?
 import isMobile from './misc/isMobile.js';

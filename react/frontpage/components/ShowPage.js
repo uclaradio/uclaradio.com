@@ -1,13 +1,13 @@
-// ShowPage.jsx
+// ShowPage.js
 // shows full description of a show
 
 import React from 'react';
 
 // Frontpage Components
-import Loader from './Loader.jsx';
+import Loader from './Loader.js';
 
 // Common Components
-import RectImage from '../../common/RectImage.jsx';
+import RectImage from '../../common/RectImage.js';
 
 import { Link } from 'react-router';
 

@@ -1,4 +1,4 @@
-// ShowsGraph.jsx
+// ShowsGraph.js
 
 const React = require('react');
 

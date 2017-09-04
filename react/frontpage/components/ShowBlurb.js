@@ -1,9 +1,9 @@
-// ShowBlurb.jsx
+// ShowBlurb.js
 
 const React = require('react');
 
 // Common Components
-import RectImage from '../../common/RectImage.jsx';
+import RectImage from '../../common/RectImage.js';
 
 import { Link } from 'react-router';
 

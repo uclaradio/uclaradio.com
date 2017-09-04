@@ -1,4 +1,4 @@
-// EventTab.jsx
+// EventTab.js
 // list of events in events tab of frontpage
 
 import React from 'react';
@@ -6,8 +6,8 @@ import React from 'react';
 import { Link } from 'react-router';
 
 // Common Elements
-import RectImage from '../../common/RectImage.jsx';
-import Loader from './Loader.jsx';
+import RectImage from '../../common/RectImage.js';
+import Loader from './Loader.js';
 
 // styling
 require('./EventList.scss');

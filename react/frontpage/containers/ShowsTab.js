@@ -1,10 +1,10 @@
-// ShowsTab.jsx
+// ShowsTab.js
 // container for frontpage list of shows
 
 import { connect } from 'react-redux';
 
 import { fetchUpdatedShows } from '../actions/shows';
-import ShowsContent from '../components/ShowsContent.jsx';
+import ShowsContent from '../components/ShowsContent.js';
 
 const mapStateToProps = state => ({
   shows: state.shows.shows,

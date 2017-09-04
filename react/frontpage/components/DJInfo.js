@@ -1,8 +1,8 @@
-// DJInfo.jsx
+// DJInfo.js
 import React from 'react';
 
 // Common Elements
-import RectImage from '../../common/RectImage.jsx';
+import RectImage from '../../common/RectImage.js';
 
 import { Link } from 'react-router';
 

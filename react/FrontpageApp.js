@@ -1,9 +1,9 @@
 /**
-FrontpageApp.jsx
+FrontpageApp.js
 
 Redux container for frontpage app.
 Note: this is not the UI, but simply a redux container providing
-  a store and relevant actions. See './frontpage/Frontpage.jsx' for UI.
+  a store and relevant actions. See './frontpage/Frontpage' for UI.
 
 Renders application with ReactDOM, rendering on #content element
 * */
@@ -25,7 +25,7 @@ import {
   updateSpotlightShow,
   fetchUpdatedShows,
 } from './frontpage/actions/shows';
-import Frontpage from './frontpage/Frontpage.jsx';
+import Frontpage from './frontpage/Frontpage.js';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

@@ -9,7 +9,7 @@ const urls = {
 };
 
 // Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
+const PanelLinksNavbar = require('./panel/PanelLinksNavbar.js');
 
 // Boostrap Components
 const Accordion = require('react-bootstrap').Accordion;

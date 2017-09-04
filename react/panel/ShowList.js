@@ -1,4 +1,4 @@
-// ShowList.jsx
+// ShowList.js
 
 const React = require('react');
 
@@ -6,7 +6,7 @@ const React = require('react');
 const Dates = require('../common/Dates.js');
 
 // Panel elements
-const RectImage = require('../common/RectImage.jsx');
+const RectImage = require('../common/RectImage.js');
 
 // Boostrap elements
 const Grid = require('react-bootstrap').Grid;

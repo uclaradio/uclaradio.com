@@ -1,4 +1,4 @@
-// ChatBox.jsx
+// ChatBox.js
 
 const React = require('react');
 const List = require('collections/list');
