@@ -10,3 +10,4 @@ Start-Process -NoNewWindow mongod
 node database/scripts/setupPanel.js
 
 Write-Host "Finished."
+Stop-Process mongod
