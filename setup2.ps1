@@ -6,8 +6,7 @@ yarn
 
 Write-Host "Seeding database..."
 # Path isn't updated until the Powershell window is closed so we gotta do it the long way.
-Start-Process -NoNewWindow mongod
+Start-Process mongod
 node database/scripts/setupPanel.js
 
 Write-Host "Finished."
-Stop-Process mongod
