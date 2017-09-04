@@ -1,7 +1,7 @@
 Write-Host "Installing npm packages..."
 # Install Windows Build Tools, dependency for node-gyp
-npm install -g --production windows-build-tools
-npm install -g node-gyp
+#npm install -g --production windows-build-tools
+#npm install -g node-gyp
 yarn
 
 Write-Host "Seeding database..."
