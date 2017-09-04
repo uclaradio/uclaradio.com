@@ -4,7 +4,7 @@
 import { connect } from 'react-redux';
 
 import { fetchUpdatedShows } from '../actions/shows';
-import ShowsContent from '../components/ShowsContent.js';
+import ShowsContent from '../components/ShowsContent';
 
 const mapStateToProps = state => ({
   shows: state.shows.shows,

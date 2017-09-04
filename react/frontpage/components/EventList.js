@@ -6,8 +6,8 @@ import React from 'react';
 import { Link } from 'react-router';
 
 // Common Elements
-import RectImage from '../../common/RectImage.js';
-import Loader from './Loader.js';
+import RectImage from '../../common/RectImage';
+import Loader from './Loader';
 
 // styling
 require('./EventList.scss');

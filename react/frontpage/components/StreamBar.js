@@ -9,10 +9,10 @@ import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
 import Slider from 'react-slick';
 
 // In house components
-import ChatBox from './ChatBox.js';
+import ChatBox from './ChatBox';
 
 // mobile?
-import isMobile from './misc/isMobile.js';
+import isMobile from './misc/isMobile';
 
 // styling
 require('./StreamBar.scss');

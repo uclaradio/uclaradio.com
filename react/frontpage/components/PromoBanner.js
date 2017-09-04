@@ -7,9 +7,9 @@ import React from 'react';
 import Slider from 'react-slick';
 
 // Common Components
-import RectImage from '../../common/RectImage.js';
+import RectImage from '../../common/RectImage';
 
-import CountdownTimer from './CountdownTimer.js';
+import CountdownTimer from './CountdownTimer';
 
 import { Link } from 'react-router';
 

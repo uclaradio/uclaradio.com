@@ -25,7 +25,7 @@ import {
   updateSpotlightShow,
   fetchUpdatedShows,
 } from './frontpage/actions/shows';
-import Frontpage from './frontpage/Frontpage.js';
+import Frontpage from './frontpage/Frontpage';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

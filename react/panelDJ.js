@@ -13,16 +13,16 @@ const urls = {
 };
 
 // Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.js');
-const ShowList = require('./panel/ShowList.js');
-const RectImage = require('./common/RectImage.js');
+const PanelLinksNavbar = require('./panel/PanelLinksNavbar');
+const ShowList = require('./panel/ShowList');
+const RectImage = require('./common/RectImage');
 
 // Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField.js');
-const InputFileUpload = require('./panel/inputs/InputFileUpload.js');
+const InputEditableTextField = require('./panel/inputs/InputEditableTextField');
+const InputFileUpload = require('./panel/inputs/InputFileUpload');
 
 // Misc
-const Dates = require('./common/Dates.js');
+const Dates = require('./common/Dates');
 
 // Bootstrap Elements
 const Grid = require('react-bootstrap').Grid;

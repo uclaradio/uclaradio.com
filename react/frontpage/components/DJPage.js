@@ -4,10 +4,10 @@
 import React from 'react';
 
 // Frontpage Components
-import Loader from './Loader.js';
+import Loader from './Loader';
 
 // Common Components
-import RectImage from '../../common/RectImage.js';
+import RectImage from '../../common/RectImage';
 
 import { Link } from 'react-router';
 import { Grid, Col, Row } from 'react-bootstrap';

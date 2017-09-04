@@ -3,10 +3,10 @@
 const React = require('react');
 
 // Misc
-const Dates = require('../common/Dates.js');
+const Dates = require('../common/Dates');
 
 // Panel elements
-const RectImage = require('../common/RectImage.js');
+const RectImage = require('../common/RectImage');
 
 // Boostrap elements
 const Grid = require('react-bootstrap').Grid;

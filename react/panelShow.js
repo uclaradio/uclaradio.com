@@ -13,15 +13,15 @@ const urls = {
 };
 
 // Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.js');
-const RectImage = require('./common/RectImage.js');
+const PanelLinksNavbar = require('./panel/PanelLinksNavbar');
+const RectImage = require('./common/RectImage');
 
 // Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField.js');
-const InputEditableDateTimeField = require('./panel/inputs/InputEditableDateTimeField.js');
-const InputCheckbox = require('./panel/inputs/InputCheckbox.js');
-const InputFileUpload = require('./panel/inputs/InputFileUpload.js');
-const ConfirmationButton = require('./panel/inputs/ConfirmationButton.js');
+const InputEditableTextField = require('./panel/inputs/InputEditableTextField');
+const InputEditableDateTimeField = require('./panel/inputs/InputEditableDateTimeField');
+const InputCheckbox = require('./panel/inputs/InputCheckbox');
+const InputFileUpload = require('./panel/inputs/InputFileUpload');
+const ConfirmationButton = require('./panel/inputs/ConfirmationButton');
 
 // Bootstrap Elements
 const Grid = require('react-bootstrap').Grid;

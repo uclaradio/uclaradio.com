@@ -9,7 +9,7 @@ import {
   stopFetching,
   fetchUpdatedDJs,
 } from '../actions/djs';
-import DJList from '../components/DJList.js';
+import DJList from '../components/DJList';
 
 const mapStateToProps = state => ({
   djs: state.djs.djs,

@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-import DJInfo from './DJInfo.js';
-import Loader from './Loader.js';
+import DJInfo from './DJInfo';
+import Loader from './Loader';
 
 require('./DJList.scss');
 

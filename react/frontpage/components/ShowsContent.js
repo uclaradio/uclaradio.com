@@ -2,13 +2,13 @@
 
 const React = require('react');
 
-import ShowsGraph from './ShowsGraph.js';
-import ShowBlurb from './ShowBlurb.js';
-import ShowList from './ShowList.js';
-import Loader from './Loader.js';
+import ShowsGraph from './ShowsGraph';
+import ShowBlurb from './ShowBlurb';
+import ShowList from './ShowList';
+import Loader from './Loader';
 
 // mobile?
-import isMobile from './misc/isMobile.js';
+import isMobile from './misc/isMobile';
 
 // styling
 require('./ShowsContent.scss');

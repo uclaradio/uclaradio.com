@@ -3,7 +3,7 @@
 import React from 'react';
 
 // Common Components
-import RectImage from '../../common/RectImage.js';
+import RectImage from '../../common/RectImage';
 
 import { Link } from 'react-router';
 

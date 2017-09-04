@@ -3,7 +3,7 @@
 const React = require('react');
 
 // Helper files
-const Dates = require('../../common/Dates.js');
+const Dates = require('../../common/Dates');
 
 // Bootstrap elements
 const ButtonGroup = require('react-bootstrap').ButtonGroup;

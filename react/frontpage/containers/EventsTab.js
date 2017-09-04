@@ -4,7 +4,7 @@
 import { connect } from 'react-redux';
 
 import { updateEvents, fetchUpdatedEvents } from '../actions/events';
-import EventList from '../components/EventList.js';
+import EventList from '../components/EventList';
 
 const mapStateToProps = state => ({
   eventGroups: eventGroupsFromState(state.events),
