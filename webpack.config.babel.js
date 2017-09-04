@@ -13,6 +13,28 @@ module.exports = {
     ],
     // vendors: ['react', 'react-bootstrap'],
   },
+  loaders: [
+    {
+      test: /\.js[x]?$/,
+      loader: 'babel',
+      exclude: /node_modules/,
+      query: {
+        presets: ['es2015', 'react'],
+      },
+    },
+    {
+      test: /\.scss$/,
+      loaders: ['style-loader', 'css-loader', 'sass-loader'],
+    },
+    {
+      test: /\.css$/,
+      loaders: ['style-loader', 'css-loader'],
+    },
+    {
+      test: /\.json$/,
+      loader: 'json',
+    },
+  ],
   output: {
     filename: '[name]',
     path: './public/build',
