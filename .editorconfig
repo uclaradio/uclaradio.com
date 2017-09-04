@@ -8,5 +8,5 @@ charset = utf-8
 indent_style = space
 indent_size = 2
 
-[setup.ps1]
+[setup?.ps1]
 end_of_line = crlf
