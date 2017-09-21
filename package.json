@@ -7,7 +7,8 @@
     "start": "node ./bin/www",
     "dev": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" ",
     "precommit": "lint-staged",
-    "test": "jest"
+    "test": "jest",
+    "webpack": "webpack"
   },
   "lint-staged": {
     "*.{js,jsx}": [

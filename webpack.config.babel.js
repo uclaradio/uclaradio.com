@@ -1,3 +1,4 @@
+import webpack from 'webpack';
 import path from 'path';
 
 module.exports = {
@@ -12,6 +13,10 @@ module.exports = {
       './react/staffingPoints.jsx',
     ],
     // vendors: ['react', 'react-bootstrap'],
+  },
+  output: {
+    filename: '[name]',
+    path: './public/build',
   },
   loaders: [
     {
@@ -35,8 +40,11 @@ module.exports = {
       loader: 'json',
     },
   ],
-  output: {
-    filename: '[name]',
-    path: './public/build',
-  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendors',
+      filename: 'vendors.js',
+    }),
+    new webpack.optimize.UglifyJsPlugin(),
+  ],
 };
