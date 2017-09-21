@@ -3,19 +3,17 @@ import path from 'path';
 
 module.exports = {
   entry: {
-    app: [
-      './react/FrontpageApp.jsx',
-      './react/panelDJ.jsx',
-      './react/panelElrond.jsx',
-      './react/panelFAQ.jsx',
-      './react/panelManager.jsx',
-      './react/panelShow.jsx',
-      './react/staffingPoints.jsx',
-    ],
+    FrontpageApp: './react/FrontpageApp.jsx',
+    panelDJ: './react/panelDJ.jsx',
+    panelElrond: './react/panelElrond.jsx',
+    panelFAQ: './react/panelFAQ.jsx',
+    panelManager: './react/panelManager.jsx',
+    panelShow: './react/panelShow.jsx',
+    staffingPoints: './react/staffingPoints.jsx',
     // vendors: ['react', 'react-bootstrap'],
   },
   output: {
-    filename: '[name]',
+    filename: '[name].min.js',
     path: path.join(__dirname, 'public', 'build'),
   },
   module: {
