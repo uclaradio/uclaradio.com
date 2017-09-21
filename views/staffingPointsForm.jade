@@ -1,34 +1,34 @@
 doctype html(lang='en')
 head
     meta(charset='utf-8')
-         
+
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-         
+
     meta(name='description', content='UCLA Radio')
-         
+
     meta(name='viewport', content='width=device-width, initial-scale=1')
-         
+
     title UCLA Radio
     // jQuery (necessary for Bootstrap's JavaScript plugins)
     script(src='https://code.jquery.com/jquery-2.1.1.min.js')
     // bootstrap
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
-         
+
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
     // font awesome
     link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
     // other fonts
     link(href='https://fonts.googleapis.com/css?family=Lato:300italic', rel='stylesheet', type='text/css')
-         
+
     link(href='https://fonts.googleapis.com/css?family=Merriweather:300', rel='stylesheet', type='text/css')
     // trianglify, for background stuff
     script(src='https://d3js.org/d3.v3.min.js')
-         
+
     script(src='https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js')
     // Our stylesheets/scripts
     link(rel='stylesheet', type='text/css', href='/css/main.css')
     link(rel='stylesheet', type='text/css', href='/css/staffingPoints.css')
-         
+
     link(rel='icon', href='favicon.ico', type='image/x-icon')
 
     script(type='text/javascript').
@@ -40,7 +40,7 @@ head
       ga('send', 'pageview');
 
   body
-    
+
     .container(role='main')
       a(href='/')
         img#logo(src='img/logo.png', alt='UCLA RADIO')
@@ -113,5 +113,3 @@ head
               .form-group
                 button.btn#new-staffing-points-submit(type='submit') Submit
 
-
-script(src='/js/staffingPoints.js')
