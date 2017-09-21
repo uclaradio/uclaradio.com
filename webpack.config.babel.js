@@ -16,30 +16,32 @@ module.exports = {
   },
   output: {
     filename: '[name]',
-    path: './public/build',
+    path: path.join(__dirname, 'public', 'build'),
   },
-  loaders: [
-    {
-      test: /\.js[x]?$/,
-      loader: 'babel',
-      exclude: /node_modules/,
-      query: {
-        presets: ['es2015', 'react'],
+  module: {
+    rules: [
+      {
+        test: /\.js[x]?/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react'],
+        },
       },
-    },
-    {
-      test: /\.scss$/,
-      loaders: ['style-loader', 'css-loader', 'sass-loader'],
-    },
-    {
-      test: /\.css$/,
-      loaders: ['style-loader', 'css-loader'],
-    },
-    {
-      test: /\.json$/,
-      loader: 'json',
-    },
-  ],
+      {
+        test: /\.scss/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.css/,
+        loaders: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.json/,
+        loader: 'json',
+      },
+    ],
+  },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendors',
