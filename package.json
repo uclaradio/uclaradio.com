@@ -5,10 +5,12 @@
   "scripts": {
     "postcheckout": "yarn",
     "start": "node ./bin/www",
-    "dev": "concurrently --kill-others \"mongod\" \"yarn run webpack:watch\" \"nodemon ./bin/www\" ",
+    "watch": "nodemon ./bin/www",
+    "dev":
+      "concurrently 'npm run watch' 'npm run assets' --names '💻,📦' --prefix name",
+    "assets": "webpack --watch --display-max-modules 0",
     "precommit": "lint-staged",
-    "test": "jest",
-    "webpack:watch": "webpack --watch"
+    "test": "jest"
   },
   "lint-staged": {
     "*.{js,jsx}": [
