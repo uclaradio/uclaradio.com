@@ -5,10 +5,11 @@
   "scripts": {
     "postcheckout": "yarn",
     "start": "node ./bin/www",
-    "dev": " concurrently --kill-others \"mongod\" \"grunt watch\" \"nodemon ./bin/www\" ",
+    "dev":
+      "concurrently --kill-others \"mongod\" \"yarn run webpack:watch\" \"nodemon ./bin/www\" ",
     "precommit": "lint-staged",
     "test": "jest",
-    "webpack": "webpack"
+    "webpack:watch": "webpack --watch"
   },
   "lint-staged": {
     "*.{js,jsx}": [
