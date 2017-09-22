@@ -7,7 +7,7 @@
     "start": "node ./bin/www",
     "watch": "nodemon ./bin/www --ignore public/",
     "dev":
-      "concurrently 'yarn run watch' 'yarn run assets' --names '💻,📦' --prefix name",
+      "concurrently  --kill-others 'yarn run watch' 'yarn run assets' --names '💻,📦' --prefix name",
     "assets": "webpack --watch --display-max-modules 0",
     "precommit": "lint-staged",
     "test": "jest"
