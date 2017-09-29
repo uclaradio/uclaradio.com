@@ -22,8 +22,9 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 5. Open CMDer and clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
 6. Open Powershell as an administrator and cd to the `uclaradio` repo you just cloned. Run our [`setup1.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup1.ps1) script. If you're getting a "running scripts is disabled error", try running `set-executionpolicy remotesigned`.
 7. Open up __another__ Powershell window as an administrator and run the [`setup2.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup2.ps1) script. Why two scripts? Windows is weird, man.
-7. Run `yarn dev` to start the server for development.
-8. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
+7. Run mongo with `mongod`.
+8. Run `yarn dev` to start the server for development.
+9. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
 
 ##### MacOS
 1. Install [Homebrew](https://brew.sh).
@@ -31,8 +32,9 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 3. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
 4. Run our [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) script.
     - Wondering what this does? Basically it installs the latest versions of [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and [Yarn](https://yarnpkg.com), then uses these programs to install the packages we use and set up a local database.
-5. Run `yarn dev` to start the server for development.
-6. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
+5. Run mongo with `mongod`.
+6. Run `yarn dev` to start the server for development.
+7. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
 
 #### Production
 - Make sure all packages are installed with `yarn`.
@@ -62,8 +64,6 @@ React front-end pages. Reusable components like UI elements are in `/react/compo
 [`app.js`](/app.js): The main server!
 
 [`defaultPasswords.json`](/defaultPasswords.json): Where the passwords go. These are different on the production server.
-
-[`Gruntfile.js`](/Gruntfile.js): Our [grunt](https://gruntjs.com) file. It automatically compiles all of our `.jsx` and `.scss` files. Just run `grunt watch`!
 
 [`setup.sh`](/setup.sh): The setup script for macOS.
 
