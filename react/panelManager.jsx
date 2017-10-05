@@ -3,6 +3,14 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';
+
+// Panel Elements
+import ActionTable from './panel/ActionTable.jsx';
+import PanelLinksNavbar from './panel/PanelLinksNavbar.jsx';
+import ShowList from './panel/ShowList.jsx';
+import InputEditableTextField from './panel/inputs/InputEditableTextField.jsx';
+import InputCheckbox from './panel/inputs/InputCheckbox.jsx';
 
 const urls = {
   managerInfo: '/panel/manager/api/info',
@@ -17,21 +25,6 @@ const urls = {
   deleteMessages: '/panel/manager/api/deletechat',
   keepMessages: '/panel/manager/api/freechat',
 };
-
-// Panel Elements
-const ActionTable = require('./panel/ActionTable.jsx');
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-const ShowList = require('./panel/ShowList.jsx');
-
-// Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-const InputCheckbox = require('./panel/inputs/InputCheckbox.jsx');
-
-// Bootstrap Elements
-import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';
-
-// other
-const CheckBoxList = require('react-checkbox-list');
 
 const ManagerPage = React.createClass({
   render() {

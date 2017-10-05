@@ -3,7 +3,6 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import {
   Button,
   ButtonGroup,
@@ -16,6 +15,13 @@ import {
   MenuItem,
 } from 'react-bootstrap';
 
+import PanelLinksNavbar from './panel/PanelLinksNavbar.jsx';
+import ShowList from './panel/ShowList.jsx';
+import RectImage from './common/RectImage.jsx';
+import InputEditableTextField from './panel/inputs/InputEditableTextField.jsx';
+import InputFileUpload from './panel/inputs/InputFileUpload.jsx';
+import Dates from './common/Dates.js';
+
 const urls = {
   url: '/panel/api/user',
   picURL: '/panel/api/userPic',
@@ -23,20 +29,6 @@ const urls = {
   showLink: '/panel/show',
   addShowURL: '/panel/api/addShow',
 };
-
-// Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-const ShowList = require('./panel/ShowList.jsx');
-const RectImage = require('./common/RectImage.jsx');
-
-// Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-const InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
-
-// Misc
-const Dates = require('./common/Dates.js');
-
-// Bootstrap Elements
 
 const PanelPage = React.createClass({
   render() {
