@@ -1,10 +1,9 @@
 // StreamIssuesPage.jsx
 
 import React from 'react';
+import './StreamIssuesPage.scss';
 
-require('./StreamIssuesPage.scss');
-
-const StreamIssuesPage = () =>
+const StreamIssuesPage = () => (
   <div className="streamIssues">
     <h3>Stream Issues</h3>
     <p>
@@ -33,6 +32,7 @@ const StreamIssuesPage = () =>
         </a>, we're always trying to improve
       </li>
     </ul>
-  </div>;
+  </div>
+);
 
 module.exports = StreamIssuesPage;

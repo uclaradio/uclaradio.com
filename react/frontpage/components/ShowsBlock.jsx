@@ -2,11 +2,8 @@
 // graph selector with schedule of shows
 
 import React from 'react';
-
 import Dates from '../../common/Dates';
-
-// styling
-require('./ShowsBlock.scss');
+import './ShowsBlock.scss';
 
 const week = [
   'sunday',

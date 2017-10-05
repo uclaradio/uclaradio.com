@@ -1,14 +1,13 @@
 // AboutPage.jsx
 
 import React from 'react';
-
-require('./AboutPage.scss');
+import './AboutPage.scss';
 
 /**
 Full page About content detailing UCLA Radio history and offering links to contact managers.
 Used as a tab's full content in frontpage.
 * */
-const AboutPage = () =>
+const AboutPage = () => (
   <div className="aboutPage">
     <div id="wrapper">
       <div className="threesplit">
@@ -33,7 +32,8 @@ const AboutPage = () =>
       <div className="threesplit">
         <h3> PLAYLISTS </h3>
         <a href="mailto:radio.playlists@media.ucla.edu" target="_top">
-          {' '}| radio.playlists@media.ucla.edu
+          {' '}
+          | radio.playlists@media.ucla.edu
         </a>
         <br />
         <h3> PROMOS / GIVEAWAYS </h3>
@@ -63,6 +63,7 @@ const AboutPage = () =>
         country by College Music Journal.
       </p>
     </div>
-  </div>;
+  </div>
+);
 
 module.exports = AboutPage;

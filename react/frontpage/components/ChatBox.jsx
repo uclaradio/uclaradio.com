@@ -1,14 +1,11 @@
 // ChatBox.jsx
 
 import React from 'react';
-const List = require('collections/list');
-const cookie = require('react-cookie');
-
-import { Grid, Col, Row } from 'react-bootstrap';
+import cookie from 'react-cookie';
+import { Grid, Col } from 'react-bootstrap';
+import './ChatBox.scss';
 
 const socket = io();
-
-require('./ChatBox.scss');
 
 const GetPreviousMessagesURL = '/chat/getNext';
 const ReportMessageURL = '/chat/report';

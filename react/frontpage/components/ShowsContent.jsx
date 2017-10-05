@@ -6,12 +6,8 @@ import ShowsGraph from './ShowsGraph.jsx';
 import ShowBlurb from './ShowBlurb.jsx';
 import ShowList from './ShowList.jsx';
 import Loader from './Loader.jsx';
-
-// mobile?
-import isMobile from './misc/isMobile.js';
-
-// styling
-require('./ShowsContent.scss');
+import isMobile from './misc/isMobile';
+import './ShowsContent.scss';
 
 // possible values for this.state.viewType
 const ScheduleViewType = {
