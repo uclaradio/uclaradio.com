@@ -2,19 +2,10 @@
 // A carousel of various promotion related material (ie Show of the Month, Ticket Giveaways, ect)
 
 import React from 'react';
-
-// Open-Source Components
-import Slider from 'react-slick';
-
-// Common Components
-import RectImage from '../../common/RectImage.jsx';
-
-import CountdownTimer from './CountdownTimer.jsx';
-
 import { Link } from 'react-router';
-
-// styling
-require('./PromoBanner.scss');
+import Slider from 'react-slick';
+import RectImage from '../../common/RectImage.jsx';
+import './PromoBanner.scss';
 
 // Promo Banner Data
 const bannerData = [
@@ -48,23 +39,19 @@ const PromoBanner = React.createClass({
     // An alternative solution would be to use ES6 arrow functions
 
     const self = this;
-    const banners = bannerData.map(banner =>
+    const banners = bannerData.map(banner => (
       <div>
-        {banner.link.indexOf('http') == -1
-          ? <Link to={banner.link}>
-              {self.getImage(banner)}
-            </Link>
-          : <a href={banner.link}>
-              {self.getImage(banner)}
-            </a>}
+        {banner.link.indexOf('http') == -1 ? (
+          <Link to={banner.link}>{self.getImage(banner)}</Link>
+        ) : (
+          <a href={banner.link}>{self.getImage(banner)}</a>
+        )}
       </div>
-    );
+    ));
 
     return (
       <div className="promoBanner">
-        <Slider {...settings}>
-          {banners}
-        </Slider>
+        <Slider {...settings}>{banners}</Slider>
       </div>
     );
   },

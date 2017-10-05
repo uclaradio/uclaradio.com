@@ -2,9 +2,7 @@
 // common reusable view component showing a loading animation
 
 import React from 'react';
-
-// styling
-require('./Loader.scss');
+import './Loader.scss';
 
 /**
 props:
@@ -14,13 +12,12 @@ props:
  - type (default 'balls')
  - width (default 64)
 * */
-import Loading from 'react-loading';
-
-const Loader = () =>
+const Loader = () => (
   <div className="loader">
     <center>
       <img src="./img/icons/loading.gif" />
     </center>
-  </div>;
+  </div>
+);
 
 export default Loader;

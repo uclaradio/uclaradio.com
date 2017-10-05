@@ -1,15 +1,10 @@
 // FrontPageNavbar.jsx
 
 import React from 'react';
-
-// Bootstrap Elements
 import { Nav, NavItem, Collapse, NavDropdown, MenuItem } from 'react-bootstrap';
-
 import { LinkContainer } from 'react-router-bootstrap';
 import { browserHistory } from 'react-router';
-
-// styling
-require('./FrontPageNavbar.scss');
+import './FrontPageNavbar.scss';
 
 /**
 Navigation bar for the stream frontpage, which has collapsing rows and selectable tabs

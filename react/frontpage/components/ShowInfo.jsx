@@ -1,14 +1,9 @@
 // ShowInfo.jsx
 
 import React from 'react';
-
-// Common Components
-import RectImage from '../../common/RectImage.jsx';
-
 import { Link } from 'react-router';
-
-// styling
-require('./ShowInfo.scss');
+import RectImage from '../../common/RectImage.jsx';
+import './ShowInfo.scss';
 
 const defaultShowPic = '/img/radio.png';
 
@@ -44,20 +39,13 @@ const ShowInfo = React.createClass({
     }
     return (
       <div className="showInfo">
-        {this.props.title &&
-          <p className="infoHeader">
-            {this.props.title}
-          </p>}
+        {this.props.title && <p className="infoHeader">{this.props.title}</p>}
         <Link to={this.urlFromShow(this.props.show)} activeClassName="active">
           <div className="showBanner">
             <RectImage src={this.props.show.picture || defaultShowPic} />
             <div className="showDetails">
-              <p className="showTitle">
-                {this.props.show.title || ''}
-              </p>
-              <p className="djs">
-                {this.djString(this.props.show.djs || {})}
-              </p>
+              <p className="showTitle">{this.props.show.title || ''}</p>
+              <p className="djs">{this.djString(this.props.show.djs || {})}</p>
             </div>
 
             {/* <span className="genre">{this.truncateName(this.props.show.genre || "", 18)}</span> */}
