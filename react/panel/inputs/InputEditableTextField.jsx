@@ -2,11 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-// Bootstrap elements
-const Input = require('react-bootstrap').Input;
-const FormControls = require('react-bootstrap').FormControls;
-const Glyphicon = require('react-bootstrap').Glyphicon;
+import { Input, FormControls, Glyphicon } from 'react-bootstrap';
 
 /**
 *  Show current saved value for a text field and let user update the field and submit changes

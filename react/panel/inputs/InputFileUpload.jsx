@@ -2,10 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-// Bootstrap elements
-const Input = require('react-bootstrap').Input;
-const Glyphicon = require('react-bootstrap').Glyphicon;
+import { Input, Glyphicon } from 'react-bootstrap';
 
 /**
 *  Input file upload element

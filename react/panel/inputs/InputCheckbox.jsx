@@ -1,10 +1,7 @@
 // InputCheckbox.jsx
 
 import React from 'react';
-
-// Bootstrap elements
-const Input = require('react-bootstrap').Input;
-const Glyphicon = require('react-bootstrap').Glyphicon;
+import { Input, Glyphicon } from 'react-bootstrap';
 
 /**
 *  Input checkbox element which can be checked or unchecked
