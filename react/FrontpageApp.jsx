@@ -8,16 +8,10 @@ Note: this is not the UI, but simply a redux container providing
 Renders application with ReactDOM, rendering on #content element
 * */
 
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import reducer from './frontpage/reducers/';
-// creates store and enables redux dev tools
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
-
-import { connect } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 
 import {
   updateNowPlaying,
@@ -27,8 +21,12 @@ import {
 } from './frontpage/actions/shows';
 import Frontpage from './frontpage/Frontpage.jsx';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import reducer from './frontpage/reducers/';
+// creates store and enables redux dev tools
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const mapDispatchToProps = dispatch => ({
   updateNowPlaying: () => {
@@ -66,10 +64,11 @@ const fetchUpdatedNowPlaying = dispatch => {
 const FrontpageContainer = connect(null, mapDispatchToProps)(Frontpage);
 
 // wrap container in redux provider to provide data store
-const FrontpageApp = () =>
+const FrontpageApp = () => (
   <Provider store={store}>
     <FrontpageContainer />
-  </Provider>;
+  </Provider>
+);
 
 // display app
 ReactDOM.render(<FrontpageApp />, document.getElementById('content'));

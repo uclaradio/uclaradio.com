@@ -4,6 +4,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import {
+  Button,
+  ButtonGroup,
+  Well,
+  Col,
+  Row,
+  Grid,
+  Input,
+  DropdownButton,
+  MenuItem,
+} from 'react-bootstrap';
+
 const urls = {
   url: '/panel/api/user',
   picURL: '/panel/api/userPic',
@@ -25,16 +37,6 @@ const InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
 const Dates = require('./common/Dates.js');
 
 // Bootstrap Elements
-const Grid = require('react-bootstrap').Grid;
-const Row = require('react-bootstrap').Row;
-const Col = require('react-bootstrap').Col;
-const Well = require('react-bootstrap').Well;
-const ButtonGroup = require('react-bootstrap').ButtonGroup;
-const Button = require('react-bootstrap').Button;
-const Input = require('react-bootstrap').Input;
-const DropdownButton = require('react-bootstrap').DropdownButton;
-const MenuItem = require('react-bootstrap').MenuItem;
-const Image = require('react-bootstrap').Image;
 
 const PanelPage = React.createClass({
   render() {

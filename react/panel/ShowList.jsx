@@ -1,19 +1,12 @@
 // ShowList.jsx
 
 import React from 'react';
+import { Grid, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 
-// Misc
-const Dates = require('../common/Dates.js');
+import RectImage from '../common/RectImage.jsx';
+import Dates from '../common/Dates';
 
 // Panel elements
-const RectImage = require('../common/RectImage.jsx');
-
-// Boostrap elements
-const Grid = require('react-bootstrap').Grid;
-const Row = require('react-bootstrap').Row;
-const Col = require('react-bootstrap').Col;
-const ListGroup = require('react-bootstrap').ListGroup;
-const ListGroupItem = require('react-bootstrap').ListGroupItem;
 
 /**
 *  Presents a list of show objects with a standard format

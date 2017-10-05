@@ -1,13 +1,9 @@
 // PanelLinksNavbar.jsx
 
 import React from 'react';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 const linksURL = '/panel/api/userlinks';
-
-// Bootstrap elements
-const Navbar = require('react-bootstrap').Navbar;
-const Nav = require('react-bootstrap').Nav;
-const NavItem = require('react-bootstrap').NavItem;
 
 /**
 *  Navbar which loads links available to the current user logged
@@ -34,7 +30,7 @@ const PanelLinksNavbar = React.createClass({
   // a span with class 'navbarSelected' around the element
   // if the provided link is the same as the current path ('/panel/...')
   styleLink(element, link) {
-    if (link == window.location.pathname) {
+    if (link === window.location.pathname) {
       return <span className="navbarSelected">{element}</span>;
     }
     return element;
