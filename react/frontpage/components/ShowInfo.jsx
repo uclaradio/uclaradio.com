@@ -56,4 +56,4 @@ const ShowInfo = React.createClass({
   },
 });
 
-module.exports = ShowInfo;
+export default ShowInfo;

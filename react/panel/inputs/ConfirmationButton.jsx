@@ -37,4 +37,4 @@ const ConfirmationButton = React.createClass({
   },
 });
 
-module.exports = ConfirmationButton;
+export default ConfirmationButton;

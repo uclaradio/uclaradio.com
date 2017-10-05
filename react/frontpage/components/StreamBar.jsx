@@ -257,4 +257,4 @@ const RecentlyPlayed = React.createClass({
   },
 });
 
-module.exports = StreamBar;
+export default StreamBar;

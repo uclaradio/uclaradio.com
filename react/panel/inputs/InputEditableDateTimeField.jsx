@@ -135,4 +135,4 @@ const InputEditableDateTimeField = React.createClass({
   },
 });
 
-module.exports = InputEditableDateTimeField;
+export default InputEditableDateTimeField;

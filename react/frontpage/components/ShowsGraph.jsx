@@ -296,4 +296,4 @@ const sortedShows = shows => {
   return schedule;
 };
 
-module.exports = ShowsGraph;
+export default ShowsGraph;

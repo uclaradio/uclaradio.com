@@ -74,4 +74,4 @@ const PanelLinksNavbar = React.createClass({
   },
 });
 
-module.exports = PanelLinksNavbar;
+export default PanelLinksNavbar;

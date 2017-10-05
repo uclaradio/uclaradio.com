@@ -120,4 +120,4 @@ const ShowBlurb = React.createClass({
   },
 });
 
-module.exports = ShowBlurb;
+export default ShowBlurb;

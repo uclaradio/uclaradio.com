@@ -36,4 +36,4 @@ const DJList = React.createClass({
   },
 });
 
-module.exports = DJList;
+export default DJList;

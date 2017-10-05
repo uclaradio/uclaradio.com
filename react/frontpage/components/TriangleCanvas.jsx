@@ -46,4 +46,4 @@ const TriangleCanvas = React.createClass({
   },
 });
 
-module.exports = TriangleCanvas;
+export default TriangleCanvas;

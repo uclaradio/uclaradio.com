@@ -66,4 +66,4 @@ const InputFileUpload = React.createClass({
   },
 });
 
-module.exports = InputFileUpload;
+export default InputFileUpload;

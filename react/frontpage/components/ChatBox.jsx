@@ -280,4 +280,4 @@ const MessageForm = React.createClass({
   },
 });
 
-module.exports = ChatBox;
+export default ChatBox;

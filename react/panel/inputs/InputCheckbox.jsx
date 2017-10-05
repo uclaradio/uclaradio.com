@@ -51,4 +51,4 @@ const InputCheckbox = React.createClass({
   },
 });
 
-module.exports = InputCheckbox;
+export default InputCheckbox;

@@ -65,4 +65,4 @@ const ShowList = React.createClass({
   },
 });
 
-module.exports = ShowList;
+export default ShowList;

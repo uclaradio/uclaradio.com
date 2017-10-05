@@ -49,4 +49,4 @@ const RectImage = React.createClass({
   },
 });
 
-module.exports = RectImage;
+export default RectImage;

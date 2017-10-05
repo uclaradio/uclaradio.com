@@ -66,4 +66,4 @@ const AboutPage = () => (
   </div>
 );
 
-module.exports = AboutPage;
+export default AboutPage;

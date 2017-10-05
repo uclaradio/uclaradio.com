@@ -68,4 +68,4 @@ const DateTimeField = React.createClass({
   },
 });
 
-module.exports = DateTimeField;
+export default DateTimeField;

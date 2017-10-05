@@ -110,4 +110,4 @@ var formatDate = function(dateString) {
   return date.getDate();
 };
 
-module.exports = EventList;
+export default EventList;

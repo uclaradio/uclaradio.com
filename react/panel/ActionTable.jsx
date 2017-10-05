@@ -150,4 +150,4 @@ const ActionTable = React.createClass({
   },
 });
 
-module.exports = ActionTable;
+export default ActionTable;

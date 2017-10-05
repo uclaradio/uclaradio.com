@@ -124,4 +124,4 @@ const ShowBlock = React.createClass({
   },
 });
 
-module.exports = ShowsGraph;
+export default ShowsGraph;

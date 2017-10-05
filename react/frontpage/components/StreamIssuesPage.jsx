@@ -35,4 +35,4 @@ const StreamIssuesPage = () => (
   </div>
 );
 
-module.exports = StreamIssuesPage;
+export default StreamIssuesPage;

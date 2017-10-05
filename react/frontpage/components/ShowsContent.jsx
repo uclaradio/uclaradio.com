@@ -126,4 +126,4 @@ const ShowsContent = React.createClass({
   },
 });
 
-module.exports = ShowsContent;
+export default ShowsContent;

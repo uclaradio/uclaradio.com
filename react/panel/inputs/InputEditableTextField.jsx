@@ -107,4 +107,4 @@ const InputEditableTextField = React.createClass({
   },
 });
 
-module.exports = InputEditableTextField;
+export default InputEditableTextField;

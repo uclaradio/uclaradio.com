@@ -145,4 +145,4 @@ const FrontPageNavbar = React.createClass({
   },
 });
 
-module.exports = FrontPageNavbar;
+export default FrontPageNavbar;
