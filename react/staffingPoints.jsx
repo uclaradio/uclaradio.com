@@ -1,13 +1,13 @@
 // staffingPoints.jsx
 // let managers approve staffing points
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const NameFilter = React.createClass({
   updateFilterName() {
     this.props.handleFilterChange({
-      nameFilter: this.refs.nameFilterInput.value,
+      nameFilteçr: this.refs.nameFilterInput.value,
     });
   },
 
@@ -167,27 +167,13 @@ const StaffingPointsRow = React.createClass({
   render() {
     return (
       <tr>
-        <td>
-          {this.props.record.fullName}
-        </td>
-        <td>
-          {this.props.record.number}
-        </td>
-        <td>
-          {this.props.record.description}
-        </td>
-        <td>
-          {this.props.record.department}
-        </td>
-        <td>
-          {this.props.record.dateCompleted.toDateString()}
-        </td>
-        <td>
-          {this.props.record.notes}
-        </td>
-        <td>
-          {this.props.record.status}
-        </td>
+        <td>{this.props.record.fullName}</td>
+        <td>{this.props.record.number}</td>
+        <td>{this.props.record.description}</td>
+        <td>{this.props.record.department}</td>
+        <td>{this.props.record.dateCompleted.toDateString()}</td>
+        <td>{this.props.record.notes}</td>
+        <td>{this.props.record.status}</td>
         <td onClick={this.updateStatus.bind(null, 'approved')}>
           <button>Approve</button>
         </td>
@@ -266,9 +252,7 @@ const StaffingPointsTable = React.createClass({
             <th>Manager Notes</th>
           </tr>
         </thead>
-        <tbody>
-          {rows}
-        </tbody>
+        <tbody>{rows}</tbody>
       </table>
     );
   },
@@ -346,9 +330,7 @@ const StaffingPointsView = React.createClass({
     return (
       <div>
         <h1 id="header">Staffing Points</h1>
-        <h4>
-          {this.state.statusMessage}
-        </h4>
+        <h4>{this.state.statusMessage}</h4>
         <div className="row">
           <div className="col-md-4 col-md-offset-8 ">
             <div className="form-group">

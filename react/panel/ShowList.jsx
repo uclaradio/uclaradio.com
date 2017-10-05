@@ -1,6 +1,6 @@
 // ShowList.jsx
 
-const React = require('react');
+import React from 'react';
 
 // Misc
 const Dates = require('../common/Dates.js');
@@ -42,33 +42,31 @@ const ShowList = React.createClass({
           href={`${url}/${show.id}`}
           key={show.id}
           className="listShow">
-          {short
-            ? title
-            : <Grid>
-                <Row>
-                  <Col xs={2} className="noPads centered">
-                    <RectImage
-                      src={show.picture || placeholder}
-                      className="showListImg rectPic"
-                      thumbnail
-                    />
-                  </Col>
-                  <Col xs={10}>
-                    {title}
-                    <p className="showListSubtitle">
-                      {show.blurb}
-                    </p>
-                  </Col>
-                </Row>
-              </Grid>}
+          {short ? (
+            title
+          ) : (
+            <Grid>
+              <Row>
+                <Col xs={2} className="noPads centered">
+                  <RectImage
+                    src={show.picture || placeholder}
+                    className="showListImg rectPic"
+                    thumbnail
+                  />
+                </Col>
+                <Col xs={10}>
+                  {title}
+                  <p className="showListSubtitle">{show.blurb}</p>
+                </Col>
+              </Row>
+            </Grid>
+          )}
         </ListGroupItem>
       );
     });
     return (
       <div className="showList">
-        <ListGroup>
-          {shows}
-        </ListGroup>
+        <ListGroup>{shows}</ListGroup>
       </div>
     );
   },

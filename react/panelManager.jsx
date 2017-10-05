@@ -1,8 +1,8 @@
 // home.html
 // let DJ edit personal info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const urls = {
   managerInfo: '/panel/manager/api/info',
@@ -114,7 +114,7 @@ const ReportedMessages = React.createClass({
           <br />
           <table className="reportedTable">
             <tbody>
-              {this.state.messages.map(message =>
+              {this.state.messages.map(message => (
                 <tr key={message.id}>
                   <td>
                     <Button
@@ -133,12 +133,10 @@ const ReportedMessages = React.createClass({
                     </Button>
                   </td>
                   <td>
-                    <q>
-                      {message.text}
-                    </q>
+                    <q>{message.text}</q>
                   </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
         </div>
@@ -438,35 +436,39 @@ const AccountsList = React.createClass({
   render() {
     return (
       <div className="accountsList">
-        {this.state.unverifiedRows.length > 0
-          ? <Panel header="Requested Accounts" bsStyle="warning">
-              <ActionTable
-                rows={this.state.unverifiedRows}
-                string1={'Full Name'}
-                string2={'Email'}
-                acceptTitle={atAcceptTitle}
-                rejectTitle={''}
-                acceptTooltip={atAcceptTooltip}
-                rejectTooltip={atRejectTooltipVerified}
-                onAccept={this.handleVerifyUser}
-                onReject={this.handleDeleteUnverifiedUser}
-              />
-            </Panel>
-          : <div />}
-        {this.state.verifiedRows.length > 0
-          ? <Panel header="DJs" bsStyle="info">
-              <ActionTable
-                rows={this.state.verifiedRows}
-                string1={'DJ Name'}
-                string2={'Full Name'}
-                placeholders1={['DJ Hagfish', 'DJ Bed Bugs', 'DJ Nickelback']}
-                rejectTitle={''}
-                rejectTooltip={atRejectTooltipVerified}
-                onReject={this.handleDeleteUser}
-                glyph={atManagerGlyph}
-              />
-            </Panel>
-          : <div />}
+        {this.state.unverifiedRows.length > 0 ? (
+          <Panel header="Requested Accounts" bsStyle="warning">
+            <ActionTable
+              rows={this.state.unverifiedRows}
+              string1={'Full Name'}
+              string2={'Email'}
+              acceptTitle={atAcceptTitle}
+              rejectTitle={''}
+              acceptTooltip={atAcceptTooltip}
+              rejectTooltip={atRejectTooltipVerified}
+              onAccept={this.handleVerifyUser}
+              onReject={this.handleDeleteUnverifiedUser}
+            />
+          </Panel>
+        ) : (
+          <div />
+        )}
+        {this.state.verifiedRows.length > 0 ? (
+          <Panel header="DJs" bsStyle="info">
+            <ActionTable
+              rows={this.state.verifiedRows}
+              string1={'DJ Name'}
+              string2={'Full Name'}
+              placeholders1={['DJ Hagfish', 'DJ Bed Bugs', 'DJ Nickelback']}
+              rejectTitle={''}
+              rejectTooltip={atRejectTooltipVerified}
+              onReject={this.handleDeleteUser}
+              glyph={atManagerGlyph}
+            />
+          </Panel>
+        ) : (
+          <div />
+        )}
       </div>
     );
   },

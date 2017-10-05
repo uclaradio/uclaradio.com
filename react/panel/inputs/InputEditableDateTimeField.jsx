@@ -1,6 +1,6 @@
 // InputEditableDateTimeField.js
 
-const React = require('react');
+import React from 'react';
 
 // Helper files
 const Dates = require('../../common/Dates.js');
@@ -70,17 +70,17 @@ const InputEditableDateTimeField = React.createClass({
         </a>
       </span>
     );
-    const days = Dates.availableDays.map(day =>
+    const days = Dates.availableDays.map(day => (
       <MenuItem key={day} eventKey={day}>
         {Dates.dayFromVar(day)}
       </MenuItem>
-    );
+    ));
 
-    const times = Dates.availableTimes.map(time =>
+    const times = Dates.availableTimes.map(time => (
       <MenuItem key={time} eventKey={time}>
         {time}
       </MenuItem>
-    );
+    ));
     return (
       <div className="inputEditableDateTimeField">
         <form className="form-horizontal">
@@ -89,43 +89,47 @@ const InputEditableDateTimeField = React.createClass({
             labelClassName="col-xs-3"
             wrapperClassName="inputEditWrapper col-xs-9"
             addonAfter={this.state.editable ? actionButton : editButton}>
-            {this.state.editable
-              ? // field edit/submittable
-                <ButtonGroup>
-                  <DropdownButton
-                    id="day"
-                    title={
-                      Dates.dayFromVar(this.state.day) ||
+            {this.state.editable ? (
+              // field edit/submittable
+              <ButtonGroup>
+                <DropdownButton
+                  id="day"
+                  title={
+                    Dates.dayFromVar(this.state.day) || (
                       <span className="placeholder">Day</span>
-                    }
-                    onSelect={this.handleDayChange}
-                    key={this.state.day}>
-                    {days}
-                  </DropdownButton>
-                  <DropdownButton
-                    id="time"
-                    title={
-                      this.state.time ||
-                      <span className="placeholder">Time</span>
-                    }
-                    onSelect={this.handleTimeChange}
-                    key={this.state.time}>
-                    {times}
-                  </DropdownButton>
-                </ButtonGroup>
-              : // locked to user input
-                <span className="customInput">
-                  {this.props.day && this.props.time
-                    ? <span>
-                        {Dates.dayFromVar(this.props.day)} {this.props.time}{' '}
-                        {this.props.verified
-                          ? <Glyphicon className="verifiedGlyph" glyph="ok" />
-                          : ''}
-                      </span>
-                    : <span className="placeholder">
-                        {this.props.placeholder}
-                      </span>}
-                </span>}
+                    )
+                  }
+                  onSelect={this.handleDayChange}
+                  key={this.state.day}>
+                  {days}
+                </DropdownButton>
+                <DropdownButton
+                  id="time"
+                  title={
+                    this.state.time || <span className="placeholder">Time</span>
+                  }
+                  onSelect={this.handleTimeChange}
+                  key={this.state.time}>
+                  {times}
+                </DropdownButton>
+              </ButtonGroup>
+            ) : (
+              // locked to user input
+              <span className="customInput">
+                {this.props.day && this.props.time ? (
+                  <span>
+                    {Dates.dayFromVar(this.props.day)} {this.props.time}{' '}
+                    {this.props.verified ? (
+                      <Glyphicon className="verifiedGlyph" glyph="ok" />
+                    ) : (
+                      ''
+                    )}
+                  </span>
+                ) : (
+                  <span className="placeholder">{this.props.placeholder}</span>
+                )}
+              </span>
+            )}
           </Input>
         </form>
       </div>

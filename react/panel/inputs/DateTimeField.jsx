@@ -1,6 +1,6 @@
 // DateTimeField.js
 
-const React = require('react');
+import React from 'react';
 
 // Bootstrap elements
 const Grid = require('react-bootstrap').Grid;

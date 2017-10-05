@@ -1,6 +1,6 @@
 // PanelLinksNavbar.jsx
 
-const React = require('react');
+import React from 'react';
 
 const linksURL = '/panel/api/userlinks';
 
@@ -35,11 +35,7 @@ const PanelLinksNavbar = React.createClass({
   // if the provided link is the same as the current path ('/panel/...')
   styleLink(element, link) {
     if (link == window.location.pathname) {
-      return (
-        <span className="navbarSelected">
-          {element}
-        </span>
-      );
+      return <span className="navbarSelected">{element}</span>;
     }
     return element;
   },
@@ -48,11 +44,11 @@ const PanelLinksNavbar = React.createClass({
   },
   render() {
     const styleLink = this.styleLink;
-    const links = this.state.links.map((link, i) =>
+    const links = this.state.links.map((link, i) => (
       <NavItem eventKey={i} key={i} href={link.link}>
         {styleLink(link.title, link.link)}
       </NavItem>
-    );
+    ));
     return (
       <div className="panelLinksNavbar">
         <Navbar>
@@ -65,16 +61,16 @@ const PanelLinksNavbar = React.createClass({
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
-            <Nav>
-              {links}
-            </Nav>
-            {this.state.loggedin
-              ? <Nav pullRight>
-                  <NavItem id="navbarLogout" eventKey={1} href="/panel/logout">
-                    Log Out
-                  </NavItem>
-                </Nav>
-              : ''}
+            <Nav>{links}</Nav>
+            {this.state.loggedin ? (
+              <Nav pullRight>
+                <NavItem id="navbarLogout" eventKey={1} href="/panel/logout">
+                  Log Out
+                </NavItem>
+              </Nav>
+            ) : (
+              ''
+            )}
           </Navbar.Collapse>
         </Navbar>
       </div>

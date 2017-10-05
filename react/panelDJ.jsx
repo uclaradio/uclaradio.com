@@ -1,8 +1,8 @@
 // home.html
 // let DJ edit personal info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const urls = {
   url: '/panel/api/user',
@@ -315,66 +315,68 @@ const NewShowForm = React.createClass({
     this.setState(this.getInitialState());
   },
   render() {
-    const days = Dates.availableDays.map(day =>
+    const days = Dates.availableDays.map(day => (
       <MenuItem key={day} eventKey={day}>
         {Dates.dayFromVar(day)}
       </MenuItem>
-    );
+    ));
 
-    const times = Dates.availableTimes.map(time =>
+    const times = Dates.availableTimes.map(time => (
       <MenuItem key={time} eventKey={time}>
         {time}
       </MenuItem>
-    );
+    ));
     return (
       <div className="newShowForm">
-        {this.state.editable
-          ? <form onSubmit={this.handleSubmit}>
-              <h4>New Show</h4>
-              <Input
-                type="text"
-                placeholder="Show Title"
-                value={this.state.title}
-                className="noBottom"
-                onChange={this.handleTitleChange}
-              />
-              <div className="centered">
-                <ButtonGroup className="lightPadding">
-                  <DropdownButton
-                    id="day"
-                    title={
-                      Dates.dayFromVar(this.state.day) ||
+        {this.state.editable ? (
+          <form onSubmit={this.handleSubmit}>
+            <h4>New Show</h4>
+            <Input
+              type="text"
+              placeholder="Show Title"
+              value={this.state.title}
+              className="noBottom"
+              onChange={this.handleTitleChange}
+            />
+            <div className="centered">
+              <ButtonGroup className="lightPadding">
+                <DropdownButton
+                  id="day"
+                  title={
+                    Dates.dayFromVar(this.state.day) || (
                       <span className="placeholder">Day</span>
-                    }
-                    onSelect={this.handleDayChange}
-                    key={this.state.day}>
-                    {days}
-                  </DropdownButton>
-                  <DropdownButton
-                    id="time"
-                    title={
-                      this.state.time ||
-                      <span className="placeholder">Time</span>
-                    }
-                    onSelect={this.handleTimeChange}
-                    key={this.state.time}>
-                    {times}
-                  </DropdownButton>
-                </ButtonGroup>
-                <Button onClick={this.handleSubmit} className="lightPadding">
-                  Submit
-                </Button>
-                <Button
-                  className="cancelLink lightPadding"
-                  onClick={this.toggleEditableField}>
-                  Cancel
-                </Button>
-              </div>
-            </form>
-          : // locked to user input
-            <p className="centered">
-              <a onClick={this.toggleEditableField}>+ Add New Show</a>
-            </p>}
+                    )
+                  }
+                  onSelect={this.handleDayChange}
+                  key={this.state.day}>
+                  {days}
+                </DropdownButton>
+                <DropdownButton
+                  id="time"
+                  title={
+                    this.state.time || <span className="placeholder">Time</span>
+                  }
+                  onSelect={this.handleTimeChange}
+                  key={this.state.time}>
+                  {times}
+                </DropdownButton>
+              </ButtonGroup>
+              <Button onClick={this.handleSubmit} className="lightPadding">
+                Submit
+              </Button>
+              <Button
+                className="cancelLink lightPadding"
+                onClick={this.toggleEditableField}>
+                Cancel
+              </Button>
+            </div>
+          </form>
+        ) : (
+          // locked to user input
+          <p className="centered">
+            <a onClick={this.toggleEditableField}>+ Add New Show</a>
+          </p>
+        )}
       </div>
     );
   },

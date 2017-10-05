@@ -1,6 +1,6 @@
 // ShowsContent.jsx
 
-const React = require('react');
+import React from 'react';
 
 import ShowsGraph from './ShowsGraph.jsx';
 import ShowBlurb from './ShowBlurb.jsx';
@@ -72,9 +72,11 @@ const ShowsContent = React.createClass({
           <div className="scheduleViewButton">
             <p
               className={
-                this.state.viewType == ScheduleViewType.grid
-                  ? 'switchSelStyle'
-                  : 'switchStyle'
+                this.state.viewType == ScheduleViewType.grid ? (
+                  'switchSelStyle'
+                ) : (
+                  'switchStyle'
+                )
               }
               onClick={() => {
                 this.updateViewType(ScheduleViewType.grid);
@@ -83,9 +85,11 @@ const ShowsContent = React.createClass({
             </p>
             <p
               className={
-                this.state.viewType == ScheduleViewType.list
-                  ? 'switchSelStyle'
-                  : 'switchStyle'
+                this.state.viewType == ScheduleViewType.list ? (
+                  'switchSelStyle'
+                ) : (
+                  'switchStyle'
+                )
               }
               onClick={() => {
                 this.updateViewType(ScheduleViewType.list);
@@ -94,29 +98,32 @@ const ShowsContent = React.createClass({
             </p>
           </div>
 
-          {this.state.viewType == ScheduleViewType.grid
-            ? <div>
-                {/* Grid View */}
-                <div className="graphStyle">
-                  <ShowsGraph
-                    shows={this.props.shows}
-                    currentShowID={this.props.currentShowID}
-                    spotlightShowID={this.props.spotlightShowID}
-                    activeShowID={
-                      this.state.activeShow && this.state.activeShow.id
-                    }
-                    onShowClick={this.toggleActiveShow}
-                  />
-                </div>
-                <div className="blurbStyle">
-                  {this.state.activeShow &&
-                    <ShowBlurb show={this.state.activeShow} />}
-                </div>
+          {this.state.viewType == ScheduleViewType.grid ? (
+            <div>
+              {/* Grid View */}
+              <div className="graphStyle">
+                <ShowsGraph
+                  shows={this.props.shows}
+                  currentShowID={this.props.currentShowID}
+                  spotlightShowID={this.props.spotlightShowID}
+                  activeShowID={
+                    this.state.activeShow && this.state.activeShow.id
+                  }
+                  onShowClick={this.toggleActiveShow}
+                />
               </div>
-            : <div>
-                {/* List View */}
-                <ShowList shows={this.props.shows} />
-              </div>}
+              <div className="blurbStyle">
+                {this.state.activeShow && (
+                  <ShowBlurb show={this.state.activeShow} />
+                )}
+              </div>
+            </div>
+          ) : (
+            <div>
+              {/* List View */}
+              <ShowList shows={this.props.shows} />
+            </div>
+          )}
         </div>
       </div>
     );

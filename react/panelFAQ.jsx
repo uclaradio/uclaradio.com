@@ -1,8 +1,8 @@
 // home.html
 // let DJ edit personal info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const urls = {
   url: '/panel/api/faq',
@@ -111,7 +111,7 @@ const FAQ = React.createClass({
       const updateQuestion = this.updateQuestion;
       const updateAnswer = this.updateAnswer;
       const deleteQuestion = this.deleteQuestion;
-      var faqs = this.state.tempFAQs.map((question, i) =>
+      var faqs = this.state.tempFAQs.map((question, i) => (
         <QuestionEdit
           key={i}
           qid={i}
@@ -121,45 +121,47 @@ const FAQ = React.createClass({
           handleUpdateAnswer={updateAnswer}
           handleDelete={deleteQuestion}
         />
-      );
+      ));
     } else {
-      var questions = this.state.faqs.map((faq, i) =>
+      var questions = this.state.faqs.map((faq, i) => (
         <Panel header={faq.question} eventKey={i} key={i}>
           {faq.answer}
         </Panel>
-      );
+      ));
     }
     return (
       <div className="faq">
-        {this.state.editing
-          ? <div className="editQuestions">
-              {faqs}
-              <div className="mainActions">
-                <a onClick={this.addQuestion}>+ Add New Question</a>
-                <span className="rightFloat">
-                  <Button onClick={this.submitData} className="lightPadding">
-                    Submit
-                  </Button>
-                  <Button
-                    className="cancelLink lightPadding"
-                    onClick={this.toggleEditing}>
-                    Cancel
-                  </Button>
-                </span>
-              </div>
+        {this.state.editing ? (
+          <div className="editQuestions">
+            {faqs}
+            <div className="mainActions">
+              <a onClick={this.addQuestion}>+ Add New Question</a>
+              <span className="rightFloat">
+                <Button onClick={this.submitData} className="lightPadding">
+                  Submit
+                </Button>
+                <Button
+                  className="cancelLink lightPadding"
+                  onClick={this.toggleEditing}>
+                  Cancel
+                </Button>
+              </span>
             </div>
-          : <div className="questions">
-              <Accordion>
-                {questions}
-              </Accordion>
-              {this.state.editable
-                ? <p className="mainActions">
-                    <a className="rightFloat" onClick={this.toggleEditing}>
-                      Edit
-                    </a>
-                  </p>
-                : ''}
-            </div>}
+          </div>
+        ) : (
+          <div className="questions">
+            <Accordion>{questions}</Accordion>
+            {this.state.editable ? (
+              <p className="mainActions">
+                <a className="rightFloat" onClick={this.toggleEditing}>
+                  Edit
+                </a>
+              </p>
+            ) : (
+              ''
+            )}
+          </div>
+        )}
       </div>
     );
   },

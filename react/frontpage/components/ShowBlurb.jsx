@@ -1,6 +1,6 @@
 // ShowBlurb.jsx
 
-const React = require('react');
+import React from 'react';
 
 // Common Components
 import RectImage from '../../common/RectImage.jsx';
@@ -60,9 +60,7 @@ const ShowBlurb = React.createClass({
         <h1 className="header">SELECTED SHOW: </h1>
         <div className="blurb">
           <div className="blurb-body">
-            <h1 className="showTitle">
-              {this.props.show.title}
-            </h1>
+            <h1 className="showTitle">{this.props.show.title}</h1>
             <Link to={this.urlFromShow(this.props.show)}>
               <RectImage
                 maxWidth="350px"
@@ -70,9 +68,7 @@ const ShowBlurb = React.createClass({
               />
             </Link>
             <Link to={this.getDJLink(this.djString(this.props.show.djs))}>
-              <p className="djs">
-                {this.djString(this.props.show.djs || {})}
-              </p>
+              <p className="djs">{this.djString(this.props.show.djs || {})}</p>
             </Link>
             <div className="lineStyle" />
             <div className="lineStyle" />
@@ -82,7 +78,7 @@ const ShowBlurb = React.createClass({
               <span style={{ float: 'right' }}>{this.props.show.genre}</span>
             </p>
             <div className="social-icons">
-              {this.props.show.facebook &&
+              {this.props.show.facebook && (
                 <a
                   className="facebookLogo"
                   href={this.props.show.facebook}
@@ -91,32 +87,34 @@ const ShowBlurb = React.createClass({
                     className="fa fa-facebook-square fa-lg"
                     aria-hidden="true"
                   />
-                </a>}
-              {this.props.show.tumblr &&
+                </a>
+              )}
+              {this.props.show.tumblr && (
                 <a
                   className="tumblrLogo"
                   href={this.props.show.tumblr}
                   target="_blank">
                   <i className="fa fa-tumblr-square fa-lg" aria-hidden="true" />
-                </a>}
-              {this.props.show.soundcloud &&
+                </a>
+              )}
+              {this.props.show.soundcloud && (
                 <a
                   className="soundcloudLogo"
                   href={this.props.show.soundcloud}
                   target="_blank">
                   <i className="fa fa-soundcloud fa-lg" aria-hidden="true" />
-                </a>}
-              {this.props.show.mixcloud &&
+                </a>
+              )}
+              {this.props.show.mixcloud && (
                 <a
                   className="mixcloudLogo"
                   href={this.props.show.mixcloud}
                   target="_blank">
                   <i className="fa fa-mixcloud fa-lg" aria-hidden="true" />
-                </a>}
+                </a>
+              )}
             </div>
-            <p className="blurbText">
-              {this.props.show.blurb}
-            </p>
+            <p className="blurbText">{this.props.show.blurb}</p>
             <Link to={this.urlFromShow(this.props.show)}>
               [CLICK FOR FULL SHOW PAGE]
             </Link>

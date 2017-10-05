@@ -1,8 +1,8 @@
 // show.html
 // let DJ edit show info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const urls = {
   showURL: '/panel/api/showData/',
@@ -245,9 +245,7 @@ const Show = React.createClass({
                 </div>
               </Col>
               <Col xs={12} md={8}>
-                <h3>
-                  {this.state.show.title}
-                </h3>
+                <h3>{this.state.show.title}</h3>
                 <InputFileUpload
                   accept=".png,.gif,.jpg,.jpeg"
                   title="Art"

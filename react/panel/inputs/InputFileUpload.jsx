@@ -1,7 +1,7 @@
 // InputFileUpload.jsx
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 // Bootstrap elements
 const Input = require('react-bootstrap').Input;
@@ -49,9 +49,11 @@ const InputFileUpload = React.createClass({
           labelClassName="col-xs-3"
           wrapperClassName="col-xs-9">
           <span>
-            {this.props.verified
-              ? <Glyphicon className="verifiedGlyph fileUpload" glyph="ok" />
-              : ''}
+            {this.props.verified ? (
+              <Glyphicon className="verifiedGlyph fileUpload" glyph="ok" />
+            ) : (
+              ''
+            )}
             <Input
               type="file"
               ref="input"

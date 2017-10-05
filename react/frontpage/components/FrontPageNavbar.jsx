@@ -1,6 +1,6 @@
 // FrontPageNavbar.jsx
 
-const React = require('react');
+import React from 'react';
 
 // Bootstrap Elements
 import { Nav, NavItem, Collapse, NavDropdown, MenuItem } from 'react-bootstrap';

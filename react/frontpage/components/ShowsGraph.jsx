@@ -1,6 +1,6 @@
 // ShowsGraph.jsx
 
-const React = require('react');
+import React from 'react';
 
 import Dates from '../../common/Dates';
 
@@ -142,11 +142,11 @@ const ShowsGraph = React.createClass({
   },
 
   render() {
-    const dayTitles = week.map(day =>
+    const dayTitles = week.map(day => (
       <span className="dayStyle" style={{ left: dayWidth, width: dayWidth }}>
         {Dates.abbreviatedDay(day)}
       </span>
-    );
+    ));
 
     const showBlocks = [];
 

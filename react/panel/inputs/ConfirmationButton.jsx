@@ -1,6 +1,6 @@
 // UserEditableDateTimeField.jsx
 
-const React = require('react');
+import React from 'react';
 
 // Bootstrap Elements
 const Button = require('react-bootstrap').Button;
@@ -23,16 +23,18 @@ const ConfirmationButton = React.createClass({
   render() {
     return (
       <div className="confirmationButton centered">
-        {this.state.unlock
-          ? <ButtonGroup>
-              <Button className="delete" onClick={this.props.onSubmit}>
-                {this.props.submit}
-              </Button>
-              <Button onClick={this.toggleUnlock}>Cancel</Button>
-            </ButtonGroup>
-          : <Button className="delete" onClick={this.toggleUnlock}>
-              {this.props.confirm}
-            </Button>}
+        {this.state.unlock ? (
+          <ButtonGroup>
+            <Button className="delete" onClick={this.props.onSubmit}>
+              {this.props.submit}
+            </Button>
+            <Button onClick={this.toggleUnlock}>Cancel</Button>
+          </ButtonGroup>
+        ) : (
+          <Button className="delete" onClick={this.toggleUnlock}>
+            {this.props.confirm}
+          </Button>
+        )}
       </div>
     );
   },

@@ -1,6 +1,6 @@
 // InputCheckbox.jsx
 
-const React = require('react');
+import React from 'react';
 
 // Bootstrap elements
 const Input = require('react-bootstrap').Input;
@@ -33,14 +33,18 @@ const InputCheckbox = React.createClass({
             label={
               <span
                 className={
-                  this.props.checked
-                    ? 'checkboxInner'
-                    : 'placeholder checkboxInner'
+                  this.props.checked ? (
+                    'checkboxInner'
+                  ) : (
+                    'placeholder checkboxInner'
+                  )
                 }>
                 {this.props.details}
-                {this.props.verified
-                  ? <Glyphicon className="verifiedGlyph" glyph="ok" />
-                  : ''}
+                {this.props.verified ? (
+                  <Glyphicon className="verifiedGlyph" glyph="ok" />
+                ) : (
+                  ''
+                )}
               </span>
             }
           />

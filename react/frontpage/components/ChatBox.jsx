@@ -1,6 +1,6 @@
 // ChatBox.jsx
 
-const React = require('react');
+import React from 'react';
 const List = require('collections/list');
 const cookie = require('react-cookie');
 
@@ -109,19 +109,21 @@ const ChatBox = React.createClass({
                     </center>
                   </div>
                   <div id="messages" className="messages">
-                    {this.state.messages.map(message =>
+                    {this.state.messages.map(message => (
                       <span key={message.id}>
-                        {' '}{!message.event &&
+                        {' '}
+                        {!message.event && (
                           <Message
                             user={message.user}
                             text={message.text}
                             date={message.date}
                             messageID={message.id}
                             viewing_user={viewing_user}
-                          />}
+                          />
+                        )}
                         <br />
                       </span>
-                    )}
+                    ))}
                   </div>
                 </div>
               </div>
@@ -176,9 +178,11 @@ const Message = React.createClass({
       <div className="message">
         <div
           className={
-            this.props.user != this.props.viewing_user
-              ? 'their-message'
-              : 'my-message'
+            this.props.user != this.props.viewing_user ? (
+              'their-message'
+            ) : (
+              'my-message'
+            )
           }>
           {/* Message Body */}
           <div className="message-body-tag">
@@ -201,19 +205,22 @@ const Message = React.createClass({
               return `${word} `;
             })}{' '}
             {/* Report Message */
-            this.props.user != this.props.viewing_user &&
+            this.props.user != this.props.viewing_user && (
               <button className="report-message" onClick={this.reportMessage}>
                 {this.state.reported ? 'GOT IT' : 'REPORT'}
-              </button>}
+              </button>
+            )}
           </div>
         </div>
         <br />
         <div
           id="message-username-tag"
           style={
-            this.props.user == this.props.viewing_user
-              ? { float: 'right' }
-              : { float: 'left' }
+            this.props.user == this.props.viewing_user ? (
+              { float: 'right' }
+            ) : (
+              { float: 'left' }
+            )
           }>
           <span className="message-username-tag-username">
             {this.props.user}

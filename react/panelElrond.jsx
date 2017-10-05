@@ -1,8 +1,8 @@
 // elrond.html
 // View what is currently on Rivendell
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const urls = {
   url: '/panel/api/songs',
@@ -62,24 +62,26 @@ const RivendellTable = React.createClass({
   render() {
     return (
       <div>
-        {this.state.fetching
-          ? <div className="centered">
-              <Spinner spinnerName="three-bounce" noFadeIn />
+        {this.state.fetching ? (
+          <div className="centered">
+            <Spinner spinnerName="three-bounce" noFadeIn />
+          </div>
+        ) : (
+          <div>
+            <div className="centered">
+              <Alert bsStyle="warning">
+                <strong>Last Updated:</strong> {this.state.lastUpdated}
+              </Alert>
             </div>
-          : <div>
-              <div className="centered">
-                <Alert bsStyle="warning">
-                  <strong>Last Updated:</strong> {this.state.lastUpdated}
-                </Alert>
-              </div>
-              <Table
-                className="table"
-                id="table"
-                data={this.state.songs}
-                filterable={['title', 'artist', 'album', 'group']}
-                itemsPerPage={100}
-              />
-            </div>}
+            <Table
+              className="table"
+              id="table"
+              data={this.state.songs}
+              filterable={['title', 'artist', 'album', 'group']}
+              itemsPerPage={100}
+            />
+          </div>
+        )}
       </div>
     );
   },

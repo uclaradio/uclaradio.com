@@ -1,6 +1,6 @@
 // ActionTable.js
 
-const React = require('react');
+import React from 'react';
 
 // Bootstrap elements
 const Table = require('react-bootstrap').Table;
@@ -47,21 +47,20 @@ const ActionButtons = React.createClass({
     return (
       <div className="actionButton">
         <ButtonGroup>
-          {showAccept
-            ? <OverlayTrigger
-                placement="top"
-                overlay={tooltip1}
-                delayShow={500}>
-                <Button
-                  className="table-action1"
-                  bsStyle="link"
-                  onClick={this.handleAccept}
-                  disabled={this.props.actionsDisabled}>
-                  <Glyphicon glyph="ok" />
-                  {this.props.acceptTitle}
-                </Button>
-              </OverlayTrigger>
-            : <div />}
+          {showAccept ? (
+            <OverlayTrigger placement="top" overlay={tooltip1} delayShow={500}>
+              <Button
+                className="table-action1"
+                bsStyle="link"
+                onClick={this.handleAccept}
+                disabled={this.props.actionsDisabled}>
+                <Glyphicon glyph="ok" />
+                {this.props.acceptTitle}
+              </Button>
+            </OverlayTrigger>
+          ) : (
+            <div />
+          )}
           {this.props.children}
           <OverlayTrigger placement="top" overlay={tooltip2} delayShow={500}>
             <Button
@@ -103,22 +102,23 @@ const ActionTable = React.createClass({
     const acceptTooltip = this.props.acceptTooltip;
     const rejectTooltip = this.props.rejectTooltip;
     const placeholders1 = this.props.placeholders1;
-    const tableBody = this.props.rows.map(row =>
+    const tableBody = this.props.rows.map(row => (
       <tr key={row.value}>
         <td>
-          {row.string1 ||
+          {row.string1 || (
             <span className="placeholder">
               {placeholders1[Math.floor(Math.random() * placeholders1.length)]}
-            </span>}
-          {row.actionsDisabled
-            ? <span className="actionGlyph">
-                <Glyphicon glyph={glyph} />
-              </span>
-            : <div />}
+            </span>
+          )}
+          {row.actionsDisabled ? (
+            <span className="actionGlyph">
+              <Glyphicon glyph={glyph} />
+            </span>
+          ) : (
+            <div />
+          )}
         </td>
-        <td>
-          {row.string2}
-        </td>
+        <td>{row.string2}</td>
         <td className="action-td">
           <ActionButtons
             value={row.value}
@@ -132,24 +132,18 @@ const ActionTable = React.createClass({
           />
         </td>
       </tr>
-    );
+    ));
 
     return (
       <div className="actionTable">
         <Table condensed hover>
           <thead>
             <tr>
-              <th>
-                {this.props.string1}
-              </th>
-              <th colSpan="2">
-                {this.props.string2}
-              </th>
+              <th>{this.props.string1}</th>
+              <th colSpan="2">{this.props.string2}</th>
             </tr>
           </thead>
-          <tbody>
-            {tableBody}
-          </tbody>
+          <tbody>{tableBody}</tbody>
         </Table>
       </div>
     );
