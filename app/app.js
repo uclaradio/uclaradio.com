@@ -21,11 +21,11 @@ const api = require('./routes/api');
 const chat = require('./routes/chat')(io);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'client', 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-app.use(favicon(`${__dirname}/public/favicon.ico`));
+app.use(favicon(`${__dirname}/../client/public/favicon.ico`));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,7 +43,7 @@ app.use(
   })
 );
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 
 app.use('/', routes);
 app.use('/staffingPoints', staffingPoints);
@@ -64,7 +64,7 @@ app.use((req, res) => {
   // var err = new Error('Not Found');
   // err.status = 404;
   // res.render('notFound');
-  res.sendFile(path.resolve('public/frontpage.html'));
+  res.sendFile(path.resolve('client/public/frontpage.html'));
 });
 
 // error handlers
