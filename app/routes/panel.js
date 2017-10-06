@@ -642,7 +642,6 @@ router.get('/elrond', (req, res) => {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    const path = require('path');
     res.sendFile(path.resolve('client/public/panel/elrond.html'));
   }
 });
