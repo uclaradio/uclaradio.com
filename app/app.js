@@ -21,7 +21,7 @@ const api = require('./routes/api');
 const chat = require('./routes/chat')(io);
 
 // view engine setup
-app.set('views', path.join(__dirname, 'client', 'views'));
+app.set('views', path.join(__dirname, '..', 'client', 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public

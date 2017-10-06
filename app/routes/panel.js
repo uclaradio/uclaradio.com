@@ -20,7 +20,7 @@ const RESIZE_WIDTH = 512;
 const IMAGE_QUALITY = 80;
 
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, '/../public/uploads'),
+  destination: path.join(__dirname, '/../client/public/uploads'),
   filename(req, file, cb) {
     cb(null, `${file.fieldname + Date.now()}.${mime.extension(file.mimetype)}`);
   },
@@ -55,7 +55,7 @@ const handleUpload = function(file) {
 
 router.get('/', (req, res) => {
   // check credentials
-  if (req.cookies.username == undefined || req.cookies.pass == undefined) {
+  if (req.cookies.username === undefined || req.cookies.pass === undefined) {
     res.render('panel/login', { title: 'Log In' });
   } else {
     accounts.autoLogin(req.cookies.username, req.cookies.pass, o => {
@@ -75,7 +75,7 @@ router.post('/', (req, res) => {
       res.status(400).send(err);
     } else {
       req.session.user = o;
-      if (req.body['remember-me'] == 'true') {
+      if (req.body['remember-me'] === 'true') {
         res.cookie('username', o.username, { maxAge: 900000 });
         res.cookie('pass', o.pass, { maxAge: 900000 });
       }
@@ -91,8 +91,7 @@ router.get('/home', (req, res) => {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    const path = require('path');
-    res.sendFile(path.resolve('public/panel/panel.html'));
+    res.sendFile(path.resolve('client/public/panel/panel.html'));
   }
 });
 
@@ -130,8 +129,7 @@ router.post('/signup', (req, res) => {
 /** *** FAQ **** */
 
 router.get('/faq', (req, res) => {
-  const path = require('path');
-  res.sendFile(path.resolve('public/panel/faq.html'));
+  res.sendFile(path.resolve('client/public/panel/faq.html'));
 });
 
 router.get('/api/faq', (req, res) => {
@@ -274,7 +272,6 @@ router.post('/manager/api/:link', (req, res) => {
       accounts.managerPrivilegeName,
       (err, hasAccess) => {
         if (hasAccess) {
-          const path = require('path');
           // perform action
           switch (req.params.link) {
             case 'info':
@@ -323,8 +320,7 @@ router.get('/manager', (req, res) => {
       accounts.managerPrivilegeName,
       (err, hasAccess) => {
         if (hasAccess) {
-          const path = require('path');
-          res.sendFile(path.resolve('public/panel/manager.html'));
+          res.sendFile(path.resolve('client/public/panel/manager.html'));
         } else {
           // redirect to home page
           res.redirect('/panel');
@@ -341,8 +337,7 @@ router.get('/show/:id', (req, res) => {
     // not logged in, redirect to log in page
     res.redirect('/panel');
   } else {
-    const path = require('path');
-    res.sendFile(path.resolve('public/panel/show.html'));
+    res.sendFile(path.resolve('client/public/panel/show.html'));
   }
 });
 
@@ -648,7 +643,7 @@ router.get('/elrond', (req, res) => {
     res.redirect('/panel');
   } else {
     const path = require('path');
-    res.sendFile(path.resolve('public/panel/elrond.html'));
+    res.sendFile(path.resolve('client/public/panel/elrond.html'));
   }
 });
 
