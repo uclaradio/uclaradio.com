@@ -2,17 +2,9 @@
 // shows full description of an event
 
 import React from 'react';
-
-// Frontpage Components
 import Loader from './Loader.jsx';
-
-// Common Components
 import RectImage from '../../common/RectImage.jsx';
-
-import { Link } from 'react-router';
-
-// styling
-require('./EventPage.scss');
+import './EventPage.scss';
 
 const defaultEventPic = '/img/radio.png';
 
@@ -47,18 +39,10 @@ const EventPage = React.createClass({
       <div className="eventPage">
         <RectImage maxWidth="350px" src={event.image || defaultEventPic} />
         <div className="eventInfo">
-          <h3>
-            {event.host}
-          </h3>
-          <h4>
-            {event.location}
-          </h4>
-          <p>
-            {formatDate(event.start)}
-          </p>
-          <p>
-            {event.type}
-          </p>
+          <h3>{event.host}</h3>
+          <h4>{event.location}</h4>
+          <p>{formatDate(event.start)}</p>
+          <p>{event.type}</p>
         </div>
       </div>
     );

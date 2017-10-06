@@ -1,12 +1,9 @@
 // ShowsGraph.jsx
 // graph selector with schedule of shows
 
-const React = require('react');
-
+import React from 'react';
 import Dates from '../../common/Dates';
-
-// styling
-require('./ShowsBlock.scss');
+import './ShowsBlock.scss';
 
 const week = [
   'sunday',
@@ -40,11 +37,7 @@ const ShowsGraph = React.createClass({
     this.setState({ activeShowID: showID });
   },
   render() {
-    const dayTitles = week.map(day =>
-      <p>
-        {Dates.abbreviatedDay(day)}
-      </p>
-    );
+    const dayTitles = week.map(day => <p>{Dates.abbreviatedDay(day)}</p>);
 
     let showBlocks = '';
     for (var hour = 0; hour < 24; hour++) {
@@ -57,9 +50,7 @@ const ShowsGraph = React.createClass({
             width: '100%',
             margin: '0 auto',
           }}>
-          <p className="timeStyle">
-            {hourString}
-          </p>
+          <p className="timeStyle">{hourString}</p>
           {week.map(day => {
             const show = this.props.schedule[day][hour];
             showBlocks += (
@@ -133,4 +124,4 @@ const ShowBlock = React.createClass({
   },
 });
 
-module.exports = ShowsGraph;
+export default ShowsGraph;

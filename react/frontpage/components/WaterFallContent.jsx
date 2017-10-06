@@ -7,7 +7,7 @@ import isMobile from './misc/isMobile.js';
 import Loader from './Loader.jsx';
 
 // styling
-require('./WaterFallContent.scss');
+import './WaterFallContent.scss';
 
 // API urls
 const SocialMediaURL = '/getSocialMedia';
@@ -104,7 +104,7 @@ const WaterFallContent = React.createClass({
       <div className="WaterFallContent">
         {this.state.fetching && <Loader />}
         <div className="wf-container" />
-        {isMobile.any() &&
+        {isMobile.any() && (
           <span>
             <br />
             <center>
@@ -112,7 +112,8 @@ const WaterFallContent = React.createClass({
                 MORE
               </button>
             </center>
-          </span>}
+          </span>
+        )}
       </div>
     );
   },

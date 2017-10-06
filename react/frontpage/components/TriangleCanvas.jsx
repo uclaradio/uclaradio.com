@@ -3,7 +3,7 @@
 import React from 'react';
 import Trianglify from 'trianglify';
 
-require('./TriangleCanvas.scss');
+import './TriangleCanvas.scss';
 
 /**
 Canvas with Trianglify styling applied, equal in size to current window,
@@ -40,12 +40,10 @@ const TriangleCanvas = React.createClass({
     return (
       <div className="triangleCanvas">
         <canvas className="canvasCanvas" id="daCanvas" />
-        <div className="canvasContent">
-          {this.props.children}
-        </div>
+        <div className="canvasContent">{this.props.children}</div>
       </div>
     );
   },
 });
 
-module.exports = TriangleCanvas;
+export default TriangleCanvas;

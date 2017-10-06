@@ -1,11 +1,10 @@
 // DJList.jsx
 
 import React from 'react';
+import './DJList.scss';
 
 import DJInfo from './DJInfo.jsx';
 import Loader from './Loader.jsx';
-
-require('./DJList.scss');
 
 const DJUrl = '/api/djs';
 
@@ -21,13 +20,13 @@ const DJList = React.createClass({
     this.props.updateDJs();
   },
   render() {
-    const djs = this.props.djs.map(dj =>
+    const djs = this.props.djs.map(dj => (
       <DJInfo
         name={dj.djName || dj.fullName}
         picture={dj.picture}
         key={dj.username}
       />
-    );
+    ));
 
     return (
       <div className="djList">
@@ -37,4 +36,4 @@ const DJList = React.createClass({
   },
 });
 
-module.exports = DJList;
+export default DJList;

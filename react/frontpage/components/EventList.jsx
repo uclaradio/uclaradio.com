@@ -2,15 +2,10 @@
 // list of events in events tab of frontpage
 
 import React from 'react';
-
 import { Link } from 'react-router';
-
-// Common Elements
 import RectImage from '../../common/RectImage.jsx';
 import Loader from './Loader.jsx';
-
-// styling
-require('./EventList.scss');
+import './EventList.scss';
 
 const defaultColor = 'grey';
 const colors = {
@@ -35,73 +30,63 @@ const EventList = React.createClass({
   },
   render() {
     // describe colors with events legend
-    const legend = Object.keys(colors).map(eventType =>
+    const legend = Object.keys(colors).map(eventType => (
       <div className="colorKeyLabel" key={eventType}>
-        <span>
-          {eventType}
-        </span>
+        <span>{eventType}</span>
         <div
           className="dot"
           style={{ backgroundColor: getBackgroundColor(eventType) }}
         />
       </div>
-    );
+    ));
 
     return (
       <div className="eventsTab">
-        {this.props.fetching && this.props.eventGroups.length == 0
-          ? <Loader />
-          : <div>
-              <div className="colorKey">
-                {legend}
-              </div>
-              {this.props.eventGroups.map(month =>
-                <div className="monthEvents" key={month.title}>
-                  <h1>
-                    {month.title}
-                  </h1>
-                  <div className="allEvents">
-                    {month.events.map(event => {
-                      const start = formatDate(event.start);
-                      const eventColor = getBackgroundColor(event.type);
-                      return (
-                        <div className="event" key={event.id}>
-                          <Link to={`/events/${event.id}`}>
-                            <RectImage src={event.image || defaultEventPic} />
-                            <div className="overlayWrapper">
-                              <div
-                                className="overlay"
-                                style={{ backgroundColor: eventColor }}>
-                                <p className="eventDate">
-                                  {start}
+        {this.props.fetching && this.props.eventGroups.length == 0 ? (
+          <Loader />
+        ) : (
+          <div>
+            <div className="colorKey">{legend}</div>
+            {this.props.eventGroups.map(month => (
+              <div className="monthEvents" key={month.title}>
+                <h1>{month.title}</h1>
+                <div className="allEvents">
+                  {month.events.map(event => {
+                    const start = formatDate(event.start);
+                    const eventColor = getBackgroundColor(event.type);
+                    return (
+                      <div className="event" key={event.id}>
+                        <Link to={`/events/${event.id}`}>
+                          <RectImage src={event.image || defaultEventPic} />
+                          <div className="overlayWrapper">
+                            <div
+                              className="overlay"
+                              style={{ backgroundColor: eventColor }}>
+                              <p className="eventDate">{start}</p>
+                              <div className="eventOverlay">
+                                <p className="bandName">{event.host}</p>
+                                <p className="separator">
+                                  . . .&nbsp;&nbsp;&nbsp;. .
+                                  .&nbsp;&nbsp;&nbsp;. . .
                                 </p>
-                                <div className="eventOverlay">
-                                  <p className="bandName">
-                                    {event.host}
-                                  </p>
-                                  <p className="separator">
-                                    . . .&nbsp;&nbsp;&nbsp;. .
-                                    .&nbsp;&nbsp;&nbsp;. . .
-                                  </p>
-                                  <p className="venue">
-                                    {event.location}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="hoverOverlay">
-                                <p className="enterLabel">
-                                  click for more details
-                                </p>
+                                <p className="venue">{event.location}</p>
                               </div>
                             </div>
-                          </Link>
-                        </div>
-                      );
-                    })}
-                  </div>
+                            <div className="hoverOverlay">
+                              <p className="enterLabel">
+                                click for more details
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                      </div>
+                    );
+                  })}
                 </div>
-              )}
-            </div>}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     );
   },
@@ -125,4 +110,4 @@ var formatDate = function(dateString) {
   return date.getDate();
 };
 
-module.exports = EventList;
+export default EventList;

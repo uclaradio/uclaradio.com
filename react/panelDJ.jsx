@@ -1,8 +1,26 @@
 // home.html
 // let DJ edit personal info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {
+  Button,
+  ButtonGroup,
+  Well,
+  Col,
+  Row,
+  Grid,
+  Input,
+  DropdownButton,
+  MenuItem,
+} from 'react-bootstrap';
+
+import PanelLinksNavbar from './panel/PanelLinksNavbar.jsx';
+import ShowList from './panel/ShowList.jsx';
+import RectImage from './common/RectImage.jsx';
+import InputEditableTextField from './panel/inputs/InputEditableTextField.jsx';
+import InputFileUpload from './panel/inputs/InputFileUpload.jsx';
+import Dates from './common/Dates.js';
 
 const urls = {
   url: '/panel/api/user',
@@ -11,30 +29,6 @@ const urls = {
   showLink: '/panel/show',
   addShowURL: '/panel/api/addShow',
 };
-
-// Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-const ShowList = require('./panel/ShowList.jsx');
-const RectImage = require('./common/RectImage.jsx');
-
-// Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-const InputFileUpload = require('./panel/inputs/InputFileUpload.jsx');
-
-// Misc
-const Dates = require('./common/Dates.js');
-
-// Bootstrap Elements
-const Grid = require('react-bootstrap').Grid;
-const Row = require('react-bootstrap').Row;
-const Col = require('react-bootstrap').Col;
-const Well = require('react-bootstrap').Well;
-const ButtonGroup = require('react-bootstrap').ButtonGroup;
-const Button = require('react-bootstrap').Button;
-const Input = require('react-bootstrap').Input;
-const DropdownButton = require('react-bootstrap').DropdownButton;
-const MenuItem = require('react-bootstrap').MenuItem;
-const Image = require('react-bootstrap').Image;
 
 const PanelPage = React.createClass({
   render() {
@@ -315,66 +309,68 @@ const NewShowForm = React.createClass({
     this.setState(this.getInitialState());
   },
   render() {
-    const days = Dates.availableDays.map(day =>
+    const days = Dates.availableDays.map(day => (
       <MenuItem key={day} eventKey={day}>
         {Dates.dayFromVar(day)}
       </MenuItem>
-    );
+    ));
 
-    const times = Dates.availableTimes.map(time =>
+    const times = Dates.availableTimes.map(time => (
       <MenuItem key={time} eventKey={time}>
         {time}
       </MenuItem>
-    );
+    ));
     return (
       <div className="newShowForm">
-        {this.state.editable
-          ? <form onSubmit={this.handleSubmit}>
-              <h4>New Show</h4>
-              <Input
-                type="text"
-                placeholder="Show Title"
-                value={this.state.title}
-                className="noBottom"
-                onChange={this.handleTitleChange}
-              />
-              <div className="centered">
-                <ButtonGroup className="lightPadding">
-                  <DropdownButton
-                    id="day"
-                    title={
-                      Dates.dayFromVar(this.state.day) ||
+        {this.state.editable ? (
+          <form onSubmit={this.handleSubmit}>
+            <h4>New Show</h4>
+            <Input
+              type="text"
+              placeholder="Show Title"
+              value={this.state.title}
+              className="noBottom"
+              onChange={this.handleTitleChange}
+            />
+            <div className="centered">
+              <ButtonGroup className="lightPadding">
+                <DropdownButton
+                  id="day"
+                  title={
+                    Dates.dayFromVar(this.state.day) || (
                       <span className="placeholder">Day</span>
-                    }
-                    onSelect={this.handleDayChange}
-                    key={this.state.day}>
-                    {days}
-                  </DropdownButton>
-                  <DropdownButton
-                    id="time"
-                    title={
-                      this.state.time ||
-                      <span className="placeholder">Time</span>
-                    }
-                    onSelect={this.handleTimeChange}
-                    key={this.state.time}>
-                    {times}
-                  </DropdownButton>
-                </ButtonGroup>
-                <Button onClick={this.handleSubmit} className="lightPadding">
-                  Submit
-                </Button>
-                <Button
-                  className="cancelLink lightPadding"
-                  onClick={this.toggleEditableField}>
-                  Cancel
-                </Button>
-              </div>
-            </form>
-          : // locked to user input
-            <p className="centered">
-              <a onClick={this.toggleEditableField}>+ Add New Show</a>
-            </p>}
+                    )
+                  }
+                  onSelect={this.handleDayChange}
+                  key={this.state.day}>
+                  {days}
+                </DropdownButton>
+                <DropdownButton
+                  id="time"
+                  title={
+                    this.state.time || <span className="placeholder">Time</span>
+                  }
+                  onSelect={this.handleTimeChange}
+                  key={this.state.time}>
+                  {times}
+                </DropdownButton>
+              </ButtonGroup>
+              <Button onClick={this.handleSubmit} className="lightPadding">
+                Submit
+              </Button>
+              <Button
+                className="cancelLink lightPadding"
+                onClick={this.toggleEditableField}>
+                Cancel
+              </Button>
+            </div>
+          </form>
+        ) : (
+          // locked to user input
+          <p className="centered">
+            <a onClick={this.toggleEditableField}>+ Add New Show</a>
+          </p>
+        )}
       </div>
     );
   },

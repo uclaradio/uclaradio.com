@@ -1,8 +1,16 @@
 // home.html
 // let DJ edit personal info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';
+
+// Panel Elements
+import ActionTable from './panel/ActionTable.jsx';
+import PanelLinksNavbar from './panel/PanelLinksNavbar.jsx';
+import ShowList from './panel/ShowList.jsx';
+import InputEditableTextField from './panel/inputs/InputEditableTextField.jsx';
+import InputCheckbox from './panel/inputs/InputCheckbox.jsx';
 
 const urls = {
   managerInfo: '/panel/manager/api/info',
@@ -17,21 +25,6 @@ const urls = {
   deleteMessages: '/panel/manager/api/deletechat',
   keepMessages: '/panel/manager/api/freechat',
 };
-
-// Panel Elements
-const ActionTable = require('./panel/ActionTable.jsx');
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-const ShowList = require('./panel/ShowList.jsx');
-
-// Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField.jsx');
-const InputCheckbox = require('./panel/inputs/InputCheckbox.jsx');
-
-// Bootstrap Elements
-import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';
-
-// other
-const CheckBoxList = require('react-checkbox-list');
 
 const ManagerPage = React.createClass({
   render() {
@@ -114,7 +107,7 @@ const ReportedMessages = React.createClass({
           <br />
           <table className="reportedTable">
             <tbody>
-              {this.state.messages.map(message =>
+              {this.state.messages.map(message => (
                 <tr key={message.id}>
                   <td>
                     <Button
@@ -133,12 +126,10 @@ const ReportedMessages = React.createClass({
                     </Button>
                   </td>
                   <td>
-                    <q>
-                      {message.text}
-                    </q>
+                    <q>{message.text}</q>
                   </td>
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
         </div>
@@ -438,35 +429,39 @@ const AccountsList = React.createClass({
   render() {
     return (
       <div className="accountsList">
-        {this.state.unverifiedRows.length > 0
-          ? <Panel header="Requested Accounts" bsStyle="warning">
-              <ActionTable
-                rows={this.state.unverifiedRows}
-                string1={'Full Name'}
-                string2={'Email'}
-                acceptTitle={atAcceptTitle}
-                rejectTitle={''}
-                acceptTooltip={atAcceptTooltip}
-                rejectTooltip={atRejectTooltipVerified}
-                onAccept={this.handleVerifyUser}
-                onReject={this.handleDeleteUnverifiedUser}
-              />
-            </Panel>
-          : <div />}
-        {this.state.verifiedRows.length > 0
-          ? <Panel header="DJs" bsStyle="info">
-              <ActionTable
-                rows={this.state.verifiedRows}
-                string1={'DJ Name'}
-                string2={'Full Name'}
-                placeholders1={['DJ Hagfish', 'DJ Bed Bugs', 'DJ Nickelback']}
-                rejectTitle={''}
-                rejectTooltip={atRejectTooltipVerified}
-                onReject={this.handleDeleteUser}
-                glyph={atManagerGlyph}
-              />
-            </Panel>
-          : <div />}
+        {this.state.unverifiedRows.length > 0 ? (
+          <Panel header="Requested Accounts" bsStyle="warning">
+            <ActionTable
+              rows={this.state.unverifiedRows}
+              string1={'Full Name'}
+              string2={'Email'}
+              acceptTitle={atAcceptTitle}
+              rejectTitle={''}
+              acceptTooltip={atAcceptTooltip}
+              rejectTooltip={atRejectTooltipVerified}
+              onAccept={this.handleVerifyUser}
+              onReject={this.handleDeleteUnverifiedUser}
+            />
+          </Panel>
+        ) : (
+          <div />
+        )}
+        {this.state.verifiedRows.length > 0 ? (
+          <Panel header="DJs" bsStyle="info">
+            <ActionTable
+              rows={this.state.verifiedRows}
+              string1={'DJ Name'}
+              string2={'Full Name'}
+              placeholders1={['DJ Hagfish', 'DJ Bed Bugs', 'DJ Nickelback']}
+              rejectTitle={''}
+              rejectTooltip={atRejectTooltipVerified}
+              onReject={this.handleDeleteUser}
+              glyph={atManagerGlyph}
+            />
+          </Panel>
+        ) : (
+          <div />
+        )}
       </div>
     );
   },

@@ -1,11 +1,8 @@
 // InputFileUpload.jsx
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-
-// Bootstrap elements
-const Input = require('react-bootstrap').Input;
-const Glyphicon = require('react-bootstrap').Glyphicon;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Input, Glyphicon } from 'react-bootstrap';
 
 /**
 *  Input file upload element
@@ -49,9 +46,11 @@ const InputFileUpload = React.createClass({
           labelClassName="col-xs-3"
           wrapperClassName="col-xs-9">
           <span>
-            {this.props.verified
-              ? <Glyphicon className="verifiedGlyph fileUpload" glyph="ok" />
-              : ''}
+            {this.props.verified ? (
+              <Glyphicon className="verifiedGlyph fileUpload" glyph="ok" />
+            ) : (
+              ''
+            )}
             <Input
               type="file"
               ref="input"
@@ -67,4 +66,4 @@ const InputFileUpload = React.createClass({
   },
 });
 
-module.exports = InputFileUpload;
+export default InputFileUpload;

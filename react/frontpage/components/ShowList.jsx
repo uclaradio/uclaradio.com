@@ -2,11 +2,9 @@
 // text list of shows
 
 import React from 'react';
-
 import { Link } from 'react-router';
-
-require('./ShowList.scss');
-require('../_common.scss');
+import './ShowList.scss';
+import '../_common.scss';
 
 // order in which days appear
 const scheduleDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -42,7 +40,7 @@ const ShowList = React.createClass({
   render() {
     return (
       <div className="showList">
-        {this.state.schedule.map(show =>
+        {this.state.schedule.map(show => (
           <div key={show.id}>
             <Link to={this.urlFromShow(show)}>
               <h3>
@@ -50,12 +48,10 @@ const ShowList = React.createClass({
                 {show.title}
               </h3>
             </Link>
-            <p>
-              {show.blurb}
-            </p>
+            <p>{show.blurb}</p>
             <br />
           </div>
-        )}
+        ))}
       </div>
     );
   },

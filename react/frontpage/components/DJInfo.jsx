@@ -32,9 +32,7 @@ const DJInfo = React.createClass({
             circle
           />
           <div className="djTileOverlay">
-            <p className="djName">
-              {this.props.name}
-            </p>
+            <p className="djName">{this.props.name}</p>
           </div>
         </Link>
       </div>
@@ -42,4 +40,4 @@ const DJInfo = React.createClass({
   },
 });
 
-module.exports = DJInfo;
+export default DJInfo;

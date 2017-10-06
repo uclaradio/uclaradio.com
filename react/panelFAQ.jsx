@@ -1,22 +1,15 @@
 // home.html
 // let DJ edit personal info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Button, Input, Panel, Accordion, Grid } from 'react-bootstrap';
+
+import PanelLinksNavbar from './panel/PanelLinksNavbar.jsx';
 
 const urls = {
   url: '/panel/api/faq',
 };
-
-// Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-
-// Boostrap Components
-const Accordion = require('react-bootstrap').Accordion;
-const Panel = require('react-bootstrap').Panel;
-const Input = require('react-bootstrap').Input;
-const Button = require('react-bootstrap').Button;
-const Grid = require('react-bootstrap').Grid;
 
 const FAQPage = React.createClass({
   render() {
@@ -111,7 +104,7 @@ const FAQ = React.createClass({
       const updateQuestion = this.updateQuestion;
       const updateAnswer = this.updateAnswer;
       const deleteQuestion = this.deleteQuestion;
-      var faqs = this.state.tempFAQs.map((question, i) =>
+      var faqs = this.state.tempFAQs.map((question, i) => (
         <QuestionEdit
           key={i}
           qid={i}
@@ -121,45 +114,47 @@ const FAQ = React.createClass({
           handleUpdateAnswer={updateAnswer}
           handleDelete={deleteQuestion}
         />
-      );
+      ));
     } else {
-      var questions = this.state.faqs.map((faq, i) =>
+      var questions = this.state.faqs.map((faq, i) => (
         <Panel header={faq.question} eventKey={i} key={i}>
           {faq.answer}
         </Panel>
-      );
+      ));
     }
     return (
       <div className="faq">
-        {this.state.editing
-          ? <div className="editQuestions">
-              {faqs}
-              <div className="mainActions">
-                <a onClick={this.addQuestion}>+ Add New Question</a>
-                <span className="rightFloat">
-                  <Button onClick={this.submitData} className="lightPadding">
-                    Submit
-                  </Button>
-                  <Button
-                    className="cancelLink lightPadding"
-                    onClick={this.toggleEditing}>
-                    Cancel
-                  </Button>
-                </span>
-              </div>
+        {this.state.editing ? (
+          <div className="editQuestions">
+            {faqs}
+            <div className="mainActions">
+              <a onClick={this.addQuestion}>+ Add New Question</a>
+              <span className="rightFloat">
+                <Button onClick={this.submitData} className="lightPadding">
+                  Submit
+                </Button>
+                <Button
+                  className="cancelLink lightPadding"
+                  onClick={this.toggleEditing}>
+                  Cancel
+                </Button>
+              </span>
             </div>
-          : <div className="questions">
-              <Accordion>
-                {questions}
-              </Accordion>
-              {this.state.editable
-                ? <p className="mainActions">
-                    <a className="rightFloat" onClick={this.toggleEditing}>
-                      Edit
-                    </a>
-                  </p>
-                : ''}
-            </div>}
+          </div>
+        ) : (
+          <div className="questions">
+            <Accordion>{questions}</Accordion>
+            {this.state.editable ? (
+              <p className="mainActions">
+                <a className="rightFloat" onClick={this.toggleEditing}>
+                  Edit
+                </a>
+              </p>
+            ) : (
+              ''
+            )}
+          </div>
+        )}
       </div>
     );
   },

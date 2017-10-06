@@ -2,22 +2,15 @@
 // shows full DJ information
 
 import React from 'react';
-
-// Frontpage Components
-import Loader from './Loader.jsx';
-
-// Common Components
+import { Col, Row } from 'react-bootstrap';
 import RectImage from '../../common/RectImage.jsx';
-
-import { Link } from 'react-router';
-import { Grid, Col, Row } from 'react-bootstrap';
+import './DJPage.scss';
 
 const defaultDJPic = '/img/bear_transparent.png';
 const defaultDJBio =
   " hasn't updated their bio yet, but they are pretty rad 😎";
 
 // styling
-require('./DJPage.scss');
 
 /**
 Page content for individual DJ
@@ -27,7 +20,6 @@ Displays DJ information
 @prop fetching: currently fetching djs
 @prop updateDJs: callback to update all listed djs
 * */
-
 const DJPage = React.createClass({
   componentWillMount() {
     if (this.props.dj == null) {
@@ -55,13 +47,9 @@ const DJPage = React.createClass({
             />
           </Col>
           <Col xs={12} md={8}>
-            <h2>
-              {' '}{dj.djName}{' '}
-            </h2>
+            <h2> {dj.djName} </h2>
             <h4> About </h4>
-            <p>
-              {' '}{dj.bio || dj.djName + defaultDJBio}{' '}
-            </p>
+            <p> {dj.bio || dj.djName + defaultDJBio} </p>
           </Col>
         </Row>
       </div>

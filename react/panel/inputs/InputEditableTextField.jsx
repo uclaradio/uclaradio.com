@@ -1,12 +1,8 @@
 // InputEditableTextField.jsx
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-
-// Bootstrap elements
-const Input = require('react-bootstrap').Input;
-const FormControls = require('react-bootstrap').FormControls;
-const Glyphicon = require('react-bootstrap').Glyphicon;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Input, FormControls, Glyphicon } from 'react-bootstrap';
 
 /**
 *  Show current saved value for a text field and let user update the field and submit changes
@@ -71,40 +67,44 @@ const InputEditableTextField = React.createClass({
     return (
       <div className="inputEditableTextField">
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
-          {this.state.editable
-            ? <Input
-                type={this.props.multiline ? 'textarea' : 'text'}
-                value={this.state.value}
-                placeholder={this.props.placeholder}
-                label={this.props.title}
-                ref="input"
-                groupClassName="group-class"
-                addonAfter={actionButton}
-                labelClassName="col-xs-12 col-sm-3"
-                wrapperClassName="col-xs-12 col-sm-9"
-                onChange={this.handleChange}
-              />
-            : // locked to user input
-              <FormControls.Static
-                label={this.props.title}
-                labelClassName="col-xs-3"
-                wrapperClassName="inputEditWrapper col-xs-9"
-                addonAfter={editButton}>
-                {this.props.currentValue
-                  ? <span>
-                      {this.props.currentValue}{' '}
-                      {this.props.verified
-                        ? <Glyphicon className="verifiedGlyph" glyph="ok" />
-                        : ''}
-                    </span>
-                  : <span className="placeholder">
-                      {this.props.placeholder}
-                    </span>}
-              </FormControls.Static>}
+          {this.state.editable ? (
+            <Input
+              type={this.props.multiline ? 'textarea' : 'text'}
+              value={this.state.value}
+              placeholder={this.props.placeholder}
+              label={this.props.title}
+              ref="input"
+              groupClassName="group-class"
+              addonAfter={actionButton}
+              labelClassName="col-xs-12 col-sm-3"
+              wrapperClassName="col-xs-12 col-sm-9"
+              onChange={this.handleChange}
+            />
+          ) : (
+            // locked to user input
+            <FormControls.Static
+              label={this.props.title}
+              labelClassName="col-xs-3"
+              wrapperClassName="inputEditWrapper col-xs-9"
+              addonAfter={editButton}>
+              {this.props.currentValue ? (
+                <span>
+                  {this.props.currentValue}{' '}
+                  {this.props.verified ? (
+                    <Glyphicon className="verifiedGlyph" glyph="ok" />
+                  ) : (
+                    ''
+                  )}
+                </span>
+              ) : (
+                <span className="placeholder">{this.props.placeholder}</span>
+              )}
+            </FormControls.Static>
+          )}
         </form>
       </div>
     );
   },
 });
 
-module.exports = InputEditableTextField;
+export default InputEditableTextField;

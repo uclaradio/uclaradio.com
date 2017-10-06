@@ -1,26 +1,20 @@
 // elrond.html
 // View what is currently on Rivendell
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Grid, Well, Alert } from 'react-bootstrap';
+import Reactable from 'reactable';
+import Spinner from 'react-spinkit';
+
+// Panel Elements
+import PanelLinksNavbar from './panel/PanelLinksNavbar.jsx';
+
+const Table = Reactable.Table;
 
 const urls = {
   url: '/panel/api/songs',
 };
-
-// Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar.jsx');
-
-// Boostrap Components
-const Grid = require('react-bootstrap').Grid;
-const Well = require('react-bootstrap').Well;
-const Alert = require('react-bootstrap').Alert;
-
-// Table Components
-const Reactable = require('reactable');
-
-const Table = Reactable.Table;
-const Spinner = require('react-spinkit');
 
 const ElrondPage = React.createClass({
   render() {
@@ -62,24 +56,26 @@ const RivendellTable = React.createClass({
   render() {
     return (
       <div>
-        {this.state.fetching
-          ? <div className="centered">
-              <Spinner spinnerName="three-bounce" noFadeIn />
+        {this.state.fetching ? (
+          <div className="centered">
+            <Spinner spinnerName="three-bounce" noFadeIn />
+          </div>
+        ) : (
+          <div>
+            <div className="centered">
+              <Alert bsStyle="warning">
+                <strong>Last Updated:</strong> {this.state.lastUpdated}
+              </Alert>
             </div>
-          : <div>
-              <div className="centered">
-                <Alert bsStyle="warning">
-                  <strong>Last Updated:</strong> {this.state.lastUpdated}
-                </Alert>
-              </div>
-              <Table
-                className="table"
-                id="table"
-                data={this.state.songs}
-                filterable={['title', 'artist', 'album', 'group']}
-                itemsPerPage={100}
-              />
-            </div>}
+            <Table
+              className="table"
+              id="table"
+              data={this.state.songs}
+              filterable={['title', 'artist', 'album', 'group']}
+              itemsPerPage={100}
+            />
+          </div>
+        )}
       </div>
     );
   },
