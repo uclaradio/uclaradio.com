@@ -3,8 +3,8 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import Loader from './Loader.jsx';
-import RectImage from '../../common/RectImage.jsx';
+import Loader from './Loader';
+import RectImage from '../../common/RectImage';
 import './ShowPage.scss';
 
 const defaultShowPic = '/img/radio.png';

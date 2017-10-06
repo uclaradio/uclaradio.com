@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import RectImage from '../../common/RectImage.jsx';
+import RectImage from '../../common/RectImage';
 import './ShowInfo.scss';
 
 const defaultShowPic = '/img/radio.png';

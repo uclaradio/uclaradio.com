@@ -6,8 +6,8 @@ import ReactDOM from 'react-dom';
 import { Grid, Row, Col, Well, FormControls } from 'react-bootstrap';
 
 // Panel Elements
-import PanelLinksNavbar from './panel/PanelLinksNavbar.jsx';
-import RectImage from './common/RectImage.jsx';
+import PanelLinksNavbar from './panel/PanelLinksNavbar';
+import RectImage from './common/RectImage';
 
 // Inputs
 import InputEditableTextField from './panel/inputs/InputEditableTextField';
