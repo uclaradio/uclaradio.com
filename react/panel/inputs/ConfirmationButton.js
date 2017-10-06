@@ -1,10 +1,7 @@
 // UserEditableDateTimeField.js
 
-const React = require('react');
-
-// Bootstrap Elements
-const Button = require('react-bootstrap').Button;
-const ButtonGroup = require('react-bootstrap').ButtonGroup;
+import React from 'react';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 /**
 *  Allows user to confirm a button submission
@@ -40,4 +37,4 @@ const ConfirmationButton = React.createClass({
   },
 });
 
-module.exports = ConfirmationButton;
+export default ConfirmationButton;

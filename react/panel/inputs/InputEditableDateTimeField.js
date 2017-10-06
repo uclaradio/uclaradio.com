@@ -1,16 +1,14 @@
 // InputEditableDateTimeField.js
 
-const React = require('react');
-
-// Helper files
-const Dates = require('../../common/Dates');
-
-// Bootstrap elements
-const ButtonGroup = require('react-bootstrap').ButtonGroup;
-const DropdownButton = require('react-bootstrap').DropdownButton;
-const MenuItem = require('react-bootstrap').MenuItem;
-const Input = require('react-bootstrap').Input;
-const Glyphicon = require('react-bootstrap').Glyphicon;
+import React from 'react';
+import {
+  ButtonGroup,
+  DropdownButton,
+  MenuItem,
+  Input,
+  Glyphicon,
+} from 'react-bootstrap';
+import Dates from '../../common/Dates';
 
 /**
 *  Show current saved value for day/time and let user update data and submit changes
@@ -137,4 +135,4 @@ const InputEditableDateTimeField = React.createClass({
   },
 });
 
-module.exports = InputEditableDateTimeField;
+export default InputEditableDateTimeField;

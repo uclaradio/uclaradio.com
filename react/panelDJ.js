@@ -1,8 +1,26 @@
 // home.html
 // let DJ edit personal info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {
+  Button,
+  ButtonGroup,
+  Well,
+  Col,
+  Row,
+  Grid,
+  Input,
+  DropdownButton,
+  MenuItem,
+} from 'react-bootstrap';
+
+import PanelLinksNavbar from './panel/PanelLinksNavbar';
+import ShowList from './panel/ShowList';
+import RectImage from './common/RectImage';
+import InputEditableTextField from './panel/inputs/InputEditableTextField';
+import InputFileUpload from './panel/inputs/InputFileUpload';
+import Dates from './common/Dates';
 
 const urls = {
   url: '/panel/api/user',
@@ -11,30 +29,6 @@ const urls = {
   showLink: '/panel/show',
   addShowURL: '/panel/api/addShow',
 };
-
-// Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar');
-const ShowList = require('./panel/ShowList');
-const RectImage = require('./common/RectImage');
-
-// Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField');
-const InputFileUpload = require('./panel/inputs/InputFileUpload');
-
-// Misc
-const Dates = require('./common/Dates');
-
-// Bootstrap Elements
-const Grid = require('react-bootstrap').Grid;
-const Row = require('react-bootstrap').Row;
-const Col = require('react-bootstrap').Col;
-const Well = require('react-bootstrap').Well;
-const ButtonGroup = require('react-bootstrap').ButtonGroup;
-const Button = require('react-bootstrap').Button;
-const Input = require('react-bootstrap').Input;
-const DropdownButton = require('react-bootstrap').DropdownButton;
-const MenuItem = require('react-bootstrap').MenuItem;
-const Image = require('react-bootstrap').Image;
 
 const PanelPage = React.createClass({
   render() {

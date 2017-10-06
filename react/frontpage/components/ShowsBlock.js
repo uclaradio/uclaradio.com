@@ -1,12 +1,9 @@
 // ShowsGraph.js
 // graph selector with schedule of shows
 
-const React = require('react');
-
+import React from 'react';
 import Dates from '../../common/Dates';
-
-// styling
-require('./ShowsBlock.scss');
+import './ShowsBlock.scss';
 
 const week = [
   'sunday',
@@ -127,4 +124,4 @@ const ShowBlock = React.createClass({
   },
 });
 
-module.exports = ShowsGraph;
+export default ShowsGraph;

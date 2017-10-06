@@ -1,12 +1,7 @@
 // DateTimeField.js
 
-const React = require('react');
-
-// Bootstrap elements
-const Grid = require('react-bootstrap').Grid;
-const Row = require('react-bootstrap').Row;
-const Col = require('react-bootstrap').Col;
-const Input = require('react-bootstrap').Input;
+import React from 'react';
+import { Grid, Row, Col, Input } from 'react-bootstrap';
 
 /**
 *  Allow user to select date and time as format ddd/hh (Mon / 10am)
@@ -73,4 +68,4 @@ const DateTimeField = React.createClass({
   },
 });
 
-module.exports = DateTimeField;
+export default DateTimeField;

@@ -14,10 +14,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res, next) => {
-  if (req.body.password != passwords.secretpassword)
+  if (req.body.password !== passwords.secretpassword)
     return res.end('Incorrect Password.');
 
-  // Adds the proposed show to the database.
   points.addStaffingPoints(req.body, (err, staffingPointsSaved) => {
     console.log('adding staffing points');
 

@@ -1,22 +1,15 @@
 // home.html
 // let DJ edit personal info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Button, Input, Panel, Accordion, Grid } from 'react-bootstrap';
+
+import PanelLinksNavbar from './panel/PanelLinksNavbar';
 
 const urls = {
   url: '/panel/api/faq',
 };
-
-// Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar');
-
-// Boostrap Components
-const Accordion = require('react-bootstrap').Accordion;
-const Panel = require('react-bootstrap').Panel;
-const Input = require('react-bootstrap').Input;
-const Button = require('react-bootstrap').Button;
-const Grid = require('react-bootstrap').Grid;
 
 const FAQPage = React.createClass({
   render() {

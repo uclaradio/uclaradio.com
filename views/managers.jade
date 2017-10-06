@@ -1,13 +1,13 @@
 doctype html(lang='en')
 head
     meta(charset='utf-8')
-         
+
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-         
+
     meta(name='description', content='UCLA Radio')
-         
+
     meta(name='viewport', content='width=device-width, initial-scale=1')
-         
+
     title UCLA Radio
     // material design requires
     link(rel='stylesheet', href='https://storage.googleapis.com/code.getmdl.io/1.0.1/material.indigo-pink.min.css')
@@ -18,22 +18,22 @@ head
     script(src='https://code.jquery.com/jquery-2.1.1.min.js')
     // bootstrap
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
-         
+
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
     // font awesome
     link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
     // other fonts
     link(href='https://fonts.googleapis.com/css?family=Lato:300italic', rel='stylesheet', type='text/css')
-         
+
     link(href='https://fonts.googleapis.com/css?family=Merriweather:300', rel='stylesheet', type='text/css')
     // trianglify, for background stuff
     script(src='https://d3js.org/d3.v3.min.js')
-         
+
     script(src='https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js')
     // Our stylesheets/scripts
     link(rel='stylesheet', type='text/css', href='css/main.css')
     link(rel='stylesheet', type='text/css', href='css/managers.css')
-         
+
     link(rel='icon', href='favicon.ico', type='image/x-icon')
 
     script(type='text/javascript').
@@ -54,7 +54,7 @@ head
         .div(class="col-sm-12 col-md-6 col-lg-4")
           .manager
             .top
-              h1 #{manager.position} // 
+              h1 #{manager.position} //
                 span(id="name") #{manager.name}
             .main
               .pic
@@ -70,11 +70,9 @@ head
                       ul
                         li #{manager.meetingTime}
                 .contact
-                  h1 CONTACT: 
+                  h1 CONTACT:
                   if (manager.email)
                     ul
                       li
                         a(href="mailto:#{manager.email}") email me!
 
-
-script(src='js/newBlurb.js')

@@ -1,19 +1,12 @@
 // ShowList.js
 
-const React = require('react');
+import React from 'react';
+import { Grid, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 
-// Misc
-const Dates = require('../common/Dates');
+import RectImage from '../common/RectImage';
+import Dates from '../common/Dates';
 
 // Panel elements
-const RectImage = require('../common/RectImage');
-
-// Boostrap elements
-const Grid = require('react-bootstrap').Grid;
-const Row = require('react-bootstrap').Row;
-const Col = require('react-bootstrap').Col;
-const ListGroup = require('react-bootstrap').ListGroup;
-const ListGroupItem = require('react-bootstrap').ListGroupItem;
 
 /**
 *  Presents a list of show objects with a standard format
@@ -72,4 +65,4 @@ const ShowList = React.createClass({
   },
 });
 
-module.exports = ShowList;
+export default ShowList;

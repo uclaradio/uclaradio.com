@@ -1,8 +1,7 @@
 // StreamIssuesPage.js
 
 import React from 'react';
-
-require('./StreamIssuesPage.scss');
+import './StreamIssuesPage.scss';
 
 const StreamIssuesPage = () => (
   <div className="streamIssues">
@@ -36,4 +35,4 @@ const StreamIssuesPage = () => (
   </div>
 );
 
-module.exports = StreamIssuesPage;
+export default StreamIssuesPage;

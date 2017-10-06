@@ -1,8 +1,7 @@
 // AboutPage.js
 
 import React from 'react';
-
-require('./AboutPage.scss');
+import './AboutPage.scss';
 
 /**
 Full page About content detailing UCLA Radio history and offering links to contact managers.
@@ -67,4 +66,4 @@ const AboutPage = () => (
   </div>
 );
 
-module.exports = AboutPage;
+export default AboutPage;

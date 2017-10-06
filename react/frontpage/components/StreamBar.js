@@ -1,21 +1,11 @@
 // StreamBar.js
 
 import React from 'react';
-
-// Bootstrap Elements
 import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
-
-// Open-Source Components
 import Slider from 'react-slick';
-
-// In house components
 import ChatBox from './ChatBox';
-
-// mobile?
 import isMobile from './misc/isMobile';
-
-// styling
-require('./StreamBar.scss');
+import './StreamBar.scss';
 
 const trackURL =
   'https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json';
@@ -267,4 +257,4 @@ const RecentlyPlayed = React.createClass({
   },
 });
 
-module.exports = StreamBar;
+export default StreamBar;

@@ -2,8 +2,7 @@
 // displayed error when an unknown page is requested
 
 import React from 'react';
-
-require('./Error404Page.scss');
+import './Error404Page.scss';
 
 const Error404Page = () => (
   <div className="error404Page">

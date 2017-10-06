@@ -1,17 +1,13 @@
 // ShowsContent.js
 
-const React = require('react');
+import React from 'react';
 
 import ShowsGraph from './ShowsGraph';
 import ShowBlurb from './ShowBlurb';
 import ShowList from './ShowList';
 import Loader from './Loader';
-
-// mobile?
 import isMobile from './misc/isMobile';
-
-// styling
-require('./ShowsContent.scss');
+import './ShowsContent.scss';
 
 // possible values for this.state.viewType
 const ScheduleViewType = {
@@ -130,4 +126,4 @@ const ShowsContent = React.createClass({
   },
 });
 
-module.exports = ShowsContent;
+export default ShowsContent;

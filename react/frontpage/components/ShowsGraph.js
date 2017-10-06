@@ -1,11 +1,8 @@
 // ShowsGraph.js
 
-const React = require('react');
-
+import React from 'react';
 import Dates from '../../common/Dates';
-
-// styling
-require('./ShowsGraph.scss');
+import './ShowsGraph.scss';
 
 const week = [
   'sunday',
@@ -299,4 +296,4 @@ const sortedShows = shows => {
   return schedule;
 };
 
-module.exports = ShowsGraph;
+export default ShowsGraph;

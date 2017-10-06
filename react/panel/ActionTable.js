@@ -1,18 +1,18 @@
 // ActionTable.js
 
-const React = require('react');
-
-// Bootstrap elements
-const Table = require('react-bootstrap').Table;
-const Button = require('react-bootstrap').Button;
-const ButtonGroup = require('react-bootstrap').ButtonGroup;
-const Glyphicon = require('react-bootstrap').Glyphicon;
-const OverlayTrigger = require('react-bootstrap').OverlayTrigger;
-const Tooltip = require('react-bootstrap').Tooltip;
+import React from 'react';
+import {
+  Table,
+  Button,
+  ButtonGroup,
+  Glyphicon,
+  OverlayTrigger,
+  Tooltip,
+} from 'react-bootstrap';
 
 /**
 *  ButtonGroup with one or two actions (reject, accept/reject)
-* 
+*
 *  @prop value: value to submit on actions
 *  @prop actionsDisabled: should disable buttons
 *  @prop acceptTitle: accept button title (or nothing)
@@ -80,7 +80,7 @@ const ActionButtons = React.createClass({
 
 /**
 *  Table with two string columns and one or two action buttons (accept/reject, reject)
-* 
+*
 *  @prop string1: string title of the first column
 *  @prop placeholders1: string placeholder of the first column
 *  @prop string2: string title of the second column
@@ -150,4 +150,4 @@ const ActionTable = React.createClass({
   },
 });
 
-module.exports = ActionTable;
+export default ActionTable;

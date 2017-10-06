@@ -1,13 +1,13 @@
 // staffingPoints.js
 // let managers approve staffing points
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const NameFilter = React.createClass({
   updateFilterName() {
     this.props.handleFilterChange({
-      nameFilter: this.refs.nameFilterInput.value,
+      nameFilteçr: this.refs.nameFilterInput.value,
     });
   },
 

@@ -2,17 +2,10 @@
 // shows full description of a show
 
 import React from 'react';
-
-// Frontpage Components
-import Loader from './Loader';
-
-// Common Components
-import RectImage from '../../common/RectImage';
-
 import { Link } from 'react-router';
-
-// styling
-require('./ShowPage.scss');
+import Loader from './Loader.jsx';
+import RectImage from '../../common/RectImage.jsx';
+import './ShowPage.scss';
 
 const defaultShowPic = '/img/radio.png';
 

@@ -8,9 +8,11 @@ import {
   Route,
   IndexRoute,
   browserHistory,
-  Link,
   IndexLink,
 } from 'react-router';
+import { connect } from 'react-redux';
+import ReactGA from 'react-ga';
+import { Grid, Col } from 'react-bootstrap';
 
 // Frontpage Containers (View Controllers)
 import ShowsTab from './containers/ShowsTab';
@@ -34,11 +36,9 @@ import PromoBanner from './components/PromoBanner';
 // Common Components
 import RectImage from '../common/RectImage';
 
-// Bootstrap elements
-import { Bootstrap, Grid, Col } from 'react-bootstrap';
+import './frontpage.scss';
 
 // Google analytics helper
-const ReactGA = require('react-ga');
 
 ReactGA.initialize('UA-21406547-20');
 
@@ -48,10 +48,8 @@ function logPageView() {
 }
 
 // Misc
-import theme from '../common/theme';
 
 // styling
-require('./frontpage.scss');
 
 // temp data
 // const sampleFeaturedShow = {"title":"Pirate Radio","id":12,"day":"Mon","time":"10pm","djs":{"chris":"DJ Jamburglar"},"genre":"Psychedelic","blurb":"Life is a trip... Sail away to undiscovered psychic frontiers with underground psychedelic jams","public":true,"pages":[],"episodes":[]};
@@ -109,13 +107,16 @@ const FrontpageContent = React.createClass({
 Redux container (wrapper) for FrontpageContent to provide props:
   nowPlaying, spotlight
 * */
-import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   const props = {};
 
   // set nowPlaying & spotlight shows if found
-  for (let showIndex = 0; showIndex < state.shows.shows.length; showIndex++) {
+  for (
+    let showIndex = 0;
+    showIndex < state.shows.shows.length;
+    showIndex += 1
+  ) {
     const show = state.shows.shows[showIndex];
     if (show.id === state.shows.nowPlayingID) {
       props.nowPlaying = show;

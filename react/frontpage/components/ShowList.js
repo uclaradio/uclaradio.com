@@ -2,11 +2,9 @@
 // text list of shows
 
 import React from 'react';
-
 import { Link } from 'react-router';
-
-require('./ShowList.scss');
-require('../_common.scss');
+import './ShowList.scss';
+import '../_common.scss';
 
 // order in which days appear
 const scheduleDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

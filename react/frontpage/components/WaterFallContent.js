@@ -7,7 +7,7 @@ import isMobile from './misc/isMobile';
 import Loader from './Loader';
 
 // styling
-require('./WaterFallContent.scss');
+import './WaterFallContent.scss';
 
 // API urls
 const SocialMediaURL = '/getSocialMedia';

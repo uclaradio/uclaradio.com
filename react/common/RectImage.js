@@ -1,15 +1,8 @@
 // RectImage
 
 import React from 'react';
-
-// Bootstrap Elements
-import Image from 'react-bootstrap';
-
-// Open-Source Elements
 import Rectangle from 'react-rectangle';
-
-// styling
-require('./RectImage.scss');
+import './RectImage.scss';
 
 /**
 *  Wrapper for Image which keeps its frame rectangular, sets height equal to width
@@ -56,4 +49,4 @@ const RectImage = React.createClass({
   },
 });
 
-module.exports = RectImage;
+export default RectImage;

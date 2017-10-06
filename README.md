@@ -12,20 +12,29 @@ In addition to the visible site, we also have a [RESTful API](https://github.com
 UCLA Radio is a completely student-run organization offering cultural content created by 100+ DJs. [Let us know](mailto:radio.web@media.ucla.edu) if you have any suggestions! All of the software here is written by students.
 
 ## Getting Started
-
 ### Running
-
 #### Development
 ##### Windows
-We're [working on that](https://github.com/uclaradio/uclaradio/pull/121)!
+1. Install [Chocolatey](https://chocolatey.org).
+2. Install git by running `choco install git --params="'/GitAndUnixToolsOnPath /NoAutoCrlf'" -y`.
+3. Install [CMDer](http://cmder.net) with `choco install cmder -y`.
+4. Install [cairo](https://www.cairographics.org), which is a dependency for a package we use. You can do this by downloading Glade (which is a program that installs cairo as a dependency) [here](http://gladewin32.sourceforge.net).
+5. Open CMDer and clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
+6. Open Powershell as an administrator and cd to the `uclaradio` repo you just cloned. Run our [`setup1.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup1.ps1) script. If you're getting a "running scripts is disabled error", try running `set-executionpolicy remotesigned`.
+7. Open up __another__ Powershell window as an administrator and run the [`setup2.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup2.ps1) script. Why two scripts? Windows is weird, man.
+7. Run mongo with `mongod`.
+8. Run `yarn dev` to start the server for development.
+9. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
 
 ##### MacOS
 1. Install [Homebrew](https://brew.sh).
-2. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
-3. Run our [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) script.
+2. Install git by running `brew install git` or by installing Xcode command line tools (which includes git) with `xcode-select --install`.
+3. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
+4. Run our [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) script.
     - Wondering what this does? Basically it installs the latest versions of [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and [Yarn](https://yarnpkg.com), then uses these programs to install the packages we use and set up a local database.
-4. Run `yarn dev` to start the server for development.
-5. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
+5. Run mongo with `mongod`.
+6. Run `yarn dev` to start the server for development.
+7. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
 
 #### Production
 - Make sure all packages are installed with `yarn`.
@@ -55,8 +64,6 @@ React front-end pages. Reusable components like UI elements are in `/react/compo
 [`app.js`](/app.js): The main server!
 
 [`defaultPasswords.json`](/defaultPasswords.json): Where the passwords go. These are different on the production server.
-
-[`Gruntfile.js`](/Gruntfile.js): Our [grunt](https://gruntjs.com) file. It automatically compiles all of our `.jsx` and `.scss` files. Just run `grunt watch`!
 
 [`setup.sh`](/setup.sh): The setup script for macOS.
 

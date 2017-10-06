@@ -2,19 +2,10 @@
 // A carousel of various promotion related material (ie Show of the Month, Ticket Giveaways, ect)
 
 import React from 'react';
-
-// Open-Source Components
-import Slider from 'react-slick';
-
-// Common Components
-import RectImage from '../../common/RectImage';
-
-import CountdownTimer from './CountdownTimer';
-
 import { Link } from 'react-router';
-
-// styling
-require('./PromoBanner.scss');
+import Slider from 'react-slick';
+import RectImage from '../../common/RectImage';
+import './PromoBanner.scss';
 
 // Promo Banner Data
 const bannerData = [

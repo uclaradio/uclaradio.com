@@ -2,17 +2,9 @@
 // shows full description of an event
 
 import React from 'react';
-
-// Frontpage Components
 import Loader from './Loader';
-
-// Common Components
 import RectImage from '../../common/RectImage';
-
-import { Link } from 'react-router';
-
-// styling
-require('./EventPage.scss');
+import './EventPage.scss';
 
 const defaultEventPic = '/img/radio.png';
 

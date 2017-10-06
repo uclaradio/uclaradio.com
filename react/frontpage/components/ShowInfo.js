@@ -1,14 +1,9 @@
 // ShowInfo.js
 
 import React from 'react';
-
-// Common Components
-import RectImage from '../../common/RectImage';
-
 import { Link } from 'react-router';
-
-// styling
-require('./ShowInfo.scss');
+import RectImage from '../../common/RectImage.jsx';
+import './ShowInfo.scss';
 
 const defaultShowPic = '/img/radio.png';
 
@@ -61,4 +56,4 @@ const ShowInfo = React.createClass({
   },
 });
 
-module.exports = ShowInfo;
+export default ShowInfo;

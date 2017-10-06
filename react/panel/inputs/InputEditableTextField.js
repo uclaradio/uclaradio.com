@@ -1,12 +1,8 @@
 // InputEditableTextField.js
 
-const React = require('react');
-const ReactDOM = require('react-dom');
-
-// Bootstrap elements
-const Input = require('react-bootstrap').Input;
-const FormControls = require('react-bootstrap').FormControls;
-const Glyphicon = require('react-bootstrap').Glyphicon;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Input, FormControls, Glyphicon } from 'react-bootstrap';
 
 /**
 *  Show current saved value for a text field and let user update the field and submit changes
@@ -111,4 +107,4 @@ const InputEditableTextField = React.createClass({
   },
 });
 
-module.exports = InputEditableTextField;
+export default InputEditableTextField;

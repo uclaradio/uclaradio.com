@@ -1,15 +1,10 @@
 // ShowBlurb.js
 
-const React = require('react');
-
-// Common Components
-import RectImage from '../../common/RectImage';
-
+import React from 'react';
 import { Link } from 'react-router';
-
-// styling
-require('./ShowBlurb.scss');
-require('../_common.scss');
+import RectImage from '../../common/RectImage.jsx';
+import './ShowBlurb.scss';
+import '../_common.scss';
 
 const defaultShowPic = '/img/radio.png';
 
@@ -125,4 +120,4 @@ const ShowBlurb = React.createClass({
   },
 });
 
-module.exports = ShowBlurb;
+export default ShowBlurb;

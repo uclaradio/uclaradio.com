@@ -40,4 +40,4 @@ const DJInfo = React.createClass({
   },
 });
 
-module.exports = DJInfo;
+export default DJInfo;

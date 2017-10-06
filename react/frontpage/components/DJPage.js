@@ -2,22 +2,16 @@
 // shows full DJ information
 
 import React from 'react';
-
-// Frontpage Components
-import Loader from './Loader';
+import { Col, Row } from 'react-bootstrap';
 
 // Common Components
 import RectImage from '../../common/RectImage';
-
-import { Link } from 'react-router';
-import { Grid, Col, Row } from 'react-bootstrap';
 
 const defaultDJPic = '/img/bear_transparent.png';
 const defaultDJBio =
   " hasn't updated their bio yet, but they are pretty rad 😎";
 
 // styling
-require('./DJPage.scss');
 
 /**
 Page content for individual DJ
@@ -27,7 +21,6 @@ Displays DJ information
 @prop fetching: currently fetching djs
 @prop updateDJs: callback to update all listed djs
 * */
-
 const DJPage = React.createClass({
   componentWillMount() {
     if (this.props.dj == null) {

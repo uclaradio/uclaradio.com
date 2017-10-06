@@ -1,8 +1,16 @@
 // home.html
 // let DJ edit personal info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';
+
+// Panel Elements
+import ActionTable from './panel/ActionTable';
+import PanelLinksNavbar from './panel/PanelLinksNavbar';
+import ShowList from './panel/ShowList';
+import InputEditableTextField from './panel/inputs/InputEditableTextField';
+import InputCheckbox from './panel/inputs/InputCheckbox';
 
 const urls = {
   managerInfo: '/panel/manager/api/info',
@@ -17,21 +25,6 @@ const urls = {
   deleteMessages: '/panel/manager/api/deletechat',
   keepMessages: '/panel/manager/api/freechat',
 };
-
-// Panel Elements
-const ActionTable = require('./panel/ActionTable');
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar');
-const ShowList = require('./panel/ShowList');
-
-// Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField');
-const InputCheckbox = require('./panel/inputs/InputCheckbox');
-
-// Bootstrap Elements
-import { Grid, Row, Col, Well, Panel, Button } from 'react-bootstrap';
-
-// other
-const CheckBoxList = require('react-checkbox-list');
 
 const ManagerPage = React.createClass({
   render() {

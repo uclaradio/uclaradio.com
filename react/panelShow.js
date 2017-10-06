@@ -1,8 +1,20 @@
 // show.html
 // let DJ edit show info
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Grid, Row, Col, Well, FormControls } from 'react-bootstrap';
+
+// Panel Elements
+import PanelLinksNavbar from './panel/PanelLinksNavbar.jsx';
+import RectImage from './common/RectImage.jsx';
+
+// Inputs
+import InputEditableTextField from './panel/inputs/InputEditableTextField';
+import InputEditableDateTimeField from './panel/inputs/InputEditableDateTimeField';
+import InputCheckbox from './panel/inputs/InputCheckbox';
+import InputFileUpload from './panel/inputs/InputFileUpload';
+import ConfirmationButton from './panel/inputs/ConfirmationButton';
 
 const urls = {
   showURL: '/panel/api/showData/',
@@ -11,24 +23,6 @@ const urls = {
   deleteShowURL: '/panel/api/deleteShow',
   deleteRedirectURL: '/panel',
 };
-
-// Panel Elements
-const PanelLinksNavbar = require('./panel/PanelLinksNavbar');
-const RectImage = require('./common/RectImage');
-
-// Inputs
-const InputEditableTextField = require('./panel/inputs/InputEditableTextField');
-const InputEditableDateTimeField = require('./panel/inputs/InputEditableDateTimeField');
-const InputCheckbox = require('./panel/inputs/InputCheckbox');
-const InputFileUpload = require('./panel/inputs/InputFileUpload');
-const ConfirmationButton = require('./panel/inputs/ConfirmationButton');
-
-// Bootstrap Elements
-const Grid = require('react-bootstrap').Grid;
-const Row = require('react-bootstrap').Row;
-const Col = require('react-bootstrap').Col;
-const Well = require('react-bootstrap').Well;
-const FormControls = require('react-bootstrap').FormControls;
 
 const ShowPage = React.createClass({
   getShowIDFromURL() {

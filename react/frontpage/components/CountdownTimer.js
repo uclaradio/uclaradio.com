@@ -4,12 +4,10 @@
 // http://codepen.io/SitePoint/pen/MwNPVq
 
 import React from 'react';
-
-// styling
-require('./CountdownTimer.scss');
+import './CountdownTimer.scss';
 
 /*
-CountdownTimer: 
+CountdownTimer:
 
 @prop deadline: deadline the countdown is for
 */

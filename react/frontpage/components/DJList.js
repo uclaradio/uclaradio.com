@@ -1,11 +1,10 @@
 // DJList.js
 
 import React from 'react';
+import './DJList.scss';
 
 import DJInfo from './DJInfo';
 import Loader from './Loader';
-
-require('./DJList.scss');
 
 const DJUrl = '/api/djs';
 
@@ -37,4 +36,4 @@ const DJList = React.createClass({
   },
 });
 
-module.exports = DJList;
+export default DJList;
