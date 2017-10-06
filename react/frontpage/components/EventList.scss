@@ -4,7 +4,7 @@ EventList.scss
 Sass styling for events tab of new frontpage
 **/
 
-@import '../common';
+@import "../common";
 
 // constants
 $event-width: 200px;
@@ -94,7 +94,7 @@ $serif-font: Georgia, serif;
   font-size: 18px;
   font-family: $serif-font;
   font-style: italic;
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 .hoverOverlay {
@@ -119,9 +119,9 @@ $serif-font: Georgia, serif;
   left: 0;
   z-index: 1;
   opacity: $overlay-opacity;
-    transition: opacity $overlay-duration;
+  transition: opacity $overlay-duration;
 }
-    
+
 .overlayWrapper:hover .overlay {
   opacity: 0;
 }

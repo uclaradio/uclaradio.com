@@ -6,7 +6,8 @@
     "postcheckout": "yarn",
     "start": "node ./bin/www",
     "watch": "nodemon ./bin/www --ignore public/",
-    "dev": "concurrently  --kill-others 'yarn run watch' 'yarn run assets' --names '💻,📦' --prefix name",
+    "dev":
+      "concurrently  --kill-others 'yarn run watch' 'yarn run assets' --names '💻,📦' --prefix name",
     "assets": "webpack --watch --display-max-modules 0",
     "precommit": "lint-staged",
     "test": "jest"
@@ -15,7 +16,8 @@
     "*.{js,jsx}": [
       "prettier --single-quote --trailing-comma es5 --jsx-bracket-same-line --write",
       "git add"
-    ]
+    ],
+    "*.{css,scss,json}": ["prettier --write", "git add"]
   },
   "dependencies": {
     "async": "^2.5.0",
