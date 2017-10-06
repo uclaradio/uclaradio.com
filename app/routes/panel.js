@@ -39,7 +39,10 @@ const handleUpload = function(file) {
       if (err) {
         errorCallback(err);
       }
-      img.resize(RESIZE_WIDTH, Jimp.AUTO).quality(IMAGE_QUALITY).write(imgPath);
+      img
+        .resize(RESIZE_WIDTH, Jimp.AUTO)
+        .quality(IMAGE_QUALITY)
+        .write(imgPath);
     });
   } else {
     console.log('Non-png/jpg file type');
