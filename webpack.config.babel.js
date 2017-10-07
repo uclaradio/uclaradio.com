@@ -3,13 +3,13 @@ import path from 'path';
 
 module.exports = {
   entry: {
-    FrontpageApp: './react/FrontpageApp.jsx',
-    panelDJ: './react/panelDJ.jsx',
-    panelElrond: './react/panelElrond.jsx',
-    panelFAQ: './react/panelFAQ.jsx',
-    panelManager: './react/panelManager.jsx',
-    panelShow: './react/panelShow.jsx',
-    staffingPoints: './react/staffingPoints.jsx',
+    FrontpageApp: './react/FrontpageApp.js',
+    panelDJ: './react/panelDJ.js',
+    panelElrond: './react/panelElrond.js',
+    panelFAQ: './react/panelFAQ.js',
+    panelManager: './react/panelManager.js',
+    panelShow: './react/panelShow.js',
+    staffingPoints: './react/staffingPoints.js',
     // vendors: ['react', 'react-bootstrap'],
   },
   output: {
@@ -19,12 +19,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js[x]?/,
+        test: /\.js/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react'],
-        },
       },
       {
         test: /\.scss/,
