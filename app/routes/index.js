@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 const async = require('async');
 const shows = require('../database/shows');
-const passwords = require('../passwords');
+const passwords = require('../../passwords');
 const requestify = require('requestify');
 
 const numberOfFBPosts = 7;

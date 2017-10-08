@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const passwords = require('../passwords.json');
+const passwords = require('../../passwords.json');
 
 const mail = {};
 

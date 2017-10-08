@@ -7,7 +7,7 @@
 // usage: node .../setupPanel.js
 
 const accounts = require('../accounts');
-const passwords = require('../../passwords.json');
+const passwords = require('../../../passwords.json');
 
 console.log('Setting up Secret DJ Panel...');
 

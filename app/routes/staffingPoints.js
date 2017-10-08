@@ -5,7 +5,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 const router = express.Router();
-const passwords = require('../passwords.json');
+const passwords = require('../../passwords.json');
 
 const points = require('../database/points');
 
