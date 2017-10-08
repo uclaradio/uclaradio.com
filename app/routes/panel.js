@@ -20,7 +20,7 @@ const RESIZE_WIDTH = 512;
 const IMAGE_QUALITY = 80;
 
 const storage = multer.diskStorage({
-  destination: path.join(__dirname, '/../client/public/uploads'),
+  destination: path.join(__dirname, '..', '..', 'client', 'public', 'uploads'),
   filename(req, file, cb) {
     cb(null, `${file.fieldname + Date.now()}.${mime.extension(file.mimetype)}`);
   },
