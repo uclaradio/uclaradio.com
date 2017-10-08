@@ -2,13 +2,13 @@
 .DS_Store
 node_modules/
 passwords.json
-public/blurbImages/
-public/uploads/
-public/build/
-public/build/*
+client/public/blurbImages/
+client/public/uploads/
+client/public/build/
+client/public/build/*
 npm-debug.log
 package.json
-public/js/react/
+client/public/js/react/
 data/*
 database/rivendell.xml
 
