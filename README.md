@@ -48,24 +48,20 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 uclaradio/
 ├── LICENSE.md
 ├── README.md
-├── app                     # Backend code
-│   ├── app.js
-│   ├── client/
-│   ├── database/
-│   ├── routes/
-│   └── services/
-├── bin                     # The command to run node
-│   └── www
-├── client                  # Frontend code
-│   ├── public/
-│   ├── react/
-│   └── views/
+├── app                       # Backend code
+│   ├── app.js                # The main server file
+│   ├── database/             #
+│   ├── routes/               #
+│   └── services/             #
+├── bin
+│   └── www                   # The command to run node
+├── client                    # Frontend code
+│   ├── public/               #
+│   ├── react/                # React files
+│   └── views/                # Jade templates
 ├── defaultPasswords.json
 ├── package.json
-├── scripts                 # Scripts to set things up
-│   ├── setup.sh
-│   ├── setup1.ps1
-│   └── setup2.ps1
+├── scripts/                  # Scripts to set things up
 ├── webpack.config.babel.js
 └── yarn.lock
 ```
@@ -77,9 +73,8 @@ As a student-run organization, UCLA Radio is especially liable to technical debt
 * Delete files that are not used anymore. It's okay, get rid of clutter.
 * Follow an organized structure. Put things in the right directories.
 
-We accept changes from both radio web members and outside contributors. Please note our [contributing guidelines](https://github.com/uclaradio/uclaradio/wiki/Contributing-Guidelines). Want to join radio? We [accept applications](http://apply.uclastudentmedia.com/applications/ucla-radio/web-staff/) every quarter.
+We accept changes from both radio web members and outside contributors. Please note our [contributing guidelines](master/.github/CONTRIBUTING.md). Want to join radio? We [accept applications](http://apply.uclastudentmedia.com/applications/ucla-radio/web-staff/) every quarter.
 
 
 ### License
-
 All of the code here is released under the [MIT License](/LICENSE.md), which basically means you can do anything you want with the code here as long as you attribute us and don't hold us liable for anything. Make something cool with our code? [Let us know](mailto:radio.web@media.ucla.edu), we'd love to hear what you made!
