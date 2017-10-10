@@ -70,43 +70,6 @@ uclaradio/
 └── yarn.lock
 ```
 
-#### React + API
-
-We prefer using a front-end web app and an API over static templates, because apps can be interactive. Our internal staff panel / content management system works this way:
-
-```javascript
-/***** User Home Page *****/
-
-// Front-end: provide HTML file to logged in users, redirect everyone else
-// uclaradio.com/panel/home -> HTML
-router.get('/home', function(req, res) {
-  if (req.session.user == null) {
-    // not logged in, redirect to log in page
-    res.redirect('/panel');
-  } else {
-    var path = require('path');
-    res.sendFile(path.resolve('public/panel/panel.html'));
-  }
-});
-
-// API: Return current logged-in user's shows as a JSON file which can be parsed by React, or 400 error
-// uclaradio.com/panel/api/shows -> JSON
-router.get('/api/shows', function(req, res) {
-  if (req.session.user == null) {
-    res.status(400).send();
-  } else {
-    var user = req.session.user;
-    shows.getShowsForUser(user.username, function(err, userShows) {
-      if (userShows) {
-        res.json({'shows': userShows});
-      } else {
-        res.status(400).send();
-      }
-    });
-  }
-});
-```
-
 ### Requirements for new code
 
 As a student-run organization, UCLA Radio is especially liable to technical debt. We have some goals for cleaning up our codebase in the future, but most importantly new code should:
