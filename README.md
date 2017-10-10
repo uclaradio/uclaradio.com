@@ -70,20 +70,6 @@ uclaradio/
 └── yarn.lock
 ```
 
-### React
-
-React files must be compiled to actual javascript before a browser can use them, because they do things like this:
-```javascript
-var djs = {'Toad', 'Squirrel', 'Camel'};
-return <p>UCLA Radio is a student-run organization with {djs.length} student DJs. </p>;
-```
-
-Do so with Grunt, which automates Webpack:
-* install grunt-client with npm: `npm install -g grunt-cli`
-* run `grunt` to compile .jsx files in `./react` and put minified versions in `./public/build`
-  * run `grunt watch` to automatically recompile whenever you hit save! (Note: this is done automatically for you when you run `npm run dev`!
-* add `.../build/[x].min.js` as a script in your HTML files
-
 #### React + API
 
 We prefer using a front-end web app and an API over static templates, because apps can be interactive. Our internal staff panel / content management system works this way:
