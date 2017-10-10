@@ -21,8 +21,8 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 3. Install [CMDer](http://cmder.net) with `choco install cmder -y`.
 4. Install [cairo](https://www.cairographics.org), which is a dependency for a package we use. You can do this by downloading Glade (which is a program that installs cairo as a dependency) [here](http://gladewin32.sourceforge.net).
 5. Open CMDer and clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
-6. Open Powershell as an administrator and cd to the `uclaradio` repo you just cloned. Run our [`setup1.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup1.ps1) script. If you're getting a "running scripts is disabled error", try running `set-executionpolicy remotesigned`.
-7. Open up __another__ Powershell window as an administrator and run the [`setup2.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup2.ps1) script. Why two scripts? Windows is weird, man.
+6. Open Powershell as an administrator and cd to the `uclaradio` repo you just cloned. Run our [`setup1.ps1`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup1.ps1) script. If you're getting a "running scripts is disabled error", try running `set-executionpolicy remotesigned`.
+7. Open up __another__ Powershell window as an administrator and run the [`setup2.ps1`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup2.ps1) script. Why two scripts? Windows is weird, man.
 7. Run mongo with `mongod`.
 8. Run `yarn dev` to start the server for development.
 9. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
@@ -31,7 +31,7 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 1. Install [Homebrew](https://brew.sh).
 2. Install git by running `brew install git` or by installing Xcode command line tools (which includes git) with `xcode-select --install`.
 3. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
-4. Run our [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) script.
+4. Run our [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup.sh) script.
     - Wondering what this does? Basically it installs the latest versions of [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and [Yarn](https://yarnpkg.com), then uses these programs to install the packages we use and set up a local database.
 5. Run mongo with `mongod`.
 6. Run `yarn dev` to start the server for development.
@@ -43,30 +43,32 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 
 ### Getting Started
 
-#### Directories
-
-##### [`./routes`](/routes)
-Handles all routing logic, or logic that deals with URI endpoints and HTTP request methods (GET, POST, etc.). (e.g. what happens when you load [`uclaradio.com/shows`](https://uclaradio.com/shows).)
-
-##### [`./database`](/database)
-Contains all data models and functions we use in the routes to do things like create a new show.
-
-##### [`./public`](/public)
-Everything we have public on the site. For your images, JavaScript, CSS, HTML and what have you.
-
-##### [`./views`](/views)
-Jade templates. Right now many front-end pages are in Jade, hopefully we will redesign them in Javascript soon.
-
-##### [`./react`](/react)
-React front-end pages. Reusable components like UI elements are in `/react/components`.
-
-#### Files
-
-[`app.js`](/app.js): The main server!
-
-[`defaultPasswords.json`](/defaultPasswords.json): Where the passwords go. These are different on the production server.
-
-[`setup.sh`](/setup.sh): The setup script for macOS.
+#### Structure
+```
+uclaradio/
+├── LICENSE.md
+├── README.md
+├── app                     # Backend code
+│   ├── app.js
+│   ├── client/
+│   ├── database/
+│   ├── routes/
+│   └── services/
+├── bin                     # The command to run node
+│   └── www
+├── client                  # Frontend code
+│   ├── public/
+│   ├── react/
+│   └── views/
+├── defaultPasswords.json
+├── package.json
+├── scripts                 # Scripts to set things up
+│   ├── setup.sh
+│   ├── setup1.ps1
+│   └── setup2.ps1
+├── webpack.config.babel.js
+└── yarn.lock
+```
 
 ### React
 
