@@ -1,5 +1,5 @@
 # UCLA Radio
-[![dependencies Status](https://david-dm.org/uclaradio/uclaradio/status.svg)](https://david-dm.org/uclaradio/uclaradio) [![devDependencies Status](https://david-dm.org/uclaradio/uclaradio/dev-status.svg)](https://david-dm.org/uclaradio/uclaradio?type=dev)
+[![dependencies Status](https://david-dm.org/uclaradio/uclaradio/status.svg)](https://david-dm.org/uclaradio/uclaradio) [![![devDependencies Status](https://david-dm.org/uclaradio/uclaradio/dev-status.svg)](https://david-dm.org/uclaradio/uclaradio?type=dev)
 [![Build Status](https://travis-ci.org/uclaradio/uclaradio.svg?branch=master)](https://travis-ci.org/uclaradio/uclaradio)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
