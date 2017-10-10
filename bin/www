@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const app = require('../app');
+const app = require('../app/app');
 const debug = require('debug')('uclaradio.github.io:server');
 const http = require('http');
 
