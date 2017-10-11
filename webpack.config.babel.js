@@ -3,13 +3,13 @@ import path from 'path';
 
 module.exports = {
   entry: {
-    FrontpageApp: './client/react/FrontpageApp.jsx',
-    panelDJ: './client/react/panelDJ.jsx',
-    panelElrond: './client/react/panelElrond.jsx',
-    panelFAQ: './client/react/panelFAQ.jsx',
-    panelManager: './client/react/panelManager.jsx',
-    panelShow: './client/react/panelShow.jsx',
-    staffingPoints: './client/react/staffingPoints.jsx',
+    FrontpageApp: './client/react/FrontpageApp.js',
+    panelDJ: './client/react/panelDJ.js',
+    panelElrond: './client/react/panelElrond.js',
+    panelFAQ: './client/react/panelFAQ.js',
+    panelManager: './client/react/panelManager.js',
+    panelShow: './client/react/panelShow.js',
+    staffingPoints: './client/react/staffingPoints.js',
     // vendors: ['react', 'react-bootstrap'],
   },
   output: {
