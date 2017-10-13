@@ -1,4 +1,4 @@
-// RectImage
+// RectImage.js
 
 import React from 'react';
 import Rectangle from 'react-rectangle';
