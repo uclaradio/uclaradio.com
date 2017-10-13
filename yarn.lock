@@ -2607,8 +2607,8 @@ eslint-config-prettier@^2.3.0:
     get-stdin "^5.0.1"
 
 eslint-config-uclaradio@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/eslint-config-uclaradio/-/eslint-config-uclaradio-1.0.8.tgz#b7490c5b451640fe904722de5dda18eeb37ef72d"
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/eslint-config-uclaradio/-/eslint-config-uclaradio-1.0.13.tgz#906627df23d384a53f62a0fc02a0c1b7e73777c6"
   dependencies:
     eslint-config-airbnb "^15.1.0"
     eslint-config-prettier "^2.3.0"
@@ -7963,8 +7963,8 @@ stylelint-config-standard@^17.0.0:
     stylelint-config-recommended "^1.0.0"
 
 stylelint-config-uclaradio@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-uclaradio/-/stylelint-config-uclaradio-1.0.0.tgz#83d4c36cd51740b8d300ae43d0bce112e07f54e8"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/stylelint-config-uclaradio/-/stylelint-config-uclaradio-1.0.1.tgz#afc67fddfd293ab09ae97bfd76390e3c2e6a0306"
   dependencies:
     stylelint-config-standard "^17.0.0"
 
