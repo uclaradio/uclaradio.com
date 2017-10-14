@@ -1,5 +1,6 @@
 # UCLA Radio
-[![dependencies Status](https://david-dm.org/uclaradio/uclaradio/status.svg)](https://david-dm.org/uclaradio/uclaradio) [![devDependencies Status](https://david-dm.org/uclaradio/uclaradio/dev-status.svg)](https://david-dm.org/uclaradio/uclaradio?type=dev)
+[![dependencies Status](https://david-dm.org/uclaradio/uclaradio/status.svg)](https://david-dm.org/uclaradio/uclaradio)
+[![devDependencies Status](https://david-dm.org/uclaradio/uclaradio/dev-status.svg)](https://david-dm.org/uclaradio/uclaradio?type=dev)
 [![Build Status](https://travis-ci.org/uclaradio/uclaradio.svg?branch=master)](https://travis-ci.org/uclaradio/uclaradio)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
@@ -20,8 +21,8 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 3. Install [CMDer](http://cmder.net) with `choco install cmder -y`.
 4. Install [cairo](https://www.cairographics.org), which is a dependency for a package we use. You can do this by downloading Glade (which is a program that installs cairo as a dependency) [here](http://gladewin32.sourceforge.net).
 5. Open CMDer and clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
-6. Open Powershell as an administrator and cd to the `uclaradio` repo you just cloned. Run our [`setup1.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup1.ps1) script. If you're getting a "running scripts is disabled error", try running `set-executionpolicy remotesigned`.
-7. Open up __another__ Powershell window as an administrator and run the [`setup2.ps1`](https://github.com/uclaradio/uclaradio/blob/master/setup2.ps1) script. Why two scripts? Windows is weird, man.
+6. Open Powershell as an administrator and cd to the `uclaradio` repo you just cloned. Run our [`setup1.ps1`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup1.ps1) script. If you're getting a "running scripts is disabled error", try running `set-executionpolicy remotesigned`.
+7. Open up __another__ Powershell window as an administrator and run the [`setup2.ps1`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup2.ps1) script. Why two scripts? Windows is weird, man.
 7. Run mongo with `mongod`.
 8. Run `yarn dev` to start the server for development.
 9. Point your browser to [`http://localhost:3000`](http://localhost:3000) :heart_eyes:
@@ -30,7 +31,7 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 1. Install [Homebrew](https://brew.sh).
 2. Install git by running `brew install git` or by installing Xcode command line tools (which includes git) with `xcode-select --install`.
 3. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download, give us some love by starring our repo.
-4. Run our [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/setup.sh) script.
+4. Run our [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup.sh) script.
     - Wondering what this does? Basically it installs the latest versions of [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and [Yarn](https://yarnpkg.com), then uses these programs to install the packages we use and set up a local database.
 5. Run mongo with `mongod`.
 6. Run `yarn dev` to start the server for development.
@@ -42,80 +43,27 @@ UCLA Radio is a completely student-run organization offering cultural content cr
 
 ### Getting Started
 
-#### Directories
-
-##### [`./routes`](/routes)
-Handles all routing logic, or logic that deals with URI endpoints and HTTP request methods (GET, POST, etc.). (e.g. what happens when you load [`uclaradio.com/shows`](https://uclaradio.com/shows).)
-
-##### [`./database`](/database)
-Contains all data models and functions we use in the routes to do things like create a new show.
-
-##### [`./public`](/public)
-Everything we have public on the site. For your images, JavaScript, CSS, HTML and what have you.
-
-##### [`./views`](/views)
-Jade templates. Right now many front-end pages are in Jade, hopefully we will redesign them in Javascript soon.
-
-##### [`./react`](/react)
-React front-end pages. Reusable components like UI elements are in `/react/components`.
-
-#### Files
-
-[`app.js`](/app.js): The main server!
-
-[`defaultPasswords.json`](/defaultPasswords.json): Where the passwords go. These are different on the production server.
-
-[`setup.sh`](/setup.sh): The setup script for macOS.
-
-### React
-
-React files must be compiled to actual javascript before a browser can use them, because they do things like this:
-```javascript
-var djs = {'Toad', 'Squirrel', 'Camel'};
-return <p>UCLA Radio is a student-run organization with {djs.length} student DJs. </p>;
+#### Structure
 ```
-
-Do so with Grunt, which automates Webpack:
-* install grunt-client with npm: `npm install -g grunt-cli`
-* run `grunt` to compile .jsx files in `./react` and put minified versions in `./public/build`
-  * run `grunt watch` to automatically recompile whenever you hit save! (Note: this is done automatically for you when you run `npm run dev`!
-* add `.../build/[x].min.js` as a script in your HTML files
-
-#### React + API
-
-We prefer using a front-end web app and an API over static templates, because apps can be interactive. Our internal staff panel / content management system works this way:
-
-```javascript
-/***** User Home Page *****/
-
-// Front-end: provide HTML file to logged in users, redirect everyone else
-// uclaradio.com/panel/home -> HTML
-router.get('/home', function(req, res) {
-  if (req.session.user == null) {
-    // not logged in, redirect to log in page
-    res.redirect('/panel');
-  } else {
-    var path = require('path');
-    res.sendFile(path.resolve('public/panel/panel.html'));
-  }
-});
-
-// API: Return current logged-in user's shows as a JSON file which can be parsed by React, or 400 error
-// uclaradio.com/panel/api/shows -> JSON
-router.get('/api/shows', function(req, res) {
-  if (req.session.user == null) {
-    res.status(400).send();
-  } else {
-    var user = req.session.user;
-    shows.getShowsForUser(user.username, function(err, userShows) {
-      if (userShows) {
-        res.json({'shows': userShows});
-      } else {
-        res.status(400).send();
-      }
-    });
-  }
-});
+uclaradio/
+├── LICENSE.md
+├── README.md
+├── app                       # Backend code
+│   ├── app.js                # The main server file
+│   ├── database/             #
+│   ├── routes/               #
+│   └── services/             #
+├── bin
+│   └── www                   # The command to run node
+├── client                    # Frontend code
+│   ├── public/               #
+│   ├── react/                # React files
+│   └── views/                # Jade templates
+├── defaultPasswords.json
+├── package.json
+├── scripts/                  # Scripts to set things up
+├── webpack.config.babel.js
+└── yarn.lock
 ```
 
 ### Requirements for new code
@@ -125,9 +73,8 @@ As a student-run organization, UCLA Radio is especially liable to technical debt
 * Delete files that are not used anymore. It's okay, get rid of clutter.
 * Follow an organized structure. Put things in the right directories.
 
-We accept changes from both radio web members and outside contributors. Please note our [contributing guidelines](https://github.com/uclaradio/uclaradio/wiki/Contributing-Guidelines). Want to join radio? We [accept applications](http://apply.uclastudentmedia.com/applications/ucla-radio/web-staff/) every quarter.
+We accept changes from both radio web members and outside contributors. Please note our [contributing guidelines](master/.github/CONTRIBUTING.md). Want to join radio? We [accept applications](http://apply.uclastudentmedia.com/applications/ucla-radio/web-staff/) every quarter.
 
 
 ### License
-
 All of the code here is released under the [MIT License](/LICENSE.md), which basically means you can do anything you want with the code here as long as you attribute us and don't hold us liable for anything. Make something cool with our code? [Let us know](mailto:radio.web@media.ucla.edu), we'd love to hear what you made!
