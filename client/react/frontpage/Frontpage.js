@@ -47,13 +47,6 @@ function logPageView() {
   ReactGA.pageview(window.location.pathname);
 }
 
-// Misc
-
-// styling
-
-// temp data
-// const sampleFeaturedShow = {"title":"Pirate Radio","id":12,"day":"Mon","time":"10pm","djs":{"chris":"DJ Jamburglar"},"genre":"Psychedelic","blurb":"Life is a trip... Sail away to undiscovered psychic frontiers with underground psychedelic jams","public":true,"pages":[],"episodes":[]};
-
 /**
 Frontpage UI, including radio stream, navbar, and triangle background.
 Expects children components for tab contents
@@ -94,9 +87,7 @@ const FrontpageContent = React.createClass({
               </Col>
             </Grid>
           </div>
-          <StreamBar
-            currentShowTitle={showPlaying ? this.props.nowPlaying.title : null}
-          />
+        <StreamBar currentShowTitle={showPlaying ? this.props.nowPlaying.title : null} />
         </TriangleCanvas>
       </div>
     );

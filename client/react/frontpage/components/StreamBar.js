@@ -1,16 +1,27 @@
 // StreamBar.js
 
 import React from 'react';
-import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
-import Slider from 'react-slick';
-import ChatBox from './ChatBox';
-import isMobile from './misc/isMobile';
-import './StreamBar.scss';
 
-const trackURL =
+// Bootstrap Elements
+import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
+
+// Open-Source Components
+import Slider from 'react-slick';
+
+// In house components
+import ChatBox from './ChatBox';
+import StreamMarquee from './StreamMarquee';
+
+//mobile?
+import isMobile from './misc/isMobile.js';
+
+// styling
+require('./StreamBar.scss');
+
+var trackURL =
   'https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json';
-const streamURL = 'http://uclaradio.com:8000/;';
-let stream;
+var streamURL = 'http://uclaradio.com:8000/;';
+var stream;
 
 /**
 Black floating audio stream bar that sits at bottom of screen,
@@ -18,8 +29,8 @@ plays audio and shows recent tracks
 
 @prop currentShowTitle: title of currently playing show, or null
 */
-const StreamBar = React.createClass({
-  getInitialState() {
+var StreamBar = React.createClass({
+  getInitialState: function() {
     return {
       playing: false,
       recentExpanded: false,
@@ -27,13 +38,13 @@ const StreamBar = React.createClass({
       hasReset: false,
     };
   },
-  componentDidMount() {
+  componentDidMount: function() {
     stream = document.getElementById('stream');
     if (!isMobile.any()) {
       stream.setAttribute('preload', 'auto');
     }
   },
-  togglePlay() {
+  togglePlay: function() {
     if (this.state.playing) {
       // pause
       stream.pause();
@@ -51,22 +62,22 @@ const StreamBar = React.createClass({
       this.setState({ playing: true });
     }
   },
-  toggleRecentExpanded() {
+  toggleRecentExpanded: function() {
     this.setState({
       recentExpanded: !this.state.recentExpanded,
       chatExpanded: false,
     });
   },
-  togggleChatExpanded() {
+  togggleChatExpanded: function() {
     this.setState({
       chatExpanded: !this.state.chatExpanded,
       recentExpanded: false,
     });
   },
-  onReset() {
+  onReset: function() {
     this.setState({ hasReset: true });
   },
-  render() {
+  render: function() {
     return (
       <div className="streamBar">
         <Grid>
@@ -74,7 +85,7 @@ const StreamBar = React.createClass({
             <Collapse
               in={this.state.chatExpanded}
               onEntering={() => {
-                const objDiv = document.getElementById('chatbox');
+                var objDiv = document.getElementById('chatbox');
                 objDiv.scrollTop = objDiv.scrollHeight;
               }}>
               <div>
@@ -82,6 +93,7 @@ const StreamBar = React.createClass({
               </div>
             </Collapse>
           </div>
+          <StreamMarquee message="ON-AIR NUMBER: (310) 794-9348 | REQUEST NUMBER: (310) 825-9999" />
           <div
             style={this.state.hasReset ? null : { opacity: '0', height: '0' }}>
             <RecentlyPlayed
@@ -123,7 +135,7 @@ const StreamBar = React.createClass({
               </span>
               <span className="playText">
                 {this.props.currentShowTitle ? (
-                  `LIVE: ${this.props.currentShowTitle}`
+                  'LIVE: ' + this.props.currentShowTitle
                 ) : (
                   'LIVE STREAM'
                 )}
@@ -140,8 +152,8 @@ const StreamBar = React.createClass({
 Recently played tracks collapsable slider
 @prop expanded: should show recently played tracks
 */
-const RecentlyPlayed = React.createClass({
-  getInitialState() {
+var RecentlyPlayed = React.createClass({
+  getInitialState: function() {
     return {
       recentTracks: [],
       mounted: false,
@@ -149,16 +161,16 @@ const RecentlyPlayed = React.createClass({
       hasReset: false,
     };
   },
-  componentWillUnmount() {
+  componentWillUnmount: function() {
     clearInterval(this.interval);
   },
-  componentDidMount() {
+  componentDidMount: function() {
     this.updateRecentTracks();
     // refresh tracks every 30 seconds
     this.interval = setInterval(this.updateRecentTracks, 30 * 1000);
     this.setState({ mounted: true });
   },
-  onEntered() {
+  onEntered: function() {
     if (!this.state.prepared) {
       this.setState({ prepared: true });
     }
@@ -168,42 +180,44 @@ const RecentlyPlayed = React.createClass({
       document.getElementById('focusAnchor').focus();
     }
   },
-  onExited() {
+  onExited: function() {
     if (this.props.reset) {
       this.props.onReset();
     }
   },
-  truncateName(name, l) {
-    return name.length > l ? `${name.substr(0, l - 2)}\u2026` : name;
+  truncateName: function(name, l) {
+    return name.length > l ? name.substr(0, l - 2) + '\u2026' : name;
   },
-  updateRecentTracks() {
+  updateRecentTracks: function() {
     $.ajax({
       url: trackURL,
       dataType: 'json',
       cache: false,
       success: function(rawTracks) {
-        const truncateName = this.truncateName;
-        let tracks = rawTracks.recenttracks.track.map(rawTrack => ({
-          artist: truncateName(rawTrack.artist['#text'], 22),
-          name: truncateName(rawTrack.name, 22),
-          url: rawTrack.url,
-          image:
-            rawTrack.image[1]['#text'] != ''
-              ? rawTrack.image[1]['#text']
-              : '/img/no_album_artwork.jpg',
-          nowPlaying: rawTrack['@attr'] != null,
-        }));
+        var truncateName = this.truncateName;
+        var tracks = rawTracks.recenttracks.track.map(function(rawTrack) {
+          return {
+            artist: truncateName(rawTrack.artist['#text'], 22),
+            name: truncateName(rawTrack.name, 22),
+            url: rawTrack.url,
+            image:
+              rawTrack.image[1]['#text'] != ''
+                ? rawTrack.image[1]['#text']
+                : '/img/no_album_artwork.jpg',
+            nowPlaying: rawTrack['@attr'] != null,
+          };
+        });
         if (!tracks) {
           tracks = [];
         }
         this.setState({ recentTracks: tracks });
       }.bind(this),
-      error(xhr, status, err) {
+      error: function(xhr, status, err) {
         console.error(trackURL, status, err.toString());
-      },
+      }.bind(this),
     });
   },
-  render() {
+  render: function() {
     const slideSettings = {
       infinite: false,
       arrows: true,
@@ -228,26 +242,28 @@ const RecentlyPlayed = React.createClass({
             onExited={this.onExited}>
             <div className="recentContent">
               <Slider {...slideSettings}>
-                {this.state.recentTracks.map((track, i) => (
-                  <div
-                    id={track.nowPlaying ? 'nowPlaying' : 'focusAnchor'}
-                    className="trackInfo"
-                    key={track.artist + track.name + i}>
-                    <div className="albumArt">
-                      <img className="trackImage" src={track.image} />
+                {this.state.recentTracks.map(function(track, i) {
+                  return (
+                    <div
+                      id={track.nowPlaying ? 'nowPlaying' : 'focusAnchor'}
+                      className="trackInfo"
+                      key={track.artist + track.name + i}>
+                      <div className="albumArt">
+                        <img className="trackImage" src={track.image} />
+                      </div>
+                      <div className="trackName">
+                        <a href={track.url} target="_blank">
+                          {track.name}
+                        </a>
+                      </div>
+                      <div className="trackArtist">
+                        <a href={track.url} target="_blank">
+                          {track.artist}
+                        </a>
+                      </div>
                     </div>
-                    <div className="trackName">
-                      <a href={track.url} target="_blank">
-                        {track.name}
-                      </a>
-                    </div>
-                    <div className="trackArtist">
-                      <a href={track.url} target="_blank">
-                        {track.artist}
-                      </a>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </Slider>
             </div>
           </Collapse>
