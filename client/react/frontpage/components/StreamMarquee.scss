@@ -18,9 +18,9 @@ Sass styling for frong page marquee component
   margin-left: 150px;
   margin-right: 150px;
   height: 100%;
-  width: calc(100% - 250px - 150px);
-  width: -moz-calc(100% - 250px - 150px); /* firefox */
-  width: -webkit-calc(100% - 250px - 150px); /* safari */
+  width: calc(100% - 250px - 300px);
+  width: -moz-calc(100% - 250px - 300px); /* firefox */
+  width: -webkit-calc(100% - 250px - 300px); /* safari */
   overflow: hidden;
 }
 

@@ -1,4 +1,4 @@
-// StreamMarquee.jsx
+// StreamMarquee.js
 
 import React from 'react';
 
@@ -19,7 +19,7 @@ var StreamMarquee = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });
 
-module.exports = StreamMarquee;
+export default StreamMarquee;
