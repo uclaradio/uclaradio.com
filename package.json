@@ -6,7 +6,8 @@
     "postcheckout": "yarn",
     "start": "node ./bin/www",
     "watch": "nodemon ./bin/www --ignore public/",
-    "dev": "concurrently  --kill-others 'yarn run watch' 'yarn run assets' --names '💻,📦' --prefix name",
+    "dev":
+      "concurrently  --kill-others 'yarn run watch' 'yarn run assets' --names '💻,📦' --prefix name",
     "assets": "webpack --watch --display-max-modules 0",
     "precommit": "lint-staged",
     "test": "jest"
@@ -15,7 +16,8 @@
     "*.{js,jsx}": [
       "prettier --single-quote --trailing-comma es5 --jsx-bracket-same-line --write",
       "git add"
-    ]
+    ],
+    "*.{css,scss,json}": ["prettier --write", "git add"]
   },
   "dependencies": {
     "async": "^2.5.0",
@@ -63,6 +65,7 @@
     "xml2js": "^0.4.17"
   },
   "devDependencies": {
+    "autoprefixer": "^7.1.4",
     "babel-cli": "^6.6.0",
     "babel-core": "^6.20.0",
     "babel-loader": "^7.1.2",
@@ -78,10 +81,12 @@
     "json-loader": "^0.5.7",
     "jsx-loader": "^0.13.2",
     "lint-staged": "^4.0.3",
+    "postcss-loader": "^2.0.6",
     "prettier": "^1.5.3",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "stylelint": "^8.0.0",
+    "stylelint-config-uclaradio": "^1.0.0",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
   }

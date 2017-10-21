@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+import autoprefixer from 'autoprefixer';
 import path from 'path';
 
 module.exports = {
@@ -25,11 +26,20 @@ module.exports = {
       },
       {
         test: /\.scss/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          { loader: 'style-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
+        ],
       },
       {
         test: /\.css/,
-        loaders: ['style-loader', 'css-loader'],
+        use: [
+          { loader: 'style-loader', options: { sourceMap: true } },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+        ],
       },
       {
         test: /\.json/,
