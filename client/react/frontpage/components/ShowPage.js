@@ -44,15 +44,17 @@ const ShowPage = React.createClass({
     return `/djs/${djName}`;
   },
   render() {
-    const show = this.props.show;
-    const djName = this.djString(show.djs);
-    if (!show) {
+    if (!this.props.show) {
       return (
         <div className="showPage">
           {this.props.fetching ? <Loader /> : "This show doesn't exist!"}
         </div>
       );
     }
+
+    const show = this.props.show;
+    const djName = this.djString(show.djs);
+
     return (
       <div className="showPage">
         <p>
