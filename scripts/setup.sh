@@ -25,7 +25,7 @@ cp defaultPasswords.json passwords.json
 echo 'Seeding database...'
 mongod &
 MONGO_PID=$!
-node database/scripts/setupPanel.js &
+node app/database/scripts/setupPanel.js &
 NODE_PID=$!
 
 wait $NODE_PID
