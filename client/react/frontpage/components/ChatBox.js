@@ -61,7 +61,7 @@ const ChatBox = React.createClass({
         });
         this.setState({ messages });
 
-        const first = messages.peek();
+        const first = messages[0];
         if (first) {
           this.setState({ message_db_cursor: first.id });
         }
