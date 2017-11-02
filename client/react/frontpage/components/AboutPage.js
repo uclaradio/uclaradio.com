@@ -16,8 +16,8 @@ const AboutPage = () => (
 
       <div className="threesplit">
         <h3> GENERAL INFO /INQUIRIES </h3>
-        <a href="mailto:radio.info@media.ucla.com" target="_top">
-          | radio.info@media.ucla.com{' '}
+        <a href="mailto:radio.info@media.ucla.edu" target="_top">
+          | radio.info@media.ucla.edu{' '}
         </a>
         <br />
         <a href="mailto:gm@media.ucla.edu" target="_top">
@@ -29,6 +29,7 @@ const AboutPage = () => (
           | radio.music@media.ucla.edu
         </a>
       </div>
+
       <div className="threesplit">
         <h3> PLAYLISTS </h3>
         <a href="mailto:radio.playlists@media.ucla.edu" target="_top">
