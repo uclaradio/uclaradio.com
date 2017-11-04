@@ -26,6 +26,7 @@ import DJContainer from './containers/DJContainer';
 import TriangleCanvas from './components/TriangleCanvas';
 import FrontPageNavbar from './components/FrontPageNavbar';
 import StreamBar from './components/StreamBar';
+import SocialPanel from './components/SocialPanel';
 import ShowInfo from './components/ShowInfo';
 import WaterFallContent from './components/WaterFallContent';
 import Error404Page from './components/Error404Page';
@@ -81,6 +82,7 @@ const FrontpageContent = React.createClass({
                     />
                   </div>
                 </IndexLink>
+                <SocialPanel />
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
                 {/* Show Spotlight */}
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
