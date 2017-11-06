@@ -4,10 +4,10 @@ DJList.scss
 Sass styling for frontpage djs list
 **/
 
-@import '../common';
+@import "../common";
 
 // constants
-$overlay-opacity: 0.80;
+$overlay-opacity: 0.8;
 $overlay-duration: 0.25s;
 
 .djList {
@@ -61,10 +61,12 @@ $overlay-duration: 0.25s;
   overflow: hidden;
 }
 
-.djTile:hover > .djTileInfo, .djTile.empty {
-  text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
+.djTile:hover > .djTileInfo,
+.djTile.empty {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
 }
 
-.djTileOverlay:hover, .djTile.empty .djTileOverlay {
+.djTileOverlay:hover,
+.djTile.empty .djTileOverlay {
   opacity: $overlay-opacity;
 }
