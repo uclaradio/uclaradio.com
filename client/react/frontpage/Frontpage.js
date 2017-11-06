@@ -63,6 +63,29 @@ Expects children components for tab contents
 @prop spotlight: show to display as spotlight
 @prop children: components to display in content area
 * */
+
+// update social media links here
+// img is the base name of the Font Awesome icon
+// Move to a separate file later?
+const socialMediaLinks = [
+  {
+    img: 'facebook',
+    link: 'https://www.facebook.com/uclaradio',
+  },
+  {
+    img: 'twitter',
+    link: 'https://twitter.com/UCLAradio',
+  },
+  {
+    img: 'instagram',
+    link: 'https://www.instagram.com/uclaradio/',
+  },
+  {
+    img: 'snapchat-ghost',
+    link: 'https://www.snapchat.com/add/uclaradio',
+  },
+];
+
 const FrontpageContent = React.createClass({
   render() {
     const showPlaying =
@@ -82,7 +105,7 @@ const FrontpageContent = React.createClass({
                     />
                   </div>
                 </IndexLink>
-                <SocialPanel />
+                <SocialPanel links={socialMediaLinks} size="2x" />
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
                 {/* Show Spotlight */}
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
