@@ -25,7 +25,7 @@ import DJContainer from './containers/DJContainer';
 // Frontpage Components (Views)
 import TriangleCanvas from './components/TriangleCanvas';
 import FrontPageNavbar from './components/FrontPageNavbar';
-import StreamBar from './components/StreamBar';
+import StreamBar from './components/StreamBar/StreamBar';
 import ShowInfo from './components/ShowInfo';
 import WaterFallContent from './components/WaterFallContent';
 import Error404Page from './components/Error404Page';
