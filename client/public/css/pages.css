@@ -133,3 +133,7 @@ body {
 .demo-card-wide > .mdl-card__title.show-nominations {
   background: url('/img/clapping.jpg') center / cover;
 }
+
+.demo-card-wide > .mdl-card__title.theme-songs {
+  background: url('/img/theme-songs.png') center / cover;
+}
