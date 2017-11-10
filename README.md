@@ -77,4 +77,4 @@ We accept changes from both radio web members and outside contributors. Please n
 
 
 ### License
-All of the code here is released under the [MIT License](/LICENSE.md), which basically means you can do anything you want with the code here as long as you attribute us and don't hold us liable for anything. Make something cool with our code? [Let us know](mailto:radio.web@media.ucla.edu), we'd love to hear what you made!
+All of the code here is released under the [AGPL License](/LICENSE), which basically means you can do anything you want with the code here as long as you attribute us and release what you make under the same license. Make something cool with our code? [Let us know](mailto:radio.web@media.ucla.edu), we'd love to hear what you made!
