@@ -118,16 +118,16 @@ importantly new code should:
 * Follow an organized structure. Put things in the right directories.
 
 We accept changes from both radio web members and outside contributors. Please
-note both our [contributing guidelines](/.github/CONTRIBUTING.md) and [code of
-conduct](/.github/CODE_OF_CONDUCT.md) before making a pull request. Want to join
-radio? We [accept
+note our [contributing
+guidelines](https://github.com/uclaradio/uclaradio/blob/master/.github/CONTRIBUTING.md).
+Want to join radio? We [accept
 applications](http://apply.uclastudentmedia.com/applications/ucla-radio/web-staff/)
 every quarter.
 
 ### License
 
-All of the code here is released under the [GNU AGPL 3.0 License](/LICENSE),
-which basically means you can do anything you want with the code here as long as
-you attribute us and release what you make under the same license. If you've
-made something cool with our code or are interested in relicensing our code,
-[let us know](mailto:radio.web@media.ucla.edu); we'd love to hear what you made!
+All of the code here is released under the [MIT License](/LICENSE.md), which
+basically means you can do anything you want with the code here as long as you
+attribute us and don't hold us liable for anything. Make something cool with our
+code? [Let us know](mailto:radio.web@media.ucla.edu), we'd love to hear what you
+made!
