@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather:700');
-@import url('https://fonts.googleapis.com/css?family=Rammetto+One');
+@import url("https://fonts.googleapis.com/css?family=Merriweather:700");
+@import url("https://fonts.googleapis.com/css?family=Rammetto+One");
 
-.countdownWrapper a:link, .countdownWrapper a:hover, .countdownWrapper a:active {
+.countdownWrapper a:link,
+.countdownWrapper a:hover,
+.countdownWrapper a:active {
   text-decoration: none;
 }
 
@@ -9,7 +11,7 @@
   background: url("/img/pledge-drive-2017-pattern.png");
 }
 .countdown {
-  font-family: 'Merriweather', serif;
+  font-family: "Merriweather", serif;
   color: #391201;
   display: block;
   text-align: center;
@@ -39,12 +41,8 @@
 // Text Outline from: https://wpshout.com/quick-guides/create-text-outline-css/
 .countdownText {
   display: block;
-  font-family: 'Rammetto One', cursive;
+  font-family: "Rammetto One", cursive;
   color: #ffcdb2;
-  text-shadow: 3-1px -1px 0 #391201, // Outline
-               1px -1px 0 #391201,   // Outline
-               -1px -1px 0 #391201,  // Outline
-               1px 1px 0 #391201,    // Outline
-               4px 4px 0 #391201,    // Brown shadow
-               4px 7px 0 #ffffff;    // White shadow
+  text-shadow: -1px -1px 0 #391201, 1px -1px 0 #391201, -1px -1px 0 #391201,
+    1px 1px 0 #391201, 4px 4px 0 #391201, 4px 7px 0 #ffffff; // White shadow
 }

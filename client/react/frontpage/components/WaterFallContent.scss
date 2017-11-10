@@ -4,7 +4,7 @@ EventsTab.scss
 Sass styling for events tab of new frontpage
 **/
 
-@import '../common';
+@import "../common";
 
 // constants
 $fadein-duration: 2s;
@@ -29,7 +29,7 @@ $fadein-duration: 2s;
 
 .wf-container:before,
 .wf-container:after {
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -128,5 +128,3 @@ $fadein-duration: 2s;
   left: 10pt;
   margin-right: -50%;
 }
-
-

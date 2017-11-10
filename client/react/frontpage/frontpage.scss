@@ -4,16 +4,15 @@ frontpage.scss
 Sass styling for new frontpage
 **/
 
-@import 'common';
-
+@import "common";
 
 body {
-  font-family: 'apercuregular';
+  font-family: "apercuregular";
   font-size: 11pt;
 }
 
 #main {
-  margin: 20pt auto 175px auto;
+  margin: 20pt auto 175px;
 }
 
 a {
@@ -22,7 +21,9 @@ a {
 
 // Frontpage styling
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin-top: 10px;
 }
 
@@ -45,7 +46,8 @@ h4 {
 //   background-color: rgba(white, 0.35);
 // }
 
-.radioBanner > .rectImage:hover, .radioBanner > .rectImage:focus {
+.radioBanner > .rectImage:hover,
+.radioBanner > .rectImage:focus {
   background-color: rgba(white, 0.5);
 }
 
