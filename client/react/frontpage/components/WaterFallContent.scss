@@ -9,7 +9,7 @@ Sass styling for events tab of new frontpage
 // constants
 $fadein-duration: 2s;
 
-@include fade-animation("waterfallfadein", 0.0, 1.0);
+@include fade-animation("waterfallfadein", 0, 1);
 
 .wf-container {
   margin: 0 -5pt;
