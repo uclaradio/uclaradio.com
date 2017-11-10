@@ -12,12 +12,19 @@
     "precommit": "lint-staged",
     "test": "jest"
   },
+  "prettier": {
+    "overrides": [
+      {
+        "files": "*.js",
+        "options": {
+          "singleQuote": true,
+          "trailingComma": "es5"
+        }
+      }
+    ]
+  },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "prettier --single-quote --trailing-comma es5 --jsx-bracket-same-line --write",
-      "git add"
-    ],
-    "*.{scss,json}": ["prettier --write", "git add"]
+    "*.{js,scss,json}": ["prettier --write", "git add"]
   },
   "dependencies": {
     "async": "^2.5.0",
