@@ -3,7 +3,9 @@
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/uclaradio');
+mongoose.connect('mongodb://localhost/uclaradio', {
+  useMongoClient: true,
+});
 
 const db = {};
 

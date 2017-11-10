@@ -4,7 +4,7 @@ FrontPageNavbar.scss
 Sass styling for navbar on frontpage
 **/
 
-@import '../common';
+@import "../common";
 
 .frontPageNavbar {
   margin-bottom: $box-padding;
@@ -81,7 +81,6 @@ Sass styling for navbar on frontpage
   height: 20pt;
   padding-left: 10pt;
 }
-
 
 // .frontPageNavbarItem.expandToggle {
 //   max-width: 80px;

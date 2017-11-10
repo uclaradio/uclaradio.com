@@ -4,7 +4,7 @@ ShowInfo.scss
 Sass styling for currently playing show info component in frontpage
 **/
 
-@import '../common';
+@import "../common";
 
 .showInfo {
   margin: 0 auto 2*$box-padding auto;
@@ -28,7 +28,8 @@ Sass styling for currently playing show info component in frontpage
   // cursor: pointer;
 }
 
-.showBanner:hover, .active .showBanner:hover {
+.showBanner:hover,
+.active .showBanner:hover {
   // background-color: $link-hover-color;
   background-color: $link-image-hover-color;
 }
