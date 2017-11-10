@@ -73,7 +73,7 @@ As a student-run organization, UCLA Radio is especially liable to technical debt
 * Delete files that are not used anymore. It's okay, get rid of clutter.
 * Follow an organized structure. Put things in the right directories.
 
-We accept changes from both radio web members and outside contributors. Please note our [contributing guidelines](https://github.com/uclaradio/uclaradio/blob/master/.github/CONTRIBUTING.md). Want to join radio? We [accept applications](http://apply.uclastudentmedia.com/applications/ucla-radio/web-staff/) every quarter.
+We accept changes from both radio web members and outside contributors. Please note both our [contributing guidelines](/.github/CONTRIBUTING.md) and [code of conduct](/.github/CODE_OF_CONDUCT.md) before making a pull request. Want to join radio? We [accept applications](http://apply.uclastudentmedia.com/applications/ucla-radio/web-staff/) every quarter.
 
 
 ### License
