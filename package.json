@@ -1,6 +1,17 @@
 {
-  "name": "uclaradio.github.io",
+  "name": "uclaradio",
   "version": "0.0.0",
+  "description": "The code for uclaradio.com.",
+  "license": "AGPL-3.0",
+  "homepage": "uclaradio.com",
+  "bugs": {
+    "url": "https://github.com/uclaradio/uclaradio/issues",
+    "email": "radio.web@media.ucla.edu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uclaradio/uclaradio.git"
+  },
   "private": true,
   "scripts": {
     "postcheckout": "yarn",
