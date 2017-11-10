@@ -12,6 +12,15 @@
     "precommit": "lint-staged",
     "test": "jest"
   },
+  "babel": {
+    "presets": ["env", "react"]
+  },
+  "eslintConfig": {
+    "extends": "uclaradio"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-uclaradio"
+  },
   "prettier": {
     "overrides": [
       {
