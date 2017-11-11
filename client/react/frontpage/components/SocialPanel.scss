@@ -7,3 +7,7 @@
 .social-link {
   margin: auto;
 }
+
+.social-link > i:hover, .social-link > i:focus {
+  color: rgba(white, 0.5);
+}
