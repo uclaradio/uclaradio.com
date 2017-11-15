@@ -8,10 +8,10 @@ const accounts = require('../database/accounts');
 
 router.get('/', (req, res) => {
   accounts.allManagers((err, managers) => {
-    const publicManagers = managers.filter(manager => manager.public);
+    managers = managers.filter(manager => manager.public);
 
     // sort alphabetically by name
-    publicManagers.sort((a, b) => {
+    managers.sort((a, b) => {
       const positionA = a.position.toUpperCase();
       const positionB = b.position.toUpperCase();
       if (positionA < positionB) {
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
       return 0;
     });
 
-    res.render('managers', { managers: { ...publicManagers } });
+    res.render('managers', managers);
   });
 });
 
