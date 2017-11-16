@@ -1,0 +1,13 @@
+.link-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 10px;
+}
+.social-link {
+  margin: auto;
+}
+
+.social-link > i:hover, .social-link > i:focus {
+  color: rgba(white, 0.5);
+}
