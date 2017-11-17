@@ -2,10 +2,14 @@
 // shows full DJ information
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 
 // Common Components
 import RectImage from '../../common/RectImage';
+
+// Actions
+import { fetchUpdatedDJs } from '../actions/djs';
 
 const defaultDJPic = '/img/bear_transparent.png';
 const defaultDJBio =
@@ -58,4 +62,28 @@ const DJPage = React.createClass({
   },
 });
 
-export default DJPage;
+const mapStateToProps = (state, ownProps) => {
+  const props = {
+    fetching: state.djs.fetching,
+    // 'djs' prop set below
+  };
+
+  const djName = ownProps.params.djName;
+
+  // set DJ if found
+  for (let djIndex = 0; djIndex < state.djs.djs.length; djIndex++) {
+    const dj = state.djs.djs[djIndex];
+    if (dj.djName === djName) {
+      props.dj = dj;
+    }
+  }
+  return props;
+};
+
+const mapDispatchToProps = dispatch => ({
+  updateDJs: () => {
+    fetchUpdatedDJs(dispatch);
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DJPage);

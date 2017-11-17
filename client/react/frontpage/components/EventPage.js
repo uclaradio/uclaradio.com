@@ -2,9 +2,12 @@
 // shows full description of an event
 
 import React from 'react';
+import { connect } from 'react-redux';
 import Loader from './Loader';
 import RectImage from '../../common/RectImage';
 import './EventPage.scss';
+
+import { fetchUpdatedEvents } from '../actions/events';
 
 const defaultEventPic = '/img/radio.png';
 
@@ -54,4 +57,18 @@ var formatDate = function(dateString) {
   return date.toDateString();
 };
 
-export default EventPage;
+const mapStateToProps = (state, ownProps) => {
+  const eventID = ownProps.params.eventID;
+  return {
+    event: state.events.events[eventID],
+    fetching: state.events.fetching,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  updateEvents: () => {
+    fetchUpdatedEvents(dispatch);
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventPage);
