@@ -23,12 +23,28 @@
     "precommit": "lint-staged",
     "test": "jest"
   },
+  "babel": {
+    "presets": ["env", "react"]
+  },
+  "eslintConfig": {
+    "extends": "uclaradio"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-uclaradio"
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": "*.js",
+        "options": {
+          "singleQuote": true,
+          "trailingComma": "es5"
+        }
+      }
+    ]
+  },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "prettier --single-quote --trailing-comma es5 --jsx-bracket-same-line --write",
-      "git add"
-    ],
-    "*.{scss,json,md}": ["prettier --write", "git add"]
+    "*.{js,scss,json,md}": ["prettier --write", "git add"]
   },
   "dependencies": {
     "async": "^2.5.0",
