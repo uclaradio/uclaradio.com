@@ -39,8 +39,8 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendors',
-      filename: 'vendors.js',
+      name: 'Vendors',
+      filename: 'Vendors.js',
     }),
     new webpack.optimize.UglifyJsPlugin(),
   ],
