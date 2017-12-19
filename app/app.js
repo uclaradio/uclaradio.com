@@ -16,8 +16,6 @@ const staffingPoints = require('./routes/staffingPoints');
 const pages = require('./routes/pages');
 const managers = require('./routes/managers');
 const panel = require('./routes/panel.js');
-const notFound = require('./routes/notFound');
-const ticketGiveawayCalendar = require('./routes/ticketGiveawayCalendar');
 const api = require('./routes/api');
 const chat = require('./routes/chat')(io);
 
