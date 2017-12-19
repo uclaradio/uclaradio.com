@@ -49,10 +49,10 @@ router.get('/getSocialMedia', async (req, res) => {
 
 router.post('/getMoreFBPosts', async (req, res) => {
   const url = getNextFBPosts(req.body.until);
-  const response = await axios.get(url);
+  const { data } = await axios.get(url);
   res.send({
-    social_media: response.data,
-    fb_pagination_until: getFBPaginationTools(response.paging.next),
+    social_media: data.data,
+    fb_pagination_until: getFBPaginationTools(data.paging.next),
   });
 });
 
@@ -62,9 +62,7 @@ router.get('/blog', (req, res, next) => {
 
 // you should be familiar with facebook's 'next' URLS before modifying this function
 function getFBPaginationTools(url) {
-  paging_token = 0;
-  until = url.split('until=')[1].split('&')[0] - 1;
-  return until;
+  return url.split('until=')[1].split('&')[0] - 1;
 }
 
 function getNextFBPosts(FB_pagination_until) {
