@@ -50,8 +50,6 @@ app.use('/', routes);
 app.use('/staffingPoints', staffingPoints);
 app.use('/pages', pages);
 app.use('/managers', managers);
-app.use('/notFound', notFound);
-app.use('/GiveawayCalendar', ticketGiveawayCalendar);
 app.use('/api', api);
 app.use('/chat', chat);
 // all links to panel/* handled in panel.js
