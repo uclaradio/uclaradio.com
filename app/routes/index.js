@@ -11,8 +11,14 @@ const requestify = require('requestify');
 
 const numberOfFBPosts = 7;
 const numberOfTUMBLRPosts = 3;
-const FB = `https://graph.facebook.com/uclaradio?fields=posts.limit(${numberOfFBPosts}){full_picture,message,created_time,link}&access_token=${passwords.FB_API_KEY}`;
-const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key=${passwords.TUMBLR_API_KEY}&limit=${numberOfTUMBLRPosts}`;
+const FB = `https://graph.facebook.com/uclaradio?fields=posts.limit(${
+  numberOfFBPosts
+}){full_picture,message,created_time,link}&access_token=${
+  passwords.FB_API_KEY
+}`;
+const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key=${
+  passwords.TUMBLR_API_KEY
+}&limit=${numberOfTUMBLRPosts}`;
 const socialMediaURLs = [FB, TUMBLR];
 
 router.get('/blurbinfo', (req, res, next) => {
@@ -101,10 +107,6 @@ router.get('/blog', (req, res, next) => {
   res.redirect('http://uclaradio.tumblr.com');
 });
 
-router.get('/pledgedrive', (req, res, next) => {
-  res.render('pledgedrive');
-});
-
 // you should be familiar with facebook's 'next' URLS before modifying this function
 function getFBPaginationTools(url) {
   paging_token = 0;
@@ -113,7 +115,9 @@ function getFBPaginationTools(url) {
 }
 
 function getNextFBPosts(FB_pagination_until) {
-  return `https://graph.facebook.com/v2.7/214439101900173/posts?fields=full_picture,message,created_time,link&limit=10&access_token=${passwords.FB_API_KEY}&until=${FB_pagination_until}`;
+  return `https://graph.facebook.com/v2.7/214439101900173/posts?fields=full_picture,message,created_time,link&limit=10&access_token=${
+    passwords.FB_API_KEY
+  }&until=${FB_pagination_until}`;
 }
 
 function getTimeAndDay() {
