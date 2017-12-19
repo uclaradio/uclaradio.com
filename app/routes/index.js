@@ -56,8 +56,8 @@ router.post('/getMoreFBPosts', async (req, res) => {
   });
 });
 
-router.get('/blog', (req, res, next) => {
-  res.redirect('http://uclaradio.tumblr.com');
+router.get('/blog', (req, res) => {
+  res.redirect('http://blog.uclaradio.com');
 });
 
 // you should be familiar with facebook's 'next' URLS before modifying this function
