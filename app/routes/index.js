@@ -5,7 +5,6 @@ const express = require('express');
 
 const router = express.Router();
 const async = require('async');
-const shows = require('../database/shows');
 const passwords = require('../../passwords');
 const requestify = require('requestify');
 
@@ -20,17 +19,6 @@ const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?a
   passwords.TUMBLR_API_KEY
 }&limit=${numberOfTUMBLRPosts}`;
 const socialMediaURLs = [FB, TUMBLR];
-
-router.get('/blurbinfo', (req, res, next) => {
-  const info = getTimeAndDay();
-
-  shows.getShowByTimeslotAndDay(info.time, info.day, (err, blurb) => {
-    if (blurb) blurb.djName = blurb.djName.join(',');
-
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(blurb));
-  });
-});
 
 router.get('/getSocialMedia', (req, res) => {
   let FB_pagination_until; // get the index of the last facebook post basically
@@ -118,32 +106,6 @@ function getNextFBPosts(FB_pagination_until) {
   return `https://graph.facebook.com/v2.7/214439101900173/posts?fields=full_picture,message,created_time,link&limit=10&access_token=${
     passwords.FB_API_KEY
   }&until=${FB_pagination_until}`;
-}
-
-function getTimeAndDay() {
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const date = new Date();
-
-  const day = days[date.getDay()];
-  let time = date.getHours();
-
-  // Change the time into the format our db is expecting
-  // AKA 12pm, 10am, 1pm: hour followed by am or pm
-  if (time === 0) {
-    time = '12am';
-  } else if (time < 12) {
-    time += 'am';
-  } else if (time == 12) {
-    time = '12pm';
-  } else {
-    time -= 12;
-    time += 'pm';
-  }
-
-  return {
-    day,
-    time,
-  };
 }
 
 module.exports = router;
