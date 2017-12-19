@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "async": "^2.5.0",
+    "axios": "^0.17.1",
     "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",

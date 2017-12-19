@@ -2,11 +2,10 @@
 // Front page
 
 const express = require('express');
+const axios = require('axios');
 
 const router = express.Router();
-const async = require('async');
 const passwords = require('../../passwords');
-const requestify = require('requestify');
 
 const numberOfFBPosts = 7;
 const numberOfTUMBLRPosts = 3;
@@ -20,75 +19,41 @@ const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?a
 }&limit=${numberOfTUMBLRPosts}`;
 const socialMediaURLs = [FB, TUMBLR];
 
-router.get('/getSocialMedia', (req, res) => {
-  let FB_pagination_until; // get the index of the last facebook post basically
-  async.map(
-    socialMediaURLs,
-    (url, callback) => {
-      requestify
-        .get(url, {
-          cache: {
-            cache: true,
-            // cache for 30*60*60*1000 milliseconds
-            expires: 108000000,
-          },
-        })
-        .then(response => {
-          const data = response.getBody();
-          switch (url) {
-            case FB:
-              FB_pagination_until = getFBPaginationTools(
-                data.posts.paging.next
-              );
-              data.posts.data.forEach(post => {
-                post.platform = 'FB';
-                post.created_time = new Date(post.created_time);
-              });
-              callback(null, data.posts.data);
-              break;
-            case TUMBLR:
-              data.response.posts.forEach(post => {
-                post.platform = 'TUMBLR';
-                post.created_time = new Date(post.date);
-              });
-              callback(null, data.response.posts);
-              break;
-          }
-        })
-        .fail(response => {
-          callback(null, []);
-        });
-    },
-    (err, allSocialMediaPosts) => {
-      allSocialMediaPosts = [].concat
-        .apply([], allSocialMediaPosts)
-        .sort((postA, postB) => postA.created_time < postB.created_time);
-      const result = {
-        social_media: allSocialMediaPosts,
-        fb_pagination_until: FB_pagination_until,
-      };
-      res.send(result);
-    }
-  );
+router.get('/getSocialMedia', async (req, res) => {
+  let allPosts = [];
+  let FB_pagination_until;
+
+  const facebookResponse = await axios.get(FB);
+  const facebookData = facebookResponse.data;
+  FB_pagination_until = getFBPaginationTools(facebookData.posts.paging.next);
+  facebookData.posts.data.forEach(post => {
+    post.platform = 'FB';
+    post.created_time = new Date(post.created_time);
+  });
+  allPosts = allPosts.concat(facebookData.posts.data);
+
+  const tumblrResponse = await axios.get(TUMBLR);
+  const tumblrData = tumblrResponse.data;
+  tumblrData.response.posts.forEach(post => {
+    post.platform = 'TUMBLR';
+    post.created_time = new Date(post.date);
+  });
+  allPosts = allPosts.concat(tumblrData.response.posts);
+
+  const result = {
+    social_media: allPosts,
+    fb_pagination_until: FB_pagination_until,
+  };
+  res.send(result);
 });
 
-router.post('/getMoreFBPosts', (req, res) => {
+router.post('/getMoreFBPosts', async (req, res) => {
   const url = getNextFBPosts(req.body.until);
-  requestify
-    .get(url, {
-      cache: {
-        cache: true,
-        // cache for 30*60*60*1000 milliseconds
-        expires: 108000000,
-      },
-    })
-    .then(response => {
-      response = response.getBody();
-      res.send({
-        social_media: response.data,
-        fb_pagination_until: getFBPaginationTools(response.paging.next),
-      });
-    });
+  const response = await axios.get(url);
+  res.send({
+    social_media: response.data,
+    fb_pagination_until: getFBPaginationTools(response.paging.next),
+  });
 });
 
 router.get('/blog', (req, res, next) => {
