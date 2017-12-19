@@ -1,17 +1,17 @@
 // chat.js
 // Handles chatroom on frontpage stream bar
 
-module.exports = function(io) {
-  const express = require('express');
-  const router = express.Router();
+const express = require('express');
 
-  const messages = require('../database/messages');
+const router = express.Router();
 
+const messages = require('../database/messages');
+
+module.exports = io => {
   // deliver more message history after a given message
   router.post('/getNext', (req, res) => {
     // id might be null if no message history available yet
-    const id = req.body.id;
-    const volume = req.body.volume;
+    const { id, volume } = req.body;
     messages.next(id, volume, data => {
       res.send(data);
     });
