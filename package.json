@@ -66,6 +66,7 @@
     "node-jsx": "^0.13.3",
     "node-sass": "^4.5.3",
     "nodemailer": "^4.0.1",
+    "public-google-calendar": "^0.2.0",
     "react": "^0.14.7",
     "react-bootstrap": "^0.28.3",
     "react-checkbox-list": "0.0.2",
