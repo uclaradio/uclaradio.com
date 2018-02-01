@@ -4,6 +4,7 @@ import React from 'react';
 import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
 import Slider from 'react-slick';
 import ChatBox from './ChatBox';
+import StreamMarquee from './StreamMarquee';
 import isMobile from './misc/isMobile';
 import './StreamBar.scss';
 
@@ -82,6 +83,7 @@ const StreamBar = React.createClass({
               </div>
             </Collapse>
           </div>
+          <StreamMarquee message="ON-AIR NUMBER: (310) 794-9348 | REQUEST LINE: (310) 825-9999"/>
           <div
             style={this.state.hasReset ? null : { opacity: '0', height: '0' }}>
             <RecentlyPlayed
