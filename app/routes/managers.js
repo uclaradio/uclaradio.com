@@ -4,17 +4,25 @@
 const express = require('express');
 
 const router = express.Router();
-const helper_funcs = require('./helper_funcs');
 const accounts = require('../database/accounts');
 
 router.get('/', (req, res) => {
   accounts.allManagers((err, managers) => {
     managers = managers.filter(manager => manager.public);
 
-    // sort by position name
-    managers.sort(helper_funcs.sort_by('position', false, false));
+    // sort alphabetically by name
+    managers.sort((a, b) => {
+      const positionA = a.position.toUpperCase();
+      const positionB = b.position.toUpperCase();
+      if (positionA < positionB) {
+        return -1;
+      } else if (positionA > positionB) {
+        return 1;
+      }
+      return 0;
+    });
 
-    res.render('managers', { managers });
+    res.render('managers', managers);
   });
 });
 
