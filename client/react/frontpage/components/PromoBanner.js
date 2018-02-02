@@ -10,8 +10,8 @@ import './PromoBanner.scss';
 // Promo Banner Data
 const bannerData = [
   {
-    img: '/img/promo/tops-web.png',
-    link: 'http://www.troubadour.com/event/1495624-tops-los-angeles/',
+    img: '/img/promo/sotm/sotm_november_2017.jpg',
+    link: '/shows/327',
   },
 ];
 
