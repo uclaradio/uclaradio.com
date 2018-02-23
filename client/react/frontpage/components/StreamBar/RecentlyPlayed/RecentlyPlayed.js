@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
 import Slider from 'react-slick';
-//import './StreamBar.scss';
+import './RecentlyPlayed.scss';
 
 const trackURL =
   'https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json';
@@ -95,14 +95,16 @@ const RecentlyPlayed = React.createClass({
             }
             transitionAppear
             onEntered={this.onEntered}
-            onExited={this.onExited}>
+            onExited={this.onExited}
+          >
             <div className="recentContent">
               <Slider {...slideSettings}>
                 {this.state.recentTracks.map((track, i) => (
                   <div
                     id={track.nowPlaying ? 'nowPlaying' : 'focusAnchor'}
                     className="trackInfo"
-                    key={track.artist + track.name + i}>
+                    key={track.artist + track.name + i}
+                  >
                     <div className="albumArt">
                       <img className="trackImage" src={track.image} />
                     </div>

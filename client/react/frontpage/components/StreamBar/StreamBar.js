@@ -77,13 +77,14 @@ const StreamBar = React.createClass({
               onEntering={() => {
                 const objDiv = document.getElementById('chatbox');
                 objDiv.scrollTop = objDiv.scrollHeight;
-              }}>
+              }}
+            >
               <div>
                 <ChatBox />
               </div>
             </Collapse>
           </div>
-          <div
+          {/*<div
             style={this.state.hasReset ? null : { opacity: '0', height: '0' }}>
             <RecentlyPlayed
               expanded={this.state.recentExpanded}
@@ -91,20 +92,19 @@ const StreamBar = React.createClass({
               onReset={this.onReset}
             />
           </div>
+          */}
           <div className="streamContent">
             <div onClick={this.togggleChatExpanded} className="expandAction">
               <img
                 className="chatIcon"
                 src={
-                  this.state.chatExpanded ? (
-                    './img/icons/chat_clicked.svg'
-                  ) : (
-                    './img/icons/chat.svg'
-                  )
+                  this.state.chatExpanded
+                    ? './img/icons/chat_clicked.svg'
+                    : './img/icons/chat.svg'
                 }
               />
             </div>
-            <div onClick={this.toggleRecentExpanded}>
+            {/*<div onClick={this.toggleRecentExpanded}>
               <span className="expandAction">
                 <img
                   className="musicIcon"
@@ -118,16 +118,15 @@ const StreamBar = React.createClass({
                 />
               </span>
             </div>
+            */}
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton">
                 <Glyphicon glyph={this.state.playing ? 'pause' : 'play'} />
               </span>
               <span className="playText">
-                {this.props.currentShowTitle ? (
-                  `LIVE: ${this.props.currentShowTitle}`
-                ) : (
-                  'LIVE STREAM'
-                )}
+                {this.props.currentShowTitle
+                  ? `LIVE: ${this.props.currentShowTitle}`
+                  : 'LIVE STREAM'}
               </span>
             </div>
           </div>
