@@ -4,12 +4,12 @@ import path from 'path';
 module.exports = {
   entry: {
     FrontpageApp: './client/react/FrontpageApp.js',
-    panelDJ: './client/react/panelDJ.js',
-    panelElrond: './client/react/panelElrond.js',
-    panelFAQ: './client/react/panelFAQ.js',
-    panelManager: './client/react/panelManager.js',
-    panelShow: './client/react/panelShow.js',
-    staffingPoints: './client/react/staffingPoints.js',
+    PanelDJ: './client/react/PanelDJ.js',
+    PanelElrond: './client/react/PanelElrond.js',
+    PanelFAQ: './client/react/PanelFAQ.js',
+    PanelManager: './client/react/PanelManager.js',
+    PanelShow: './client/react/PanelShow.js',
+    // StaffingPoints: './client/react/StaffingPoints.js',
     // vendors: ['react', 'react-bootstrap'],
   },
   output: {
@@ -39,8 +39,8 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendors',
-      filename: 'vendors.js',
+      name: 'Vendors',
+      filename: 'Vendors.js',
     }),
     new webpack.optimize.UglifyJsPlugin(),
   ],

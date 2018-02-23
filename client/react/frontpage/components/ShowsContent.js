@@ -1,6 +1,9 @@
 // ShowsContent.js
 
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { fetchUpdatedShows } from '../actions/shows';
 
 import ShowsGraph from './ShowsGraph';
 import ShowBlurb from './ShowBlurb';
@@ -68,28 +71,26 @@ const ShowsContent = React.createClass({
           <div className="scheduleViewButton">
             <p
               className={
-                this.state.viewType == ScheduleViewType.grid ? (
-                  'switchSelStyle'
-                ) : (
-                  'switchStyle'
-                )
+                this.state.viewType == ScheduleViewType.grid
+                  ? 'switchSelStyle'
+                  : 'switchStyle'
               }
               onClick={() => {
                 this.updateViewType(ScheduleViewType.grid);
-              }}>
+              }}
+            >
               GRID
             </p>
             <p
               className={
-                this.state.viewType == ScheduleViewType.list ? (
-                  'switchSelStyle'
-                ) : (
-                  'switchStyle'
-                )
+                this.state.viewType == ScheduleViewType.list
+                  ? 'switchSelStyle'
+                  : 'switchStyle'
               }
               onClick={() => {
                 this.updateViewType(ScheduleViewType.list);
-              }}>
+              }}
+            >
               LIST
             </p>
           </div>
@@ -126,4 +127,17 @@ const ShowsContent = React.createClass({
   },
 });
 
-export default ShowsContent;
+const mapStateToProps = state => ({
+  shows: state.shows.shows,
+  fetching: state.shows.fetching,
+  currentShowID: state.shows.nowPlayingID,
+  spotlightShowID: state.shows.spotlightID,
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateShows: () => {
+    fetchUpdatedShows(dispatch);
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowsContent);

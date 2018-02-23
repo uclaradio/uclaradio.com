@@ -342,7 +342,8 @@ const NewShowForm = React.createClass({
                     )
                   }
                   onSelect={this.handleDayChange}
-                  key={this.state.day}>
+                  key={this.state.day}
+                >
                   {days}
                 </DropdownButton>
                 <DropdownButton
@@ -351,7 +352,8 @@ const NewShowForm = React.createClass({
                     this.state.time || <span className="placeholder">Time</span>
                   }
                   onSelect={this.handleTimeChange}
-                  key={this.state.time}>
+                  key={this.state.time}
+                >
                   {times}
                 </DropdownButton>
               </ButtonGroup>
@@ -360,7 +362,8 @@ const NewShowForm = React.createClass({
               </Button>
               <Button
                 className="cancelLink lightPadding"
-                onClick={this.toggleEditableField}>
+                onClick={this.toggleEditableField}
+              >
                 Cancel
               </Button>
             </div>

@@ -29,7 +29,9 @@ Sass styling for frontpage stream bar component
   font-size: 11pt;
 }
 
-.playButton, .playText, .expandAction {
+.playButton,
+.playText,
+.expandAction {
   cursor: pointer;
   height: 20pt;
 }
@@ -59,22 +61,23 @@ Sass styling for frontpage stream bar component
   width: 33%;
 }
 
-.trackInfo a, .trackInfo a:hover {
+.trackInfo a,
+.trackInfo a:hover {
   text-decoration: none;
   color: white !important;
 }
 
 .trackImage {
   height: 64px;
-  height: 64px;
-  margin: 0 auto 5px auto;
+  margin: 0 auto 5px;
 }
 
 .trackArtist a {
   color: #cacaca !important;
 }
 
-.trackName, .trackArtist {
+.trackName,
+.trackArtist {
   line-height: 20px;
 }
 

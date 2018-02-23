@@ -14,18 +14,19 @@ import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
 import { Grid, Col } from 'react-bootstrap';
 
-// Frontpage Containers (View Controllers)
-import ShowsTab from './containers/ShowsTab';
-import EventsTab from './containers/EventsTab';
-import DJsTab from './containers/DJsTab';
-import ShowContainer from './containers/ShowContainer';
-import EventContainer from './containers/EventContainer';
-import DJContainer from './containers/DJContainer';
+// Redux Components
+import ShowsContent from './components/ShowsContent';
+import EventList from './components/EventList';
+import DJList from './components/DJList';
+import ShowPage from './components/ShowPage';
+import EventPage from './components/EventPage';
+import DJPage from './components/DJPage';
 
-// Frontpage Components (Views)
+// Non-Redux Components
 import TriangleCanvas from './components/TriangleCanvas';
 import FrontPageNavbar from './components/FrontPageNavbar';
 import StreamBar from './components/StreamBar/StreamBar';
+import SocialPanel from './components/SocialPanel';
 import ShowInfo from './components/ShowInfo';
 import WaterFallContent from './components/WaterFallContent';
 import Error404Page from './components/Error404Page';
@@ -62,6 +63,29 @@ Expects children components for tab contents
 @prop spotlight: show to display as spotlight
 @prop children: components to display in content area
 * */
+
+// update social media links here
+// img is the base name of the Font Awesome icon
+// Move to a separate file later?
+const socialMediaLinks = [
+  {
+    img: 'facebook',
+    link: 'https://www.facebook.com/uclaradio',
+  },
+  {
+    img: 'twitter',
+    link: 'https://twitter.com/UCLAradio',
+  },
+  {
+    img: 'instagram',
+    link: 'https://www.instagram.com/uclaradio/',
+  },
+  {
+    img: 'snapchat-ghost',
+    link: 'https://www.snapchat.com/add/uclaradio',
+  },
+];
+
 const FrontpageContent = React.createClass({
   render() {
     const showPlaying =
@@ -81,6 +105,7 @@ const FrontpageContent = React.createClass({
                     />
                   </div>
                 </IndexLink>
+                <SocialPanel links={socialMediaLinks} size="2x" />
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
                 {/* Show Spotlight */}
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
@@ -146,12 +171,12 @@ const FrontpageContentContainer = connect(mapStateToProps)(FrontpageContent);
 const routes = (
   <Route path="/" component={FrontpageContentContainer}>
     <IndexRoute component={WaterFallContent} />
-    <Route path="/djs" component={DJsTab} />
-    <Route path="/djs/:djName" component={DJContainer} />
-    <Route path="/events" component={EventsTab} />
-    <Route path="/shows" components={ShowsTab} />
-    <Route path="/shows/:showID" component={ShowContainer} />
-    <Route path="/events/:eventID" component={EventContainer} />
+    <Route path="/djs" component={DJList} />
+    <Route path="/djs/:djName" component={DJPage} />
+    <Route path="/events" component={EventList} />
+    <Route path="/shows" components={ShowsContent} />
+    <Route path="/shows/:showID" component={ShowPage} />
+    <Route path="/events/:eventID" component={EventPage} />
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
     <Route path="*" component={Error404Page} />

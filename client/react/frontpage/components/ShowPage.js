@@ -2,10 +2,13 @@
 // shows full description of a show
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Loader from './Loader';
 import RectImage from '../../common/RectImage';
 import './ShowPage.scss';
+
+import { fetchUpdatedShows } from '../actions/shows';
 
 const defaultShowPic = '/img/radio.png';
 
@@ -83,7 +86,8 @@ const ShowPage = React.createClass({
               <a
                 className="soundcloudLogo"
                 href={show.soundcloud}
-                target="_blank">
+                target="_blank"
+              >
                 <i className="fa fa-soundcloud fa-lg" aria-hidden="true" />
               </a>
             )}
@@ -99,4 +103,28 @@ const ShowPage = React.createClass({
   },
 });
 
-export default ShowPage;
+const mapStateToProps = (state, ownProps) => {
+  const props = {
+    fetching: state.shows.fetching,
+  };
+
+  const showID = Number(ownProps.params.showID);
+
+  // set show if found
+  for (let showIndex = 0; showIndex < state.shows.shows.length; showIndex++) {
+    const show = state.shows.shows[showIndex];
+    if (show.id === showID) {
+      props.show = show;
+    }
+  }
+
+  return props;
+};
+
+const mapDispatchToProps = dispatch => ({
+  updateShows: () => {
+    fetchUpdatedShows(dispatch);
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);

@@ -16,7 +16,7 @@ const FrontPageNavbar = React.createClass({
   handleClick(selectedKey) {
     switch (selectedKey) {
       case 1:
-        window.open('http://uclaradio.tumblr.com', '_blank');
+        window.open('http://blog.uclaradio.com', '_blank');
         break;
       case 2:
         browserHistory.push('/streamIssues');
@@ -45,7 +45,8 @@ const FrontPageNavbar = React.createClass({
           justified
           bsStyle="pills"
           className="hidden-xs"
-          onSelect={this.handleClick}>
+          onSelect={this.handleClick}
+        >
           <LinkContainer to="/djs">
             <NavItem className="frontPageNavbarItem leftMost">
               <span className="equalWidth">DJs</span>
@@ -84,7 +85,8 @@ const FrontPageNavbar = React.createClass({
             </NavItem>
             <NavItem
               eventKey={3}
-              className="frontPageNavbarItem rightMost collapsed">
+              className="frontPageNavbarItem rightMost collapsed"
+            >
               <span className="equalWidth">Apply</span>
             </NavItem>
           </Nav>
@@ -95,7 +97,8 @@ const FrontPageNavbar = React.createClass({
           justified
           bsStyle="pills"
           className="hidden-sm hidden-md hidden-lg"
-          onSelect={this.handleClick}>
+          onSelect={this.handleClick}
+        >
           <LinkContainer to="/djs">
             <NavItem className="frontPageNavbarItem fullWidth topMost">
               DJs
@@ -109,33 +112,38 @@ const FrontPageNavbar = React.createClass({
           </LinkContainer>
           <NavDropdown
             title="More"
-            className="frontPageNavbarItem fullWidth bottomMost">
+            className="frontPageNavbarItem fullWidth bottomMost"
+          >
             <MenuItem
               className="dropdownNavbarItem"
               onClick={() => {
                 this.handleClick(4);
-              }}>
+              }}
+            >
               About
             </MenuItem>
             <MenuItem
               className="dropdownNavbarItem"
               onClick={() => {
                 this.handleClick(2);
-              }}>
+              }}
+            >
               Stream Issues
             </MenuItem>
             <MenuItem
               className="dropdownNavbarItem"
               onClick={() => {
                 this.handleClick(1);
-              }}>
+              }}
+            >
               Blog
             </MenuItem>
             <MenuItem
               className="dropdownNavbarItem"
               onClick={() => {
                 this.handleClick(3);
-              }}>
+              }}
+            >
               Apply
             </MenuItem>
           </NavDropdown>

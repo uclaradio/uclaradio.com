@@ -113,7 +113,8 @@ const ReportedMessages = React.createClass({
                     <Button
                       onClick={() => {
                         handleKeep(message.id);
-                      }}>
+                      }}
+                    >
                       Keep
                     </Button>
                   </td>
@@ -121,7 +122,8 @@ const ReportedMessages = React.createClass({
                     <Button
                       onClick={() => {
                         handleDelete(message.id);
-                      }}>
+                      }}
+                    >
                       Delete
                     </Button>
                   </td>

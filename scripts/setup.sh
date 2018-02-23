@@ -20,12 +20,12 @@ sudo chown -R $USER /data/db
 echo 'Installing npm packages...'
 yarn
 
-cp defaultPasswords.json passwords.json
+cp ../defaultPasswords.json ../passwords.json
 
 echo 'Seeding database...'
 mongod &
 MONGO_PID=$!
-node app/database/scripts/setupPanel.js &
+node ../app/database/scripts/setupPanel.js &
 NODE_PID=$!
 
 wait $NODE_PID

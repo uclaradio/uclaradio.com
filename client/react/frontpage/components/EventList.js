@@ -1,7 +1,10 @@
-// EventTab.js
+// EventList.js
 // list of events in events tab of frontpage
 
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { updateEvents, fetchUpdatedEvents } from '../actions/events';
 
 import { Link } from 'react-router';
 
@@ -66,7 +69,8 @@ const EventList = React.createClass({
                           <div className="overlayWrapper">
                             <div
                               className="overlay"
-                              style={{ backgroundColor: eventColor }}>
+                              style={{ backgroundColor: eventColor }}
+                            >
                               <p className="eventDate">{start}</p>
                               <div className="eventOverlay">
                                 <p className="bandName">{event.host}</p>
@@ -115,4 +119,43 @@ var formatDate = function(dateString) {
   return date.getDate();
 };
 
-module.exports = EventList;
+const eventGroupsFromState = state => {
+  if (!state.events || !state.groups) {
+    return [];
+  }
+
+  // convert groups' event ids to event objects
+  const eventGroups = [];
+  for (let groupIndex = 0; groupIndex < state.groups.length; groupIndex++) {
+    const stateGroup = state.groups[groupIndex];
+    const newGroup = {
+      title: stateGroup.title,
+      events: [],
+    };
+    for (
+      let eventIndex = 0;
+      eventIndex < stateGroup.eventIDs.length;
+      eventIndex++
+    ) {
+      const event = state.events[stateGroup.eventIDs[eventIndex]];
+      if (event) {
+        newGroup.events.push(event);
+      }
+    }
+    eventGroups.push(newGroup);
+  }
+  return eventGroups;
+};
+
+const mapStateToProps = state => ({
+  eventGroups: eventGroupsFromState(state.events),
+  fetching: state.events.fetching,
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateEvents: () => {
+    fetchUpdatedEvents(dispatch);
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventList);

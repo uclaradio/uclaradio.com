@@ -1,115 +1,115 @@
-doctype html(lang='en')
-head
-    meta(charset='utf-8')
+//- doctype html(lang='en')
+//- head
+//-     meta(charset='utf-8')
 
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+//-     meta(http-equiv='X-UA-Compatible', content='IE=edge')
 
-    meta(name='description', content='UCLA Radio')
+//-     meta(name='description', content='UCLA Radio')
 
-    meta(name='viewport', content='width=device-width, initial-scale=1')
+//-     meta(name='viewport', content='width=device-width, initial-scale=1')
 
-    title UCLA Radio
-    // jQuery (necessary for Bootstrap's JavaScript plugins)
-    script(src='https://code.jquery.com/jquery-2.1.1.min.js')
-    // bootstrap
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+//-     title UCLA Radio
+//-     // jQuery (necessary for Bootstrap's JavaScript plugins)
+//-     script(src='https://code.jquery.com/jquery-2.1.1.min.js')
+//-     // bootstrap
+//-     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
 
-    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
-    // font awesome
-    link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
-    // other fonts
-    link(href='https://fonts.googleapis.com/css?family=Lato:300italic', rel='stylesheet', type='text/css')
+//-     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
+//-     // font awesome
+//-     link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', rel='stylesheet')
+//-     // other fonts
+//-     link(href='https://fonts.googleapis.com/css?family=Lato:300italic', rel='stylesheet', type='text/css')
 
-    link(href='https://fonts.googleapis.com/css?family=Merriweather:300', rel='stylesheet', type='text/css')
-    // trianglify, for background stuff
-    script(src='https://d3js.org/d3.v3.min.js')
+//-     link(href='https://fonts.googleapis.com/css?family=Merriweather:300', rel='stylesheet', type='text/css')
+//-     // trianglify, for background stuff
+//-     script(src='https://d3js.org/d3.v3.min.js')
 
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js')
-    // Our stylesheets/scripts
-    link(rel='stylesheet', type='text/css', href='/css/main.css')
-    link(rel='stylesheet', type='text/css', href='/css/staffingPoints.css')
+//-     script(src='https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js')
+//-     // Our stylesheets/scripts
+//-     link(rel='stylesheet', type='text/css', href='/css/main.css')
+//-     link(rel='stylesheet', type='text/css', href='/css/staffingPoints.css')
 
-    link(rel='icon', href='favicon.ico', type='image/x-icon')
+//-     link(rel='icon', href='favicon.ico', type='image/x-icon')
 
-    script(type='text/javascript').
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-21406547-20', 'auto');
-      ga('send', 'pageview');
+//-     script(type='text/javascript').
+//-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+//-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+//-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+//-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+//-       ga('create', 'UA-21406547-20', 'auto');
+//-       ga('send', 'pageview');
 
-  body
+//-   body
 
-    .container(role='main')
-      a(href='/')
-        img#logo(src='img/logo.png', alt='UCLA RADIO')
+//-     .container(role='main')
+//-       a(href='/')
+//-         img#logo(src='img/logo.png', alt='UCLA RADIO')
 
-      h1#header Staffing Points Form
-      h4 Remember to only submit one activity per form! Do not group multiple activities because they're for the same department
+//-       h1#header Staffing Points Form
+//-       h4 Remember to only submit one activity per form! Do not group multiple activities because they're for the same department
 
-      #submissionStatus
-        h3= status
+//-       #submissionStatus
+//-         h3= status
 
-      form#staffing-points(action='/staffingPoints' method='POST')
-        .form-container
+//-       form#staffing-points(action='/staffingPoints' method='POST')
+//-         .form-container
 
-          .row
-            .col-md-6
-              .form-group
-                label(for='fullName') Full Name
-                  input.form-control(type='text', name='fullName', required)
+//-           .row
+//-             .col-md-6
+//-               .form-group
+//-                 label(for='fullName') Full Name
+//-                   input.form-control(type='text', name='fullName', required)
 
-            .col-md-6
-              .form-group
-                label(for='djName') Date of Completion
-                  input.form-control(type='date', name='dateCompleted', required)
-          .row
-            .col-md-6
-              .form-group
-                label(for='department') Points Description
-                  input.form-control(type='text', name='pointsDescription', required)
+//-             .col-md-6
+//-               .form-group
+//-                 label(for='djName') Date of Completion
+//-                   input.form-control(type='date', name='dateCompleted', required)
+//-           .row
+//-             .col-md-6
+//-               .form-group
+//-                 label(for='department') Points Description
+//-                   input.form-control(type='text', name='pointsDescription', required)
 
-            .col-md-6
-              .form-group
-                label(for='email') Department
-                  select.form-control(name='department', required)
-                    option(disabled='disabled')
-                    option(value='Art & Design') Art & Design
-                    option(value='Digital Press') Digital Press
-                    option(value='Comedy') Comedy
-                    option(value='Events') Events
-                    option(value='Fundraising') Fundraising
-                    option(value='Marketing') Marketing
-                    option(value='Music') Music
-                    option(value='News') News
-                    option(value='Photo/Video') Photo/Video
-                    option(value='Productions') Productions
-                    option(value='Programming') Programming
-                    option(value='Promotions') Promotions
-                    option(value='Sports') Sports
-                    option(value='Web') Web
-                    option(value='Interns') Interns
+//-             .col-md-6
+//-               .form-group
+//-                 label(for='email') Department
+//-                   select.form-control(name='department', required)
+//-                     option(disabled='disabled')
+//-                     option(value='Art & Design') Art & Design
+//-                     option(value='Digital Press') Digital Press
+//-                     option(value='Comedy') Comedy
+//-                     option(value='Events') Events
+//-                     option(value='Fundraising') Fundraising
+//-                     option(value='Marketing') Marketing
+//-                     option(value='Music') Music
+//-                     option(value='News') News
+//-                     option(value='Photo/Video') Photo/Video
+//-                     option(value='Productions') Productions
+//-                     option(value='Programming') Programming
+//-                     option(value='Promotions') Promotions
+//-                     option(value='Sports') Sports
+//-                     option(value='Web') Web
+//-                     option(value='Interns') Interns
 
-          .row
-            .col-md-6
-              .form-group
-                label(for='numberOfPoints') Number of Points
-                  input.form-control(type='number', name='numberOfPoints', required)
+//-           .row
+//-             .col-md-6
+//-               .form-group
+//-                 label(for='numberOfPoints') Number of Points
+//-                   input.form-control(type='number', name='numberOfPoints', required)
 
-            .col-md-6
-              .form-group
-                label(for='password') Super Secret Password
-                  input.form-control(type='password', name='password', required)
+//-             .col-md-6
+//-               .form-group
+//-                 label(for='password') Super Secret Password
+//-                   input.form-control(type='password', name='password', required)
 
-          .row
-            .col-md-12
-              .form-group
-                label(for='other') Notes (Describe what you did with a little more detail!)
-                  textarea.form-control(name='other', required)
+//-           .row
+//-             .col-md-12
+//-               .form-group
+//-                 label(for='other') Notes (Describe what you did with a little more detail!)
+//-                   textarea.form-control(name='other', required)
 
-          .row
-            .col-md-12
-              .form-group
-                button.btn#new-staffing-points-submit(type='submit') Submit
+//-           .row
+//-             .col-md-12
+//-               .form-group
+//-                 button.btn#new-staffing-points-submit(type='submit') Submit
 

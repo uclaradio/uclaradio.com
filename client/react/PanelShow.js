@@ -250,7 +250,8 @@ const Show = React.createClass({
                   <FormControls.Static
                     label="DJs"
                     labelClassName="col-xs-3"
-                    wrapperClassName="inputEditWrapper col-xs-9">
+                    wrapperClassName="inputEditWrapper col-xs-9"
+                  >
                     {djs}
                   </FormControls.Static>
                 </form>

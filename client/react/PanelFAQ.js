@@ -135,7 +135,8 @@ const FAQ = React.createClass({
                 </Button>
                 <Button
                   className="cancelLink lightPadding"
-                  onClick={this.toggleEditing}>
+                  onClick={this.toggleEditing}
+                >
                   Cancel
                 </Button>
               </span>

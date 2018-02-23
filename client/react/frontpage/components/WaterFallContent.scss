@@ -4,12 +4,12 @@ EventsTab.scss
 Sass styling for events tab of new frontpage
 **/
 
-@import '../common';
+@import "../common";
 
 // constants
 $fadein-duration: 2s;
 
-@include fade-animation("waterfallfadein", 0.0, 1.0);
+@include fade-animation("waterfallfadein", 0, 1);
 
 .wf-container {
   margin: 0 -5pt;
@@ -29,7 +29,7 @@ $fadein-duration: 2s;
 
 .wf-container:before,
 .wf-container:after {
-  content: '';
+  content: "";
   display: table;
 }
 
@@ -128,5 +128,3 @@ $fadein-duration: 2s;
   left: 10pt;
   margin-right: -50%;
 }
-
-
