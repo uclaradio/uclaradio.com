@@ -94,7 +94,6 @@ const StreamBar = React.createClass({
               </div>
             </Collapse>
           </div>
-          <StreamMarquee message="ON-AIR NUMBER: (310) 794-9348 | REQUEST NUMBER: (310) 825-9999" />
           <div
             style={this.state.hasReset ? null : { opacity: '0', height: '0' }}
           >
@@ -127,6 +126,7 @@ const StreamBar = React.createClass({
                 />
               </span>
             </div>
+            <StreamMarquee message="ON-AIR NUMBER: (310) 794-9348 | REQUEST NUMBER: (310) 825-9999" />
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton">
                 <Glyphicon glyph={this.state.playing ? 'pause' : 'play'} />
