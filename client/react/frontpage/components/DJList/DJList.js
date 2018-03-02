@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import './DJList.scss';
 
 import DJInfo from './DJInfo';
-import Loader from './Loader';
+import Loader from '../Loader';
 
 import {
   updateDJs,
   startFetching,
   stopFetching,
   fetchUpdatedDJs,
-} from '../actions/djs';
+} from '../../actions/djs';
 
 const DJUrl = '/api/djs';
 
