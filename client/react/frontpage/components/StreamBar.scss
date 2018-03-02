@@ -28,7 +28,7 @@ Sass styling for frontpage stream bar component
   padding-left: 10pt;
   font-size: 11pt;
 }
-
+.volumeControlIcon,
 .playButton,
 .playText,
 .expandAction {
@@ -92,4 +92,30 @@ Sass styling for frontpage stream bar component
   background-size: 50% 100%;
   animation: example infinite;
   background-image: url("http://i1064.photobucket.com/albums/u364/Regan_Hsu/currentSong_zpsxvmayuag.gif");
+}
+
+.volumeControlIcon > .glyphicon {
+  font-size: 24px;
+  height: 20pt;
+  vertical-align: middle;
+}
+
+.volumeControl {
+  display: inline-block;
+  float: left;
+  padding-right: 10px;
+  position: relative;
+}
+
+.playToggle {
+  display: inline-block;
+}
+
+.volumeSlider {
+  position: absolute;
+  bottom: 40px;
+  background-color: black;
+  height: 200px;
+  opacity: 0.85;
+  padding: 15px 10px;
 }

@@ -1,10 +1,12 @@
 // StreamBar.js
 
+import 'rc-slider/assets/index.css';
 import React from 'react';
 import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
 import Slider from 'react-slick';
 import ChatBox from './ChatBox';
 import isMobile from './misc/isMobile';
+import VolumeSlider from 'rc-slider';
 import './StreamBar.scss';
 
 const trackURL =
@@ -25,6 +27,7 @@ const StreamBar = React.createClass({
       recentExpanded: false,
       chatExpanded: false,
       hasReset: false,
+      showVolumeSlider: false,
     };
   },
   componentDidMount() {
@@ -32,6 +35,12 @@ const StreamBar = React.createClass({
     if (!isMobile.any()) {
       stream.setAttribute('preload', 'auto');
     }
+  },
+  toggleShowVolumeSlider() {
+    this.setState({ showVolumeSlider: !this.state.showVolumeSlider });
+  },
+  setVolume(volume) {
+    stream.volume = volume / 100;
   },
   togglePlay() {
     if (this.state.playing) {
@@ -76,14 +85,16 @@ const StreamBar = React.createClass({
               onEntering={() => {
                 const objDiv = document.getElementById('chatbox');
                 objDiv.scrollTop = objDiv.scrollHeight;
-              }}>
+              }}
+            >
               <div>
                 <ChatBox />
               </div>
             </Collapse>
           </div>
           <div
-            style={this.state.hasReset ? null : { opacity: '0', height: '0' }}>
+            style={this.state.hasReset ? null : { opacity: '0', height: '0' }}
+          >
             <RecentlyPlayed
               expanded={this.state.recentExpanded}
               reset={!this.state.hasReset}
@@ -95,11 +106,9 @@ const StreamBar = React.createClass({
               <img
                 className="chatIcon"
                 src={
-                  this.state.chatExpanded ? (
-                    './img/icons/chat_clicked.svg'
-                  ) : (
-                    './img/icons/chat.svg'
-                  )
+                  this.state.chatExpanded
+                    ? './img/icons/chat_clicked.svg'
+                    : './img/icons/chat.svg'
                 }
               />
             </div>
@@ -108,25 +117,56 @@ const StreamBar = React.createClass({
                 <img
                   className="musicIcon"
                   src={
-                    this.state.recentExpanded ? (
-                      './img/icons/music_clicked.svg'
-                    ) : (
-                      './img/icons/music.svg'
-                    )
+                    this.state.recentExpanded
+                      ? './img/icons/music_clicked.svg'
+                      : './img/icons/music.svg'
                   }
                 />
               </span>
+            </div>
+            <div className="volumeControl">
+              <span
+                className="volumeControlIcon"
+                onClick={this.toggleShowVolumeSlider}
+              >
+                <Glyphicon glyph="volume-up" />
+              </span>
+              {(() => {
+                if (!this.state.showVolumeSlider) {
+                  return null;
+                }
+
+                return (
+                  <div className="volumeSlider">
+                    <VolumeSlider
+                      step={1}
+                      vertical={true}
+                      included={true}
+                      onChange={this.setVolume}
+                      defaultValue={stream.volume * 100}
+                      railStyle={{
+                        backgroundColor: 'white',
+                        borderRadius: 0,
+                      }}
+                      handleStyle={{
+                        border: 'solid 0.5px grey',
+                      }}
+                      trackStyle={{
+                        backgroundColor: '#ffccff',
+                      }}
+                    />
+                  </div>
+                );
+              })()}
             </div>
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton">
                 <Glyphicon glyph={this.state.playing ? 'pause' : 'play'} />
               </span>
               <span className="playText">
-                {this.props.currentShowTitle ? (
-                  `LIVE: ${this.props.currentShowTitle}`
-                ) : (
-                  'LIVE STREAM'
-                )}
+                {this.props.currentShowTitle
+                  ? `LIVE: ${this.props.currentShowTitle}`
+                  : 'LIVE STREAM'}
               </span>
             </div>
           </div>
@@ -225,14 +265,16 @@ const RecentlyPlayed = React.createClass({
             }
             transitionAppear
             onEntered={this.onEntered}
-            onExited={this.onExited}>
+            onExited={this.onExited}
+          >
             <div className="recentContent">
               <Slider {...slideSettings}>
                 {this.state.recentTracks.map((track, i) => (
                   <div
                     id={track.nowPlaying ? 'nowPlaying' : 'focusAnchor'}
                     className="trackInfo"
-                    key={track.artist + track.name + i}>
+                    key={track.artist + track.name + i}
+                  >
                     <div className="albumArt">
                       <img className="trackImage" src={track.image} />
                     </div>
