@@ -17,7 +17,7 @@ import { Grid, Col } from 'react-bootstrap';
 // Redux Components
 import ShowsContent from './components/ShowsContent';
 import EventList from './components/EventList';
-import DJList from './components/DJList';
+import DJList from './components/DJList/DJList';
 import ShowPage from './components/ShowPage';
 import EventPage from './components/EventPage';
 import DJPage from './components/DJPage';
