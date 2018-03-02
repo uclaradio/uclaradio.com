@@ -86,7 +86,8 @@ const ShowPage = React.createClass({
               <a
                 className="soundcloudLogo"
                 href={show.soundcloud}
-                target="_blank">
+                target="_blank"
+              >
                 <i className="fa fa-soundcloud fa-lg" aria-hidden="true" />
               </a>
             )}

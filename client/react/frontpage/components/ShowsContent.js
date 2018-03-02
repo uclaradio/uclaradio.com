@@ -77,7 +77,8 @@ const ShowsContent = React.createClass({
               }
               onClick={() => {
                 this.updateViewType(ScheduleViewType.grid);
-              }}>
+              }}
+            >
               GRID
             </p>
             <p
@@ -88,7 +89,8 @@ const ShowsContent = React.createClass({
               }
               onClick={() => {
                 this.updateViewType(ScheduleViewType.list);
-              }}>
+              }}
+            >
               LIST
             </p>
           </div>

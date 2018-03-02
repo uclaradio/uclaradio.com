@@ -69,7 +69,8 @@ const EventList = React.createClass({
                           <div className="overlayWrapper">
                             <div
                               className="overlay"
-                              style={{ backgroundColor: eventColor }}>
+                              style={{ backgroundColor: eventColor }}
+                            >
                               <p className="eventDate">{start}</p>
                               <div className="eventOverlay">
                                 <p className="bandName">{event.host}</p>

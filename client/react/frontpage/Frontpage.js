@@ -25,7 +25,7 @@ import DJPage from './components/DJPage';
 // Non-Redux Components
 import TriangleCanvas from './components/TriangleCanvas';
 import FrontPageNavbar from './components/FrontPageNavbar';
-import StreamBar from './components/StreamBar';
+import StreamBar from './components/StreamBar/StreamBar';
 import SocialPanel from './components/SocialPanel';
 import ShowInfo from './components/ShowInfo';
 import WaterFallContent from './components/WaterFallContent';
