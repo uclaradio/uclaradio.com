@@ -1,11 +1,22 @@
 // StreamBar.js
 
 import React from 'react';
+
+// Bootstrap Elements
 import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
+
+// Open-Source Components
 import Slider from 'react-slick';
+
+// In house components
 import ChatBox from './ChatBox';
-import isMobile from './misc/isMobile';
-import './StreamBar.scss';
+import StreamMarquee from './StreamMarquee';
+
+//mobile?
+import isMobile from './misc/isMobile.js';
+
+// styling
+require('./StreamBar.scss');
 
 const trackURL =
   'https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json';
@@ -76,14 +87,16 @@ const StreamBar = React.createClass({
               onEntering={() => {
                 const objDiv = document.getElementById('chatbox');
                 objDiv.scrollTop = objDiv.scrollHeight;
-              }}>
+              }}
+            >
               <div>
                 <ChatBox />
               </div>
             </Collapse>
           </div>
           <div
-            style={this.state.hasReset ? null : { opacity: '0', height: '0' }}>
+            style={this.state.hasReset ? null : { opacity: '0', height: '0' }}
+          >
             <RecentlyPlayed
               expanded={this.state.recentExpanded}
               reset={!this.state.hasReset}
@@ -95,11 +108,9 @@ const StreamBar = React.createClass({
               <img
                 className="chatIcon"
                 src={
-                  this.state.chatExpanded ? (
-                    './img/icons/chat_clicked.svg'
-                  ) : (
-                    './img/icons/chat.svg'
-                  )
+                  this.state.chatExpanded
+                    ? './img/icons/chat_clicked.svg'
+                    : './img/icons/chat.svg'
                 }
               />
             </div>
@@ -108,25 +119,22 @@ const StreamBar = React.createClass({
                 <img
                   className="musicIcon"
                   src={
-                    this.state.recentExpanded ? (
-                      './img/icons/music_clicked.svg'
-                    ) : (
-                      './img/icons/music.svg'
-                    )
+                    this.state.recentExpanded
+                      ? './img/icons/music_clicked.svg'
+                      : './img/icons/music.svg'
                   }
                 />
               </span>
             </div>
+            <StreamMarquee message="ON-AIR NUMBER: (310) 794-9348 | REQUEST NUMBER: (310) 825-9999" />
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton">
                 <Glyphicon glyph={this.state.playing ? 'pause' : 'play'} />
               </span>
               <span className="playText">
-                {this.props.currentShowTitle ? (
-                  `LIVE: ${this.props.currentShowTitle}`
-                ) : (
-                  'LIVE STREAM'
-                )}
+                {this.props.currentShowTitle
+                  ? 'LIVE: ${this.props.currentShowTitle}'
+                  : 'LIVE STREAM'}
               </span>
             </div>
           </div>
@@ -174,7 +182,7 @@ const RecentlyPlayed = React.createClass({
     }
   },
   truncateName(name, l) {
-    return name.length > l ? `${name.substr(0, l - 2)}\u2026` : name;
+    return name.length > l ? name.substr(0, l - 2) + '\u2026' : name;
   },
   updateRecentTracks() {
     $.ajax({
@@ -183,16 +191,18 @@ const RecentlyPlayed = React.createClass({
       cache: false,
       success: function(rawTracks) {
         const truncateName = this.truncateName;
-        let tracks = rawTracks.recenttracks.track.map(rawTrack => ({
-          artist: truncateName(rawTrack.artist['#text'], 22),
-          name: truncateName(rawTrack.name, 22),
-          url: rawTrack.url,
-          image:
-            rawTrack.image[1]['#text'] != ''
-              ? rawTrack.image[1]['#text']
-              : '/img/no_album_artwork.jpg',
-          nowPlaying: rawTrack['@attr'] != null,
-        }));
+        let tracks = rawTracks.recenttracks.track.map(function(rawTrack) {
+          return {
+            artist: truncateName(rawTrack.artist['#text'], 22),
+            name: truncateName(rawTrack.name, 22),
+            url: rawTrack.url,
+            image:
+              rawTrack.image[1]['#text'] != ''
+                ? rawTrack.image[1]['#text']
+                : '/img/no_album_artwork.jpg',
+            nowPlaying: rawTrack['@attr'] != null,
+          };
+        });
         if (!tracks) {
           tracks = [];
         }
@@ -225,29 +235,33 @@ const RecentlyPlayed = React.createClass({
             }
             transitionAppear
             onEntered={this.onEntered}
-            onExited={this.onExited}>
+            onExited={this.onExited}
+          >
             <div className="recentContent">
               <Slider {...slideSettings}>
-                {this.state.recentTracks.map((track, i) => (
-                  <div
-                    id={track.nowPlaying ? 'nowPlaying' : 'focusAnchor'}
-                    className="trackInfo"
-                    key={track.artist + track.name + i}>
-                    <div className="albumArt">
-                      <img className="trackImage" src={track.image} />
+                {this.state.recentTracks.map(function(track, i) {
+                  return (
+                    <div
+                      id={track.nowPlaying ? 'nowPlaying' : 'focusAnchor'}
+                      className="trackInfo"
+                      key={track.artist + track.name + i}
+                    >
+                      <div className="albumArt">
+                        <img className="trackImage" src={track.image} />
+                      </div>
+                      <div className="trackName">
+                        <a href={track.url} target="_blank">
+                          {track.name}
+                        </a>
+                      </div>
+                      <div className="trackArtist">
+                        <a href={track.url} target="_blank">
+                          {track.artist}
+                        </a>
+                      </div>
                     </div>
-                    <div className="trackName">
-                      <a href={track.url} target="_blank">
-                        {track.name}
-                      </a>
-                    </div>
-                    <div className="trackArtist">
-                      <a href={track.url} target="_blank">
-                        {track.artist}
-                      </a>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </Slider>
             </div>
           </Collapse>

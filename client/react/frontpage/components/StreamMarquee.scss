@@ -1,0 +1,103 @@
+/**
+StreamMarquee.scss
+
+Sass styling for frong page marquee component
+**/
+
+.marquee-container {
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  margin-left: 150px;
+  width: 60%;
+  z-index: 5;
+}
+
+.marquee {
+  position: relative;
+  z-index: 6;
+  height: 100%;
+  overflow: hidden;
+}
+
+.marquee p {
+  width: 100%;
+  height: 100%;
+  color: white !important;
+  line-height: 35pt;
+  font-size: 10pt;
+  position: absolute;
+  text-align: center;
+
+  white-space: nowrap;
+  box-sizing: border-box;
+  animation: marquee 25s linear infinite;
+  -moz-animation: marquee 25s linear infinite; /* firefox */
+  -webkit-animation: marquee 25s linear infinite; /* safari */
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(-100%, 0);
+  }
+  100% {
+    transform: translate(100%, 0);
+  }
+}
+
+/* firefox */
+@-moz-keyframes marquee {
+  0% {
+    -moz-transform: translate(-100%, 0);
+  }
+  100% {
+    -moz-transform: translate(100%, 0);
+  }
+}
+
+/* safari */
+@-webkit-keyframes marquee {
+  0% {
+    -webkit-transform: translate(-100%, 0);
+  }
+  100% {
+    -webkit-transform: translate(100%, 0);
+  }
+}
+
+/* medium screens */
+@media (min-width: 990px) and (max-width: 1024px) {
+  .marquee p {
+    animation: marquee 20s linear infinite;
+    -moz-animation: marquee 20s linear infinite;
+    -webkit-animation: marquee 20s linear infinite;
+  }
+}
+
+/* larger tablets */
+@media (min-width: 780px) and (max-width: 990px) {
+  .marquee-container {
+    width: 65%;
+    padding-right: 150px;
+  }
+}
+
+/* small tablets */
+@media (min-width: 550px) and (max-width: 670px) {
+  .marquee-container {
+    width: 50%;
+  }
+
+  .marquee p {
+    animation: marquee 15s linear infinite;
+    -moz-animation: marquee 15s linear infinite;
+    -webkit-animation: marquee 15s linear infinite;
+  }
+}
+
+/* mobile */
+@media (max-width: 550px) {
+  .marquee {
+    display: none;
+  }
+}
