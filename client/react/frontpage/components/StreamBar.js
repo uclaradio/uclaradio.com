@@ -28,6 +28,7 @@ const StreamBar = React.createClass({
     };
   },
   componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
     stream = document.getElementById('stream');
     if (!isMobile.any()) {
       stream.setAttribute('preload', 'auto');
@@ -66,6 +67,21 @@ const StreamBar = React.createClass({
   onReset() {
     this.setState({ hasReset: true });
   },
+  handleClickOutside(event) {
+    var streamBar = document.getElementsByClassName('streamBar')[0];
+    var node = event.target.parentNode;
+    var isParent = false;
+    while (node != null) {
+      if (node == streamBar) {
+        isParent = true;
+      }
+      node = node.parentNode;
+    }
+
+    if (!isParent && this.state.chatExpanded) {
+      this.togggleChatExpanded();
+    }
+  },
   render() {
     return (
       <div className="streamBar">
@@ -76,14 +92,16 @@ const StreamBar = React.createClass({
               onEntering={() => {
                 const objDiv = document.getElementById('chatbox');
                 objDiv.scrollTop = objDiv.scrollHeight;
-              }}>
+              }}
+            >
               <div>
                 <ChatBox />
               </div>
             </Collapse>
           </div>
           <div
-            style={this.state.hasReset ? null : { opacity: '0', height: '0' }}>
+            style={this.state.hasReset ? null : { opacity: '0', height: '0' }}
+          >
             <RecentlyPlayed
               expanded={this.state.recentExpanded}
               reset={!this.state.hasReset}
@@ -95,11 +113,9 @@ const StreamBar = React.createClass({
               <img
                 className="chatIcon"
                 src={
-                  this.state.chatExpanded ? (
-                    './img/icons/chat_clicked.svg'
-                  ) : (
-                    './img/icons/chat.svg'
-                  )
+                  this.state.chatExpanded
+                    ? './img/icons/chat_clicked.svg'
+                    : './img/icons/chat.svg'
                 }
               />
             </div>
@@ -108,11 +124,9 @@ const StreamBar = React.createClass({
                 <img
                   className="musicIcon"
                   src={
-                    this.state.recentExpanded ? (
-                      './img/icons/music_clicked.svg'
-                    ) : (
-                      './img/icons/music.svg'
-                    )
+                    this.state.recentExpanded
+                      ? './img/icons/music_clicked.svg'
+                      : './img/icons/music.svg'
                   }
                 />
               </span>
@@ -122,11 +136,9 @@ const StreamBar = React.createClass({
                 <Glyphicon glyph={this.state.playing ? 'pause' : 'play'} />
               </span>
               <span className="playText">
-                {this.props.currentShowTitle ? (
-                  `LIVE: ${this.props.currentShowTitle}`
-                ) : (
-                  'LIVE STREAM'
-                )}
+                {this.props.currentShowTitle
+                  ? `LIVE: ${this.props.currentShowTitle}`
+                  : 'LIVE STREAM'}
               </span>
             </div>
           </div>
@@ -225,14 +237,16 @@ const RecentlyPlayed = React.createClass({
             }
             transitionAppear
             onEntered={this.onEntered}
-            onExited={this.onExited}>
+            onExited={this.onExited}
+          >
             <div className="recentContent">
               <Slider {...slideSettings}>
                 {this.state.recentTracks.map((track, i) => (
                   <div
                     id={track.nowPlaying ? 'nowPlaying' : 'focusAnchor'}
                     className="trackInfo"
-                    key={track.artist + track.name + i}>
+                    key={track.artist + track.name + i}
+                  >
                     <div className="albumArt">
                       <img className="trackImage" src={track.image} />
                     </div>
