@@ -10,8 +10,8 @@ import './PromoBanner.scss';
 // Promo Banner Data
 const bannerData = [
   {
-    img: '/img/promo/sotm/sotm_feb_2018.jpg',
-    link: '/shows/359',
+    img: '/img/promo/sotm/sotm_march_2018.jpg',
+    link: '/shows/356',
   },
 ];
 
