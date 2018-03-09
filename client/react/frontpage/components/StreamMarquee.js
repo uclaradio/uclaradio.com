@@ -11,9 +11,10 @@ StreamMarquee:
 */
 
 var StreamMarquee = React.createClass({
-  render: function() {
+  render() {
+    let style = { width: this.props.marqueeWidth };
     return (
-      <div className="marquee-container">
+      <div className="marquee-container" style={style}>
         <div className="marquee">
           <p>{this.props.message}</p>
         </div>

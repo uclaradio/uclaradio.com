@@ -36,6 +36,7 @@ const StreamBar = React.createClass({
       recentExpanded: false,
       chatExpanded: false,
       hasReset: false,
+      marqueeWidth: '65%',
     };
   },
   componentDidMount() {
@@ -43,6 +44,10 @@ const StreamBar = React.createClass({
     if (!isMobile.any()) {
       stream.setAttribute('preload', 'auto');
     }
+    window.addEventListener('resize', this.calcMarqueeSize);
+  },
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.calcMarqueeSize);
   },
   togglePlay() {
     if (this.state.playing) {
@@ -76,6 +81,24 @@ const StreamBar = React.createClass({
   },
   onReset() {
     this.setState({ hasReset: true });
+  },
+  calcMarqueeSize() {
+    let playTextElement = document.getElementsByClassName('playText')[0] || 0;
+    let musicIconElement = document.getElementsByClassName('musicIcon')[0] || 0;
+
+    if (playTextElement != 0 && musicIconElement != 0) {
+      const marginLeft = 150;
+
+      const playButtonOffset = playTextElement.getBoundingClientRect();
+      const playLeft = playButtonOffset.left;
+
+      const musicIconOffset = musicIconElement.getBoundingClientRect();
+      const musicIconLeft = musicIconOffset.left;
+
+      let marqueeWidth = musicIconLeft - (playLeft + marginLeft);
+
+      this.setState({ marqueeWidth: marqueeWidth });
+    }
   },
   render() {
     return (
@@ -126,7 +149,10 @@ const StreamBar = React.createClass({
                 />
               </span>
             </div>
-            <StreamMarquee message="ON-AIR NUMBER: (310) 794-9348 | REQUEST NUMBER: (310) 825-9999" />
+            <StreamMarquee
+              message="ON-AIR NUMBER: (310) 794-9348 | REQUEST NUMBER: (310) 825-9999"
+              marqueeWidth={this.state.marqueeWidth}
+            />
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton">
                 <Glyphicon glyph={this.state.playing ? 'pause' : 'play'} />

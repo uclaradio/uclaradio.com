@@ -9,7 +9,6 @@ Sass styling for frong page marquee component
   bottom: 0;
   height: 50px;
   margin-left: 150px;
-  width: 60%;
   z-index: 5;
 }
 
@@ -74,20 +73,8 @@ Sass styling for frong page marquee component
   }
 }
 
-/* larger tablets */
-@media (min-width: 780px) and (max-width: 990px) {
-  .marquee-container {
-    width: 65%;
-    padding-right: 150px;
-  }
-}
-
 /* small tablets */
 @media (min-width: 550px) and (max-width: 670px) {
-  .marquee-container {
-    width: 50%;
-  }
-
   .marquee p {
     animation: marquee 15s linear infinite;
     -moz-animation: marquee 15s linear infinite;
