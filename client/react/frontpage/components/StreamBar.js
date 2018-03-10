@@ -69,16 +69,20 @@ const StreamBar = React.createClass({
   },
   handleClickOutside(event) {
     var streamBar = document.getElementsByClassName('streamBar')[0];
+    var canvasContent = document.getElementsByClassName('canvasContent')[0];
     var node = event.target.parentNode;
     var isParent = false;
-    while (node != null) {
+    while (node != null && !isParent) {
       if (node == streamBar) {
         isParent = true;
       }
       node = node.parentNode;
     }
-
-    if (!isParent && this.state.chatExpanded) {
+    if (
+      !isParent &&
+      this.state.chatExpanded &&
+      event.target.parentNode != canvasContent
+    ) {
       this.togggleChatExpanded();
     }
   },
