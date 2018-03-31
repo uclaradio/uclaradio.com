@@ -10,6 +10,10 @@ import './PromoBanner.scss';
 // Promo Banner Data
 const bannerData = [
   {
+    img: '/img/promo/apply_for_radio_S18.png',
+    link: 'http://apply.uclastudentmedia.com/applications/ucla-radio/',
+  },
+  {
     img: '/img/promo/sotm/sotm_march_2018.jpg',
     link: '/shows/356',
   },
