@@ -173,6 +173,8 @@ function newNode(full_picture, summary, created_time, link, platform) {
     case 'TUMBLR':
       box_content_text.className = 'wf-box-content-blog';
       break;
+    default:
+      break;
   }
   box_content_text.appendChild(document.createTextNode(summary));
   summary = String(summary);

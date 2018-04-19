@@ -47,7 +47,7 @@
     "*.{js,scss,json,md}": ["prettier --write", "git add"]
   },
   "dependencies": {
-    "async": "^2.5.0",
+    "axios": "^0.17.1",
     "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
@@ -81,7 +81,6 @@
     "react-spinkit": "^2.1.1",
     "reactable": "^0.14.1",
     "redux": "^3.6.0",
-    "requestify": "^0.2.3",
     "serve-favicon": "^2.2.0",
     "socket.io": "^2.0.3",
     "spdy": "^3.3.2",
