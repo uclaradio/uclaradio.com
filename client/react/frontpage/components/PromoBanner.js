@@ -7,11 +7,16 @@ import Slider from 'react-slick';
 import RectImage from '../../common/RectImage';
 import './PromoBanner.scss';
 
-// Promo Banner Data
+// Promo Banner Data:
+// Data should look like:
+//  {
+//     img: '',
+//     link: '',
+//  }
 const bannerData = [
   {
-    img: '/img/promo/apply_for_radio_S18.png',
-    link: 'http://apply.uclastudentmedia.com/applications/ucla-radio/',
+    img: '/img/promo/web-wine-n-blanket.png',
+    link: '',
   },
   {
     img: '/img/promo/sotm/sotm_march_2018.jpg',
