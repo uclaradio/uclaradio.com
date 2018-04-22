@@ -1,0 +1,17 @@
+.spaceJam {
+  position: fixed;
+  bottom: 52px;
+  width: 100%;
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+
+  z-index: 10;
+}
+
+.spaceJam img {
+  max-height: 100px;
+  margin: 0 25px;
+  cursor: pointer;
+}
