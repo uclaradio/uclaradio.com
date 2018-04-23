@@ -7,11 +7,8 @@ class SpaceJam extends React.Component {
   }
 
   changeBackground(newB) {
-    let background = document.body;
-    background.style.backgroundImage = 'url(' + newB + ')';
-    background.style.backgroundRepeat = 'no-repeat';
-    background.style.backgroundSize = 'cover';
-    background.style.backgroundAttachment = 'fixed';
+    let background = document.getElementById('space');
+    background.src = newB;
   }
 
   render() {
@@ -19,7 +16,7 @@ class SpaceJam extends React.Component {
       <div className="spaceJam">
         <img
           src="/img/alien1.png"
-          onClick={() => this.changeBackground('/img/galaxy1.jpg')}
+          onClick={() => this.changeBackground('/img/nebula3.jpg')}
         />
         <img
           src="/img/alien2.png"
@@ -31,11 +28,11 @@ class SpaceJam extends React.Component {
         />
         <img
           src="/img/alien4.png"
-          onClick={() => this.changeBackground('/img/galaxy5.jpeg')}
+          onClick={() => this.changeBackground('/img/galaxy7.jpeg')}
         />
         <img
           src="/img/alien5.png"
-          onClick={() => this.changeBackground('/img/galaxy3.jpeg')}
+          onClick={() => this.changeBackground('/img/nebula4.jpg')}
         />
       </div>
     );
