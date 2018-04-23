@@ -33,6 +33,7 @@ import Error404Page from './components/Error404Page';
 import StreamIssuesPage from './components/StreamIssuesPage';
 import AboutPage from './components/AboutPage';
 import PromoBanner from './components/PromoBanner';
+import SpaceJam from './components/SpaceJam';
 
 // Common Components
 import RectImage from '../common/RectImage';
@@ -93,36 +94,34 @@ const FrontpageContent = React.createClass({
     return (
       <div className="frontpageContent">
         {/* <TriangleCanvas xColors={theme.timezoneColorScheme()}> */}
-        <TriangleCanvas xColors="Spectral">
-          <div className="container" id="main">
-            <Grid>
-              <Col xs={12} md={3} className="frontpageCol">
-                <IndexLink to="/" activeClassName="active">
-                  <div className="radioBanner">
-                    <RectImage
-                      maxWidth="350px"
-                      src="/img/uclaradio-black.png"
-                    />
-                  </div>
-                </IndexLink>
-                <SocialPanel links={socialMediaLinks} size="2x" />
-                <ShowInfo title="Current Show" show={this.props.nowPlaying} />
-                {/* Show Spotlight */}
-                <ShowInfo title="Spotlight" show={this.props.spotlight} />
-              </Col>
+        {/*<TriangleCanvas xColors="Spectral">*/}
+        <div className="container" id="main">
+          <Grid>
+            <Col xs={12} md={3} className="frontpageCol">
+              <IndexLink to="/" activeClassName="active">
+                <div className="radioBanner">
+                  <RectImage maxWidth="350px" src="/img/uclaradio-black.png" />
+                </div>
+              </IndexLink>
+              <SocialPanel links={socialMediaLinks} size="2x" />
+              <ShowInfo title="Current Show" show={this.props.nowPlaying} />
+              {/* Show Spotlight */}
+              <ShowInfo title="Spotlight" show={this.props.spotlight} />
+            </Col>
 
-              <Col xs={12} md={9} className="frontpageCol">
-                {/* Show of the Month */}
-                <PromoBanner />
-                <FrontPageNavbar />
-                {this.props.children}
-              </Col>
-            </Grid>
-          </div>
-          <StreamBar
-            currentShowTitle={showPlaying ? this.props.nowPlaying.title : null}
-          />
-        </TriangleCanvas>
+            <Col xs={12} md={9} className="frontpageCol">
+              {/* Show of the Month */}
+              <PromoBanner />
+              <FrontPageNavbar />
+              {this.props.children}
+            </Col>
+          </Grid>
+        </div>
+        <StreamBar
+          currentShowTitle={showPlaying ? this.props.nowPlaying.title : null}
+        />
+        <SpaceJam />
+        {/*</TriangleCanvas>*/}
       </div>
     );
   },

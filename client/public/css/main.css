@@ -16,8 +16,8 @@
   width: 100%;
 }
 
-.slick-prev {
-}
+/* .slick-prev {
+} */
 
 .slick-slide {
   height: 231px;
@@ -82,7 +82,8 @@
 }
 
 body {
-  font-color: #333;
+  /* color: #333; */
+  color: rgb(228, 228, 228) !important;
   height: 100%;
   width: 100%;
   font-size: 24px;
