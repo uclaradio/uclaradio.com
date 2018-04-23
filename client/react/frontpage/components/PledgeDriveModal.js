@@ -1,13 +1,6 @@
 import React from 'react';
-
 import { Modal, Button } from 'react-bootstrap';
-
 import { Link } from 'react-router';
-
-const PledgeDrivePhoto = {
-  img: '/img/p-drive-modal.jpg',
-  link: 'http://spark.ucla.edu/uclaradio',
-};
 
 const PledgeDriveModal = React.createClass({
   getInitialState() {
@@ -22,8 +15,8 @@ const PledgeDriveModal = React.createClass({
     return (
       <Modal show={this.state.showModal} onHide={this.close}>
         <Modal.Body>
-          <a href={PledgeDrivePhoto.link}>
-            <img src={PledgeDrivePhoto.img} style={{ width: '100%' }}>
+          <a href="http://spark.ucla.edu/uclaradio">
+            <img src="/img/p-drive-modal.png" style={{ width: '100%' }}>
               {' '}
             </img>
           </a>

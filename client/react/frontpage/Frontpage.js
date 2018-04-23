@@ -34,6 +34,7 @@ import StreamIssuesPage from './components/StreamIssuesPage';
 import AboutPage from './components/AboutPage';
 import PromoBanner from './components/PromoBanner';
 import SpaceJam from './components/SpaceJam';
+import PledgeDriveModal from './components/PledgeDriveModal';
 
 // Common Components
 import RectImage from '../common/RectImage';
@@ -113,6 +114,7 @@ const FrontpageContent = React.createClass({
               {/* Show of the Month */}
               <PromoBanner />
               <FrontPageNavbar />
+              <PledgeDriveModal />
               {this.props.children}
             </Col>
           </Grid>

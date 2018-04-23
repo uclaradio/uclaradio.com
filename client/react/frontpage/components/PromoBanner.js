@@ -16,11 +16,11 @@ import './PromoBanner.scss';
 const bannerData = [
   {
     img: '/img/promo/web-wine-n-blanket.png',
-    link: '',
+    link: 'https://www.facebook.com/events/2067576166837819/',
   },
   {
-    img: '/img/promo/sotm/sotm_march_2018.jpg',
-    link: '/shows/356',
+    img: '/img/promo/pd-2018.png',
+    link: 'https://www.facebook.com/events/1298520493612291/',
   },
 ];
 
