@@ -23,7 +23,7 @@ class SpaceJam extends React.Component {
         />
         <img
           src="/img/alien2.png"
-          onClick={() => this.changeBackground('/img/galaxy5.jpeg')}
+          onClick={() => this.changeBackground('/img/nebula0.jpg')}
         />
         <img
           src="/img/alien3.png"
@@ -31,7 +31,7 @@ class SpaceJam extends React.Component {
         />
         <img
           src="/img/alien4.png"
-          onClick={() => this.changeBackground('/img/galaxy7.jpeg')}
+          onClick={() => this.changeBackground('/img/galaxy5.jpeg')}
         />
         <img
           src="/img/alien5.png"

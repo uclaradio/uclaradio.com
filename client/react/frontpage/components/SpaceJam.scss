@@ -15,3 +15,10 @@
   margin: 0 25px;
   cursor: pointer;
 }
+
+@media (max-width: 550px) {
+  .spaceJam img {
+    max-height: 80px;
+    margin: 0;
+  }
+}

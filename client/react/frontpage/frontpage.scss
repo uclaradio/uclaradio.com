@@ -21,6 +21,8 @@ body {
 }
 
 a {
+  // color: black !important;
+  // swap back after pledge drive!
   color: #ffffff;
 }
 
@@ -47,6 +49,7 @@ h4 {
   margin-bottom: 4*$box-padding;
 }
 
+// .radioBanner > .rectImage only for pledge drive
 .radioBanner > .rectImage {
   background-color: rgba(240, 240, 240, 0.7);
 }
