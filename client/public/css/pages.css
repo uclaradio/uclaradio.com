@@ -7,7 +7,7 @@ label {
 }
 
 #new-blurb-submit {
-  background-color: rgba(0, 0, 0, .13);
+  background-color: rgba(0, 0, 0, 0.13);
   width: 100%;
 }
 
@@ -25,7 +25,7 @@ body {
 }
 
 .mdl-card__title > h2 {
-  background-color: hsla(0, 0%, 0%,0.5);
+  background-color: hsla(0, 0%, 0%, 0.5);
   padding: 10px;
   color: white;
 }
@@ -38,106 +38,110 @@ body {
   background: url('/img/points-total.png') center / cover;
 } */
 
+.demo-card-wide > .mdl-card__title.request-form {
+  background: url("/img/request-box.jpg") center / cover;
+}
+
 .demo-card-wide > .mdl-card__title.in-station {
-  background: url('/img/in-station.jpg') center / cover;
+  background: url("/img/in-station.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.concert-press {
-  background: url('/img/concert-press.jpg') center / cover;
+  background: url("/img/concert-press.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.substitution {
-  background: url('/img/substitution.jpg') center / cover;
+  background: url("/img/substitution.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.spreadsheet {
-  background: url('/img/spreadsheet.png') center / cover;
+  background: url("/img/spreadsheet.png") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.consent-and-release {
-  background: url('/img/consent-and-release.jpg') center / cover;
+  background: url("/img/consent-and-release.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.roster {
-  background: url('/img/roster.png') center / cover;
+  background: url("/img/roster.png") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.calendar {
-  background: url('/img/calendar.jpg') center / cover;
+  background: url("/img/calendar.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.email {
-  background: url('/img/email.jpg') center / cover;
+  background: url("/img/email.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.faq {
-  background: url('/img/faq.jpg') center / cover;
+  background: url("/img/faq.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.suggestion-box {
-  background: url('/img/suggestion-box.jpg') center / cover;
+  background: url("/img/suggestion-box.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.bylaws {
-  background: url('/img/bylaws.jpg') center / cover;
+  background: url("/img/bylaws.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.interview-signups {
-  background: url('/img/interview-signups.jpg') center / cover;
+  background: url("/img/interview-signups.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.show-graphics {
-  background: url('/img/show-graphics.jpg') center / cover;
+  background: url("/img/show-graphics.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.nmfs {
-  background: url('/img/nmfs.png') center / cover;
+  background: url("/img/nmfs.png") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.panel {
-  background: url('/img/panel.png') center / cover;
+  background: url("/img/panel.png") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.photovidrequest {
-  background: url('/img/photovidrequest.jpg') center / cover;
+  background: url("/img/photovidrequest.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.winnerinfo {
-  background: url('/img/winnerinfo.jpg') center / cover;
+  background: url("/img/winnerinfo.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.ticketgiveaway {
-  background: url('/img/ticketgiveaway.jpg') center / cover;
+  background: url("/img/ticketgiveaway.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.archive {
-  background: url('/img/archive.png') center / cover;
+  background: url("/img/archive.png") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.equipment {
-  background: url('/img/turntable.jpg') center / cover;
+  background: url("/img/turntable.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.socials {
-  background: url('/img/social_media.png') center / cover;
+  background: url("/img/social_media.png") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.productions-room {
-  background: url('/img/productions_room.png') center / cover;
+  background: url("/img/productions_room.png") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.rivendell-library {
-  background: url('/img/musiclibrary.png') center / cover;
+  background: url("/img/musiclibrary.png") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.show-nominations {
-  background: url('/img/clapping.jpg') center / cover;
+  background: url("/img/clapping.jpg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.theme-songs {
-  background: url('/img/theme-songs.png') center / cover;
+  background: url("/img/theme-songs.png") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.DJ-profile {
-  background: url('/img/dj_profile.jpg') center / cover;
+  background: url("/img/dj_profile.jpg") center / cover;
 }
