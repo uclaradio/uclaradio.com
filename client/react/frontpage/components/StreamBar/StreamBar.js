@@ -6,7 +6,9 @@ import Slider from 'react-slick';
 import ChatBox from './ChatBox/ChatBox';
 import RecentlyPlayed from './RecentlyPlayed/RecentlyPlayed';
 import isMobile from '../misc/isMobile';
+import VolumeSlider from 'rc-slider';
 import './StreamBar.scss';
+import 'rc-slider/assets/index.css';
 
 const trackURL =
   'https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json';
@@ -26,6 +28,7 @@ const StreamBar = React.createClass({
       recentExpanded: false,
       chatExpanded: false,
       hasReset: false,
+      showVolumeSlider: false,
     };
   },
   componentDidMount() {
@@ -33,6 +36,12 @@ const StreamBar = React.createClass({
     if (!isMobile.any()) {
       stream.setAttribute('preload', 'auto');
     }
+  },
+  toggleShowVolumeSlider() {
+    this.setState({ showVolumeSlider: !this.state.showVolumeSlider });
+  },
+  setVolume(volume) {
+    stream.volume = volume / 100;
   },
   togglePlay() {
     if (this.state.playing) {
@@ -119,6 +128,41 @@ const StreamBar = React.createClass({
               </span>
             </div>
             */}
+            <div className="volumeControl">
+              <span
+                className="volumeControlIcon"
+                onClick={this.toggleShowVolumeSlider}
+              >
+                <Glyphicon glyph="volume-up" />
+              </span>
+              {(() => {
+                if (!this.state.showVolumeSlider) {
+                  return null;
+                }
+
+                return (
+                  <div className="volumeSlider">
+                    <VolumeSlider
+                      step={1}
+                      vertical={true}
+                      included={true}
+                      onChange={this.setVolume}
+                      defaultValue={stream.volume * 100}
+                      railStyle={{
+                        backgroundColor: 'white',
+                        borderRadius: 0,
+                      }}
+                      handleStyle={{
+                        border: 'solid 0.5px grey',
+                      }}
+                      trackStyle={{
+                        backgroundColor: '#ffccff',
+                      }}
+                    />
+                  </div>
+                );
+              })()}
+            </div>
             <div onClick={this.togglePlay} className="playToggle">
               <span className="playButton">
                 <Glyphicon glyph={this.state.playing ? 'pause' : 'play'} />
