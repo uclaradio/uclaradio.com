@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "async": "^2.5.0",
-    "bcrypt": "^1.0.2",
+    "bcrypt": "^2.0.1",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "collections": "^5.0.7",
@@ -104,7 +104,7 @@
     "json-loader": "^0.5.7",
     "jsx-loader": "^0.13.2",
     "lint-staged": "^4.0.3",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.9.0",
     "nodemon": "^1.12.1",
     "prettier": "^1.5.3",
     "sass-loader": "^6.0.6",

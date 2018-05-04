@@ -121,7 +121,6 @@ const FrontpageContent = React.createClass({
         <StreamBar
           currentShowTitle={showPlaying ? this.props.nowPlaying.title : null}
         />
-        {/* <SpaceJam /> */}
         {/*</TriangleCanvas>*/}
       </div>
     );
