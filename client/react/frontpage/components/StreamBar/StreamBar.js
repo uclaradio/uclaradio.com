@@ -5,6 +5,7 @@ import { Grid, Glyphicon, Collapse } from 'react-bootstrap';
 import Slider from 'react-slick';
 import ChatBox from './ChatBox/ChatBox';
 import RecentlyPlayed from './RecentlyPlayed/RecentlyPlayed';
+import SpaceJam from './SpaceJam/SpaceJam';
 import isMobile from '../misc/isMobile';
 import './StreamBar.scss';
 
@@ -131,6 +132,7 @@ const StreamBar = React.createClass({
             </div>
           </div>
         </Grid>
+        {this.state.chatExpanded ? null : <SpaceJam />}
       </div>
     );
   },

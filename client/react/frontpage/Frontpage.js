@@ -33,7 +33,6 @@ import Error404Page from './components/Error404Page';
 import StreamIssuesPage from './components/StreamIssuesPage';
 import AboutPage from './components/AboutPage';
 import PromoBanner from './components/PromoBanner';
-import SpaceJam from './components/SpaceJam';
 import PledgeDriveModal from './components/PledgeDriveModal';
 
 // Common Components
@@ -122,7 +121,6 @@ const FrontpageContent = React.createClass({
         <StreamBar
           currentShowTitle={showPlaying ? this.props.nowPlaying.title : null}
         />
-        <SpaceJam />
         {/*</TriangleCanvas>*/}
       </div>
     );
