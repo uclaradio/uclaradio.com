@@ -145,3 +145,7 @@ body {
 .demo-card-wide > .mdl-card__title.DJ-profile {
   background: url("/img/dj_profile.jpg") center / cover;
 }
+
+.demo-card-wide > .mdl-card__title.no-no {
+  background: url("/img/no-no.jpg") center / cover;
+}
