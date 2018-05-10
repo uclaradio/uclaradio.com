@@ -30,6 +30,8 @@ const FrontPageNavbar = React.createClass({
       case 4:
         browserHistory.push('/about');
         break;
+      case 5:
+        browserHistory.push('/events');
       case 10:
         this.setState({ open: !this.state.open });
         break;
@@ -57,11 +59,9 @@ const FrontPageNavbar = React.createClass({
               <span className="equalWidth">Shows</span>
             </NavItem>
           </LinkContainer>
-          <LinkContainer to="/events">
-            <NavItem className="frontPageNavbarItem">
-              <span className="equalWidth">Events</span>
-            </NavItem>
-          </LinkContainer>
+          <NavItem eventKey={1} className="frontPageNavbarItem">
+            <span className="equalWidth">Blog</span>
+          </NavItem>
           <NavItem eventKey={10} className="frontPageNavbarItem rightMost">
             <span className="equalWidth">
               {this.state.open ? 'Less' : 'More'}
@@ -80,9 +80,11 @@ const FrontPageNavbar = React.createClass({
                 <span className="equalWidth">Stream</span>
               </NavItem>
             </LinkContainer>
-            <NavItem eventKey={1} className="frontPageNavbarItem collapsed">
-              <span className="equalWidth">Blog</span>
-            </NavItem>
+            <LinkContainer to="/events">
+              <NavItem className="frontPageNavbarItem collapsed">
+                <span className="equalWidth">Events</span>
+              </NavItem>
+            </LinkContainer>
             <NavItem
               eventKey={3}
               className="frontPageNavbarItem rightMost collapsed"
@@ -107,9 +109,9 @@ const FrontPageNavbar = React.createClass({
           <LinkContainer to="/shows">
             <NavItem className="frontPageNavbarItem fullWidth">Shows</NavItem>
           </LinkContainer>
-          <LinkContainer to="/events">
-            <NavItem className="frontPageNavbarItem fullWidth">Events</NavItem>
-          </LinkContainer>
+          <NavItem eventKey={1} className="frontPageNavbarItem fullWidth">
+            Blog
+          </NavItem>
           <NavDropdown
             title="More"
             className="frontPageNavbarItem fullWidth bottomMost"
@@ -133,10 +135,10 @@ const FrontPageNavbar = React.createClass({
             <MenuItem
               className="dropdownNavbarItem"
               onClick={() => {
-                this.handleClick(1);
+                this.handleClick(5);
               }}
             >
-              Blog
+              Events
             </MenuItem>
             <MenuItem
               className="dropdownNavbarItem"
