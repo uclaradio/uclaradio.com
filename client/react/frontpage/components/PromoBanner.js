@@ -16,7 +16,7 @@ import './PromoBanner.scss';
 const bannerData = [
   {
     img: '/img/promo/sotm/sotm_may_2018.jpg',
-    link: 'https://uclaradio.com/shows/489',
+    link: '/shows/489',
   },
   {
     img: '/img/promo/pd-2018.png',
