@@ -19,8 +19,8 @@ const bannerData = [
     link: '/shows/489',
   },
   {
-    img: '/img/promo/pd-2018.png',
-    link: 'https://www.facebook.com/events/1298520493612291/',
+    img: '/img/promo/dirty_penni_fest.png',
+    link: 'https://www.facebook.com/events/170504736905445/',
   },
 ];
 
