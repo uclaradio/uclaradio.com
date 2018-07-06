@@ -15,12 +15,8 @@ import './PromoBanner.scss';
 //  }
 const bannerData = [
   {
-    img: '/img/promo/sotm/sotm_may_2018.jpg',
-    link: '/shows/489',
-  },
-  {
-    img: '/img/promo/dirty_penni_fest.png',
-    link: 'https://www.facebook.com/events/170504736905445/',
+    img: '/img/generalWeb.png',
+    link: '',
   },
 ];
 
