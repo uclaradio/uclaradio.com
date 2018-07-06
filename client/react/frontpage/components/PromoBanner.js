@@ -15,7 +15,7 @@ import './PromoBanner.scss';
 //  }
 const bannerData = [
   {
-    img: '/img/generalWeb.png',
+    img: '/img/GeneralWEB.png',
     link: '',
   },
 ];
