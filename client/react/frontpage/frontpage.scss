@@ -9,10 +9,6 @@ Sass styling for new frontpage
 body {
   font-family: "apercuregular";
   font-size: 11pt;
-  color: #f0f0f0;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 #main {
@@ -20,9 +16,7 @@ body {
 }
 
 a {
-  // color: black !important;
-  // swap back after pledge drive!
-  color: #ffffff;
+  color: black !important;
 }
 
 // Frontpage styling
@@ -46,11 +40,6 @@ h4 {
 
 .radioBanner {
   margin-bottom: 4*$box-padding;
-}
-
-// .radioBanner > .rectImage only for pledge drive
-.radioBanner > .rectImage {
-  background-color: rgba(240, 240, 240, 0.7);
 }
 
 // .active > .radioBanner > .rectImage {
