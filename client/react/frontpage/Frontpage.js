@@ -33,6 +33,7 @@ import Error404Page from './components/Error404Page';
 import StreamIssuesPage from './components/StreamIssuesPage';
 import AboutPage from './components/AboutPage';
 import PromoBanner from './components/PromoBanner';
+import SoccerUpdate from './components/SoccerUpdate';
 
 // Common Components
 import RectImage from '../common/RectImage';
@@ -112,6 +113,7 @@ const FrontpageContent = React.createClass({
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
+                <SoccerUpdate />
                 {/* Show of the Month */}
                 <PromoBanner />
                 <FrontPageNavbar />
