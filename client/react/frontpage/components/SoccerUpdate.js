@@ -12,8 +12,8 @@ const SoccerUpdate = () => (
         target="_blank"
         href="https://uclabruins.com/sports/2016/8/16/live-audio.aspx"
       >
-        Click for live coverage of UCLA Men’s Soccer vs LMU at on Saturday 10/20
-        @ 7PM PST feat. UCLA Radio DJ Anish Vishwakoti
+        Click for live coverage of UCLA Women’s Soccer vs Oregon State on Sunday
+        10/21 @ 12PM PST feat. UCLA Radio DJ Anish Vishwakoti
       </a>
     </div>
     <div id="soccer">⚽</div>
