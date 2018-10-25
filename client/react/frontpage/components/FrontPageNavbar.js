@@ -16,7 +16,7 @@ const FrontPageNavbar = React.createClass({
   handleClick(selectedKey) {
     switch (selectedKey) {
       case 1:
-        window.open('http://blog.uclaradio.com', '_blank');
+        browserHistory.push('/blog');
         break;
       case 2:
         browserHistory.push('/streamIssues');
