@@ -15,10 +15,6 @@ import './PromoBanner.scss';
 //  }
 const bannerData = [
   {
-    img: '/img/promo/chaotic-reflections.png',
-    link: 'https://www.facebook.com/events/2190789901178453',
-  },
-  {
     img: '/img/promo/summer-graphic-radio-banner.jpg',
     link: '',
   },
