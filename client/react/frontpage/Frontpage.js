@@ -113,7 +113,7 @@ const FrontpageContent = React.createClass({
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
-                {/* <SoccerUpdate /> */}
+                <SoccerUpdate />
                 {/* Show of the Month */}
                 <PromoBanner />
                 <FrontPageNavbar />
