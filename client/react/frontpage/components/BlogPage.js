@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Loader from './Loader';
 import RectImage from '../../common/RectImage';
-
+const axios = require('axios');
 /**
 Page content for individual show
 Displays full description of a show, with blurb, picture, djs.. everything
@@ -19,15 +19,28 @@ const AddPost = React.createClass({
   getInitialState: function() {
     return {
       title: '',
-      subject: '',
+      content: '',
     };
   },
 
   handleTitleChange(e) {
     this.setState({ title: e.target.value });
   },
-  handleSubjectChange(e) {
+  handleContentChange(e) {
     this.setState({ body: e.target.value });
+  },
+  addPost() {
+    axios
+      .post('/addPost', {
+        title: this.state.title,
+        content: this.state.content,
+      })
+      .then(function(response) {
+        console.log('response from add post is ', response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   },
 
   render() {
@@ -54,9 +67,9 @@ const AddPost = React.createClass({
                   className="form-control"
                   onChange={this.handleSubjectChange}
                   type="textarea"
-                  id="subject"
+                  id="content"
                   placeholder="Subject"
-                  maxlength="2000000000"
+                  maxLength="2000000000"
                   rows="10"
                 />
               </div>
@@ -66,6 +79,7 @@ const AddPost = React.createClass({
                   id="submit"
                   name="submit"
                   className="btn btn-primary pull-right"
+                  onClick={this.addPost}
                 >
                   Add Post
                 </button>

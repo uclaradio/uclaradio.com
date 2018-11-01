@@ -21,24 +21,24 @@ const BlogModel = mongoose.model('blogposts', BlogSchema);
 const uniqueCheckIterations = 10;
 
 // create a new message object with given text, username, and a unique id
-blogposts.addPost = function(data, callback) {
-  db.getNextAvailableId(db.messageIdKey, nextId => {
-    const blogpost = new BlogModel({
-      id: nextId,
-      title: data.title,
-      content: data.content,
-      user: data.user,
-    });
-    blogpost.save();
-
-    db.setLastTakenId(db.messageIdKey, nextId, err => {
-      if (err) {
-        console.log('error setting next id for messages: ', err);
+blogposts.addPost = function(title, content, callback) {
+  // remove all old faqs
+  {
+    BlogModel.collection.insert(
+      {
+        title: title,
+        content: content,
+      },
+      {},
+      err => {
+        if (err == null) {
+          callback(true);
+        } else {
+          callback(false);
+        }
       }
-    });
-
-    callback(blogpost);
-  });
+    );
+  }
 };
 
 // delete message
