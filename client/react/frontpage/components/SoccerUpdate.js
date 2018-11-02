@@ -12,8 +12,8 @@ const SoccerUpdate = () => (
         target="_blank"
         href="https://uclabruins.com/sports/2016/8/16/live-audio.aspx"
       >
-        Click for live coverage of UCLA Men's Soccer vs UC Berkeley on Thursday
-        11/01 @ 7PM PST feat. UCLA Radio DJ Anish Vishwakoti
+        Click for live coverage of UCLA Men's Soccer vs Stanford on Sunday 11/04
+        @ 4PM PST feat. UCLA Radio DJ Anish Vishwakoti
       </a>
     </div>
     <div id="soccer">⚽</div>
