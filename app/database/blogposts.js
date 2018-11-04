@@ -24,6 +24,7 @@ const uniqueCheckIterations = 10;
 blogposts.addPost = function(title, content, callback) {
   // remove all old faqs
   {
+    console.log('hi i am here');
     BlogModel.collection.insert(
       {
         title: title,

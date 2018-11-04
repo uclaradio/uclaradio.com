@@ -27,7 +27,7 @@ const AddPost = React.createClass({
     this.setState({ title: e.target.value });
   },
   handleContentChange(e) {
-    this.setState({ body: e.target.value });
+    this.setState({ content: e.target.value });
   },
   addPost() {
     axios
@@ -37,6 +37,7 @@ const AddPost = React.createClass({
       })
       .then(function(response) {
         console.log('response from add post is ', response);
+        console.log('Hi i am here');
       })
       .catch(function(error) {
         console.log(error);
@@ -65,7 +66,7 @@ const AddPost = React.createClass({
               <div className="form-group" id="textbox">
                 <textarea
                   className="form-control"
-                  onChange={this.handleSubjectChange}
+                  onChange={this.handleContentChange}
                   type="textarea"
                   id="content"
                   placeholder="Subject"
