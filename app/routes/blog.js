@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const post = require('../database/blogposts');
+const blogposts = require('../database/blogposts');
 
 router.post('/addPost', (req, res) => {
-  console.log('Hi i am here123');
+  console.log('Hi i am in blogpost');
   var title = req.body.title;
   var content = req.body.content;
-  post.addPost(title, content, function(result) {
+  blogposts.addPost(title, content, function(result) {
     res.send(result);
   });
 });

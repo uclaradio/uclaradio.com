@@ -18,6 +18,7 @@ const notFound = require('./routes/notFound');
 const ticketGiveawayCalendar = require('./routes/ticketGiveawayCalendar');
 const api = require('./routes/api');
 const chat = require('./routes/chat')(io);
+const blog = require('./routes/blog');
 
 // view engine setup
 app.set('views', path.join(__dirname, '..', 'client', 'views'));
@@ -50,6 +51,7 @@ app.use('/notFound', notFound);
 app.use('/GiveawayCalendar', ticketGiveawayCalendar);
 app.use('/api', api);
 app.use('/chat', chat);
+app.use('/blog', blog);
 // all links to panel/* handled in panel.js
 app.use('/panel', panel);
 

@@ -17,55 +17,30 @@ const BlogSchema = new mongoose.Schema({
 
 const BlogModel = mongoose.model('blogposts', BlogSchema);
 
-// number of times script should attempt and check to confirm a unique username, per round
-const uniqueCheckIterations = 10;
-
-// create a new message object with given text, username, and a unique id
+// create a new blogpost object with given text, username, and a unique id
 blogposts.addPost = function(title, content, callback) {
-  // remove all old faqs
-  {
-    console.log('hi i am here');
-    BlogModel.collection.insert(
-      {
-        title: title,
-        content: content,
-      },
-      {},
-      err => {
-        if (err == null) {
-          callback(true);
-        } else {
-          callback(false);
-        }
+  db.getNextAvailableId(db.blogpostIdKey, nextId => {
+    const blogpost = new BlogModel({
+      id: nextId,
+      title: title,
+      content: content,
+    });
+    blogpost.save();
+
+    db.setLastTakenId(db.blogpostIdKey, nextId, err => {
+      if (err) {
+        console.log('error setting id for blogpsts', err);
       }
-    );
-  }
+    });
+    callback(blogpost);
+  });
 };
 
-// delete message
-blogposts.delete = function(messageID, callback) {
-  BlogModel.remove({ id: messageID }, () => {
+// delete blogpost
+blogposts.delete = function(blogpostID, callback) {
+  BlogModel.remove({ id: blogpostID }, () => {
     callback();
   });
 };
-
-// list [volume] messages after message with ID
-blogposts.next = function(messageID, volume, callback) {
-  const param = messageID ? { id: { $lt: messageID } } : null;
-  const promise = BlogModel.find(param)
-    .limit(parseInt(volume))
-    .sort({ _id: -1 });
-  promise.then(data => {
-    callback(data);
-  });
-};
-
-// supply a username
-
-// generate a random username with some max number of digits
-// example: digits <= 5: "Guest430" or "Guest47988" could be generated
-
-// try and get a random username by checking that no identical user exists in database.
-// after some number of attempts, give up and reuse a username
 
 module.exports = blogposts;

@@ -2,10 +2,6 @@
 // shows full description of a show
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import Loader from './Loader';
-import RectImage from '../../common/RectImage';
 const axios = require('axios');
 /**
 Page content for individual show
@@ -37,7 +33,7 @@ const AddPost = React.createClass({
       })
       .then(function(response) {
         console.log('response from add post is ', response);
-        console.log('Hi i am here');
+        console.log('Hi i am in BlogPage');
       })
       .catch(function(error) {
         console.log(error);
