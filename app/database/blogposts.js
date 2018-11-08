@@ -18,12 +18,13 @@ const BlogSchema = new mongoose.Schema({
 const BlogModel = mongoose.model('blogposts', BlogSchema);
 
 // create a new blogpost object with given text, username, and a unique id
-blogposts.addPost = function(title, content, callback) {
+blogposts.addPost = function(req, callback) {
+  console.log("I'm in blog post");
   db.getNextAvailableId(db.blogpostIdKey, nextId => {
     const blogpost = new BlogModel({
       id: nextId,
-      title: title,
-      content: content,
+      title: req.title,
+      content: req.content,
     });
     blogpost.save();
 
