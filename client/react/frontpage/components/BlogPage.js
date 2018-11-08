@@ -2,14 +2,14 @@
 // shows full description of a show
 
 import React from 'react';
+import './BlogPage.scss';
+
 const axios = require('axios');
 /**
-Page content for individual show
-Displays full description of a show, with blurb, picture, djs.. everything
+Page content for adding a blog post
+Displays a button to add blog post
 
-@prop show: show object
-@prop fetching: currently fetching shows
-@prop updateShows: callback to update all listed shows
+@prop addPost: callback to add a blog post
 * */
 
 const AddPost = React.createClass({
@@ -27,14 +27,14 @@ const AddPost = React.createClass({
     this.setState({ content: e.target.value });
   },
   addPost() {
+    console.log('BlogPage.js addPost()');
     axios
-      .post('/addPost', {
+      .post('/blog/addPost', {
         title: this.state.title,
         content: this.state.content,
       })
       .then(function(response) {
         console.log('response from add post is ', response);
-        console.log('Hi i am in BlogPage');
       })
       .catch(function(error) {
         console.log(error);
@@ -100,10 +100,7 @@ const BlogPage = React.createClass({
 
   handleClick(e) {
     this.setState({ count: 1 });
-
-    console.log('hi');
   },
-  // creates readable string from DJ dictionary returned from the server
 
   render() {
     return (
@@ -122,7 +119,5 @@ const BlogPage = React.createClass({
     );
   },
 });
-
-// set show if found
 
 export default BlogPage;

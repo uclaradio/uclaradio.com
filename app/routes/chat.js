@@ -10,6 +10,7 @@ module.exports = function(io) {
   // deliver more message history after a given message
   router.post('/getNext', (req, res) => {
     // id might be null if no message history available yet
+    console.log('we are in chat posting');
     const id = req.body.id;
     const volume = req.body.volume;
     messages.next(id, volume, data => {

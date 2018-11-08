@@ -23,8 +23,8 @@ blogposts.addPost = function(req, callback) {
   db.getNextAvailableId(db.blogpostIdKey, nextId => {
     const blogpost = new BlogModel({
       id: nextId,
-      title: req.title,
-      content: req.content,
+      title: req.body.title,
+      content: req.body.content,
     });
     blogpost.save();
 
