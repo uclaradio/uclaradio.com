@@ -11,6 +11,7 @@ Displays full description of a show, with blurb, picture, djs.. everything
 @prop fetching: currently fetching shows
 @prop updateShows: callback to update all listed shows
 * */
+
 const AddPost = React.createClass({
   getInitialState: function() {
     return {
