@@ -19,6 +19,10 @@ const bannerData = [
     link: '',
   },
   {
+    img: '/img/promo/sotm/sotm-nov2018.png',
+    link: 'https://www.facebook.com/cratedigging.uclaradio/',
+  },
+  {
     img: '/img/GeneralWEB.png',
     link: '',
   },
