@@ -10,10 +10,10 @@ const SoccerUpdate = () => (
       <a
         class="blinkText"
         target="_blank"
-        href="https://uclabruins.com/sports/2016/8/16/live-audio.aspx"
+        href="https://pac-12.com/live/ucla-3"
       >
-        Click for live coverage of UCLA Men's Soccer vs SDSU on Thursday 11/08 @
-        8PM PST feat. UCLA Radio DJ Anish Vishwakoti
+        Click to watch UCLA Women’s Soccer vs San Jose State live on Friday
+        11/09 @ 6PM PST feat. UCLA Radio DJ Anish Vishwakoti
       </a>
     </div>
     <div id="soccer">⚽</div>
