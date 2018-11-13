@@ -91,24 +91,63 @@ DJList: fetches a json list of djs from API and displays data
 @prop updateDJs: callback to fetch updated dj list from server
 */
 const DJList = React.createClass({
+  getInitialState() {
+    return {
+      displayedDJs: this.props.djs,
+    };
+  },
   componentDidMount() {
     this.props.updateDJs();
   },
+  getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.djs.length !== prevState.displayedDJs.length) {
+      return {
+        displayedDJs: nextProps.djs,
+      };
+    }
+    return null;
+  },
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.djs.length !== this.props.djs.length) {
+      this.setState({
+        displayedDJs: this.props.djs,
+      });
+    }
+  },
+  handleSearch(input) {
+    const searchQuery = input.target.value.toLowerCase();
+    const DJs = this.props.djs.filter(el => {
+      let searchValue;
+
+      if (el.djName) {
+        searchValue = el.djName.toLowerCase();
+      } else {
+        searchValue = el.fullName.toLowerCase();
+      }
+
+      return searchValue.indexOf(searchQuery) !== -1;
+    });
+
+    this.setState({
+      displayedDJs: DJs,
+    });
+  },
+
   render() {
-    const djs = this.props.djs.map(dj => (
-      // const djs = allDJs.map(dj => (
+    const djs = this.state.displayedDJs.map(dj => (
+      //const djs = allDJs.map(dj => (
       <DJInfo
         name={dj.djName || dj.fullName}
         picture={dj.picture}
         key={dj.username}
-        bio={dj.bio}
+        bio={dj.bio || "This DJ doesn't have a bio yet!"}
       />
     ));
 
     return (
       <div className="djList">
-        <DJSearchBar />
-        {this.props.fetching && this.props.djs.length == 0 ? <Loader /> : djs}
+        <DJSearchBar onChange={this.handleSearch} />
+        {this.props.fetching ? <Loader /> : djs}
       </div>
     );
   },

@@ -4,7 +4,12 @@ const DJSearchBar = React.createClass({
   render() {
     return (
       <div className="djSearchBar">
-        <input placeholder="Search for a DJ..." />
+        <form>
+          <input
+            placeholder="Search for a DJ..."
+            onChange={this.props.onChange}
+          />
+        </form>
       </div>
     );
   },

@@ -19,8 +19,8 @@ $overlay-duration: 0.25s;
 .djTile {
   width: 195px;
   height: 195px;
+  margin: 0.8%;
   display: inline-block;
-  margin: 0.75% 0.75% 0% 0.75%;
   position: relative;
 }
 
@@ -37,11 +37,11 @@ $overlay-duration: 0.25s;
   -ms-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  transition-duration: 0.3s;
+  transition-duration: 0.5s;
 }
 
 .djBio {
-  max-width: 180px;
+  max-width: 195px;
   padding: 5%;
   text-align: left;
   position: relative;
@@ -51,7 +51,7 @@ $overlay-duration: 0.25s;
   -ms-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  transition-duration: 0.3s;
+  transition-duration: 0.5s;
 }
 
 .djTileInfo {
@@ -90,6 +90,10 @@ $overlay-duration: 0.25s;
 
 .djTile.empty .djTileOverlay {
   opacity: $overlay-opacity;
+}
+
+.djTile.full .djTileOverlay {
+  opacity: 0;
 }
 
 .djTile.empty:hover .djTileOverlay,
