@@ -201,7 +201,7 @@ const Frontpage = React.createClass({
 
     // update now playing and fetch initial shows data
     // 11/5/18 - "Headache Gone!"
-    this.props.setSpotlightShowID(594);
+    this.props.setSpotlightShowID(625);
     this.props.updateShows();
   },
   componentWillUnmount() {
