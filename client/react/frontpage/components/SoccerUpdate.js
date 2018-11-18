@@ -12,9 +12,8 @@ const SoccerUpdate = () => (
         target="_blank"
         href="https://pac-12.com/live/ucla-3"
       >
-        Click to watch UCLA Women’s Soccer vs Minnesota live in an NCAA 2nd
-        Round Match on Friday 11/16 @ 7:30PM PST feat. UCLA Radio DJ Anish
-        Vishwakoti
+        Click to watch UCLA Women’s Soccer vs NC State live in an NCAA 3rd Round
+        Match on Friday 11/18 @ 6PM PST feat. UCLA Radio DJ Anish Vishwakoti
       </a>
     </div>
     <div id="soccer">⚽</div>
