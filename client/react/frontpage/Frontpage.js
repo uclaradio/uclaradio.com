@@ -33,7 +33,7 @@ import Error404Page from './components/Error404Page';
 import StreamIssuesPage from './components/StreamIssuesPage';
 import AboutPage from './components/AboutPage';
 import PromoBanner from './components/PromoBanner';
-import SoccerUpdate from './components/SoccerUpdate';
+// import SoccerUpdate from './components/SoccerUpdate';
 
 // Common Components
 import RectImage from '../common/RectImage';
@@ -113,7 +113,7 @@ const FrontpageContent = React.createClass({
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
-                <SoccerUpdate />
+                {/* <SoccerUpdate /> */}
                 {/* Show of the Month */}
                 <PromoBanner />
                 <FrontPageNavbar />
@@ -200,8 +200,8 @@ const Frontpage = React.createClass({
     this.interval = setInterval(this.props.updateNowPlaying, 30 * 1000);
 
     // update now playing and fetch initial shows data
-    // 11/5/18 - "Headache Gone!"
-    this.props.setSpotlightShowID(625);
+    // 11/19/18 - "The Closer You Are..."
+    this.props.setSpotlightShowID(658);
     this.props.updateShows();
   },
   componentWillUnmount() {
