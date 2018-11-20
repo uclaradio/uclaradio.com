@@ -30,9 +30,11 @@ const DJList = React.createClass({
       displayedDJs: this.props.djs,
     };
   },
+
   componentDidMount() {
     this.props.updateDJs();
   },
+
   getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.djs.length !== prevState.displayedDJs.length) {
       return {
@@ -41,6 +43,7 @@ const DJList = React.createClass({
     }
     return null;
   },
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.djs.length !== this.props.djs.length) {
       this.setState({
@@ -48,6 +51,7 @@ const DJList = React.createClass({
       });
     }
   },
+
   handleSearch(input) {
     const searchQuery = input.target.value.toLowerCase();
     const DJs = this.props.djs.filter(el => {
@@ -68,14 +72,36 @@ const DJList = React.createClass({
   },
 
   render() {
-    const djs = this.state.displayedDJs.map(dj => (
-      <DJInfo
-        name={dj.djName || dj.fullName}
-        picture={dj.picture}
-        key={dj.username}
-        bio={dj.bio || "This DJ doesn't have a bio yet!"}
-      />
-    ));
+    const djs = [];
+    // const djs = this.state.displayedDJs.map(dj => (
+    //   <DJInfo
+    //     name={dj.djName || dj.fullName}
+    //     picture={dj.picture}
+    //     key={dj.username}
+    //     bio={dj.bio || "This DJ doesn't have a bio yet!"}
+    //   />
+    // ));
+
+    this.state.displayedDJs.forEach(dj => {
+      let displayedBio;
+
+      if (dj.bio) {
+        if (dj.bio.length > 200) {
+          displayedBio = 'This DJ has a lengthier bio. Click to see more!';
+        } else {
+          displayedBio = dj.bio;
+        }
+      }
+
+      djs.push(
+        <DJInfo
+          name={dj.djName || dj.fullName}
+          picture={dj.picture}
+          key={dj.username}
+          bio={displayedBio || "This DJ doesn't have a bio yet!"}
+        />
+      );
+    });
 
     return (
       <div className="djList">
