@@ -6,6 +6,7 @@ import './DJList.scss';
 
 import DJInfo from './DJInfo';
 import DJSearchBar from './DJSearchBar';
+import DJCurrentShow from './DJCurrentShow';
 import Loader from '../Loader';
 
 import {
