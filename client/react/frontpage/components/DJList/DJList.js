@@ -18,6 +18,15 @@ import {
 
 const DJUrl = '/api/djs';
 
+const fillerCurrentDJ = {
+  picture: '/img/uclaradio.jpg',
+  name: 'DJ Katie',
+  show: "Katie's Show",
+  showtime: 'Wednesdays 4pm',
+  bio:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+};
+
 /*
 DJList: fetches a json list of djs from API and displays data
 
@@ -106,6 +115,7 @@ const DJList = React.createClass({
 
     return (
       <div className="djList">
+        <DJCurrentShow currentDJ={fillerCurrentDJ} />
         <DJSearchBar onChange={this.handleSearch} />
         {this.props.fetching ? <Loader /> : djs}
       </div>
