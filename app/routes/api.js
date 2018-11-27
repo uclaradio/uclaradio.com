@@ -79,7 +79,7 @@ router.get('/giveawayDescription', (req, res) => {
 
 // static data
 router.get('/streamURL', (req, res) => {
-  res.json({ url: 'http://uclaradio.com:8000/;' });
+  res.json({ url: 'https://uclaradio.com/stream/;' });
 });
 
 /* Helper Functions */
