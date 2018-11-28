@@ -5,6 +5,7 @@ const DJSearchBar = React.createClass({
     return (
       <div className="djSearchBar">
         <input
+          aria-label="Search for a DJ"
           placeholder="Search for a DJ..."
           onChange={this.props.onChange}
         />
