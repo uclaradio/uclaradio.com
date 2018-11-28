@@ -14,9 +14,14 @@ export const stopFetching = () => ({
   type: 'STOPPED_FETCHING_DJS',
 });
 
+export const updateCurrentShow = currentShow => ({
+  type: 'UPDATE_CURRENT_SHOW',
+  currentShow,
+});
+
 // Fetch updated DJ list from server and update store via dispatch
-// const djsURL = '/api/djs'; // uncomment this later
-const djsURL = 'https://uclaradio.com/api/djs';
+const djsURL = '/api/djs'; // uncomment this later
+// const djsURL = 'https://uclaradio.com/api/djs';
 
 export const fetchUpdatedDJs = dispatch => {
   dispatch(startFetching());
@@ -31,6 +36,25 @@ export const fetchUpdatedDJs = dispatch => {
     error(xhr, status, err) {
       dispatch(stopFetching());
       console.error(djsURL, status, err.toString());
+    },
+  });
+};
+
+// Fetch current show from server
+const currentShowURL = '/api/nowplaying';
+// const currentShowURL = 'https://uclaradio.com/api/nowplaying';
+
+export const fetchCurrentShow = dispatch => {
+  $.ajax({
+    url: currentShowURL,
+    dataType: 'json',
+    cache: false,
+    success(data) {
+      console.log(data);
+      dispatch(updateCurrentShow(data));
+    },
+    error(xhr, status, err) {
+      console.error(currentShowURL, status, err.toString());
     },
   });
 };

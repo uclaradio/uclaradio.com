@@ -11,21 +11,14 @@ import Loader from '../Loader';
 
 import {
   updateDJs,
+  updateCurrentShow,
   startFetching,
   stopFetching,
   fetchUpdatedDJs,
+  fetchCurrentShow,
 } from '../../actions/djs';
 
-const DJUrl = '/api/djs';
-
-const fillerCurrentDJ = {
-  picture: '/img/uclaradio.jpg',
-  name: 'DJ Katie',
-  show: "Katie's Show",
-  showtime: 'Wednesdays 4pm',
-  bio:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-};
+const defaultDJPic = '/img/bear_transparent.png';
 
 /*
 DJList: fetches a json list of djs from API and displays data
@@ -43,6 +36,7 @@ const DJList = React.createClass({
 
   componentDidMount() {
     this.props.updateDJs();
+    this.props.updateCurrentShow();
   },
 
   getDerivedStateFromProps(nextProps, prevState) {
@@ -83,14 +77,19 @@ const DJList = React.createClass({
 
   render() {
     const djs = [];
-    // const djs = this.state.displayedDJs.map(dj => (
-    //   <DJInfo
-    //     name={dj.djName || dj.fullName}
-    //     picture={dj.picture}
-    //     key={dj.username}
-    //     bio={dj.bio || "This DJ doesn't have a bio yet!"}
-    //   />
-    // ));
+
+    const currentDJ = {
+      picture: defaultDJPic,
+      name:
+        this.props.currentShow.djs == null
+          ? ''
+          : this.props.currentShow.djs[
+              Object.keys(this.props.currentShow.djs)[0]
+            ],
+      show: this.props.currentShow.title,
+      showtime: `${this.props.currentShow.day} ${this.props.currentShow.time}`,
+      bio: "This DJ doesn't have a bio yet!",
+    };
 
     this.state.displayedDJs.forEach(dj => {
       let displayedBio;
@@ -103,19 +102,33 @@ const DJList = React.createClass({
         }
       }
 
-      djs.push(
-        <DJInfo
-          name={dj.djName || dj.fullName}
-          picture={dj.picture}
-          key={dj.username}
-          bio={displayedBio || "This DJ doesn't have a bio yet!"}
-        />
-      );
+      if (dj.djName !== currentDJ.name) {
+        djs.push(
+          <DJInfo
+            name={dj.djName || dj.fullName}
+            picture={dj.picture}
+            key={dj.username}
+            bio={displayedBio || "This DJ doesn't have a bio yet!"}
+          />
+        );
+      } else {
+        if (dj.picture) {
+          currentDJ.picture = dj.picture;
+        }
+        if (dj.bio) {
+          currentDJ.bio = displayedBio;
+        }
+      }
     });
 
     return (
       <div className="djList">
-        <DJCurrentShow currentDJ={fillerCurrentDJ} />
+        {this.props.currentShow.status !== null &&
+        this.props.currentShow.status === 'no show playing' ? (
+          <p />
+        ) : (
+          <DJCurrentShow currentDJ={currentDJ} />
+        )}
         <DJSearchBar onChange={this.handleSearch} />
         {this.props.fetching ? <Loader /> : djs}
       </div>
@@ -126,11 +139,15 @@ const DJList = React.createClass({
 const mapStateToProps = state => ({
   djs: state.djs.djs,
   fetching: state.djs.fetching,
+  currentShow: state.djs.currentShow,
 });
 
 const mapDispatchToProps = dispatch => ({
   updateDJs: () => {
     fetchUpdatedDJs(dispatch);
+  },
+  updateCurrentShow: () => {
+    fetchCurrentShow(dispatch);
   },
 });
 

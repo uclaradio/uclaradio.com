@@ -212,24 +212,6 @@ const Frontpage = React.createClass({
     return (
       <Router history={browserHistory} onUpdate={logPageView}>
         {routes}
-        {/* <Route path="/" component={FrontpageContentContainer}>
-          <IndexRoute component={WaterFallContent} />
-          <Route path="/djs" component={DJList} />
-          <Route
-            path="/djs"
-            render={routeProps => (
-              <DJList {...routeProps} currentShow={this.state.nowPlaying} />
-            )}
-          />
-          <Route path="/djs/:djName" component={DJPage} />
-          <Route path="/events" component={EventList} />
-          <Route path="/shows" components={ShowsContent} />
-          <Route path="/shows/:showID" component={ShowPage} />
-          <Route path="/events/:eventID" component={EventPage} />
-          <Route path="/streamIssues" component={StreamIssuesPage} />
-          <Route path="/about" component={AboutPage} />
-          <Route path="*" component={Error404Page} />
-        </Route> */}
       </Router>
     );
   },
