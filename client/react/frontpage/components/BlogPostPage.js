@@ -1,22 +1,19 @@
-// BlogPostInfo.js
-// shows full description of a show
+// BlogPostPage.js
+// shows full description of post
 
 import React from 'react';
 import Loader from './Loader';
 /**
-Page content for individual show
-Displays full description of a show, with blurb, picture, djs.. everything
+Page content for individual post
+Displays full description of a post.. everything
 * */
 
 const keystoneAPI = '/getArticles';
-const keystoneURL = 'http://localhost:3010/';
+const keystoneURL = 'http://localhost:3010';
 
 const BlogPostPage = React.createClass({
   getInitialState: function() {
     return { blogPost: null };
-  },
-  urlFromBlogPost(blogPost) {
-    return `/blog/${blogPost._id}`;
   },
   componentDidMount() {
     var queryRoute = `${keystoneAPI}/${this.props.params.blogPostID}`;
@@ -48,8 +45,9 @@ const BlogPostPage = React.createClass({
         <div key={blogPost._id}>
           <h1>{blogPost.name}</h1>
           <img
+            alt="blog post image"
             style={{ width: '300px', height: '300px' }}
-            src={keystoneURL + img}
+            src={keystoneURL + '/' + img}
           />
           <h2>Content</h2>
           <div dangerouslySetInnerHTML={this.createMarkupForContent()} />
