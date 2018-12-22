@@ -1,12 +1,12 @@
-// ShowPage.js
+// BlogPage.js
 // shows full description of a show
 
 import React from 'react';
+import { Link } from 'react-router';
 /**
 Page content for individual show
 Displays full description of a show, with blurb, picture, djs.. everything
 
-@prop fetching: currently fetching shows
 * */
 
 const keystoneAPI = '/getArticles';
@@ -21,11 +21,12 @@ const BlogPage = React.createClass({
       this.setState({ blogPosts: articles });
     });
   },
+  urlFromBlogPost(blogPost) {
+    return `/blog/${blogPost._id}`;
+  },
   renderArticles() {
     const data = Object.values(this.state.blogPosts);
     return data.map(article => {
-      console.log('article');
-      console.log(article);
       const img = article.image ? article.image.filename : '';
       // Get the html for content
       function createMarkupForContent() {
@@ -40,7 +41,9 @@ const BlogPage = React.createClass({
       if ((article.state = 'published')) {
         return (
           <div key={article._id}>
-            <h1>{article.name}</h1>
+            <Link to={this.urlFromBlogPost(article)}>
+              <h1>{article.name}</h1>
+            </Link>
             <img
               style={{ width: '300px', height: '300px' }}
               src={keystoneURL + img}
