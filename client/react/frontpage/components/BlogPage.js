@@ -1,71 +1,128 @@
-// BlogPage.js
-// Blog page
+// ShowPage.js
+// shows full description of a show
 
 import React from 'react';
-import { Link } from 'react-router';
-import Loader from './Loader';
+const axios = require('axios');
 /**
-Page content for all blog posts. 
-Displays shortened descriptions for each post
+Page content for individual show
+Displays full description of a show, with blurb, picture, djs.. everything
+
+@prop show: show object
+@prop fetching: currently fetching shows
+@prop updateShows: callback to update all listed shows
 * */
 
-const keystoneAPI = '/getArticles';
-const keystoneURL = 'http://localhost:3010';
-
-const BlogPage = React.createClass({
+const AddPost = React.createClass({
   getInitialState: function() {
-    return { blogPosts: [] };
+    return {
+      title: '',
+      content: '',
+    };
   },
-  componentDidMount() {
-    $.get(keystoneAPI, articles => {
-      this.setState({ blogPosts: articles });
-    });
+
+  handleTitleChange(e) {
+    this.setState({ title: e.target.value });
   },
-  urlFromBlogPost(blogPost) {
-    return `/blog/${blogPost._id}`;
+  handleContentChange(e) {
+    this.setState({ content: e.target.value });
   },
-  renderArticles() {
-    const data = Object.values(this.state.blogPosts);
-    return data.map(article => {
-      const img = article.image ? article.image.filename : '';
-      // Get the html for content
-      function createMarkupForContent() {
-        if (article.content) {
-          return {
-            __html: article.content,
-          };
-        } else {
-          return;
-        }
-      }
-      if ((article.state = 'published')) {
-        return (
-          <div key={article._id}>
-            <Link to={this.urlFromBlogPost(article)}>
-              <h1>{article.name}</h1>
-            </Link>
-            <img
-              alt="blog post image"
-              style={{ width: '300px', height: '300px' }}
-              src={keystoneURL + '/' + img}
-            />
-            <h2>Content</h2>
-            <div dangerouslySetInnerHTML={createMarkupForContent()} />
-          </div>
-        );
-      }
-    });
+  addPost() {
+    axios
+      .post('/addPost', {
+        title: this.state.title,
+        content: this.state.content,
+      })
+      .then(function(response) {
+        console.log('response from add post is ', response);
+        console.log('Hi i am in BlogPage');
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   },
+
   render() {
-    if (!this.state.blogPosts) {
-      return (
-        <div className="blogPage">
-          {this.props.fetching ? <Loader /> : 'No blog posts!'}
+    return (
+      <div className="col-md-5">
+        <div className="form-area">
+          <form role="form">
+            <br styles="clear:both" />
+            <div className="Unit">
+              <div className="form-group">
+                <input
+                  type="text"
+                  onChange={this.handleTitleChange}
+                  className="form-control"
+                  id="title"
+                  name="title"
+                  placeholder="Title"
+                  required
+                />
+              </div>
+
+              <div className="form-group" id="textbox">
+                <textarea
+                  className="form-control"
+                  onChange={this.handleContentChange}
+                  type="textarea"
+                  id="content"
+                  placeholder="Subject"
+                  maxLength="2000000000"
+                  rows="10"
+                />
+              </div>
+              <div className="button-align">
+                <button
+                  type="button"
+                  id="submit"
+                  name="submit"
+                  className="btn btn-primary pull-right"
+                  onClick={this.addPost}
+                >
+                  Add Post
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-      );
-    }
-    return <div className="blogPage">{this.renderArticles()}</div>;
+      </div>
+    );
   },
 });
+const BlogPage = React.createClass({
+  getInitialState: function() {
+    return { count: 'Hello!' };
+  },
+  componentDidMount() {
+    // scroll to top of page
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  },
+
+  handleClick(e) {
+    this.setState({ count: 1 });
+
+    console.log('hi');
+  },
+  // creates readable string from DJ dictionary returned from the server
+
+  render() {
+    return (
+      <div>
+        <button
+          onClick={this.handleClick}
+          type="button"
+          id="submit"
+          name="submit"
+          className="btn btn-primary pull-right"
+        >
+          Create a Post
+        </button>
+        ,{this.state.count === 1 && <AddPost />}
+      </div>
+    );
+  },
+});
+
+// set show if found
 
 export default BlogPage;

@@ -11,7 +11,6 @@ const requestify = require('requestify');
 
 const numberOfFBPosts = 7;
 const numberOfTUMBLRPosts = 3;
-const KEYSTONE = 'http://localhost:3010/api/articles';
 const FB = `https://graph.facebook.com/uclaradio?fields=posts.limit(${numberOfFBPosts}){full_picture,message,created_time,link}&access_token=${
   passwords.FB_API_KEY
 }`;
@@ -29,41 +28,6 @@ router.get('/blurbinfo', (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(blurb));
   });
-});
-
-router.get('/getArticles/:blogPostID', function(req, res) {
-  var queryAPI = `${KEYSTONE}/${req.params.blogPostID}`;
-  requestify
-    .get(queryAPI, {
-      cache: {
-        cache: true,
-        expires: 100000000,
-      },
-    })
-    .then(response => {
-      const data = response.getBody();
-      res.send(data);
-    })
-    .fail(response => {
-      console.log(response);
-    });
-});
-
-router.get('/getArticles', (req, res) => {
-  requestify
-    .get(KEYSTONE, {
-      cache: {
-        cache: true,
-        expires: 100000000,
-      },
-    })
-    .then(response => {
-      const data = response.getBody();
-      res.send(data.articles);
-    })
-    .fail(response => {
-      console.log(response);
-    });
 });
 
 router.get('/getSocialMedia', (req, res) => {
