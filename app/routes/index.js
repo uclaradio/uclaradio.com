@@ -2,7 +2,6 @@
 // Front page
 
 const express = require('express');
-
 const router = express.Router();
 const async = require('async');
 const shows = require('../database/shows');
@@ -11,6 +10,8 @@ const requestify = require('requestify');
 
 const numberOfFBPosts = 7;
 const numberOfTUMBLRPosts = 3;
+const keystoneIDLength = 24;
+const tumblrIDLength = 12;
 const KEYSTONE = 'http://localhost:3010/api/posts';
 const FB = `https://graph.facebook.com/uclaradio?fields=posts.limit(${numberOfFBPosts}){full_picture,message,created_time,link}&access_token=${
   passwords.FB_API_KEY
@@ -19,6 +20,7 @@ const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?a
   passwords.TUMBLR_API_KEY
 }&limit=${numberOfTUMBLRPosts}`;
 const socialMediaURLs = [FB, TUMBLR];
+const blogURLs = [KEYSTONE, TUMBLR];
 
 router.get('/blurbinfo', (req, res, next) => {
   const info = getTimeAndDay();
@@ -32,38 +34,108 @@ router.get('/blurbinfo', (req, res, next) => {
 });
 
 router.get('/getBlogPosts/:blogPostID', function(req, res) {
-  var queryAPI = `${KEYSTONE}/${req.params.blogPostID}`;
+  // Length to differentiate blog IDs
+  // external api database shouldn't be stored uclaradio.com
+  // i think that would be reverse engineering
+  const queryID = req.params.blogPostID;
+  var query;
+  var platform;
+  if (queryID.length == keystoneIDLength) {
+    query = `${KEYSTONE}/${queryID}`;
+    platform = 'KEYSTONE';
+  } else if (queryID.length == tumblrIDLength) {
+    query = TUMBLR;
+    platform = 'TUMBLR';
+  } else {
+    res.send(null);
+    return;
+  }
   requestify
-    .get(queryAPI, {
+    .get(query, {
       cache: {
         cache: true,
-        expires: 100000000,
+        expires: 10800000,
       },
     })
     .then(response => {
       const data = response.getBody();
-      res.send(data);
+      switch (platform) {
+        case 'KEYSTONE':
+          data.platform = platform;
+          data.created_time = new Date(data.createdAt);
+          data.title = data.name;
+          res.send(data);
+          break;
+        case 'TUMBLR':
+          // Tumblr api doesn't seem to support getByID
+          // get all posts and filter
+          data.response.posts = data.response.posts.filter(post => {
+            return post.id == queryID;
+          });
+          const post = data.response.posts[0];
+          post.platform = platform;
+          post.created_time = new Date(post.date);
+          post.content = post.body;
+          res.send(post);
+          break;
+      }
     })
     .fail(response => {
-      console.log(response);
+      res.send(null);
     });
 });
 
 router.get('/getBlogPosts', (req, res) => {
-  requestify
-    .get(KEYSTONE, {
-      cache: {
-        cache: true,
-        expires: 100000000,
-      },
-    })
-    .then(response => {
-      const data = response.getBody();
-      res.send(data.posts);
-    })
-    .fail(response => {
-      console.log(response);
-    });
+  async.map(
+    blogURLs,
+    (url, callback) => {
+      requestify
+        .get(url, {
+          cache: {
+            cache: true,
+            expires: 1080000,
+          },
+        })
+        .then(response => {
+          const data = response.getBody();
+          switch (url) {
+            case KEYSTONE:
+              // only send published posts
+              data.posts = data.posts.filter(post => {
+                return post.state == 'published';
+              });
+              data.posts.forEach(post => {
+                post.id = post._id;
+                post.platform = 'KEYSTONE';
+                post.created_time = new Date(post.createdAt);
+                post.title = post.name;
+              });
+              callback(null, data.posts);
+              break;
+            case TUMBLR:
+              data.response.posts.forEach(post => {
+                post.platform = 'TUMBLR';
+                post.created_time = new Date(post.date);
+                post.content = post.body;
+              });
+              callback(null, data.response.posts);
+              break;
+          }
+        })
+        .fail(response => {
+          callback(null, []);
+        });
+    },
+    (err, allBlogPosts) => {
+      allBlogPosts = [].concat
+        .apply([], allBlogPosts)
+        .sort((postA, postB) => postA.created_time < postB.created_time);
+      const result = {
+        blog_posts: allBlogPosts,
+      };
+      res.send(result);
+    }
+  );
 });
 
 router.get('/getSocialMedia', (req, res) => {
