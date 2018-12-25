@@ -9,43 +9,43 @@ Page content for all blog posts.
 Displays shortened descriptions for each post
 * */
 
-const keystoneAPI = '/getArticles';
+const keystoneAPI = '/getBlogPosts';
 const keystoneURL = 'http://localhost:3010';
 
 const BlogPage = React.createClass({
   getInitialState: function() {
-    return { blogPosts: [] };
+    return { posts: [], fetching: true };
   },
   componentDidMount() {
-    $.get(keystoneAPI, articles => {
-      this.setState({ blogPosts: articles });
+    $.get(keystoneAPI, posts => {
+      this.setState({ fetching: false, posts: posts });
     });
   },
-  urlFromBlogPost(blogPost) {
-    return `/blog/${blogPost._id}`;
+  urlFromPost(post) {
+    return `/blog/${post._id}`;
   },
-  renderArticles() {
-    const data = Object.values(this.state.blogPosts);
-    return data.map(article => {
-      const img = article.image ? article.image.filename : '';
+  renderPosts() {
+    const data = Object.values(this.state.posts);
+    return data.map(post => {
+      const img = post.image ? post.image.filename : '';
       // Get the html for content
       function createMarkupForContent() {
-        if (article.content) {
+        if (post.content) {
           return {
-            __html: article.content,
+            __html: post.content,
           };
         } else {
           return;
         }
       }
-      if ((article.state = 'published')) {
+      if ((post.state = 'published')) {
         return (
-          <div key={article._id}>
-            <Link to={this.urlFromBlogPost(article)}>
-              <h1>{article.name}</h1>
+          <div key={post._id}>
+            <Link to={this.urlFromPost(post)}>
+              <h1>{post.name}</h1>
             </Link>
             <img
-              alt="blog post image"
+              alt="post image"
               style={{ width: '300px', height: '300px' }}
               src={keystoneURL + '/' + img}
             />
@@ -57,14 +57,14 @@ const BlogPage = React.createClass({
     });
   },
   render() {
-    if (!this.state.blogPosts) {
+    if (!this.state.posts) {
       return (
         <div className="blogPage">
-          {this.props.fetching ? <Loader /> : 'No blog posts!'}
+          {this.state.fetching ? <Loader /> : 'No posts!'}
         </div>
       );
     }
-    return <div className="blogPage">{this.renderArticles()}</div>;
+    return <div className="blogPage">{this.renderPosts()}</div>;
   },
 });
 
