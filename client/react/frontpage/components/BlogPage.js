@@ -9,7 +9,7 @@ Page content for all blog posts.
 Displays shortened descriptions for each post
 * */
 
-const keystoneAPI = '/getBlogPosts';
+const BlogPostsURL = '/getBlogPosts';
 const keystoneURL = 'http://localhost:3010';
 
 const BlogPage = React.createClass({
@@ -17,17 +17,15 @@ const BlogPage = React.createClass({
     return { posts: [], fetching: true };
   },
   componentDidMount() {
-    $.get(keystoneAPI, posts => {
-      this.setState({ fetching: false, posts: posts });
+    $.get(BlogPostsURL, result => {
+      this.setState({ fetching: false, posts: result.blog_posts });
     });
   },
   urlFromPost(post) {
-    return `/blog/${post._id}`;
+    return `/blog/${post.id}`;
   },
   renderPosts() {
-    const data = Object.values(this.state.posts);
-    return data.map(post => {
-      const img = post.image ? post.image.filename : '';
+    return this.state.posts.map(post => {
       // Get the html for content
       function createMarkupForContent() {
         if (post.content) {
@@ -38,21 +36,33 @@ const BlogPage = React.createClass({
           return;
         }
       }
-      if ((post.state = 'published')) {
-        return (
-          <div key={post._id}>
-            <Link to={this.urlFromPost(post)}>
-              <h1>{post.name}</h1>
-            </Link>
-            <img
-              alt="post image"
-              style={{ width: '300px', height: '300px' }}
-              src={keystoneURL + '/' + img}
-            />
-            <h2>Content</h2>
-            <div dangerouslySetInnerHTML={createMarkupForContent()} />
-          </div>
-        );
+      switch (post.platform) {
+        case 'KEYSTONE':
+          const img = post.image ? post.image.filename : '';
+          return (
+            <div key={post.id}>
+              <Link to={this.urlFromPost(post)}>
+                <h1>{post.title}</h1>
+              </Link>
+              <img
+                alt="post image"
+                style={{ width: '300px', height: '300px' }}
+                src={keystoneURL + '/' + img}
+              />
+              <h2>Content</h2>
+              <div dangerouslySetInnerHTML={createMarkupForContent()} />
+            </div>
+          );
+        case 'TUMBLR':
+          return (
+            <div key={post.id}>
+              <Link to={this.urlFromPost(post)}>
+                <h1>{post.title}</h1>
+              </Link>
+              <h2>Content</h2>
+              <div dangerouslySetInnerHTML={createMarkupForContent()} />
+            </div>
+          );
       }
     });
   },
