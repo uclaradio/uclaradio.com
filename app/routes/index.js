@@ -9,7 +9,7 @@ const passwords = require('../../passwords');
 const requestify = require('requestify');
 
 const numberOfFBPosts = 7;
-const numberOfTUMBLRPosts = 3;
+const numberOfTUMBLRPosts = 10;
 const keystoneIDLength = 24;
 const tumblrIDLength = 12;
 const KEYSTONE = 'http://localhost:3010/api/posts';
