@@ -90,6 +90,14 @@ body {
   background: url("/img/interview-signups.jpg") center / cover;
 }
 
+.demo-card-wide > .mdl-card__title.general-manager {
+  background: url("/img/faizanbutterfly.png") center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.confetti {
+  background: url("/img/confetti.jpeg") center / cover;
+}
+
 .demo-card-wide > .mdl-card__title.show-graphics {
   background: url("/img/show-graphics.jpg") center / cover;
 }
