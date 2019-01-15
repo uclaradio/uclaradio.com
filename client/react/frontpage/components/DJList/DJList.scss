@@ -111,10 +111,14 @@ $overlay-duration: 0.25s;
 .djTileOverlay:hover > .djBio {
   opacity: $overlay-opacity;
   top: 40%;
+  max-height: 111px;
+  overflow-y: scroll;
 }
 
 .currentDJ {
   margin: 2% 1% 2% 1%;
+  max-height: 235px;
+  overflow-y: scroll;
 }
 
 .currentDJImage {
@@ -135,4 +139,8 @@ $overlay-duration: 0.25s;
 
 .currentDJShow {
   font-style: italic;
+}
+
+a:hover {
+  text-decoration: none;
 }

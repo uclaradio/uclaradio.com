@@ -92,15 +92,7 @@ const DJList = React.createClass({
     };
 
     this.state.displayedDJs.forEach(dj => {
-      let displayedBio;
-
-      if (dj.bio) {
-        if (dj.bio.length > 200) {
-          displayedBio = 'This DJ has a lengthier bio. Click to see more!';
-        } else {
-          displayedBio = dj.bio;
-        }
-      }
+      const displayedBio = dj.bio;
 
       if (dj.djName !== currentDJ.name) {
         djs.push(

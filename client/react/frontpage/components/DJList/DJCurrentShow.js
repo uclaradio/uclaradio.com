@@ -3,6 +3,8 @@ import RectImage from '../../../common/RectImage';
 
 const DJCurrentShow = React.createClass({
   render() {
+    const link = `/djs/${this.props.currentDJ.name}`;
+
     return (
       <div className="currentDJ">
         <div className="currentDJImage">
@@ -14,9 +16,11 @@ const DJCurrentShow = React.createClass({
         </div>
         <div className="currentDJInfo">
           <p>Now Playing</p>
-          <p className="currentDJName">{this.props.currentDJ.name}</p>
+          <a href={link} className="currentDJName">
+            {this.props.currentDJ.name}
+          </a>
           <p className="currentDJShow">
-            {this.props.currentDJ.show + ' @ ' + this.props.currentDJ.showtime}
+            {`${this.props.currentDJ.show} @ ${this.props.currentDJ.showtime}`}
           </p>
           <p>About: {this.props.currentDJ.bio}</p>
         </div>
