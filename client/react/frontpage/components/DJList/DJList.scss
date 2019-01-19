@@ -12,47 +12,31 @@ $overlay-duration: 0.25s;
 
 .djList {
   text-align: center;
-  font-size: 18px;
   width: 100%;
-  overflow: hidden;
 }
 
 .djTile {
-  width: 195px;
-  height: 195px;
-  margin: 0.8%;
+  width: 150px;
+  height: 150px;
   display: inline-block;
+  margin: 1%;
   position: relative;
 }
 
 .djTile.full {
+  border-radius: 50%;
   background-color: white;
   overflow: hidden;
 }
 
 .djName {
-  max-width: 195px;
+  max-width: 145px;
   text-align: center;
   position: relative;
   top: 50%;
   -ms-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  transition-duration: 0.5s;
-}
-
-.djBio {
-  max-width: 195px;
-  padding: 5%;
-  text-align: left;
-  position: relative;
-  top: 65%;
-  opacity: 0;
-  font-size: 12px;
-  -ms-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-  transition-duration: 0.5s;
 }
 
 .djTileInfo {
@@ -63,26 +47,18 @@ $overlay-duration: 0.25s;
 }
 
 .djTileOverlay {
-  width: 195px;
-  height: 195px;
+  width: 150px;
+  height: 150px;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
   cursor: pointer;
   background-color: white;
+  opacity: 0;
   transition: opacity $overlay-duration;
+  border-radius: 50%;
   overflow: hidden;
-}
-
-.djSearchBar input,
-.djSearchBar input:focus {
-  padding: 5px 0px 5px 0px;
-  margin: 15px 0px 10px 0px;
-  width: 97%;
-  border-radius: 0;
-  border-width: 0px 0px 1px 0px;
-  border-color: gray;
 }
 
 .djTile:hover > .djTileInfo,
@@ -90,57 +66,7 @@ $overlay-duration: 0.25s;
   text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
 }
 
+.djTileOverlay:hover,
 .djTile.empty .djTileOverlay {
   opacity: $overlay-opacity;
-}
-
-.djTile.full .djTileOverlay {
-  opacity: 0;
-}
-
-.djTile.empty:hover .djTileOverlay,
-.djTile.full:hover .djTileOverlay {
-  background-color: white;
-  opacity: 0.9;
-}
-
-.djTileOverlay:hover > .djName {
-  top: 20%;
-}
-
-.djTileOverlay:hover > .djBio {
-  opacity: $overlay-opacity;
-  top: 40%;
-  max-height: 111px;
-  overflow-y: scroll;
-}
-
-.currentDJ {
-  margin: 2% 1% 2% 1%;
-  max-height: 235px;
-  overflow-y: scroll;
-}
-
-.currentDJImage {
-  float: left;
-  margin-right: 20px;
-  clear: both;
-  height: 235px;
-  width: 235px;
-}
-
-.currentDJInfo {
-  text-align: left;
-}
-
-.currentDJName {
-  font-size: 25px;
-}
-
-.currentDJShow {
-  font-style: italic;
-}
-
-a:hover {
-  text-decoration: none;
 }
