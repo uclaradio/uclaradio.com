@@ -9,7 +9,6 @@ Displays full description of a post.. everything
 * */
 
 const BlogPostsURL = '/getBlogPosts';
-const keystoneURL = 'http://localhost:3010';
 
 const BlogPostPage = React.createClass({
   getInitialState: function() {
@@ -32,30 +31,13 @@ const BlogPostPage = React.createClass({
   },
   renderPost() {
     const post = this.state.post;
-    switch (post.platform) {
-      case 'KEYSTONE':
-        const img = post.image ? post.image.filename : '';
-        return (
-          <div key={post.id}>
-            <h1>{post.title}</h1>
-            <img
-              alt="post image"
-              style={{ width: '300px', height: '300px' }}
-              src={keystoneURL + '/' + img}
-            />
-            <h2>Content</h2>
-            <div dangerouslySetInnerHTML={this.createMarkupForContent()} />
-          </div>
-        );
-      case 'TUMBLR':
-        return (
-          <div key={post.id}>
-            <h1>{post.title}</h1>
-            <h2>Content</h2>
-            <div dangerouslySetInnerHTML={this.createMarkupForContent()} />
-          </div>
-        );
-    }
+    return (
+      <div key={post.id}>
+        <h1>{post.title}</h1>
+        <h2>Content</h2>
+        <div dangerouslySetInnerHTML={this.createMarkupForContent()} />
+      </div>
+    );
   },
   render() {
     if (!this.state.post) {

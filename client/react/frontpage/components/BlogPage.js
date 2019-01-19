@@ -10,7 +10,6 @@ Displays shortened descriptions for each post
 * */
 
 const BlogPostsURL = '/getBlogPosts';
-const keystoneURL = 'http://localhost:3010';
 
 const BlogPage = React.createClass({
   getInitialState: function() {
@@ -36,34 +35,15 @@ const BlogPage = React.createClass({
           return;
         }
       }
-      switch (post.platform) {
-        case 'KEYSTONE':
-          const img = post.image ? post.image.filename : '';
-          return (
-            <div key={post.id}>
-              <Link to={this.urlFromPost(post)}>
-                <h1>{post.title}</h1>
-              </Link>
-              <img
-                alt="post image"
-                style={{ width: '300px', height: '300px' }}
-                src={keystoneURL + '/' + img}
-              />
-              <h2>Content</h2>
-              <div dangerouslySetInnerHTML={createMarkupForContent()} />
-            </div>
-          );
-        case 'TUMBLR':
-          return (
-            <div key={post.id}>
-              <Link to={this.urlFromPost(post)}>
-                <h1>{post.title}</h1>
-              </Link>
-              <h2>Content</h2>
-              <div dangerouslySetInnerHTML={createMarkupForContent()} />
-            </div>
-          );
-      }
+      return (
+        <div key={post.id}>
+          <Link to={this.urlFromPost(post)}>
+            <h1>{post.title}</h1>
+          </Link>
+          <h2>Content</h2>
+          <div dangerouslySetInnerHTML={createMarkupForContent()} />
+        </div>
+      );
     });
   },
   render() {
