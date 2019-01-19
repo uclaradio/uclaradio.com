@@ -7,6 +7,7 @@ import RectImage from '../../../common/RectImage';
 import { Link } from 'react-router';
 
 const defaultDJPic = '/img/bear_transparent.png';
+const defaultNonEmptyDJPic = '/img/uclaradio.jpg';
 
 /*
 DJInfo: UI element showing information for a dj
@@ -15,24 +16,27 @@ DJInfo: UI element showing information for a dj
 */
 const DJInfo = React.createClass({
   getDJImage(picURL) {
-    return picURL || defaultDJPic;
+    // return picURL || defaultDJPic;
+    return picURL == null ? defaultDJPic : defaultNonEmptyDJPic;
   },
   getDJLink(djName) {
     return `/djs/${djName}`;
   },
   render() {
     const className =
-      this.props.picture == null ? 'djTile empty' : 'djTile full';
+      this.props.picture == null ? 'djTile empty ' : 'djTile full ';
+
     return (
       <div className={className}>
         <Link to={this.getDJLink(this.props.name)}>
           <RectImage
-            maxWidth="200px"
+            maxWidth="235px"
+            maxHeight="235px"
             src={this.getDJImage(this.props.picture)}
-            circle
           />
           <div className="djTileOverlay">
             <p className="djName">{this.props.name}</p>
+            <p className="djBio">About: {this.props.bio}</p>
           </div>
         </Link>
       </div>
