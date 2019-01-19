@@ -42,7 +42,6 @@ const mapDispatchToProps = dispatch => ({
 
 // fetch now playing show info from server and update store
 const nowPlayingURL = '/api/nowplaying';
-// const nowPlayingURL = 'https://uclaradio.com/api/nowplaying';
 const fetchUpdatedNowPlaying = dispatch => {
   $.ajax({
     url: nowPlayingURL,

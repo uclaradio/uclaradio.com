@@ -23,7 +23,6 @@ const DJInfo = React.createClass({
     return `/djs/${djName}`;
   },
   render() {
-    // const className = this.props.picture == null ? 'djTile empty ' : 'djTile full ';
     const className =
       this.props.picture == null ? 'djTile empty ' : 'djTile full ';
 
