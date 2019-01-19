@@ -8,6 +8,11 @@ import Waterfall from './misc/ResponsiveWaterfall';
 import isMobile from './misc/isMobile';
 import FeaturedPost from './BlogFeaturedPost';
 import NavBar from './BlogNavBar';
+import ReactHtmlParser, {
+  processNodes,
+  convertNodeToElement,
+  htmlparser2,
+} from 'react-html-parser';
 
 import Slider from 'react-slick';
 import RectImage from '../../common/RectImage';
@@ -101,10 +106,6 @@ const BlogPage = React.createClass({
     return box;
   },
 
-  getImage(banner) {
-    return <div>{banner.title}</div>;
-  },
-
   renderPosts() {
     return this.state.posts.map(post => {
       // Get the html for content
@@ -137,29 +138,10 @@ const BlogPage = React.createClass({
   },
 
   render() {
-    const settings = {
-      autoplay: true,
-      infinite: true,
-      fade: true,
-      autoplaySpeed: 500000000,
-      draggable: false,
-    };
-
     // <Link> component is unable to link to external links
     // Currently doing an inline conditional via a ternary
     // The self variable is be declared as 'this' is function scoped
     // An alternative solution would be to use ES6 arrow functions
-
-    const self = this;
-    const posts = this.state.posts.map(post => (
-      <div>
-        {post.post_url.indexOf('http') == -1 ? (
-          <Link to={post.post_url}>{self.getImage(post)}</Link>
-        ) : (
-          <a href={post.post_url}>{self.getImage(post)}</a>
-        )}
-      </div>
-    ));
 
     // if (this.state.posts) {
     //   console.log("exists")
@@ -170,19 +152,13 @@ const BlogPage = React.createClass({
 
     return (
       <div>
-        {
-          <div className="promoBanner">
-            {posts.length > 0 && <Slider {...settings}>{posts}</Slider>}
-          </div>
-        }
-
         <FeaturedPost posts={this.state.posts} />
 
         <div>
           {' '}
           <NavBar />{' '}
         </div>
-        <div className="WaterFallContent">
+        {/* <div className="WaterFallContent">
           {this.state.fetching && <Loader />}
           <div className="wf-container" />
           {isMobile.any() && (
@@ -193,7 +169,8 @@ const BlogPage = React.createClass({
               </center>
             </span>
           )}
-        </div>
+        </div> */}
+        <div>{this.renderPosts()}</div>
       </div>
     );
   },
