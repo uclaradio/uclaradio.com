@@ -173,7 +173,6 @@ const FrontpageContentContainer = connect(mapStateToProps)(FrontpageContent);
 const routes = (
   <Route path="/" component={FrontpageContentContainer}>
     <IndexRoute component={WaterFallContent} />
-    {/* <Route path="/djs" component={DJList} /> */}
     <Route path="/djs" component={DJList} />
     <Route path="/djs/:djName" component={DJPage} />
     <Route path="/events" component={EventList} />
