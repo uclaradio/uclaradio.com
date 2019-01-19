@@ -61,10 +61,7 @@ const fetchUpdatedNowPlaying = dispatch => {
 };
 
 // redux container for frontpage
-const FrontpageContainer = connect(
-  null,
-  mapDispatchToProps
-)(Frontpage);
+const FrontpageContainer = connect(null, mapDispatchToProps)(Frontpage);
 
 // wrap container in redux provider to provide data store
 const FrontpageApp = () => (

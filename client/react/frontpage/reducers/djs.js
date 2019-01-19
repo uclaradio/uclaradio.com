@@ -1,13 +1,8 @@
-import { bindActionCreators } from 'redux';
-
 // djs.js
 // reducers for actions related to frontpage djs
 
 const initialState = {
   djs: [],
-  currentShow: {
-    title: 'default',
-  },
   fetching: false,
 };
 
@@ -25,10 +20,6 @@ const djs = (state = initialState, action) => {
     case 'STOPPED_FETCHING_DJS':
       return Object.assign({}, state, {
         fetching: false,
-      });
-    case 'UPDATE_CURRENT_SHOW':
-      return Object.assign({}, state, {
-        currentShow: action.currentShow,
       });
     default:
       return state;
