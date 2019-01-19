@@ -41,7 +41,6 @@ export const fetchUpdatedDJs = dispatch => {
 
 // Fetch current show from server
 const currentShowURL = '/api/nowplaying';
-// const currentShowURL = 'https://uclaradio.com/api/nowplaying';
 
 export const fetchCurrentShow = dispatch => {
   $.ajax({
