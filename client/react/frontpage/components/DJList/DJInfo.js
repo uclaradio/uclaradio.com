@@ -7,7 +7,6 @@ import RectImage from '../../../common/RectImage';
 import { Link } from 'react-router';
 
 const defaultDJPic = '/img/bear_transparent.png';
-const defaultNonEmptyDJPic = '/img/uclaradio.jpg';
 
 /*
 DJInfo: UI element showing information for a dj
@@ -16,8 +15,7 @@ DJInfo: UI element showing information for a dj
 */
 const DJInfo = React.createClass({
   getDJImage(picURL) {
-    // return picURL || defaultDJPic;
-    return picURL == null ? defaultDJPic : defaultNonEmptyDJPic;
+    return picURL || defaultDJPic;
   },
   getDJLink(djName) {
     return `/djs/${djName}`;
