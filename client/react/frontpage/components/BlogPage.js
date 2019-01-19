@@ -8,11 +8,6 @@ import Waterfall from './misc/ResponsiveWaterfall';
 import isMobile from './misc/isMobile';
 import FeaturedPost from './BlogFeaturedPost';
 import NavBar from './BlogNavBar';
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2,
-} from 'react-html-parser';
 
 import Slider from 'react-slick';
 import RectImage from '../../common/RectImage';
@@ -61,9 +56,22 @@ const BlogPage = React.createClass({
     });
   },
 
+  handleNavbarChange(term) {},
+
   nodeFromPost(post) {
+    var el = document.createElement('html');
+    el.innerHTML = post.body;
+    var imgsrc = el.getElementsByTagName('img');
+    var imgsrc2;
+
+    if (imgsrc[0]) {
+      imgsrc2 = imgsrc[0].src;
+    } else {
+      imgsrc2 =
+        'https://pbs.twimg.com/profile_images/988328487650914306/0LQl2f3v_400x400.jpg';
+    }
     const link = this.urlFromPost(post);
-    const picture = post.full_picture;
+    const picture = imgsrc2;
     const summary = post.summary || post.message || '';
     const platform = post.platform || 'FB';
     return this.newNode(picture, summary, link, platform);
@@ -158,19 +166,20 @@ const BlogPage = React.createClass({
           {' '}
           <NavBar />{' '}
         </div>
-        {/* <div className="WaterFallContent">
-          {this.state.fetching && <Loader />}
-          <div className="wf-container" />
-          {isMobile.any() && (
-            <span>
-              <br />
-              <center>
-                <button>MORE</button>
-              </center>
-            </span>
-          )}
-        </div> */}
-        <div>{this.renderPosts()}</div>
+        {
+          <div className="WaterFallContent">
+            {this.state.fetching && <Loader />}
+            <div className="wf-container" />
+            {isMobile.any() && (
+              <span>
+                <br />
+                <center>
+                  <button>MORE</button>
+                </center>
+              </span>
+            )}
+          </div>
+        }
       </div>
     );
   },
