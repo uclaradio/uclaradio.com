@@ -91,6 +91,19 @@ const DJList = React.createClass({
       bio: "This DJ doesn't have a bio yet!",
     };
 
+    this.props.djs.forEach(dj => {
+      const displayedBio = dj.bio;
+
+      if (dj.djName === currentDJ.name) {
+        if (dj.picture) {
+          currentDJ.picture = dj.picture;
+        }
+        if (dj.bio) {
+          currentDJ.bio = displayedBio;
+        }
+      }
+    });
+
     this.state.displayedDJs.forEach(dj => {
       const displayedBio = dj.bio;
 
@@ -103,13 +116,6 @@ const DJList = React.createClass({
             bio={displayedBio || "This DJ doesn't have a bio yet!"}
           />
         );
-      } else {
-        if (dj.picture) {
-          currentDJ.picture = dj.picture;
-        }
-        if (dj.bio) {
-          currentDJ.bio = displayedBio;
-        }
       }
     });
 
