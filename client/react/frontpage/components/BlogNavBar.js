@@ -11,14 +11,22 @@ const BlogNavBar = React.createClass({
   handleClick(selectedKey) {
     switch (selectedKey) {
       case 1:
+        this.props.function('ConcertReview');
+        console.log('here part1');
+
         break;
       case 2:
+        this.props.function('ArtistInterview');
         break;
       case 3:
+        this.props.function('Sports');
         break;
+
       case 4:
+        this.props.function('FestivalReview');
         break;
       case 5:
+        this.props.function('Other');
 
       case 10:
         break;
@@ -37,22 +45,21 @@ const BlogNavBar = React.createClass({
           className="hidden-xs"
           onSelect={this.handleClick}
         >
-          <NavItem className="frontPageNavbarItem leftMost">
-            <span className="equalWidth">Comedy Reviews</span>
-          </NavItem>
-
-          <NavItem className="frontPageNavbarItem">
+          <NavItem eventKey={1} className="frontPageNavbarItem">
             <span className="equalWidth">Show Reviews</span>
           </NavItem>
 
-          <NavItem eventKey={1} className="frontPageNavbarItem">
-            <span className="equalWidth">Festival Reviews</span>
+          <NavItem eventKey={2} className="frontPageNavbarItem">
+            <span className="equalWidth">Artist Interviews</span>
           </NavItem>
-          <NavItem eventKey={10} className="frontPageNavbarItem rightMost">
+          <NavItem eventKey={3} className="frontPageNavbarItem rightMost">
             <span className="equalWidth">Sports Interviews</span>
           </NavItem>
-          <NavItem eventKey={10} className="frontPageNavbarItem rightMost">
-            <span className="equalWidth">Artist Interviews</span>
+          <NavItem eventKey={4} className="frontPageNavbarItem rightMost">
+            <span className="equalWidth">Festival Reviews</span>
+          </NavItem>
+          <NavItem eventKey={5} className="frontPageNavbarItem leftMost">
+            <span className="equalWidth">Other</span>
           </NavItem>
         </Nav>
 

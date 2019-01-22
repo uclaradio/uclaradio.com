@@ -43,7 +43,19 @@ const BlogPage = React.createClass({
       );
     });
   },
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.posts[0]) {
+      waterfall = new Waterfall({ minBoxWidth: 250 });
+
+      this.appendPosts(this.state.posts);
+      console.log('here part2');
+      console.log(this.state.posts);
+    }
+  },
+
+  componentWillUnmount() {},
   urlFromPost(post) {
+    if (!post) console.log('lmao never post');
     return `/blog/${post.id}`;
   },
   appendPosts(newPosts) {
@@ -51,12 +63,27 @@ const BlogPage = React.createClass({
       const boxHandle = this.nodeFromPost(el);
 
       if (boxHandle) {
-        waterfall.addBox(boxHandle);
+        <Link to={this.urlFromPost(el)}>{waterfall.addBox(boxHandle)}</Link>;
       }
     });
   },
 
-  handleNavbarChange(term) {},
+  handleNavbarChange(term) {
+    const postsvar = this.state.posts.filter(el => {
+      var len = el.tags.length;
+
+      if (el.tags[len - 1] === term) {
+      }
+
+      return el.tags[len - 1] === term;
+    });
+
+    console.log(postsvar);
+
+    this.setState({
+      posts: postsvar,
+    });
+  },
 
   nodeFromPost(post) {
     var el = document.createElement('html');
@@ -74,19 +101,18 @@ const BlogPage = React.createClass({
     const picture = imgsrc2;
     const summary = post.summary || post.message || '';
     const platform = post.platform || 'FB';
-    return this.newNode(picture, summary, link, platform);
+    return this.newNode(picture, summary, link, platform, post);
   },
 
   // create new DOM element representing post with provided content
-  newNode(full_picture, summary, created_time, link, platform) {
+  newNode(full_picture, summary, created_time, link, platform, post) {
     if (!full_picture && (!summary || summary.includes('http'))) {
       return null;
     }
     const box = document.createElement('div');
     box.className = 'wf-box';
     const a = document.createElement('a');
-    a.href = link;
-    a.target = '_blank';
+
     const box_content = document.createElement('div');
     box_content.className = 'wf-box-content';
     if (full_picture) {
@@ -111,6 +137,7 @@ const BlogPage = React.createClass({
     }
     a.appendChild(box_content);
     box.appendChild(a);
+
     return box;
   },
 
@@ -164,7 +191,7 @@ const BlogPage = React.createClass({
 
         <div>
           {' '}
-          <NavBar />{' '}
+          <NavBar function={this.handleNavbarChange} />{' '}
         </div>
         {
           <div className="WaterFallContent">
