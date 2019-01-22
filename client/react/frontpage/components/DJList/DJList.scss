@@ -12,7 +12,7 @@ $overlay-duration: 0.25s;
 
 .djList {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   width: 100%;
   overflow: hidden;
 }
@@ -105,20 +105,20 @@ $overlay-duration: 0.25s;
 }
 
 .djTileOverlay:hover > .djName {
-  top: 20%;
+  top: 25%;
 }
 
 .djTileOverlay:hover > .djBio {
   opacity: $overlay-opacity;
-  top: 40%;
+  top: 42%;
   max-height: 111px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .currentDJ {
   margin: 2% 1% 2% 1%;
   max-height: 235px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .currentDJImage {
