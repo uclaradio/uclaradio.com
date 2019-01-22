@@ -138,6 +138,29 @@ router.get('/getBlogPosts', (req, res) => {
   );
 });
 
+router.post('/getMoreTUMBLRPosts', (req, res) => {
+  const url = getNextTUMBLRPosts(req.body.offset);
+  requestify
+    .get(url, {
+      cache: {
+        cache: true,
+        expires: 108000000,
+      },
+    })
+    .then(response => {
+      const data = response.getBody();
+      data.response.posts.forEach(post => {
+        post.platform = 'TUMBLR';
+        post.created_time = new Date(post.date);
+        post.content = post.body;
+      });
+      res.send({
+        tumblr_posts: data.response.posts,
+        offset: req.body.offset,
+      });
+    });
+});
+
 router.get('/getSocialMedia', (req, res) => {
   let FB_pagination_until; // get the index of the last facebook post basically
   async.map(
@@ -184,6 +207,7 @@ router.get('/getSocialMedia', (req, res) => {
       const result = {
         social_media: allSocialMediaPosts,
         fb_pagination_until: FB_pagination_until,
+        offset: 0,
       };
       res.send(result);
     }
@@ -224,6 +248,12 @@ function getNextFBPosts(FB_pagination_until) {
   return `https://graph.facebook.com/v2.7/214439101900173/posts?fields=full_picture,message,created_time,link&limit=10&access_token=${
     passwords.FB_API_KEY
   }&until=${FB_pagination_until}`;
+}
+
+function getNextTUMBLRPosts(offset) {
+  return `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key=${
+    passwords.TUMBLR_API_KEY
+  }&limit=10&offset=${offset}`;
 }
 
 function getTimeAndDay() {
