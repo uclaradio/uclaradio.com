@@ -11,10 +11,11 @@ Displays shortened descriptions for each post
 
 const BlogPostsURL = '/getBlogPosts';
 const keystoneURL = 'http://localhost:3010';
+const getMoreTUMBLRPostsURL = '/getMoreTUMBLRPosts';
 
 const BlogPage = React.createClass({
   getInitialState: function() {
-    return { posts: [], fetching: true };
+    return { posts: [], fetching: true, tumblr_offset: 0 };
   },
   componentDidMount() {
     $.get(BlogPostsURL, result => {
@@ -23,6 +24,25 @@ const BlogPage = React.createClass({
   },
   urlFromPost(post) {
     return `/blog/${post.id}`;
+  },
+  fetchMorePosts() {
+    $.post(
+      getMoreTUMBLRPostsURL,
+      {
+        offset: parseInt(this.state.tumblr_offset) + 10,
+      },
+      result => {
+        console.log(result.tumblr_posts);
+        this.setState(
+          {
+            tumblr_offset: result.offset,
+          },
+          function() {
+            // TODO: place append_posts() based on WaterFallContent.js
+          }
+        );
+      }
+    );
   },
   renderPosts() {
     return this.state.posts.map(post => {
