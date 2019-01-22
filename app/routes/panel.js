@@ -126,6 +126,14 @@ router.post('/signup', (req, res) => {
   );
 });
 
+/** *** Reset Password Link **** */
+
+router.get('/reset-password', (req, res) => {
+  res.render('panel/reset', { title: 'Reset' });
+});
+
+router.post('/reset', (req, res) => {});
+
 /** *** FAQ **** */
 
 router.get('/faq', (req, res) => {
