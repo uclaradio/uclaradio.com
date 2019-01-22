@@ -20,13 +20,14 @@ Displays shortened descriptions for each post
 
 const BlogPostsURL = '/getBlogPosts';
 const keystoneURL = 'http://localhost:3010';
+const getMoreTUMBLRPostsURL = '/getMoreTUMBLRPosts';
 
 let waterfall;
 import './WaterFallContent.scss';
 
 const BlogPage = React.createClass({
   getInitialState: function() {
-    return { posts: [], fetching: true, postNo: 0 };
+    return { posts: [], fetching: true, postNo: 0, tumblr_offset: 0 };
   },
   componentDidMount() {
     $.get(BlogPostsURL, result => {
@@ -44,7 +45,7 @@ const BlogPage = React.createClass({
     });
   },
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.posts[0]) {
+    if (prevState.posts[0] && prevState.posts !== this.state.posts) {
       waterfall = new Waterfall({ minBoxWidth: 250 });
 
       this.appendPosts(this.state.posts);
@@ -68,6 +69,27 @@ const BlogPage = React.createClass({
     });
   },
 
+  handleScroll(event) {
+    const i = waterfall.getHighestIndex();
+    if (i > -1) {
+      // get last box of the column
+      const lastBox = Array.prototype.slice.call(
+        waterfall.columns[i].children,
+        -1
+      )[0];
+      if (checkSlide(lastBox) && !isMobile.any()) {
+        if (this.state.paginatedDataInProgress == false) {
+          // locking mechanism so scrolling won't cause an infinite amt of requests
+          this.setState({
+            paginatedDataInProgress: true,
+          });
+          // request next set of Facebook posts
+          this.fetchMorePosts();
+        }
+      }
+    }
+  },
+
   handleNavbarChange(term) {
     const postsvar = this.state.posts.filter(el => {
       var len = el.tags.length;
@@ -83,6 +105,28 @@ const BlogPage = React.createClass({
     this.setState({
       posts: postsvar,
     });
+  },
+
+  fetchMorePosts() {
+    $.post(
+      getMoreTUMBLRPostsURL,
+      {
+        offset: parseInt(this.state.tumblr_offset) + 10,
+      },
+      result => {
+        console.log(result.tumblr_posts);
+        this.setState(
+          {
+            tumblr_offset: result.offset,
+            paginatedDataInProgress: false,
+          },
+          function() {
+            this.appendPosts(result.tumblr_posts);
+            // TODO: place append_posts() based on WaterFallContent.js
+          }
+        );
+      }
+    );
   },
 
   nodeFromPost(post) {
@@ -144,7 +188,6 @@ const BlogPage = React.createClass({
   renderPosts() {
     return this.state.posts.map(post => {
       // Get the html for content
-
       switch (post.platform) {
         case 'KEYSTONE':
           const img = post.image ? post.image.filename : '';
@@ -207,6 +250,7 @@ const BlogPage = React.createClass({
             )}
           </div>
         }
+        <button onClick={this.fetchMorePosts}>fetch more posts</button>
       </div>
     );
   },
