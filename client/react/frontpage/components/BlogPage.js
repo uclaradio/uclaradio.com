@@ -31,8 +31,10 @@ const BlogPage = React.createClass({
   },
   componentDidMount() {
     $.get(BlogPostsURL, result => {
+      console.log(result);
       this.setState(
         {
+          paginatedDataInProgress: false,
           fetching: false,
           posts: result.blog_posts,
         },
@@ -56,7 +58,8 @@ const BlogPage = React.createClass({
 
   componentWillUnmount() {},
   urlFromPost(post) {
-    if (!post) console.log('lmao never post');
+    console.log(`/blog/${post.id}`);
+
     return `/blog/${post.id}`;
   },
   appendPosts(newPosts) {
@@ -64,7 +67,7 @@ const BlogPage = React.createClass({
       const boxHandle = this.nodeFromPost(el);
 
       if (boxHandle) {
-        <Link to={this.urlFromPost(el)}>{waterfall.addBox(boxHandle)}</Link>;
+        <Link to={`/blog/${el.id}`}>{waterfall.addBox(boxHandle)}</Link>;
       }
     });
   },
@@ -114,7 +117,7 @@ const BlogPage = React.createClass({
         offset: parseInt(this.state.tumblr_offset) + 10,
       },
       result => {
-        console.log(result.tumblr_posts);
+        console.log(result);
         this.setState(
           {
             tumblr_offset: result.offset,
@@ -156,6 +159,7 @@ const BlogPage = React.createClass({
     const box = document.createElement('div');
     box.className = 'wf-box';
     const a = document.createElement('a');
+    a.target = link;
 
     const box_content = document.createElement('div');
     box_content.className = 'wf-box-content';
@@ -181,6 +185,9 @@ const BlogPage = React.createClass({
     }
     a.appendChild(box_content);
     box.appendChild(a);
+    console.log(box);
+
+    <Link to={link}> {box}</Link>;
 
     return box;
   },
@@ -255,5 +262,13 @@ const BlogPage = React.createClass({
     );
   },
 });
-
+function checkSlide(elem) {
+  if (elem) {
+    const screenHeight =
+      (document.documentElement.scrollTop || document.body.scrollTop) +
+      (document.documentElement.clientHeight || document.body.clientHeight);
+    const elemCenter = elem.offsetTop + elem.offsetHeight / 2;
+    return elemCenter < 1.5 * screenHeight;
+  }
+}
 export default BlogPage;
