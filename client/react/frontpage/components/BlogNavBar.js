@@ -27,7 +27,6 @@ const BlogNavBar = React.createClass({
         break;
       case 5:
         this.props.function('Other');
-
       case 10:
         break;
       default:
@@ -58,9 +57,9 @@ const BlogNavBar = React.createClass({
           <NavItem eventKey={4} className="frontPageNavbarItem rightMost">
             <span className="equalWidth">Festival Reviews</span>
           </NavItem>
-          <NavItem eventKey={5} className="frontPageNavbarItem leftMost">
-            <span className="equalWidth">Other</span>
-          </NavItem>
+          {/* <NavItem eventKey={5} className="frontPageNavbarItem leftMost">
+            <span className="equalWidth">Other Delights</span>
+          </NavItem> */}
         </Nav>
 
         {/** Extra Small devices, hidden on sm, md, lg * */}

@@ -1,0 +1,30 @@
+$grey: #c5c5c5;
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+
+  input {
+    margin: 20px;
+    width: 100px;
+    text-align: center;
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+.pagination-btn {
+  padding: 20px;
+  margin: 20px;
+  font-size: 20px;
+  border: 1px solid $grey;
+  cursor: pointer;
+
+  &.btn-disabled {
+    opacity: 0.4;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}

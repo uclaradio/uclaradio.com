@@ -8,7 +8,7 @@ import ReactHtmlParser, {
   convertNodeToElement,
   htmlparser2,
 } from 'react-html-parser';
-import './PromoBanner.scss';
+import './BlogFeaturedPost.scss';
 
 function transform(node) {
   // do not render any <span> tags
