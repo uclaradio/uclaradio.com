@@ -263,21 +263,6 @@ accounts.updateAccount = function(newData, callback) {
   });
 };
 
-// update password for user with email
-// accounts.updatePassword = function(email, newPass, callback) {
-//   UserModel.findOne({email: email}, function(err, o) {
-//     if (o) {
-//       saltAndHash(newPass, function(hash) {
-//         o.pass = hash;
-//         UserModel.save(o, {safe: true}, callback);
-//       });
-//     }
-//     else {
-//       callback(err, null);
-//     }
-//   });
-// };
-
 // delete a user with the given username
 accounts.deleteUser = function(username, callback) {
   UserModel.remove({ username }, e => {
@@ -561,3 +546,142 @@ var getObjectId = function(id) {
 };
 
 module.exports = accounts;
+
+/* Update Password Functions */
+
+// Generates a random Alphanumeric string
+function generateRandomId (size) {
+  var text = "";
+  var possibleText = "abcdefghijklmnopqrstuvwxyz0123456789";
+  var possibleLen = possibleText.length;
+
+  for(var i = 0; i < size; i++) {
+    text += possibleText.charAt(Math.floor(Math.random()*possibleLen));
+  }  
+  return text;
+}
+
+//Schema for entry database
+const passwordSchema = new mongoose.Schema({
+  ID: String,
+  email: String,
+  date: Date,
+});
+
+const pwEntryModel = mongoose.model('entries', passwordSchema);
+
+//Verifies that an email exists in the system
+accounts.verifyEmail = function(myEmail, callback) {
+  UserModel.findOne( {email: myEmail}, function(err, result) {
+    if(err){
+      return callback(err);
+  } else if (result){
+      return callback(null, result);
+  } else {
+      return callback(null, null);
+  }
+  });
+}
+
+//Adds an entry to the database
+accounts.addPWEntry = function(myID, myEmail) {
+  var currTime = new Date();
+
+  var newEntry = new pwEntryModel({ID: myID, email: myEmail, date: currTime});
+  newEntry.save(function (err, newEntry) {
+      if (err) return console.error(err);
+    });
+}
+
+//Returns a single entry with that matching ID
+accounts.getSingleEntry = function(myID, callback) {
+ pwEntryModel.findOne({ID: myID},  function(err, result) {
+  if(err){
+      return callback(err);
+  } else if (result){
+      return callback(null, result);
+  } else {
+      return callback(null, null);
+  }
+ });
+}
+
+//Checks the time to make sure the link is still valid
+accounts.checkTime = function(loggedDate, callback) {
+  currTime = new Date();
+  var expiryTimeHrs = .25; //Can be changed to whatever we want
+
+  if(currTime.getTime() > (loggedDate.getTime() + 3600*1000*expiryTimeHrs)) {
+     return callback(null, false);
+  } else return callback(null, true);
+}
+
+//Deletes the entry from the database
+accounts.deleteEntry = function(myID) {
+  pwEntryModel.deleteOne({ID: myID}, function(err) {
+    if(err) console.log(err);
+    return;
+  });
+}
+
+// update password for user with email
+accounts.updatePassword = function(email, newPass, callback) {
+  UserModel.findOne({email: email}, function(err, o) {     
+    if (o) {
+     saltAndHash(newPass, function(hash) {
+       o.pass = hash;
+       UserModel.save(o, {safe: true}, callback);
+      });
+    } else {
+     callback(err, null);
+    }
+  });
+};
+
+//Checks to see if the passwords are the same
+accounts.checkPasswords = function(pass1, pass2) {
+  return (pass1 == pass2);
+}
+
+/*Verifies the passwords match and the link is good and calls the function
+to update the password */
+accounts.verifyNUpdatePassword = function (pass1, pass2, token) {
+
+  if(accounts.checkPasswords(pass1, pass2)) { //Check to see if passwords work
+
+    accounts.getSingleEntry(token, function(err, entry) {
+      if(entry == null) {
+        console.log('Error finding query');
+        return;
+      }
+
+      //Check to make sure link is valid
+      accounts.checkTime(entry.date, function(err, result) {
+        if(result) {
+          accounts.updatePassword(entry.email, pass1, function(err) {
+           if(err) console.log(err);
+           else accounts.deleteEntry(token); //Delete entry
+           console.log('Password Updated Successfully!');
+          });
+        } else { //Link is invalid
+          console.log('Link has expired! Please try again.');
+          accounts.deleteEntry(token); //Still delete entry
+        }
+      });
+    });
+  } 
+}
+
+//Function to verify email, generate token, and log in database
+accounts.forgotPassword = function(email) {
+  accounts.verifyEmail(email, function(err, result) {
+    if(result) {
+      var token = generateRandomId(40); //Generate random ID
+      mail.resetPassword(email, token);
+      accounts.addPWEntry(token, email);
+    } else {
+      console.log('No User Found!');
+      return;
+    }
+  });
+}
