@@ -62,7 +62,7 @@ any suggestions! All of the software here is written by students.
 3. Clone our repo by running the command `git clone
    https://github.com/uclaradio/uclaradio.git`. While you wait for it download,
    give us some love by starring our repo.
-4. Navigate to the scripts directory and run our
+4. Navigate to the [`scripts`] directory and run our
    [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup.sh)
    script.
    * Wondering what this does? Basically it installs the latest versions of
