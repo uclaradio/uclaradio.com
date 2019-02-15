@@ -21,6 +21,7 @@ const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?a
 }&limit=${numberOfTUMBLRPosts}`;
 const socialMediaURLs = [FB, TUMBLR];
 const blogURLs = [KEYSTONE, TUMBLR];
+var currentOffset = 0;
 
 router.get('/blurbinfo', (req, res, next) => {
   const info = getTimeAndDay();
@@ -40,14 +41,18 @@ router.get('/getBlogPosts/:blogPostID', function(req, res) {
   // external api database shouldn't be stored uclaradio.com
   // i think that would be reverse engineering
   const queryID = req.params.blogPostID;
+  console.log('DEBUGGING: queryID');
   console.log(queryID);
+  console.log('DEBUGGING: currentOffset');
+  console.log(currentOffset);
   var query;
   var platform;
   if (queryID.length == keystoneIDLength) {
     query = `${KEYSTONE}/${queryID}`;
     platform = 'KEYSTONE';
   } else if (queryID.length == tumblrIDLength) {
-    query = TUMBLR;
+    query = getNextTUMBLRPosts(currentOffset);
+    console.log(query);
     platform = 'TUMBLR';
   } else {
     res.send(null);
@@ -89,6 +94,7 @@ router.get('/getBlogPosts/:blogPostID', function(req, res) {
 });
 
 router.get('/getBlogPosts', (req, res) => {
+  currentOffset = 0;
   async.map(
     blogURLs,
     (url, callback) => {
@@ -142,7 +148,8 @@ router.get('/getBlogPosts', (req, res) => {
 });
 
 router.post('/getMoreTUMBLRPosts', (req, res) => {
-  const url = getNextTUMBLRPosts(req.body.offset);
+  currentOffset = req.body.offset;
+  const url = getNextTUMBLRPosts(currentOffset);
   requestify
     .get(url, {
       cache: {
@@ -159,7 +166,7 @@ router.post('/getMoreTUMBLRPosts', (req, res) => {
       });
       res.send({
         tumblr_posts: data.response.posts,
-        offset: req.body.offset,
+        offset: currentOffset,
       });
     });
 });
@@ -254,6 +261,7 @@ function getNextFBPosts(FB_pagination_until) {
 }
 
 function getNextTUMBLRPosts(offset) {
+  currentOffset = offset;
   return `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key=${
     passwords.TUMBLR_API_KEY
   }&limit=24&offset=${offset}`;
