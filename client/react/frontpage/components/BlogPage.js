@@ -86,7 +86,20 @@ const BlogPage = React.createClass({
     );
   },
   handleNavbarChange(term) {
-    console.log('haha2');
+    const postsvar = this.state.allposts.filter(el => {
+      var len = el.tags.length;
+
+      if (el.tags[len - 1] === term) {
+      }
+
+      return el.tags[len - 1] === term;
+    });
+
+    console.log(postsvar);
+
+    this.setState({
+      allposts: postsvar,
+    });
   },
 
   setPageNumber(pageNum) {
