@@ -9,7 +9,7 @@ const passwords = require('../../passwords');
 const requestify = require('requestify');
 
 const numberOfFBPosts = 7;
-const numberOfTUMBLRPosts = 50;
+const numberOfTUMBLRPosts = 24;
 const keystoneIDLength = 24;
 const tumblrIDLength = 12;
 const KEYSTONE = 'http://localhost:3010/api/posts';
@@ -253,7 +253,7 @@ function getNextFBPosts(FB_pagination_until) {
 function getNextTUMBLRPosts(offset) {
   return `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key=${
     passwords.TUMBLR_API_KEY
-  }&limit=10&offset=${offset}`;
+  }&limit=24&offset=${offset}`;
 }
 
 function getTimeAndDay() {

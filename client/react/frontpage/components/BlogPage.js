@@ -15,16 +15,20 @@ Displays shortened descriptions for each post
 * */
 
 const BlogPostsURL = '/getBlogPosts';
+const GetMorePostsURL = '/getMoreTUMBLRPosts';
+
 const keystoneURL = 'http://localhost:3010';
 
 const BlogPage = React.createClass({
   getInitialState: function() {
     return {
       posts: [],
+      allposts: [],
       fetching: true,
       page_number: 0,
       max_pages: 0,
       POSTS_PER_PAGE: 12,
+      tumblr_offset: 0,
     };
   },
   componentDidMount() {
@@ -33,21 +37,56 @@ const BlogPage = React.createClass({
       this.setState({
         fetching: false,
         posts: data,
-        max_pages: Math.ceil(data.length / this.state.POSTS_PER_PAGE) - 1,
+        max_pages: 12,
+        allposts: data,
       });
     });
   },
+  fetchMorePosts() {
+    console.log('here2');
+    $.post(
+      GetMorePostsURL,
+      {
+        offset: parseInt(this.state.tumblr_offset) + 24,
+      },
+      result => {
+        console.log('hellohellohello');
+        console.log(result);
+
+        this.setState({
+          tumblr_offset: result.offset,
+
+          allposts: this.state.allposts.concat(result.tumblr_posts),
+        });
+      }
+    );
+  },
+
   urlFromPost(post) {
     if (post) return `/blog/${post.id}`;
   },
   getCurrentPostsOnThisPage() {
-    return this.state.posts.slice(
+    console.log('camebackhere');
+
+    console.log(this.state.allposts.length);
+
+    let postsonpage = this.state.allposts.slice(
+      this.state.page_number * this.state.POSTS_PER_PAGE,
+      (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
+    );
+
+    console.log(postsonpage.length);
+    if (this.state.page_number > 0 && postsonpage.length < 12) {
+      console.log('here1');
+      this.fetchMorePosts();
+    }
+    return this.state.allposts.slice(
       this.state.page_number * this.state.POSTS_PER_PAGE,
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
     );
   },
   handleNavbarChange(term) {
-    console.log(haha);
+    console.log('haha2');
   },
 
   setPageNumber(pageNum) {
@@ -64,6 +103,7 @@ const BlogPage = React.createClass({
   },
   renderPosts() {
     const currentPosts = this.getCurrentPostsOnThisPage();
+
     return currentPosts.map(post => {
       switch (post.platform) {
         case 'KEYSTONE':
