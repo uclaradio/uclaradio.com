@@ -20,7 +20,8 @@
     "dev": "concurrently  --kill-others 'yarn run watch' 'yarn run assets' --names '💻,📦' --prefix name",
     "assets": "webpack --watch --display-max-modules 0",
     "precommit": "lint-staged",
-    "test": "jest"
+    "test": "jest",
+    "fill-blog-db": "node app/database/scripts/addTumblrPosts.js"
   },
   "babel": {
     "presets": [
@@ -93,6 +94,7 @@
     "socket.io": "^2.0.3",
     "spdy": "^3.3.2",
     "trianglify": "^1.0.1",
+    "tumblr.js": "^2.0.0",
     "xml2js": "^0.4.17"
   },
   "devDependencies": {

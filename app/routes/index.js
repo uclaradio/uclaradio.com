@@ -5,6 +5,7 @@ const express = require('express');
 const router = express.Router();
 const async = require('async');
 const shows = require('../database/shows');
+const blogposts = require('../database/blogposts');
 const passwords = require('../../passwords');
 const requestify = require('requestify');
 
@@ -56,58 +57,55 @@ router.get('/getBlogPosts/:blogPostID', function(req, res) {
     res.send(null);
     return;
   }
-  requestify
-    .get(query, {
-      cache: {
-        cache: true,
-        expires: 10800000,
-      },
-    })
-    .then(response => {
-      const data = response.getBody();
-      switch (platform) {
-        case 'KEYSTONE':
-          data.platform = platform;
-          data.created_time = new Date(data.createdAt);
-          data.title = data.name;
-          res.send(data);
-          break;
-        case 'TUMBLR':
-          // Tumblr api doesn't seem to support getByID
-          // get all posts and filter
-          data.response.posts = data.response.posts.filter(post => {
-            return post.id == queryID;
-          });
-          const post = data.response.posts[0];
-          post.platform = platform;
-          post.created_time = new Date(post.date);
-          post.content = post.body;
-          res.send(post);
-          break;
-      }
-    })
-    .fail(response => {
-      res.send(null);
-    });
-});
-
-router.get('/getBlogPosts', (req, res) => {
-  currentOffset = 0;
-  async.map(
-    blogURLs,
-    (url, callback) => {
+  switch (platform) {
+    case 'KEYSTONE':
       requestify
-        .get(url, {
+        .get(query, {
           cache: {
             cache: true,
-            expires: 1080000,
+            expires: 10800000,
           },
         })
         .then(response => {
           const data = response.getBody();
-          switch (url) {
-            case KEYSTONE:
-              // only send published posts
+          data.platform = platform;
+          data.created_time = new Date(data.createdAt);
+          data.title = data.name;
+          res.send(data);
+        })
+        .fail(response => {
+          res.send(null);
+        });
+      break;
+    case 'TUMBLR':
+      blogposts.getPostByID(queryID, (err, o) => {
+        if (o) {
+          res.send(o);
+        } else {
+          res.status(400).send(err);
+        }
+      });
+      break;
+  }
+});
+
+router.get('/getBlogPosts', (req, res) => {
+  console.log('/getBlogPosts');
+  currentOffset = 0;
+  async.map(
+    blogURLs,
+    (url, callback) => {
+      switch (url) {
+        case KEYSTONE:
+          requestify
+            .get(KEYSTONE, {
+              cache: {
+                cache: true,
+                expires: 45325423,
+              },
+            })
+            .then(response => {
+              const data = response.getBody();
               data.posts = data.posts.filter(post => {
                 return post.state == 'published';
               });
@@ -118,20 +116,24 @@ router.get('/getBlogPosts', (req, res) => {
                 post.title = post.name;
               });
               callback(null, data.posts);
-              break;
-            case TUMBLR:
-              data.response.posts.forEach(post => {
-                post.platform = 'TUMBLR';
-                post.created_time = new Date(post.date);
-                post.content = post.body;
-              });
-              callback(null, data.response.posts);
-              break;
-          }
-        })
-        .fail(response => {
-          callback(null, []);
-        });
+            })
+            .fail(response => {
+              callback(null, []);
+            });
+          break;
+        case TUMBLR:
+          blogposts.getAllPosts((err, o) => {
+            if (o) {
+              console.log('DEBUGGING: we have posts');
+              // console.log(o);
+              callback(null, o);
+            } else {
+              console.log('error');
+              callback(err, []);
+            }
+          });
+          break;
+      }
     },
     (err, allBlogPosts) => {
       allBlogPosts = [].concat

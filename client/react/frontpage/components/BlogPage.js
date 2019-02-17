@@ -115,9 +115,10 @@ const BlogPage = React.createClass({
     return imgsrc[0].src;
   },
   renderPosts() {
+    console.log('renderPosts');
     const currentPosts = this.getCurrentPostsOnThisPage();
-
     return currentPosts.map(post => {
+      console.log(post);
       switch (post.platform) {
         case 'KEYSTONE':
           const img = post.image ? post.image.filename : '';
@@ -158,7 +159,7 @@ const BlogPage = React.createClass({
     }
     return (
       <div className="blogPage">
-        <FeaturedPost posts={this.state.posts} />
+        {/* <FeaturedPost posts={this.state.posts} /> */}
         <div>
           <NavBar function={this.handleNavbarChange} />{' '}
         </div>
