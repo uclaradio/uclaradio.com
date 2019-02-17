@@ -29,6 +29,7 @@ const BlogPage = React.createClass({
       max_pages: 0,
       POSTS_PER_PAGE: 12,
       tumblr_offset: 0,
+      hasBeenClicked: false,
     };
   },
   componentDidMount() {
@@ -36,9 +37,10 @@ const BlogPage = React.createClass({
       const data = result.blog_posts;
       this.setState({
         fetching: false,
-        posts: data,
+
         max_pages: 12,
-        allposts: data,
+        posts: data,
+        postcontainer: data,
       });
     });
   },
@@ -56,7 +58,9 @@ const BlogPage = React.createClass({
         this.setState({
           tumblr_offset: result.offset,
 
-          allposts: this.state.allposts.concat(result.tumblr_posts),
+          posts: this.state.posts.concat(result.tumblr_posts),
+
+          storedposts: this.state.posts,
         });
       }
     );
@@ -68,9 +72,9 @@ const BlogPage = React.createClass({
   getCurrentPostsOnThisPage() {
     console.log('camebackhere');
 
-    console.log(this.state.allposts.length);
+    console.log(this.state.posts.length);
 
-    let postsonpage = this.state.allposts.slice(
+    let postsonpage = this.state.posts.slice(
       this.state.page_number * this.state.POSTS_PER_PAGE,
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
     );
@@ -80,26 +84,33 @@ const BlogPage = React.createClass({
       console.log('here1');
       this.fetchMorePosts();
     }
-    return this.state.allposts.slice(
+    return this.state.posts.slice(
       this.state.page_number * this.state.POSTS_PER_PAGE,
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
     );
   },
   handleNavbarChange(term) {
-    const postsvar = this.state.allposts.filter(el => {
-      var len = el.tags.length;
+    if (hasBeenClicked === true) {
+      this.setState({
+        posts: storedposts,
+      });
+    } else {
+      const filteredposts = this.state.posts.filter(el => {
+        var len = el.tags.length;
 
-      if (el.tags[len - 1] === term) {
-      }
+        if (el.tags[len - 1] === term) {
+        }
 
-      return el.tags[len - 1] === term;
-    });
+        return el.tags[len - 1] === term;
+      });
 
-    console.log(postsvar);
+      console.log(filteredposts);
 
-    this.setState({
-      allposts: postsvar,
-    });
+      this.setState({
+        posts: filteredposts,
+        hasBeenClicked: true,
+      });
+    }
   },
 
   setPageNumber(pageNum) {

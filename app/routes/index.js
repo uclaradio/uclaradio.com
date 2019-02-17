@@ -34,10 +34,13 @@ router.get('/blurbinfo', (req, res, next) => {
 });
 
 router.get('/getBlogPosts/:blogPostID', function(req, res) {
+  console.log('here pt3');
+
   // Length to differentiate blog IDs
   // external api database shouldn't be stored uclaradio.com
   // i think that would be reverse engineering
   const queryID = req.params.blogPostID;
+  console.log(queryID);
   var query;
   var platform;
   if (queryID.length == keystoneIDLength) {
