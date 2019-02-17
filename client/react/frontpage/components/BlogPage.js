@@ -90,7 +90,7 @@ const BlogPage = React.createClass({
     );
   },
   handleNavbarChange(term) {
-    if (hasBeenClicked === true) {
+    if (this.state.hasBeenClicked == true) {
       this.setState({
         posts: storedposts,
       });
@@ -171,7 +171,7 @@ const BlogPage = React.createClass({
       <div className="blogPage">
         <FeaturedPost posts={this.state.posts} />
         <div>
-          <NavBar function={this.handleNavbarChange} />{' '}
+          <NavBar handleNavbarChange={this.handleNavbarChange} />{' '}
         </div>
         <div className="posts-container">{this.renderPosts()}</div>
         <Pagination

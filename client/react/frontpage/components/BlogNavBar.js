@@ -1,6 +1,8 @@
 import React from 'react';
-import { Dropdown } from 'react-bootstrap';
-// import {  } from 'react-router-bootstrap';
+import { Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+
+import './FrontPageNavbar.scss';
 
 const BlogNavBar = React.createClass({
   getInitialState() {
@@ -9,22 +11,22 @@ const BlogNavBar = React.createClass({
   handleClick(selectedKey) {
     switch (selectedKey) {
       case 1:
-        this.props.function('ConcertReview');
+        this.props.handleNavbarChange('ConcertReview');
         console.log('here part1');
 
         break;
       case 2:
-        this.props.function('ArtistInterview');
+        this.props.handleNavbarChange('ArtistInterview');
         break;
       case 3:
-        this.props.function('Sports');
+        this.props.handleNavbarChange('Sports');
         break;
 
       case 4:
-        this.props.function('FestivalReview');
+        this.props.handleNavbarChange('FestivalReview');
         break;
       case 5:
-        this.props.function('Other');
+        this.props.handleNavbarChange('Other');
       case 10:
         break;
       default:
@@ -34,19 +36,54 @@ const BlogNavBar = React.createClass({
 
   render() {
     return (
-      <div>
-        <DropdownButton
-          alignRight
-          title="Dropdown right"
-          id="dropdown-menu-align-right"
+      <div className="frontPageNavbar">
+        {/** Large devices, hidden on xs * */}
+        <Nav
+          justified
+          bsStyle="pills"
+          className="hidden-xs"
+          onSelect={this.handleClick}
         >
-          <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-          <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-          <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-        </DropdownButton>
-        ;
+          <NavItem eventKey={1} className="frontPageNavbarItem">
+            <span className="equalWidth">Show Reviews</span>
+          </NavItem>
+
+          <NavItem eventKey={2} className="frontPageNavbarItem">
+            <span className="equalWidth">Artist Interviews</span>
+          </NavItem>
+          <NavItem eventKey={3} className="frontPageNavbarItem rightMost">
+            <span className="equalWidth">Sports Interviews</span>
+          </NavItem>
+          <NavItem eventKey={4} className="frontPageNavbarItem rightMost">
+            <span className="equalWidth">Festival Reviews</span>
+          </NavItem>
+          {/* <NavItem eventKey={5} className="frontPageNavbarItem leftMost">
+            <span className="equalWidth">Other Delights</span>
+          </NavItem> */}
+        </Nav>
+
+        {/** Extra Small devices, hidden on sm, md, lg * */}
+        <Nav
+          justified
+          bsStyle="pills"
+          className="hidden-sm hidden-md hidden-lg"
+          onSelect={this.handleClick}
+        >
+          <NavItem className="frontPageNavbarItem fullWidth topMost">
+            Comedy Reviews
+          </NavItem>
+
+          <NavItem className="frontPageNavbarItem fullWidth">
+            Show Reviews
+          </NavItem>
+
+          <NavItem eventKey={1} className="frontPageNavbarItem fullWidth">
+            Festival Reviews
+          </NavItem>
+          <NavItem eventKey={1} className="frontPageNavbarItem fullWidth">
+            Sports Interviews
+          </NavItem>
+        </Nav>
       </div>
     );
   },
