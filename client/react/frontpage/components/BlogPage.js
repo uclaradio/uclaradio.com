@@ -136,8 +136,10 @@ const BlogPage = React.createClass({
     }
   },
   renderPosts() {
+    console.log('renderPosts');
     const currentPosts = this.getCurrentPostsOnThisPage();
     return currentPosts.map(post => {
+      console.log(post);
       switch (post.platform) {
         case 'KEYSTONE':
           const img = post.image ? post.image.filename : '';
@@ -178,7 +180,7 @@ const BlogPage = React.createClass({
     }
     return (
       <div className="blogPage">
-        <FeaturedPost posts={this.state.posts} />
+        {/* <FeaturedPost posts={this.state.posts} /> */}
         <FilterBar handleFilterChange={this.filterPosts} />
         <div className="posts-container">{this.renderPosts()}</div>
         <Pagination
