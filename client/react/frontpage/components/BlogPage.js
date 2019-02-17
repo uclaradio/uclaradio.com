@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import Loader from './Loader';
 import Pagination from './Pagination';
 import FeaturedPost from './BlogFeaturedPost';
-import NavBar from './BlogNavBar';
+import FilterBar from './FilterBar';
 import './BlogPage.scss';
 
 /**
@@ -29,7 +29,8 @@ const BlogPage = React.createClass({
       max_pages: 0,
       POSTS_PER_PAGE: 12,
       tumblr_offset: 0,
-      hasBeenClicked: false,
+      activeFilters: [],
+      filteredPosts: [],
     };
   },
   componentDidMount() {
@@ -37,30 +38,36 @@ const BlogPage = React.createClass({
       const data = result.blog_posts;
       this.setState({
         fetching: false,
-
         max_pages: 12,
         posts: data,
         postcontainer: data,
+        filteredPosts: data,
       });
     });
   },
   fetchMorePosts() {
-    console.log('here2');
+    console.log('fetchMorePosts');
     $.post(
       GetMorePostsURL,
       {
         offset: parseInt(this.state.tumblr_offset) + 24,
       },
       result => {
-        console.log('hellohellohello');
+        console.log('result');
         console.log(result);
-
+        var combinedPosts = this.state.posts.concat(result.tumblr_posts);
+        const filteredPosts = combinedPosts.filter(el => {
+          var len = el.tags.length;
+          return this.containsFilter(
+            el.tags[len - 1],
+            this.state.activeFilters
+          );
+        });
         this.setState({
           tumblr_offset: result.offset,
-
-          posts: this.state.posts.concat(result.tumblr_posts),
-
+          posts: combinedPosts,
           storedposts: this.state.posts,
+          filteredPosts: filteredPosts,
         });
       }
     );
@@ -71,10 +78,8 @@ const BlogPage = React.createClass({
   },
   getCurrentPostsOnThisPage() {
     console.log('camebackhere');
-
-    console.log(this.state.posts.length);
-
-    let postsonpage = this.state.posts.slice(
+    console.log(this.state.filteredPosts.length);
+    let postsonpage = this.state.filteredPosts.slice(
       this.state.page_number * this.state.POSTS_PER_PAGE,
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
     );
@@ -84,33 +89,10 @@ const BlogPage = React.createClass({
       console.log('here1');
       this.fetchMorePosts();
     }
-    return this.state.posts.slice(
+    return this.state.filteredPosts.slice(
       this.state.page_number * this.state.POSTS_PER_PAGE,
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
     );
-  },
-  handleNavbarChange(term) {
-    if (this.state.hasBeenClicked == true) {
-      this.setState({
-        posts: storedposts,
-      });
-    } else {
-      const filteredposts = this.state.posts.filter(el => {
-        var len = el.tags.length;
-
-        if (el.tags[len - 1] === term) {
-        }
-
-        return el.tags[len - 1] === term;
-      });
-
-      console.log(filteredposts);
-
-      this.setState({
-        posts: filteredposts,
-        hasBeenClicked: true,
-      });
-    }
   },
 
   setPageNumber(pageNum) {
@@ -125,9 +107,36 @@ const BlogPage = React.createClass({
     }
     return imgsrc[0].src;
   },
+  containsFilter(filterName, filters) {
+    var list = filters;
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] === filterName) {
+        return true;
+      }
+    }
+    return false;
+  },
+  filterPosts(filters) {
+    console.log('filterPosts');
+    console.log(filters);
+    if (filters.length == 0) {
+      this.setState({
+        filteredPosts: this.state.posts,
+        activeFilters: [],
+      });
+    } else {
+      const filteredPosts = this.state.posts.filter(el => {
+        var len = el.tags.length;
+        return this.containsFilter(el.tags[len - 1], filters);
+      });
+      this.setState({
+        filteredPosts: filteredPosts,
+        activeFilters: filters,
+      });
+    }
+  },
   renderPosts() {
     const currentPosts = this.getCurrentPostsOnThisPage();
-
     return currentPosts.map(post => {
       switch (post.platform) {
         case 'KEYSTONE':
@@ -160,7 +169,7 @@ const BlogPage = React.createClass({
     });
   },
   render() {
-    if (!this.state.posts) {
+    if (!this.state.filteredPosts) {
       return (
         <div className="blogPage">
           {this.state.fetching ? <Loader /> : 'No posts!'}
@@ -170,9 +179,7 @@ const BlogPage = React.createClass({
     return (
       <div className="blogPage">
         <FeaturedPost posts={this.state.posts} />
-        <div>
-          <NavBar handleNavbarChange={this.handleNavbarChange} />{' '}
-        </div>
+        <FilterBar handleFilterChange={this.filterPosts} />
         <div className="posts-container">{this.renderPosts()}</div>
         <Pagination
           maxPages={this.state.max_pages}
