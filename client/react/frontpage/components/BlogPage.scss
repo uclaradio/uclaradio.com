@@ -1,0 +1,12 @@
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.post-wrapper {
+  font-size: 20px;
+  background-color: white;
+  width: 200px;
+  margin: 5px;
+}
