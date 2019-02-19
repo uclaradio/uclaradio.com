@@ -669,4 +669,20 @@ router.get('/api/songs', (req, res) => {
   }
 });
 
+/** ACCOUNT MANAGEMENT */
+router.get('/send-password-reset', (req, res) => {
+  res.render('panel/check-email');
+});
+
+router.post('/send-password-reset', (req, res) => {
+  if (req.body !== undefined) {
+    console.log('asuh dude');
+    accounts.forgotPassword(req.body.email); // if user entered email
+    res.redirect('/panel/send-password-reset');
+  } else {
+    console.log('DIDNT GET NO EMAIL');
+    res.redirect('back'); // else, refresh page
+  }
+});
+
 module.exports = router;

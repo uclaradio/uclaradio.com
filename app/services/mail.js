@@ -34,19 +34,19 @@ mail.confirmManager = function(email) {
 
 //Send User an email with reset password link
 mail.resetPassword = function(email, token) {
-  const body = 
-  'You are receiving this email because you have requested to reset your DJ Panel Password.\n\n' +
-    'If this was not you, please contact a Web Manager A$AP. Otherwise, please click the link below:\n' +
-    'https://uclaradio.com/panel/' + id; //Update with correct stuff
+  const body =
+    'You are receiving this email because you have requested to reset your DJ Panel Password.\n\n' +
+    'If this was not you, please contact a Dev Manager A$AP. Otherwise, please click the link below:\n' +
+    'https://uclaradio.com/panel/' +
+    id; //Update with correct stuff
   mail.send(email, 'UCLA Radio Panel Password Reset', body);
-}
-
+};
 
 // send mail with defined transport object
 mail.send = function(to, subject, body) {
   // setup e-mail data with unicode symbols
   const mailOptions = {
-    from: '"UCLA Radio Web Dept." <radio.web@media.ucla.edu>',
+    from: '"UCLA Radio Dev Dept." <radio.web@media.ucla.edu>',
     to,
     subject,
     text: body,

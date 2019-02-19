@@ -4,11 +4,11 @@ extends layout
 block content
 
 	#container
-		form( method="post")#login-form.well.span4
+		form( action='/panel/send-password-reset' method='post' enctype='application/x-www-form-urlencoded')#login-form.well.span4
 			h1 Reset DJ Password
 			p.subheading Enter the email associated with your account
 			label Email 
-			input(type="text", name="email", id='email-tf').span4.required
+			input(type="email", name="email", id='email-tf').span4.required
 			button(git type="submit" style="width:8rem;")#account-form-btn1.btn
 				| Send
 block scripts
