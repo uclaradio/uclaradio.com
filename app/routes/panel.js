@@ -685,4 +685,8 @@ router.post('/send-password-reset', (req, res) => {
   }
 });
 
+router.get('/hi-tom', (req, res) => {
+  res.render('panel/new-password');
+});
+
 module.exports = router;
