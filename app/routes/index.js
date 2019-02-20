@@ -37,23 +37,16 @@ router.get('/blurbinfo', (req, res, next) => {
 
 router.get('/getBlogPosts/:blogPostID', function(req, res) {
   console.log('here pt3');
-
   // Length to differentiate blog IDs
   // external api database shouldn't be stored uclaradio.com
   // i think that would be reverse engineering
   const queryID = req.params.blogPostID;
-  console.log('DEBUGGING: queryID');
-  console.log(queryID);
-  console.log('DEBUGGING: currentOffset');
-  console.log(currentOffset);
   var query;
   var platform;
   if (queryID.length == keystoneIDLength) {
     query = `${KEYSTONE}/${queryID}`;
     platform = 'KEYSTONE';
   } else if (queryID.length == tumblrIDLength) {
-    query = getNextTUMBLRPosts(currentOffset);
-    console.log(query);
     platform = 'TUMBLR';
   } else {
     res.send(null);
@@ -126,11 +119,8 @@ router.get('/getBlogPosts', (req, res) => {
         case TUMBLR:
           blogposts.getAllPosts((err, o) => {
             if (o) {
-              console.log('DEBUGGING: we have posts');
-              // console.log(o);
               callback(null, o);
             } else {
-              console.log('error');
               callback(err, []);
             }
           });

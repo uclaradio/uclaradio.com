@@ -43,6 +43,7 @@ for (
           post.content,
           post.platform,
           post.created_time,
+          post.tags,
           (err, saved) => {
             if (err) {
               console.log('Failed to add post: ' + err);

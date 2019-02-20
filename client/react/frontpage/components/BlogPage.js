@@ -53,8 +53,6 @@ const BlogPage = React.createClass({
         offset: parseInt(this.state.tumblr_offset) + 24,
       },
       result => {
-        console.log('result');
-        console.log(result);
         var combinedPosts = this.state.posts.concat(result.tumblr_posts);
         const filteredPosts = combinedPosts.filter(el => {
           var len = el.tags.length;
@@ -100,7 +98,7 @@ const BlogPage = React.createClass({
   },
   extractFirstImg(post) {
     var el = document.createElement('html');
-    el.innerHTML = post.body;
+    el.innerHTML = post.content;
     var imgsrc = el.getElementsByTagName('img');
     if (!imgsrc[0]) {
       return 'https://pbs.twimg.com/profile_images/988328487650914306/0LQl2f3v_400x400.jpg';
@@ -139,7 +137,6 @@ const BlogPage = React.createClass({
     console.log('renderPosts');
     const currentPosts = this.getCurrentPostsOnThisPage();
     return currentPosts.map(post => {
-      console.log(post);
       switch (post.platform) {
         case 'KEYSTONE':
           const img = post.image ? post.image.filename : '';
