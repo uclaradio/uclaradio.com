@@ -56,6 +56,7 @@
   },
   "dependencies": {
     "async": "^2.5.0",
+    "bcrypt": "^2.0.1",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "collections": "^5.0.7",
