@@ -92,6 +92,7 @@
     "serve-favicon": "^2.2.0",
     "socket.io": "^2.0.3",
     "spdy": "^3.3.2",
+    "trianglify": "^2.0.0",
     "xml2js": "^0.4.17",
     "yarnhook": "^0.3.0"
   },
