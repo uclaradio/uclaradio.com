@@ -30,14 +30,6 @@ body {
   color: white;
 }
 
-/* .demo-card-wide > .mdl-card__title.staffing-points {
-  background: url('/img/staffing-points.png') center / cover;
-}
-
-.demo-card-wide > .mdl-card__title.total-points {
-  background: url('/img/points-total.png') center / cover;
-} */
-
 .demo-card-wide > .mdl-card__title.request-form {
   background: url("/img/request-box.jpg") center / cover;
 }

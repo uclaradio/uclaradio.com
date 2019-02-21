@@ -12,7 +12,6 @@ const io = socketIO();
 app.io = io;
 
 const routes = require('./routes/index');
-// const staffingPoints = require('./routes/staffingPoints');
 const pages = require('./routes/pages');
 const panel = require('./routes/panel.js');
 const notFound = require('./routes/notFound');
@@ -46,9 +45,7 @@ app.use(
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 
 app.use('/', routes);
-// app.use('/staffingPoints', staffingPoints);
 app.use('/pages', pages);
-app.use('/managers', managers);
 app.use('/notFound', notFound);
 app.use('/GiveawayCalendar', ticketGiveawayCalendar);
 app.use('/api', api);
