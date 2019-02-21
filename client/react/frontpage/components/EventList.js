@@ -32,10 +32,11 @@ Content of events page
 @prop fetching: currently fetching objects
 @prop updateEvents: callback action to fetch updated events from server
 * */
-const EventList = React.createClass({
+class EventList extends React.Component {
   componentWillMount() {
     this.props.updateEvents();
-  },
+  }
+
   render() {
     // describe colors with events legend
     const legend = Object.keys(colors).map(eventType => (
@@ -98,8 +99,8 @@ const EventList = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 var getBackgroundColor = function(type) {
   return colors[type] || defaultColor;
@@ -158,4 +159,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EventList);

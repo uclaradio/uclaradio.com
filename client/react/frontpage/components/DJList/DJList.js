@@ -27,26 +27,24 @@ DJList: fetches a json list of djs from API and displays data
 @prop fetching: currently fetching objects
 @prop updateDJs: callback to fetch updated dj list from server
 */
-const DJList = React.createClass({
-  getInitialState() {
-    return {
-      displayedDJs: this.props.djs,
-    };
-  },
+class DJList extends React.Component {
+  state = {
+    displayedDJs: this.props.djs,
+  };
 
   componentDidMount() {
     this.props.updateDJs();
     this.props.updateCurrentShow();
-  },
+  }
 
-  getDerivedStateFromProps(nextProps, prevState) {
+  getDerivedStateFromProps = (nextProps, prevState) => {
     if (nextProps.djs.length !== prevState.displayedDJs.length) {
       return {
         displayedDJs: nextProps.djs,
       };
     }
     return null;
-  },
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.djs.length !== this.props.djs.length) {
@@ -54,9 +52,9 @@ const DJList = React.createClass({
         displayedDJs: this.props.djs,
       });
     }
-  },
+  }
 
-  handleSearch(input) {
+  handleSearch = input => {
     const searchQuery = input.target.value.toLowerCase();
     const DJs = this.props.djs.filter(el => {
       let searchValue;
@@ -73,7 +71,7 @@ const DJList = React.createClass({
     this.setState({
       displayedDJs: DJs,
     });
-  },
+  };
 
   render() {
     const djs = [];
@@ -131,8 +129,8 @@ const DJList = React.createClass({
         {this.props.fetching ? <Loader /> : djs}
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = state => ({
   djs: state.djs.djs,

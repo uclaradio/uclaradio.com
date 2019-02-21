@@ -28,6 +28,9 @@
     "presets": [
       "env",
       "react"
+    ],
+    "plugins": [
+      "transform-class-properties"
     ]
   },
   "eslintConfig": {
@@ -60,6 +63,7 @@
     "body-parser": "^1.17.2",
     "collections": "^5.0.7",
     "cookie-parser": "^1.4.3",
+    "create-react-class": "^15.6.3",
     "debug": "^3.0.0",
     "express": "^4.15.4",
     "express-session": "^1.15.5",
@@ -100,6 +104,7 @@
     "babel-cli": "^6.6.0",
     "babel-core": "^6.20.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.16.0",
     "concurrently": "^3.4.0",

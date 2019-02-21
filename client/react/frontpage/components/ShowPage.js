@@ -20,18 +20,20 @@ Displays full description of a show, with blurb, picture, djs.. everything
 @prop fetching: currently fetching shows
 @prop updateShows: callback to update all listed shows
 * */
-const ShowPage = React.createClass({
+class ShowPage extends React.Component {
   componentWillMount() {
     if (this.props.show == null) {
       this.props.updateShows();
     }
-  },
+  }
+
   componentDidMount() {
     // scroll to top of page
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-  },
+  }
+
   // creates readable string from DJ dictionary returned from the server
-  djString(djMap) {
+  djString = djMap => {
     let djString = '';
     let addComma = false;
     for (const dj in djMap) {
@@ -42,10 +44,12 @@ const ShowPage = React.createClass({
       addComma = true;
     }
     return djString;
-  },
-  getDJLink(djName) {
+  };
+
+  getDJLink = djName => {
     return `/djs/${djName}`;
-  },
+  };
+
   render() {
     if (!this.props.show) {
       return (
@@ -100,8 +104,8 @@ const ShowPage = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = (state, ownProps) => {
   const props = {
@@ -127,4 +131,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShowPage);

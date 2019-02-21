@@ -16,11 +16,10 @@ Message component displaying a message object
 @prop viewing_user: username associated with viewing user
 @prop date: timestamp of message
 * */
-const Message = React.createClass({
-  getInitialState() {
-    return {};
-  },
-  reportMessage() {
+class Message extends React.Component {
+  state = {};
+
+  reportMessage = () => {
     $.post(
       ReportMessageURL,
       {
@@ -32,7 +31,8 @@ const Message = React.createClass({
         }
       }
     );
-  },
+  };
+
   render() {
     const date = new Date(this.props.date);
     const Month = date.getMonth() + 1;
@@ -44,12 +44,11 @@ const Message = React.createClass({
       <div className="message">
         <div
           className={
-            this.props.user != this.props.viewing_user ? (
-              'their-message'
-            ) : (
-              'my-message'
-            )
-          }>
+            this.props.user != this.props.viewing_user
+              ? 'their-message'
+              : 'my-message'
+          }
+        >
           {/* Message Body */}
           <div className="message-body-tag">
             {// if it's an image, display the image
@@ -82,22 +81,23 @@ const Message = React.createClass({
         <div
           id="message-username-tag"
           style={
-            this.props.user == this.props.viewing_user ? (
-              { float: 'right' }
-            ) : (
-              { float: 'left' }
-            )
-          }>
+            this.props.user == this.props.viewing_user
+              ? { float: 'right' }
+              : { float: 'left' }
+          }
+        >
           <span className="message-username-tag-username">
             {this.props.user}
           </span>
-          {` ${/* + Month + "/" + Day + " " */
+          {` ${
+            /* + Month + "/" + Day + " " */
 
-          Hour}:${Minute}:${Second}`}
+            Hour
+          }:${Minute}:${Second}`}
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 export default Message;

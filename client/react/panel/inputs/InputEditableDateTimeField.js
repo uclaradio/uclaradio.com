@@ -11,38 +11,40 @@ import {
 import Dates from '../../common/Dates';
 
 /**
-*  Show current saved value for day/time and let user update data and submit changes
-*
-*  @prop title: form title of the element
-*  @prop placeholder: placeholder to show in field
-*  @prop verified: should show indicator that the value was successfully... whatever
-*
-*  @prop day: current saved day value
-*  @prop time: current saved time value
-*  @prop onDateSubmit -> function(day, time): parent's function to be called if 'Submit' is hit
-*
-*  @state day: current day value being entered
-*  @state time: current time value being entered
-*  @state editable: should let the user edit the field
-*/
-const InputEditableDateTimeField = React.createClass({
-  getInitialState() {
-    return { day: 'Mon', time: '10am', editable: false };
-  },
-  handleDayChange(e, day) {
+ *  Show current saved value for day/time and let user update data and submit changes
+ *
+ *  @prop title: form title of the element
+ *  @prop placeholder: placeholder to show in field
+ *  @prop verified: should show indicator that the value was successfully... whatever
+ *
+ *  @prop day: current saved day value
+ *  @prop time: current saved time value
+ *  @prop onDateSubmit -> function(day, time): parent's function to be called if 'Submit' is hit
+ *
+ *  @state day: current day value being entered
+ *  @state time: current time value being entered
+ *  @state editable: should let the user edit the field
+ */
+class InputEditableDateTimeField extends React.Component {
+  state = { day: 'Mon', time: '10am', editable: false };
+
+  handleDayChange = (e, day) => {
     this.setState({ day });
-  },
-  handleTimeChange(e, time) {
+  };
+
+  handleTimeChange = (e, time) => {
     this.setState({ time });
-  },
-  toggleEditableField(e) {
+  };
+
+  toggleEditableField = e => {
     this.setState({
       day: this.props.day,
       time: this.props.time,
       editable: !this.state.editable,
     });
-  },
-  handleSubmit(e) {
+  };
+
+  handleSubmit = e => {
     e.preventDefault();
     const day = this.state.day.trim();
     const time = this.state.time.trim();
@@ -50,7 +52,8 @@ const InputEditableDateTimeField = React.createClass({
       this.props.onDateSubmit(day, time);
       this.setState({ day: 'Mon', time: '10am', editable: false });
     }
-  },
+  };
+
   render() {
     const editButton = (
       <a className="customInput" onClick={this.toggleEditableField}>
@@ -61,9 +64,8 @@ const InputEditableDateTimeField = React.createClass({
     const actionButton = (
       <span>
         <a onClick={this.handleSubmit}>{this.props.buttonTitle || 'Update'}</a>
-        &emsp;&emsp;&emsp;<a
-          className="cancelLink"
-          onClick={this.toggleEditableField}>
+        &emsp;&emsp;&emsp;
+        <a className="cancelLink" onClick={this.toggleEditableField}>
           Cancel
         </a>
       </span>
@@ -86,7 +88,8 @@ const InputEditableDateTimeField = React.createClass({
             label={this.props.title}
             labelClassName="col-xs-3"
             wrapperClassName="inputEditWrapper col-xs-9"
-            addonAfter={this.state.editable ? actionButton : editButton}>
+            addonAfter={this.state.editable ? actionButton : editButton}
+          >
             {this.state.editable ? (
               // field edit/submittable
               <ButtonGroup>
@@ -98,7 +101,8 @@ const InputEditableDateTimeField = React.createClass({
                     )
                   }
                   onSelect={this.handleDayChange}
-                  key={this.state.day}>
+                  key={this.state.day}
+                >
                   {days}
                 </DropdownButton>
                 <DropdownButton
@@ -107,7 +111,8 @@ const InputEditableDateTimeField = React.createClass({
                     this.state.time || <span className="placeholder">Time</span>
                   }
                   onSelect={this.handleTimeChange}
-                  key={this.state.time}>
+                  key={this.state.time}
+                >
                   {times}
                 </DropdownButton>
               </ButtonGroup>
@@ -132,7 +137,7 @@ const InputEditableDateTimeField = React.createClass({
         </form>
       </div>
     );
-  },
-});
+  }
+}
 
 export default InputEditableDateTimeField;

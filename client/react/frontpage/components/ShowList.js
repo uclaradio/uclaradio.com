@@ -14,29 +14,32 @@ Implemented as a presentational component (view)
 
 @prop shows: show objects indexed by their ids
 * */
-const ShowList = React.createClass({
-  getInitialState() {
-    return {
-      schedule: [],
-    };
-  },
+class ShowList extends React.Component {
+  state = {
+    schedule: [],
+  };
+
   componentWillMount() {
     this.updateSchedule(this.props.shows);
-  },
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.shows) {
       this.updateSchedule(nextProps.shows);
     }
-  },
-  updateSchedule(shows) {
+  }
+
+  updateSchedule = shows => {
     const sorted = sortedShows(shows);
     this.setState({
       schedule: sorted,
     });
-  },
-  urlFromShow(show) {
+  };
+
+  urlFromShow = show => {
     return `/shows/${show.id}`;
-  },
+  };
+
   render() {
     return (
       <div className="showList">
@@ -54,8 +57,8 @@ const ShowList = React.createClass({
         ))}
       </div>
     );
-  },
-});
+  }
+}
 
 // shows sorted by day, then time
 const sortedShows = shows => {

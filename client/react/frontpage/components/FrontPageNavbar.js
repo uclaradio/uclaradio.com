@@ -9,11 +9,10 @@ import './FrontPageNavbar.scss';
 /**
 Navigation bar for the stream frontpage, which has collapsing rows and selectable tabs
 */
-const FrontPageNavbar = React.createClass({
-  getInitialState() {
-    return { open: false };
-  },
-  handleClick(selectedKey) {
+class FrontPageNavbar extends React.Component {
+  state = { open: false };
+
+  handleClick = selectedKey => {
     switch (selectedKey) {
       case 1:
         window.open('http://blog.uclaradio.com', '_blank');
@@ -38,7 +37,8 @@ const FrontPageNavbar = React.createClass({
       default:
         break;
     }
-  },
+  };
+
   render() {
     return (
       <div className="frontPageNavbar">
@@ -152,7 +152,7 @@ const FrontPageNavbar = React.createClass({
         </Nav>
       </div>
     );
-  },
-});
+  }
+}
 
 export default FrontPageNavbar;

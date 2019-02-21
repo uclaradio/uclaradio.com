@@ -4,13 +4,13 @@ import React from 'react';
 import { Grid, Row, Col, Input } from 'react-bootstrap';
 
 /**
-*  Allow user to select date and time as format ddd/hh (Mon / 10am)
-*  @prop day: current day
-*  @prop time: current time
-*  @prop onDayChange: function to call when day changes
-*  @prop onTimeChange: function to call when time changes
-*/
-const DateTimeField = React.createClass({
+ *  Allow user to select date and time as format ddd/hh (Mon / 10am)
+ *  @prop day: current day
+ *  @prop time: current time
+ *  @prop onDayChange: function to call when day changes
+ *  @prop onTimeChange: function to call when time changes
+ */
+class DateTimeField extends React.Component {
   render() {
     return (
       <div className="dateTimeField">
@@ -20,7 +20,8 @@ const DateTimeField = React.createClass({
               <Input
                 value={this.props.day}
                 type="select"
-                onChange={this.props.onDayChange}>
+                onChange={this.props.onDayChange}
+              >
                 <option value="Mon">Monday</option>
                 <option value="Tue">Tuesday</option>
                 <option value="Wed">Wednesday</option>
@@ -34,7 +35,8 @@ const DateTimeField = React.createClass({
               <Input
                 value={this.props.time}
                 type="select"
-                onChange={this.props.onTimeChange}>
+                onChange={this.props.onTimeChange}
+              >
                 <option value="12am">12AM</option>
                 <option value="1am">1AM</option>
                 <option value="2am">2AM</option>
@@ -65,7 +67,7 @@ const DateTimeField = React.createClass({
         </Grid>
       </div>
     );
-  },
-});
+  }
+}
 
 export default DateTimeField;

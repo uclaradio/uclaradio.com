@@ -11,12 +11,11 @@ CountdownTimer:
 
 @prop deadline: deadline the countdown is for
 */
-const CountdownTimer = React.createClass({
-  getInitialState() {
+class CountdownTimer extends React.Component {
+  constructor(props) {
+    super(props);
     const currentDate = new Date();
-    const timeDiff = Math.abs(
-      this.props.deadline.getTime() - currentDate.getTime()
-    );
+    const timeDiff = Math.abs(props.deadline.getTime() - currentDate.getTime());
     const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
     const hoursLeft = Math.floor(timeDiff / (1000 * 3600)) - 24 * daysLeft;
     const minutesLeft =
@@ -26,20 +25,24 @@ const CountdownTimer = React.createClass({
       60 * minutesLeft -
       3600 * hoursLeft -
       24 * 3600 * daysLeft;
-    return {
+
+    this.state = {
       days: daysLeft,
       hours: hoursLeft,
       minutes: minutesLeft,
       seconds: secondsLeft,
     };
-  },
+  }
+
   componentDidMount() {
     this.timer = setInterval(this.tick, 1000);
-  },
+  }
+
   componentWillUnmount() {
     clearInterval(this.timer);
-  },
-  tick() {
+  }
+
+  tick = () => {
     const currentDate = new Date();
     const timeDiff = Math.abs(
       this.props.deadline.getTime() - currentDate.getTime()
@@ -59,7 +62,8 @@ const CountdownTimer = React.createClass({
       minutes: minutesLeft,
       seconds: secondsLeft,
     });
-  },
+  };
+
   render() {
     return (
       <div className="countdownWrapper">
@@ -90,7 +94,7 @@ const CountdownTimer = React.createClass({
         </a>
       </div>
     );
-  },
-});
+  }
+}
 
 export default CountdownTimer;

@@ -13,9 +13,9 @@ Floating div with image and relevant info for a show
 @prop title: (optional) title to show above show
 @prop show: show to present
 */
-const ShowInfo = React.createClass({
+class ShowInfo extends React.Component {
   // creates readable string from DJ dictionary returned from the server
-  djString(djMap) {
+  djString = djMap => {
     let djString = '';
     let addComma = false;
     for (const dj in djMap) {
@@ -26,13 +26,16 @@ const ShowInfo = React.createClass({
       addComma = true;
     }
     return djString;
-  },
-  truncateName(name, l) {
+  };
+
+  truncateName = (name, l) => {
     return name.length > l ? `${name.substr(0, l - 2)}\u2026` : name;
-  },
-  urlFromShow(show) {
+  };
+
+  urlFromShow = show => {
     return `/shows/${show.id}`;
-  },
+  };
+
   render() {
     if (!this.props.show) {
       return <div className="showInfoEmpty" />;
@@ -53,7 +56,7 @@ const ShowInfo = React.createClass({
         </Link>
       </div>
     );
-  },
-});
+  }
+}
 
 export default ShowInfo;

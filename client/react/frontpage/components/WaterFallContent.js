@@ -16,13 +16,12 @@ const getMoreFBPostsURL = '/getMoreFBPosts';
 // local vars
 let waterfall;
 
-const WaterFallContent = React.createClass({
-  getInitialState() {
-    return {
-      socialMediaPosts: [],
-      fetching: true,
-    };
-  },
+class WaterFallContent extends React.Component {
+  state = {
+    socialMediaPosts: [],
+    fetching: true,
+  };
+
   componentDidMount() {
     // Get initial data
     $.get(SocialMediaURL, result => {
@@ -39,12 +38,14 @@ const WaterFallContent = React.createClass({
         }
       );
     });
-  },
+  }
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
-  },
+  }
+
   // fetch another page of posts, display in waterfall
-  fetchMorePosts() {
+  fetchMorePosts = () => {
     $.post(
       getMoreFBPostsURL,
       {
@@ -62,17 +63,19 @@ const WaterFallContent = React.createClass({
         );
       }
     );
-  },
+  };
+
   // Add post objects from API to waterfall content as DOM elements
-  appendPosts(newPosts) {
+  appendPosts = newPosts => {
     newPosts.map(el => {
       const boxHandle = nodeFromPost(el);
       if (boxHandle) {
         waterfall.addBox(boxHandle);
       }
     });
-  },
-  handleScroll(event) {
+  };
+
+  handleScroll = event => {
     const i = waterfall.getHighestIndex();
     if (i > -1) {
       // get last box of the column
@@ -91,14 +94,16 @@ const WaterFallContent = React.createClass({
         }
       }
     }
-  },
-  mobileLoadMore() {
+  };
+
+  mobileLoadMore = () => {
     this.setState({
       paginatedDataInProgress: true,
     });
     // request next set of Facebook posts
     this.fetchMorePosts();
-  },
+  };
+
   render() {
     return (
       <div className="WaterFallContent">
@@ -116,8 +121,8 @@ const WaterFallContent = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 function checkSlide(elem) {
   if (elem) {

@@ -1,4 +1,5 @@
 import React from 'react';
+
 //import './ChatBox.scss';
 
 /**
@@ -7,11 +8,10 @@ Form to submit new message
 @prop user: username associated with viewing user
 @prop onMessageSubmit: callback to execute with new message data
 * */
-const MessageForm = React.createClass({
-  getInitialState() {
-    return { text: '' };
-  },
-  handleSubmit(e) {
+class MessageForm extends React.Component {
+  state = { text: '' };
+
+  handleSubmit = e => {
     e.preventDefault();
     if (this.state.text.trim() != '') {
       const message = {
@@ -22,10 +22,12 @@ const MessageForm = React.createClass({
       this.props.onMessageSubmit(message);
       this.setState({ text: '' });
     }
-  },
-  changeHandler(e) {
+  };
+
+  changeHandler = e => {
     this.setState({ text: e.target.value });
-  },
+  };
+
   render() {
     return (
       <span>
@@ -47,7 +49,7 @@ const MessageForm = React.createClass({
         </div>
       </span>
     );
-  },
-});
+  }
+}
 
 export default MessageForm;

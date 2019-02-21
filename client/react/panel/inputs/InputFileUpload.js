@@ -5,37 +5,39 @@ import ReactDOM from 'react-dom';
 import { Input, Glyphicon } from 'react-bootstrap';
 
 /**
-*  Input file upload element
-*
-*  @prop title: title of the input
-*  @prop accept: file types that should be accepted
-*  @prop onSubmit -> function(img): function to call on file submit
-*  @prop details: help details
-*  @prop verified: should indicate input data was... whatever
-*/
-const InputFileUpload = React.createClass({
-  getInitialState() {
-    return { disabled: true };
-  },
-  handleChange(e) {
+ *  Input file upload element
+ *
+ *  @prop title: title of the input
+ *  @prop accept: file types that should be accepted
+ *  @prop onSubmit -> function(img): function to call on file submit
+ *  @prop details: help details
+ *  @prop verified: should indicate input data was... whatever
+ */
+class InputFileUpload extends React.Component {
+  state = { disabled: true };
+
+  handleChange = e => {
     if (e.target.files.length > 0) {
       this.setState({ file: e.target.files[0], disabled: false });
     } else {
       this.setState({ disabled: true });
     }
-  },
-  handleSubmit() {
+  };
+
+  handleSubmit = () => {
     if (this.state.file && !this.state.disabled) {
       this.props.onSubmit(this.state.file);
       ReactDOM.findDOMNode(this.refs.input.getInputDOMNode()).value = '';
       this.setState({ disabled: true });
     }
-  },
+  };
+
   render() {
     const submitButton = (
       <a
         onClick={this.handleSubmit}
-        className={this.state.disabled ? 'disabled' : ''}>
+        className={this.state.disabled ? 'disabled' : ''}
+      >
         Submit
       </a>
     );
@@ -44,7 +46,8 @@ const InputFileUpload = React.createClass({
         <Input
           label={this.props.title}
           labelClassName="col-xs-3"
-          wrapperClassName="col-xs-9">
+          wrapperClassName="col-xs-9"
+        >
           <span>
             {this.props.verified ? (
               <Glyphicon className="verifiedGlyph fileUpload" glyph="ok" />
@@ -63,7 +66,7 @@ const InputFileUpload = React.createClass({
         </Input>
       </form>
     );
-  },
-});
+  }
+}
 
 export default InputFileUpload;

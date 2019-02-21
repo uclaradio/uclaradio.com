@@ -10,25 +10,26 @@ const trackURL =
 Recently played tracks collapsable slider
 @prop expanded: should show recently played tracks
 */
-const RecentlyPlayed = React.createClass({
-  getInitialState() {
-    return {
-      recentTracks: [],
-      mounted: false,
-      prepared: false,
-      hasReset: false,
-    };
-  },
+class RecentlyPlayed extends React.Component {
+  state = {
+    recentTracks: [],
+    mounted: false,
+    prepared: false,
+    hasReset: false,
+  };
+
   componentWillUnmount() {
     clearInterval(this.interval);
-  },
+  }
+
   componentDidMount() {
     this.updateRecentTracks();
     // refresh tracks every 30 seconds
     this.interval = setInterval(this.updateRecentTracks, 30 * 1000);
     this.setState({ mounted: true });
-  },
-  onEntered() {
+  }
+
+  onEntered = () => {
     if (!this.state.prepared) {
       this.setState({ prepared: true });
     }
@@ -37,16 +38,19 @@ const RecentlyPlayed = React.createClass({
     } else {
       document.getElementById('focusAnchor').focus();
     }
-  },
-  onExited() {
+  };
+
+  onExited = () => {
     if (this.props.reset) {
       this.props.onReset();
     }
-  },
-  truncateName(name, l) {
+  };
+
+  truncateName = (name, l) => {
     return name.length > l ? `${name.substr(0, l - 2)}\u2026` : name;
-  },
-  updateRecentTracks() {
+  };
+
+  updateRecentTracks = () => {
     $.ajax({
       url: trackURL,
       dataType: 'json',
@@ -72,7 +76,8 @@ const RecentlyPlayed = React.createClass({
         console.error(trackURL, status, err.toString());
       },
     });
-  },
+  };
+
   render() {
     const slideSettings = {
       infinite: false,
@@ -126,7 +131,7 @@ const RecentlyPlayed = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 export default RecentlyPlayed;

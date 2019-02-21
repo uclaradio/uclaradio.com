@@ -24,14 +24,13 @@ const urls = {
   deleteRedirectURL: '/panel',
 };
 
-const ShowPage = React.createClass({
-  getShowIDFromURL() {
+class ShowPage extends React.Component {
+  getShowIDFromURL = () => {
     return window.location.pathname.split('/').pop();
-  },
+  };
 
-  getInitialState() {
-    return { showID: this.getShowIDFromURL() };
-  },
+  state = { showID: this.getShowIDFromURL() };
+
   render() {
     return (
       <div className="showPage">
@@ -41,26 +40,25 @@ const ShowPage = React.createClass({
         <Show urls={this.props.urls} showID={this.state.showID} />
       </div>
     );
-  },
-});
+  }
+}
 
-const Show = React.createClass({
-  getInitialState() {
-    return {
-      show: {},
-      titleVerified: false,
-      dateVerified: false,
-      genreVerified: false,
-      blurbVerified: false,
-      publicVerified: false,
-      artVerified: false,
-      facebookVerified: false,
-      tumblrVerified: false,
-      soundcloudVerified: false,
-      mixcloudVerified: false,
-    };
-  },
-  loadDataFromServer() {
+class Show extends React.Component {
+  state = {
+    show: {},
+    titleVerified: false,
+    dateVerified: false,
+    genreVerified: false,
+    blurbVerified: false,
+    publicVerified: false,
+    artVerified: false,
+    facebookVerified: false,
+    tumblrVerified: false,
+    soundcloudVerified: false,
+    mixcloudVerified: false,
+  };
+
+  loadDataFromServer = () => {
     $.ajax({
       url: this.props.urls.showURL + this.props.showID,
       dataType: 'json',
@@ -72,8 +70,9 @@ const Show = React.createClass({
         console.error(this.props.urls.showURL, status, err.toString());
       }.bind(this),
     });
-  },
-  handleShowDataSubmit(updatedShow, successVar) {
+  };
+
+  handleShowDataSubmit = (updatedShow, successVar) => {
     const oldShow = this.state.show;
     // Optimistically update local data, will be refreshed or reset after response from server
     this.setState({ show: updatedShow });
@@ -98,14 +97,17 @@ const Show = React.createClass({
         console.error(this.props.urls.showUpdateURL, status, err.toString());
       }.bind(this),
     });
-  },
-  verifyShowArt() {
+  };
+
+  verifyShowArt = () => {
     this.setState({ artVerified: true });
-  },
-  unverifyShowArt() {
+  };
+
+  unverifyShowArt = () => {
     this.setState({ artVerified: false });
-  },
-  validateLink(link) {
+  };
+
+  validateLink = link => {
     if (link === '') {
       return link;
     }
@@ -114,8 +116,9 @@ const Show = React.createClass({
       return addHTTP;
     }
     return link;
-  },
-  handleShowArtSubmit(data) {
+  };
+
+  handleShowArtSubmit = data => {
     if (!data) {
       return;
     }
@@ -138,55 +141,64 @@ const Show = React.createClass({
       }
     };
     request.send(formData);
-  },
-  handleTitleSubmit(title) {
+  };
+
+  handleTitleSubmit = title => {
     const show = $.extend(true, {}, this.state.show);
     show.title = title;
     this.handleShowDataSubmit(show, 'titleVerified');
-  },
-  handleDateSubmit(day, time) {
+  };
+
+  handleDateSubmit = (day, time) => {
     const show = $.extend(true, {}, this.state.show);
     show.day = day;
     show.time = time;
     this.handleShowDataSubmit(show, 'dateVerified');
-  },
-  handleGenreSubmit(genre) {
+  };
+
+  handleGenreSubmit = genre => {
     const show = $.extend(true, {}, this.state.show);
     show.genre = genre;
     this.handleShowDataSubmit(show, 'genreVerified');
-  },
-  handleBlurbSubmit(blurb) {
+  };
+
+  handleBlurbSubmit = blurb => {
     const show = $.extend(true, {}, this.state.show);
     show.blurb = blurb;
     this.handleShowDataSubmit(show, 'blurbVerified');
-  },
-  handleFacebookSubmit(facebook) {
+  };
+
+  handleFacebookSubmit = facebook => {
     const show = $.extend(true, {}, this.state.show);
     show.facebook = this.validateLink(facebook);
     this.handleShowDataSubmit(show, 'facebookVerified');
-  },
-  handleTumblrSubmit(tumblr) {
+  };
+
+  handleTumblrSubmit = tumblr => {
     const show = $.extend(true, {}, this.state.show);
     show.tumblr = this.validateLink(tumblr);
     this.handleShowDataSubmit(show, 'tumblrVerified');
-  },
-  handleSoundcloudSubmit(soundcloud) {
+  };
+
+  handleSoundcloudSubmit = soundcloud => {
     const show = $.extend(true, {}, this.state.show);
     show.soundcloud = this.validateLink(soundcloud);
     this.handleShowDataSubmit(show, 'soundcloudVerified');
-  },
-  handleMixcloudSubmit(mixcloud) {
+  };
+
+  handleMixcloudSubmit = mixcloud => {
     const show = $.extend(true, {}, this.state.show);
     show.mixcloud = this.validateLink(mixcloud);
     this.handleShowDataSubmit(show, 'mixcloudVerified');
-  },
+  };
 
-  handlePublicSubmit(checked) {
+  handlePublicSubmit = checked => {
     const show = $.extend(true, {}, this.state.show);
     show.public = checked;
     this.handleShowDataSubmit(show, 'publicVerified');
-  },
-  handleDeleteShow() {
+  };
+
+  handleDeleteShow = () => {
     $.ajax({
       url: this.props.urls.deleteShowURL,
       dataType: 'json',
@@ -199,11 +211,12 @@ const Show = React.createClass({
         console.error(this.props.urls.deleteShowURL, status, err.toString());
       }.bind(this),
     });
-  },
+  };
 
   componentDidMount() {
     this.loadDataFromServer();
-  },
+  }
+
   render() {
     let djs = '';
     if (this.state.show.djs != null) {
@@ -335,7 +348,7 @@ const Show = React.createClass({
         </Grid>
       </div>
     );
-  },
-});
+  }
+}
 
 ReactDOM.render(<ShowPage urls={urls} />, document.getElementById('content'));

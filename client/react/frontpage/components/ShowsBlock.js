@@ -27,15 +27,15 @@ Full graph with schedule of shows
     "saturday": {11: {show}, ...},
   }
 */
-const ShowsGraph = React.createClass({
-  getInitialState() {
-    return {
-      activeShowID: -1,
-    };
-  },
-  toggleActiveShow(showID) {
+class ShowsGraph extends React.Component {
+  state = {
+    activeShowID: -1,
+  };
+
+  toggleActiveShow = showID => {
     this.setState({ activeShowID: showID });
-  },
+  };
+
   render() {
     const dayTitles = week.map(day => <p>{Dates.abbreviatedDay(day)}</p>);
 
@@ -49,7 +49,8 @@ const ShowsGraph = React.createClass({
             position: 'relative',
             width: '100%',
             margin: '0 auto',
-          }}>
+          }}
+        >
           <p className="timeStyle">{hourString}</p>
           {week.map(day => {
             const show = this.props.schedule[day][hour];
@@ -75,8 +76,8 @@ const ShowsGraph = React.createClass({
         {showBlocks}
       </div>
     );
-  },
-});
+  }
+}
 
 /*
 Individual show block with rollover action
@@ -87,16 +88,19 @@ Individual show block with rollover action
 @prop isActiveShow: styling bool: user clicked on this show
 @prop isSpotlightShow: styling bool: show is a spotlight feature on website
 */
-const ShowBlock = React.createClass({
-  handleMouseOver() {
+class ShowBlock extends React.Component {
+  handleMouseOver = () => {
     this.setState({ active: true });
-  },
-  handleMouseOut() {
+  };
+
+  handleMouseOut = () => {
     this.setState({ active: false });
-  },
-  handleClick() {
+  };
+
+  handleClick = () => {
     this.props.handleClick();
-  },
+  };
+
   render() {
     if (!this.props.isValidShow) {
       const boringBlockStyle = {
@@ -121,7 +125,7 @@ const ShowBlock = React.createClass({
         onClick={this.handleClick}
       />
     );
-  },
-});
+  }
+}
 
 export default ShowsGraph;

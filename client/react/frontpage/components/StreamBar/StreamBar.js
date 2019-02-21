@@ -19,22 +19,22 @@ plays audio and shows recent tracks
 
 @prop currentShowTitle: title of currently playing show, or null
 */
-const StreamBar = React.createClass({
-  getInitialState() {
-    return {
-      playing: false,
-      recentExpanded: false,
-      chatExpanded: false,
-      hasReset: false,
-    };
-  },
+class StreamBar extends React.Component {
+  state = {
+    playing: false,
+    recentExpanded: false,
+    chatExpanded: false,
+    hasReset: false,
+  };
+
   componentDidMount() {
     stream = document.getElementById('stream');
     if (!isMobile.any()) {
       stream.setAttribute('preload', 'auto');
     }
-  },
-  togglePlay() {
+  }
+
+  togglePlay = () => {
     if (this.state.playing) {
       // pause
       stream.pause();
@@ -51,22 +51,26 @@ const StreamBar = React.createClass({
       stream.play();
       this.setState({ playing: true });
     }
-  },
-  toggleRecentExpanded() {
+  };
+
+  toggleRecentExpanded = () => {
     this.setState({
       recentExpanded: !this.state.recentExpanded,
       chatExpanded: false,
     });
-  },
-  togggleChatExpanded() {
+  };
+
+  togggleChatExpanded = () => {
     this.setState({
       chatExpanded: !this.state.chatExpanded,
       recentExpanded: false,
     });
-  },
-  onReset() {
+  };
+
+  onReset = () => {
     this.setState({ hasReset: true });
-  },
+  };
+
   render() {
     return (
       <div className="streamBar">
@@ -133,7 +137,7 @@ const StreamBar = React.createClass({
         </Grid>
       </div>
     );
-  },
-});
+  }
+}
 
 export default StreamBar;

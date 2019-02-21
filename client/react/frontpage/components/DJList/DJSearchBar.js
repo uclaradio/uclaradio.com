@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DJSearchBar = React.createClass({
+class DJSearchBar extends React.Component {
   render() {
     return (
       <div className="djSearchBar">
@@ -11,7 +11,7 @@ const DJSearchBar = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 export default DJSearchBar;
