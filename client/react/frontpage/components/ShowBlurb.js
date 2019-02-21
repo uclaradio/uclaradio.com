@@ -22,8 +22,8 @@ Vertical blurb info for a show, including picture and description
   picture: String, // relative url to image file
 }
 */
-const ShowBlurb = React.createClass({
-  djString(djMap) {
+class ShowBlurb extends React.Component {
+  djString = djMap => {
     let djString = '';
     let addComma = false;
     for (const dj in djMap) {
@@ -34,15 +34,15 @@ const ShowBlurb = React.createClass({
       addComma = true;
     }
     return djString;
-  },
+  };
 
-  urlFromShow(show) {
+  urlFromShow = show => {
     return `/shows/${show.id}`;
-  },
+  };
 
-  getDJLink(djName) {
+  getDJLink = djName => {
     return `/djs/${djName}`;
-  },
+  };
 
   render() {
     if (!this.props.show) {
@@ -77,7 +77,8 @@ const ShowBlurb = React.createClass({
                 <a
                   className="facebookLogo"
                   href={this.props.show.facebook}
-                  target="_blank">
+                  target="_blank"
+                >
                   <i
                     className="fa fa-facebook-square fa-lg"
                     aria-hidden="true"
@@ -88,7 +89,8 @@ const ShowBlurb = React.createClass({
                 <a
                   className="tumblrLogo"
                   href={this.props.show.tumblr}
-                  target="_blank">
+                  target="_blank"
+                >
                   <i className="fa fa-tumblr-square fa-lg" aria-hidden="true" />
                 </a>
               )}
@@ -96,7 +98,8 @@ const ShowBlurb = React.createClass({
                 <a
                   className="soundcloudLogo"
                   href={this.props.show.soundcloud}
-                  target="_blank">
+                  target="_blank"
+                >
                   <i className="fa fa-soundcloud fa-lg" aria-hidden="true" />
                 </a>
               )}
@@ -104,7 +107,8 @@ const ShowBlurb = React.createClass({
                 <a
                   className="mixcloudLogo"
                   href={this.props.show.mixcloud}
-                  target="_blank">
+                  target="_blank"
+                >
                   <i className="fa fa-mixcloud fa-lg" aria-hidden="true" />
                 </a>
               )}
@@ -117,7 +121,7 @@ const ShowBlurb = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 export default ShowBlurb;

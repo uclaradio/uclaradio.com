@@ -16,7 +16,7 @@ const urls = {
   url: '/panel/api/songs',
 };
 
-const ElrondPage = React.createClass({
+class ElrondPage extends React.Component {
   render() {
     return (
       <div className="panelPage">
@@ -28,15 +28,13 @@ const ElrondPage = React.createClass({
         </Grid>
       </div>
     );
-  },
-});
+  }
+}
 
-const RivendellTable = React.createClass({
-  getInitialState() {
-    return { songs: [], fetching: true };
-  },
+class RivendellTable extends React.Component {
+  state = { songs: [], fetching: true };
 
-  loadDataFromServer() {
+  loadDataFromServer = () => {
     $.ajax({
       url: urls.url,
       dataType: 'json',
@@ -48,11 +46,12 @@ const RivendellTable = React.createClass({
         console.error(this.props.urls.url, status, err.toString());
       }.bind(this),
     });
-  },
+  };
 
   componentDidMount() {
     this.loadDataFromServer();
-  },
+  }
+
   render() {
     return (
       <div>
@@ -78,7 +77,7 @@ const RivendellTable = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 ReactDOM.render(<ElrondPage />, document.getElementById('content'));

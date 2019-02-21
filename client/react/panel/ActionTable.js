@@ -11,24 +11,26 @@ import {
 } from 'react-bootstrap';
 
 /**
-*  ButtonGroup with one or two actions (reject, accept/reject)
-*
-*  @prop value: value to submit on actions
-*  @prop actionsDisabled: should disable buttons
-*  @prop acceptTitle: accept button title (or nothing)
-*  @prop rejectTitle: reject button title
-*  @prop acceptTooltip: string to show in accept action tooltip  (or nothing)
-*  @prop rejectTooltip: string to show in reject action tooltip
-*  @prop onAccept -> function(value): function to call if accept button hit (or nothing)
-*  @prop onReject -> function(value): function to call if reject button hit
-*/
-const ActionButtons = React.createClass({
-  handleAccept() {
+ *  ButtonGroup with one or two actions (reject, accept/reject)
+ *
+ *  @prop value: value to submit on actions
+ *  @prop actionsDisabled: should disable buttons
+ *  @prop acceptTitle: accept button title (or nothing)
+ *  @prop rejectTitle: reject button title
+ *  @prop acceptTooltip: string to show in accept action tooltip  (or nothing)
+ *  @prop rejectTooltip: string to show in reject action tooltip
+ *  @prop onAccept -> function(value): function to call if accept button hit (or nothing)
+ *  @prop onReject -> function(value): function to call if reject button hit
+ */
+class ActionButtons extends React.Component {
+  handleAccept = () => {
     this.props.onAccept(this.props.value);
-  },
-  handleReject() {
+  };
+
+  handleReject = () => {
     this.props.onReject(this.props.value);
-  },
+  };
+
   render() {
     const showAccept =
       this.props.acceptTitle && this.props.acceptTooltip && this.props.onAccept;
@@ -53,7 +55,8 @@ const ActionButtons = React.createClass({
                 className="table-action1"
                 bsStyle="link"
                 onClick={this.handleAccept}
-                disabled={this.props.actionsDisabled}>
+                disabled={this.props.actionsDisabled}
+              >
                 <Glyphicon glyph="ok" />
                 {this.props.acceptTitle}
               </Button>
@@ -67,7 +70,8 @@ const ActionButtons = React.createClass({
               className="table-action2"
               bsStyle="link"
               onClick={this.handleReject}
-              disabled={this.props.actionsDisabled}>
+              disabled={this.props.actionsDisabled}
+            >
               <Glyphicon glyph="remove" />
               {this.props.rejectTitle}
             </Button>
@@ -75,24 +79,24 @@ const ActionButtons = React.createClass({
         </ButtonGroup>
       </div>
     );
-  },
-});
+  }
+}
 
 /**
-*  Table with two string columns and one or two action buttons (accept/reject, reject)
-*
-*  @prop string1: string title of the first column
-*  @prop placeholders1: string placeholder of the first column
-*  @prop string2: string title of the second column
-*  @prop acceptTitle: string title of the accept action if it exists
-*  @prop rejectTitle: string title of the reject action
-*  @prop acceptTooltip: string to show in accept action tooltip
-*  @prop rejectTooltip: string to show in reject action tooltip
-*  @prop onAccept -> function(row.value): function to call if accept button hit on row
-*  @prop onReject -> function(row.value): function to call if reject button hit on row
-*  @prop rows -> [{value: x, string1: x, string2: x, actionsDisabled: bool}]
-*/
-const ActionTable = React.createClass({
+ *  Table with two string columns and one or two action buttons (accept/reject, reject)
+ *
+ *  @prop string1: string title of the first column
+ *  @prop placeholders1: string placeholder of the first column
+ *  @prop string2: string title of the second column
+ *  @prop acceptTitle: string title of the accept action if it exists
+ *  @prop rejectTitle: string title of the reject action
+ *  @prop acceptTooltip: string to show in accept action tooltip
+ *  @prop rejectTooltip: string to show in reject action tooltip
+ *  @prop onAccept -> function(row.value): function to call if accept button hit on row
+ *  @prop onReject -> function(row.value): function to call if reject button hit on row
+ *  @prop rows -> [{value: x, string1: x, string2: x, actionsDisabled: bool}]
+ */
+class ActionTable extends React.Component {
   render() {
     const act1 = this.props.onAccept;
     const glyph = this.props.glyph;
@@ -147,7 +151,7 @@ const ActionTable = React.createClass({
         </Table>
       </div>
     );
-  },
-});
+  }
+}
 
 export default ActionTable;

@@ -25,27 +25,27 @@ Full graph with schedule of shows
 @prop activeShowID: id of active show user clicked on
 @prop onShowClick(show): callback for when a show is made active
 */
-const ShowsGraph = React.createClass({
-  getInitialState() {
-    return {};
-  },
+class ShowsGraph extends React.Component {
+  state = {};
+
   componentWillMount() {
     this.updateSchedule(this.props.shows);
-  },
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.shows) {
       this.updateSchedule(nextProps.shows);
     }
-  },
+  }
 
-  updateSchedule(shows) {
+  updateSchedule = shows => {
     const sorted = sortedShows(shows);
     this.setState({
       schedule: sorted,
     });
-  },
+  };
 
-  findStartTime() {
+  findStartTime = () => {
     // find earliest show time (after 5am)
     let found = 0;
     for (var s = 5; s < Dates.availableTimes.length; s++) {
@@ -64,9 +64,9 @@ const ShowsGraph = React.createClass({
       }
     }
     return s;
-  },
+  };
 
-  findEndTime() {
+  findEndTime = () => {
     // find latest show time
     let found = 0;
 
@@ -107,9 +107,9 @@ const ShowsGraph = React.createClass({
       }
     }
     return e;
-  },
+  };
 
-  lateNightDay(day) {
+  lateNightDay = day => {
     let displayDay;
 
     switch (day) {
@@ -136,7 +136,7 @@ const ShowsGraph = React.createClass({
         break;
     }
     return displayDay;
-  },
+  };
 
   render() {
     const dayTitles = week.map(day => (
@@ -225,8 +225,8 @@ const ShowsGraph = React.createClass({
         {showBlocks}
       </div>
     );
-  },
-});
+  }
+}
 
 /*
 Individual show block with rollover action
@@ -237,10 +237,11 @@ Individual show block with rollover action
 @prop isActiveShow: styling bool: user clicked on this show
 @prop isSpotlightShow: styling bool: show is a spotlight feature on website
 */
-const ShowBlock = React.createClass({
-  handleClick() {
+class ShowBlock extends React.Component {
+  handleClick = () => {
     this.props.handleClick();
-  },
+  };
+
   render() {
     if (!this.props.isValidShow) {
       return (
@@ -264,8 +265,8 @@ const ShowBlock = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 // creates schedule object:
 // {

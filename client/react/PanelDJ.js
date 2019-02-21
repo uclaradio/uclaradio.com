@@ -2,6 +2,7 @@
 // let DJ edit personal info
 
 import React from 'react';
+import createReactClass from 'create-react-class';
 import ReactDOM from 'react-dom';
 import {
   Button,
@@ -30,7 +31,7 @@ const urls = {
   addShowURL: '/panel/api/addShow',
 };
 
-const PanelPage = React.createClass({
+class PanelPage extends React.Component {
   render() {
     return (
       <div className="panelPage">
@@ -49,21 +50,20 @@ const PanelPage = React.createClass({
         </Grid>
       </div>
     );
-  },
-});
+  }
+}
 
-const User = React.createClass({
-  getInitialState() {
-    return {
-      user: { username: '', djName: '', email: '', phone: '', bio: '' },
-      djNameVerified: false,
-      emailVerified: false,
-      phoneVerified: false,
-      fullNameVerified: false,
-      bioVerified: false,
-    };
-  },
-  loadDataFromServer() {
+class User extends React.Component {
+  state = {
+    user: { username: '', djName: '', email: '', phone: '', bio: '' },
+    djNameVerified: false,
+    emailVerified: false,
+    phoneVerified: false,
+    fullNameVerified: false,
+    bioVerified: false,
+  };
+
+  loadDataFromServer = () => {
     $.ajax({
       url: this.props.urls.url,
       dataType: 'json',
@@ -75,8 +75,9 @@ const User = React.createClass({
         console.error(this.props.urls.url, status, err.toString());
       }.bind(this),
     });
-  },
-  handleUserDataSubmit(updatedUser, successVar) {
+  };
+
+  handleUserDataSubmit = (updatedUser, successVar) => {
     const oldUser = this.state.user;
     // Optimistically update local data, will be refreshed or reset after response from server
     updatedUser.username = oldUser.username;
@@ -100,42 +101,51 @@ const User = React.createClass({
         console.error(this.props.urls.url, status, err.toString());
       }.bind(this),
     });
-  },
-  handleDJNameSubmit(newDJName) {
+  };
+
+  handleDJNameSubmit = newDJName => {
     const user = $.extend(true, {}, this.state.user);
     user.djName = newDJName;
     this.handleUserDataSubmit(user, 'djNameVerified');
-  },
-  handleFullNameSubmit(fullName) {
+  };
+
+  handleFullNameSubmit = fullName => {
     const user = $.extend(true, {}, this.state.user);
     user.fullName = fullName;
     this.handleUserDataSubmit(user, 'fullNameVerified');
-  },
-  handleEmailSubmit(newEmail) {
+  };
+
+  handleEmailSubmit = newEmail => {
     const user = $.extend(true, {}, this.state.user);
     user.email = newEmail;
     this.handleUserDataSubmit(user, 'emailVerified');
-  },
-  handlePhoneSubmit(newPhone) {
+  };
+
+  handlePhoneSubmit = newPhone => {
     const user = $.extend(true, {}, this.state.user);
     user.phone = newPhone;
     this.handleUserDataSubmit(user, 'phoneVerified');
-  },
-  handleBioSubmit(newBio) {
+  };
+
+  handleBioSubmit = newBio => {
     const user = $.extend(true, {}, this.state.user);
     user.bio = newBio;
     this.handleUserDataSubmit(user, 'bioVerified');
-  },
-  verifyPic() {
+  };
+
+  verifyPic = () => {
     this.setState({ picVerified: true });
-  },
-  unverifyPic() {
+  };
+
+  unverifyPic = () => {
     this.setState({ picVerified: false });
-  },
-  updateUserState(user) {
+  };
+
+  updateUserState = user => {
     this.setState({ user });
-  },
-  handlePicSubmit(data) {
+  };
+
+  handlePicSubmit = data => {
     if (!data) {
       return;
     }
@@ -158,14 +168,16 @@ const User = React.createClass({
       }
     };
     request.send(formData);
-  },
+  };
+
   componentDidMount() {
     this.loadDataFromServer();
 
     // make profile image square
     const imageWidth = $('.pic.profile').width();
     $('.pic.profile').css({ height: `${imageWidth}px` });
-  },
+  }
+
   render() {
     return (
       <div className="user">
@@ -222,15 +234,13 @@ const User = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
-const UserShowsList = React.createClass({
-  getInitialState() {
-    // shows: {title, day, time}
-    return { shows: [] };
-  },
-  loadDataFromServer() {
+class UserShowsList extends React.Component {
+  state = { shows: [] };
+
+  loadDataFromServer = () => {
     $.ajax({
       url: this.props.urls.showsURL,
       dataType: 'json',
@@ -242,8 +252,9 @@ const UserShowsList = React.createClass({
         console.error(this.props.urls.showsURL, status, err.toString());
       }.bind(this),
     });
-  },
-  handleUserSubmitNewShow(showData) {
+  };
+
+  handleUserSubmitNewShow = showData => {
     const oldShows = this.state.shows;
     // optimistically add show data
     const localShowData = showData;
@@ -262,10 +273,12 @@ const UserShowsList = React.createClass({
         console.error(this.props.urls.addShowURL, status, err.toString());
       }.bind(this),
     });
-  },
+  };
+
   componentDidMount() {
     this.loadDataFromServer();
-  },
+  }
+
   render() {
     return (
       <div className="userShowsList">
@@ -277,25 +290,32 @@ const UserShowsList = React.createClass({
         <NewShowForm onNewShowSubmit={this.handleUserSubmitNewShow} />
       </div>
     );
-  },
-});
+  }
+}
 
-const NewShowForm = React.createClass({
+const NewShowForm = createReactClass({
+  displayName: 'NewShowForm',
+
   getInitialState() {
     return { title: '', day: 'Mon', time: '11am', editable: false };
   },
+
   handleTitleChange(e) {
     this.setState({ title: e.target.value });
   },
+
   handleDayChange(e, day) {
     this.setState({ day });
   },
+
   handleTimeChange(e, time) {
     this.setState({ time });
   },
+
   toggleEditableField(e) {
     this.setState({ text: '', editable: !this.state.editable });
   },
+
   handleSubmit(e) {
     e.preventDefault();
     const title = this.state.title.trim();
@@ -308,6 +328,7 @@ const NewShowForm = React.createClass({
     this.props.onNewShowSubmit(showData);
     this.setState(this.getInitialState());
   },
+
   render() {
     const days = Dates.availableDays.map(day => (
       <MenuItem key={day} eventKey={day}>

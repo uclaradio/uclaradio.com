@@ -25,12 +25,13 @@ Displays DJ information
 @prop fetching: currently fetching djs
 @prop updateDJs: callback to update all listed djs
 * */
-const DJPage = React.createClass({
+class DJPage extends React.Component {
   componentWillMount() {
     if (this.props.dj == null) {
       this.props.updateDJs();
     }
-  },
+  }
+
   render() {
     const dj = this.props.dj;
     if (!dj) {
@@ -59,8 +60,8 @@ const DJPage = React.createClass({
         </Row>
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = (state, ownProps) => {
   const props = {
@@ -86,4 +87,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DJPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DJPage);

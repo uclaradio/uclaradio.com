@@ -27,27 +27,30 @@ View component for shows tab of frontpage
 @prop currentShowID: id of current show
 @prop spotlightShowID: id of spotlight show
 */
-const ShowsContent = React.createClass({
-  getInitialState() {
-    return {
-      mobile: false,
-      viewType: ScheduleViewType.grid,
-    };
-  },
+class ShowsContent extends React.Component {
+  state = {
+    mobile: false,
+    viewType: ScheduleViewType.grid,
+  };
+
   componentWillMount() {
     this.props.updateShows();
-  },
+  }
+
   componentDidMount() {
     if (isMobile.any()) {
       this.setState({ mobile: true });
     }
-  },
-  toggleActiveShow(show) {
+  }
+
+  toggleActiveShow = show => {
     this.setState({ activeShow: show });
-  },
-  updateViewType(viewType) {
+  };
+
+  updateViewType = viewType => {
     this.setState({ viewType });
-  },
+  };
+
   render() {
     // loading
     if (this.props.fetching && this.props.shows.length == 0) {
@@ -124,8 +127,8 @@ const ShowsContent = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = state => ({
   shows: state.shows.shows,
@@ -140,4 +143,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowsContent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShowsContent);

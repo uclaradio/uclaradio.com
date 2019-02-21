@@ -87,7 +87,7 @@ const socialMediaLinks = [
   },
 ];
 
-const FrontpageContent = React.createClass({
+class FrontpageContent extends React.Component {
   render() {
     const showPlaying =
       this.props.nowPlaying && this.props.nowPlaying.title != null;
@@ -127,8 +127,8 @@ const FrontpageContent = React.createClass({
         </TriangleCanvas>
       </div>
     );
-  },
-});
+  }
+}
 
 /**
 Redux container (wrapper) for FrontpageContent to provide props:
@@ -193,7 +193,7 @@ also sets some data in store
 @prop setSpotlightShowID: (showID) => update the spotlight to be a show with the provided showID
 @prop updateShows: () => should fetch updated list of shows and update store
 * */
-const Frontpage = React.createClass({
+class Frontpage extends React.Component {
   componentWillMount() {
     // refresh live show info now and every 30 seconds
     this.props.updateNowPlaying();
@@ -203,17 +203,19 @@ const Frontpage = React.createClass({
     // 02/18/19 - "UCLA Radio News with Sophia Donskoi and Ryan Smith"
     this.props.setSpotlightShowID(765);
     this.props.updateShows();
-  },
+  }
+
   componentWillUnmount() {
     clearInterval(this.interval);
-  },
+  }
+
   render() {
     return (
       <Router history={browserHistory} onUpdate={logPageView}>
         {routes}
       </Router>
     );
-  },
-});
+  }
+}
 
 export default Frontpage;

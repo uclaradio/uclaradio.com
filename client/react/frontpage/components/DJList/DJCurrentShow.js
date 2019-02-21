@@ -1,7 +1,7 @@
 import React from 'react';
 import RectImage from '../../../common/RectImage';
 
-const DJCurrentShow = React.createClass({
+class DJCurrentShow extends React.Component {
   render() {
     const link = `/djs/${this.props.currentDJ.name}`;
 
@@ -26,7 +26,7 @@ const DJCurrentShow = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 export default DJCurrentShow;

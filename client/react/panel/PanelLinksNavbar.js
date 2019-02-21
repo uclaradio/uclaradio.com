@@ -6,14 +6,13 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 const linksURL = '/panel/api/userlinks';
 
 /**
-*  Navbar which loads links available to the current user logged
-*  into the DJ panel
-*/
-const PanelLinksNavbar = React.createClass({
-  getInitialState() {
-    return { links: [] };
-  },
-  loadDataFromServer() {
+ *  Navbar which loads links available to the current user logged
+ *  into the DJ panel
+ */
+class PanelLinksNavbar extends React.Component {
+  state = { links: [] };
+
+  loadDataFromServer = () => {
     $.ajax({
       url: linksURL,
       dataType: 'json',
@@ -25,19 +24,22 @@ const PanelLinksNavbar = React.createClass({
         console.error(linksURL, status, err.toString());
       },
     });
-  },
+  };
+
   // provided a node element and a link, this function will wrap
   // a span with class 'navbarSelected' around the element
   // if the provided link is the same as the current path ('/panel/...')
-  styleLink(element, link) {
+  styleLink = (element, link) => {
     if (link === window.location.pathname) {
       return <span className="navbarSelected">{element}</span>;
     }
     return element;
-  },
+  };
+
   componentDidMount() {
     this.loadDataFromServer();
-  },
+  }
+
   render() {
     const styleLink = this.styleLink;
     const links = this.state.links.map((link, i) => (
@@ -71,7 +73,7 @@ const PanelLinksNavbar = React.createClass({
         </Navbar>
       </div>
     );
-  },
-});
+  }
+}
 
 export default PanelLinksNavbar;

@@ -26,7 +26,7 @@ const urls = {
   keepMessages: '/panel/manager/api/freechat',
 };
 
-const ManagerPage = React.createClass({
+class ManagerPage extends React.Component {
   render() {
     return (
       <div className="managerPage">
@@ -47,16 +47,15 @@ const ManagerPage = React.createClass({
         </Grid>
       </div>
     );
-  },
-});
+  }
+}
 
-const ReportedMessages = React.createClass({
-  getInitialState() {
-    return {
-      messages: [],
-    };
-  },
-  fetchReportedMessages() {
+class ReportedMessages extends React.Component {
+  state = {
+    messages: [],
+  };
+
+  fetchReportedMessages = () => {
     $.ajax({
       url: urls.getReportedMessages,
       type: 'GET',
@@ -64,8 +63,9 @@ const ReportedMessages = React.createClass({
         this.setState({ messages });
       }.bind(this),
     });
-  },
-  handleKeep(messageID) {
+  };
+
+  handleKeep = messageID => {
     $.ajax({
       url: urls.keepMessages,
       type: 'POST',
@@ -76,8 +76,9 @@ const ReportedMessages = React.createClass({
         this.fetchReportedMessages();
       }.bind(this),
     });
-  },
-  handleDelete(messageID) {
+  };
+
+  handleDelete = messageID => {
     $.ajax({
       url: urls.deleteMessages,
       type: 'POST',
@@ -88,10 +89,12 @@ const ReportedMessages = React.createClass({
         this.fetchReportedMessages();
       }.bind(this),
     });
-  },
+  };
+
   componentDidMount() {
     this.fetchReportedMessages();
-  },
+  }
+
   render() {
     if (this.state.messages.length == 0) {
       return <div className="reportedMessages" />;
@@ -137,22 +140,21 @@ const ReportedMessages = React.createClass({
         </div>
       </Well>
     );
-  },
-});
+  }
+}
 
-const Manager = React.createClass({
-  getInitialState() {
-    return {
-      manager: {},
-      positionVerified: false,
-      publicVerified: false,
-      meetingTimeVerified: false,
-      meetingLocationVerified: false,
-      emailVerified: false,
-      departmentInfoVerified: false,
-    };
-  },
-  loadDataFromServer() {
+class Manager extends React.Component {
+  state = {
+    manager: {},
+    positionVerified: false,
+    publicVerified: false,
+    meetingTimeVerified: false,
+    meetingLocationVerified: false,
+    emailVerified: false,
+    departmentInfoVerified: false,
+  };
+
+  loadDataFromServer = () => {
     $.ajax({
       url: this.props.urls.managerInfo,
       dataType: 'json',
@@ -164,8 +166,9 @@ const Manager = React.createClass({
         console.error(this.props.urls.managerInfo, status, err.toString());
       }.bind(this),
     });
-  },
-  handleManagerInfoSubmit(updatedManager, successVar) {
+  };
+
+  handleManagerInfoSubmit = (updatedManager, successVar) => {
     const oldManager = this.state.manager;
     // Optimistically update local data, will be refreshed or reset after response from server
     this.setState({ manager: updatedManager });
@@ -189,40 +192,48 @@ const Manager = React.createClass({
         console.error(this.props.urls.managerUpdate, status, err.toString());
       }.bind(this),
     });
-  },
-  handlePositionSubmit(position) {
+  };
+
+  handlePositionSubmit = position => {
     const manager = $.extend(true, {}, this.state.manager);
     manager.position = position;
     this.handleManagerInfoSubmit(manager, 'positionVerified');
-  },
-  handleMeetingTimeSubmit(meetingTime) {
+  };
+
+  handleMeetingTimeSubmit = meetingTime => {
     const manager = $.extend(true, {}, this.state.manager);
     manager.meetingTime = meetingTime;
     this.handleManagerInfoSubmit(manager, 'meetingTimeVerified');
-  },
-  handleMeetingPlaceSubmit(meetingPlace) {
+  };
+
+  handleMeetingPlaceSubmit = meetingPlace => {
     const manager = $.extend(true, {}, this.state.manager);
     manager.meetingPlace = meetingPlace;
     this.handleManagerInfoSubmit(manager, 'meetingLocationVerified');
-  },
-  handleEmailSubmit(email) {
+  };
+
+  handleEmailSubmit = email => {
     const manager = $.extend(true, {}, this.state.manager);
     manager.email = email;
     this.handleManagerInfoSubmit(manager, 'emailVerified');
-  },
-  handleDepartmentInfoSubmit(departmentInfo) {
+  };
+
+  handleDepartmentInfoSubmit = departmentInfo => {
     const manager = $.extend(true, {}, this.state.manager);
     manager.departmentInfo = departmentInfo;
     this.handleManagerInfoSubmit(manager, 'departmentInfoVerified');
-  },
-  handlePublicSubmit(checked) {
+  };
+
+  handlePublicSubmit = checked => {
     const manager = $.extend(true, {}, this.state.manager);
     manager.public = checked;
     this.handleManagerInfoSubmit(manager, 'publicVerified');
-  },
+  };
+
   componentDidMount() {
     this.loadDataFromServer();
-  },
+  }
+
   render() {
     return (
       <div className="manager">
@@ -272,15 +283,13 @@ const Manager = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
-const ManagerShowsList = React.createClass({
-  getInitialState() {
-    // shows: {title, day, time}
-    return { shows: [] };
-  },
-  loadDataFromServer() {
+class ManagerShowsList extends React.Component {
+  state = { shows: [] };
+
+  loadDataFromServer = () => {
     $.ajax({
       url: this.props.urls.allShows,
       dataType: 'json',
@@ -292,10 +301,12 @@ const ManagerShowsList = React.createClass({
         console.error(this.props.urls.allShows, status, err.toString());
       }.bind(this),
     });
-  },
+  };
+
   componentDidMount() {
     this.loadDataFromServer();
-  },
+  }
+
   render() {
     return (
       <div className="userShowsList">
@@ -308,8 +319,8 @@ const ManagerShowsList = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 // user account strings
 const atManagerGlyph = 'fire';
@@ -319,8 +330,14 @@ const atAcceptTooltip = 'Verify user is a Radio DJ';
 // delete verified user strings
 const atRejectTooltipVerified = 'Delete DJ account';
 
-const AccountsList = React.createClass({
-  loadDataFromServer() {
+class AccountsList extends React.Component {
+  state = {
+    accounts: { unverified: [], verified: [] },
+    unverifiedRows: [],
+    verifiedRows: [],
+  };
+
+  loadDataFromServer = () => {
     $.ajax({
       url: this.props.urls.listAccounts,
       dataType: 'json',
@@ -334,8 +351,9 @@ const AccountsList = React.createClass({
         console.error(this.props.url, status, err.toString());
       }.bind(this),
     });
-  },
-  updateUser(url, username, oldAccounts) {
+  };
+
+  updateUser = (url, username, oldAccounts) => {
     const updateData = { username };
     $.ajax({
       url,
@@ -351,8 +369,9 @@ const AccountsList = React.createClass({
         console.error(this.props.showURL, status, err.toString());
       }.bind(this),
     });
-  },
-  handleVerifyUser(username) {
+  };
+
+  handleVerifyUser = username => {
     const oldAccounts = this.state.accounts;
     const newAccounts = $.extend(true, [], this.state.accounts);
     for (let i = 0; i < newAccounts.unverified.length; i++) {
@@ -366,8 +385,9 @@ const AccountsList = React.createClass({
     // optimistically add show data to present
     this.setState({ accounts: newAccounts });
     this.updateUser(this.props.urls.verifyAccount, username, oldAccounts);
-  },
-  handleDeleteUser(username) {
+  };
+
+  handleDeleteUser = username => {
     const oldAccounts = this.state.accounts;
     const newAccounts = $.extend(true, [], this.state.accounts);
     for (let i = 0; i < newAccounts.verified.length; i++) {
@@ -380,8 +400,9 @@ const AccountsList = React.createClass({
     // optimistically add show data to present
     this.setState({ accounts: newAccounts });
     this.updateUser(this.props.urls.delete, username, oldAccounts);
-  },
-  handleDeleteUnverifiedUser(username) {
+  };
+
+  handleDeleteUnverifiedUser = username => {
     const oldAccounts = this.state.accounts;
     const newAccounts = $.extend(true, [], this.state.accounts);
     for (let i = 0; i < newAccounts.unverified.length; i++) {
@@ -394,8 +415,9 @@ const AccountsList = React.createClass({
     // optimistically add show data to present
     this.setState({ accounts: newAccounts });
     this.updateUser(this.props.urls.deleteUnverified, username, oldAccounts);
-  },
-  updateTableRows() {
+  };
+
+  updateTableRows = () => {
     const makeRows = function(accounts, verified) {
       const rows = [];
       for (let i = 0; i < accounts.length; i++) {
@@ -416,18 +438,12 @@ const AccountsList = React.createClass({
     this.setState({
       verifiedRows: makeRows(this.state.accounts.verified, true),
     });
-  },
+  };
 
-  getInitialState() {
-    return {
-      accounts: { unverified: [], verified: [] },
-      unverifiedRows: [],
-      verifiedRows: [],
-    };
-  },
   componentDidMount() {
     this.loadDataFromServer();
-  },
+  }
+
   render() {
     return (
       <div className="accountsList">
@@ -466,8 +482,8 @@ const AccountsList = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 ReactDOM.render(
   <ManagerPage urls={urls} />,

@@ -9,14 +9,14 @@ import Dates from '../common/Dates';
 // Panel elements
 
 /**
-*  Presents a list of show objects with a standard format
-*
-*  @prop url: url href to add '/showID' to
-*  @prop placeholder: img src to display if no image set
-*  @prop shows -> [{show...}]: shows to list
-*  @prop short: should hide description
-*/
-const ShowList = React.createClass({
+ *  Presents a list of show objects with a standard format
+ *
+ *  @prop url: url href to add '/showID' to
+ *  @prop placeholder: img src to display if no image set
+ *  @prop shows -> [{show...}]: shows to list
+ *  @prop short: should hide description
+ */
+class ShowList extends React.Component {
   render() {
     const url = this.props.url;
     const placeholder = this.props.placeholder;
@@ -34,7 +34,8 @@ const ShowList = React.createClass({
         <ListGroupItem
           href={`${url}/${show.id}`}
           key={show.id}
-          className="listShow">
+          className="listShow"
+        >
           {short ? (
             title
           ) : (
@@ -62,7 +63,7 @@ const ShowList = React.createClass({
         <ListGroup>{shows}</ListGroup>
       </div>
     );
-  },
-});
+  }
+}
 
 export default ShowList;

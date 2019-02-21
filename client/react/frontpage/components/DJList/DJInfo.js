@@ -13,13 +13,15 @@ DJInfo: UI element showing information for a dj
 @prop picture: url for dj profile picture
 @prop name: dj name
 */
-const DJInfo = React.createClass({
-  getDJImage(picURL) {
+class DJInfo extends React.Component {
+  getDJImage = picURL => {
     return picURL || defaultDJPic;
-  },
-  getDJLink(djName) {
+  };
+
+  getDJLink = djName => {
     return `/djs/${djName}`;
-  },
+  };
+
   render() {
     const className =
       this.props.picture == null ? 'djTile empty ' : 'djTile full ';
@@ -39,7 +41,7 @@ const DJInfo = React.createClass({
         </Link>
       </div>
     );
-  },
-});
+  }
+}
 
 export default DJInfo;

@@ -19,16 +19,18 @@ Displays full description of a event, with description, picture, location...
 @prop fetching: currently fetching events
 @prop updateEvents: callback to update all listed events
 * */
-const EventPage = React.createClass({
+class EventPage extends React.Component {
   componentWillMount() {
     if (this.props.event == null) {
       this.props.updateEvents();
     }
-  },
+  }
+
   componentDidMount() {
     // scroll to top of page
     document.body.scrollTop = document.documentElement.scrollTop = 0;
-  },
+  }
+
   render() {
     const event = this.props.event;
     if (!event) {
@@ -49,8 +51,8 @@ const EventPage = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 var formatDate = function(dateString) {
   const date = new Date(dateString);
@@ -71,4 +73,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EventPage);

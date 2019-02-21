@@ -28,14 +28,15 @@ const bannerData = [
   },
 ];
 
-const PromoBanner = React.createClass({
-  getImage(banner) {
+class PromoBanner extends React.Component {
+  getImage = banner => {
     return (
       <RectImage src={banner.img} aspectRatio={5}>
         <div className="overlay" />
       </RectImage>
     );
-  },
+  };
+
   render() {
     const settings = {
       dots: true,
@@ -69,7 +70,7 @@ const PromoBanner = React.createClass({
         <Slider {...settings}>{banners}</Slider>
       </div>
     );
-  },
-});
+  }
+}
 
 export default PromoBanner;

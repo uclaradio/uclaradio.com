@@ -2,14 +2,12 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-const PledgeDriveModal = React.createClass({
-  getInitialState() {
-    return { showModal: true };
-  },
+class PledgeDriveModal extends React.Component {
+  state = { showModal: true };
 
-  close() {
+  close = () => {
     this.setState({ showModal: false });
-  },
+  };
 
   render() {
     return (
@@ -26,7 +24,7 @@ const PledgeDriveModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
 export default PledgeDriveModal;

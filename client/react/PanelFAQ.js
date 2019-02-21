@@ -11,7 +11,7 @@ const urls = {
   url: '/panel/api/faq',
 };
 
-const FAQPage = React.createClass({
+class FAQPage extends React.Component {
   render() {
     return (
       <div className="panelPage">
@@ -21,14 +21,13 @@ const FAQPage = React.createClass({
         </Grid>
       </div>
     );
-  },
-});
+  }
+}
 
-const FAQ = React.createClass({
-  getInitialState() {
-    return { faqs: [], tempFAQs: [], editable: false, editing: false };
-  },
-  loadDataFromServer() {
+class FAQ extends React.Component {
+  state = { faqs: [], tempFAQs: [], editable: false, editing: false };
+
+  loadDataFromServer = () => {
     $.ajax({
       url: this.props.urls.url,
       dataType: 'json',
@@ -43,36 +42,42 @@ const FAQ = React.createClass({
         console.error(this.props.urls.url, status, err.toString());
       }.bind(this),
     });
-  },
-  updateFAQ(faqs) {
+  };
+
+  updateFAQ = faqs => {
     this.setState({ tempFAQs: faqs });
-  },
-  updateQuestion(qid, value) {
+  };
+
+  updateQuestion = (qid, value) => {
     const faqs = this.state.tempFAQs;
     const faq = faqs[qid];
     faq.question = value;
     faqs[qid] = faq;
     this.setState({ tempFAQs: faqs });
-  },
-  updateAnswer(qid, value) {
+  };
+
+  updateAnswer = (qid, value) => {
     const faqs = this.state.tempFAQs;
     const faq = faqs[qid];
     faq.answer = value;
     faqs[qid] = faq;
     this.setState({ tempFAQs: faqs });
-  },
-  addQuestion() {
+  };
+
+  addQuestion = () => {
     const faqs = this.state.tempFAQs;
     const lastID = faqs.length > 0 ? faqs[faqs.length - 1].id + 1 : 1;
     faqs.push({ id: lastID, question: '', answer: '' });
     this.setState({ tempFAQs: faqs });
-  },
-  deleteQuestion(qid) {
+  };
+
+  deleteQuestion = qid => {
     const faqs = this.state.tempFAQs;
     faqs.splice(qid, 1);
     this.setState({ tempFAQs: faqs });
-  },
-  submitData() {
+  };
+
+  submitData = () => {
     const oldFAQs = this.state.faqs;
     // optimistically update local info
     this.setState({ faqs: this.state.tempFAQs });
@@ -89,16 +94,19 @@ const FAQ = React.createClass({
         console.error(this.props.urls.url, status, err.toString());
       }.bind(this),
     });
-  },
-  toggleEditing() {
+  };
+
+  toggleEditing = () => {
     this.setState({
       tempFAQs: this.state.faqs.slice(0),
       editing: !this.state.editing,
     });
-  },
+  };
+
   componentDidMount() {
     this.loadDataFromServer();
-  },
+  }
+
   render() {
     if (this.state.editing) {
       const updateQuestion = this.updateQuestion;
@@ -158,19 +166,22 @@ const FAQ = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
-const QuestionEdit = React.createClass({
-  updateQuestion(e) {
+class QuestionEdit extends React.Component {
+  updateQuestion = e => {
     this.props.handleUpdateQuestion(this.props.qid, e.target.value);
-  },
-  updateAnswer(e) {
+  };
+
+  updateAnswer = e => {
     this.props.handleUpdateAnswer(this.props.qid, e.target.value);
-  },
-  deleteQuestion() {
+  };
+
+  deleteQuestion = () => {
     this.props.handleDelete(this.props.qid);
-  },
+  };
+
   render() {
     return (
       <div className="questionEdit">
@@ -202,7 +213,7 @@ const QuestionEdit = React.createClass({
         </form>
       </div>
     );
-  },
-});
+  }
+}
 
 ReactDOM.render(<FAQPage urls={urls} />, document.getElementById('content'));

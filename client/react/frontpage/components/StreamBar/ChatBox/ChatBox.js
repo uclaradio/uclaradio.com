@@ -24,14 +24,13 @@ const scrollToBottom = () => {
 /**
 Chatroom component allowing users to post messages to our server socket
 * */
-const ChatBox = React.createClass({
-  getInitialState() {
-    return {
-      user: '',
-      messages: [],
-      text: '',
-    };
-  },
+class ChatBox extends React.Component {
+  state = {
+    user: '',
+    messages: [],
+    text: '',
+  };
+
   componentWillMount() {
     socket.on('new message', this.messageReceived);
     socket.on('assign username', this.setUsername);
@@ -44,12 +43,14 @@ const ChatBox = React.createClass({
       // join as new user
       socket.emit('add user');
     }
-  },
+  }
+
   componentDidMount() {
     this.getNext(null, 10);
     scrollToBottom();
-  },
-  getNext(id, volume) {
+  }
+
+  getNext = (id, volume) => {
     $.post(
       GetPreviousMessagesURL,
       {
@@ -69,26 +70,31 @@ const ChatBox = React.createClass({
         }
       }
     );
-  },
-  messageReceived(message) {
+  };
+
+  messageReceived = message => {
     const messages = this.state.messages;
     messages.push(message);
     this.setState({ messages });
     scrollToBottom();
-  },
-  setUsername(username) {
+  };
+
+  setUsername = username => {
     // save username in cookie
     const d = new Date();
     d.setDate(d.getDate() + 2 * 365);
     cookie.save('username', username, { path: '/', expires: d });
     this.setState({ user: username });
-  },
-  handleMessageSubmit(message) {
+  };
+
+  handleMessageSubmit = message => {
     socket.emit('new message', message);
-  },
-  retrieveOlderMessages() {
+  };
+
+  retrieveOlderMessages = () => {
     this.getNext(this.state.message_db_cursor, 10);
-  },
+  };
+
   render() {
     const viewing_user = this.state.user;
     return (
@@ -102,7 +108,8 @@ const ChatBox = React.createClass({
                     <center>
                       <button
                         id="load_more"
-                        onClick={this.retrieveOlderMessages}>
+                        onClick={this.retrieveOlderMessages}
+                      >
                         MORE
                       </button>
                     </center>
@@ -137,7 +144,7 @@ const ChatBox = React.createClass({
         </Grid>
       </span>
     );
-  },
-});
+  }
+}
 
 export default ChatBox;
