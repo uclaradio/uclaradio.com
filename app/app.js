@@ -14,7 +14,6 @@ app.io = io;
 const routes = require('./routes/index');
 // const staffingPoints = require('./routes/staffingPoints');
 const pages = require('./routes/pages');
-const managers = require('./routes/managers');
 const panel = require('./routes/panel.js');
 const notFound = require('./routes/notFound');
 const ticketGiveawayCalendar = require('./routes/ticketGiveawayCalendar');
