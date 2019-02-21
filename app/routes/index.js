@@ -5,6 +5,7 @@ const express = require('express');
 const router = express.Router();
 const async = require('async');
 const shows = require('../database/shows');
+const blogposts = require('../database/blogposts');
 const passwords = require('../../passwords');
 const requestify = require('requestify');
 
@@ -21,6 +22,7 @@ const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?a
 }&limit=${numberOfTUMBLRPosts}`;
 const socialMediaURLs = [FB, TUMBLR];
 const blogURLs = [KEYSTONE, TUMBLR];
+var currentOffset = 0;
 
 router.get('/blurbinfo', (req, res, next) => {
   const info = getTimeAndDay();
@@ -35,75 +37,70 @@ router.get('/blurbinfo', (req, res, next) => {
 
 router.get('/getBlogPosts/:blogPostID', function(req, res) {
   console.log('here pt3');
-
   // Length to differentiate blog IDs
   // external api database shouldn't be stored uclaradio.com
   // i think that would be reverse engineering
   const queryID = req.params.blogPostID;
-  console.log(queryID);
   var query;
   var platform;
   if (queryID.length == keystoneIDLength) {
     query = `${KEYSTONE}/${queryID}`;
     platform = 'KEYSTONE';
   } else if (queryID.length == tumblrIDLength) {
-    query = TUMBLR;
     platform = 'TUMBLR';
   } else {
     res.send(null);
     return;
   }
-  requestify
-    .get(query, {
-      cache: {
-        cache: true,
-        expires: 10800000,
-      },
-    })
-    .then(response => {
-      const data = response.getBody();
-      switch (platform) {
-        case 'KEYSTONE':
-          data.platform = platform;
-          data.created_time = new Date(data.createdAt);
-          data.title = data.name;
-          res.send(data);
-          break;
-        case 'TUMBLR':
-          // Tumblr api doesn't seem to support getByID
-          // get all posts and filter
-          data.response.posts = data.response.posts.filter(post => {
-            return post.id == queryID;
-          });
-          const post = data.response.posts[0];
-          post.platform = platform;
-          post.created_time = new Date(post.date);
-          post.content = post.body;
-          res.send(post);
-          break;
-      }
-    })
-    .fail(response => {
-      res.send(null);
-    });
-});
-
-router.get('/getBlogPosts', (req, res) => {
-  async.map(
-    blogURLs,
-    (url, callback) => {
+  switch (platform) {
+    case 'KEYSTONE':
       requestify
-        .get(url, {
+        .get(query, {
           cache: {
             cache: true,
-            expires: 1080000,
+            expires: 10800000,
           },
         })
         .then(response => {
           const data = response.getBody();
-          switch (url) {
-            case KEYSTONE:
-              // only send published posts
+          data.platform = platform;
+          data.created_time = new Date(data.createdAt);
+          data.title = data.name;
+          res.send(data);
+        })
+        .fail(response => {
+          res.send(null);
+        });
+      break;
+    case 'TUMBLR':
+      blogposts.getPostByID(queryID, (err, o) => {
+        if (o) {
+          res.send(o);
+        } else {
+          res.status(400).send(err);
+        }
+      });
+      break;
+  }
+});
+
+router.get('/getBlogPosts', (req, res) => {
+  console.log('/getBlogPosts');
+  currentOffset = 0;
+  async.map(
+    blogURLs,
+    (url, callback) => {
+      switch (url) {
+        case KEYSTONE:
+          requestify
+            .get(KEYSTONE, {
+              cache: {
+                cache: true,
+                expires: 45325423,
+              },
+            })
+            .then(response => {
+              const data = response.getBody();
               data.posts = data.posts.filter(post => {
                 return post.state == 'published';
               });
@@ -114,20 +111,21 @@ router.get('/getBlogPosts', (req, res) => {
                 post.title = post.name;
               });
               callback(null, data.posts);
-              break;
-            case TUMBLR:
-              data.response.posts.forEach(post => {
-                post.platform = 'TUMBLR';
-                post.created_time = new Date(post.date);
-                post.content = post.body;
-              });
-              callback(null, data.response.posts);
-              break;
-          }
-        })
-        .fail(response => {
-          callback(null, []);
-        });
+            })
+            .fail(response => {
+              callback(null, []);
+            });
+          break;
+        case TUMBLR:
+          blogposts.getAllPosts((err, o) => {
+            if (o) {
+              callback(null, o);
+            } else {
+              callback(err, []);
+            }
+          });
+          break;
+      }
     },
     (err, allBlogPosts) => {
       allBlogPosts = [].concat
@@ -142,7 +140,8 @@ router.get('/getBlogPosts', (req, res) => {
 });
 
 router.post('/getMoreTUMBLRPosts', (req, res) => {
-  const url = getNextTUMBLRPosts(req.body.offset);
+  currentOffset = req.body.offset;
+  const url = getNextTUMBLRPosts(currentOffset);
   requestify
     .get(url, {
       cache: {
@@ -159,7 +158,7 @@ router.post('/getMoreTUMBLRPosts', (req, res) => {
       });
       res.send({
         tumblr_posts: data.response.posts,
-        offset: req.body.offset,
+        offset: currentOffset,
       });
     });
 });
@@ -254,6 +253,7 @@ function getNextFBPosts(FB_pagination_until) {
 }
 
 function getNextTUMBLRPosts(offset) {
+  currentOffset = offset;
   return `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key=${
     passwords.TUMBLR_API_KEY
   }&limit=24&offset=${offset}`;
