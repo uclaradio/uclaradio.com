@@ -66,9 +66,10 @@ any suggestions! All of the software here is written by students.
      [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and
      [Yarn](https://yarnpkg.com), then uses these programs to install the
      packages we use and set up a local database.
-5. Run mongo with `mongod`.
-6. Run `yarn dev` to start the server for development.
-7. Point your browser to [`http://localhost:3000`](http://localhost:3000)
+5. Run `nodenv init`, and follow the instructions it tells you.
+6. Run mongo with `mongod`.
+7. Run `yarn dev` to start the server for development.
+8. Point your browser to [`http://localhost:3000`](http://localhost:3000)
    :heart_eyes:
 
 ###### Blog Development
