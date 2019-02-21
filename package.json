@@ -20,7 +20,10 @@
     "assets": "webpack --watch --display-max-modules 0",
     "precommit": "lint-staged",
     "test": "jest",
-    "fill-blog-db": "mongoimport --jsonArray --db uclaradio --collection blogposts --file categorized-blogposts.json"
+    "fill-blog-db": "mongoimport --jsonArray --db uclaradio --collection blogposts --file categorized-blogposts.json",
+    "postmerge": "yarnhook",
+    "postcheckout": "yarnhook",
+    "postrewrite": "yarnhook"
   },
   "babel": {
     "presets": [
@@ -53,7 +56,6 @@
   },
   "dependencies": {
     "async": "^2.5.0",
-    "bcrypt": "^1.0.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "collections": "^5.0.7",
@@ -94,7 +96,8 @@
     "spdy": "^3.3.2",
     "trianglify": "^1.0.1",
     "tumblr.js": "^2.0.0",
-    "xml2js": "^0.4.17"
+    "xml2js": "^0.4.17",
+    "yarnhook": "^0.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.0",
