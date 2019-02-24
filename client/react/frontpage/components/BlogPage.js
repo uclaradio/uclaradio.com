@@ -7,6 +7,7 @@ import Loader from './Loader';
 import Pagination from './Pagination';
 import FeaturedPost from './BlogFeaturedPost';
 import FilterBar from './FilterBar';
+import BlogSearch from './BlogSearch';
 import './BlogPage.scss';
 
 /**
@@ -40,7 +41,7 @@ const BlogPage = React.createClass({
         fetching: false,
         max_pages: 12,
         posts: data,
-        postcontainer: data,
+        allposts: data,
         filteredPosts: data,
       });
     });
@@ -76,6 +77,7 @@ const BlogPage = React.createClass({
   },
   getCurrentPostsOnThisPage() {
     console.log('camebackhere');
+    console.log(this.state.page_number);
     console.log(this.state.filteredPosts.length);
     let postsonpage = this.state.filteredPosts.slice(
       this.state.page_number * this.state.POSTS_PER_PAGE,
@@ -85,7 +87,7 @@ const BlogPage = React.createClass({
     console.log(postsonpage.length);
     if (this.state.page_number > 0 && postsonpage.length < 12) {
       console.log('here1');
-      this.fetchMorePosts();
+      this.setPageNumber(0);
     }
     return this.state.filteredPosts.slice(
       this.state.page_number * this.state.POSTS_PER_PAGE,
@@ -95,6 +97,7 @@ const BlogPage = React.createClass({
 
   setPageNumber(pageNum) {
     this.setState({ page_number: pageNum });
+    console.log(this.state.page_number);
   },
   extractFirstImg(post) {
     var el = document.createElement('html');
@@ -132,6 +135,30 @@ const BlogPage = React.createClass({
         activeFilters: filters,
       });
     }
+  },
+  handleSearch(input) {
+    console.log('in handle search' + input.target.value);
+    console.log(this.state.allposts.length);
+    const query = input.target.value;
+
+    var searchQuery = input.target.value.toLowerCase();
+
+    const searchedposts = this.state.allposts.filter(el => {
+      let searchValue;
+
+      console.log(el.title);
+
+      if (el.title) {
+        searchValue = el.title.toLowerCase();
+        return searchValue.indexOf(searchQuery) !== -1;
+      }
+    });
+
+    this.setState({
+      filteredPosts: searchedposts,
+    });
+    this.setPageNumber(0);
+    console.log('here1');
   },
   renderPosts() {
     console.log('renderPosts');
@@ -177,12 +204,16 @@ const BlogPage = React.createClass({
     }
     return (
       <div className="blogPage">
-        {/* <FeaturedPost posts={this.state.posts} /> */}
+        {/* {<FeaturedPost posts={this.state.posts} />} */}
+
         <FilterBar handleFilterChange={this.filterPosts} />
+        <BlogSearch onChange={this.handleSearch} />
+
         <div className="posts-container">{this.renderPosts()}</div>
         <Pagination
           maxPages={this.state.max_pages}
           setPageNumber={this.setPageNumber}
+          pageNumber={this.state.page_number}
         />
       </div>
     );

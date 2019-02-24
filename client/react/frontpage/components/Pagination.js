@@ -12,8 +12,9 @@ Reusable pagination
 
 const Pagination = React.createClass({
   getInitialState: function() {
-    return { pageNumber: 0 };
+    return { pageNumber: this.props.pageNumber };
   },
+
   handleInputChange(e) {
     var newPageNum = e.target.value;
     if (newPageNum < 0) {
@@ -24,25 +25,25 @@ const Pagination = React.createClass({
   },
   goToNextPage() {
     if (this.nextIsValid()) {
-      this.props.setPageNumber(this.state.pageNumber + 1);
+      this.props.setPageNumber(this.props.pageNumber + 1);
       this.setState({
-        pageNumber: this.state.pageNumber + 1,
+        pageNumber: this.props.pageNumber + 1,
       });
     }
   },
   goToPrevPage() {
     if (this.prevIsValid()) {
-      this.props.setPageNumber(this.state.pageNumber - 1);
+      this.props.setPageNumber(this.props.pageNumber - 1);
       this.setState({
-        pageNumber: this.state.pageNumber - 1,
+        pageNumber: this.props.pageNumber - 1,
       });
     }
   },
   nextIsValid() {
-    return this.state.pageNumber < this.props.maxPages;
+    return this.props.pageNumber < this.props.maxPages;
   },
   prevIsValid() {
-    return this.state.pageNumber > 0;
+    return this.props.pageNumber > 0;
   },
   render() {
     var prevIsDisabled = !this.prevIsValid();
@@ -57,7 +58,7 @@ const Pagination = React.createClass({
           {'<Prev'}
         </button>
         <input
-          value={this.state.pageNumber}
+          value={this.props.pageNumber}
           onChange={this.handleInputChange}
         />
         <button

@@ -2,6 +2,7 @@
 // filtering bar for BlogPage
 
 import React from 'react';
+import './BlogFeaturedPost.scss';
 /**
 Displays toggleable filter tags. 
 Returns an array of selected filters tags.
@@ -51,8 +52,9 @@ const FilterBar = React.createClass({
   },
   render() {
     return (
-      <div className="filter-bar">
-        <ul>
+      <div className="dropdown">
+        <button className="dropbtn">Dropdown</button>
+        <ul className="dropdown-content">
           <li
             id="shows"
             onClick={() => {
