@@ -2,7 +2,7 @@
 // filtering bar for BlogPage
 
 import React from 'react';
-import './BlogFeaturedPost.scss';
+import './FilterBar.scss';
 /**
 Displays toggleable filter tags. 
 Returns an array of selected filters tags.
