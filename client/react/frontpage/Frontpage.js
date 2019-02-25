@@ -200,8 +200,8 @@ const Frontpage = React.createClass({
     this.interval = setInterval(this.props.updateNowPlaying, 30 * 1000);
 
     // update now playing and fetch initial shows data
-    // 02/18/19 - "UCLA Radio News with Sophia Donskoi and Ryan Smith"
-    this.props.setSpotlightShowID(765);
+    // 02/25/19 - "Clitbait"
+    this.props.setSpotlightShowID(732);
     this.props.updateShows();
   },
   componentWillUnmount() {
