@@ -676,7 +676,7 @@ router.get('/send-password-reset', (req, res) => {
 
 router.post('/send-password-reset', (req, res) => {
   if (req.body !== undefined) {
-    console.log('asuh dude');
+    //TODO: Refresh if not working
     accounts.forgotPassword(req.body.email); // if user entered email
     res.redirect('/panel/send-password-reset');
   } else {
@@ -687,6 +687,25 @@ router.post('/send-password-reset', (req, res) => {
 
 router.get('/hi-tom', (req, res) => {
   res.render('panel/new-password');
+});
+//TODO: Add so it goes to a confirmation page
+router.post('/hi-tom', (req, res) => {
+  if (req.body !== undefined) {
+    accounts.verifyNUpdatePassword(
+      req.body.pass1,
+      req.body.pass2,
+      req.body.unique_id,
+      function(message, success) {
+        console.log(message); //TODO: Log this to client's screen
+        if (!success) res.redirect('back');
+        //TODO: Add reason why - popup?
+        else res.redirect('/hi-tom');
+      }
+    );
+  } else {
+    console.log('DIDNT GET TOKEN OR PASSWORDS');
+    res.redirect('back');
+  }
 });
 
 module.exports = router;

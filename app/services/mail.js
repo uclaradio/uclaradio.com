@@ -35,10 +35,15 @@ mail.confirmManager = function(email) {
 //Send User an email with reset password link
 mail.resetPassword = function(email, token) {
   const body =
-    'You are receiving this email because you have requested to reset your DJ Panel Password.\n\n' +
-    'If this was not you, please contact a Dev Manager A$AP. Otherwise, please click the link below:\n' +
-    'https://uclaradio.com/panel/' +
-    id; //Update with correct stuff
+    'You are receiving this email because you have requested to reset your DJ Panel Password.  ' +
+    'If this was not you, please contact a Web Manager A$AP.\n\n' +
+    'Copy the activation key below and click on the link to reset your password.\n' +
+    'Unique Identifier: ' +
+    token +
+    '\n' +
+    'Reset Link: https://uclaradio.com/panel/hi-tom\n\n' + //Update with correct stuff
+    'Please note that this unique identifier is only valid for 15 minutes.\n' +
+    '- UCLA Radio Web Team\n';
   mail.send(email, 'UCLA Radio Panel Password Reset', body);
 };
 
