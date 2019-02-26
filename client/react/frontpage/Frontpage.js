@@ -201,7 +201,7 @@ const Frontpage = React.createClass({
 
     // update now playing and fetch initial shows data
     // 02/25/19 - "Clitbait"
-    this.props.setSpotlightShowID(732);
+    this.props.setSpotlightShowID(788);
     this.props.updateShows();
   },
   componentWillUnmount() {
