@@ -676,7 +676,6 @@ router.get('/send-password-reset', (req, res) => {
 
 router.post('/send-password-reset', (req, res) => {
   if (req.body !== undefined) {
-    //TODO: Refresh if not working
     accounts.forgotPassword(req.body.email); // if user entered email
     res.redirect('/panel/send-password-reset');
   } else {
@@ -704,7 +703,7 @@ router.post('/set-password', (req, res) => {
       req.body.unique_id,
       function(message, success) {
         if (!success) res.render('panel/new-password', { errMsg: message });
-        else res.redirect('/password-did-reset');
+        else res.redirect('/panel/password-did-reset');
       }
     );
   } else {
