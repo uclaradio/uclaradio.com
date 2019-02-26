@@ -685,11 +685,11 @@ router.post('/send-password-reset', (req, res) => {
   }
 });
 
-router.get('/hi-tom', (req, res) => {
+router.get('/set-password', (req, res) => {
   res.render('panel/new-password');
 });
 //TODO: Add so it goes to a confirmation page
-router.post('/hi-tom', (req, res) => {
+router.post('/set-password', (req, res) => {
   if (req.body !== undefined) {
     accounts.verifyNUpdatePassword(
       req.body.pass1,
@@ -699,7 +699,7 @@ router.post('/hi-tom', (req, res) => {
         console.log(message); //TODO: Log this to client's screen
         if (!success) res.redirect('back');
         //TODO: Add reason why - popup?
-        else res.redirect('/hi-tom');
+        else res.redirect('/set-password');
       }
     );
   } else {
