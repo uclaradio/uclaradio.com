@@ -638,30 +638,34 @@ accounts.checkPasswords = function(pass1, pass2) {
 /*Verifies the passwords match and the link is good and calls the function
 to update the password */
 accounts.verifyNUpdatePassword = function(pass1, pass2, token, callback) {
-  if (accounts.checkPasswords(pass1, pass2)) {
+  if (!accounts.checkPasswords(pass1, pass2)) {
     //Check to see if passwords work
-    accounts.getSingleEntry(token, function(err, entry) {
-      if (entry == null) {
-        return callback('Invalid Token!', false); //TODO: Tell them token is bad
-      }
-      //Check to make sure link is valid
-      accounts.checkTime(entry.date, function(err, result) {
-        if (result) {
-          accounts.updatePassword(entry.email, pass1, function(err) {
-            if (err) console.log(err);
-            else accounts.deleteEntry(token); //Delete entry
-            return callback('Password Updated Successfully!', true);
-          });
-        } else {
-          //Link is invalid
-          accounts.deleteEntry(token); //Still delete entry
-          return callback('Link has expired!', false); //TODO: Tell them link has expired
-        }
-      });
-    });
-  } else {
-    return callback("Passwords don't match!", false); //TODO: Tell them passwords don't match
+    return callback("Passwords don't match!", false);
   }
+
+  if (pass1.length() < 8) {
+    return callback('Password must be at least 8 characters.', false);
+  }
+
+  accounts.getSingleEntry(token, function(err, entry) {
+    if (entry == null) {
+      return callback('Invalid Token!', false);
+    }
+    //Check to make sure link is valid
+    accounts.checkTime(entry.date, function(err, result) {
+      if (result) {
+        accounts.updatePassword(entry.email, pass1, function(err) {
+          if (err) console.log(err);
+          else accounts.deleteEntry(token); //Delete entry
+          return callback('Password Updated Successfully!', true);
+        });
+      } else {
+        //Link is invalid
+        accounts.deleteEntry(token); //Still delete entry
+        return callback('Link has expired!', false);
+      }
+    });
+  });
 };
 
 //Function to verify email, generate token, and log in database

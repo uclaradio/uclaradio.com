@@ -41,7 +41,7 @@ mail.resetPassword = function(email, token) {
     'Unique Identifier: ' +
     token +
     '\n' +
-    'Reset Link: https://uclaradio.com/panel/hi-tom\n\n' + //Update with correct stuff
+    'Reset Link: https://uclaradio.com/panel/set-password\n\n' + //Update with correct stuff
     'Please note that this unique identifier is only valid for 15 minutes.\n' +
     '- UCLA Radio Web Team\n';
   mail.send(email, 'UCLA Radio Panel Password Reset', body);
