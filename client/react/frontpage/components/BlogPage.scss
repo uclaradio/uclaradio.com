@@ -1,3 +1,5 @@
+@import "../common";
+
 .posts-container {
   display: flex;
   flex-wrap: wrap;
@@ -9,4 +11,44 @@
   background-color: white;
   width: 200px;
   margin: 5px;
+}
+
+.post-image {
+  opacity: 1;
+}
+
+.equalWidth div {
+  display: inline-block;
+  width: 60pt;
+}
+
+.blogPageNavbarItem {
+  color: black !important;
+  font-size: 12pt;
+  margin: 0pt 5pt;
+  border-radius: 0 !important;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.blogNavbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.blogNavbar > div {
+  width: 50%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  background: $link-color;
+  flex-direction: column;
+}
+
+.blogNavbar > div:hover {
+  background: $link-hover-color;
+}
+
+.blogNavbar > div + div {
+  margin-left: 12pt;
+  align-self: flex-start;
 }

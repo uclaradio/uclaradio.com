@@ -7,6 +7,7 @@ import Loader from './Loader';
 import Pagination from './Pagination';
 import FilterBar from './FilterBar';
 import BlogSearch from './BlogSearch';
+import { Nav, NavItem, Collapse, NavDropdown, MenuItem } from 'react-bootstrap';
 import './BlogPage.scss';
 
 /**
@@ -35,7 +36,7 @@ const BlogPage = React.createClass({
       const data = result.blog_posts;
       this.setState({
         fetching: false,
-        max_pages: 12,
+        max_pages: data.length / this.state.POSTS_PER_PAGE,
         posts: data,
         filteredPosts: data,
       });
@@ -127,6 +128,7 @@ const BlogPage = React.createClass({
                   alt="post image"
                   style={{ width: '300px', height: '300px' }}
                   src={keystoneURL + '/' + img}
+                  className="post-image"
                 />
                 <div>{post.title}</div>
               </Link>
@@ -138,7 +140,7 @@ const BlogPage = React.createClass({
             <div className="post-wrapper" key={post.id}>
               <Link to={this.urlFromPost(post)}>
                 <div>
-                  <img src={imgURL} />
+                  <img src={imgURL} className="post-image" />
                   <div>{post.title}</div>
                 </div>
               </Link>
@@ -157,8 +159,10 @@ const BlogPage = React.createClass({
     }
     return (
       <div className="blogPage">
-        <FilterBar handleFilterChange={this.filterPosts} />
-        <BlogSearch onChange={this.handleSearch} />
+        <div className="blogNavbar">
+          <FilterBar handleFilterChange={this.filterPosts} />
+          <BlogSearch onChange={this.handleSearch} />
+        </div>
         <div className="posts-container">{this.renderPosts()}</div>
         <Pagination
           maxPages={this.state.max_pages}

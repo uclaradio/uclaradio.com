@@ -2,6 +2,7 @@
 // filtering bar for BlogPage
 
 import React from 'react';
+import { Input, Glyphicon } from 'react-bootstrap';
 import './FilterBar.scss';
 /**
 Displays toggleable filter tags. 
@@ -12,6 +13,7 @@ const FilterBar = React.createClass({
   getInitialState: function() {
     return {
       selectedFilters: [],
+      concertCheck: false,
     };
   },
   containsFilter(filterName) {
@@ -53,8 +55,21 @@ const FilterBar = React.createClass({
   render() {
     return (
       <div className="dropdown">
-        <button className="dropbtn">Dropdown</button>
+        <button className="dropbtn">Topic</button>
         <ul className="dropdown-content">
+          <Input
+            type="checkbox"
+            checked={() => {
+              this.setState({
+                concertCheck: !this.state.concertCheck,
+              });
+              return this.state.concertCheck;
+            }}
+            onChange={() => {
+              this.updateSelectedFilters('ConcertReview');
+            }}
+            label="Show Reviews"
+          />
           <li
             id="shows"
             onClick={() => {
