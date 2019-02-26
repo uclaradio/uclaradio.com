@@ -694,8 +694,6 @@ router.get('/set-password', (req, res) => {
 });
 
 router.post('/set-password', (req, res) => {
-  console.log('got to POST /set-password');
-
   if (req.body !== undefined) {
     accounts.verifyNUpdatePassword(
       req.body.pass1,
