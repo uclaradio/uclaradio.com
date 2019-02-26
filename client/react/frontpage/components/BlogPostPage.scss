@@ -30,7 +30,7 @@
 .coverPhoto {
   cursor: pointer;
   z-index: 1;
-  height: 400px;
+  max-height: 400px;
   overflow: hidden;
 }
 

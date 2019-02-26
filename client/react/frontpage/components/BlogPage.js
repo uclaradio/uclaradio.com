@@ -91,8 +91,12 @@ const BlogPage = React.createClass({
       });
     } else {
       const filteredPosts = this.state.posts.filter(el => {
-        var len = el.tags.length;
-        return this.containsFilter(el.tags[len - 1], filters);
+        if (el.tags) {
+          var len = el.tags.length;
+          return this.containsFilter(el.tags[len - 1], filters);
+        } else {
+          return false;
+        }
       });
       this.setState({
         filteredPosts: filteredPosts,
@@ -124,12 +128,7 @@ const BlogPage = React.createClass({
           return (
             <div className="post-wrapper" key={post.id}>
               <Link to={this.urlFromPost(post)}>
-                <img
-                  alt="post image"
-                  style={{ width: '300px', height: '300px' }}
-                  src={keystoneURL + '/' + img}
-                  className="post-image"
-                />
+                <img src={keystoneURL + '/' + img} className="post-image" />
                 <div>{post.title}</div>
               </Link>
             </div>

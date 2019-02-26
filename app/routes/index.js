@@ -36,7 +36,7 @@ router.get('/blurbinfo', (req, res, next) => {
 });
 
 router.get('/getBlogPosts/:blogPostID', function(req, res) {
-  console.log('here pt3');
+  console.log('/getBlogPosts/:blogPostID');
   // Length to differentiate blog IDs
   // external api database shouldn't be stored uclaradio.com
   // i think that would be reverse engineering
@@ -64,7 +64,7 @@ router.get('/getBlogPosts/:blogPostID', function(req, res) {
         .then(response => {
           const data = response.getBody();
           data.platform = platform;
-          data.created_time = new Date(data.createdAt);
+          data.date = new Date(data.createdAt);
           data.title = data.name;
           res.send(data);
         })
@@ -104,10 +104,15 @@ router.get('/getBlogPosts', (req, res) => {
               data.posts = data.posts.filter(post => {
                 return post.state == 'published';
               });
+              console.log(data.posts);
               data.posts.forEach(post => {
                 post.id = post._id;
                 post.platform = 'KEYSTONE';
-                post.created_time = new Date(post.createdAt);
+                if (post.publishedAt) {
+                  post.date = new Date(post.publishedAt);
+                } else {
+                  post.date = new Date(post.createdAt);
+                }
                 post.title = post.name;
               });
               callback(null, data.posts);
@@ -130,7 +135,7 @@ router.get('/getBlogPosts', (req, res) => {
     (err, allBlogPosts) => {
       allBlogPosts = [].concat
         .apply([], allBlogPosts)
-        .sort((postA, postB) => postA.created_time < postB.created_time);
+        .sort((postA, postB) => postA.date < postB.date);
       const result = {
         blog_posts: allBlogPosts,
       };

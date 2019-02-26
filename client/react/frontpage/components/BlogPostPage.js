@@ -16,11 +16,16 @@ const keystoneURL = 'http://localhost:3010';
 
 const BlogPostPage = React.createClass({
   getInitialState: function() {
+    console.log('initial state');
     return { fetching: true, post: null, type: '', date: '' };
   },
   componentDidMount() {
+    console.log('componentDidMount');
     var queryRoute = `${BlogPostsURL}/${this.props.params.blogPostID}`;
+    console.log('queryRoute');
+    console.log(queryRoute);
     $.get(queryRoute, post => {
+      console.log(post);
       this.parseTag(post);
       this.parseDate(post);
       this.setState({ fetching: false, post: post });
@@ -36,10 +41,12 @@ const BlogPostPage = React.createClass({
     }
   },
   parseTag(post) {
-    const len = post.tags.length;
-    this.setState({
-      type: this.tagToType(post.tags[len - 1]),
-    });
+    if (post.tags) {
+      const len = post.tags.length;
+      this.setState({
+        type: this.tagToType(post.tags[len - 1]),
+      });
+    }
   },
   parseDate(post) {
     const date = new Date(post.date);
@@ -74,7 +81,7 @@ const BlogPostPage = React.createClass({
       case 'KEYSTONE':
         const img = post.image ? post.image.filename : '';
         return (
-          <div key={post.id}>
+          <div key={post.id} className="blogPostContainer">
             <div className="coverPhoto">
               <img
                 alt="post image"
@@ -82,8 +89,8 @@ const BlogPostPage = React.createClass({
                 src={keystoneURL + '/' + img}
               />
             </div>
+            <div className="subheading">{subheading}</div>
             <h1>{post.title}</h1>
-            <h2>Content</h2>
             <div dangerouslySetInnerHTML={this.createMarkupForContent()} />
           </div>
         );
