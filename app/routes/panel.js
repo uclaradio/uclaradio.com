@@ -685,21 +685,26 @@ router.post('/send-password-reset', (req, res) => {
   }
 });
 
+router.get('/password-did-reset', (req, res) => {
+  res.render('panel/success-password');
+});
+
+// FORM TO SET A NEW PASSWORD
 router.get('/set-password', (req, res) => {
   res.render('panel/new-password');
 });
-//TODO: Add so it goes to a confirmation page
+
 router.post('/set-password', (req, res) => {
+  console.log('got to POST /set-password');
+
   if (req.body !== undefined) {
     accounts.verifyNUpdatePassword(
       req.body.pass1,
       req.body.pass2,
       req.body.unique_id,
       function(message, success) {
-        console.log(message); //TODO: Log this to client's screen
-        if (!success) res.redirect('back');
-        //TODO: Add reason why - popup?
-        else res.redirect('/set-password');
+        if (!success) res.render('panel/new-password', { errMsg: message });
+        else res.redirect('/password-did-reset');
       }
     );
   } else {

@@ -10,6 +10,11 @@ body {
   background: -ms-radial-gradient(center, ellipse cover, #f2f9fe 0%, #d6f0fd 100%) /* IE10+ */;
   background: radial-gradient(center, ellipse cover, #f2f9fe 0%, #d6f0fd 100%) /* W3C */;
 }
+
+#error {
+  color: red;
+}
+
 #container {
   width: 340px;
   margin: 160px auto;

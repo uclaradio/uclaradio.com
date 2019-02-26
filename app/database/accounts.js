@@ -643,7 +643,7 @@ accounts.verifyNUpdatePassword = function(pass1, pass2, token, callback) {
     return callback("Passwords don't match!", false);
   }
 
-  if (pass1.length() < 8) {
+  if (pass1.length < 8) {
     return callback('Password must be at least 8 characters.', false);
   }
 
@@ -653,7 +653,8 @@ accounts.verifyNUpdatePassword = function(pass1, pass2, token, callback) {
     }
     //Check to make sure link is valid
     accounts.checkTime(entry.date, function(err, result) {
-      if (result) {
+      if (err) console.log(err);
+      else if (result) {
         accounts.updatePassword(entry.email, pass1, function(err) {
           if (err) console.log(err);
           else accounts.deleteEntry(token); //Delete entry
