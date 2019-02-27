@@ -126,6 +126,14 @@ router.post('/signup', (req, res) => {
   );
 });
 
+/** *** Reset Password Link **** */
+
+router.get('/reset-password', (req, res) => {
+  res.render('panel/reset', { title: 'Reset' });
+});
+
+router.post('/reset', (req, res) => {});
+
 /** *** FAQ **** */
 
 router.get('/faq', (req, res) => {
@@ -658,6 +666,45 @@ router.get('/api/songs', (req, res) => {
         res.status(400).send();
       }
     });
+  }
+});
+
+/** ACCOUNT MANAGEMENT */
+router.get('/send-password-reset', (req, res) => {
+  res.render('panel/check-email');
+});
+
+router.post('/send-password-reset', (req, res) => {
+  if (req.body !== undefined) {
+    accounts.forgotPassword(req.body.email); // if user entered email
+    res.redirect('/panel/send-password-reset');
+  } else {
+    res.redirect('back'); // else, refresh page
+  }
+});
+
+router.get('/password-did-reset', (req, res) => {
+  res.render('panel/success-password');
+});
+
+// FORM TO SET A NEW PASSWORD
+router.get('/set-password', (req, res) => {
+  res.render('panel/new-password');
+});
+
+router.post('/set-password', (req, res) => {
+  if (req.body !== undefined) {
+    accounts.verifyNUpdatePassword(
+      req.body.pass1,
+      req.body.pass2,
+      req.body.unique_id,
+      function(message, success) {
+        if (!success) res.render('panel/new-password', { errMsg: message });
+        else res.redirect('/panel/password-did-reset');
+      }
+    );
+  } else {
+    res.redirect('back');
   }
 });
 
