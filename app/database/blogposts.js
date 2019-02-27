@@ -65,11 +65,14 @@ blogposts.getAllPosts = function(callback) {
     .sort('-date')
     .exec(function(err, res) {
       if (err) {
+        console.log('error: ' + err);
       } else {
+        console.log('no error!');
         const posts = [];
         for (let i = 0; i < res.length; i++) {
           posts.push(blogposts.webSafeBlogPost(res[i]));
         }
+        console.log(posts.length);
         callback(null, posts);
       }
     });

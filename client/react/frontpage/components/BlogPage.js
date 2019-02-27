@@ -11,7 +11,7 @@ import { Nav, NavItem, Collapse, NavDropdown, MenuItem } from 'react-bootstrap';
 import './BlogPage.scss';
 
 /**
-Page content for all blog posts. 
+Page content for all blog posts.
 Displays shortened descriptions for each post
 * */
 

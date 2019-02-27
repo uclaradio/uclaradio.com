@@ -7,19 +7,29 @@
   // padding: 16px;
   font-size: 16px;
   border: none;
+  height: 38px;
+}
+
+.dropbtn:focus {
+  outline: none;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
   display: inline-block;
+  margin-bottom: 3px;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
+  // display: none;
+  list-style-type: none;
   z-index: 1;
-  height: 0;
+  // height: 0;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
   transition: height 400ms linear;
 }
 
@@ -38,7 +48,8 @@
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
-  height: auto;
+  display: block;
+  // height: auto;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -47,6 +58,10 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   // background-color: $link-hover-color;
+}
+
+.dropdown input {
+  padding: 5px;
 }
 
 .blogPageNavbarItem > li > a:hover {

@@ -37,6 +37,7 @@
 
 .blogNavbar > div {
   width: 50%;
+  height: 100%;
   display: flex;
   text-align: center;
   justify-content: center;
@@ -51,4 +52,18 @@
 .blogNavbar > div + div {
   margin-left: 12pt;
   align-self: flex-start;
+}
+
+.blogNavbar .blogSearchBar,
+.blogNavbar .blogSearchBar:hover {
+  background: none;
+}
+
+.blogSearchBar input,
+.blogSearchBar input:focus {
+  background: none;
+  border-radius: 0;
+  border-width: 0px 0px 1px 0px;
+  border-color: gray;
+  outline: none;
 }
