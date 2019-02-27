@@ -7,7 +7,6 @@ import Loader from './Loader';
 import Pagination from './Pagination';
 import FilterBar from './FilterBar';
 import BlogSearch from './BlogSearch';
-import { Nav, NavItem, Collapse, NavDropdown, MenuItem } from 'react-bootstrap';
 import './BlogPage.scss';
 
 /**
@@ -16,7 +15,6 @@ Displays shortened descriptions for each post
 * */
 
 const BlogPostsURL = '/getBlogPosts';
-const keystoneURL = 'http://localhost:3010';
 
 const BlogPage = React.createClass({
   getInitialState: function() {
@@ -64,13 +62,23 @@ const BlogPage = React.createClass({
     this.setState({ page_number: pageNum });
   },
   extractFirstImg(post) {
-    var el = document.createElement('html');
-    el.innerHTML = post.content;
-    var imgsrc = el.getElementsByTagName('img');
-    if (!imgsrc[0]) {
-      return 'https://pbs.twimg.com/profile_images/988328487650914306/0LQl2f3v_400x400.jpg';
+    switch (post.platform) {
+      case 'KEYSTONE':
+        if (post.coverImage) {
+          return post.coverImage.secure_url;
+        } else if (post.img1) {
+          return post.img1.secure_url;
+        }
+      case 'TUMBLR':
+        var el = document.createElement('html');
+        el.innerHTML = post.content;
+        var imgsrc = el.getElementsByTagName('img');
+        if (imgsrc[0]) {
+          return imgsrc[0].src;
+        }
+      default:
+        return 'https://pbs.twimg.com/profile_images/988328487650914306/0LQl2f3v_400x400.jpg';
     }
-    return imgsrc[0].src;
   },
   containsFilter(filterName, filters) {
     var list = filters;
@@ -121,20 +129,21 @@ const BlogPage = React.createClass({
   },
   renderPosts() {
     const currentPosts = this.getCurrentPostsOnThisPage();
+    var imgURL;
     return currentPosts.map(post => {
       switch (post.platform) {
         case 'KEYSTONE':
-          const img = post.image ? post.image.filename : '';
+          imgURL = this.extractFirstImg(post);
           return (
             <div className="post-wrapper" key={post.id}>
               <Link to={this.urlFromPost(post)}>
-                <img src={keystoneURL + '/' + img} className="post-image" />
+                <img src={imgURL} className="post-image" />
                 <div>{post.title}</div>
               </Link>
             </div>
           );
         case 'TUMBLR':
-          const imgURL = this.extractFirstImg(post);
+          imgURL = this.extractFirstImg(post);
           return (
             <div className="post-wrapper" key={post.id}>
               <Link to={this.urlFromPost(post)}>

@@ -13,7 +13,7 @@ const numberOfFBPosts = 7;
 const numberOfTUMBLRPosts = 24;
 const keystoneIDLength = 24;
 const tumblrIDLength = 12;
-const KEYSTONE = 'http://localhost:3010/api/posts';
+const KEYSTONE = 'http://uclaradio-blog.herokuapp.com/api/posts';
 const FB = `https://graph.facebook.com/uclaradio?fields=posts.limit(${numberOfFBPosts}){full_picture,message,created_time,link}&access_token=${
   passwords.FB_API_KEY
 }`;

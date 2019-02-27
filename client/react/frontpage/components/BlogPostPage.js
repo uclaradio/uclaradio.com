@@ -12,7 +12,6 @@ Displays full description of a post.. everything
 * */
 
 const BlogPostsURL = '/getBlogPosts';
-const keystoneURL = 'http://localhost:3010';
 
 const BlogPostPage = React.createClass({
   getInitialState: function() {
@@ -31,11 +30,51 @@ const BlogPostPage = React.createClass({
       this.setState({ fetching: false, post: post });
     });
   },
+  parseKeystonePost(post) {
+    if (post.img1) {
+      post.content = post.content.replace(
+        '<p>&lt;img1&gt;</p>',
+        `<img src=${post.img1.secure_url} />`
+      );
+    }
+    if (post.img2) {
+      post.content = post.content.replace(
+        '<p>&lt;img2&gt;</p>',
+        `<img src=${post.img2.secure_url} />`
+      );
+    }
+    if (post.img3) {
+      post.content = post.content.replace(
+        '<p>&lt;img3&gt;</p>',
+        `<img src=${post.img3.secure_url} />`
+      );
+    }
+    if (post.img4) {
+      post.content = post.content.replace(
+        '<p>&lt;img4&gt;</p>',
+        `<img src=${post.img4.secure_url} />`
+      );
+    }
+    if (post.img5) {
+      post.content = post.content.replace(
+        '<p>&lt;img5&gt;</p>',
+        `<img src=${post.img5.secure_url} />`
+      );
+    }
+    return post.content;
+  },
   createMarkupForContent() {
     if (this.state.post.content) {
-      return {
-        __html: this.state.post.content,
-      };
+      switch (this.state.post.platform) {
+        case 'KEYSTONE':
+          return {
+            __html: this.parseKeystonePost(this.state.post),
+          };
+        case 'TUMBLR':
+          return {
+            __html: this.state.post.content,
+          };
+      }
     } else {
       return;
     }
@@ -58,6 +97,7 @@ const BlogPostPage = React.createClass({
   tagToType(tag) {
     switch (tag) {
       case 'ConcertReview':
+      case 'ShowReview':
         return 'CONCERT REVIEW';
       case 'ArtistInterview':
         return 'ARTIST INTERVIEW';
@@ -79,19 +119,27 @@ const BlogPostPage = React.createClass({
     }
     switch (post.platform) {
       case 'KEYSTONE':
-        const img = post.image ? post.image.filename : '';
-        return (
-          <div key={post.id} className="blogPostContainer">
+        var coverPhotoDiv;
+        if (post.coverImg) {
+          coverPhotoDiv = (
             <div className="coverPhoto">
               <img
                 alt="post image"
                 style={{ width: '300px', height: '300px' }}
-                src={keystoneURL + '/' + img}
+                src={post.coverImg.secure_url}
               />
             </div>
+          );
+        }
+        return (
+          <div key={post.id} className="blogPostContainer">
+            {coverPhotoDiv}
             <div className="subheading">{subheading}</div>
             <h1>{post.title}</h1>
-            <div dangerouslySetInnerHTML={this.createMarkupForContent()} />
+            <div
+              className="content"
+              dangerouslySetInnerHTML={this.createMarkupForContent()}
+            />
           </div>
         );
       case 'TUMBLR':
