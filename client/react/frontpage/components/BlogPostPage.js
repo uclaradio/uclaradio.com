@@ -120,13 +120,13 @@ const BlogPostPage = React.createClass({
     switch (post.platform) {
       case 'KEYSTONE':
         var coverPhotoDiv;
-        if (post.coverImg) {
+        if (post.coverPhoto) {
           coverPhotoDiv = (
-            <div className="coverPhoto">
+            <div className="coverPhotoContainer">
               <img
+                className="coverPhoto"
                 alt="post image"
-                style={{ width: '300px', height: '300px' }}
-                src={post.coverImg.secure_url}
+                src={post.coverPhoto.secure_url}
               />
             </div>
           );
