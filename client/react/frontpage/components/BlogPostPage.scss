@@ -27,15 +27,23 @@
   opacity: 1;
 }
 
-.coverPhoto {
-  cursor: pointer;
-  z-index: 1;
-  height: 400px;
+.coverPhotoContainer {
+  width: 100%;
+  height: 350px;
   overflow: hidden;
 }
 
-.coverPhoto img {
+.coverPhoto {
+  cursor: pointer;
+  z-index: 1;
+  overflow: hidden;
   opacity: 1;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
+
+// .coverPhoto img {
+//   opacity: 1;
+//   width: 100%;
+//   height: 100%;
+// }

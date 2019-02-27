@@ -1,5 +1,7 @@
 @import "../common";
 
+$image-height: 250px;
+
 .posts-container {
   display: flex;
   flex-wrap: wrap;
@@ -9,12 +11,46 @@
 .post-wrapper {
   font-size: 20px;
   background-color: white;
-  width: 200px;
+  max-width: 270px;
   margin: 5px;
+  margin-left: none;
+}
+
+.image-container {
+  width: 100%;
+  height: $image-height;
+  overflow: hidden;
 }
 
 .post-image {
-  opacity: 1;
+  opacity: 0.8;
+  width: 100%;
+  min-height: $image-height;
+}
+
+.text-container {
+  padding: 10px;
+  letter-spacing: 0.03em;
+}
+
+.post-wrapper:hover {
+  .post-image {
+    opacity: 1;
+  }
+}
+
+.subheading {
+  color: #65645a;
+  font-size: 11pt;
+}
+
+.title {
+  margin: 15px 0;
+  font-size: 15pt;
+}
+
+.credits {
+  font-size: 11pt;
 }
 
 .equalWidth div {
