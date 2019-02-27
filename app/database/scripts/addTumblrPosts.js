@@ -7,7 +7,7 @@
 const blogposts = require('../blogposts.js');
 const passwords = require('../../../passwords');
 const TUMBLRPostsLimit = 50;
-const totalPosts = 950;
+const totalPosts = 1000;
 
 // Authenticate via OAuth
 const tumblr = require('tumblr.js');

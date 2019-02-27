@@ -15,16 +15,11 @@ const BlogPostsURL = '/getBlogPosts';
 
 const BlogPostPage = React.createClass({
   getInitialState: function() {
-    console.log('initial state');
     return { fetching: true, post: null, type: '', date: '' };
   },
   componentDidMount() {
-    console.log('componentDidMount');
     var queryRoute = `${BlogPostsURL}/${this.props.params.blogPostID}`;
-    console.log('queryRoute');
-    console.log(queryRoute);
     $.get(queryRoute, post => {
-      console.log(post);
       this.parseTag(post);
       this.parseDate(post);
       this.setState({ fetching: false, post: post });
