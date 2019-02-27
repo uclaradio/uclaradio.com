@@ -9,7 +9,6 @@ module.exports = {
     PanelFAQ: './client/react/PanelFAQ.js',
     PanelManager: './client/react/PanelManager.js',
     PanelShow: './client/react/PanelShow.js',
-    // StaffingPoints: './client/react/StaffingPoints.js',
     // vendors: ['react', 'react-bootstrap'],
   },
   output: {
