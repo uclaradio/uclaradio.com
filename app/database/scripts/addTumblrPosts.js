@@ -7,7 +7,7 @@
 const blogposts = require('../blogposts.js');
 const passwords = require('../../../passwords');
 const TUMBLRPostsLimit = 50;
-const totalPosts = 700;
+const totalPosts = 950;
 
 // Authenticate via OAuth
 const tumblr = require('tumblr.js');
@@ -33,25 +33,26 @@ for (
         return;
       }
       data.posts.forEach(post => {
-        console.log(post.title);
-        post.platform = 'TUMBLR';
-        post.created_time = new Date(post.date);
-        post.content = post.body;
-        blogposts.addPost(
-          post.id,
-          post.title,
-          post.content,
-          post.platform,
-          post.created_time,
-          post.tags,
-          (err, saved) => {
-            if (err) {
-              console.log('Failed to add post: ' + err);
-            } else {
-              console.log('No errors adding to DB');
+        if (post.title && post.body) {
+          post.platform = 'TUMBLR';
+          post.created_time = new Date(post.date);
+          post.content = post.body;
+          blogposts.addPost(
+            post.id,
+            post.title,
+            post.content,
+            post.platform,
+            post.created_time,
+            post.tags,
+            (err, saved) => {
+              if (err) {
+                console.log('Failed to add post: ' + err);
+              } else {
+                console.log('No errors adding to DB');
+              }
             }
-          }
-        );
+          );
+        }
       });
     }
   );

@@ -184,32 +184,30 @@ const BlogPage = React.createClass({
   renderPosts() {
     const currentPosts = this.getCurrentPostsOnThisPage();
     return currentPosts.map(post => {
-      if (post.content) {
-        const imgURL = this.extractFirstImg(post);
-        const credits = this.parseCredits(post);
-        const type = this.parseTag(post);
-        const date = this.parseDate(post);
-        var subheading;
-        if (type) {
-          subheading = type + ' | ' + date;
-        } else {
-          subheading = date;
-        }
-        return (
-          <div className="post-wrapper" key={post.id}>
-            <Link to={this.urlFromPost(post)}>
-              <div className="image-container">
-                <img src={imgURL} className="post-image" />
-              </div>
-              <div className="text-container">
-                <div className="subheading">{subheading}</div>
-                <div className="title">{post.title}</div>
-                <div className="credits">{credits}</div>
-              </div>
-            </Link>
-          </div>
-        );
+      const imgURL = this.extractFirstImg(post);
+      const credits = this.parseCredits(post);
+      const type = this.parseTag(post);
+      const date = this.parseDate(post);
+      var subheading;
+      if (type) {
+        subheading = type + ' | ' + date;
+      } else {
+        subheading = date;
       }
+      return (
+        <div className="post-wrapper" key={post.id}>
+          <Link to={this.urlFromPost(post)}>
+            <div className="image-container">
+              <img src={imgURL} className="post-image" />
+            </div>
+            <div className="text-container">
+              <div className="subheading">{subheading}</div>
+              <div className="title">{post.title}</div>
+              <div className="credits">{credits}</div>
+            </div>
+          </Link>
+        </div>
+      );
     });
   },
   render() {
