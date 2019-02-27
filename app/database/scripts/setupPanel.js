@@ -25,7 +25,7 @@ accounts.addPrivilege(accounts.managerPrivilegeName, links, (err, success) => {
   accounts.requestNewAccount(
     'gm',
     passwords.gmpass,
-    'radio.web@media.ucla.edu',
+    'gm@media.ucla.edu',
     'General Manager',
     (err, saved) => {
       if (err) {

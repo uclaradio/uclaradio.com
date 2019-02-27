@@ -679,7 +679,6 @@ router.post('/send-password-reset', (req, res) => {
     accounts.forgotPassword(req.body.email); // if user entered email
     res.redirect('/panel/send-password-reset');
   } else {
-    console.log('DIDNT GET NO EMAIL');
     res.redirect('back'); // else, refresh page
   }
 });
@@ -705,7 +704,6 @@ router.post('/set-password', (req, res) => {
       }
     );
   } else {
-    console.log('DIDNT GET TOKEN OR PASSWORDS');
     res.redirect('back');
   }
 });
