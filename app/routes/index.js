@@ -21,7 +21,7 @@ const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?a
   passwords.TUMBLR_API_KEY
 }&limit=${numberOfTUMBLRPosts}`;
 const socialMediaURLs = [FB, TUMBLR];
-const blogURLs = [KEYSTONE, TUMBLR];
+const blogURLs = [TUMBLR, KEYSTONE];
 var currentOffset = 0;
 
 router.get('/blurbinfo', (req, res, next) => {

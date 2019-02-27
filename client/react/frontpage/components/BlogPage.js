@@ -7,6 +7,7 @@ import Loader from './Loader';
 import Pagination from './Pagination';
 import FilterBar from './FilterBar';
 import BlogSearch from './BlogSearch';
+import moment from 'moment';
 import './BlogPage.scss';
 
 /**
@@ -127,33 +128,87 @@ const BlogPage = React.createClass({
     });
     this.setPageNumber(0);
   },
+  parseTag(post) {
+    if (post.tags) {
+      const len = post.tags.length;
+      return this.tagToType(post.tags[len - 1]);
+    }
+  },
+  parseDate(post) {
+    const date = new Date(post.date);
+    const momentDate = moment(date).format('MM/DD/YYYY');
+    return momentDate;
+  },
+  parseCredits(post) {
+    var credits;
+    switch (post.platform) {
+      case 'KEYSTONE':
+        if (post.author != null && post.author == post.photographer) {
+          credits = 'article and photographs by ' + post.author;
+        } else if (post.author && post.photographer == null) {
+          credits = 'article by ' + post.author;
+        } else if (post.author && post.photographer) {
+          credits =
+            'article by ' +
+            post.author +
+            ' and photographs by ' +
+            post.photographer;
+        }
+        return credits;
+      case 'TUMBLR':
+        var wrapper = document.createElement('div');
+        wrapper.innerHTML = post.content;
+        var div = wrapper.firstChild;
+        const italics = div.getElementsByTagName('i');
+        if (italics.length >= 1) {
+          if (italics[0].innerHTML.length > 'written by'.length)
+            return italics[0].innerHTML;
+        }
+    }
+  },
+  tagToType(tag) {
+    switch (tag) {
+      case 'ConcertReview':
+      case 'ShowReview':
+        return 'CONCERT REVIEW';
+      case 'ArtistInterview':
+        return 'ARTIST INTERVIEW';
+      case 'Sports':
+        return 'SPORTS';
+      case 'FestivalReview':
+        return 'FESTIVAL REVIEW';
+      case 'Other':
+        return 'UCLA RADIO';
+    }
+  },
   renderPosts() {
     const currentPosts = this.getCurrentPostsOnThisPage();
-    var imgURL;
     return currentPosts.map(post => {
-      switch (post.platform) {
-        case 'KEYSTONE':
-          imgURL = this.extractFirstImg(post);
-          return (
-            <div className="post-wrapper" key={post.id}>
-              <Link to={this.urlFromPost(post)}>
+      if (post.content) {
+        const imgURL = this.extractFirstImg(post);
+        const credits = this.parseCredits(post);
+        const type = this.parseTag(post);
+        const date = this.parseDate(post);
+        var subheading;
+        if (type) {
+          subheading = type + ' | ' + date;
+        } else {
+          subheading = date;
+        }
+        return (
+          <div className="post-wrapper" key={post.id}>
+            <Link to={this.urlFromPost(post)}>
+              <div className="image-container">
                 <img src={imgURL} className="post-image" />
-                <div>{post.title}</div>
-              </Link>
-            </div>
-          );
-        case 'TUMBLR':
-          imgURL = this.extractFirstImg(post);
-          return (
-            <div className="post-wrapper" key={post.id}>
-              <Link to={this.urlFromPost(post)}>
-                <div>
-                  <img src={imgURL} className="post-image" />
-                  <div>{post.title}</div>
-                </div>
-              </Link>
-            </div>
-          );
+              </div>
+              <div className="text-container">
+                <div className="subheading">{subheading}</div>
+                <div className="title">{post.title}</div>
+                <div className="credits">{credits}</div>
+              </div>
+            </Link>
+          </div>
+        );
       }
     });
   },
