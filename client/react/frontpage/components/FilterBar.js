@@ -82,47 +82,47 @@ const FilterBar = React.createClass({
           >
             <li className="FilterEl" id="shows">
               <Input
+                label="Show Reviews"
                 type="checkbox"
                 onChange={() => {
                   this.updateSelectedFilters('ConcertReview');
                 }}
-                label="Show Reviews"
               />
             </li>
             <li className="FilterEl" id="artists">
               <Input
+                label="Artist Interviews"
                 type="checkbox"
                 onChange={() => {
                   this.updateSelectedFilters('ArtistInterview');
                 }}
-                label="Artist Interviews"
               />
             </li>
             <li className="FilterEl" id="sports">
               <Input
+                label="Sports"
                 type="checkbox"
                 onChange={() => {
                   this.updateSelectedFilters('Sports');
                 }}
-                label="Sports"
               />
             </li>
             <li className="FilterEl" id="festivals">
               <Input
+                label="Festival Reviews"
                 type="checkbox"
                 onChange={() => {
                   this.updateSelectedFilters('FestivalReview');
                 }}
-                label="Festival Reviews"
               />
             </li>
             <li className="FilterEl" id="other">
               <Input
+                label="Other"
                 type="checkbox"
                 onChange={() => {
                   this.updateSelectedFilters('Other');
                 }}
-                label="Other"
               />
             </li>
           </ul>

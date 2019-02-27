@@ -72,7 +72,6 @@ blogposts.getAllPosts = function(callback) {
         for (let i = 0; i < res.length; i++) {
           posts.push(blogposts.webSafeBlogPost(res[i]));
         }
-        console.log(posts.length);
         callback(null, posts);
       }
     });

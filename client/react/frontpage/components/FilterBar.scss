@@ -2,9 +2,7 @@
 @import "../common";
 
 .dropbtn {
-  // background-color: $link-color;
   color: black;
-  // padding: 16px;
   font-size: 16px;
   border: none;
   height: 38px;
@@ -23,10 +21,8 @@
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  // display: none;
   list-style-type: none;
   z-index: 1;
-  // height: 0;
   overflow: hidden;
   margin: 0;
   padding: 0;
@@ -42,23 +38,12 @@
   display: block;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  // background-color: $link-hover-color;
-}
-
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
-  // height: auto;
   list-style-type: none;
   margin: 0;
   padding: 0;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-  // background-color: $link-hover-color;
 }
 
 .dropdown input {
