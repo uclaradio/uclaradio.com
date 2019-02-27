@@ -204,7 +204,7 @@ const BlogPage = React.createClass({
         <div className="post-wrapper" key={post.id}>
           <Link to={this.urlFromPost(post)}>
             <div className="image-container">
-              <img src={imgURL} className="post-image" />
+              <img alt="cover photo" src={imgURL} className="post-image" />
             </div>
             <div className="text-container">
               <div className="subheading">{subheading}</div>

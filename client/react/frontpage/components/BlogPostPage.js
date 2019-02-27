@@ -29,31 +29,31 @@ const BlogPostPage = React.createClass({
     if (post.img1) {
       post.content = post.content.replace(
         '<p>&lt;img1&gt;</p>',
-        `<img src=${post.img1.secure_url} />`
+        `<img alt="Image 1" src=${post.img1.secure_url} />`
       );
     }
     if (post.img2) {
       post.content = post.content.replace(
         '<p>&lt;img2&gt;</p>',
-        `<img src=${post.img2.secure_url} />`
+        `<img alt="Image 2" src=${post.img2.secure_url} />`
       );
     }
     if (post.img3) {
       post.content = post.content.replace(
         '<p>&lt;img3&gt;</p>',
-        `<img src=${post.img3.secure_url} />`
+        `<img alt="Image 3" src=${post.img3.secure_url} />`
       );
     }
     if (post.img4) {
       post.content = post.content.replace(
         '<p>&lt;img4&gt;</p>',
-        `<img src=${post.img4.secure_url} />`
+        `<img alt="Image 4" src=${post.img4.secure_url} />`
       );
     }
     if (post.img5) {
       post.content = post.content.replace(
         '<p>&lt;img5&gt;</p>',
-        `<img src=${post.img5.secure_url} />`
+        `<img alt="Image 5" src=${post.img5.secure_url} />`
       );
     }
     return post.content;
