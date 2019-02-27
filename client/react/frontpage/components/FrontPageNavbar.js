@@ -61,7 +61,7 @@ const FrontPageNavbar = React.createClass({
           </LinkContainer>
           <NavItem eventKey={1} className="frontPageNavbarItem">
             <span className="equalWidth">
-              Blog <span className="beta">(beta)</span>
+              Blog <span className="beta">(BETA)</span>
             </span>
           </NavItem>
           <NavItem eventKey={10} className="frontPageNavbarItem rightMost">
