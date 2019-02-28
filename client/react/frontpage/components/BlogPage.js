@@ -223,6 +223,7 @@ const BlogPage = React.createClass({
     }
     return (
       <div className="blogPage">
+        <div className="filterHeading">Filters</div>
         <div className="blogNavbar">
           <FilterBar handleFilterChange={this.filterPosts} />
           <BlogSearch onChange={this.handleSearch} />

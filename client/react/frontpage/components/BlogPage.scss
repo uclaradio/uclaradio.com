@@ -58,17 +58,16 @@ $image-height: 250px;
   width: 60pt;
 }
 
-.blogPageNavbarItem {
-  color: black !important;
+.filterHeading {
   font-size: 12pt;
-  margin: 0pt 5pt;
-  border-radius: 0 !important;
-  background-color: rgba(255, 255, 255, 0.6);
+  margin: 15px 0;
+  color: #65645a;
 }
 
 .blogNavbar {
   display: flex;
   justify-content: space-between;
+  margin: 15px 0;
 }
 
 .blogNavbar > div {
