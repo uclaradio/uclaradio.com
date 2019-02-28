@@ -161,7 +161,6 @@ router.get('/api/faq', (req, res) => {
       res.status(400).send(err);
     }
   });
-  // res.json({editable: true, faqs: [{"id": 1, "question": "How do I get staff points?", "answer": "[staffing points information]"}]});
 });
 
 router.post('/api/faq', (req, res) => {
