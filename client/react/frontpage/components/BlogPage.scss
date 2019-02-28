@@ -2,13 +2,13 @@
 
 $image-height: 250px;
 
-.posts-container {
+.postsContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.post-wrapper {
+.postWrapper {
   font-size: 20px;
   background-color: white;
   max-width: 270px;
@@ -16,25 +16,25 @@ $image-height: 250px;
   margin-left: none;
 }
 
-.image-container {
+.imageContainer {
   width: 100%;
   height: $image-height;
   overflow: hidden;
 }
 
-.post-image {
+.postImage {
   opacity: 0.8;
   width: 100%;
   min-height: $image-height;
 }
 
-.text-container {
+.textContainer {
   padding: 10px;
   letter-spacing: 0.03em;
 }
 
-.post-wrapper:hover {
-  .post-image {
+.postWrapper:hover {
+  .postImage {
     opacity: 1;
   }
 }

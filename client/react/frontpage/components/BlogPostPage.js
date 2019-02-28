@@ -114,21 +114,21 @@ const BlogPostPage = React.createClass({
     }
     switch (post.platform) {
       case 'KEYSTONE':
-        var coverPhotoDiv;
-        if (post.coverPhoto) {
-          coverPhotoDiv = (
-            <div className="coverPhotoContainer">
+        var coverImageDiv;
+        if (post.coverImage) {
+          coverImageDiv = (
+            <div className="coverImageContainer">
               <img
-                className="coverPhoto"
+                className="coverImage"
                 alt="post image"
-                src={post.coverPhoto.secure_url}
+                src={post.coverImage.secure_url}
               />
             </div>
           );
         }
         return (
           <div key={post.id} className="blogPostContainer">
-            {coverPhotoDiv}
+            {coverImageDiv}
             <div className="subheading">{subheading}</div>
             <h1>{post.title}</h1>
             <div

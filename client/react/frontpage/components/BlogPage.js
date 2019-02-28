@@ -70,7 +70,6 @@ const BlogPage = React.createClass({
   extractFirstImg(post) {
     switch (post.platform) {
       case 'KEYSTONE':
-        console.log(post.title);
         if (post.coverImage) {
           return post.coverImage.secure_url;
         } else if (post.img1) {
@@ -97,8 +96,6 @@ const BlogPage = React.createClass({
     return false;
   },
   filterPosts(filters) {
-    console.log('filterPosts');
-    console.log(filters);
     if (filters.length == 0) {
       this.setState({
         filteredPosts: this.state.posts,
@@ -201,12 +198,12 @@ const BlogPage = React.createClass({
         subheading = date;
       }
       return (
-        <div className="post-wrapper" key={post.id}>
+        <div className="postWrapper" key={post.id}>
           <Link to={this.urlFromPost(post)}>
-            <div className="image-container">
-              <img alt="cover photo" src={imgURL} className="post-image" />
+            <div className="imageContainer">
+              <img alt="cover photo" src={imgURL} className="postImage" />
             </div>
-            <div className="text-container">
+            <div className="textContainer">
               <div className="subheading">{subheading}</div>
               <div className="title">{post.title}</div>
               <div className="credits">{credits}</div>
@@ -230,7 +227,7 @@ const BlogPage = React.createClass({
           <FilterBar handleFilterChange={this.filterPosts} />
           <BlogSearch onChange={this.handleSearch} />
         </div>
-        <div className="posts-container">{this.renderPosts()}</div>
+        <div className="postsContainer">{this.renderPosts()}</div>
         <Pagination
           maxPages={this.state.max_pages}
           setPageNumber={this.setPageNumber}

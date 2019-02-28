@@ -27,13 +27,13 @@
   opacity: 1;
 }
 
-.coverPhotoContainer {
+.coverImageContainer {
   width: 100%;
   height: 350px;
   overflow: hidden;
 }
 
-.coverPhoto {
+.coverImage {
   cursor: pointer;
   z-index: 1;
   overflow: hidden;
@@ -42,7 +42,7 @@
   height: auto;
 }
 
-// .coverPhoto img {
+// .coverImage img {
 //   opacity: 1;
 //   width: 100%;
 //   height: 100%;
