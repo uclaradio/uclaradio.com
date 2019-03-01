@@ -1,12 +1,119 @@
-.posts-container {
+@import "../common";
+
+$image-height: 250px;
+
+.postsContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.post-wrapper {
+.postWrapper {
   font-size: 20px;
   background-color: white;
-  width: 200px;
+  max-width: 270px;
   margin: 5px;
+  margin-left: none;
+}
+
+.imageContainer {
+  width: 100%;
+  height: $image-height;
+  overflow: hidden;
+}
+
+.postImage {
+  opacity: 0.8;
+  width: 100%;
+  min-height: $image-height;
+}
+
+.textContainer {
+  padding: 10px;
+  letter-spacing: 0.03em;
+}
+
+.postWrapper:hover {
+  .postImage {
+    opacity: 1;
+  }
+}
+
+.subheading {
+  color: #65645a;
+  font-size: 11pt;
+}
+
+.title {
+  margin: 15px 0;
+  font-size: 15pt;
+}
+
+.credits {
+  font-size: 11pt;
+}
+
+.equalWidth div {
+  display: inline-block;
+  width: 60pt;
+}
+
+.filterHeading {
+  font-size: 12pt;
+  margin: 15px 0;
+  color: #65645a;
+}
+
+.blogNavbar {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.blogNavbar > div {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  background: $link-color;
+  flex-direction: column;
+}
+
+.blogNavbar > div:hover {
+  background: $link-hover-color;
+}
+
+.blogNavbar > div + div {
+  margin-left: 12pt;
+  align-self: flex-start;
+}
+
+.blogNavbar .blogSearchBar,
+.blogNavbar .blogSearchBar:hover {
+  background: none;
+}
+
+.blogSearchBar input,
+.blogSearchBar input:focus {
+  background: none;
+  border-radius: 0;
+  border-width: 0px 0px 1px 0px;
+  border-color: gray;
+  outline: none;
+}
+
+.pagination-btn {
+  border: none;
+  padding: 5px;
+}
+
+.pagination-wrapper input {
+  width: 50px;
+  border: none;
+}
+
+.pagination-wrapper input:focus {
+  border: none;
+  outline: none;
 }

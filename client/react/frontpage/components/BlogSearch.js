@@ -3,7 +3,7 @@ import React from 'react';
 export const BlogSearch = React.createClass({
   render() {
     return (
-      <div className="djSearchBar">
+      <div className="blogSearchBar">
         <input
           aria-label="Search for a DJ"
           placeholder="Search for a post by title..."

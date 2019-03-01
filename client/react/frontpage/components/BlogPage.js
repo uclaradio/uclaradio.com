@@ -7,15 +7,15 @@ import Loader from './Loader';
 import Pagination from './Pagination';
 import FilterBar from './FilterBar';
 import BlogSearch from './BlogSearch';
+import moment from 'moment';
 import './BlogPage.scss';
 
 /**
-Page content for all blog posts. 
+Page content for all blog posts.
 Displays shortened descriptions for each post
 * */
 
 const BlogPostsURL = '/getBlogPosts';
-const keystoneURL = 'http://localhost:3010';
 
 const BlogPage = React.createClass({
   getInitialState: function() {
@@ -33,11 +33,16 @@ const BlogPage = React.createClass({
   componentDidMount() {
     $.get(BlogPostsURL, result => {
       const data = result.blog_posts;
+      const dataWithout2016 = data.filter(post => {
+        var date = new Date(post.date);
+        var momentDate = moment(date).format('YYYY');
+        return momentDate != '2016';
+      });
       this.setState({
         fetching: false,
-        max_pages: 12,
-        posts: data,
-        filteredPosts: data,
+        max_pages: data.length / this.state.POSTS_PER_PAGE,
+        posts: dataWithout2016,
+        filteredPosts: dataWithout2016,
       });
     });
   },
@@ -63,13 +68,23 @@ const BlogPage = React.createClass({
     this.setState({ page_number: pageNum });
   },
   extractFirstImg(post) {
-    var el = document.createElement('html');
-    el.innerHTML = post.content;
-    var imgsrc = el.getElementsByTagName('img');
-    if (!imgsrc[0]) {
-      return 'https://pbs.twimg.com/profile_images/988328487650914306/0LQl2f3v_400x400.jpg';
+    switch (post.platform) {
+      case 'KEYSTONE':
+        if (post.coverImage) {
+          return post.coverImage.secure_url;
+        } else if (post.img1) {
+          return post.img1.secure_url;
+        }
+      case 'TUMBLR':
+        var el = document.createElement('html');
+        el.innerHTML = post.content;
+        var imgsrc = el.getElementsByTagName('img');
+        if (imgsrc[0]) {
+          return imgsrc[0].src;
+        }
+      default:
+        return 'https://pbs.twimg.com/profile_images/988328487650914306/0LQl2f3v_400x400.jpg';
     }
-    return imgsrc[0].src;
   },
   containsFilter(filterName, filters) {
     var list = filters;
@@ -81,8 +96,6 @@ const BlogPage = React.createClass({
     return false;
   },
   filterPosts(filters) {
-    console.log('filterPosts');
-    console.log(filters);
     if (filters.length == 0) {
       this.setState({
         filteredPosts: this.state.posts,
@@ -90,8 +103,12 @@ const BlogPage = React.createClass({
       });
     } else {
       const filteredPosts = this.state.posts.filter(el => {
-        var len = el.tags.length;
-        return this.containsFilter(el.tags[len - 1], filters);
+        if (el.tags) {
+          var len = el.tags.length;
+          return this.containsFilter(el.tags[len - 1], filters);
+        } else {
+          return false;
+        }
       });
       this.setState({
         filteredPosts: filteredPosts,
@@ -114,37 +131,86 @@ const BlogPage = React.createClass({
     });
     this.setPageNumber(0);
   },
+  parseTag(post) {
+    if (post.tags) {
+      const len = post.tags.length;
+      return this.tagToType(post.tags[len - 1]);
+    }
+  },
+  parseDate(post) {
+    const date = new Date(post.date);
+    const momentDate = moment(date).format('MM/DD/YYYY');
+    return momentDate;
+  },
+  parseCredits(post) {
+    var credits;
+    switch (post.platform) {
+      case 'KEYSTONE':
+        if (post.author != null && post.author == post.photographer) {
+          credits = 'article and photographs by ' + post.author;
+        } else if (post.author && post.photographer == null) {
+          credits = 'article by ' + post.author;
+        } else if (post.author && post.photographer) {
+          credits =
+            'article by ' +
+            post.author +
+            ' and photographs by ' +
+            post.photographer;
+        }
+        return credits;
+      case 'TUMBLR':
+        var wrapper = document.createElement('div');
+        wrapper.innerHTML = post.content;
+        var div = wrapper.firstChild;
+        const italics = div.getElementsByTagName('i');
+        if (italics.length >= 1) {
+          if (italics[0].innerHTML.length > 'written by'.length)
+            return italics[0].innerHTML;
+        }
+    }
+  },
+  tagToType(tag) {
+    switch (tag) {
+      case 'ConcertReview':
+      case 'ShowReview':
+        return 'CONCERT REVIEW';
+      case 'ArtistInterview':
+        return 'ARTIST INTERVIEW';
+      case 'Sports':
+        return 'SPORTS';
+      case 'FestivalReview':
+        return 'FESTIVAL REVIEW';
+      case 'Other':
+        return 'UCLA RADIO';
+    }
+  },
   renderPosts() {
     const currentPosts = this.getCurrentPostsOnThisPage();
     return currentPosts.map(post => {
-      switch (post.platform) {
-        case 'KEYSTONE':
-          const img = post.image ? post.image.filename : '';
-          return (
-            <div className="post-wrapper" key={post.id}>
-              <Link to={this.urlFromPost(post)}>
-                <img
-                  alt="post image"
-                  style={{ width: '300px', height: '300px' }}
-                  src={keystoneURL + '/' + img}
-                />
-                <div>{post.title}</div>
-              </Link>
-            </div>
-          );
-        case 'TUMBLR':
-          const imgURL = this.extractFirstImg(post);
-          return (
-            <div className="post-wrapper" key={post.id}>
-              <Link to={this.urlFromPost(post)}>
-                <div>
-                  <img src={imgURL} />
-                  <div>{post.title}</div>
-                </div>
-              </Link>
-            </div>
-          );
+      const imgURL = this.extractFirstImg(post);
+      const credits = this.parseCredits(post);
+      const type = this.parseTag(post);
+      const date = this.parseDate(post);
+      var subheading;
+      if (type) {
+        subheading = type + ' | ' + date;
+      } else {
+        subheading = date;
       }
+      return (
+        <div className="postWrapper" key={post.id}>
+          <Link to={this.urlFromPost(post)}>
+            <div className="imageContainer">
+              <img alt="cover photo" src={imgURL} className="postImage" />
+            </div>
+            <div className="textContainer">
+              <div className="subheading">{subheading}</div>
+              <div className="title">{post.title}</div>
+              <div className="credits">{credits}</div>
+            </div>
+          </Link>
+        </div>
+      );
     });
   },
   render() {
@@ -157,9 +223,12 @@ const BlogPage = React.createClass({
     }
     return (
       <div className="blogPage">
-        <FilterBar handleFilterChange={this.filterPosts} />
-        <BlogSearch onChange={this.handleSearch} />
-        <div className="posts-container">{this.renderPosts()}</div>
+        <div className="filterHeading">Filters</div>
+        <div className="blogNavbar">
+          <FilterBar handleFilterChange={this.filterPosts} />
+          <BlogSearch onChange={this.handleSearch} />
+        </div>
+        <div className="postsContainer">{this.renderPosts()}</div>
         <Pagination
           maxPages={this.state.max_pages}
           setPageNumber={this.setPageNumber}
