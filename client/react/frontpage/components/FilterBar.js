@@ -2,9 +2,10 @@
 // filtering bar for BlogPage
 
 import React from 'react';
+import { Input, Glyphicon } from 'react-bootstrap';
 import './FilterBar.scss';
 /**
-Displays toggleable filter tags. 
+Displays toggleable filter tags.
 Returns an array of selected filters tags.
 * */
 
@@ -12,6 +13,8 @@ const FilterBar = React.createClass({
   getInitialState: function() {
     return {
       selectedFilters: [],
+      concertCheck: false,
+      showDropdown: false,
     };
   },
   containsFilter(filterName) {
@@ -50,52 +53,80 @@ const FilterBar = React.createClass({
       this.insertFilter(filterName);
     }
   },
+  showDropdown(event) {
+    event.preventDefault();
+
+    this.setState({ showDropdown: true }, () => {
+      document.addEventListener('click', this.closeDropdown);
+    });
+  },
+  closeDropdown() {
+    if (!this.dropdownMenu.contains(event.target)) {
+      this.setState({ showDropdown: false }, () => {
+        document.removeEventListener('click', this.closeDropdown);
+      });
+    }
+  },
   render() {
     return (
       <div className="dropdown">
-        <button className="dropbtn">Dropdown</button>
-        <ul className="dropdown-content">
-          <li
-            id="shows"
-            onClick={() => {
-              this.updateSelectedFilters('ConcertReview');
+        <button className="dropbtn" onClick={this.showDropdown}>
+          Topic
+        </button>
+        {this.state.showDropdown ? (
+          <ul
+            className="dropdown-content"
+            ref={element => {
+              this.dropdownMenu = element;
             }}
           >
-            Show Reviews
-          </li>
-          <li
-            id="artists"
-            onClick={() => {
-              this.updateSelectedFilters('ArtistInterview');
-            }}
-          >
-            Artist Interviews
-          </li>
-          <li
-            id="sports"
-            onClick={() => {
-              this.updateSelectedFilters('Sports');
-            }}
-          >
-            Sports
-          </li>
-          <li
-            id="festivals"
-            onClick={() => {
-              this.updateSelectedFilters('FestivalReview');
-            }}
-          >
-            Festival Reviews
-          </li>
-          <li
-            id="other"
-            onClick={() => {
-              this.updateSelectedFilters('Other');
-            }}
-          >
-            Other
-          </li>
-        </ul>
+            <li className="FilterEl" id="shows">
+              <Input
+                label="Show Reviews"
+                type="checkbox"
+                onChange={() => {
+                  this.updateSelectedFilters('ConcertReview');
+                }}
+              />
+            </li>
+            <li className="FilterEl" id="artists">
+              <Input
+                label="Artist Interviews"
+                type="checkbox"
+                onChange={() => {
+                  this.updateSelectedFilters('ArtistInterview');
+                }}
+              />
+            </li>
+            <li className="FilterEl" id="sports">
+              <Input
+                label="Sports"
+                type="checkbox"
+                onChange={() => {
+                  this.updateSelectedFilters('Sports');
+                }}
+              />
+            </li>
+            <li className="FilterEl" id="festivals">
+              <Input
+                label="Festival Reviews"
+                type="checkbox"
+                onChange={() => {
+                  this.updateSelectedFilters('FestivalReview');
+                }}
+              />
+            </li>
+            <li className="FilterEl" id="other">
+              <Input
+                label="Other"
+                type="checkbox"
+                onChange={() => {
+                  this.updateSelectedFilters('Other');
+                }}
+              />
+            </li>
+          </ul>
+        ) : null}
       </div>
     );
   },

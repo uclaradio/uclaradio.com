@@ -13,7 +13,7 @@ const numberOfFBPosts = 7;
 const numberOfTUMBLRPosts = 24;
 const keystoneIDLength = 24;
 const tumblrIDLength = 12;
-const KEYSTONE = 'http://localhost:3010/api/posts';
+const KEYSTONE = 'http://uclaradio-blog.herokuapp.com/api/posts';
 const FB = `https://graph.facebook.com/uclaradio?fields=posts.limit(${numberOfFBPosts}){full_picture,message,created_time,link}&access_token=${
   passwords.FB_API_KEY
 }`;
@@ -21,7 +21,7 @@ const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?a
   passwords.TUMBLR_API_KEY
 }&limit=${numberOfTUMBLRPosts}`;
 const socialMediaURLs = [FB, TUMBLR];
-const blogURLs = [KEYSTONE, TUMBLR];
+const blogURLs = [TUMBLR, KEYSTONE];
 var currentOffset = 0;
 
 router.get('/blurbinfo', (req, res, next) => {
@@ -36,7 +36,7 @@ router.get('/blurbinfo', (req, res, next) => {
 });
 
 router.get('/getBlogPosts/:blogPostID', function(req, res) {
-  console.log('here pt3');
+  console.log('/getBlogPosts/:blogPostID');
   // Length to differentiate blog IDs
   // external api database shouldn't be stored uclaradio.com
   // i think that would be reverse engineering
@@ -64,7 +64,7 @@ router.get('/getBlogPosts/:blogPostID', function(req, res) {
         .then(response => {
           const data = response.getBody();
           data.platform = platform;
-          data.created_time = new Date(data.createdAt);
+          data.date = new Date(data.createdAt);
           data.title = data.name;
           res.send(data);
         })
@@ -104,10 +104,15 @@ router.get('/getBlogPosts', (req, res) => {
               data.posts = data.posts.filter(post => {
                 return post.state == 'published';
               });
+              console.log(data.posts);
               data.posts.forEach(post => {
                 post.id = post._id;
                 post.platform = 'KEYSTONE';
-                post.created_time = new Date(post.createdAt);
+                if (post.publishedAt) {
+                  post.date = new Date(post.publishedAt);
+                } else {
+                  post.date = new Date(post.createdAt);
+                }
                 post.title = post.name;
               });
               callback(null, data.posts);
@@ -130,7 +135,7 @@ router.get('/getBlogPosts', (req, res) => {
     (err, allBlogPosts) => {
       allBlogPosts = [].concat
         .apply([], allBlogPosts)
-        .sort((postA, postB) => postA.created_time < postB.created_time);
+        .sort((postA, postB) => postA.date < postB.date);
       const result = {
         blog_posts: allBlogPosts,
       };
