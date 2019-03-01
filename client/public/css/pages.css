@@ -86,6 +86,9 @@ body {
   background: url("/img/faizanbutterfly.png") center / cover;
 }
 
+.demo-card-wide > .mdl-card__title.transcript {
+  background: url("/img/typewriter.jpg") center / cover;
+}
 .demo-card-wide > .mdl-card__title.confetti {
   background: url("/img/confetti.jpeg") center / cover;
 }
