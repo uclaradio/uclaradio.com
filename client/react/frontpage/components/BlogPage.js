@@ -28,6 +28,7 @@ const BlogPage = React.createClass({
       tumblr_offset: 0,
       activeFilters: [],
       filteredPosts: [],
+      postsOnPage: 0,
     };
   },
   componentDidMount() {
@@ -55,9 +56,6 @@ const BlogPage = React.createClass({
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
     );
 
-    if (this.state.page_number > 0 && postsonpage.length < 12) {
-      this.setPageNumber(0);
-    }
     return this.state.filteredPosts.slice(
       this.state.page_number * this.state.POSTS_PER_PAGE,
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
@@ -66,6 +64,13 @@ const BlogPage = React.createClass({
 
   setPageNumber(pageNum) {
     this.setState({ page_number: pageNum });
+    console.log('right here ');
+  },
+  increasePageNumber() {
+    this.setState({ page_number: this.state.page_number + 1 });
+  },
+  decreasePageNumber() {
+    this.setState({ page_number: this.state.page_number - 1 });
   },
   extractFirstImg(post) {
     switch (post.platform) {
@@ -231,8 +236,10 @@ const BlogPage = React.createClass({
         <div className="postsContainer">{this.renderPosts()}</div>
         <Pagination
           maxPages={this.state.max_pages}
-          setPageNumber={this.setPageNumber}
+          increasePageNumber={this.increasePageNumber}
+          decreasePageNumber={this.decreasePageNumber}
           pageNumber={this.state.page_number}
+          postNumber={this.state.filteredPosts.length}
         />
       </div>
     );
