@@ -64,7 +64,6 @@ const BlogPage = React.createClass({
 
   setPageNumber(pageNum) {
     this.setState({ page_number: pageNum });
-    console.log('right here ');
   },
   increasePageNumber() {
     this.setState({ page_number: this.state.page_number + 1 });

@@ -11,10 +11,6 @@ Reusable pagination
 * */
 
 const Pagination = React.createClass({
-  getInitialState: function() {
-    return {};
-  },
-
   handleInputChange(e) {
     var newPageNum = e.target.value;
     if (newPageNum < 0) {
@@ -34,9 +30,9 @@ const Pagination = React.createClass({
     }
   },
   nextIsValid() {
-    let postsleft = this.props.postNumber - 12 * (this.props.pageNumber + 1);
+    let postsLeft = this.props.postNumber - 12 * (this.props.pageNumber + 1);
 
-    return postsleft > 0;
+    return postsLeft > 0;
   },
   prevIsValid() {
     return this.props.pageNumber > 0;
