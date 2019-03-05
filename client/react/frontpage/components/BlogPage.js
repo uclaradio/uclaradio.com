@@ -102,12 +102,19 @@ const BlogPage = React.createClass({
         activeFilters: [],
       });
     } else {
-      const filteredPosts = this.state.posts.filter(el => {
-        if (el.tags) {
-          var len = el.tags.length;
-          return this.containsFilter(el.tags[len - 1], filters);
-        } else {
-          return false;
+      const filteredPosts = this.state.posts.filter(post => {
+        switch (post.platform) {
+          case 'KEYSTONE':
+            if (post.tags) {
+              var len = post.tags.length;
+              var filterName = this.tagToType(post.tags[len - 1]);
+              return this.containsFilter(filterName, filters);
+            } else {
+              return false;
+            }
+          case 'TUMBLR':
+            var filterName = this.tagToType(post.topic);
+            return this.containsFilter(filterName, filters);
         }
       });
       this.setState({
@@ -132,9 +139,14 @@ const BlogPage = React.createClass({
     this.setPageNumber(0);
   },
   parseTag(post) {
-    if (post.tags) {
-      const len = post.tags.length;
-      return this.tagToType(post.tags[len - 1]);
+    switch (post.platform) {
+      case 'KEYSTONE':
+        if (post.tags) {
+          const len = post.tags.length;
+          return this.tagToType(post.tags[len - 1]);
+        }
+      case 'TUMBLR':
+        return this.tagToType(post.topic);
     }
   },
   parseDate(post) {
@@ -172,16 +184,33 @@ const BlogPage = React.createClass({
   tagToType(tag) {
     switch (tag) {
       case 'ConcertReview':
-      case 'ShowReview':
-        return 'CONCERT REVIEW';
-      case 'ArtistInterview':
-        return 'ARTIST INTERVIEW';
-      case 'Sports':
-        return 'SPORTS';
       case 'FestivalReview':
-        return 'FESTIVAL REVIEW';
-      case 'Other':
-        return 'UCLA RADIO';
+      case 'ShowReview':
+      case 'Show Review':
+      case 'Concert Review':
+        return 'CONCERT REVIEW'; // 1
+      case 'Album Review':
+      case 'Single Review':
+      case 'Music Review':
+        return 'MUSIC REVIEW'; //2
+      case 'ArtistInterview':
+      case 'Interview':
+        return 'INTERVIEW'; //3
+      case 'Sports':
+      case 'UCLA Radio Sports':
+        return 'SPORTS'; //4
+      case 'UCLA Radio News':
+      case 'News':
+        return 'NEWS'; //5
+      case 'Film Review':
+      case 'TV':
+        return 'ENTERTAINMENT'; //6
+      case 'UCLA Radio Comedy':
+      case 'Comedy':
+        return 'COMEDY'; //7
+      case 'Show of the Month':
+      case 'meet the dj':
+        return 'FEATURED'; //8
     }
   },
   renderPosts() {

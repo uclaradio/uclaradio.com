@@ -71,7 +71,7 @@ const FilterBar = React.createClass({
     return (
       <div className="dropdown">
         <button className="dropbtn" onClick={this.showDropdown}>
-          Topic
+          Type
         </button>
         {this.state.showDropdown ? (
           <ul
@@ -80,48 +80,75 @@ const FilterBar = React.createClass({
               this.dropdownMenu = element;
             }}
           >
-            <li className="FilterEl" id="shows">
+            <li>
               <Input
                 label="Show Reviews"
                 type="checkbox"
                 onChange={() => {
-                  this.updateSelectedFilters('ConcertReview');
+                  this.updateSelectedFilters('CONCERT REVIEW');
                 }}
               />
             </li>
-            <li className="FilterEl" id="artists">
+            <li>
               <Input
-                label="Artist Interviews"
+                label="Music Reviews"
                 type="checkbox"
                 onChange={() => {
-                  this.updateSelectedFilters('ArtistInterview');
+                  this.updateSelectedFilters('MUSIC REVIEW');
                 }}
               />
             </li>
-            <li className="FilterEl" id="sports">
+            <li>
+              <Input
+                label="Interviews"
+                type="checkbox"
+                onChange={() => {
+                  this.updateSelectedFilters('INTERVIEW');
+                }}
+              />
+            </li>
+            <li>
               <Input
                 label="Sports"
                 type="checkbox"
                 onChange={() => {
-                  this.updateSelectedFilters('Sports');
+                  this.updateSelectedFilters('SPORTS');
                 }}
               />
             </li>
-            <li className="FilterEl" id="festivals">
+            <li>
               <Input
-                label="Festival Reviews"
+                label="News"
                 type="checkbox"
                 onChange={() => {
-                  this.updateSelectedFilters('FestivalReview');
+                  this.updateSelectedFilters('NEWS');
                 }}
               />
             </li>
-            <li className="FilterEl" id="other">
+            <li>
               <Input
-                label="Other"
+                label="Entertainment"
                 type="checkbox"
                 onChange={() => {
-                  this.updateSelectedFilters('Other');
+                  this.updateSelectedFilters('ENTERTAINMENT');
+                }}
+              />
+            </li>
+            <li>
+              <Input
+                label="Comedy"
+                type="checkbox"
+                onChange={() => {
+                  this.updateSelectedFilters('COMEDY');
+                }}
+              />
+            </li>
+            <li>
+              <Input
+                label="Featured"
+                type="checkbox"
+                onChange={() => {
+                  this.updateSelectedFilters('FEATURED');
                 }}
               />
             </li>
