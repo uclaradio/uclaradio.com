@@ -72,6 +72,7 @@ const Pagination = React.createClass({
           {'< Prev'}
         </button>
         <input
+          aria-label="Page Input"
           defaultValue={this.props.pageNumber}
           value={this.state.pageNumber}
           onChange={this.handleInputChange}

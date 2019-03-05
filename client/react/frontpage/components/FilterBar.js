@@ -82,6 +82,7 @@ const FilterBar = React.createClass({
           >
             <li className="FilterEl" id="shows">
               <Input
+                aria-label="Show Reviews"
                 label="Show Reviews"
                 type="checkbox"
                 onChange={() => {
@@ -91,6 +92,7 @@ const FilterBar = React.createClass({
             </li>
             <li className="FilterEl" id="artists">
               <Input
+                aria-label="Artist Interview"
                 label="Artist Interviews"
                 type="checkbox"
                 onChange={() => {
@@ -100,6 +102,7 @@ const FilterBar = React.createClass({
             </li>
             <li className="FilterEl" id="sports">
               <Input
+                aria-label="Sports"
                 label="Sports"
                 type="checkbox"
                 onChange={() => {
@@ -109,6 +112,7 @@ const FilterBar = React.createClass({
             </li>
             <li className="FilterEl" id="festivals">
               <Input
+                aria-label="Festival Reviews"
                 label="Festival Reviews"
                 type="checkbox"
                 onChange={() => {
@@ -118,6 +122,7 @@ const FilterBar = React.createClass({
             </li>
             <li className="FilterEl" id="other">
               <Input
+                aria-label="Other"
                 label="Other"
                 type="checkbox"
                 onChange={() => {
