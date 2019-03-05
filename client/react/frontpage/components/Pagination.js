@@ -11,16 +11,26 @@ Reusable pagination
 * */
 
 const Pagination = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return { pageNumber: this.props.pageNumber };
   },
-
   handleInputChange(e) {
-    var newPageNum = e.target.value;
+    let newPageNum = e.target.value;
+
+    if (newPageNum) {
+      newPageNum = parseInt(newPageNum, 10);
+    }
+
     if (newPageNum < 0) {
       newPageNum = 0;
     } else if (newPageNum > this.props.maxPages) {
       newPageNum = this.props.maxPages;
+    }
+  },
+  handleEnter(e) {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.props.setPageNumber(this.state.pageNumber);
     }
   },
   goToNextPage() {
@@ -46,8 +56,8 @@ const Pagination = React.createClass({
     return this.props.pageNumber > 0;
   },
   render() {
-    var prevIsDisabled = !this.prevIsValid();
-    var nextIsDisabled = !this.nextIsValid();
+    const prevIsDisabled = !this.prevIsValid();
+    const nextIsDisabled = !this.nextIsValid();
     return (
       <div className="pagination-wrapper">
         <button
@@ -55,11 +65,12 @@ const Pagination = React.createClass({
           onClick={this.goToPrevPage}
           disabled={prevIsDisabled}
         >
-          {'<Prev'}
+          {'< Prev'}
         </button>
         <input
           value={this.props.pageNumber}
           onChange={this.handleInputChange}
+          onKeyDown={this.handleEnter}
         />
         <button
           className={`pagination-btn ${nextIsDisabled ? 'btn-disabled' : ''}`}
