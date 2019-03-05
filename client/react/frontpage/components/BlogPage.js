@@ -33,16 +33,11 @@ const BlogPage = React.createClass({
   componentDidMount() {
     $.get(BlogPostsURL, result => {
       const data = result.blog_posts;
-      const dataWithout2016 = data.filter(post => {
-        var date = new Date(post.date);
-        var momentDate = moment(date).format('YYYY');
-        return momentDate != '2016';
-      });
       this.setState({
         fetching: false,
         max_pages: data.length / this.state.POSTS_PER_PAGE,
-        posts: dataWithout2016,
-        filteredPosts: dataWithout2016,
+        posts: data,
+        filteredPosts: data,
       });
     });
   },
