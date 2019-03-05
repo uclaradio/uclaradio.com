@@ -21,12 +21,6 @@ const Pagination = React.createClass({
       newPageNum = parseInt(newPageNum, 10);
     }
 
-    if (newPageNum < 0) {
-      newPageNum = 0;
-    } else if (newPageNum > this.props.maxPages) {
-      newPageNum = this.props.maxPages;
-    }
-
     this.setState({
       pageNumber: newPageNum,
     });
@@ -34,7 +28,11 @@ const Pagination = React.createClass({
   handleEnter(e) {
     if (e.keyCode === 13) {
       e.preventDefault();
-      if (!e.target.value) {
+      if (
+        !e.target.value ||
+        e.target.value < 0 ||
+        e.target.value > this.props.maxPages
+      ) {
         this.setState({
           pageNumber: 0,
         });

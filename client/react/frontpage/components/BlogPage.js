@@ -40,7 +40,7 @@ const BlogPage = React.createClass({
       });
       this.setState({
         fetching: false,
-        max_pages: data.length / this.state.POSTS_PER_PAGE,
+        max_pages: dataWithout2016.length / this.state.POSTS_PER_PAGE,
         posts: dataWithout2016,
         filteredPosts: dataWithout2016,
       });
