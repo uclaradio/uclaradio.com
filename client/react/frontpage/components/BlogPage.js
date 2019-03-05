@@ -65,8 +65,8 @@ const BlogPage = React.createClass({
   extractFirstImg(post) {
     switch (post.platform) {
       case 'KEYSTONE':
-        if (post.coverImage) {
-          return post.coverImage.secure_url;
+        if (post.coverPhoto) {
+          return post.coverPhoto.secure_url;
         } else if (post.img1) {
           return post.img1.secure_url;
         }
