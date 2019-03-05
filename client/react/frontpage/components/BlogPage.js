@@ -164,8 +164,9 @@ const BlogPage = React.createClass({
         var div = wrapper.firstChild;
         const italics = div.getElementsByTagName('i');
         if (italics.length >= 1) {
-          if (italics[0].innerHTML.length > 'written by'.length)
-            return italics[0].innerHTML;
+          if (italics[0].innerHTML.length > 'written by'.length) {
+            return italics[0].textContent;
+          }
         }
     }
   },
