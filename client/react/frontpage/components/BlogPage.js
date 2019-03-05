@@ -105,14 +105,14 @@ const BlogPage = React.createClass({
       const filteredPosts = this.state.posts.filter(post => {
         switch (post.platform) {
           case 'KEYSTONE':
-            if (post.type) {
-              var filterName = this.tagToType(post.type);
+            if (post.category) {
+              var filterName = this.tagToCategory(post.category);
               return this.containsFilter(filterName, filters);
             } else {
               return false;
             }
           case 'TUMBLR':
-            var filterName = this.tagToType(post.topic);
+            var filterName = this.tagToCategory(post.topic);
             return this.containsFilter(filterName, filters);
         }
       });
@@ -140,11 +140,12 @@ const BlogPage = React.createClass({
   parseTag(post) {
     switch (post.platform) {
       case 'KEYSTONE':
-        if (post.type) {
-          return this.tagToType(post.type);
+        if (post.category) {
+          return this.tagToCategory(post.category);
         }
+        break;
       case 'TUMBLR':
-        return this.tagToType(post.topic);
+        return this.tagToCategory(post.topic);
     }
   },
   parseDate(post) {
@@ -179,7 +180,7 @@ const BlogPage = React.createClass({
         }
     }
   },
-  tagToType(tag) {
+  tagToCategory(tag) {
     tag = tag.toLowerCase().replace(/ /g, '');
     switch (tag) {
       case 'concertreview':
@@ -216,11 +217,11 @@ const BlogPage = React.createClass({
     return currentPosts.map(post => {
       const imgURL = this.extractFirstImg(post);
       const credits = this.parseCredits(post);
-      const type = this.parseTag(post);
+      const category = this.parseTag(post);
       const date = this.parseDate(post);
       var subheading;
-      if (type) {
-        subheading = type + ' | ' + date;
+      if (category) {
+        subheading = category + ' | ' + date;
       } else {
         subheading = date;
       }

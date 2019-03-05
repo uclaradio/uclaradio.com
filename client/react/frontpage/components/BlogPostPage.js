@@ -15,7 +15,7 @@ const BlogPostsURL = '/getBlogPosts';
 
 const BlogPostPage = React.createClass({
   getInitialState: function() {
-    return { fetching: true, post: null, type: '', date: '' };
+    return { fetching: true, post: null, category: '', date: '' };
   },
   componentDidMount() {
     var queryRoute = `${BlogPostsURL}/${this.props.params.blogPostID}`;
@@ -77,15 +77,15 @@ const BlogPostPage = React.createClass({
   parseTag(post) {
     switch (post.platform) {
       case 'KEYSTONE':
-        if (post.type) {
+        if (post.category) {
           this.setState({
-            type: this.tagToType(post.type),
+            category: this.tagToCategory(post.category),
           });
         }
         break;
       case 'TUMBLR':
         this.setState({
-          type: this.tagToType(post.topic),
+          category: this.tagToCategory(post.topic),
         });
         break;
     }
@@ -97,7 +97,7 @@ const BlogPostPage = React.createClass({
       date: momentDate,
     });
   },
-  tagToType(tag) {
+  tagToCategory(tag) {
     tag = tag.toLowerCase().replace(/ /g, '');
     switch (tag) {
       case 'concertreview':
@@ -132,17 +132,15 @@ const BlogPostPage = React.createClass({
   renderPost() {
     const post = this.state.post;
     var subheading;
-    if (this.state.type) {
-      subheading = this.state.type + ' | ' + this.state.date;
+    if (this.state.category) {
+      subheading = this.state.category + ' | ' + this.state.date;
     } else {
       subheading = this.state.date;
     }
     switch (post.platform) {
       case 'KEYSTONE':
         var coverImageDiv;
-        console.log('KEYSTONE');
         if (post.coverPhoto) {
-          console.log('post.coverImage');
           coverImageDiv = (
             <div className="coverImageContainer">
               <img

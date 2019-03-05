@@ -113,7 +113,7 @@ const FrontPageNavbar = React.createClass({
           </LinkContainer>
           <NavItem eventKey={1} className="frontPageNavbarItem fullWidth">
             Blog
-            <span className="beta">(beta)</span>
+            <span className="beta">&nbsp;(BETA)</span>
           </NavItem>
           <NavDropdown
             title="More"

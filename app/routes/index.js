@@ -36,7 +36,6 @@ router.get('/blurbinfo', (req, res, next) => {
 });
 
 router.get('/getBlogPosts/:blogPostID', function(req, res) {
-  console.log('/getBlogPosts/:blogPostID');
   // Length to differentiate blog IDs
   // external api database shouldn't be stored uclaradio.com
   // i think that would be reverse engineering
@@ -85,7 +84,6 @@ router.get('/getBlogPosts/:blogPostID', function(req, res) {
 });
 
 router.get('/getBlogPosts', (req, res) => {
-  console.log('/getBlogPosts');
   currentOffset = 0;
   async.map(
     blogURLs,
@@ -104,7 +102,6 @@ router.get('/getBlogPosts', (req, res) => {
               data.posts = data.posts.filter(post => {
                 return post.state == 'published';
               });
-              console.log(data.posts);
               data.posts.forEach(post => {
                 post.id = post._id;
                 post.platform = 'KEYSTONE';

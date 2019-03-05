@@ -82,7 +82,7 @@ const FilterBar = React.createClass({
           >
             <li>
               <Input
-                label="Show Reviews"
+                label="Concert Reviews"
                 type="checkbox"
                 checked={this.containsFilter('CONCERT REVIEW')}
                 onChange={() => {
