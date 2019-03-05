@@ -65,8 +65,8 @@ const BlogPage = React.createClass({
   extractFirstImg(post) {
     switch (post.platform) {
       case 'KEYSTONE':
-        if (post.coverImage) {
-          return post.coverImage.secure_url;
+        if (post.coverPhoto) {
+          return post.coverPhoto.secure_url;
         } else if (post.img1) {
           return post.img1.secure_url;
         }
@@ -219,7 +219,10 @@ const BlogPage = React.createClass({
     }
     return (
       <div className="blogPage">
-        <div className="filterHeading">Filters</div>
+        <div className="filterHeading">
+          Welcome to the new blog! If you're feeling nostalgic, you can still
+          checkout our <a href="http://blog.uclaradio.com">old blog</a>.
+        </div>
         <div className="blogNavbar">
           <FilterBar handleFilterChange={this.filterPosts} />
           <BlogSearch onChange={this.handleSearch} />
