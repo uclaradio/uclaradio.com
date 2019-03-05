@@ -1,12 +1,13 @@
 $grey: #c5c5c5;
 
 .pagination-wrapper {
+  font-size: 18px;
   display: flex;
   justify-content: center;
 
   input {
-    margin: 20px;
-    width: 100px;
+    margin: 15px;
+    width: 75px;
     text-align: center;
     &:focus {
       outline: 0;
@@ -14,10 +15,8 @@ $grey: #c5c5c5;
   }
 }
 .pagination-btn {
-  padding: 20px;
-  margin: 20px;
-  font-size: 20px;
-  border: 1px solid $grey;
+  padding: 5px;
+  border: none;
   cursor: pointer;
 
   &.btn-disabled {
