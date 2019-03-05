@@ -71,7 +71,7 @@ const FilterBar = React.createClass({
     return (
       <div className="dropdown">
         <button className="dropbtn" onClick={this.showDropdown}>
-          Type
+          Categories
         </button>
         {this.state.showDropdown ? (
           <ul
