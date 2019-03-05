@@ -34,7 +34,14 @@ const Pagination = React.createClass({
   handleEnter(e) {
     if (e.keyCode === 13) {
       e.preventDefault();
-      this.props.setPageNumber(this.state.pageNumber);
+      if (!e.target.value) {
+        this.setState({
+          pageNumber: 0,
+        });
+        this.props.setPageNumber(0);
+      } else {
+        this.props.setPageNumber(this.state.pageNumber);
+      }
     }
   },
   goToNextPage() {
