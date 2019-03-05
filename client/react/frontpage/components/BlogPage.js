@@ -105,9 +105,8 @@ const BlogPage = React.createClass({
       const filteredPosts = this.state.posts.filter(post => {
         switch (post.platform) {
           case 'KEYSTONE':
-            if (post.tags) {
-              var len = post.tags.length;
-              var filterName = this.tagToType(post.tags[len - 1]);
+            if (post.type) {
+              var filterName = this.tagToType(post.type);
               return this.containsFilter(filterName, filters);
             } else {
               return false;
@@ -141,9 +140,8 @@ const BlogPage = React.createClass({
   parseTag(post) {
     switch (post.platform) {
       case 'KEYSTONE':
-        if (post.tags) {
-          const len = post.tags.length;
-          return this.tagToType(post.tags[len - 1]);
+        if (post.type) {
+          return this.tagToType(post.type);
         }
       case 'TUMBLR':
         return this.tagToType(post.topic);
@@ -182,34 +180,34 @@ const BlogPage = React.createClass({
     }
   },
   tagToType(tag) {
+    tag = tag.toLowerCase().replace(/ /g, '');
     switch (tag) {
-      case 'ConcertReview':
-      case 'FestivalReview':
-      case 'ShowReview':
-      case 'Show Review':
-      case 'Concert Review':
+      case 'concertreview':
+      case 'festivalreview':
+      case 'showreview':
         return 'CONCERT REVIEW'; // 1
-      case 'Album Review':
-      case 'Single Review':
-      case 'Music Review':
+      case 'albumreview':
+      case 'singlereview':
+      case 'musicreview':
         return 'MUSIC REVIEW'; //2
-      case 'ArtistInterview':
-      case 'Interview':
+      case 'artistinterview':
+      case 'interview':
         return 'INTERVIEW'; //3
-      case 'Sports':
-      case 'UCLA Radio Sports':
+      case 'sports':
+      case 'uclaradiosports':
         return 'SPORTS'; //4
-      case 'UCLA Radio News':
-      case 'News':
+      case 'uclaradionews':
+      case 'news':
         return 'NEWS'; //5
-      case 'Film Review':
-      case 'TV':
+      case 'filmreview':
+      case 'tv':
+      case 'entertainment':
         return 'ENTERTAINMENT'; //6
-      case 'UCLA Radio Comedy':
-      case 'Comedy':
+      case 'uclaradiocomedy':
+      case 'comedy':
         return 'COMEDY'; //7
-      case 'Show of the Month':
-      case 'meet the dj':
+      case 'showofthemonth':
+      case 'meetthedj':
         return 'FEATURED'; //8
     }
   },
