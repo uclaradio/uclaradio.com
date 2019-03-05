@@ -26,6 +26,10 @@ const Pagination = React.createClass({
     } else if (newPageNum > this.props.maxPages) {
       newPageNum = this.props.maxPages;
     }
+
+    this.setState({
+      pageNumber: newPageNum,
+    });
   },
   handleEnter(e) {
     if (e.keyCode === 13) {
@@ -68,7 +72,8 @@ const Pagination = React.createClass({
           {'< Prev'}
         </button>
         <input
-          value={this.props.pageNumber}
+          defaultValue={this.props.pageNumber}
+          value={this.state.pageNumber}
           onChange={this.handleInputChange}
           onKeyDown={this.handleEnter}
         />
