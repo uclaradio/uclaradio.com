@@ -33,16 +33,11 @@ const BlogPage = React.createClass({
   componentDidMount() {
     $.get(BlogPostsURL, result => {
       const data = result.blog_posts;
-      const dataWithout2016 = data.filter(post => {
-        var date = new Date(post.date);
-        var momentDate = moment(date).format('YYYY');
-        return momentDate != '2016';
-      });
       this.setState({
         fetching: false,
-        max_pages: dataWithout2016.length / this.state.POSTS_PER_PAGE,
-        posts: dataWithout2016,
-        filteredPosts: dataWithout2016,
+        max_pages: data.length / this.state.POSTS_PER_PAGE,
+        posts: data,
+        filteredPosts: data,
       });
     });
   },
@@ -164,8 +159,9 @@ const BlogPage = React.createClass({
         var div = wrapper.firstChild;
         const italics = div.getElementsByTagName('i');
         if (italics.length >= 1) {
-          if (italics[0].innerHTML.length > 'written by'.length)
-            return italics[0].innerHTML;
+          if (italics[0].innerHTML.length > 'written by'.length) {
+            return italics[0].textContent;
+          }
         }
     }
   },
