@@ -132,7 +132,7 @@ router.get('/getBlogPosts', (req, res) => {
     (err, allBlogPosts) => {
       allBlogPosts = [].concat
         .apply([], allBlogPosts)
-        .sort((postA, postB) => postA.date < postB.date);
+        .sort((postA, postB) => new Date(postB.date) - new Date(postA.date));
       const result = {
         blog_posts: allBlogPosts,
       };

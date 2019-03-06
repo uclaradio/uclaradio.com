@@ -11,16 +11,35 @@ Reusable pagination
 * */
 
 const Pagination = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return { pageNumber: this.props.pageNumber };
   },
-
   handleInputChange(e) {
-    var newPageNum = e.target.value;
-    if (newPageNum < 0) {
-      newPageNum = 0;
-    } else if (newPageNum > this.props.maxPages) {
-      newPageNum = this.props.maxPages;
+    let newPageNum = e.target.value;
+
+    if (newPageNum) {
+      newPageNum = parseInt(newPageNum, 10);
+    }
+
+    this.setState({
+      pageNumber: newPageNum,
+    });
+  },
+  handleEnter(e) {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      if (
+        !e.target.value ||
+        e.target.value < 0 ||
+        e.target.value > this.props.maxPages
+      ) {
+        this.setState({
+          pageNumber: 0,
+        });
+        this.props.setPageNumber(0);
+      } else {
+        this.props.setPageNumber(this.state.pageNumber);
+      }
     }
   },
   goToNextPage() {
@@ -46,8 +65,8 @@ const Pagination = React.createClass({
     return this.props.pageNumber > 0;
   },
   render() {
-    var prevIsDisabled = !this.prevIsValid();
-    var nextIsDisabled = !this.nextIsValid();
+    const prevIsDisabled = !this.prevIsValid();
+    const nextIsDisabled = !this.nextIsValid();
     return (
       <div className="pagination-wrapper">
         <button
@@ -55,11 +74,14 @@ const Pagination = React.createClass({
           onClick={this.goToPrevPage}
           disabled={prevIsDisabled}
         >
-          {'<Prev'}
+          {'< Prev'}
         </button>
         <input
-          value={this.props.pageNumber}
+          aria-label="Page Input"
+          defaultValue={this.props.pageNumber}
+          value={this.state.pageNumber}
           onChange={this.handleInputChange}
+          onKeyDown={this.handleEnter}
         />
         <button
           className={`pagination-btn ${nextIsDisabled ? 'btn-disabled' : ''}`}

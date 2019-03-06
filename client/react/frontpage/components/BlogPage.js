@@ -33,16 +33,11 @@ const BlogPage = React.createClass({
   componentDidMount() {
     $.get(BlogPostsURL, result => {
       const data = result.blog_posts;
-      const dataWithout2016 = data.filter(post => {
-        var date = new Date(post.date);
-        var momentDate = moment(date).format('YYYY');
-        return momentDate != '2016';
-      });
       this.setState({
         fetching: false,
         max_pages: data.length / this.state.POSTS_PER_PAGE,
-        posts: dataWithout2016,
-        filteredPosts: dataWithout2016,
+        posts: data,
+        filteredPosts: data,
       });
     });
   },
@@ -70,8 +65,8 @@ const BlogPage = React.createClass({
   extractFirstImg(post) {
     switch (post.platform) {
       case 'KEYSTONE':
-        if (post.coverImage) {
-          return post.coverImage.secure_url;
+        if (post.coverPhoto) {
+          return post.coverPhoto.secure_url;
         } else if (post.img1) {
           return post.img1.secure_url;
         }
@@ -175,8 +170,9 @@ const BlogPage = React.createClass({
         var div = wrapper.firstChild;
         const italics = div.getElementsByTagName('i');
         if (italics.length >= 1) {
-          if (italics[0].innerHTML.length > 'written by'.length)
-            return italics[0].innerHTML;
+          if (italics[0].innerHTML.length > 'written by'.length) {
+            return italics[0].textContent;
+          }
         }
     }
   },
@@ -251,7 +247,10 @@ const BlogPage = React.createClass({
     }
     return (
       <div className="blogPage">
-        <div className="filterHeading">Filters</div>
+        <div className="filterHeading">
+          Welcome to the new blog! If you're feeling nostalgic, you can still
+          checkout our <a href="http://blog.uclaradio.com">old blog</a>.
+        </div>
         <div className="blogNavbar">
           <FilterBar handleFilterChange={this.filterPosts} />
           <BlogSearch onChange={this.handleSearch} />

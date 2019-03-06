@@ -112,6 +112,7 @@ const FilterBar = React.createClass({
             </li>
             <li>
               <Input
+                aria-label="Sports"
                 label="Sports"
                 type="checkbox"
                 checked={this.containsFilter('SPORTS')}
