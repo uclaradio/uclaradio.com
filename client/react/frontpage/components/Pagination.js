@@ -12,9 +12,22 @@ Reusable pagination
 
 const Pagination = React.createClass({
   getInitialState() {
-    return { pageNumber: this.props.pageNumber };
+    return {
+      pageNumber: this.props.pageNumber,
+      changingPage: false,
+    };
+  },
+  componentDidUpdate() {
+    if (
+      this.props.pageNumber !== this.state.pageNumber &&
+      !this.state.changingPage
+    )
+      this.setState({
+        pageNumber: this.props.pageNumber,
+      });
   },
   handleInputChange(e) {
+    this.setState({ changingPage: true });
     let newPageNum = e.target.value;
 
     if (newPageNum) {
@@ -22,7 +35,8 @@ const Pagination = React.createClass({
     }
 
     this.setState({
-      pageNumber: newPageNum,
+      // user's entry will be 1-indexed
+      pageNumber: newPageNum - 1,
     });
   },
   handleEnter(e) {
@@ -40,6 +54,7 @@ const Pagination = React.createClass({
       } else {
         this.props.setPageNumber(this.state.pageNumber);
       }
+      this.setState({ changingPage: false });
     }
   },
   goToNextPage() {
@@ -79,7 +94,8 @@ const Pagination = React.createClass({
         <input
           aria-label="Page Input"
           defaultValue={this.props.pageNumber}
-          value={this.state.pageNumber}
+          // display 0 as empty string
+          value={this.state.pageNumber >= 0 ? this.state.pageNumber + 1 : ''}
           onChange={this.handleInputChange}
           onKeyDown={this.handleEnter}
         />
