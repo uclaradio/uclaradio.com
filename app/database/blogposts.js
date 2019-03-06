@@ -14,7 +14,7 @@ const BlogSchema = new mongoose.Schema({
   platform: String,
   date: { type: Date, default: Date.now },
   tags: [String],
-  topic: String,
+  category: String,
 });
 BlogSchema.index({ id: 1 });
 
@@ -28,7 +28,7 @@ blogposts.webSafeBlogPost = function(blogpost) {
     platform: blogpost.platform,
     date: blogpost.date,
     tags: blogpost.tags,
-    topic: blogpost.topic,
+    category: blogpost.category,
   };
 };
 
@@ -40,7 +40,7 @@ blogposts.addPost = function(
   platform,
   created_time,
   tags,
-  topic,
+  category,
   callback
 ) {
   db.getNextAvailableId(db.blogpostIdKey, nextId => {
@@ -51,7 +51,7 @@ blogposts.addPost = function(
       platform: platform,
       date: created_time,
       tags: tags,
-      topic: topic,
+      category: category,
     });
     blogpost.save();
     db.setLastTakenId(db.blogpostIdKey, nextId, err => {

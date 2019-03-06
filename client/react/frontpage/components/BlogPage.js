@@ -96,17 +96,11 @@ const BlogPage = React.createClass({
       });
     } else {
       const filteredPosts = this.state.posts.filter(post => {
-        switch (post.platform) {
-          case 'KEYSTONE':
-            if (post.category) {
-              var filterName = this.tagToCategory(post.category);
-              return this.containsFilter(filterName, filters);
-            } else {
-              return false;
-            }
-          case 'TUMBLR':
-            var filterName = this.tagToCategory(post.topic);
-            return this.containsFilter(filterName, filters);
+        if (post.category) {
+          var filterName = this.tagToCategory(post.category);
+          return this.containsFilter(filterName, filters);
+        } else {
+          return false;
         }
       });
       this.setState({
@@ -131,14 +125,8 @@ const BlogPage = React.createClass({
     this.setPageNumber(0);
   },
   parseTag(post) {
-    switch (post.platform) {
-      case 'KEYSTONE':
-        if (post.category) {
-          return this.tagToCategory(post.category);
-        }
-        break;
-      case 'TUMBLR':
-        return this.tagToCategory(post.topic);
+    if (post.category) {
+      return this.tagToCategory(post.category);
     }
   },
   parseDate(post) {
