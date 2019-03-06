@@ -16,9 +16,11 @@
   line-height: 1.7;
 }
 
-.content > img {
+.content > img,
+.content-img {
   opacity: 1;
   height: auto;
+  width: 100%;
 }
 
 .content .tmblr-full img {
@@ -40,4 +42,9 @@
   opacity: 1;
   width: 100%;
   height: auto;
+}
+
+.blogPostContainer .subheading,
+.blogPostContainer .credits {
+  font-size: 13pt;
 }

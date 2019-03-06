@@ -28,32 +28,32 @@ const BlogPostPage = React.createClass({
   parseKeystonePost(post) {
     if (post.img1) {
       post.content = post.content.replace(
-        '<p>&lt;Image1&gt;</p>',
-        `<img alt="Image 1" src=${post.img1.secure_url} />`
+        '&lt;Image1&gt;',
+        `<img class="content-img" alt="Image 1" src=${post.img1.secure_url} />`
       );
     }
     if (post.img2) {
       post.content = post.content.replace(
-        '<p>&lt;Image2&gt;</p>',
-        `<img alt="Image 2" src=${post.img2.secure_url} />`
+        '&lt;Image2&gt;',
+        `<img class="content-img" alt="Image 2" src=${post.img2.secure_url} />`
       );
     }
     if (post.img3) {
       post.content = post.content.replace(
-        '<p>&lt;Image3&gt;</p>',
-        `<img alt="Image 3" src=${post.img3.secure_url} />`
+        '&lt;Image3&gt;',
+        `<img class="content-img" alt="Image 3" src=${post.img3.secure_url} />`
       );
     }
     if (post.img4) {
       post.content = post.content.replace(
-        '<p>&lt;Image4&gt;</p>',
-        `<img alt="Image 4" src=${post.img4.secure_url} />`
+        '&lt;Image4&gt;',
+        `<img class="content-img" alt="Image 4" src=${post.img4.secure_url} />`
       );
     }
     if (post.img5) {
       post.content = post.content.replace(
-        '<p>&lt;Image5&gt;</p>',
-        `<img alt="Image 5" src=${post.img5.secure_url} />`
+        '&lt;Image5&gt;',
+        `<img class="content-img" alt="Image 5" src=${post.img5.secure_url} />`
       );
     }
     return post.content;
@@ -74,6 +74,12 @@ const BlogPostPage = React.createClass({
       return;
     }
   },
+  authorExists(post) {
+    return post.author && post.author != '';
+  },
+  photographerExists(post) {
+    return post.photographer && post.photographer != '';
+  },
   parseCategory(post) {
     var category = post.category;
     if (category && category != 'None' && category != 'Invalid Tag') {
@@ -89,8 +95,27 @@ const BlogPostPage = React.createClass({
       date: momentDate,
     });
   },
+  parseCredits(post) {
+    var credits;
+    var authorExists = this.authorExists(post);
+    var photographerExists = this.photographerExists(post);
+
+    if (authorExists && post.author == post.photographer) {
+      credits = 'article and photographs by ' + post.author;
+    } else if (authorExists && !photographerExists) {
+      credits = 'article by ' + post.author;
+    } else if (authorExists && photographerExists) {
+      credits =
+        'article by ' +
+        post.author +
+        ' and photographs by ' +
+        post.photographer;
+    }
+    return credits;
+  },
   renderPost() {
     const post = this.state.post;
+    const credits = this.parseCredits(post);
     var subheading;
     if (this.state.category) {
       subheading = this.state.category + ' | ' + this.state.date;
@@ -116,6 +141,7 @@ const BlogPostPage = React.createClass({
             {coverImageDiv}
             <div className="subheading">{subheading}</div>
             <h1>{post.title}</h1>
+            <div className="credits">{credits}</div>
             <div
               className="content"
               dangerouslySetInnerHTML={this.createMarkupForContent()}

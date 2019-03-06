@@ -123,6 +123,12 @@ const BlogPage = React.createClass({
     });
     this.setPageNumber(0);
   },
+  authorExists(post) {
+    return post.author && post.author != '';
+  },
+  photographerExists(post) {
+    return post.photographer && post.photographer != '';
+  },
   parseCategory(post) {
     var category = post.category;
     if (category && category != 'None' && category != 'Invalid Tag') {
@@ -138,11 +144,14 @@ const BlogPage = React.createClass({
     var credits;
     switch (post.platform) {
       case 'KEYSTONE':
-        if (post.author != null && post.author == post.photographer) {
+        var authorExists = this.authorExists(post);
+        var photographerExists = this.photographerExists(post);
+
+        if (authorExists && post.author == post.photographer) {
           credits = 'article and photographs by ' + post.author;
-        } else if (post.author && post.photographer == null) {
+        } else if (authorExists && !photographerExists) {
           credits = 'article by ' + post.author;
-        } else if (post.author && post.photographer) {
+        } else if (authorExists && photographerExists) {
           credits =
             'article by ' +
             post.author +
