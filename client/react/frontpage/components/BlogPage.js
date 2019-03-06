@@ -49,9 +49,6 @@ const BlogPage = React.createClass({
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
     );
 
-    if (this.state.page_number > 0 && postsonpage.length < 12) {
-      this.setPageNumber(0);
-    }
     return this.state.filteredPosts.slice(
       this.state.page_number * this.state.POSTS_PER_PAGE,
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
@@ -118,10 +115,10 @@ const BlogPage = React.createClass({
       }
     });
 
+    this.setPageNumber(0);
     this.setState({
       filteredPosts: searchedposts,
     });
-    this.setPageNumber(0);
   },
   authorExists(post) {
     return post.author && post.author != '';
@@ -223,6 +220,7 @@ const BlogPage = React.createClass({
           maxPages={this.state.max_pages}
           setPageNumber={this.setPageNumber}
           pageNumber={this.state.page_number}
+          numberOfPosts={this.state.filteredPosts.length}
         />
       </div>
     );
