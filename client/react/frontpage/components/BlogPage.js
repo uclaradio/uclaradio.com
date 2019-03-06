@@ -97,12 +97,18 @@ const BlogPage = React.createClass({
         activeFilters: [],
       });
     } else {
-      const filteredPosts = this.state.posts.filter(el => {
-        if (el.tags) {
-          var len = el.tags.length;
-          return this.containsFilter(el.tags[len - 1], filters);
-        } else {
-          return false;
+      const filteredPosts = this.state.posts.filter(post => {
+        switch (post.platform) {
+          case 'KEYSTONE':
+            if (post.category) {
+              var filterName = this.tagToCategory(post.category);
+              return this.containsFilter(filterName, filters);
+            } else {
+              return false;
+            }
+          case 'TUMBLR':
+            var filterName = this.tagToCategory(post.topic);
+            return this.containsFilter(filterName, filters);
         }
       });
       this.setState({
@@ -127,9 +133,14 @@ const BlogPage = React.createClass({
     this.setPageNumber(0);
   },
   parseTag(post) {
-    if (post.tags) {
-      const len = post.tags.length;
-      return this.tagToType(post.tags[len - 1]);
+    switch (post.platform) {
+      case 'KEYSTONE':
+        if (post.category) {
+          return this.tagToCategory(post.category);
+        }
+        break;
+      case 'TUMBLR':
+        return this.tagToCategory(post.topic);
     }
   },
   parseDate(post) {
@@ -165,19 +176,36 @@ const BlogPage = React.createClass({
         }
     }
   },
-  tagToType(tag) {
+  tagToCategory(tag) {
+    tag = tag.toLowerCase().replace(/ /g, '');
     switch (tag) {
-      case 'ConcertReview':
-      case 'ShowReview':
-        return 'CONCERT REVIEW';
-      case 'ArtistInterview':
-        return 'ARTIST INTERVIEW';
-      case 'Sports':
-        return 'SPORTS';
-      case 'FestivalReview':
-        return 'FESTIVAL REVIEW';
-      case 'Other':
-        return 'UCLA RADIO';
+      case 'concertreview':
+      case 'festivalreview':
+      case 'showreview':
+        return 'CONCERT REVIEW'; // 1
+      case 'albumreview':
+      case 'singlereview':
+      case 'musicreview':
+        return 'MUSIC REVIEW'; //2
+      case 'artistinterview':
+      case 'interview':
+        return 'INTERVIEW'; //3
+      case 'sports':
+      case 'uclaradiosports':
+        return 'SPORTS'; //4
+      case 'uclaradionews':
+      case 'news':
+        return 'NEWS'; //5
+      case 'filmreview':
+      case 'tv':
+      case 'entertainment':
+        return 'ENTERTAINMENT'; //6
+      case 'uclaradiocomedy':
+      case 'comedy':
+        return 'COMEDY'; //7
+      case 'showofthemonth':
+      case 'meetthedj':
+        return 'FEATURED'; //8
     }
   },
   renderPosts() {
@@ -185,11 +213,11 @@ const BlogPage = React.createClass({
     return currentPosts.map(post => {
       const imgURL = this.extractFirstImg(post);
       const credits = this.parseCredits(post);
-      const type = this.parseTag(post);
+      const category = this.parseTag(post);
       const date = this.parseDate(post);
       var subheading;
-      if (type) {
-        subheading = type + ' | ' + date;
+      if (category) {
+        subheading = category + ' | ' + date;
       } else {
         subheading = date;
       }

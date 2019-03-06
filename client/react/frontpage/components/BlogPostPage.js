@@ -15,7 +15,7 @@ const BlogPostsURL = '/getBlogPosts';
 
 const BlogPostPage = React.createClass({
   getInitialState: function() {
-    return { fetching: true, post: null, type: '', date: '' };
+    return { fetching: true, post: null, category: '', date: '' };
   },
   componentDidMount() {
     var queryRoute = `${BlogPostsURL}/${this.props.params.blogPostID}`;
@@ -75,11 +75,19 @@ const BlogPostPage = React.createClass({
     }
   },
   parseTag(post) {
-    if (post.tags) {
-      const len = post.tags.length;
-      this.setState({
-        type: this.tagToType(post.tags[len - 1]),
-      });
+    switch (post.platform) {
+      case 'KEYSTONE':
+        if (post.category) {
+          this.setState({
+            category: this.tagToCategory(post.category),
+          });
+        }
+        break;
+      case 'TUMBLR':
+        this.setState({
+          category: this.tagToCategory(post.topic),
+        });
+        break;
     }
   },
   parseDate(post) {
@@ -89,26 +97,43 @@ const BlogPostPage = React.createClass({
       date: momentDate,
     });
   },
-  tagToType(tag) {
+  tagToCategory(tag) {
+    tag = tag.toLowerCase().replace(/ /g, '');
     switch (tag) {
-      case 'ConcertReview':
-      case 'ShowReview':
-        return 'CONCERT REVIEW';
-      case 'ArtistInterview':
-        return 'ARTIST INTERVIEW';
-      case 'Sports':
-        return 'SPORTS';
-      case 'FestivalReview':
-        return 'FESTIVAL REVIEW';
-      case 'Other':
-        return 'UCLA RADIO';
+      case 'concertreview':
+      case 'festivalreview':
+      case 'showreview':
+        return 'CONCERT REVIEW'; // 1
+      case 'albumreview':
+      case 'singlereview':
+      case 'musicreview':
+        return 'MUSIC REVIEW'; //2
+      case 'artistinterview':
+      case 'interview':
+        return 'INTERVIEW'; //3
+      case 'sports':
+      case 'uclaradiosports':
+        return 'SPORTS'; //4
+      case 'uclaradionews':
+      case 'news':
+        return 'NEWS'; //5
+      case 'filmreview':
+      case 'tv':
+      case 'entertainment':
+        return 'ENTERTAINMENT'; //6
+      case 'uclaradiocomedy':
+      case 'comedy':
+        return 'COMEDY'; //7
+      case 'showofthemonth':
+      case 'meetthedj':
+        return 'FEATURED'; //8
     }
   },
   renderPost() {
     const post = this.state.post;
     var subheading;
-    if (this.state.type) {
-      subheading = this.state.type + ' | ' + this.state.date;
+    if (this.state.category) {
+      subheading = this.state.category + ' | ' + this.state.date;
     } else {
       subheading = this.state.date;
     }
