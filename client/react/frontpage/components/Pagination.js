@@ -14,6 +14,12 @@ const Pagination = React.createClass({
   getInitialState() {
     return { pageNumber: this.props.pageNumber };
   },
+  componentDidUpdate() {
+    if (this.props.pageNumber !== this.state.pageNumber)
+      this.setState({
+        pageNumber: this.props.pageNumber,
+      });
+  },
   handleInputChange(e) {
     let newPageNum = e.target.value;
 
@@ -79,7 +85,7 @@ const Pagination = React.createClass({
         <input
           aria-label="Page Input"
           defaultValue={this.props.pageNumber}
-          value={this.props.pageNumber}
+          value={this.state.pageNumber}
           onChange={this.handleInputChange}
           onKeyDown={this.handleEnter}
         />
