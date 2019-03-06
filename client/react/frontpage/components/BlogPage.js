@@ -97,8 +97,7 @@ const BlogPage = React.createClass({
     } else {
       const filteredPosts = this.state.posts.filter(post => {
         if (post.category) {
-          var filterName = this.tagToCategory(post.category);
-          return this.containsFilter(filterName, filters);
+          return this.containsFilter(post.category, filters);
         } else {
           return false;
         }
@@ -164,26 +163,8 @@ const BlogPage = React.createClass({
     }
   },
   tagToCategory(tag) {
-    tag = tag.toLowerCase().replace(/ /g, '');
-    switch (tag) {
-      case 'concertreview':
-      case 'showreview':
-        return 'CONCERT REVIEW'; // 1
-      case 'musicreview':
-        return 'MUSIC REVIEW'; //2
-      case 'interview':
-        return 'INTERVIEW'; //3
-      case 'sports':
-        return 'SPORTS'; //4
-      case 'news':
-        return 'NEWS'; //5
-      case 'entertainment':
-        return 'ENTERTAINMENT'; //6
-      case 'comedy':
-        return 'COMEDY'; //7
-      case 'featured':
-      case 'uclaradio':
-        return 'FEATURED'; //8
+    if (tag != 'None' && tag != 'Invalid Tag') {
+      return tag.toUpperCase();
     }
   },
   renderPosts() {

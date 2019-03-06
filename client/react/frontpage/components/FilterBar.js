@@ -84,9 +84,9 @@ const FilterBar = React.createClass({
               <Input
                 label="Concert Reviews"
                 type="checkbox"
-                checked={this.containsFilter('CONCERT REVIEW')}
+                checked={this.containsFilter('Show Review')}
                 onChange={() => {
-                  this.updateSelectedFilters('CONCERT REVIEW');
+                  this.updateSelectedFilters('Show Review');
                 }}
               />
             </li>
@@ -94,9 +94,9 @@ const FilterBar = React.createClass({
               <Input
                 label="Music Reviews"
                 type="checkbox"
-                checked={this.containsFilter('MUSIC REVIEW')}
+                checked={this.containsFilter('Music Review')}
                 onChange={() => {
-                  this.updateSelectedFilters('MUSIC REVIEW');
+                  this.updateSelectedFilters('Music Review');
                 }}
               />
             </li>
@@ -104,9 +104,9 @@ const FilterBar = React.createClass({
               <Input
                 label="Interviews"
                 type="checkbox"
-                checked={this.containsFilter('INTERVIEW')}
+                checked={this.containsFilter('Interview')}
                 onChange={() => {
-                  this.updateSelectedFilters('INTERVIEW');
+                  this.updateSelectedFilters('Interview');
                 }}
               />
             </li>
@@ -115,9 +115,9 @@ const FilterBar = React.createClass({
                 aria-label="Sports"
                 label="Sports"
                 type="checkbox"
-                checked={this.containsFilter('SPORTS')}
+                checked={this.containsFilter('Sports')}
                 onChange={() => {
-                  this.updateSelectedFilters('SPORTS');
+                  this.updateSelectedFilters('Sports');
                 }}
               />
             </li>
@@ -125,9 +125,9 @@ const FilterBar = React.createClass({
               <Input
                 label="News"
                 type="checkbox"
-                checked={this.containsFilter('NEWS')}
+                checked={this.containsFilter('News')}
                 onChange={() => {
-                  this.updateSelectedFilters('NEWS');
+                  this.updateSelectedFilters('News');
                 }}
               />
             </li>
@@ -135,9 +135,9 @@ const FilterBar = React.createClass({
               <Input
                 label="Entertainment"
                 type="checkbox"
-                checked={this.containsFilter('ENTERTAINMENT')}
+                checked={this.containsFilter('Entertainment')}
                 onChange={() => {
-                  this.updateSelectedFilters('ENTERTAINMENT');
+                  this.updateSelectedFilters('Entertainment');
                 }}
               />
             </li>
@@ -145,9 +145,9 @@ const FilterBar = React.createClass({
               <Input
                 label="Comedy"
                 type="checkbox"
-                checked={this.containsFilter('COMEDY')}
+                checked={this.containsFilter('Comedy')}
                 onChange={() => {
-                  this.updateSelectedFilters('COMEDY');
+                  this.updateSelectedFilters('Comedy');
                 }}
               />
             </li>
@@ -155,9 +155,9 @@ const FilterBar = React.createClass({
               <Input
                 label="Featured"
                 type="checkbox"
-                checked={this.containsFilter('FEATURED')}
+                checked={this.containsFilter('UCLA Radio')}
                 onChange={() => {
-                  this.updateSelectedFilters('FEATURED');
+                  this.updateSelectedFilters('UCLA Radio');
                 }}
               />
             </li>
