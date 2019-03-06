@@ -22,7 +22,8 @@ const Pagination = React.createClass({
     }
 
     this.setState({
-      pageNumber: newPageNum,
+      // user's entry will be 1-indexed
+      pageNumber: newPageNum - 1,
     });
   },
   handleEnter(e) {
@@ -79,7 +80,8 @@ const Pagination = React.createClass({
         <input
           aria-label="Page Input"
           defaultValue={this.props.pageNumber}
-          value={this.state.pageNumber}
+          // display 0 as empty string
+          value={this.state.pageNumber >= 0 ? this.state.pageNumber + 1 : ''}
           onChange={this.handleInputChange}
           onKeyDown={this.handleEnter}
         />
