@@ -201,7 +201,7 @@ const BlogPage = React.createClass({
     }
     return (
       <div className="blogPage">
-        <div className="filterHeading">
+        <div className="blogHeading">
           Welcome to the new blog! If you're feeling nostalgic, you can still
           checkout our <a href="http://blog.uclaradio.com">old blog</a>.
         </div>
