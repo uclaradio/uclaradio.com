@@ -5,7 +5,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import Loader from './Loader';
 import Pagination from './Pagination';
-import FilterBar from './FilterBar';
+import BlogFilterBar from './BlogFilterBar';
 import BlogSearch from './BlogSearch';
 import moment from 'moment';
 import './BlogPage.scss';
@@ -206,7 +206,7 @@ const BlogPage = React.createClass({
           checkout our <a href="http://blog.uclaradio.com">old blog</a>.
         </div>
         <div className="blogNavbar">
-          <FilterBar handleFilterChange={this.filterPosts} />
+          <BlogFilterBar handleFilterChange={this.filterPosts} />
           <BlogSearch onChange={this.handleSearch} />
         </div>
         <div className="postsContainer">{this.renderPosts()}</div>
