@@ -2,6 +2,7 @@
 .DS_Store
 node_modules/
 passwords.json
+categorized-blogposts.json
 client/public/blurbImages/
 client/public/uploads/
 client/public/build/
