@@ -1,12 +1,12 @@
-// FilterBar.js
+// BlogFilterBar.js
 // filtering bar for BlogPage
 
 import React from 'react';
 import { Input } from 'react-bootstrap';
-import './FilterBar.scss';
+import './BlogFilterBar.scss';
 /**
-Displays toggleable filter tags.
-Returns an array of selected filters tags.
+Displays toggleable filters.
+Returns an array of selected filters.
 * */
 
 const FilterBar = React.createClass({
