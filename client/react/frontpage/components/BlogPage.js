@@ -178,31 +178,22 @@ const BlogPage = React.createClass({
     tag = tag.toLowerCase().replace(/ /g, '');
     switch (tag) {
       case 'concertreview':
-      case 'festivalreview':
       case 'showreview':
         return 'CONCERT REVIEW'; // 1
-      case 'albumreview':
-      case 'singlereview':
       case 'musicreview':
         return 'MUSIC REVIEW'; //2
-      case 'artistinterview':
       case 'interview':
         return 'INTERVIEW'; //3
       case 'sports':
-      case 'uclaradiosports':
         return 'SPORTS'; //4
-      case 'uclaradionews':
       case 'news':
         return 'NEWS'; //5
-      case 'filmreview':
-      case 'tv':
       case 'entertainment':
         return 'ENTERTAINMENT'; //6
-      case 'uclaradiocomedy':
       case 'comedy':
         return 'COMEDY'; //7
-      case 'showofthemonth':
-      case 'meetthedj':
+      case 'featured':
+      case 'uclaradio':
         return 'FEATURED'; //8
     }
   },
