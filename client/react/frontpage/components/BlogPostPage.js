@@ -20,7 +20,7 @@ const BlogPostPage = React.createClass({
   componentDidMount() {
     var queryRoute = `${BlogPostsURL}/${this.props.params.blogPostID}`;
     $.get(queryRoute, post => {
-      this.parseTag(post);
+      this.parseCategory(post);
       this.parseDate(post);
       this.setState({ fetching: false, post: post });
     });
@@ -74,10 +74,11 @@ const BlogPostPage = React.createClass({
       return;
     }
   },
-  parseTag(post) {
-    if (post.category) {
+  parseCategory(post) {
+    var category = post.category;
+    if (category && category != 'None' && category != 'Invalid Tag') {
       this.setState({
-        category: this.tagToCategory(post.category),
+        category: category.toUpperCase(),
       });
     }
   },
@@ -87,11 +88,6 @@ const BlogPostPage = React.createClass({
     this.setState({
       date: momentDate,
     });
-  },
-  tagToCategory(tag) {
-    if (tag != 'None' && tag != 'Invalid Tag') {
-      return tag.toUpperCase();
-    }
   },
   renderPost() {
     const post = this.state.post;

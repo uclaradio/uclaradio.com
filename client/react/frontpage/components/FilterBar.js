@@ -2,7 +2,7 @@
 // filtering bar for BlogPage
 
 import React from 'react';
-import { Input, Glyphicon } from 'react-bootstrap';
+import { Input } from 'react-bootstrap';
 import './FilterBar.scss';
 /**
 Displays toggleable filter tags.
@@ -153,7 +153,7 @@ const FilterBar = React.createClass({
             </li>
             <li>
               <Input
-                label="Featured"
+                label="UCLA Radio"
                 type="checkbox"
                 checked={this.containsFilter('UCLA Radio')}
                 onChange={() => {

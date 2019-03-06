@@ -124,9 +124,10 @@ const BlogPage = React.createClass({
     });
     this.setPageNumber(0);
   },
-  parseTag(post) {
-    if (post.category) {
-      return this.tagToCategory(post.category);
+  parseCategory(post) {
+    var category = post.category;
+    if (category && category != 'None' && category != 'Invalid Tag') {
+      return category.toUpperCase();
     }
   },
   parseDate(post) {
@@ -162,17 +163,12 @@ const BlogPage = React.createClass({
         }
     }
   },
-  tagToCategory(tag) {
-    if (tag != 'None' && tag != 'Invalid Tag') {
-      return tag.toUpperCase();
-    }
-  },
   renderPosts() {
     const currentPosts = this.getCurrentPostsOnThisPage();
     return currentPosts.map(post => {
       const imgURL = this.extractFirstImg(post);
       const credits = this.parseCredits(post);
-      const category = this.parseTag(post);
+      const category = this.parseCategory(post);
       const date = this.parseDate(post);
       var subheading;
       if (category) {
