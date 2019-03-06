@@ -116,6 +116,7 @@ const BlogPage = React.createClass({
         activeFilters: filters,
       });
     }
+    this.setPageNumber(0);
   },
   handleSearch(input) {
     var searchQuery = input.target.value.toLowerCase();
