@@ -10,10 +10,10 @@ const SoccerUpdate = () => (
       <a
         class="blinkText"
         target="_blank"
-        href="https://uclabruins.com/sports/2016/8/16/live-audio.aspx"
+        href="https://pac-12.com/live/ucla-3"
       >
-        Click for live coverage of UCLA Men’s Soccer vs Oregon State on Sunday
-        10/07 @ 12PM PST feat. UCLA Radio DJ Anish Vishwakoti
+        Click to watch UCLA Women’s Soccer vs NC State live in an NCAA 3rd Round
+        Match on Friday 11/18 @ 6PM PST feat. UCLA Radio DJ Anish Vishwakoti
       </a>
     </div>
     <div id="soccer">⚽</div>

@@ -2,8 +2,15 @@
 extends layout
 
 block content
-	include modals/reset-password
 
+	#container
+		form( action='/panel/send-password-reset' method='post' enctype='application/x-www-form-urlencoded')#login-form.well.span4
+			h1 Reset DJ Password
+			p.subheading Enter the email associated with your account
+			label Email 
+			input(type="email", name="email", id='email-tf').span4.required
+			button(git type="submit" style="width:8rem;")#account-form-btn1.btn
+				| Send
 block scripts
 	script(src='/vendor/jquery.min.js')
 	script(src='/vendor/jquery.form.js')

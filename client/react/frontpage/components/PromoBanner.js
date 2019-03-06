@@ -15,6 +15,10 @@ import './PromoBanner.scss';
 //  }
 const bannerData = [
   {
+    img: '/img/promo/winter2019webBanner.jpg',
+    link: 'https://apply.uclastudentmedia.com/applications/ucla-radio',
+  },
+  {
     img: '/img/promo/summer-graphic-radio-banner.jpg',
     link: '',
   },
@@ -53,7 +57,9 @@ const PromoBanner = React.createClass({
         {banner.link.indexOf('http') == -1 ? (
           <Link to={banner.link}>{self.getImage(banner)}</Link>
         ) : (
-          <a href={banner.link}>{self.getImage(banner)}</a>
+          <a target="_blank" href={banner.link}>
+            {self.getImage(banner)}
+          </a>
         )}
       </div>
     ));
