@@ -75,19 +75,10 @@ const BlogPostPage = React.createClass({
     }
   },
   parseTag(post) {
-    switch (post.platform) {
-      case 'KEYSTONE':
-        if (post.category) {
-          this.setState({
-            category: this.tagToCategory(post.category),
-          });
-        }
-        break;
-      case 'TUMBLR':
-        this.setState({
-          category: this.tagToCategory(post.topic),
-        });
-        break;
+    if (post.category) {
+      this.setState({
+        category: this.tagToCategory(post.category),
+      });
     }
   },
   parseDate(post) {
