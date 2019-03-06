@@ -79,10 +79,9 @@ const BlogPage = React.createClass({
         return 'https://pbs.twimg.com/profile_images/988328487650914306/0LQl2f3v_400x400.jpg';
     }
   },
-  containsFilter(filterName, filters) {
-    var list = filters;
-    for (var i = 0; i < list.length; i++) {
-      if (list[i] === filterName) {
+  containsArrayElement(element, array) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === element) {
         return true;
       }
     }
@@ -97,7 +96,7 @@ const BlogPage = React.createClass({
     } else {
       const filteredPosts = this.state.posts.filter(post => {
         if (post.category) {
-          return this.containsFilter(post.category, filters);
+          return this.containsArrayElement(post.category, filters);
         } else {
           return false;
         }
