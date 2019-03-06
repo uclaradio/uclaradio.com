@@ -79,7 +79,7 @@ const Pagination = React.createClass({
         <input
           aria-label="Page Input"
           defaultValue={this.props.pageNumber}
-          value={this.state.pageNumber}
+          value={this.props.pageNumber}
           onChange={this.handleInputChange}
           onKeyDown={this.handleEnter}
         />
