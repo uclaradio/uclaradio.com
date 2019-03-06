@@ -25,7 +25,6 @@ const BlogPage = React.createClass({
       page_number: 0,
       max_pages: 0,
       POSTS_PER_PAGE: 12,
-      tumblr_offset: 0,
       activeFilters: [],
       filteredPosts: [],
     };
@@ -58,7 +57,6 @@ const BlogPage = React.createClass({
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
     );
   },
-
   setPageNumber(pageNum) {
     this.setState({ page_number: pageNum });
   },
