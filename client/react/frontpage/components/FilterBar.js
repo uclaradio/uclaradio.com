@@ -71,7 +71,7 @@ const FilterBar = React.createClass({
     return (
       <div className="dropdown">
         <button className="dropbtn" onClick={this.showDropdown}>
-          Topic
+          Categories
         </button>
         {this.state.showDropdown ? (
           <ul
@@ -80,53 +80,84 @@ const FilterBar = React.createClass({
               this.dropdownMenu = element;
             }}
           >
-            <li className="FilterEl" id="shows">
+            <li>
               <Input
-                aria-label="Show Reviews"
-                label="Show Reviews"
+                label="Concert Reviews"
                 type="checkbox"
+                checked={this.containsFilter('CONCERT REVIEW')}
                 onChange={() => {
-                  this.updateSelectedFilters('ConcertReview');
+                  this.updateSelectedFilters('CONCERT REVIEW');
                 }}
               />
             </li>
-            <li className="FilterEl" id="artists">
+            <li>
               <Input
-                aria-label="Artist Interview"
-                label="Artist Interviews"
+                label="Music Reviews"
                 type="checkbox"
+                checked={this.containsFilter('MUSIC REVIEW')}
                 onChange={() => {
-                  this.updateSelectedFilters('ArtistInterview');
+                  this.updateSelectedFilters('MUSIC REVIEW');
                 }}
               />
             </li>
-            <li className="FilterEl" id="sports">
+            <li>
+              <Input
+                label="Interviews"
+                type="checkbox"
+                checked={this.containsFilter('INTERVIEW')}
+                onChange={() => {
+                  this.updateSelectedFilters('INTERVIEW');
+                }}
+              />
+            </li>
+            <li>
               <Input
                 aria-label="Sports"
                 label="Sports"
                 type="checkbox"
+                checked={this.containsFilter('SPORTS')}
                 onChange={() => {
-                  this.updateSelectedFilters('Sports');
+                  this.updateSelectedFilters('SPORTS');
                 }}
               />
             </li>
-            <li className="FilterEl" id="festivals">
+            <li>
               <Input
-                aria-label="Festival Reviews"
-                label="Festival Reviews"
+                label="News"
                 type="checkbox"
+                checked={this.containsFilter('NEWS')}
                 onChange={() => {
-                  this.updateSelectedFilters('FestivalReview');
+                  this.updateSelectedFilters('NEWS');
                 }}
               />
             </li>
-            <li className="FilterEl" id="other">
+            <li>
               <Input
-                aria-label="Other"
-                label="Other"
+                label="Entertainment"
                 type="checkbox"
+                checked={this.containsFilter('ENTERTAINMENT')}
                 onChange={() => {
-                  this.updateSelectedFilters('Other');
+                  this.updateSelectedFilters('ENTERTAINMENT');
+                }}
+              />
+            </li>
+            <li>
+              <Input
+                label="Comedy"
+                type="checkbox"
+                checked={this.containsFilter('COMEDY')}
+                onChange={() => {
+                  this.updateSelectedFilters('COMEDY');
+                }}
+              />
+            </li>
+            <li>
+              <Input
+                label="Featured"
+                type="checkbox"
+                checked={this.containsFilter('FEATURED')}
+                onChange={() => {
+                  this.updateSelectedFilters('FEATURED');
                 }}
               />
             </li>
