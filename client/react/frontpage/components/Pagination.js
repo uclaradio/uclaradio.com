@@ -12,9 +12,22 @@ Reusable pagination
 
 const Pagination = React.createClass({
   getInitialState() {
-    return { pageNumber: this.props.pageNumber };
+    return {
+      pageNumber: this.props.pageNumber,
+      changingPage: false,
+    };
+  },
+  componentDidUpdate() {
+    if (
+      this.props.pageNumber !== this.state.pageNumber &&
+      !this.state.changingPage
+    )
+      this.setState({
+        pageNumber: this.props.pageNumber,
+      });
   },
   handleInputChange(e) {
+    this.setState({ changingPage: true });
     let newPageNum = e.target.value;
 
     if (newPageNum) {
@@ -41,6 +54,7 @@ const Pagination = React.createClass({
       } else {
         this.props.setPageNumber(this.state.pageNumber);
       }
+      this.setState({ changingPage: false });
     }
   },
   goToNextPage() {
