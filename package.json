@@ -21,7 +21,7 @@
     "assets": "webpack --watch --display-max-modules 0",
     "precommit": "lint-staged",
     "test": "jest",
-    "fill-blog-db": "node app/database/scripts/addTumblrPosts.js"
+    "fill-blog-db": "mongoimport --jsonArray --db uclaradio --collection blogposts --file categorized-blogposts.json"
   },
   "babel": {
     "presets": [

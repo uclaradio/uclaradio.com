@@ -73,10 +73,11 @@ any suggestions! All of the software here is written by students.
 
 ###### Blog Development
 
-8. Run `yarn fill-blog-db` to seed the database with all the tumblr posts. This may take a few moments.
-9. In another terminal, run `mongo` to enter the mongo shell.
-10. Once in the shell, switch to the appropriate database `use uclaradio`.
-11. Validate that you just added 750 blogposts `db.blogposts.count()`.
+8. Download the categorized blogposts file, which contains all the old tumblr posts. You'll need access from the codeowners.
+9. Run `yarn fill-blog-db` to seed the database with the downloaded JSON file.
+10. In another terminal, run `mongo` to enter the mongo shell.
+11. Once in the shell, switch to the appropriate database `use uclaradio`.
+12. Validate that you just added 734 blogposts `db.blogposts.count()`.
 
 #### Production
 
