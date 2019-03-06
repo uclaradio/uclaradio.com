@@ -1,5 +1,6 @@
 *.swp
 .DS_Store
+.vscode/*
 node_modules/
 passwords.json
 categorized-blogposts.json
