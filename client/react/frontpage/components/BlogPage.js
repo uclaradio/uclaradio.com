@@ -201,7 +201,7 @@ const BlogPage = React.createClass({
     });
   },
   render() {
-    if (!this.state.filteredPosts) {
+    if (!this.state.filteredPosts || !this.state.filteredPosts.length) {
       return (
         <div className="blogPage">
           {this.state.fetching ? <Loader /> : 'No posts!'}
