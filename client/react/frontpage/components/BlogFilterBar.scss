@@ -1,4 +1,4 @@
-// FilterBar
+// BlogFilterBar
 @import "../common";
 
 .dropbtn {
@@ -36,14 +36,6 @@
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 
 .dropdown input {

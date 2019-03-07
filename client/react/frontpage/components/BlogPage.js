@@ -5,7 +5,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import Loader from './Loader';
 import Pagination from './Pagination';
-import FilterBar from './FilterBar';
+import BlogFilterBar from './BlogFilterBar';
 import BlogSearch from './BlogSearch';
 import moment from 'moment';
 import './BlogPage.scss';
@@ -25,7 +25,6 @@ const BlogPage = React.createClass({
       page_number: 0,
       max_pages: 0,
       POSTS_PER_PAGE: 12,
-      tumblr_offset: 0,
       activeFilters: [],
       filteredPosts: [],
     };
@@ -58,7 +57,6 @@ const BlogPage = React.createClass({
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
     );
   },
-
   setPageNumber(pageNum) {
     this.setState({ page_number: pageNum });
   },
@@ -81,10 +79,9 @@ const BlogPage = React.createClass({
         return 'https://pbs.twimg.com/profile_images/988328487650914306/0LQl2f3v_400x400.jpg';
     }
   },
-  containsFilter(filterName, filters) {
-    var list = filters;
-    for (var i = 0; i < list.length; i++) {
-      if (list[i] === filterName) {
+  containsArrayElement(element, array) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === element) {
         return true;
       }
     }
@@ -98,17 +95,10 @@ const BlogPage = React.createClass({
       });
     } else {
       const filteredPosts = this.state.posts.filter(post => {
-        switch (post.platform) {
-          case 'KEYSTONE':
-            if (post.category) {
-              var filterName = this.tagToCategory(post.category);
-              return this.containsFilter(filterName, filters);
-            } else {
-              return false;
-            }
-          case 'TUMBLR':
-            var filterName = this.tagToCategory(post.topic);
-            return this.containsFilter(filterName, filters);
+        if (post.category) {
+          return this.containsArrayElement(post.category, filters);
+        } else {
+          return false;
         }
       });
       this.setState({
@@ -133,15 +123,16 @@ const BlogPage = React.createClass({
     });
     this.setPageNumber(0);
   },
-  parseTag(post) {
-    switch (post.platform) {
-      case 'KEYSTONE':
-        if (post.category) {
-          return this.tagToCategory(post.category);
-        }
-        break;
-      case 'TUMBLR':
-        return this.tagToCategory(post.topic);
+  authorExists(post) {
+    return post.author && post.author != '';
+  },
+  photographerExists(post) {
+    return post.photographer && post.photographer != '';
+  },
+  parseCategory(post) {
+    var category = post.category;
+    if (category && category != 'None' && category != 'Invalid Tag') {
+      return category.toUpperCase();
     }
   },
   parseDate(post) {
@@ -153,11 +144,14 @@ const BlogPage = React.createClass({
     var credits;
     switch (post.platform) {
       case 'KEYSTONE':
-        if (post.author != null && post.author == post.photographer) {
+        var authorExists = this.authorExists(post);
+        var photographerExists = this.photographerExists(post);
+
+        if (authorExists && post.author == post.photographer) {
           credits = 'article and photographs by ' + post.author;
-        } else if (post.author && post.photographer == null) {
+        } else if (authorExists && !photographerExists) {
           credits = 'article by ' + post.author;
-        } else if (post.author && post.photographer) {
+        } else if (authorExists && photographerExists) {
           credits =
             'article by ' +
             post.author +
@@ -177,44 +171,12 @@ const BlogPage = React.createClass({
         }
     }
   },
-  tagToCategory(tag) {
-    tag = tag.toLowerCase().replace(/ /g, '');
-    switch (tag) {
-      case 'concertreview':
-      case 'festivalreview':
-      case 'showreview':
-        return 'CONCERT REVIEW'; // 1
-      case 'albumreview':
-      case 'singlereview':
-      case 'musicreview':
-        return 'MUSIC REVIEW'; //2
-      case 'artistinterview':
-      case 'interview':
-        return 'INTERVIEW'; //3
-      case 'sports':
-      case 'uclaradiosports':
-        return 'SPORTS'; //4
-      case 'uclaradionews':
-      case 'news':
-        return 'NEWS'; //5
-      case 'filmreview':
-      case 'tv':
-      case 'entertainment':
-        return 'ENTERTAINMENT'; //6
-      case 'uclaradiocomedy':
-      case 'comedy':
-        return 'COMEDY'; //7
-      case 'showofthemonth':
-      case 'meetthedj':
-        return 'FEATURED'; //8
-    }
-  },
   renderPosts() {
     const currentPosts = this.getCurrentPostsOnThisPage();
     return currentPosts.map(post => {
       const imgURL = this.extractFirstImg(post);
       const credits = this.parseCredits(post);
-      const category = this.parseTag(post);
+      const category = this.parseCategory(post);
       const date = this.parseDate(post);
       var subheading;
       if (category) {
@@ -248,12 +210,12 @@ const BlogPage = React.createClass({
     }
     return (
       <div className="blogPage">
-        <div className="filterHeading">
+        <div className="blogHeading">
           Welcome to the new blog! If you're feeling nostalgic, you can still
           checkout our <a href="http://blog.uclaradio.com">old blog</a>.
         </div>
         <div className="blogNavbar">
-          <FilterBar handleFilterChange={this.filterPosts} />
+          <BlogFilterBar handleFilterChange={this.filterPosts} />
           <BlogSearch onChange={this.handleSearch} />
         </div>
         <div className="postsContainer">{this.renderPosts()}</div>

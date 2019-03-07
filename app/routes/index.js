@@ -22,7 +22,6 @@ const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?a
 }&limit=${numberOfTUMBLRPosts}`;
 const socialMediaURLs = [FB, TUMBLR];
 const blogURLs = [TUMBLR, KEYSTONE];
-var currentOffset = 0;
 
 router.get('/blurbinfo', (req, res, next) => {
   const info = getTimeAndDay();
@@ -37,8 +36,6 @@ router.get('/blurbinfo', (req, res, next) => {
 
 router.get('/getBlogPosts/:blogPostID', function(req, res) {
   // Length to differentiate blog IDs
-  // external api database shouldn't be stored uclaradio.com
-  // i think that would be reverse engineering
   const queryID = req.params.blogPostID;
   var query;
   var platform;
@@ -84,7 +81,6 @@ router.get('/getBlogPosts/:blogPostID', function(req, res) {
 });
 
 router.get('/getBlogPosts', (req, res) => {
-  currentOffset = 0;
   async.map(
     blogURLs,
     (url, callback) => {
@@ -139,30 +135,6 @@ router.get('/getBlogPosts', (req, res) => {
       res.send(result);
     }
   );
-});
-
-router.post('/getMoreTUMBLRPosts', (req, res) => {
-  currentOffset = req.body.offset;
-  const url = getNextTUMBLRPosts(currentOffset);
-  requestify
-    .get(url, {
-      cache: {
-        cache: true,
-        expires: 108000000,
-      },
-    })
-    .then(response => {
-      const data = response.getBody();
-      data.response.posts.forEach(post => {
-        post.platform = 'TUMBLR';
-        post.created_time = new Date(post.date);
-        post.content = post.body;
-      });
-      res.send({
-        tumblr_posts: data.response.posts,
-        offset: currentOffset,
-      });
-    });
 });
 
 router.get('/getSocialMedia', (req, res) => {
@@ -252,13 +224,6 @@ function getNextFBPosts(FB_pagination_until) {
   return `https://graph.facebook.com/v2.7/214439101900173/posts?fields=full_picture,message,created_time,link&limit=10&access_token=${
     passwords.FB_API_KEY
   }&until=${FB_pagination_until}`;
-}
-
-function getNextTUMBLRPosts(offset) {
-  currentOffset = offset;
-  return `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key=${
-    passwords.TUMBLR_API_KEY
-  }&limit=24&offset=${offset}`;
 }
 
 function getTimeAndDay() {
