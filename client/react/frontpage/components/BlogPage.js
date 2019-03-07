@@ -223,6 +223,7 @@ const BlogPage = React.createClass({
           maxPages={this.state.max_pages}
           setPageNumber={this.setPageNumber}
           pageNumber={this.state.page_number}
+          numberOfPosts={this.state.filteredPosts.length}
         />
       </div>
     );

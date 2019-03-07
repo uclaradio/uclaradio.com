@@ -74,7 +74,11 @@ const Pagination = React.createClass({
     }
   },
   nextIsValid() {
-    return this.props.pageNumber < this.props.maxPages;
+    if (this.props.numberOfPosts) {
+      var postsOnNextPage =
+        this.props.numberOfPosts - 12 * (this.props.pageNumber + 1);
+      return postsOnNextPage > 0;
+    } else return true;
   },
   prevIsValid() {
     return this.props.pageNumber > 0;
