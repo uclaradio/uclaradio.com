@@ -95,9 +95,9 @@ const Pagination = React.createClass({
         </button>
         <input
           aria-label="Page Input"
-          defaultValue={this.props.pageNumber}
+          defaultValue={this.state.pageNumber}
           // display 0 as empty string
-          value={this.props.pageNumber >= 0 ? this.state.pageNumber + 1 : ''}
+          value={this.state.pageNumber >= 0 ? this.state.pageNumber + 1 : ''}
           onChange={this.handleInputChange}
           onKeyDown={this.handleEnter}
         />
