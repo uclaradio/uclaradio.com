@@ -49,9 +49,6 @@ const BlogPage = React.createClass({
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
     );
 
-    if (this.state.page_number > 0 && postsonpage.length < 12) {
-      this.setPageNumber(0);
-    }
     return this.state.filteredPosts.slice(
       this.state.page_number * this.state.POSTS_PER_PAGE,
       (this.state.page_number + 1) * this.state.POSTS_PER_PAGE
