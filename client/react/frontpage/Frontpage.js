@@ -21,6 +21,7 @@ import DJList from './components/DJList/DJList';
 import ShowPage from './components/ShowPage';
 import EventPage from './components/EventPage';
 import DJPage from './components/DJPage';
+import BlogPage from './components/BlogPage';
 
 // Non-Redux Components
 import TriangleCanvas from './components/TriangleCanvas';
@@ -39,6 +40,7 @@ import PromoBanner from './components/PromoBanner';
 import RectImage from '../common/RectImage';
 
 import './frontpage.scss';
+import BlogPostPage from './components/BlogPostPage';
 
 // Google analytics helper
 
@@ -178,6 +180,8 @@ const routes = (
     <Route path="/events" component={EventList} />
     <Route path="/shows" components={ShowsContent} />
     <Route path="/shows/:showID" component={ShowPage} />
+    <Route path="/blog" component={BlogPage} />
+    <Route path="/blog/:blogPostID" component={BlogPostPage} />
     <Route path="/events/:eventID" component={EventPage} />
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
