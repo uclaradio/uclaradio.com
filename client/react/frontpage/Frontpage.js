@@ -181,7 +181,7 @@ const routes = (
     <Route path="/shows" components={ShowsContent} />
     <Route path="/shows/:showID" component={ShowPage} />
     <Route path="/blog" component={BlogPage} />
-    <Route path="blog/:blogPostID" component={BlogPostPage} />
+    <Route path="/blog/:blogPostID" component={BlogPostPage} />
     <Route path="/events/:eventID" component={EventPage} />
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
