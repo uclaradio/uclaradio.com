@@ -51,12 +51,7 @@ router.get('/getBlogPosts/:blogPostID', function(req, res) {
   switch (platform) {
     case 'KEYSTONE':
       requestify
-        .get(query, {
-          cache: {
-            cache: true,
-            expires: 10800000,
-          },
-        })
+        .get(query)
         .then(response => {
           const data = response.getBody();
           data.platform = platform;
@@ -87,12 +82,7 @@ router.get('/getBlogPosts', (req, res) => {
       switch (url) {
         case KEYSTONE:
           requestify
-            .get(KEYSTONE, {
-              cache: {
-                cache: true,
-                expires: 45325423,
-              },
-            })
+            .get(KEYSTONE)
             .then(response => {
               const data = response.getBody();
               data.posts = data.posts.filter(post => {
