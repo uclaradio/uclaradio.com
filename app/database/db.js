@@ -3,12 +3,9 @@
 
 const mongoose = require('mongoose');
 
-mongoose.connect(
-  'mongodb://localhost/uclaradio',
-  {
-    useMongoClient: true,
-  }
-);
+mongoose.connect('mongodb://localhost/uclaradio', {
+  useMongoClient: true,
+});
 
 const db = {};
 
@@ -16,7 +13,6 @@ const db = {};
 
 db.showIdKey = 'show'; // ids for Show table
 db.messageIdKey = 'message'; // ids for messages table
-db.blogpostIdKey = 'blogpost'; // ids for blogposts table
 
 // Contains last distributed id for a table, in order to provide a unique id for each show, etc.
 const LastIdSchema = new mongoose.Schema({
