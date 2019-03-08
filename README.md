@@ -32,14 +32,12 @@ any suggestions! All of the software here is written by students.
 ##### Windows
 
 1. Install [Chocolatey](https://chocolatey.org).
-2. Install git by running `choco install git --params="'/GitAndUnixToolsOnPath
-   /NoAutoCrlf'" -y`.
+2. Install git by running `choco install git --params="'/GitAndUnixToolsOnPath /NoAutoCrlf'" -y`.
 3. Install [CMDer](http://cmder.net) with `choco install cmder -y`.
 4. Install [cairo](https://www.cairographics.org), which is a dependency for a
    package we use. You can do this by downloading Glade (which is a program that
    installs cairo as a dependency) [here](http://gladewin32.sourceforge.net).
-5. Open CMDer and clone our repo by running the command `git clone
-   https://github.com/uclaradio/uclaradio.git`. While you wait for it download,
+5. Open CMDer and clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download,
    give us some love by starring our repo.
 6. Open Powershell as an administrator and cd to the `uclaradio` repo you just
    cloned. Run our
@@ -59,13 +57,12 @@ any suggestions! All of the software here is written by students.
 1. Install [Homebrew](https://brew.sh).
 2. Install git by running `brew install git` or by installing Xcode command line
    tools (which includes git) with `xcode-select --install`.
-3. Clone our repo by running the command `git clone
-   https://github.com/uclaradio/uclaradio.git`. While you wait for it download,
+3. Clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download,
    give us some love by starring our repo.
 4. Navigate to the `scripts` directory and run our
    [`setup.sh`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup.sh)
    script.
-   * Wondering what this does? Basically it installs the latest versions of
+   - Wondering what this does? Basically it installs the latest versions of
      [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and
      [Yarn](https://yarnpkg.com), then uses these programs to install the
      packages we use and set up a local database.
@@ -74,10 +71,18 @@ any suggestions! All of the software here is written by students.
 7. Point your browser to [`http://localhost:3000`](http://localhost:3000)
    :heart_eyes:
 
+###### Blog Development
+
+8. Download the categorized blogposts file, which contains all the old tumblr posts. You'll need access from the codeowners.
+9. Run `yarn fill-blog-db` to seed the database with the downloaded JSON file.
+10. In another terminal, run `mongo` to enter the mongo shell.
+11. Once in the shell, switch to the appropriate database `use uclaradio`.
+12. Validate that you just added 734 blogposts `db.blogposts.count()`.
+
 #### Production
 
-* Make sure all packages are installed with `yarn`.
-* Run `node bin/www prod` to start the server for production (will require HTTPS
+- Make sure all packages are installed with `yarn`.
+- Run `node bin/www prod` to start the server for production (will require HTTPS
   and listen on port 80).
 
 ### Getting Started
@@ -112,10 +117,10 @@ As a student-run organization, UCLA Radio is especially liable to technical
 debt. We have some goals for cleaning up our codebase in the future, but most
 importantly new code should:
 
-* Have new front-end pages in **React**. We prefer using a front-end framework
+- Have new front-end pages in **React**. We prefer using a front-end framework
   with an API to complicated templates.
-* Delete files that are not used anymore. It's okay, get rid of clutter.
-* Follow an organized structure. Put things in the right directories.
+- Delete files that are not used anymore. It's okay, get rid of clutter.
+- Follow an organized structure. Put things in the right directories.
 
 We accept changes from both radio web members and outside contributors. Please
 note both our [contributing guidelines](/.github/CONTRIBUTING.md) and [code of
