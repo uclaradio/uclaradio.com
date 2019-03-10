@@ -4,6 +4,7 @@
 node_modules/
 passwords.json
 categorized-blogposts.json
+stats.json
 client/public/blurbImages/
 client/public/uploads/
 client/public/build/

@@ -6,6 +6,7 @@ module.exports = function(io) {
   const router = express.Router();
 
   const messages = require('../database/messages');
+  const analytics = require('./analytics');
 
   // deliver more message history after a given message
   router.post('/getNext', (req, res) => {
@@ -34,6 +35,7 @@ module.exports = function(io) {
 
   // handle socket event
   io.on('connection', socket => {
+    analytics.addVisitor('site');
     // new user joined
     socket.on('add user', () => {
       messages.generateUsername(username => {
@@ -52,6 +54,8 @@ module.exports = function(io) {
     // user disconnected
     socket.on('disconnect', () => {
       console.log(socket.username, 'left chatroom.');
+      analytics.subVisitor('site');
+      if (analytics.isUserListening) analytics.subListener('site');
     });
 
     // new message sent

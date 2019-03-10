@@ -13,6 +13,8 @@ const trackURL =
 const streamURL = 'https://uclaradio.com/stream/;';
 let stream;
 
+const statsURL = '/analytics/listeners';
+
 /**
 Black floating audio stream bar that sits at bottom of screen,
 plays audio and shows recent tracks
@@ -42,6 +44,7 @@ const StreamBar = React.createClass({
         stream.src = '';
       }
       this.setState({ playing: false });
+      $.post(statsURL, { quantity: -1, platform: 'site' }, _ => {});
     } else {
       // play
       if (isMobile.any()) {
@@ -50,6 +53,7 @@ const StreamBar = React.createClass({
       }
       stream.play();
       this.setState({ playing: true });
+      $.post(statsURL, { quantity: 1, platform: 'site' }, _ => {});
     }
   },
   toggleRecentExpanded() {
