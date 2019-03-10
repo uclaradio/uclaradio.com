@@ -15,10 +15,6 @@ import './PromoBanner.scss';
 //  }
 const bannerData = [
   {
-    img: '/img/promo/winter2019webBanner.jpg',
-    link: 'https://apply.uclastudentmedia.com/applications/ucla-radio',
-  },
-  {
     img: '/img/promo/summer-graphic-radio-banner.jpg',
     link: '',
   },
