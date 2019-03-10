@@ -7,27 +7,24 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 
+const shows = require('../database/shows');
+
 const statsFilePath = path.join(process.cwd(), 'stats.json');
 
 const platforms = ['site', 'android', 'ios'];
-const stats = fs.existsSync(statsFilePath)
+var stats = fs.existsSync(statsFilePath)
   ? require(statsFilePath)
   : {
       visitors: { site: 0, android: 0, ios: 0 },
       listeners: { site: 0, android: 0, ios: 0 },
+      currentShow: {},
     };
 
 var userListening = false;
 
 console.log(stats);
 
-function writeStatsToFile() {
-  try {
-    fs.writeFileSync(statsFilePath, JSON.stringify(stats));
-  } catch (ex) {
-    console.error(ex);
-  }
-}
+// accessors
 
 function totalVisitors() {
   const count = 0;
@@ -46,6 +43,8 @@ function totalListeners() {
 function isUserListening() {
   return userListening;
 }
+
+// mutators
 
 function addVisitor(platform) {
   stats.visitors[platform]++;
@@ -71,7 +70,28 @@ function subListener(platform) {
   writeStatsToFile();
 }
 
+function updateStats() {
+  readStatsFromFile();
+
+  const info = getTimeAndDay();
+  shows.getShowByTimeslotAndDay(info.time, info.day, (err, blurb) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+    if (blurb && blurb.public) {
+      stats.currentShow = blurb;
+    } else {
+      stats.currentShow = {};
+    }
+  });
+}
+
+// routes
+
 router.get('/currentStats', (_, res) => {
+  updateStats();
   res.send(stats);
 });
 
@@ -109,6 +129,51 @@ router.post('/listeners', (req, res) => {
   }
   res.send({ success: 'Success!' });
 });
+
+// helper functions
+
+function getTimeAndDay() {
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const date = new Date();
+
+  const day = days[date.getDay()];
+  let time = date.getHours();
+
+  // Change the time into the format our db is expecting
+  // AKA 12pm, 10am, 1pm: hour followed by am or pm
+  if (time === 0) {
+    time = '12am';
+  } else if (time < 12) {
+    time += 'am';
+  } else if (time == 12) {
+    time = '12pm';
+  } else {
+    time -= 12;
+    time += 'pm';
+  }
+
+  return {
+    day,
+    time,
+  };
+}
+
+function writeStatsToFile() {
+  try {
+    fs.writeFileSync(statsFilePath, JSON.stringify(stats));
+  } catch (ex) {
+    console.error(ex);
+  }
+}
+
+function readStatsFromFile() {
+  try {
+    stats = JSON.parse(fs.readFileSync(statsFilePath, 'utf8'));
+  } catch (ex) {
+    if (ex.code == 'ENOENT') writeStatsToFile();
+    else console.error(ex);
+  }
+}
 
 module.exports = {
   router,
