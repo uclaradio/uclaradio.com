@@ -204,8 +204,8 @@ const Frontpage = React.createClass({
     this.interval = setInterval(this.props.updateNowPlaying, 30 * 1000);
 
     // update now playing and fetch initial shows data
-    // 03/18/19 - "Tuesday Newsday"
-    this.props.setSpotlightShowID(784);
+    // 04/08/19 - "Sports Den"
+    this.props.setSpotlightShowID(835);
     this.props.updateShows();
   },
   componentWillUnmount() {
