@@ -66,6 +66,9 @@ any suggestions! All of the software here is written by students.
      [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and
      [Yarn](https://yarnpkg.com), then uses these programs to install the
      packages we use and set up a local database.
+   - If you have a problem that looks like
+     `error: unknown type name 'uint64_t' uint64_t ri_user_time;`
+     Check out this page [`https://github.com/cython/cython/issues/2009`] and do what matkam says.
 5. Run mongo with `mongod`.
 6. Run `yarn dev` to start the server for development.
 7. Point your browser to [`http://localhost:3000`](http://localhost:3000)
