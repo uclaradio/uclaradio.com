@@ -35,6 +35,7 @@ const MessageForm = React.createClass({
               onChange={this.changeHandler}
               value={this.state.text}
               placeholder="Write a Message"
+              maxLength={11}
             />
             <br />
             <br />
