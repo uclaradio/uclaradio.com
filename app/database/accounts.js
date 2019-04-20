@@ -677,7 +677,31 @@ accounts.forgotPassword = function(email) {
       mail.resetPassword(email, token); //Send email
       accounts.addPWEntry(token, email); //Add entry to DB
     } else {
-      console.log('No User Found!');
+      return;
+    }
+  });
+};
+
+//Verifies email and sends JUST the username to the user
+accounts.forgotUsername = function(email) {
+  accounts.verifyEmail(email, function(err, result) {
+    if (result) {
+      mail.sendUsername(email, result.username);
+    } else {
+      return;
+    }
+  });
+};
+
+//Function to verify email, generate token, and log in database
+//Sends email with username and password reset link to user
+accounts.forgotUsernameAndPassword = function(email) {
+  accounts.verifyEmail(email, function(err, result) {
+    if (result) {
+      var token = generateRandomId(40); //Generate random ID
+      mail.usernameAndResetPassword(email, token, result.username); //Send email
+      accounts.addPWEntry(token, email); //Add entry to DB
+    } else {
       return;
     }
   });

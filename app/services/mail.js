@@ -35,16 +35,49 @@ mail.confirmManager = function(email) {
 //Send User an email with reset password link
 mail.resetPassword = function(email, token) {
   const body =
-    'You are receiving this email because you have requested to reset your DJ Panel Password.  ' +
+    "Looks like you forgot your password! Here's a chance to reset it.  " +
     'If this was not you, please contact a Dev Manager A$AP.\n\n' +
     'Copy the activation key below and click on the link to reset your password.\n' +
     'Unique Identifier: ' +
     token +
     '\n' +
-    'Reset Link: https://uclaradio.com/panel/set-password\n\n' + //Update with correct stuff
+    'Reset Link: https://uclaradio.com/panel/set-password\n\n' +
     'Please note that this unique identifier is only valid for 15 minutes.\n' +
     '- UCLA Radio Dev Team\n';
   mail.send(email, 'UCLA Radio Panel Password Reset', body);
+};
+
+mail.sendUsername = function(email, username) {
+  const body =
+    "Looks like you forgot your username! Here's what we found-\n\n" +
+    'UCLA Radio Panel Username: ' +
+    username +
+    '\n\n' +
+    'If this was not you, please contact a Dev Manager A$AP\n' +
+    '- UCLA Radio Dev Team\n';
+  mail.send(email, 'UCLA Radio Panel Username Recovery', body);
+};
+
+mail.usernameAndResetPassword = function(email, token, username) {
+  const body =
+    'Looks like you forgot your username & password!' +
+    " Here's your username and a chance to reset your password.  " +
+    'If this was not you, please contact a Dev Manager A$AP.\n\n' +
+    'Copy the activation key below and click on the link to reset your password.\n' +
+    'Username: ' +
+    username +
+    '\n' +
+    'Unique Identifier: ' +
+    token +
+    '\n' +
+    'Reset Link: https://uclaradio.com/panel/set-password\n\n' +
+    'Please note that this unique identifier is only valid for 15 minutes.\n' +
+    '- UCLA Radio Dev Team\n';
+  mail.send(
+    email,
+    'UCLA Radio Panel Username Recovery and Password Reset',
+    body
+  );
 };
 
 // send mail with defined transport object

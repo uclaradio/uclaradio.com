@@ -9,6 +9,12 @@ block content
 			p.subheading Enter the email associated with your account
 			label Email 
 			input(type="email", name="email", id='email-tf').span4.required
+			p.subheading I forgot my... (Check all that apply)
+			input(type="checkbox", name="username", alignment = "Alignment_left", checked=(condition))
+			= "Username"
+			input(type="checkbox", name="password", alignment = "Alignment_left", checked=(condition))
+			= "Password"
+				|
 			button(git type="submit" style="width:8rem;")#account-form-btn1.btn
 				| Send
 block scripts

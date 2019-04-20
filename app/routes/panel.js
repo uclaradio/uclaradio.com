@@ -675,8 +675,23 @@ router.get('/send-password-reset', (req, res) => {
 
 router.post('/send-password-reset', (req, res) => {
   if (req.body !== undefined) {
-    accounts.forgotPassword(req.body.email); // if user entered email
-    res.redirect('/panel/send-password-reset');
+    // if user entered email
+    if (req.body.password && ~req.body.username) {
+      //Reset password only
+      accounts.forgotPassword(req.body.email);
+      res.redirect('/panel/send-password-reset');
+    } else if (req.body.username && ~req.body.password) {
+      //Forgot Username only
+      accounts.forgotUsername(req.body.email);
+      res.redirect('/panel/send-password-reset');
+    } else if (req.body.password && req.body.username) {
+      //Forgot username and pass
+      accounts.forgotUsernameAndPassword(req.body.email);
+      res.redirect('/panel/send-password-reset');
+    } else {
+      //Nothing entered, refresh
+      res.redirect('back');
+    }
   } else {
     res.redirect('back'); // else, refresh page
   }
