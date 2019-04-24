@@ -66,6 +66,9 @@ any suggestions! All of the software here is written by students.
      [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and
      [Yarn](https://yarnpkg.com), then uses these programs to install the
      packages we use and set up a local database.
+   - If you have a problem that looks like
+     `error: unknown type name 'uint64_t' uint64_t ri_user_time;`
+     you're going to need to rename your `/usr/local/include` folder to something else. I used `usr/local/include_old`. This solution is from the following issue [`https://github.com/cython/cython/issues/2009`](https://github.com/cython/cython/issues/2009) if you're interested in reading more about the error.
 5. Run mongo with `mongod`.
 6. Run `yarn dev` to start the server for development.
 7. Point your browser to [`http://localhost:3000`](http://localhost:3000)
