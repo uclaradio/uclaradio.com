@@ -107,7 +107,7 @@ const FrontpageContent = React.createClass({
                   <div className="radioBanner">
                     <RectImage
                       maxWidth="350px"
-                      src="/img/uclaradio-black-disco.png"
+                      src="/img/uclaradio-black-disco.gif"
                     />
                   </div>
                 </IndexLink>
