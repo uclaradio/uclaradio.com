@@ -42,6 +42,9 @@ import RectImage from '../common/RectImage';
 import './frontpage.scss';
 import BlogPostPage from './components/BlogPostPage';
 
+// Pledge Drive
+import DiscoFeatures from './components/DiscoFeatures';
+
 // Google analytics helper
 
 ReactGA.initialize('UA-21406547-20');
@@ -126,6 +129,7 @@ const FrontpageContent = React.createClass({
           <StreamBar
             currentShowTitle={showPlaying ? this.props.nowPlaying.title : null}
           />
+          <DiscoFeatures />
         </TriangleCanvas>
       </div>
     );
