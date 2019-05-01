@@ -44,6 +44,7 @@ import BlogPostPage from './components/BlogPostPage';
 
 // Pledge Drive
 import DiscoFeatures from './components/DiscoFeatures';
+import Sparkle from 'react-sparkle';
 
 // Google analytics helper
 
@@ -131,6 +132,14 @@ const FrontpageContent = React.createClass({
           />
           <DiscoFeatures />
         </TriangleCanvas>
+        <Sparkle
+          color={'#FFF'}
+          count={70}
+          minSize={5}
+          maxSize={15}
+          flicker={false}
+          overflowPx={0}
+        />
       </div>
     );
   },
