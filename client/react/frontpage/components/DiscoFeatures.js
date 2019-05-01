@@ -31,6 +31,7 @@ class DiscoFeatures extends React.Component {
             filter: `sepia(100%) saturate(500%) hue-rotate(${tints[0]}deg)`,
           }}
           onClick={handleClick}
+          alt="A disco baby"
         />
         <img
           src="/img/disco_guy_with_babies.png"
@@ -40,6 +41,7 @@ class DiscoFeatures extends React.Component {
             filter: `sepia(100%) saturate(500%) hue-rotate(${tints[1]}deg)`,
           }}
           onClick={handleClick}
+          alt="A disco guy with disco babies"
         />
         <img
           src="/img/discoG.png"
@@ -50,6 +52,7 @@ class DiscoFeatures extends React.Component {
             filter: `sepia(100%) saturate(500%) hue-rotate(${tints[2]}deg)`,
           }}
           onClick={handleClick}
+          alt="I have no clue what this is"
         />
         <img
           src="/img/disco_baby2.png"
@@ -61,6 +64,7 @@ class DiscoFeatures extends React.Component {
             filter: `sepia(100%) saturate(500%) hue-rotate(${tints[3]}deg)`,
           }}
           onClick={handleClick}
+          alt="Another disco baby"
         />
       </div>
     );
