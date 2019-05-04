@@ -12,7 +12,6 @@ const PledgeDriveModal = React.createClass({
   },
 
   render() {
-    console.log('in here');
     return (
       <Modal show={this.state.showModal} onHide={this.close}>
         <Modal.Body>
