@@ -92,7 +92,6 @@ const socialMediaLinks = [
 
 const FrontpageContent = React.createClass({
   render() {
-    console.log('in here');
     const showPlaying =
       this.props.nowPlaying && this.props.nowPlaying.title != null;
     return (
