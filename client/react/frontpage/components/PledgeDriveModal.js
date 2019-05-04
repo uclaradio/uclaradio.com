@@ -12,11 +12,12 @@ const PledgeDriveModal = React.createClass({
   },
 
   render() {
+    console.log('in here');
     return (
       <Modal show={this.state.showModal} onHide={this.close}>
         <Modal.Body>
           <a href="http://spark.ucla.edu/uclaradio">
-            <img src="/img/p-drive-modal.png" style={{ width: '100%' }}>
+            <img src="/img/pledge-drive-popup.gif" style={{ width: '100%' }}>
               {' '}
             </img>
           </a>

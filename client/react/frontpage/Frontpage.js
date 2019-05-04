@@ -41,6 +41,7 @@ import RectImage from '../common/RectImage';
 
 import './frontpage.scss';
 import BlogPostPage from './components/BlogPostPage';
+import PledgeDriveModal from './components/PledgeDriveModal';
 
 // Google analytics helper
 
@@ -91,6 +92,7 @@ const socialMediaLinks = [
 
 const FrontpageContent = React.createClass({
   render() {
+    console.log('in here');
     const showPlaying =
       this.props.nowPlaying && this.props.nowPlaying.title != null;
     return (
@@ -109,6 +111,8 @@ const FrontpageContent = React.createClass({
                   </div>
                 </IndexLink>
                 <SocialPanel links={socialMediaLinks} size="2x" />
+
+                <PledgeDriveModal />
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
                 {/* Show Spotlight */}
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
@@ -118,6 +122,7 @@ const FrontpageContent = React.createClass({
                 {/* <SportsUpdate /> */}
                 {/* Show of the Month */}
                 <PromoBanner />
+
                 <FrontPageNavbar />
                 {this.props.children}
               </Col>
