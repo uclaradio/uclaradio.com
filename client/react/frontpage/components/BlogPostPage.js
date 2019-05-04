@@ -26,6 +26,15 @@ const BlogPostPage = React.createClass({
     });
   },
   parseKeystonePost(post) {
+    if (post.imgs)
+      for (let i = 0; i < post.imgs.length; i++) {
+        post.content = post.content.replace(
+          new RegExp(`/&lt;.*?Image${i}.*?&gt;/`),
+          `<img class="content-img" alt="Image ${i}" src=${
+            post.imgs[i].secure_url
+          } />`
+        );
+      }
     if (post.img1) {
       post.content = post.content.replace(
         /&lt;.*?Image1.*?&gt;/,
@@ -56,6 +65,7 @@ const BlogPostPage = React.createClass({
         `<img class="content-img" alt="Image 5" src=${post.img5.secure_url} />`
       );
     }
+
     return post.content;
   },
   createMarkupForContent() {
