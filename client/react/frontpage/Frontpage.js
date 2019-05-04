@@ -34,6 +34,7 @@ import Error404Page from './components/Error404Page';
 import StreamIssuesPage from './components/StreamIssuesPage';
 import AboutPage from './components/AboutPage';
 import PromoBanner from './components/PromoBanner';
+import CountdownTimer from './components/CountdownTimer';
 // import SportsUpdate from './components/SportsUpdate';
 
 // Common Components
@@ -104,6 +105,7 @@ const FrontpageContent = React.createClass({
         <TriangleCanvas xColors="Spectral">
           <div className="container" id="main">
             <Grid>
+              <CountdownTimer deadline={new Date(2019, 5, 1)} />
               <Col xs={12} md={3} className="frontpageCol">
                 <IndexLink to="/" activeClassName="active">
                   <div className="radioBanner">
