@@ -25,7 +25,7 @@ Sass styling for navbar on frontpage
 
 .frontPageNavbarItem > a {
   color: black !important;
-  font-size: 12pt;
+  font-size: 11pt;
   margin: 0pt $box-padding;
   border-radius: 0 !important;
   background-color: $link-color;
@@ -70,11 +70,6 @@ Sass styling for navbar on frontpage
 .frontPageNavbarItem .equalWidth {
   display: inline-block;
   width: 60pt;
-}
-
-.beta {
-  font-size: small;
-  color: red;
 }
 
 .chatIcon {

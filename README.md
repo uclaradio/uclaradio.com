@@ -67,18 +67,13 @@ any suggestions! All of the software here is written by students.
      [Yarn](https://yarnpkg.com), then uses these programs to install the
      packages we use and set up a local database.
 5. Run `nodenv init`, and follow the instructions it tells you.
+   - If you have a problem that looks like
+     `error: unknown type name 'uint64_t' uint64_t ri_user_time;`
+     you're going to need to rename your `/usr/local/include` folder to something else. I used `usr/local/include_old`. This solution is from the following issue [`https://github.com/cython/cython/issues/2009`](https://github.com/cython/cython/issues/2009) if you're interested in reading more about the error.
 6. Run mongo with `mongod`.
 7. Run `yarn dev` to start the server for development.
 8. Point your browser to [`http://localhost:3000`](http://localhost:3000)
    :heart_eyes:
-
-###### Blog Development
-
-8. Download the categorized blogposts file, which contains all the old tumblr posts. You'll need access from the codeowners.
-9. Run `yarn fill-blog-db` to seed the database with the downloaded JSON file.
-10. In another terminal, run `mongo` to enter the mongo shell.
-11. Once in the shell, switch to the appropriate database `use uclaradio`.
-12. Validate that you just added 734 blogposts `db.blogposts.count()`.
 
 #### Production
 
