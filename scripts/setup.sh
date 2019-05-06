@@ -7,6 +7,7 @@ echo 'Setting up UCLARadio repository...'
 echo 'Installing macOS packages...'
 brew update
 brew install node
+brew install nodenv
 brew install mongodb
 brew install yarn
 # Cairo is a dependency: https://github.com/uclaradio/uclaradio/issues/131
