@@ -8842,6 +8842,14 @@ react-slick@^0.14.5:
     object-assign "^4.1.0"
     slick-carousel "^1.6.0"
 
+react-sparkle@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-sparkle/-/react-sparkle-1.0.4.tgz#f2775b817777ec5f02bd99e465abf9291797eff2"
+  integrity sha1-8ndbgXd37F8CvZnkZav5KReX7/I=
+  dependencies:
+    react "^16.2.0"
+    resize-observer-polyfill "^1.5.0"
+
 react-spinkit@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/react-spinkit/-/react-spinkit-2.1.2.tgz#55c037bd73e99e4b69bf2e37c6227474e74a99f6"
@@ -8858,6 +8866,16 @@ react@^0.14.7:
   dependencies:
     envify "^3.0.0"
     fbjs "^0.6.1"
+
+react@^16.2.0:
+  version "16.8.6"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
+  integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.13.6"
 
 reactable@^0.14.1:
   version "0.14.1"
@@ -9327,6 +9345,11 @@ requires-port@1.0.x, requires-port@1.x.x, requires-port@~1.0.0:
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
 
+resize-observer-polyfill@^1.5.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
+
 resolve-cwd@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/resolve-cwd/-/resolve-cwd-2.0.0.tgz#00a9f7387556e27038eae232caa372a6a59b665a"
@@ -9532,6 +9555,14 @@ sax@>=0.6.0, sax@^1.1.4, sax@^1.2.1, sax@^1.2.4, sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
+
+scheduler@^0.13.6:
+  version "0.13.6"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.13.6.tgz#466a4ec332467b31a91b9bf74e5347072e4cd889"
+  integrity sha512-IWnObHt413ucAYKsD9J1QShUKkbKLQQHdxRyw73sw4FN26iWr3DY/H34xGPe4nmL1DwXyWmSWmMrA9TfQbE/XQ==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 schema-utils@^0.3.0:
   version "0.3.0"

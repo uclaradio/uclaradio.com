@@ -15,11 +15,11 @@ import './PromoBanner.scss';
 //  }
 const bannerData = [
   {
-    img: '/img/promo/summer-graphic-radio-banner.jpg',
+    img: '/img/promo/pledge_drive_banner.png',
     link: '',
   },
   {
-    img: '/img/GeneralWEB.png',
+    img: '/img/promo/pledge_drive_banner_2.jpg',
     link: '',
   },
 ];
@@ -34,11 +34,11 @@ const PromoBanner = React.createClass({
   },
   render() {
     const settings = {
-      dots: true,
+      dots: false, // remove dots
       autoplay: true,
       infinite: true,
       fade: true,
-      autoplaySpeed: 5000,
+      autoplaySpeed: 500, // sped up
       draggable: false,
     };
 
