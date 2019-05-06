@@ -52,6 +52,7 @@ const MessageForm = React.createClass({
                 value={this.state.text}
                 placeholder="Write a Message"
                 maxLength={255}
+                aria-label="Message Form"
               />
               <div className="chars_remaining" style={charsRemainingStyle}>
                 {this.state.charsLeft}
