@@ -223,8 +223,8 @@ const Frontpage = React.createClass({
     this.interval = setInterval(this.props.updateNowPlaying, 30 * 1000);
 
     // update now playing and fetch initial shows data
-    // 04/29/19 - "Identity Crisis: Being Asian in America"
-    this.props.setSpotlightShowID(827);
+    // 05/06/19 - "Silver Screen Schoolgirls: Horny Edition"
+    this.props.setSpotlightShowID(881);
     this.props.updateShows();
   },
   componentWillUnmount() {

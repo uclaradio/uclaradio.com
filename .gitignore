@@ -13,3 +13,4 @@ package.json
 client/public/js/react/
 data/*
 app/database/rivendell.xml
+package-lock.json
