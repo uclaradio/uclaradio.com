@@ -4,9 +4,11 @@
 const mongoose = require('mongoose');
 
 mongoose.connect(
-  'mongodb://localhost/uclaradio',
+  'mongodb://localhost/uclaradio?authSource=admin',
   {
     useMongoClient: true,
+    user: require('../../passwords').mongo_user,
+    pass: require('../../passwords').mongo_pass,
   }
 );
 
