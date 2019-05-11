@@ -63,6 +63,8 @@ const AboutPage = () => (
         was named the #1 Student-Run Internet-Only College Radio Station in the
         country by College Music Journal.
       </p>
+      <br />
+      <a href="/about/policy">Privacy Policy</a>
     </div>
   </div>
 );
