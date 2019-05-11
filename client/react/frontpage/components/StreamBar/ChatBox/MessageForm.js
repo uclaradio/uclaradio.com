@@ -7,9 +7,19 @@ Form to submit new message
 @prop user: username associated with viewing user
 @prop onMessageSubmit: callback to execute with new message data
 * */
+
+const maxChars = 255;
+
+const charsRemainingStyle = {
+  fontSize: '85%',
+  position: 'absolute',
+  top: '10px',
+  right: '10px',
+};
+
 const MessageForm = React.createClass({
   getInitialState() {
-    return { text: '' };
+    return { text: '', charsLeft: maxChars };
   },
   handleSubmit(e) {
     e.preventDefault();
@@ -24,18 +34,30 @@ const MessageForm = React.createClass({
     }
   },
   changeHandler(e) {
-    this.setState({ text: e.target.value });
+    const input = e.target.value;
+    this.setState({ text: input, charsLeft: maxChars - input.length });
   },
   render() {
     return (
       <span>
         <div className="message_form">
           <form onSubmit={this.handleSubmit}>
-            <input
-              onChange={this.changeHandler}
-              value={this.state.text}
-              placeholder="Write a Message"
-            />
+            <div
+              className="container_for_message_to_send"
+              style={{ position: 'relative' }}
+            >
+              <input
+                className="message_to_send"
+                onChange={this.changeHandler}
+                value={this.state.text}
+                placeholder="Write a Message"
+                maxLength={255}
+                aria-label="Message Form"
+              />
+              <div className="chars_remaining" style={charsRemainingStyle}>
+                {this.state.charsLeft}
+              </div>
+            </div>
             <br />
             <br />
             <div id="load_more_wrapper">
