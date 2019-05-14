@@ -32,6 +32,9 @@ const FrontPageNavbar = React.createClass({
         break;
       case 5:
         browserHistory.push('/events');
+      case 6:
+        browserHistory.push('/podcasts');
+        break;
       case 10:
         this.setState({ open: !this.state.open });
         break;
@@ -87,12 +90,17 @@ const FrontPageNavbar = React.createClass({
                 <span className="equalWidth">Events</span>
               </NavItem>
             </LinkContainer>
-            <NavItem
-              eventKey={3}
-              className="frontPageNavbarItem rightMost collapsed"
-            >
+            <NavItem eventKey={3} className="frontPageNavbarItem collapsed">
               <span className="equalWidth">Apply</span>
             </NavItem>
+            <LinkContainer to="/podcasts">
+              <NavItem
+                eventKey={6}
+                className="frontPageNavbarItem rightMost collapsed"
+              >
+                <span className="equalWidth">Podcasts</span>
+              </NavItem>
+            </LinkContainer>
           </Nav>
         </Collapse>
 
@@ -150,6 +158,14 @@ const FrontPageNavbar = React.createClass({
               }}
             >
               Apply
+            </MenuItem>
+            <MenuItem
+              className="dropdownNavbarItem"
+              onClick={() => {
+                this.handleClick(6);
+              }}
+            >
+              Podcasts
             </MenuItem>
           </NavDropdown>
         </Nav>

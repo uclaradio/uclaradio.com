@@ -40,6 +40,7 @@ export const fetchUpdatedShows = dispatch => {
     success(data) {
       dispatch(stopFetching());
       dispatch(updateShows(data.shows));
+      // console.log(data)
     },
     error(xhr, status, err) {
       dispatch(stopFetching());

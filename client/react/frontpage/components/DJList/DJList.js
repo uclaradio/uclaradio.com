@@ -122,7 +122,8 @@ const DJList = React.createClass({
     return (
       <div className="djList">
         {this.props.currentShow.status !== null &&
-        this.props.currentShow.status === 'no show playing' ? (
+        this.props.currentShow.status ===
+          'actions.fetchPlaylists(dispatch);si' ? (
           <p />
         ) : (
           <DJCurrentShow currentDJ={currentDJ} />

@@ -33,6 +33,7 @@ import WaterFallContent from './components/WaterFallContent';
 import Error404Page from './components/Error404Page';
 import StreamIssuesPage from './components/StreamIssuesPage';
 import AboutPage from './components/AboutPage';
+import PodcastPage from './components/PodcastPage/PodcastPage';
 import PromoBanner from './components/PromoBanner';
 // import SportsUpdate from './components/SportsUpdate';
 
@@ -168,6 +169,8 @@ const mapStateToProps = state => {
 
   return props;
 };
+
+// connects store to frontpageContent
 const FrontpageContentContainer = connect(mapStateToProps)(FrontpageContent);
 
 // react-router routes
@@ -185,6 +188,7 @@ const routes = (
     <Route path="/events/:eventID" component={EventPage} />
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
+    <Route path="/podcasts" component={PodcastPage} />
     <Route path="*" component={Error404Page} />
   </Route>
 );
