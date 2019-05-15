@@ -2,10 +2,6 @@
 echo "This is the UCLA Radio setup scrit for WSL Ubuntu."
 echo "This script will install the following 4 packages:"
 echo "(1) mongodb, (2) cairo, (3) yarn, and (4) nodejs"
-if [[ ! $REPLY =~ ^[Yy] ]] ; then 
-	echo "Setup has been cancelled. Exiitng."
-	[[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
-fi 
 sudo apt-get update
 sudo apt-get install -y mongodb #installing mongodb
 sudo apt-get install -y libcairo2-dev #installing cairo
