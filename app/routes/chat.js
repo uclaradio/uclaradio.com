@@ -56,15 +56,17 @@ module.exports = function(io) {
 
     // new message sent
     socket.on('new message', data => {
-      messages.saveMessage(data, message => {
-        io.sockets.emit('new message', {
-          id: message.id,
-          text: message.text,
-          user: message.user,
-          date: message.date,
+      if (data.user && data.text) {
+        messages.saveMessage(data, message => {
+          io.sockets.emit('new message', {
+            id: message.id,
+            text: message.text,
+            user: message.user,
+            date: message.date,
+          });
+          console.log('chat -', `${message.user}:`, message.text);
         });
-        console.log('chat -', `${message.user}:`, message.text);
-      });
+      }
     });
   });
 

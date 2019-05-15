@@ -15,12 +15,12 @@ import './PromoBanner.scss';
 //  }
 const bannerData = [
   {
-    img: '/img/promo/web-wine-n-blanket.png',
-    link: 'https://www.facebook.com/events/2067576166837819/',
+    img: '/img/promo/pledge_drive_banner.png',
+    link: '',
   },
   {
-    img: '/img/promo/pd-2018.png',
-    link: 'https://www.facebook.com/events/1298520493612291/',
+    img: '/img/promo/pledge_drive_banner_2.jpg',
+    link: '',
   },
 ];
 
@@ -34,11 +34,11 @@ const PromoBanner = React.createClass({
   },
   render() {
     const settings = {
-      dots: true,
+      dots: false, // remove dots
       autoplay: true,
       infinite: true,
       fade: true,
-      autoplaySpeed: 5000,
+      autoplaySpeed: 500, // sped up
       draggable: false,
     };
 
@@ -53,7 +53,9 @@ const PromoBanner = React.createClass({
         {banner.link.indexOf('http') == -1 ? (
           <Link to={banner.link}>{self.getImage(banner)}</Link>
         ) : (
-          <a href={banner.link}>{self.getImage(banner)}</a>
+          <a target="_blank" href={banner.link}>
+            {self.getImage(banner)}
+          </a>
         )}
       </div>
     ));

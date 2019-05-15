@@ -6,15 +6,14 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const socketIO = require('socket.io');
+const http = require('http');
 
 const app = express();
 const io = socketIO();
 app.io = io;
 
 const routes = require('./routes/index');
-// const staffingPoints = require('./routes/staffingPoints');
 const pages = require('./routes/pages');
-const managers = require('./routes/managers');
 const panel = require('./routes/panel.js');
 const notFound = require('./routes/notFound');
 const ticketGiveawayCalendar = require('./routes/ticketGiveawayCalendar');
@@ -47,9 +46,7 @@ app.use(
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 
 app.use('/', routes);
-// app.use('/staffingPoints', staffingPoints);
 app.use('/pages', pages);
-app.use('/managers', managers);
 app.use('/notFound', notFound);
 app.use('/GiveawayCalendar', ticketGiveawayCalendar);
 app.use('/api', api);
@@ -92,5 +89,11 @@ app.use((err, req, res) => {
     error: {},
   });
 });
+
+// Regularly ping the blog's Heroku app to keep it awake
+setInterval(_ => {
+  http.get('http://uclaradio-blog.herokuapp.com');
+  console.log('Pinging blog...');
+}, 1740000 /* 29 minutes; app sleeps after 30 */);
 
 module.exports = app;

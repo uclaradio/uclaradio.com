@@ -30,14 +30,6 @@ body {
   color: white;
 }
 
-/* .demo-card-wide > .mdl-card__title.staffing-points {
-  background: url('/img/staffing-points.png') center / cover;
-}
-
-.demo-card-wide > .mdl-card__title.total-points {
-  background: url('/img/points-total.png') center / cover;
-} */
-
 .demo-card-wide > .mdl-card__title.request-form {
   background: url("/img/request-box.jpg") center / cover;
 }
@@ -55,7 +47,7 @@ body {
 }
 
 .demo-card-wide > .mdl-card__title.spreadsheet {
-  background: url("/img/spreadsheet.png") center / cover;
+  background: url("/img/vulture-subs.png") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.consent-and-release {
@@ -88,6 +80,22 @@ body {
 
 .demo-card-wide > .mdl-card__title.interview-signups {
   background: url("/img/interview-signups.jpg") center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.general-manager {
+  background: url("/img/faizanbutterfly.png") center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.transcript {
+  background: url("/img/typewriter.jpg") center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.disco_art {
+  background: url("/img/radio_disco.JPG") center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.confetti {
+  background: url("/img/confetti.jpeg") center / cover;
 }
 
 .demo-card-wide > .mdl-card__title.show-graphics {
@@ -144,4 +152,8 @@ body {
 
 .demo-card-wide > .mdl-card__title.DJ-profile {
   background: url("/img/dj_profile.jpg") center / cover;
+}
+
+.demo-card-wide > .mdl-card__title.no-no {
+  background: url("/img/no-no.jpg") center / cover;
 }

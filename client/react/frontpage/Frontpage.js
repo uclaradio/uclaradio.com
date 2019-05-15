@@ -21,6 +21,7 @@ import DJList from './components/DJList/DJList';
 import ShowPage from './components/ShowPage';
 import EventPage from './components/EventPage';
 import DJPage from './components/DJPage';
+import BlogPage from './components/BlogPage';
 
 // Non-Redux Components
 import TriangleCanvas from './components/TriangleCanvas';
@@ -32,14 +33,21 @@ import WaterFallContent from './components/WaterFallContent';
 import Error404Page from './components/Error404Page';
 import StreamIssuesPage from './components/StreamIssuesPage';
 import AboutPage from './components/AboutPage';
+import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import PromoBanner from './components/PromoBanner';
-import SpaceJam from './components/SpaceJam';
-import PledgeDriveModal from './components/PledgeDriveModal';
+import CountdownTimer from './components/CountdownTimer';
+// import SportsUpdate from './components/SportsUpdate';
 
 // Common Components
 import RectImage from '../common/RectImage';
 
 import './frontpage.scss';
+import BlogPostPage from './components/BlogPostPage';
+import PledgeDriveModal from './components/PledgeDriveModal';
+
+// Pledge Drive
+import DiscoFeatures from './components/DiscoFeatures';
+import Sparkle from 'react-sparkle';
 
 // Google analytics helper
 
@@ -95,35 +103,50 @@ const FrontpageContent = React.createClass({
     return (
       <div className="frontpageContent">
         {/* <TriangleCanvas xColors={theme.timezoneColorScheme()}> */}
-        {/*<TriangleCanvas xColors="Spectral">*/}
-        <div className="container" id="main">
-          <Grid>
-            <Col xs={12} md={3} className="frontpageCol">
-              <IndexLink to="/" activeClassName="active">
-                <div className="radioBanner">
-                  <RectImage maxWidth="350px" src="/img/uclaradio-black.png" />
-                </div>
-              </IndexLink>
-              <SocialPanel links={socialMediaLinks} size="2x" />
-              <ShowInfo title="Current Show" show={this.props.nowPlaying} />
-              {/* Show Spotlight */}
-              <ShowInfo title="Spotlight" show={this.props.spotlight} />
-            </Col>
+        <TriangleCanvas xColors="Spectral">
+          <div className="container" id="main">
+            <Grid>
+              <CountdownTimer deadline={new Date(2019, 5, 1)} />
+              <Col xs={12} md={3} className="frontpageCol">
+                <IndexLink to="/" activeClassName="active">
+                  <div className="radioBanner">
+                    <RectImage
+                      maxWidth="350px"
+                      src="/img/uclaradio_pledge_drive_logo.gif"
+                    />
+                  </div>
+                </IndexLink>
+                <SocialPanel links={socialMediaLinks} size="2x" />
 
-            <Col xs={12} md={9} className="frontpageCol">
-              {/* Show of the Month */}
-              <PromoBanner />
-              <FrontPageNavbar />
-              <PledgeDriveModal />
-              {this.props.children}
-            </Col>
-          </Grid>
-        </div>
-        <StreamBar
-          currentShowTitle={showPlaying ? this.props.nowPlaying.title : null}
+                <PledgeDriveModal />
+                <ShowInfo title="Current Show" show={this.props.nowPlaying} />
+                {/* Show Spotlight */}
+                <ShowInfo title="Spotlight" show={this.props.spotlight} />
+              </Col>
+
+              <Col xs={12} md={9} className="frontpageCol">
+                {/* <SportsUpdate /> */}
+                {/* Show of the Month */}
+                <PromoBanner />
+
+                <FrontPageNavbar />
+                {this.props.children}
+              </Col>
+            </Grid>
+          </div>
+          <StreamBar
+            currentShowTitle={showPlaying ? this.props.nowPlaying.title : null}
+          />
+          <DiscoFeatures />
+        </TriangleCanvas>
+        <Sparkle
+          color={'#FFF'}
+          count={70}
+          minSize={5}
+          maxSize={15}
+          flicker={false}
+          overflowPx={0}
         />
-        <SpaceJam />
-        {/*</TriangleCanvas>*/}
       </div>
     );
   },
@@ -177,9 +200,12 @@ const routes = (
     <Route path="/events" component={EventList} />
     <Route path="/shows" components={ShowsContent} />
     <Route path="/shows/:showID" component={ShowPage} />
+    <Route path="/blog" component={BlogPage} />
+    <Route path="/blog/:blogPostID" component={BlogPostPage} />
     <Route path="/events/:eventID" component={EventPage} />
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
+    <Route path="/about/privacy-policy" component={PrivacyPolicyPage} />
     <Route path="*" component={Error404Page} />
   </Route>
 );
@@ -199,8 +225,8 @@ const Frontpage = React.createClass({
     this.interval = setInterval(this.props.updateNowPlaying, 30 * 1000);
 
     // update now playing and fetch initial shows data
-    // 04/27/18 - "Bread and Butter"
-    this.props.setSpotlightShowID(541);
+    // 05/13/19 - "2020 Central"
+    this.props.setSpotlightShowID(882);
     this.props.updateShows();
   },
   componentWillUnmount() {

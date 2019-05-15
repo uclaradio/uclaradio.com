@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-    <title>UCLA Radio</title>
-    <base href="/">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <title>UCLA Radio</title>
+  <base href="/">
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="css/font.css">
-    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+    crossorigin="anonymous">
 
-    <!-- Font Awesome -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="css/font.css">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
-    <!-- JavaScript Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js"></script>
+  <!-- Font Awesome -->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous">
 
-    <!-- React Slider Styles -->
-    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
-  </head>
-  <body>
-    <audio id="stream" src="http://uclaradio.com:8000/;" preload="none"></audio>
-    <div id="content"></div>
-    <img id="space" alt="Pledge Drive 2018 Space Background" src="/img/galaxyDefault.jpeg" />
+  <!-- JavaScript Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.4/trianglify.min.js"></script>
 
-    <!-- socket.io.js must be referenced before compiled react files (builds) -->
-    <script src="/socket.io/socket.io.js"></script>
+  <!-- React Slider Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
+</head>
 
-    <!-- compiled react filed (builds) -->
-    <script src="/build/Vendors.js"></script>
-    <script src="/build/FrontpageApp.min.js"></script>
-  </body>
+<body>
+  <audio id="stream" src="https://uclaradio.com/stream/;" preload="none"></audio>
+  <div id="content"></div>
+
+  <!-- socket.io.js must be referenced before compiled react files (builds) -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- compiled react filed (builds) -->
+  <script src="/build/Vendors.js"></script>
+  <script src="/build/FrontpageApp.min.js"></script>
+</body>
+
 </html>

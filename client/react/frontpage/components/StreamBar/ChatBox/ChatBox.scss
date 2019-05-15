@@ -46,6 +46,10 @@ input:focus {
   width: 100%;
 }
 
+.message_to_send {
+  padding-right: 15%;
+}
+
 @media only screen and (min-width: 450px) {
   /*ensure that chat images are full size on mobile */
   .message_form {

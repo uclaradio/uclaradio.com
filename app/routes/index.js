@@ -2,18 +2,26 @@
 // Front page
 
 const express = require('express');
-
 const router = express.Router();
 const async = require('async');
 const shows = require('../database/shows');
+const blogposts = require('../database/blogposts');
 const passwords = require('../../passwords');
 const requestify = require('requestify');
 
 const numberOfFBPosts = 7;
-const numberOfTUMBLRPosts = 3;
-const FB = `https://graph.facebook.com/uclaradio?fields=posts.limit(${numberOfFBPosts}){full_picture,message,created_time,link}&access_token=${passwords.FB_API_KEY}`;
-const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key=${passwords.TUMBLR_API_KEY}&limit=${numberOfTUMBLRPosts}`;
+const numberOfTUMBLRPosts = 24;
+const keystoneIDLength = 24;
+const tumblrIDLength = 12;
+const KEYSTONE = 'http://uclaradio-blog.herokuapp.com/api/posts';
+const FB = `https://graph.facebook.com/uclaradio?fields=posts.limit(${numberOfFBPosts}){full_picture,message,created_time,link}&access_token=${
+  passwords.FB_API_KEY
+}`;
+const TUMBLR = `https://api.tumblr.com/v2/blog/uclaradio.tumblr.com/posts/text?api_key=${
+  passwords.TUMBLR_API_KEY
+}&limit=${numberOfTUMBLRPosts}`;
 const socialMediaURLs = [FB, TUMBLR];
+const blogURLs = [TUMBLR, KEYSTONE];
 
 router.get('/blurbinfo', (req, res, next) => {
   const info = getTimeAndDay();
@@ -24,6 +32,106 @@ router.get('/blurbinfo', (req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(blurb));
   });
+});
+
+router.get('/getBlogPosts/:blogPostID', function(req, res) {
+  // Length to differentiate blog IDs
+  const queryID = req.params.blogPostID;
+  var query;
+  var platform;
+  if (queryID.length == keystoneIDLength) {
+    query = `${KEYSTONE}/${queryID}`;
+    platform = 'KEYSTONE';
+  } else if (queryID.length == tumblrIDLength) {
+    platform = 'TUMBLR';
+  } else {
+    res.send(null);
+    return;
+  }
+  switch (platform) {
+    case 'KEYSTONE':
+      requestify
+        .get(query)
+        .then(response => {
+          const data = response.getBody();
+          data.platform = platform;
+          data.date = new Date(data.createdAt);
+          data.title = data.name;
+          res.send(data);
+        })
+        .fail(response => {
+          res.send(null);
+        });
+      break;
+    case 'TUMBLR':
+      blogposts.getPostByID(queryID, (err, o) => {
+        if (o) {
+          res.send(o);
+        } else {
+          res.status(400).send(err);
+        }
+      });
+      break;
+  }
+});
+
+router.get('/getBlogPosts', (req, res) => {
+  async.map(
+    blogURLs,
+    (url, callback) => {
+      switch (url) {
+        case KEYSTONE:
+          requestify
+            .get(KEYSTONE)
+            .then(response => {
+              const data = response.getBody();
+              data.posts = data.posts.filter(post => {
+                if (post.publishedAt)
+                  // if the post has a publishedAt field, only allow it through the filter if it is
+                  //  before the current date and time (on load)
+                  return (
+                    post.state == 'published' &&
+                    new Date(post.publishedAt) - new Date() < 0
+                  );
+                else return post.state == 'published';
+              });
+              data.posts.forEach(post => {
+                post.id = post._id;
+                post.platform = 'KEYSTONE';
+                if (post.publishedAt) {
+                  post.date = new Date(post.publishedAt);
+                } else {
+                  post.date = new Date(post.createdAt);
+                }
+                post.title = post.name;
+              });
+              callback(null, data.posts);
+            })
+            .fail(response => {
+              callback(null, []);
+            });
+          break;
+        case TUMBLR:
+          blogposts.getAllPosts((err, o) => {
+            if (o) {
+              callback(null, o);
+            } else {
+              callback(err, []);
+            }
+          });
+          break;
+      }
+    },
+    (err, allBlogPosts) => {
+      allBlogPosts = [].concat
+        .apply([], allBlogPosts)
+        .sort((postA, postB) => new Date(postB.date) - new Date(postA.date));
+      const result = {
+        blog_posts: allBlogPosts,
+      };
+      res.send(result);
+    }
+  );
 });
 
 router.get('/getSocialMedia', (req, res) => {
@@ -72,6 +180,7 @@ router.get('/getSocialMedia', (req, res) => {
       const result = {
         social_media: allSocialMediaPosts,
         fb_pagination_until: FB_pagination_until,
+        offset: 0,
       };
       res.send(result);
     }
@@ -97,10 +206,6 @@ router.post('/getMoreFBPosts', (req, res) => {
     });
 });
 
-router.get('/blog', (req, res, next) => {
-  res.redirect('http://uclaradio.tumblr.com');
-});
-
 router.get('/pledgedrive', (req, res, next) => {
   res.render('pledgedrive');
 });
@@ -113,7 +218,9 @@ function getFBPaginationTools(url) {
 }
 
 function getNextFBPosts(FB_pagination_until) {
-  return `https://graph.facebook.com/v2.7/214439101900173/posts?fields=full_picture,message,created_time,link&limit=10&access_token=${passwords.FB_API_KEY}&until=${FB_pagination_until}`;
+  return `https://graph.facebook.com/v2.7/214439101900173/posts?fields=full_picture,message,created_time,link&limit=10&access_token=${
+    passwords.FB_API_KEY
+  }&until=${FB_pagination_until}`;
 }
 
 function getTimeAndDay() {

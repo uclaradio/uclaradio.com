@@ -12,7 +12,7 @@ import 'rc-slider/assets/index.css';
 
 const trackURL =
   'https://ws.audioscrobbler.com/2.0/?method=user.getRecentTracks&user=uclaradio&api_key=d3e63e89b35e60885c944fe9b7341b76&limit=10&format=json';
-const streamURL = 'http://uclaradio.com:8000/;';
+const streamURL = 'https://uclaradio.com/stream/;';
 let stream;
 
 /**
