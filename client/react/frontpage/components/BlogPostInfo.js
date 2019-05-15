@@ -11,7 +11,6 @@ const BlogPostURL = '/getLatestBlogPost';
 const BlogPostInfo = React.createClass({
   getInitialState() {
     return {
-      fetching: true,
       postInfo: {},
     };
   },
@@ -19,7 +18,6 @@ const BlogPostInfo = React.createClass({
     $.get(BlogPostURL, result => {
       const latestPost = result.post;
       this.setState({
-        fetching: false,
         postInfo: latestPost,
       });
     });
@@ -44,9 +42,6 @@ const BlogPostInfo = React.createClass({
     return null;
   },
   render() {
-    if (this.state.fetching) {
-      return <p />;
-    }
     return (
       <div className="blogPostInfo">
         <p className="infoHeader">Latest Blog Post</p>
@@ -56,7 +51,7 @@ const BlogPostInfo = React.createClass({
               src={this.urlFromImage(this.state.postInfo) || defaultShowPic}
             />
             <div className="postDetails">
-              <p className="postTitle">{this.state.postInfo.name}</p>
+              <p className="postTitle">{this.state.postInfo.name || ''}</p>
               <p className="postAuthor">
                 by {this.state.postInfo.author || ''}
               </p>
