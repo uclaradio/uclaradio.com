@@ -205,7 +205,7 @@ const routes = (
     <Route path="/events/:eventID" component={EventPage} />
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
-    <Route path="/about/policy" component={PrivacyPolicyPage} />
+    <Route path="/about/privacy-policy" component={PrivacyPolicyPage} />
     <Route path="*" component={Error404Page} />
   </Route>
 );

@@ -89,7 +89,7 @@ const AboutPage = () => (
       <p>Read our full Privacy Policy below.</p>
       <br />
       <div id="privacypolicy">
-        <a id="pplink" href="/about/policy">
+        <a id="pplink" href="/about/privacy-policy">
           Privacy Policy{' '}
         </a>
       </div>
