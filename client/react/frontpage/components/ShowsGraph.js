@@ -199,7 +199,6 @@ const ShowsGraph = React.createClass({
               const displayDay = this.lateNightDay(day);
               const show =
                 this.state.schedule && this.state.schedule[displayDay][hour];
-              console.log(this.props.currentShowID);
               return (
                 <ShowBlock
                   showImage={
