@@ -225,13 +225,6 @@ const ShowsGraph = React.createClass({
 
     return (
       <div className="showsGraph">
-        <div className="colorKey">
-          <p>current show</p>
-          <div className="dotCur" /> {/* Current Show Color Key */}
-          <p>spotlight show</p>
-          <div className="dotSpot" /> {/* Spotlight Show Color Key */}
-        </div>
-
         {dayTitles}
         {showBlocks}
       </div>

@@ -27,11 +27,11 @@ Sass styling for show blurb on shows page (with grid)
 }
 
 .blurb {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.85);
   width: 400px;
   display: inline-block;
   position: fixed;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(0%, -50%);
 }
