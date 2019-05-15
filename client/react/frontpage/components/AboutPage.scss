@@ -6,7 +6,6 @@ Sass syling for the About page
 .aboutPage {
   margin: 10pt 0;
   padding: 10pt 20pt;
-  text-align: center;
 }
 
 #about_text {
@@ -23,4 +22,40 @@ Sass syling for the About page
   padding: 5px;
   display: inline-block;
   vertical-align: top;
+  text-align: center;
+}
+
+.onethirdsplit {
+  width: 33%;
+  min-width: 200px;
+  padding: 5px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.twothirdsplit {
+  margin-top: 10px;
+  width: 66%;
+  min-width: 400px;
+  padding: 5px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+#privacypolicy {
+  background: rgba(255, 255, 255, 0.5);
+  width: 200px;
+  height: 45px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 45px;
+}
+
+#privacypolicy:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+#pplink {
+  display: block;
+  height: 100%;
 }
