@@ -49,7 +49,8 @@ const ShowsGraph = React.createClass({
             position: 'relative',
             width: '100%',
             margin: '0 auto',
-          }}>
+          }}
+        >
           <p className="timeStyle">{hourString}</p>
           {week.map(day => {
             const show = this.props.schedule[day][hour];
@@ -86,6 +87,8 @@ Individual show block with rollover action
 @prop isCurrentShow: styling bool: this show is currently playing
 @prop isActiveShow: styling bool: user clicked on this show
 @prop isSpotlightShow: styling bool: show is a spotlight feature on website
+@prop showImage: image for the show
+
 */
 const ShowBlock = React.createClass({
   handleMouseOver() {

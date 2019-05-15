@@ -108,12 +108,12 @@ const ShowsContent = React.createClass({
                   }
                   onShowClick={this.toggleActiveShow}
                 />
+                <div className="blurbStyle">
+                  {this.state.activeShow && (
+                    <ShowBlurb show={this.state.activeShow} />
+                  )}
+                </div>
               </div>
-              {/* <div className="blurbStyle">
-                {this.state.activeShow && (
-                  <ShowBlurb show={this.state.activeShow} />
-                )}
-              </div> */}
             </div>
           ) : (
             <div>
