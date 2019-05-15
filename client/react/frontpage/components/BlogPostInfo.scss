@@ -1,0 +1,67 @@
+/**
+BlogPostInfo.scss
+
+Sass styling for blog post info component in frontpage
+**/
+
+@import "../common";
+
+.blogPostInfo {
+  margin: 0 auto 2 * $box-padding auto;
+  // max-width: 350px;
+}
+
+.infoHeader {
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  margin: 5px 0;
+}
+
+.infoHeader .glyphicon {
+  margin: 0 5px;
+}
+
+.blogPic {
+  padding: 5px;
+  // background-color: $link-color;
+  // cursor: pointer;
+}
+
+.blogPic:hover,
+.active .blogPic:hover {
+  // background-color: $link-hover-color;
+  background-color: $link-image-hover-color;
+}
+
+.active .blogPic {
+  // background-color: $link-hover-color;
+  background-color: $link-image-active-color;
+}
+
+.blogPostInfo .blogPic {
+  margin: 0 auto;
+}
+
+.blogPic .rectImage {
+  margin: 0 !important;
+  width: 30%;
+  max-width: 100px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.blogPostInfo .postDetails {
+  padding: 5px 10px;
+  width: 70%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.postDetails .postTitle {
+  font-size: 18px;
+}
+
+.postDetails p {
+  margin: 0;
+}
