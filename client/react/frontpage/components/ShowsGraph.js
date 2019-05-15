@@ -199,6 +199,7 @@ const ShowsGraph = React.createClass({
               const displayDay = this.lateNightDay(day);
               const show =
                 this.state.schedule && this.state.schedule[displayDay][hour];
+              console.log(this.props.currentShowID);
               return (
                 <ShowBlock
                   showImage={
@@ -261,6 +262,8 @@ const ShowBlock = React.createClass({
       (this.props.isCurrentShow && '#3c84cc') ||
       'black';
 
+    const opacityLevel = (this.props.isCurrentShow && '1.0') || '0.8';
+
     const backgroundImage = 'url("' + this.props.showImage + '")';
 
     return (
@@ -272,6 +275,7 @@ const ShowBlock = React.createClass({
             backgroundSize: '100px 100px',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
+            opacity: opacityLevel,
           }}
           onClick={this.handleClick}
         />
