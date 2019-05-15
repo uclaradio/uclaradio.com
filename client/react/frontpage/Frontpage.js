@@ -36,7 +36,6 @@ import AboutPage from './components/AboutPage';
 import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import PromoBanner from './components/PromoBanner';
 import CountdownTimer from './components/CountdownTimer';
-import BlogPostInfo from './components/BlogPostInfo';
 // import SportsUpdate from './components/SportsUpdate';
 
 // Common Components
@@ -123,7 +122,6 @@ const FrontpageContent = React.createClass({
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
                 {/* Show Spotlight */}
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
-                <BlogPostInfo />
               </Col>
 
               <Col xs={12} md={9} className="frontpageCol">
