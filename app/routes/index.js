@@ -86,12 +86,6 @@ router.get('/getBlogPosts', (req, res) => {
             .then(response => {
               const data = response.getBody();
               data.posts = data.posts.filter(post => {
-                console.log(
-                  'Post: ' +
-                    post.name +
-                    ', before: ' +
-                    (new Date(post.publishedAt) - new Date()).toString()
-                );
                 if (post.publishedAt)
                   // if the post has a publishedAt field, only allow it through the filter if it is
                   //  before the current date and time (on load)
