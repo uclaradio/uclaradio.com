@@ -44,10 +44,12 @@ const AboutPage = () => (
       </div>
       <br />
     </div>
-
-    <div id="about_text">
-      <br />
-      <h3>About</h3>
+    <br />
+    <br />
+    <div className="threesplit">
+      <h1>ABOUT US: </h1>
+    </div>
+    <div className="twothirdsplit">
       <p>
         <strong>UCLA Radio</strong> is made up of over 150 unique, creative, and
         passionate students dedicated to bringing quality programming to our
@@ -63,6 +65,34 @@ const AboutPage = () => (
         was named the #1 Student-Run Internet-Only College Radio Station in the
         country by College Music Journal.
       </p>
+    </div>
+    <br />
+    <br />
+    <div className="threesplit">
+      <h1>OUR POLICY: </h1>
+    </div>
+    <div className="twothirdsplit">
+      <p>
+        It is UCLA Radio's policy to respect your privacy regarding any
+        information we may collect while operating our website. This Privacy
+        Policy applies to <a href="http://uclaradio.com">uclaradio.com</a>{' '}
+        (hereinafter, "us", "we", or "uclaradio.com"). We respect your privacy
+        and are committed to protecting personally identifiable information you
+        may provide us through the Website. We have adopted this privacy policy
+        ("Privacy Policy") to explain what information may be collected on our
+        Website, how we use this information, and under what circumstances we
+        may disclose the information to third parties. This Privacy Policy
+        applies only to information we collect through the Website and does not
+        apply to our collection of information from other sources.
+      </p>
+      <br />
+      <p>Read our full Privacy Policy below.</p>
+      <br />
+      <div id="privacypolicy">
+        <a id="pplink" href="/about/privacy-policy">
+          Privacy Policy{' '}
+        </a>
+      </div>
     </div>
   </div>
 );
