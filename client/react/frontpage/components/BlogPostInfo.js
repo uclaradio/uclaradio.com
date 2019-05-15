@@ -44,7 +44,7 @@ const BlogPostInfo = React.createClass({
   render() {
     return (
       <div className="blogPostInfo">
-        <p className="infoHeader">Featured Blog Post</p>
+        <p className="infoHeader">Latest Blog Post</p>
         <Link to={this.urlFromPost(this.state.postInfo)}>
           <div className="blogPic">
             <RectImage

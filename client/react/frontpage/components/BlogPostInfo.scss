@@ -8,7 +8,6 @@ Sass styling for blog post info component in frontpage
 
 .blogPostInfo {
   margin: 0 auto 2 * $box-padding auto;
-  // max-width: 350px;
 }
 
 .infoHeader {
@@ -24,18 +23,14 @@ Sass styling for blog post info component in frontpage
 
 .blogPic {
   padding: 5px;
-  // background-color: $link-color;
-  // cursor: pointer;
 }
 
 .blogPic:hover,
 .active .blogPic:hover {
-  // background-color: $link-hover-color;
   background-color: $link-image-hover-color;
 }
 
 .active .blogPic {
-  // background-color: $link-hover-color;
   background-color: $link-image-active-color;
 }
 
