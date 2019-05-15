@@ -109,11 +109,11 @@ const ShowsContent = React.createClass({
                   onShowClick={this.toggleActiveShow}
                 />
               </div>
-              <div className="blurbStyle">
+              {/* <div className="blurbStyle">
                 {this.state.activeShow && (
                   <ShowBlurb show={this.state.activeShow} />
                 )}
-              </div>
+              </div> */}
             </div>
           ) : (
             <div>
@@ -140,4 +140,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowsContent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShowsContent);

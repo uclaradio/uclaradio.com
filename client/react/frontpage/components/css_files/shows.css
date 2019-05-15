@@ -1,15 +1,12 @@
 /* SHOWS CONTENT */
-
 .graphStyle {
-  float: left;
-}
+  float: left; }
 
 .blurbStyle {
   width: 40%;
   float: left;
   font-size: 12px;
-  font-weight: lighter;
-}
+  font-weight: lighter; }
 
 .switchSelStyle {
   display: inline-block;
@@ -17,23 +14,20 @@
   font-weight: 800;
   text-decoration: underline;
   padding: 5px;
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .switchStyle {
   display: inline-block;
   position: relative;
   padding: 5px;
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .schedHeader {
   display: inline;
   font-size: 50px;
   font-weight: 100;
   font-style: italic;
-  margin-top: -15px;
-}
+  margin-top: -15px; }
 
 .scheduleViewButton {
   display: inline;
@@ -43,21 +37,17 @@
   height: 50px;
   left: 30px;
   top: -8px;
-  padding: 2px;
-}
+  padding: 2px; }
 
 /* SHOW GRAPH */
-
 .colorKey {
   display: block;
-  position: relative;
-}
+  position: relative; }
 
 .colorKeyPara {
   font-size: 13px;
   position: relative;
-  display: inline-block;
-}
+  display: inline-block; }
 
 .dotCur {
   position: relative;
@@ -67,8 +57,7 @@
   display: inline-block;
   margin-left: 10px;
   margin-right: 20px;
-  background-color: rgba(60, 132, 204, 0.45);
-}
+  background-color: rgba(60, 132, 204, 0.45); }
 
 .dotSpot {
   position: relative;
@@ -78,16 +67,14 @@
   display: inline-block;
   margin-left: 10px;
   margin-right: 15px;
-  background-color: rgba(128, 0, 128, 0.45);
-}
+  background-color: rgba(128, 0, 128, 0.45); }
 
 .headsStyle {
   font-size: 11px;
   padding-right: 1px;
   margin-bottom: 2px;
   display: inline-block;
-  position: relative;
-}
+  position: relative; }
 
 .timeStyle {
   font-size: 11px;
@@ -95,25 +82,21 @@
   display: inline-block;
   position: relative;
   margin-right: -15px;
-  top: -5px;
-}
+  top: -5px; }
 
 .hourBlocks {
   width: 100%;
   margin-bottom: -10px;
   display: inline-block;
-  position: relative;
-}
+  position: relative; }
 
 /* SHOW GRAPH BLOCKS */
-
 .boringBlockStyle {
   height: 100%;
   width: 100%;
   background-color: white;
   display: inline-block;
-  position: relative;
-}
+  position: relative; }
 
 .blockStyle {
   cursor: pointer;
@@ -121,18 +104,15 @@
   width: 100%;
   display: inline-block;
   position: relative;
-  background: rgba(255, 255, 255, 0.45);
-}
+  background: rgba(255, 255, 255, 0.45); }
 
 /* SHOW BLURB */
-
 .blurbStyle {
   width: 40%;
   float: left;
   font-size: 12px;
   font-weight: lighter;
-  margin-top: -50px;
-}
+  margin-top: -50px; }
 
 .lineStyle {
   border-top: 0.5px solid black;
@@ -140,30 +120,24 @@
   width: 100%;
   position: relative;
   margin-bottom: 2px;
-  top: -5px;
-}
+  top: -5px; }
 
 /* GENERAL */
-
 .header {
   font-size: 15px;
-  font-weight: lighter;
-}
+  font-weight: lighter; }
 
 .djs {
   font-size: 15px;
-  font-style: italic;
-}
+  font-style: italic; }
 
 .showTitle {
   font-size: 20px;
-  font-weight: lighter;
-}
+  font-weight: lighter; }
 
 .blurb {
   font-size: 12px;
-  font-weight: lighter;
-}
+  font-weight: lighter; }
 
 .dot {
   background-color: grey;
@@ -172,38 +146,31 @@
   border-radius: 50%;
   display: inline-block;
   margin-left: 5px;
-  position: relative;
-}
+  position: relative; }
 
 .Headline {
-  h1 {
-    display: inline;
-    font-size: 50pt;
-  }
   padding-top: 15px;
-  padding-bottom: 15px;
-}
+  padding-bottom: 15px; }
+  .Headline h1 {
+    display: inline;
+    font-size: 50pt; }
 
 .chart-container {
   display: block;
   margin: 0;
-  padding-top: 15px;
-}
+  padding-top: 15px; }
 
 .day {
   display: inline-block;
   position: relative;
-  width: 8%;
-  h1 {
+  width: 8%; }
+  .day h1 {
     display: inline;
-    font-size: 15pt;
-  }
-}
+    font-size: 15pt; }
 
 .showBlock {
   opacity: 0.5;
   height: 20px;
   padding-right: 5px;
   display: inline-block;
-  position: relative;
-}
+  position: relative; }
