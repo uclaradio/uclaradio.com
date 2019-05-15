@@ -33,6 +33,7 @@ import WaterFallContent from './components/WaterFallContent';
 import Error404Page from './components/Error404Page';
 import StreamIssuesPage from './components/StreamIssuesPage';
 import AboutPage from './components/AboutPage';
+import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import PromoBanner from './components/PromoBanner';
 import CountdownTimer from './components/CountdownTimer';
 // import SportsUpdate from './components/SportsUpdate';
@@ -204,6 +205,7 @@ const routes = (
     <Route path="/events/:eventID" component={EventPage} />
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
+    <Route path="/about/privacy-policy" component={PrivacyPolicyPage} />
     <Route path="*" component={Error404Page} />
   </Route>
 );
@@ -223,8 +225,8 @@ const Frontpage = React.createClass({
     this.interval = setInterval(this.props.updateNowPlaying, 30 * 1000);
 
     // update now playing and fetch initial shows data
-    // 05/06/19 - "Silver Screen Schoolgirls: Horny Edition"
-    this.props.setSpotlightShowID(881);
+    // 05/13/19 - "2020 Central"
+    this.props.setSpotlightShowID(882);
     this.props.updateShows();
   },
   componentWillUnmount() {

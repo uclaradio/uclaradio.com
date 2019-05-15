@@ -29,28 +29,50 @@ any suggestions! All of the software here is written by students.
 
 #### Development
 
+Below are the primary way we recommend for Windows and Mac users to set up the repo properly on their computer to run.  
+If you are wondering why you can't just clone it and be done it is because we have some extra programs that need to be
+downloaded in order for to run and develop the website. These include Node, MongoDB, and Yarn mainly.
+
+The Windows set up will require the usage of Windows Subsystem for Linux in order to make downloading and installing
+all of these software easy. It also helps to make the environment more similar to Mac users so it is easier to get help
+and work together.
+
+Mac users will need Homebrew in order to have the command terminal be able to download and install programs as if it
+was a complete Linux system.
+
 ##### Windows
 
-1. Install [Chocolatey](https://chocolatey.org).
-2. Install git by running `choco install git --params="'/GitAndUnixToolsOnPath /NoAutoCrlf'" -y`.
-3. Install [CMDer](http://cmder.net) with `choco install cmder -y`.
-4. Install [cairo](https://www.cairographics.org), which is a dependency for a
-   package we use. You can do this by downloading Glade (which is a program that
-   installs cairo as a dependency) [here](http://gladewin32.sourceforge.net).
-5. Open CMDer and clone our repo by running the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download,
+1. Install [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Please download Ubuntu.
+2. Open Ubuntu and ensure git is installed by running `git --version`.
+3. Navigate back to the Windows c drive with `cd /mnt/c/Users`.
+   (Note: if you `ls` and are worried about the denied permissions, that is normal because it simply means don't touch this
+   or you might break something internally. Everything you need you have access to!)
+4. Now once you are here, cd into your own user folder. Then navigate to a directory that you want to work in.
+   (Do not just put it in your user folder--go to your desktop or documents folder)
+   Ex) `cd Bob/Desktop` and `mkdir radio_stuff` to make a folder/directory
+5. Run the command `git clone https://github.com/uclaradio/uclaradio.git`. While you wait for it download,
    give us some love by starring our repo.
-6. Open Powershell as an administrator and cd to the `uclaradio` repo you just
-   cloned. Run our
-   [`setup1.ps1`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup1.ps1)
-   script. If you're getting a "running scripts is disabled error", try running
-   `set-executionpolicy remotesigned`.
-7. Open up **another** Powershell window as an administrator and run the
-   [`setup2.ps1`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup2.ps1)
-   script. Why two scripts? Windows is weird, man.
-8. Run mongo with `mongod`.
-9. Run `yarn dev` to start the server for development.
+6. Navigate to the set up script with `cd uclaradio/scripts`.
+   Then run our [`setup_ubuntu.sh`](https://github.com/uclaradio/uclaradio/blob/master/scripts/setup_ubuntu.sh) script.
+   - Wondering what this does? Basically it installs the latest versions of
+     [Node](https://nodejs.org/en/), [MongoDB](https://www.mongodb.com), and
+     [Yarn](https://yarnpkg.com), then uses these programs to install the
+     packages we use and set up a local database.
+   - Is yarn not working? Try yarn --version and if you see 0.3# instead of 1.#.#, then run `sudo apt remove cmdtest`
+     Rerun the setup script and see if it works now. More on this issue [here](https://github.com/yarnpkg/yarn/issues/2821)
+   - Is the setup script not running and returning an error? Try running `sudo apt-get install dos2unix` and then
+     `dos2unix setup_ubuntu.sh` (to fix WSL formatting [error](https://askubuntu.com/questions/966488/how-do-i-fix-r-command-not-found-errors-running-bash-scripts-in-wsl)).
+7. Open up **another** Ubuntu window by left-clicking the icon at the bottom and clicking Ubuntu.
+   Navigate to the uclaradio repo. (To make life easier, just copy the path from the original window!)
+8. Run mongo with `mongod` in one Ubuntu window.
+9. Run `yarn dev` in the other Ubuntu window to start the server for development.
 10. Point your browser to [`http://localhost:3000`](http://localhost:3000)
     :heart_eyes:
+11. Please note that whenever you open a new ubuntu terminal you will have to navigate back to the Windows c file system.
+    This is done as said before by going for example `cd /mnt/c/Users/Bob/Desktop/uclaradio`. The reason for having to do
+    this every time you open instead of simply cloning the repo into the default WSL Ubuntu root setup is because this way
+    you can find and open the repo with file explorer. If you'd like to edit files easily using a text/code editor, this
+    is very crucial.
 
 ##### MacOS
 

@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const socketIO = require('socket.io');
+const http = require('http');
 
 const app = express();
 const io = socketIO();
@@ -88,5 +89,11 @@ app.use((err, req, res) => {
     error: {},
   });
 });
+
+// Regularly ping the blog's Heroku app to keep it awake
+setInterval(_ => {
+  http.get('http://uclaradio-blog.herokuapp.com');
+  console.log('Pinging blog...');
+}, 1740000 /* 29 minutes; app sleeps after 30 */);
 
 module.exports = app;

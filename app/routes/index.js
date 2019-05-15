@@ -86,7 +86,14 @@ router.get('/getBlogPosts', (req, res) => {
             .then(response => {
               const data = response.getBody();
               data.posts = data.posts.filter(post => {
-                return post.state == 'published';
+                if (post.publishedAt)
+                  // if the post has a publishedAt field, only allow it through the filter if it is
+                  //  before the current date and time (on load)
+                  return (
+                    post.state == 'published' &&
+                    new Date(post.publishedAt) - new Date() < 0
+                  );
+                else return post.state == 'published';
               });
               data.posts.forEach(post => {
                 post.id = post._id;
