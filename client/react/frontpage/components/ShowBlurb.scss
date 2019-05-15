@@ -13,10 +13,8 @@ Sass styling for show blurb on shows page (with grid)
 
 .blurbStyle {
   width: 40%;
-  float: left;
   font-size: 12px;
   font-weight: lighter;
-  margin-top: -50px;
 }
 
 .lineStyle {
@@ -29,11 +27,13 @@ Sass styling for show blurb on shows page (with grid)
 }
 
 .blurb {
-  background: rgba(255, 255, 255, 0.45);
-  height: 100%;
-  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  width: 400px;
   display: inline-block;
-  position: relative;
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(0%, -50%);
 }
 
 .blurb-body {

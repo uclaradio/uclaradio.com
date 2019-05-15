@@ -15,6 +15,8 @@ const week = [
 ];
 const dayWidth = `${100 / 8}%`;
 
+const defaultShowPic = '/img/radio.png';
+
 /*
 Full graph with schedule of shows
 
@@ -166,6 +168,10 @@ const ShowsGraph = React.createClass({
             const show = this.state.schedule && this.state.schedule[day][hour];
             return (
               <ShowBlock
+                showImage={
+                  show &&
+                  (this.state.schedule[day][hour].picture || defaultShowPic)
+                }
                 isValidShow={show && show.title}
                 isCurrentShow={show && show.id === this.props.currentShowID}
                 isActiveShow={show && show.id === this.props.activeShowID}
@@ -195,6 +201,11 @@ const ShowsGraph = React.createClass({
                 this.state.schedule && this.state.schedule[displayDay][hour];
               return (
                 <ShowBlock
+                  showImage={
+                    show &&
+                    (this.state.schedule[displayDay][hour].picture ||
+                      defaultShowPic)
+                  }
                   isValidShow={show && show.title}
                   isCurrentShow={show && show.id === this.props.currentShowID}
                   isActiveShow={show && show.id === this.props.activeShowID}
@@ -214,13 +225,6 @@ const ShowsGraph = React.createClass({
 
     return (
       <div className="showsGraph">
-        <div className="colorKey">
-          <p>current show</p>
-          <div className="dotCur" /> {/* Current Show Color Key */}
-          <p>spotlight show</p>
-          <div className="dotSpot" /> {/* Spotlight Show Color Key */}
-        </div>
-
         {dayTitles}
         {showBlocks}
       </div>
@@ -236,6 +240,8 @@ Individual show block with rollover action
 @prop isCurrentShow: styling bool: this show is currently playing
 @prop isActiveShow: styling bool: user clicked on this show
 @prop isSpotlightShow: styling bool: show is a spotlight feature on website
+@prop showImage: string: image for the show
+
 */
 const ShowBlock = React.createClass({
   handleClick() {
@@ -255,11 +261,21 @@ const ShowBlock = React.createClass({
       (this.props.isCurrentShow && '#3c84cc') ||
       'black';
 
+    const opacityLevel = (this.props.isCurrentShow && '1.0') || '0.8';
+
+    const backgroundImage = 'url("' + this.props.showImage + '")';
+
     return (
       <div className="showBlock" style={{ width: dayWidth }}>
         <div
           className="blockStyle"
-          style={{ backgroundColor: blockColor }}
+          style={{
+            backgroundImage: backgroundImage,
+            backgroundSize: '100px 100px',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            opacity: opacityLevel,
+          }}
           onClick={this.handleClick}
         />
       </div>

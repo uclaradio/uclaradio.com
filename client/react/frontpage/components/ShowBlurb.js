@@ -51,11 +51,17 @@ const ShowBlurb = React.createClass({
 
     return (
       <div className="showBlurb">
-        <div className="dot" />
-        <h1 className="header">SELECTED SHOW: </h1>
         <div className="blurb">
           <div className="blurb-body">
-            <h1 className="showTitle">{this.props.show.title}</h1>
+            <div>
+              <a
+                onClick={this.props.action}
+                style={{ float: 'right', fontSize: '20px' }}
+              >
+                [x]
+              </a>
+              <h1 className="showTitle">{this.props.show.title}</h1>
+            </div>
             <Link to={this.urlFromShow(this.props.show)}>
               <RectImage
                 maxWidth="350px"
@@ -77,7 +83,8 @@ const ShowBlurb = React.createClass({
                 <a
                   className="facebookLogo"
                   href={this.props.show.facebook}
-                  target="_blank">
+                  target="_blank"
+                >
                   <i
                     className="fa fa-facebook-square fa-lg"
                     aria-hidden="true"
@@ -88,7 +95,8 @@ const ShowBlurb = React.createClass({
                 <a
                   className="tumblrLogo"
                   href={this.props.show.tumblr}
-                  target="_blank">
+                  target="_blank"
+                >
                   <i className="fa fa-tumblr-square fa-lg" aria-hidden="true" />
                 </a>
               )}
@@ -96,7 +104,8 @@ const ShowBlurb = React.createClass({
                 <a
                   className="soundcloudLogo"
                   href={this.props.show.soundcloud}
-                  target="_blank">
+                  target="_blank"
+                >
                   <i className="fa fa-soundcloud fa-lg" aria-hidden="true" />
                 </a>
               )}
@@ -104,7 +113,8 @@ const ShowBlurb = React.createClass({
                 <a
                   className="mixcloudLogo"
                   href={this.props.show.mixcloud}
-                  target="_blank">
+                  target="_blank"
+                >
                   <i className="fa fa-mixcloud fa-lg" aria-hidden="true" />
                 </a>
               )}
