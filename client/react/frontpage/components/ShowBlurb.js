@@ -53,7 +53,15 @@ const ShowBlurb = React.createClass({
       <div className="showBlurb">
         <div className="blurb">
           <div className="blurb-body">
-            <h1 className="showTitle">{this.props.show.title}</h1>
+            <div>
+              <a
+                onClick={this.props.action}
+                style={{ float: 'right', fontSize: '20px' }}
+              >
+                [x]
+              </a>
+              <h1 className="showTitle">{this.props.show.title}</h1>
+            </div>
             <Link to={this.urlFromShow(this.props.show)}>
               <RectImage
                 maxWidth="350px"
@@ -115,10 +123,6 @@ const ShowBlurb = React.createClass({
             <Link to={this.urlFromShow(this.props.show)}>
               [CLICK FOR FULL SHOW PAGE]
             </Link>
-            <a onClick={this.props.action} style={{ float: 'right' }}>
-              {' '}
-              [x]{' '}
-            </a>
           </div>
         </div>
       </div>
