@@ -34,37 +34,6 @@ router.get('/blurbinfo', (req, res, next) => {
   });
 });
 
-router.get('/getLatestBlogPost', function(req, res) {
-  requestify
-    .get(KEYSTONE)
-    .then(response => {
-      const data = response.getBody();
-      data.posts = data.posts.filter(post => {
-        return post.state == 'published';
-      });
-
-      data.posts.forEach(post => {
-        if (post.publishedAt) {
-          post.date = new Date(post.publishedAt);
-        } else {
-          post.date = new Date(post.createdAt);
-        }
-      });
-
-      data.posts = data.posts.sort((a, b) => {
-        return b.date - a.date;
-      });
-
-      const result = {
-        post: data.posts[0],
-      };
-      res.send(result);
-    })
-    .fail(response => {
-      res.send(null);
-    });
-});
-
 router.get('/getBlogPosts/:blogPostID', function(req, res) {
   // Length to differentiate blog IDs
   const queryID = req.params.blogPostID;
