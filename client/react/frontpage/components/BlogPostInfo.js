@@ -6,7 +6,7 @@ import RectImage from '../../common/RectImage';
 import './BlogPostInfo.scss';
 
 const defaultShowPic = '/img/radio.png';
-const BlogPostURL = '/getLatestBlogPost';
+const BlogPostURL = '/getBlogPosts';
 
 const BlogPostInfo = React.createClass({
   getInitialState() {
@@ -16,7 +16,7 @@ const BlogPostInfo = React.createClass({
   },
   componentDidMount() {
     $.get(BlogPostURL, result => {
-      const latestPost = result.post;
+      const latestPost = result.blog_posts[0];
       this.setState({
         postInfo: latestPost,
       });
@@ -24,9 +24,9 @@ const BlogPostInfo = React.createClass({
   },
   urlFromPost(post) {
     if (post) {
-      if (post._id) {
-        console.log(post._id);
-        return `/blog/${post._id}`;
+      if (post.id) {
+        console.log(post.id);
+        return `/blog/${post.id}`;
       }
     }
     return null;
@@ -51,7 +51,7 @@ const BlogPostInfo = React.createClass({
               src={this.urlFromImage(this.state.postInfo) || defaultShowPic}
             />
             <div className="postDetails">
-              <p className="postTitle">{this.state.postInfo.name || ''}</p>
+              <p className="postTitle">{this.state.postInfo.title || ''}</p>
               <p className="postAuthor">
                 by {this.state.postInfo.author || ''}
               </p>
