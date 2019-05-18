@@ -12,6 +12,7 @@ const BlogPostInfo = React.createClass({
   getInitialState() {
     return {
       postInfo: {},
+      fetching: true,
     };
   },
   componentDidMount() {
@@ -19,6 +20,7 @@ const BlogPostInfo = React.createClass({
       const latestPost = result.blog_posts[0];
       this.setState({
         postInfo: latestPost,
+        fetching: false,
       });
     });
   },
@@ -42,6 +44,9 @@ const BlogPostInfo = React.createClass({
     return null;
   },
   render() {
+    if (this.state.fetching) {
+      return <p />;
+    }
     return (
       <div className="blogPostInfo">
         <p className="infoHeader">Latest Blog Post</p>
