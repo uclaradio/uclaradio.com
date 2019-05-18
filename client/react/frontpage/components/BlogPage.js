@@ -113,9 +113,12 @@ const BlogPage = React.createClass({
     const searchedposts = this.state.posts.filter(el => {
       let searchValue;
       if (el.title) {
-        searchValue = el.title.toLowerCase();
-        return searchValue.indexOf(searchQuery) !== -1;
+        searchValue = el.title.toLowerCase() + ' ';
       }
+      if (el.author) {
+        searchValue += el.author.toLowerCase();
+      }
+      return searchValue.indexOf(searchQuery) !== -1;
     });
 
     this.setState({
