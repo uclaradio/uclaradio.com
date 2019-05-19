@@ -36,6 +36,7 @@ const ShowsContent = React.createClass({
   },
   componentWillMount() {
     this.props.updateShows();
+    this.blurbHandler = this.blurbHandler.bind(this);
   },
   componentDidMount() {
     if (isMobile.any()) {
@@ -47,6 +48,9 @@ const ShowsContent = React.createClass({
   },
   updateViewType(viewType) {
     this.setState({ viewType });
+  },
+  blurbHandler() {
+    this.setState({ activeShow: null });
   },
   render() {
     // loading
@@ -108,11 +112,14 @@ const ShowsContent = React.createClass({
                   }
                   onShowClick={this.toggleActiveShow}
                 />
-              </div>
-              <div className="blurbStyle">
-                {this.state.activeShow && (
-                  <ShowBlurb show={this.state.activeShow} />
-                )}
+                <div className="blurbStyle">
+                  {this.state.activeShow && (
+                    <ShowBlurb
+                      show={this.state.activeShow}
+                      action={this.blurbHandler}
+                    />
+                  )}
+                </div>
               </div>
             </div>
           ) : (
@@ -140,4 +147,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowsContent);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShowsContent);

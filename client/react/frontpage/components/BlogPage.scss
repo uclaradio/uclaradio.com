@@ -26,6 +26,8 @@ $image-height: 270px;
   opacity: 0.8;
   width: 100%;
   min-height: $image-height;
+  object-fit: cover;
+  object-position: center;
 }
 
 .textContainer {

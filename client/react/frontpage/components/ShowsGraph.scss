@@ -5,8 +5,8 @@ Sass styling for graph/grid on shows page
 **/
 
 .showBlock {
-  opacity: 0.5;
-  height: 20px;
+  opacity: 1;
+  height: 70px;
   padding-right: 5px;
   display: inline-block;
   position: relative;
@@ -18,6 +18,7 @@ Sass styling for graph/grid on shows page
   background-color: white;
   display: inline-block;
   position: relative;
+  opacity: 0.5;
 }
 
 .blockStyle {
@@ -26,7 +27,7 @@ Sass styling for graph/grid on shows page
   width: 100%;
   display: inline-block;
   position: relative;
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 1);
 }
 
 .colorKey {
@@ -63,7 +64,7 @@ Sass styling for graph/grid on shows page
 }
 
 .dayStyle {
-  font-size: 11px;
+  font-size: 20px;
   padding-right: 1px;
   margin-bottom: 2px;
   display: inline-block;
@@ -71,12 +72,12 @@ Sass styling for graph/grid on shows page
 }
 
 .timeStyle {
-  font-size: 11px;
+  font-size: 20px;
   padding-right: 3px;
   display: inline-block;
   position: relative;
   margin-right: -15px;
-  top: -5px;
+  top: -25px;
 }
 
 .hourBlocks {
