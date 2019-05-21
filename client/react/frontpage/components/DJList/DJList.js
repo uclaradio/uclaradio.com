@@ -31,6 +31,7 @@ const DJList = React.createClass({
   getInitialState() {
     return {
       displayedDJs: this.props.djs,
+      fetching: true,
     };
   },
 
@@ -52,6 +53,7 @@ const DJList = React.createClass({
     if (prevProps.djs.length !== this.props.djs.length) {
       this.setState({
         displayedDJs: this.props.djs,
+        fetching: false,
       });
     }
   },
@@ -119,6 +121,9 @@ const DJList = React.createClass({
       }
     });
 
+    if (this.state.fetching) {
+      return <Loader />;
+    }
     return (
       <div className="djList">
         {this.props.currentShow.status !== null &&
