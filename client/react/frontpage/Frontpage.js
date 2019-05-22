@@ -72,6 +72,7 @@ Expects children components for tab contents
 
 @prop nowPlaying: show to display as live
 @prop spotlight: show to display as spotlight
+@prop showOfMonth: show to display as show of the month
 @prop children: components to display in content area
 * */
 
@@ -123,6 +124,11 @@ const FrontpageContent = React.createClass({
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
                 {/* Show Spotlight */}
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
+                {/* Show of the Month */}
+                <ShowInfo
+                  title="Show of the Month"
+                  show={this.props.showOfMonth}
+                />
                 <BlogPostInfo />
               </Col>
 
@@ -156,7 +162,7 @@ const FrontpageContent = React.createClass({
 
 /**
 Redux container (wrapper) for FrontpageContent to provide props:
-  nowPlaying, spotlight
+  nowPlaying, spotlight, showOfMonth
 * */
 
 const mapStateToProps = state => {
@@ -186,6 +192,13 @@ const mapStateToProps = state => {
   );
   if (spotlight && spotlight !== -1) {
     props.spotlight = spotlight;
+  }
+
+  const showOfMonth = state.shows.shows.find(
+    show => show.id == state.shows.showOfMonthID
+  );
+  if (showOfMonth && showOfMonth !== -1) {
+    props.showOfMonth = showOfMonth;
   }
 
   return props;
@@ -218,6 +231,7 @@ also sets some data in store
 
 @prop updateNowPlaying: () => refresh now playing by requesting new data from server
 @prop setSpotlightShowID: (showID) => update the spotlight to be a show with the provided showID
+@prop setShowOfMonthID: (showID) => update the show of the month to be a show with the provided showID
 @prop updateShows: () => should fetch updated list of shows and update store
 * */
 const Frontpage = React.createClass({
@@ -229,6 +243,8 @@ const Frontpage = React.createClass({
     // update now playing and fetch initial shows data
     // 05/20/19 - "The Problem Attic"
     this.props.setSpotlightShowID(917);
+    // Show of the Month
+    this.props.setShowOfMonthID(917);
     this.props.updateShows();
   },
   componentWillUnmount() {

@@ -18,6 +18,7 @@ import {
   addUpdateShow,
   updateSpotlightShow,
   fetchUpdatedShows,
+  updateShowOfMonth,
 } from './frontpage/actions/shows';
 import Frontpage from './frontpage/Frontpage';
 
@@ -34,6 +35,9 @@ const mapDispatchToProps = dispatch => ({
   },
   setSpotlightShowID: showID => {
     dispatch(updateSpotlightShow(showID));
+  },
+  setShowOfMonthID: showID => {
+    dispatch(updateShowOfMonth(showID));
   },
   updateShows: () => {
     fetchUpdatedShows(dispatch);

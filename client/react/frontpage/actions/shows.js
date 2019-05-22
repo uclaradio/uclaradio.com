@@ -29,6 +29,11 @@ export const updateSpotlightShow = showID => ({
   showID,
 });
 
+export const updateShowOfMonth = showID => ({
+  type: 'UPDATE_SHOW_OF_MONTH',
+  showID,
+});
+
 const scheduleURL = '/api/schedule';
 // Fetch updated show schedule from server and update store via dispatch
 export const fetchUpdatedShows = dispatch => {

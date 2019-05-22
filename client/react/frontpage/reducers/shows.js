@@ -37,6 +37,10 @@ const shows = (state = initialState, action) => {
       return Object.assign({}, state, {
         spotlightID: action.showID,
       });
+    case 'UPDATE_SHOW_OF_MONTH':
+      return Object.assign({}, state, {
+        showOfMonthID: action.showID,
+      });
     default:
       return state;
   }
