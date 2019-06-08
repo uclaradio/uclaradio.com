@@ -35,7 +35,6 @@ import StreamIssuesPage from './components/StreamIssuesPage';
 import AboutPage from './components/AboutPage';
 import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import PromoBanner from './components/PromoBanner';
-import CountdownTimer from './components/CountdownTimer';
 import BlogPostInfo from './components/BlogPostInfo';
 // import SportsUpdate from './components/SportsUpdate';
 
@@ -44,11 +43,6 @@ import RectImage from '../common/RectImage';
 
 import './frontpage.scss';
 import BlogPostPage from './components/BlogPostPage';
-import PledgeDriveModal from './components/PledgeDriveModal';
-
-// Pledge Drive
-import DiscoFeatures from './components/DiscoFeatures';
-import Sparkle from 'react-sparkle';
 
 // Google analytics helper
 
@@ -107,19 +101,16 @@ const FrontpageContent = React.createClass({
         <TriangleCanvas xColors="Spectral">
           <div className="container" id="main">
             <Grid>
-              <CountdownTimer deadline={new Date(2019, 5, 1)} />
               <Col xs={12} md={3} className="frontpageCol">
                 <IndexLink to="/" activeClassName="active">
                   <div className="radioBanner">
                     <RectImage
                       maxWidth="350px"
-                      src="/img/uclaradio_pledge_drive_logo.gif"
+                      src="/img/uclaradio-black.png"
                     />
                   </div>
                 </IndexLink>
                 <SocialPanel links={socialMediaLinks} size="2x" />
-
-                <PledgeDriveModal />
                 <ShowInfo title="Current Show" show={this.props.nowPlaying} />
                 {/* Show Spotlight */}
                 <ShowInfo title="Spotlight" show={this.props.spotlight} />
@@ -130,7 +121,6 @@ const FrontpageContent = React.createClass({
                 {/* <SportsUpdate /> */}
                 {/* Show of the Month */}
                 <PromoBanner />
-
                 <FrontPageNavbar />
                 {this.props.children}
               </Col>
@@ -139,16 +129,7 @@ const FrontpageContent = React.createClass({
           <StreamBar
             currentShowTitle={showPlaying ? this.props.nowPlaying.title : null}
           />
-          <DiscoFeatures />
         </TriangleCanvas>
-        <Sparkle
-          color={'#FFF'}
-          count={70}
-          minSize={5}
-          maxSize={15}
-          flicker={false}
-          overflowPx={0}
-        />
       </div>
     );
   },
