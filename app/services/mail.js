@@ -51,7 +51,7 @@ mail.resetPassword = function(email, token) {
 mail.send = function(to, subject, body) {
   // setup e-mail data with unicode symbols
   const mailOptions = {
-    from: '"UCLA Radio Dev Dept." <radio.web@media.ucla.edu>',
+    from: '"UCLA Radio Dev Dept." <radio.dev@media.ucla.edu>',
     to,
     subject,
     text: body,
