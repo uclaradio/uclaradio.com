@@ -94,6 +94,7 @@
     "requestify": "^0.2.3",
     "serve-favicon": "^2.2.0",
     "socket.io": "^2.0.3",
+    "soundcloud": "^3.3.2",
     "spdy": "^3.3.2",
     "trianglify": "^1.0.1",
     "tumblr.js": "^2.0.0",

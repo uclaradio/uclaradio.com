@@ -41,6 +41,6 @@ module.exports = {
       name: 'Vendors',
       filename: 'Vendors.js',
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    // new webpack.optimize.UglifyJsPlugin(),
   ],
 };
