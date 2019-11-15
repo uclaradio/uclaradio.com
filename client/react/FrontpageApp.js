@@ -23,7 +23,7 @@ import Frontpage from './frontpage/Frontpage';
 
 import reducer from './frontpage/reducers/';
 // creates store and enables redux dev tools
-const store = createStore(
+export const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );

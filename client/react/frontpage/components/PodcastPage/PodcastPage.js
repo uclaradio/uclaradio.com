@@ -2,15 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 //import PodcastSearchBar from './PodcastSearchBar';
 import {
-  fetchPlaylists,
+  fetchTracks,
+  play,
+  pause,
+  printStore,
   updatePlaylists,
   startFetching,
   stopFetching,
 } from '../../actions/podcasts';
 import PodcastPlaylist from './PodcastPlaylist';
 import './PodcastPage.scss';
-
 import Loader from '../Loader';
+import FunctionalButton from './FunctionalButton';
 
 /**
 Content podcasts
@@ -27,10 +30,18 @@ class PodcastPage extends React.Component {
     this.state = {
       displayedPlaylists: this.props.playlists,
     };
+    this.handlePlayButtonClick = this.handlePlayButtonClick.bind(this);
+    this.handlePauseButtonClick = this.handlePauseButtonClick.bind(this);
+    this.handlePrintButton = this.handlePrintButton.bind(this);
   }
+  // Test functions here
   componentDidMount() {
-    this.props.updatePlaylists();
+    this.props.fetchTracks();
+    // this.props.play('701900914')
   }
+
+  // ARROW FUNCTIONS DONT WORK IN CLASSES
+  // printhello = () => { console.log('hello') }
 
   getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.playlists.length !== prevState.displayedPlaylists.length) {
@@ -39,6 +50,20 @@ class PodcastPage extends React.Component {
         displayedPlaylists: nextProps.playlists,
       };
     } else return null;
+  }
+
+  handlePlayButtonClick() {
+    this.props.play('701900914');
+    console.log('play button is being clicked!');
+  }
+
+  handlePauseButtonClick() {
+    this.props.pause('701900914');
+    console.log('pause button is being clicked');
+  }
+
+  handlePrintButton() {
+    this.props.print();
   }
 
   render() {
@@ -53,9 +78,22 @@ class PodcastPage extends React.Component {
     //         imgURL={playlist.imgURL}
     //     />
     // )})
-
+    console.log('printing from the component' + this);
     return (
-      <div />
+      <div>
+        <FunctionalButton
+          handleClick={this.handlePlayButtonClick}
+          button={'Play'}
+        />
+        <FunctionalButton
+          handleClick={this.handlePauseButtonClick}
+          button={'Pause'}
+        />
+        <FunctionalButton
+          handleClick={this.handlePrintButton}
+          button={'Print'}
+        />
+      </div>
       // <div className='podcastContainer'>
       //     <div className='searchBar'>
       //     </div>
@@ -69,7 +107,7 @@ class PodcastPage extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('6');
+  console.log('Printed from PodcastPage.js');
   return {
     playlists: state.podcasts.playlists,
     fetching: state.podcasts.fetching,
@@ -77,8 +115,17 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  updatePlaylists: () => {
-    fetchPlaylists(dispatch);
+  fetchTracks: () => {
+    fetchTracks(dispatch);
+  },
+  play: track => {
+    play(dispatch, track);
+  },
+  pause: track => {
+    pause(dispatch, track);
+  },
+  print: () => {
+    printStore(dispatch);
   },
 });
 
