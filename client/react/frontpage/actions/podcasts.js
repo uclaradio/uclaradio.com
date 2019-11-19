@@ -3,6 +3,13 @@
 
 import store from '../../FrontpageApp.js';
 
+// Initialize SC Player
+const SC = require('soundcloud');
+SC.initialize({
+  client_id: 'fm3wyeQvCi4fIiAoBCz40q9gWfzFSUZu',
+});
+const user_id = '65467039';
+
 // ACTIONS
 export const updatePlaylists = playlists => ({
   type: 'UPDATE_PLAYLISTS',
@@ -17,9 +24,10 @@ export const stopFetching = {
   type: 'STOPPED_FETCHING_PLAYLISTS',
 };
 
-const loadTracks = {
+const loadTracks = tracks => ({
   type: 'LOAD_TRACKS',
-};
+  tracks,
+});
 
 // TESTS
 const print = {
@@ -40,7 +48,7 @@ const pauseTrack = track => ({
   track,
 });
 
-export const printStore = () => {
+export const printStore = dispatch => {
   dispatch(print);
 };
 
@@ -66,7 +74,7 @@ export const pause = (dispatch, track) => {
   // dispatch(correctAction)
 };
 
-export const fetchTracks = async dispatch => {
+export const fetchTracks = dispatch => {
   SC.get(`/users/${user_id}/tracks`).then(tracks => {
     console.log(tracks[0]);
     dispatch(loadTracks(tracks));
@@ -76,7 +84,7 @@ export const fetchTracks = async dispatch => {
     // 	console.log(track.title)
     // })
   });
-  //dispatch(loadTracks)
+  // dispatch(loadTracks)
 
   //dispatch(startFetching)
 

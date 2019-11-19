@@ -27,21 +27,28 @@ const pauseTrack = player => {
   //     player.pause()
   //     console.log('pausing from the function')
   //   })
-  player.pause();
+  trackPlayer.pause();
   console.log('pausing from the function');
 };
 
-const fetchTracks = () => {
-  SC.get(`/users/${user_id}/tracks`).then(tracks => {
-    console.log(tracks[0]);
-    dispatch(loadTracks(tracks));
-    // dispatch(print) // test print
-    // dispatch(stopFetching)
-    // tracks.forEach((track) => {
-    // 	console.log(track.title)
-    // })
-  });
-};
+// const fetchTracks = async () => {
+//   try {
+//     const tracks = await SC.get(`users/${user_id}/tracks`)
+//   }
+//   catch (e) {
+//     console.log(e)
+//   }
+//   return tracks
+//   // SC.get(`/users/${user_id}/tracks`).then(tracks => {
+//   //   console.log(tracks[0]);
+//   //   dispatch(loadTracks(tracks));
+//   // dispatch(print) // test print
+//   // dispatch(stopFetching)
+//   // tracks.forEach((track) => {
+//   // 	console.log(track.title)
+//   // })
+//   // });
+// };
 
 const podcasts = (state = initialState, action) => {
   switch (action.type) {
@@ -52,8 +59,8 @@ const podcasts = (state = initialState, action) => {
     case 'STOPPED_FETCHING_PLAYLISTS':
       return Object.assign({}, state, { fetching: false });
     case 'LOAD_TRACKS':
-      console.log(fetchTracks());
-      return Object.assign({}, state, { tracks });
+      // const tracks = await fetchTracks();
+      return Object.assign({}, state, { tracks: action.tracks });
     case 'PRINT':
       console.log(
         'Printing tracks from state: ' + JSON.stringify(state.tracks)
