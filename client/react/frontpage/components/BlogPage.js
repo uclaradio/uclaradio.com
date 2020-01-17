@@ -66,7 +66,7 @@ const BlogPage = React.createClass({
         if (post.coverPhoto) {
           return post.coverPhoto.secure_url;
         } else if (post.img1) {
-          return post.img1.secure_url;
+          return post.img1.url;
         }
       case 'TUMBLR':
         var el = document.createElement('html');
