@@ -211,6 +211,7 @@ const BlogPage = React.createClass({
         </div>
       );
     }
+
     return (
       <div className="blogPage">
         <div className="blogHeading">

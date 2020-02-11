@@ -91,6 +91,12 @@ const FrontPageNavbar = React.createClass({
             >
               <span className="equalWidth">Apply</span>
             </NavItem>
+
+            <LinkContainer to="/gallery">
+              <NavItem className="frontPageNavbarItem collapsed">
+                <span className="equalWidth">Gallery</span>
+              </NavItem>
+            </LinkContainer>
           </Nav>
         </Collapse>
 

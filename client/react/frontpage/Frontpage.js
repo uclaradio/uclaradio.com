@@ -22,6 +22,7 @@ import ShowPage from './components/ShowPage';
 import EventPage from './components/EventPage';
 import DJPage from './components/DJPage';
 import BlogPage from './components/BlogPage';
+import GalleryPage from './components/GalleryPage';
 
 // Non-Redux Components
 import TriangleCanvas from './components/TriangleCanvas';
@@ -189,6 +190,7 @@ const routes = (
     <Route path="/streamIssues" component={StreamIssuesPage} />
     <Route path="/about" component={AboutPage} />
     <Route path="/about/privacy-policy" component={PrivacyPolicyPage} />
+    <Route path="/gallery" component={GalleryPage} />
     <Route path="*" component={Error404Page} />
   </Route>
 );
