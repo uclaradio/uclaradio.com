@@ -23,7 +23,7 @@ const FrontPageNavbar = React.createClass({
         break;
       case 3:
         window.open(
-          'http://apply.uclastudentmedia.com/applications/ucla-radio/',
+          'https://apply.uclastudentmedia.com/publications/ucla-radio/',
           '_blank'
         );
         break;
@@ -111,7 +111,6 @@ const FrontPageNavbar = React.createClass({
           </LinkContainer>
           <NavItem eventKey={1} className="frontPageNavbarItem fullWidth">
             Blog
-            <span className="beta">&nbsp;(BETA)</span>
           </NavItem>
           <NavDropdown
             title="More"
