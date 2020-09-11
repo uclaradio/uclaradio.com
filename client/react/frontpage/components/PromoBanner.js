@@ -15,19 +15,15 @@ import './PromoBanner.scss';
 //  }
 const bannerData = [
   {
-    img: '/img/promo/summer-graphic-radio-banner.jpg',
-    link: '',
-  },
-  {
-    img: '/img/GeneralWEB.png',
-    link: '',
+    img: '/img/fbbanner-apply2.jpg',
+    link: 'https://apply.uclastudentmedia.com',
   },
 ];
 
 const PromoBanner = React.createClass({
   getImage(banner) {
     return (
-      <RectImage src={banner.img} aspectRatio={5}>
+      <RectImage src={banner.img} aspectRatio={1.7}>
         <div className="overlay" />
       </RectImage>
     );

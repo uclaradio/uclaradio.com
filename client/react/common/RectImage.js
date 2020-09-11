@@ -5,14 +5,14 @@ import Rectangle from 'react-rectangle';
 import './RectImage.scss';
 
 /**
-*  Wrapper for Image which keeps its frame rectangular, sets height equal to width
-*  Centers image with scale-to-fill if you set the background
-*
-*  @prop src: image source url
-*  @prop maxWidth: maximum width value
-*  @prop circle: Image should be circle
-*  @prop aspectRatio: float ratio for image
-*/
+ *  Wrapper for Image which keeps its frame rectangular, sets height equal to width
+ *  Centers image with scale-to-fill if you set the background
+ *
+ *  @prop src: image source url
+ *  @prop maxWidth: maximum width value
+ *  @prop circle: Image should be circle
+ *  @prop aspectRatio: float ratio for image
+ */
 const RectImage = React.createClass({
   getDefaultProps() {
     return {
@@ -28,6 +28,7 @@ const RectImage = React.createClass({
       width: '100%',
       height: '100%',
       backgroundSize: 'cover',
+      backgroundPosition: 'center',
     };
     if (this.props.circle) {
       pictureStyle.borderRadius = '50%';
@@ -40,7 +41,8 @@ const RectImage = React.createClass({
       <Rectangle
         className="rectImage"
         aspectRatio={this.props.aspectRatio}
-        style={rectangleStyle}>
+        style={rectangleStyle}
+      >
         <div style={pictureStyle} className="rectImagePic">
           {this.props.children}
         </div>

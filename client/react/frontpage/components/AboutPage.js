@@ -16,17 +16,13 @@ const AboutPage = () => (
 
       <div className="threesplit">
         <h3> GENERAL INFO /INQUIRIES </h3>
-        <a href="mailto:radio.info@media.ucla.edu" target="_top">
-          | radio.info@media.ucla.edu{' '}
-        </a>
-        <br />
         <a href="mailto:gm@media.ucla.edu" target="_top">
           | gm@media.ucla.edu
         </a>
         <br />
-        <h3> MUSIC / BOOKING </h3>
-        <a href="mailto:radio.music@media.ucla.edu" target="_top">
-          | radio.music@media.ucla.edu
+        <h3> HIRING </h3>
+        <a href="mailto:radio.interns@media.ucla.edu" target="_top">
+          | radio.interns@media.ucla.edu
         </a>
       </div>
 
@@ -40,6 +36,11 @@ const AboutPage = () => (
         <h3> PROMOS / GIVEAWAYS </h3>
         <a href="mailto:radio.promotions@media.ucla.edu" target="_top">
           | radio.promotions@media.ucla.edu
+        </a>
+        <br />
+        <h3> MUSIC / BOOKING </h3>
+        <a href="mailto:radio.music@media.ucla.edu" target="_top">
+          | radio.music@media.ucla.edu
         </a>
       </div>
       <br />
